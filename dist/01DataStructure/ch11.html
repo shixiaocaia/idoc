@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vim 备忘清单 iDoc</title>
-    <meta name="description" content="使得相邻两个元素比较大小，大的元素慢慢下沉，下次循环到len - 1 - i，因为底部有一部分已经排序完成了">
+    <title>排序 iDoc</title>
+    <meta name="description" content="冒泡排序">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -61,7 +61,8 @@
         </aside>
       </div>
       <markdown-style>
-        <h2 id="冒泡排序"><a aria-hidden="true" tabindex="-1" href="#冒泡排序" class="anchor"><span class="icon icon-link"></span></a>冒泡排序</h2>
+        <h1 id="排序"><a aria-hidden="true" tabindex="-1" href="#排序" class="anchor"><span class="icon icon-link"></span></a>排序</h1>
+        <p>冒泡排序</p>
         <p>使得相邻两个元素比较大小，大的元素慢慢下沉，下次循环到len - 1 - i，因为底部有一部分已经排序完成了</p>
         <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">void</span> <span class="token function">bubbleSort</span><span class="token punctuation">(</span>vector<span class="token operator">&#x3C;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&#x26;</span> a<span class="token punctuation">)</span><span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="2">    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&#x3C;</span> a<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
@@ -389,7 +390,6 @@ void insertionSort(vector<int>&#x26; a, int n) {//{ 9,1,5,6,2,3 }
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#冒泡排序" class="tocs-link">冒泡排序</a></li>
             <li><a href="#选择排序" class="tocs-link">选择排序</a></li>
             <li><a href="#插入排序" class="tocs-link">插入排序</a></li>
             <li><a href="#希尔排序" class="tocs-link">希尔排序</a></li>
