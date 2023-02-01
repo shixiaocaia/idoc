@@ -1,5 +1,6 @@
+<!--idoc:ignore:end-->
 # XIAOCAI's Notes
-
+<!--idoc:ignore:end-->
 **📪 简介**
 
 👋，这里是小蔡的个人笔记站点，用于记录读研期间乃至以后工作中学习的内容，定期自我复盘。
@@ -38,4 +39,3 @@
     <label for="file">Webserver：</label>
     <progress max="100" value="50"></progress>
 </p>
-
