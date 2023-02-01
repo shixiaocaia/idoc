@@ -1,4 +1,4 @@
-LC
+LeetCode
 ===
 
 ![LeetCode Stats](https://leetcard.jacoblin.cool/shixiaocaia?theme=light&font=Zilla%20Slab&site=cn)
