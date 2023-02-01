@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LC iDoc</title>
+    <meta name="description" content="基于最原始的阻塞网络 I/O， 如果服务器要支持多个客户端，其中比较传统的方式，就是使用多进程模型，也就是为每个客户端分配一个进程来处理请求。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/demo-preview.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="index.html" target="" class="active">Webserver</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">README</a>
+            <a href="ch00.html" class="">CPP语法</a>
+            <a href="ch01.html" class="">封装类</a>
+            <a href="ch02.html" class="">半同步/半反应堆线程池</a>
+            <a href="ch03.html" class="">I/O多路复用</a>
+            <a href="ch04.html" class="">HTTP连接请求处理类</a>
+            <a href="ch05.html" class="">定时器处理非活动链接</a>
+            <a href="ch06.html" class="">日志系统</a>
+            <a href="ch07.html" class="">数据库连接池</a>
+            <a href="ch08.html" class="">注册登录</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h2 id="多进程模型"><a aria-hidden="true" tabindex="-1" href="#多进程模型" class="anchor"><span class="icon icon-link"></span></a>多进程模型</h2>
+        <p>基于最原始的阻塞网络 I/O， 如果服务器要支持多个客户端，其中比较传统的方式，就是使用<strong>多进程模型</strong>，也就是为每个客户端分配一个进程来处理请求。</p>
+        <p>服务器的主进程负责监听客户的连接，一旦与客户端连接完成，accept() 函数就会返回一个「已连接 Socket」，这时就通过 <code>fork()</code> 函数创建一个子进程，实际上就把父进程所有相关的东西都<strong>复制</strong>一份，包括文件描述符、内存地址空间、程序计数器、执行的代码等。</p>
+        <p>这两个进程刚复制完的时候，几乎一模一样。不过，会根据<strong>返回值</strong>来区分是父进程还是子进程，如果返回值是 0，则是子进程；如果返回值是其他的整数，就是父进程。</p>
+        <p>正因为子进程会<strong>复制父进程的文件描述符</strong>，于是就可以直接使用「已连接 Socket 」和客户端通信了，</p>
+        <p>可以发现，子进程不需要关心「监听 Socket」，只需要关心「已连接 Socket」；父进程则相反，将客户服务交给子进程来处理，因此父进程不需要关心「已连接 Socket」，只需要关心「监听 Socket」。</p>
+        <p>下面这张图描述了从连接请求到连接建立，父进程创建生子进程为客户服务。</p>
+        <p>
+          <img src="http://pic.shixiaocaia.fun/202301241830108.png" alt="img">
+        </p>
+        <p>另外，当「子进程」退出时，实际上内核里还会保留该进程的一些信息，也是会占用内存的，如果不做好“回收”工作，就会变成<strong>僵尸进程</strong>，随着僵尸进程越多，会慢慢耗尽我们的系统资源。</p>
+        <p>因此，父进程要“善后”好自己的孩子，怎么善后呢？那么有两种方式可以在子进程退出后回收资源，分别是调用 <code>wait()</code> 和 <code>waitpid()</code> 函数。</p>
+        <p>这种用多个进程来应付多个客户端的方式，在应对 100 个客户端还是可行的，但是当客户端数量高达一万时，肯定扛不住的，因为每产生一个进程，必会占据一定的系统资源，而且进程间上下文切换的“包袱”是很重的，性能会大打折扣。</p>
+        <p>进程的上下文切换不仅包含了虚拟内存、栈、全局变量等用户空间的资源，还包括了内核堆栈、寄存器等内核空间的资源。</p>
+        <h2 id="多线程模型"><a aria-hidden="true" tabindex="-1" href="#多线程模型" class="anchor"><span class="icon icon-link"></span></a>多线程模型</h2>
+        <p>线程是运行在进程中的一个“逻辑流”，单进程中可以运行多个线程，同进程里的线程可以共享进程的部分资源，比如文件描述符列表、进程空间、代码、全局数据、堆、共享库等，这些共享些资源在上下文切换时不需要切换，而只需要切换线程的私有数据、寄存器等不共享的数据，因此同一个进程下的线程上下文切换的开销要比进程小得多。</p>
+        <p>当服务器与客户端 TCP 完成连接后，通过 <code>pthread_create()</code> 函数创建线程，然后将「已连接 Socket」的文件描述符传递给线程函数，接着在线程里和客户端进行通信，从而达到并发处理的目的。</p>
+        <p>
+          <img src="http://pic.shixiaocaia.fun/202301241830456.png" alt="img">
+        </p>
+        <h3 id="线程池"><a aria-hidden="true" tabindex="-1" href="#线程池" class="anchor"><span class="icon icon-link"></span></a>线程池</h3>
+        <p>如果每来一个连接就创建一个线程，线程运行完后，还得操作系统还得销毁线程，虽说线程切换的上写文开销不大，但是如果频繁创建和销毁线程，系统开销也是不小的。</p>
+        <p>那么，我们可以使用<strong>线程池</strong>的方式来避免线程的频繁创建和销毁，所谓的线程池，就是提前创建若干个线程，这样当由新连接建立时，将这个已连接的 Socket 放入到一个队列里，然后线程池里的线程负责从队列中取出「已连接 Socket 」进行处理。</p>
+        <hr>
+        <p>本项目中线程池的设计模式为<strong>半同步/半反应堆</strong>，其中反应堆具体为Proactor事件处理模式。</p>
+        <p>具体的，主线程为异步线程，负责监听文件描述符，接收socket新连接，若当前监听的socket发生了读写事件，然后将任务插入到请求队列。工作线程从请求队列中取出任务，完成读写数据的处理。</p>
+        <h2 id="进程和线程的区别"><a aria-hidden="true" tabindex="-1" href="#进程和线程的区别" class="anchor"><span class="icon icon-link"></span></a>进程和线程的区别</h2>
+        <ol>
+          <li>进程复制资源，线程共享部分资源</li>
+        </ol>
+        <blockquote>
+          <p>创建一个子进程，实际上就把父进程所有相关的东西都<strong>复制</strong>一份，包括文件描述符、内存地址空间、程序计数器、执行的代码等。</p>
+          <p>同进程里的线程可以共享进程的部分资源，比如文件描述符列表、进程空间、代码、全局数据、堆、共享库等，这些共享些资源在上下文切换时不需要切换，而只需要切换线程的私有数据、寄存器等不共享的数据，因此同一个进程下的线程上下文切换的开销要比进程小得多。</p>
+        </blockquote>
+        <h2 id="问题"><a aria-hidden="true" tabindex="-1" href="#问题" class="anchor"><span class="icon icon-link"></span></a>问题</h2>
+        <ol>
+          <li><code>pthread_create(m_threads + i, NULL, worker, this)</code></li>
+        </ol>
+        <blockquote>
+          <p>worker如果是一个普通的类成员函数，那么自带的默认参数this指针，和函数原型的<code>void *</code>冲突了。</p>
+        </blockquote>
+        <h2 id="函数实现"><a aria-hidden="true" tabindex="-1" href="#函数实现" class="anchor"><span class="icon icon-link"></span></a>函数实现</h2>
+        <p><strong>线程池创建与回收</strong></p>
+        <blockquote>
+          <p>初始化线程池。</p>
+          <p>构造函数中创建线程池,pthread_create函数中将类的对象作为参数传递给静态函数(worker),在静态函数中引用这个对象,并调用其动态方法(run)。</p>
+          <p>具体的，类对象传递时用this指针，传递给静态函数后，将其转换为线程池类，并调用私有成员函数run。</p>
+        </blockquote>
+        <p><strong>析构</strong></p>
+        <blockquote>
+          <p>释放线程池。</p>
+        </blockquote>
+        <p><strong>向请求任务队列插入请求</strong></p>
+        <blockquote>
+          <p>通过list容器创建请求队列，向队列中添加时，通过互斥锁保证线程安全，添加完成后通过信号量提醒有任务要处理，最后注意线程同步。</p>
+        </blockquote>
+        <p><strong>线程处理函数</strong></p>
+        <blockquote>
+          <p>内部访问私有成员函数run，完成线程处理要求。</p>
+        </blockquote>
+        <p><strong>run执行任务</strong></p>
+        <blockquote>
+          <p>主要实现，工作线程从请求队列中取出某个任务进行处理，注意线程同步。</p>
+        </blockquote>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#多进程模型" class="tocs-link">多进程模型</a></li>
+            <li><a href="#多线程模型" class="tocs-link">多线程模型</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#线程池" class="tocs-link">线程池</a></li>
+              </ol>
+            </li>
+            <li><a href="#进程和线程的区别" class="tocs-link">进程和线程的区别</a></li>
+            <li><a href="#问题" class="tocs-link">问题</a></li>
+            <li><a href="#函数实现" class="tocs-link">函数实现</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>

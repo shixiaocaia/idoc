@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LC iDoc</title>
+    <meta name="description" content="作用：解决通过应用进程的交互来实现特定网络应用的问题。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/demo-preview.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="index.html" target="" class="active">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">README</a>
+            <label>深入浅出计算机网络</label>
+            <a href="ch04.html" class="">网络层</a>
+            <a href="ch05.html" class="">传输层</a>
+            <a href="ch06.html" class="">应用层</a>
+            <label>HTTP篇</label>
+            <label>TCP篇</label>
+            <label>IP篇</label>
+            <label>综合篇</label>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h2 id="简介"><a aria-hidden="true" tabindex="-1" href="#简介" class="anchor"><span class="icon icon-link"></span></a>简介</h2>
+        <p>作用：解决通过应用进程的交互来实现特定网络应用的问题。</p>
+        <p>开发一种新的网络应用，首先要考虑网络应用在各种端系统上的组织方式和他们之间的关系，目前主要流行的是：</p>
+        <ul>
+          <li>客户/服务器（CS, Client/Server）</li>
+          <li>对等（P2P, Peer - to - Peer)</li>
+        </ul>
+        <h3 id="cs"><a aria-hidden="true" tabindex="-1" href="#cs" class="anchor"><span class="icon icon-link"></span></a>CS</h3>
+        <img src="http://pic.shixiaocaia.fun/202301301045478.png" alt="image-20221118091458113" style="zoom:50%;">
+        <p>基于C/S方式的应用服务通常是<strong>服务集中型</strong>的，即应用服务集中在网络中比客户计算机少得多的服务器计算机上。</p>
+        <p>由于一台服务器计算机要为多个客户机提供服务，在C/S应用中，常会出现服务器计算机跟不上众多客户机请求的情况。</p>
+        <p>为此，在C/S应用中，常用计算机群集（或服务器场）构建一个强大的虚拟服务器。</p>
+        <h3 id="p2p"><a aria-hidden="true" tabindex="-1" href="#p2p" class="anchor"><span class="icon icon-link"></span></a>P2P</h3>
+        <img src="http://pic.shixiaocaia.fun/202301301045742.png" alt="image-20221118091822117" style="zoom:50%;">
+        <p>在P2P方式中，没有固定的服务请求者和服务提供者，分布在网络边缘各端系统中的应用进程是对等的，被称为对等方。对等方相互之间直接通信，每个对等方既是服务的请求者，又是服务的提供者。</p>
+        <p>基于P2P的应用是服务分散型的，因为服务不是集中在少数几个服务器计算机中，而是分散在大量对等计算机中，这些计算机并不为服务提供商所有，而是为个人控制的桌面计算机和笔记本电脑，它们通常位于住宅、校园和办公室中。</p>
+        <h2 id="dhcp"><a aria-hidden="true" tabindex="-1" href="#dhcp" class="anchor"><span class="icon icon-link"></span></a>DHCP</h2>
+        <p>动态主机配置协议DHCP, (Dynamic Host Configuration Protocal）。可为计算机自动配置网络参数，使得计算机“即插即联网”（Plug-and-Play Networking）。</p>
+        <p>在网络中配置一台DHCP服务器，网络中各个主机开机后自动启动DHCP程序，向DHCP服务器请求自己的网络配置参数：</p>
+        <ul>
+          <li>IP地址</li>
+          <li>子网掩码</li>
+          <li>默认网关的IP地址（一般指路由器）</li>
+          <li>域名服务器的IP地址</li>
+        </ul>
+        <h3 id="工作过程"><a aria-hidden="true" tabindex="-1" href="#工作过程" class="anchor"><span class="icon icon-link"></span></a>工作过程</h3>
+        <p>DHCP使用的是C/S方式，是TCP/IP体系结构应用层中的协议，使用UDP提供的服务。</p>
+        <p>基本流程：</p>
+        <ol>
+          <li>DHCP客户寻找DHCP服务器（DHCP 发现报文）</li>
+          <li>DHCP服务器提供给客户端IP地址租用。</li>
+          <li>DHCP接受IP地址租约。</li>
+          <li>DHCP服务器确认IP地址租约。</li>
+          <li>DHCP客户端进行IP地址续约。</li>
+          <li>DHCP服务端可以随时解除IP地址续约。</li>
+        </ol>
+        <blockquote>
+          <p>客户端使用ARP：使用前确保未被其他主机使用。</p>
+          <p>服务端使用ARP：确保所挑选的IP地址未被其他主机使用。</p>
+        </blockquote>
+        <blockquote>
+          <p>发送报文未必是广播的，看TCP/IP协议栈</p>
+        </blockquote>
+        <h3 id="中继代理"><a aria-hidden="true" tabindex="-1" href="#中继代理" class="anchor"><span class="icon icon-link"></span></a>中继代理</h3>
+        <p>现实当中不可能给每个网络都设置DHCP服务器，而路由器又有<strong>隔离广播域</strong>的作用，因此要给路由器设定DHCP中级路由代理。</p>
+        <h2 id="域名系统"><a aria-hidden="true" tabindex="-1" href="#域名系统" class="anchor"><span class="icon icon-link"></span></a>域名系统</h2>
+        <p>实际使用可以通过IP地址访问目的主机，但是IP地址不利于记忆，所以一般使用域名系统来访问。</p>
+        <blockquote>
+          <p>域名级别最低的写在最左边。</p>
+        </blockquote>
+        <h3 id="域名解析"><a aria-hidden="true" tabindex="-1" href="#域名解析" class="anchor"><span class="icon icon-link"></span></a>域名解析</h3>
+        <p>查询方式有递归和迭代查询。</p>
+        <blockquote>
+          <p>递归方式：从主机到本地（本区域服务器）去查询，然后去根域名服务器，顶级域名服务器，查到再向上返回。</p>
+          <p>迭代方式：不断告诉你去哪里查，及时反馈，再去下一个地方查，再反馈。</p>
+        </blockquote>
+        <p>为了减轻服务器的负担，域名服务器（例如本地区服务器）使用了高速缓存，用来存放最近查询过的域名以及映射信息，这样就不用一级级查找了。</p>
+        <h2 id="其他概念"><a aria-hidden="true" tabindex="-1" href="#其他概念" class="anchor"><span class="icon icon-link"></span></a>其他概念</h2>
+        <ul>
+          <li>
+            <p>FTP 文件传输协议</p>
+          </li>
+          <li>
+            <p>SMPT 简单邮件传输协议</p>
+          </li>
+          <li>
+            <p>HTTP 超文本传输协议 HyperText Transfer Protocol</p>
+          </li>
+          <li>
+            <p>WWW 万维网</p>
+          </li>
+          <li>
+            <p>URL 统一资源定位符</p>
+          </li>
+        </ul>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#简介" class="tocs-link">简介</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#cs" class="tocs-link">CS</a></li>
+                <li><a href="#p2p" class="tocs-link">P2P</a></li>
+              </ol>
+            </li>
+            <li><a href="#dhcp" class="tocs-link">DHCP</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#工作过程" class="tocs-link">工作过程</a></li>
+                <li><a href="#中继代理" class="tocs-link">中继代理</a></li>
+              </ol>
+            </li>
+            <li><a href="#域名系统" class="tocs-link">域名系统</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#域名解析" class="tocs-link">域名解析</a></li>
+              </ol>
+            </li>
+            <li><a href="#其他概念" class="tocs-link">其他概念</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>

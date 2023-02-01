@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组 iDoc</title>
+    <meta name="description" content="通常是一维数组，要寻找任一个元素的右边或者左边第一个比自己大或者小的元素的位置，此时我们就要想到可以用单调栈了。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/demo-preview.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
+            <li><a href="index.html" target="" class="active">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">README</a>
+            <label>Leetcode</label>
+            <a href="ch1.html" class="">数组</a>
+            <a href="ch2.html" class="">链表</a>
+            <a href="ch3.html" class="">哈希表</a>
+            <a href="ch4.html" class="">字符串</a>
+            <a href="ch5.html" class="">栈与队列</a>
+            <a href="ch6.html" class="">二叉树</a>
+            <a href="ch7.html" class="">回溯</a>
+            <a href="ch8.html" class="">贪心</a>
+            <a href="ch9.html" class="">动态规划</a>
+            <a href="ch10.html" class="">单调栈</a>
+            <a href="ch11.html" class="">排序</a>
+            <a href="ch12.html" class="">其他</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h2 id="力扣hot-100"><a aria-hidden="true" tabindex="-1" href="#力扣hot-100" class="anchor"><span class="icon icon-link"></span></a>力扣Hot 100</h2>
+        <p><a href="https://leetcode.cn/problems/lru-cache/">146. LRU 缓存</a></p>
+        <blockquote>
+          <p>LRU 算法（Least Recently Used）就是一种缓存淘汰策略。也就是说我们认为最近使用过的数据应该是是「有用的」，很久都没用过的数据应该是无用的，内存满了就优先删那些很久没用过的数据。</p>
+          <p>比如手机后台使用程序，最近使用的app放在前面，之前的程序排在后面会被优先清理。</p>
+        </blockquote>
+        <blockquote>
+          <p>可以把cache理解成一个队列，最近使用的排在左边（队头），久未使用的放在右边（队尾）。</p>
+          <p>put的操作，如果之前队列没有会插入到队头，有的话会更新value，并放置到队头。如果内存满了，就要删除队尾的元素（久未使用），再插入到队头。</p>
+          <p>get的操作，如果队列中有，就返回值，并放置到前列，如果没有返回-1。</p>
+        </blockquote>
+        <blockquote>
+          <ol>
+            <li>
+              <p>因此本体需要考虑，cache中元素必须是有序的，以区分最近使用的和长久未使用的，当容量满了方便删除。</p>
+            </li>
+            <li>
+              <p>要在cache中快速找某个key，每次返回cache中的某个key，变更为最近使用的，所以cache要支持任意位置的快速插入和删除元素。</p>
+            </li>
+            <li>
+              <p>哈希表查找快，但是元素没有固定无法区分使用事件。链表有顺序之分，插入删除块，查找慢。</p>
+            </li>
+          </ol>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/add-two-numbers">2. 两数相加</a></p>
+        <blockquote>
+          <p>我以为的两数相加，直接相加，链表反转。实际的两数相加，如果位数不统一怎么办，还有进位。</p>
+        </blockquote>
+        <blockquote>
+          <p>给长度不足的一方补0，同时记录进位。</p>
+          <p>最高位如果还有进位再补1。</p>
+        </blockquote>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#力扣hot-100" class="tocs-link">力扣Hot 100</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>

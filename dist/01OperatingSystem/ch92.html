@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LC iDoc</title>
+    <meta name="description" content="回收内存的操作基本都会发生磁盘 I/O 的，如果回收内存的操作很频繁，意味着磁盘 I/O 次数会很多，这个过程势必会影响系统的性能，整个系统给人的感觉就是很卡。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/demo-preview.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="index.html" target="" class="active">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">README</a>
+            <label>进程</label>
+            <a href="ch81.html" class="">进程、线程、调度</a>
+            <a href="ch82.html" class="">问题</a>
+            <label>虚拟内存</label>
+            <a href="ch91.html" class="">虚拟内存</a>
+            <a href="ch92.html" class="">问题</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h2 id="概念"><a aria-hidden="true" tabindex="-1" href="#概念" class="anchor"><span class="icon icon-link"></span></a>概念</h2>
+        <p><strong>写回和写通</strong></p>
+        <blockquote>
+          <ol>
+            <li>Write-through: When data is updated, it is written to both the cache and the back-end storage.</li>
+          </ol>
+          <p>This mode is easy for operation but is slow in data writing because data has to be written to both the cache and the storage.</p>
+          <ol start="2">
+            <li>Write-back: When data is updated, it is written only to the cache. The modified data is written to the back-end storage only when data is removed from the cache.</li>
+          </ol>
+          <p>This mode has fast data write speed but data will be lost if a power failure occurs before the updated data is written to the storage.</p>
+        </blockquote>
+        <hr>
+        <h2 id="大问题"><a aria-hidden="true" tabindex="-1" href="#大问题" class="anchor"><span class="icon icon-link"></span></a>大问题</h2>
+        <p><strong>Linux进程的内存分布长什么样？</strong></p>
+        <p><strong>malloc是如何分配内存的？</strong></p>
+        <blockquote>
+          <p>通过 malloc 函数申请内存的时候，实际上申请的是虚拟内存，此时并不会分配物理内存。</p>
+        </blockquote>
+        <p><strong>malloc(0)分配的是物理内存吗？</strong></p>
+        <p><strong>malloc(1)会分配多大的虚拟内存？</strong></p>
+        <p><strong>free释放内存，会归还给操作系统吗？</strong></p>
+        <p><strong>为什么不全部使用mmap来分配内存？</strong></p>
+        <p><strong>既然brk那么牛逼，为什么不全部使用brk来分配？</strong></p>
+        <p><strong>free0函数只传入一个内存地址，为什么能知道要释放多大的内存？</strong></p>
+        <hr>
+        <h2 id="哪些内存可以被回收"><a aria-hidden="true" tabindex="-1" href="#哪些内存可以被回收" class="anchor"><span class="icon icon-link"></span></a>哪些内存可以被回收？</h2>
+        <blockquote>
+          <p><strong>文件页</strong>（File-backed Page）：内核缓存的磁盘数据（Buffer）和内核缓存的文件数据（Cache）都叫作文件页。<strong>回收干净页的方式是直接释放内存，回收脏页的方式是先写回磁盘后再释放内存</strong>。</p>
+          <p><strong>匿名页</strong>（Anonymous Page）：这部分内存没有实际载体，不像文件缓存有硬盘文件这样一个载体，比如堆、栈数据等。这部分内存很可能还要再次被访问，所以不能直接释放内存，它们<strong>回收的方式是通过 Linux 的 Swap 机制</strong>，Swap 会把不常访问的内存先写到磁盘中，然后释放这些内存，给其他更需要的进程使用。</p>
+        </blockquote>
+        <blockquote>
+          <p>根据LRU算法，优先回收不常用的内存。LRU算法维护了两个双向链表分别记录活跃和不活跃的内存页链表。</p>
+        </blockquote>
+        <h2 id="回收内存带来的性能影响"><a aria-hidden="true" tabindex="-1" href="#回收内存带来的性能影响" class="anchor"><span class="icon icon-link"></span></a>回收内存带来的性能影响</h2>
+        <p>回收内存的操作基本都会发生磁盘 I/O 的，如果回收内存的操作很频繁，意味着磁盘 I/O 次数会很多，这个过程势必会影响系统的性能，整个系统给人的感觉就是很卡。</p>
+        <blockquote>
+          <p>常见解决回收内存导致的性能影响：</p>
+          <ol>
+            <li>调整文件页和匿名页的回收倾向。在回收文件页时，对于干净页不涉及I/O，因此可以调整回收倾向。通过设置swappiness数值大小，来调整。</li>
+            <li>尽早触发 kswapd 内核线程异步回收内存。kswapd 会定期扫描内存的使用情况，根据剩余内存（pages_free）的情况来进行内存回收的工作。</li>
+          </ol>
+        </blockquote>
+        <p><strong>NUMA架构下的内存回收策略</strong></p>
+        <h2 id="如何保护一个进程不被oom杀掉呢"><a aria-hidden="true" tabindex="-1" href="#如何保护一个进程不被oom杀掉呢" class="anchor"><span class="icon icon-link"></span></a>如何保护一个进程不被OOM杀掉呢？</h2>
+        <blockquote>
+          <p>在 Linux 内核里有一个 <code>oom_badness()</code> 函数，它会把系统中可以被杀掉的进程扫描一遍，并对每个进程打分，得分最高的进程就会被首先杀掉。</p>
+        </blockquote>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#概念" class="tocs-link">概念</a></li>
+            <li><a href="#大问题" class="tocs-link">大问题</a></li>
+            <li><a href="#哪些内存可以被回收" class="tocs-link">哪些内存可以被回收？</a></li>
+            <li><a href="#回收内存带来的性能影响" class="tocs-link">回收内存带来的性能影响</a></li>
+            <li><a href="#如何保护一个进程不被oom杀掉呢" class="tocs-link">如何保护一个进程不被OOM杀掉呢？</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>

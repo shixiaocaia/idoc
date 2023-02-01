@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LC iDoc</title>
+    <meta name="description" content="线程同步机制包装类。
+使用信号量、互斥锁、条件变量实现了多线程同步，确保任一时刻只能有一个线程能进入关键代码段。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/demo-preview.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="index.html" target="" class="active">Webserver</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">README</a>
+            <a href="ch00.html" class="">CPP语法</a>
+            <a href="ch01.html" class="">封装类</a>
+            <a href="ch02.html" class="">半同步/半反应堆线程池</a>
+            <a href="ch03.html" class="">I/O多路复用</a>
+            <a href="ch04.html" class="">HTTP连接请求处理类</a>
+            <a href="ch05.html" class="">定时器处理非活动链接</a>
+            <a href="ch06.html" class="">日志系统</a>
+            <a href="ch07.html" class="">数据库连接池</a>
+            <a href="ch08.html" class="">注册登录</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h2 id="总体目标"><a aria-hidden="true" tabindex="-1" href="#总体目标" class="anchor"><span class="icon icon-link"></span></a>总体目标</h2>
+        <p>
+          线程同步机制包装类。
+          使用信号量、互斥锁、条件变量实现了多线程同步，确保任一时刻只能有一个线程能进入关键代码段。
+        </p>
+        <h2 id="问题"><a aria-hidden="true" tabindex="-1" href="#问题" class="anchor"><span class="icon icon-link"></span></a>问题</h2>
+        <p>叙述三部分的作用。</p>
+        <p><strong>信号量</strong></p>
+        <p>记录线程池中，任务数量，是否还有任务需要处理了</p>
+        <p><strong>互斥锁</strong></p>
+        <p>保护关键代码段，用于同步线程对共享数据的<strong>访问</strong>。</p>
+        <p>在这里保护请求队列</p>
+        <p><strong>条件变量</strong></p>
+        <p>用于线程之间同步共享数据的<strong>值</strong>。</p>
+        <p>条件变量提供了一种线程间的通知机制，当某个共享数据达到某个值时候，唤醒等待这个贡献数据的线程。</p>
+        <h2 id="class-sem-信号量"><a aria-hidden="true" tabindex="-1" href="#class-sem-信号量" class="anchor"><span class="icon icon-link"></span></a>class sem 信号量</h2>
+        <p>需要实现</p>
+        <blockquote>
+          <ul>
+            <li>初始化信号量</li>
+            <li>用于销毁信号量</li>
+            <li>对信号加锁，将信号量减一,信号量为0时,sem_wait阻塞</li>
+            <li>对信号解锁，将信号量加一,信号量大于0时,唤醒调用sem_post的线程</li>
+          </ul>
+        </blockquote>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">int</span> <span class="token function">sem_init</span><span class="token punctuation">(</span>sem_t <span class="token operator">*</span>sem<span class="token punctuation">,</span> <span class="token keyword">int</span> pshared<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">int</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="2"><span class="token operator">-</span> 初始化信号量
+</span><span class="code-line line-number" line="3"><span class="token operator">-</span> 参数：
+</span><span class="code-line line-number" line="4">    <span class="token operator">-</span> sem <span class="token operator">:</span> 信号量变量的地址
+</span><span class="code-line line-number" line="5">    <span class="token operator">-</span> pshared <span class="token operator">:</span> <span class="token number">0</span> 用在线程间 ，非<span class="token number">0</span> 用在进程间
+</span><span class="code-line line-number" line="6">    <span class="token operator">-</span> value <span class="token operator">:</span> 信号量中的值
+</span><span class="code-line line-number" line="7">
+</span><span class="code-line line-number" line="8"><span class="token keyword">int</span> <span class="token function">sem_destroy</span><span class="token punctuation">(</span>sem_t <span class="token operator">*</span>sem<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="9"><span class="token operator">-</span> 释放资源
+</span><span class="code-line line-number" line="10">
+</span><span class="code-line line-number" line="11"><span class="token keyword">int</span> <span class="token function">sem_wait</span><span class="token punctuation">(</span>sem_t <span class="token operator">*</span>sem<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="12"><span class="token operator">-</span> 对信号量加锁，调用一次对信号量的值<span class="token operator">-</span><span class="token number">1</span>，如果值为<span class="token number">0</span>，就阻塞
+</span><span class="code-line line-number" line="13">
+</span><span class="code-line line-number" line="14"><span class="token keyword">int</span> <span class="token function">sem_post</span><span class="token punctuation">(</span>sem_t <span class="token operator">*</span>sem<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="15"><span class="token operator">-</span> 对信号量解锁，调用一次对信号量的值<span class="token operator">+</span><span class="token number">1</span>，当信号量值大于<span class="token number">0</span>是，调用sem_wait等待信号量的线程将被唤醒。
+</span><span class="code-line line-number" line="16">    
+</span><span class="code-line line-number" line="17"><span class="token comment">//上述函数成功返回0，否则返回-1并设置errno</span>
+</span></code><input type="hidden" value="int sem_init(sem_t *sem, int pshared, unsigned int value);
+- 初始化信号量
+- 参数：
+    - sem : 信号量变量的地址
+    - pshared : 0 用在线程间 ，非0 用在进程间
+    - value : 信号量中的值
+
+int sem_destroy(sem_t *sem);
+- 释放资源
+
+int sem_wait(sem_t *sem);
+- 对信号量加锁，调用一次对信号量的值-1，如果值为0，就阻塞
+
+int sem_post(sem_t *sem);
+- 对信号量解锁，调用一次对信号量的值+1，当信号量值大于0是，调用sem_wait等待信号量的线程将被唤醒。
+    
+//上述函数成功返回0，否则返回-1并设置errno
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="class-locker-互斥锁"><a aria-hidden="true" tabindex="-1" href="#class-locker-互斥锁" class="anchor"><span class="icon icon-link"></span></a>class locker 互斥锁</h2>
+        <p>为避免线程更新共享变量时出现问题，可以使用互斥量（mutex 是 mutual exclusion 的缩写）来确保同时仅有一个线程可以访问某项共享资源。可以使用互斥量来保证对任意共享资源的原子访问。</p>
+        <p>需要实现</p>
+        <blockquote>
+          <ul>
+            <li>初始化互斥锁</li>
+            <li>销毁互斥锁</li>
+            <li>互斥锁加锁</li>
+            <li>互斥锁解锁</li>
+          </ul>
+        </blockquote>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1">pthread_mutex_t m_mutex<span class="token punctuation">;</span> <span class="token comment">//互斥量的类型 </span>
+</span><span class="code-line line-number" line="2">    
+</span><span class="code-line line-number" line="3"><span class="token keyword">int</span> <span class="token function">pthread_mutex_init</span><span class="token punctuation">(</span>pthread_mutex_t <span class="token operator">*</span>restrict mutex<span class="token punctuation">,</span> <span class="token keyword">const</span> pthread_mutexattr_t <span class="token operator">*</span>restrict attr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="4"><span class="token operator">-</span> 初始化互斥量
+</span><span class="code-line line-number" line="5">    <span class="token operator">-</span> 参数 ：
+</span><span class="code-line line-number" line="6">    <span class="token operator">-</span> mutex ： 需要初始化的互斥量变量
+</span><span class="code-line line-number" line="7">    <span class="token operator">-</span> attr ： 互斥量相关的属性，一般设置为 <span class="token constant">NULL</span>
+</span><span class="code-line line-number" line="8">
+</span><span class="code-line line-number" line="9"><span class="token keyword">int</span> <span class="token function">pthread_mutex_destroy</span><span class="token punctuation">(</span>pthread_mutex_t <span class="token operator">*</span>mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="10"><span class="token operator">-</span> 释放互斥量的资源
+</span><span class="code-line line-number" line="11">
+</span><span class="code-line line-number" line="12"><span class="token keyword">int</span> <span class="token function">pthread_mutex_lock</span><span class="token punctuation">(</span>pthread_mutex_t <span class="token operator">*</span>mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="13"><span class="token operator">-</span> 加锁，阻塞的，如果有一个线程加锁了，那么其他的线程只能阻塞等待
+</span><span class="code-line line-number" line="14">
+</span><span class="code-line line-number" line="15"><span class="token keyword">int</span> <span class="token function">pthread_mutex_trylock</span><span class="token punctuation">(</span>pthread_mutex_t <span class="token operator">*</span>mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="16"><span class="token operator">-</span> 尝试加锁，如果加锁失败，不会阻塞，会直接返回。
+</span><span class="code-line line-number" line="17">
+</span><span class="code-line line-number" line="18"><span class="token keyword">int</span> <span class="token function">pthread_mutex_unlock</span><span class="token punctuation">(</span>pthread_mutex_t <span class="token operator">*</span>mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="19"><span class="token operator">-</span> 解锁
+</span></code><input type="hidden" value="pthread_mutex_t m_mutex; //互斥量的类型 
+    
+int pthread_mutex_init(pthread_mutex_t *restrict mutex, const pthread_mutexattr_t *restrict attr);
+- 初始化互斥量
+    - 参数 ：
+    - mutex ： 需要初始化的互斥量变量
+    - attr ： 互斥量相关的属性，一般设置为 NULL
+
+int pthread_mutex_destroy(pthread_mutex_t *mutex);
+- 释放互斥量的资源
+
+int pthread_mutex_lock(pthread_mutex_t *mutex);
+- 加锁，阻塞的，如果有一个线程加锁了，那么其他的线程只能阻塞等待
+
+int pthread_mutex_trylock(pthread_mutex_t *mutex);
+- 尝试加锁，如果加锁失败，不会阻塞，会直接返回。
+
+int pthread_mutex_unlock(pthread_mutex_t *mutex);
+- 解锁
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="class-cond-条件变量"><a aria-hidden="true" tabindex="-1" href="#class-cond-条件变量" class="anchor"><span class="icon icon-link"></span></a>class cond 条件变量</h2>
+        <p>条件变量提供了一种线程间的通知机制,当某个共享数据达到某个值时,唤醒等待这个共享数据的线程.</p>
+        <p>需要实现</p>
+        <blockquote>
+          <ul>
+            <li>初始化条件变量</li>
+            <li>释放条件变量</li>
+            <li>wait / timedwait唤醒一个或者多个等待的线程</li>
+            <li>signal broadcast唤醒所有等待的线程</li>
+          </ul>
+        </blockquote>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1">pthread_cond_t m_cond<span class="token punctuation">;</span> <span class="token comment">//条件变量的类型</span>
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3"><span class="token keyword">int</span> <span class="token function">pthread_cond_init</span><span class="token punctuation">(</span>pthread_cond_t <span class="token operator">*</span>restrict cond<span class="token punctuation">,</span> <span class="token keyword">const</span> pthread_condattr_t <span class="token operator">*</span>restrict attr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5"><span class="token keyword">int</span> <span class="token function">pthread_cond_destroy</span><span class="token punctuation">(</span>pthread_cond_t <span class="token operator">*</span>cond<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="6">
+</span><span class="code-line line-number" line="7"><span class="token keyword">int</span> <span class="token function">pthread_cond_wait</span><span class="token punctuation">(</span>pthread_cond_t <span class="token operator">*</span>restrict cond<span class="token punctuation">,</span> pthread_mutex_t <span class="token operator">*</span>restrict mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="8">    <span class="token operator">-</span> 等待，调用了该函数，线程会阻塞。
+</span><span class="code-line line-number" line="9">    <span class="token operator">-</span> 在调用前，确保互斥锁已经加锁
+</span><span class="code-line line-number" line="10">
+</span><span class="code-line line-number" line="11"><span class="token keyword">int</span> <span class="token function">pthread_cond_timedwait</span><span class="token punctuation">(</span>pthread_cond_t <span class="token operator">*</span>restrict cond<span class="token punctuation">,</span> pthread_mutex_t <span class="token operator">*</span>restrict mutex<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">timespec</span> <span class="token operator">*</span>restrict abstime<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="12">    <span class="token operator">-</span> 等待多长时间，调用了这个函数，线程会阻塞，直到指定的时间结束。
+</span><span class="code-line line-number" line="13">
+</span><span class="code-line line-number" line="14"><span class="token keyword">int</span> <span class="token function">pthread_cond_signal</span><span class="token punctuation">(</span>pthread_cond_t <span class="token operator">*</span>cond<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="15">    <span class="token operator">-</span> 唤醒一个或者多个等待的线程
+</span><span class="code-line line-number" line="16">
+</span><span class="code-line line-number" line="17"><span class="token keyword">int</span> <span class="token function">pthread_cond_broadcast</span><span class="token punctuation">(</span>pthread_cond_t <span class="token operator">*</span>cond<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="18">    <span class="token operator">-</span> 唤醒所有的等待的线程
+</span></code><input type="hidden" value="pthread_cond_t m_cond; //条件变量的类型
+
+int pthread_cond_init(pthread_cond_t *restrict cond, const pthread_condattr_t *restrict attr);
+
+int pthread_cond_destroy(pthread_cond_t *cond);
+
+int pthread_cond_wait(pthread_cond_t *restrict cond, pthread_mutex_t *restrict mutex);
+    - 等待，调用了该函数，线程会阻塞。
+    - 在调用前，确保互斥锁已经加锁
+
+int pthread_cond_timedwait(pthread_cond_t *restrict cond, pthread_mutex_t *restrict mutex, const struct timespec *restrict abstime);
+    - 等待多长时间，调用了这个函数，线程会阻塞，直到指定的时间结束。
+
+int pthread_cond_signal(pthread_cond_t *cond);
+    - 唤醒一个或者多个等待的线程
+
+int pthread_cond_broadcast(pthread_cond_t *cond);
+    - 唤醒所有的等待的线程
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#总体目标" class="tocs-link">总体目标</a></li>
+            <li><a href="#问题" class="tocs-link">问题</a></li>
+            <li><a href="#class-sem-信号量" class="tocs-link">class sem 信号量</a></li>
+            <li><a href="#class-locker-互斥锁" class="tocs-link">class locker 互斥锁</a></li>
+            <li><a href="#class-cond-条件变量" class="tocs-link">class cond 条件变量</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>

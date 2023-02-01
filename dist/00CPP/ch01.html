@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iDoc</title>
+    <meta name="description" content="在C++11中可以取地址的、有名字的就是左值，反之，不能取地址的、没有名字的就是右值。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/demo-preview.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="index.html" target="" class="active">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <label>总结</label>
+            <a href="index.html" class="">首页</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h2 id="条件编译"><a aria-hidden="true" tabindex="-1" href="#条件编译" class="anchor"><span class="icon icon-link"></span></a>条件编译</h2>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">ifdef</span> <span class="token expression">P</span></span>
+</span><span class="code-line line-number" line="2">cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"test"</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="3"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">endif</span></span>
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5">g<span class="token operator">++</span> <span class="token operator">-</span>DP p1<span class="token punctuation">.</span>cpp <span class="token operator">-</span>o test
+</span></code><input type="hidden" value="#ifdef P
+cout << &#x22;test&#x22; << endl;
+#endif
+
+g++ -DP p1.cpp -o test
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="enum使用"><a aria-hidden="true" tabindex="-1" href="#enum使用" class="anchor"><span class="icon icon-link"></span></a>enum使用</h2>
+        <blockquote>
+          <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">enum</span> <span class="token class-name">week</span> <span class="token punctuation">{</span>Sun<span class="token punctuation">,</span> Mon<span class="token punctuation">,</span> Tue<span class="token punctuation">,</span> Wed<span class="token punctuation">,</span> Thu<span class="token punctuation">,</span> Fri<span class="token punctuation">,</span> Sat<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="2"><span class="token comment">//默认从Sun = 0 开始，逐个加1</span>
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4"><span class="token keyword">enum</span> <span class="token class-name">week</span> <span class="token punctuation">{</span>Sun<span class="token operator">=</span><span class="token number">7</span><span class="token punctuation">,</span> Mon<span class="token operator">=</span><span class="token number">1</span><span class="token punctuation">,</span> Tue<span class="token punctuation">,</span> Wed<span class="token punctuation">,</span> Thu<span class="token punctuation">,</span> Fri<span class="token punctuation">,</span> Sat<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="5"><span class="token comment">//枚举常量Sun,Mon,Tue,Wed,Thu,Fri,Sat的值分别为7、1、2、3、4、5、</span>
+</span></code><input type="hidden" value="enum week {Sun, Mon, Tue, Wed, Thu, Fri, Sat};
+//默认从Sun = 0 开始，逐个加1
+
+enum week {Sun=7, Mon=1, Tue, Wed, Thu, Fri, Sat};
+//枚举常量Sun,Mon,Tue,Wed,Thu,Fri,Sat的值分别为7、1、2、3、4、5、
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        </blockquote>
+        <h2 id="左值和右值"><a aria-hidden="true" tabindex="-1" href="#左值和右值" class="anchor"><span class="icon icon-link"></span></a>左值和右值</h2>
+        <p>在C++11中可以取地址的、有名字的就是左值，反之，不能取地址的、没有名字的就是右值。</p>
+        <p><strong>左值引用、右值引用</strong></p>
+        <blockquote>
+          <p>左值引用就是对一个左值进行引用的类型。</p>
+          <p>右值引用就是对一个右值进行引用的类型，事实上，由于右值通常不具有名字，我们也只能通过引用的方式找到它的存在。</p>
+          <p>右值引用和左值引用都是属于引用类型，并且都是左值,且都必须初始化。</p>
+        </blockquote>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">int</span> <span class="token operator">&#x26;</span>a <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span> <span class="token comment">//通常左值引用不能绑定到右值</span>
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3"><span class="token comment">//常量左值引用是个“万能”的引用类型。它可以接受非常量左值、常量左值、右值对其进行初始化。</span>
+</span><span class="code-line line-number" line="4"><span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>        # 非常量左值
+</span><span class="code-line line-number" line="5"><span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">&#x26;</span>c <span class="token operator">=</span> b<span class="token punctuation">;</span> # 常量左值引用绑定到非常量左值，编译通过
+</span><span class="code-line line-number" line="6"><span class="token keyword">const</span> <span class="token keyword">int</span> d <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>  # 常量左值
+</span><span class="code-line line-number" line="7"><span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">&#x26;</span>e <span class="token operator">=</span> c<span class="token punctuation">;</span> # 常量左值引用绑定到常量左值，编译通过
+</span><span class="code-line line-number" line="8"><span class="token keyword">const</span> <span class="token keyword">int</span> <span class="token operator">&#x26;</span>b <span class="token operator">=</span><span class="token number">2</span><span class="token punctuation">;</span>  # 常量左值引用绑定到右值，编程通过
+</span></code><input type="hidden" value="int &#x26;a = 2; //通常左值引用不能绑定到右值
+
+//常量左值引用是个“万能”的引用类型。它可以接受非常量左值、常量左值、右值对其进行初始化。
+int b = 2;        # 非常量左值
+const int &#x26;c = b; # 常量左值引用绑定到非常量左值，编译通过
+const int d = 2;  # 常量左值
+const int &#x26;e = c; # 常量左值引用绑定到常量左值，编译通过
+const int &#x26;b =2;  # 常量左值引用绑定到右值，编程通过
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token comment">//&#x26;&#x26;右值值引用通常不能绑定到任何的左值，要想绑定一个左值到右值引用，通常需要std::move()将左值强制转换为右值</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">int</span> a<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="3"><span class="token keyword">int</span> <span class="token operator">&#x26;&#x26;</span>r1 <span class="token operator">=</span> c<span class="token punctuation">;</span>             # 编译失败
+</span><span class="code-line line-number" line="4"><span class="token keyword">int</span> <span class="token operator">&#x26;&#x26;</span>r2 <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span><span class="token function">move</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">;</span>  # 编译通过
+</span></code><input type="hidden" value="//&#x26;&#x26;右值值引用通常不能绑定到任何的左值，要想绑定一个左值到右值引用，通常需要std::move()将左值强制转换为右值
+int a;
+int &#x26;&#x26;r1 = c;             # 编译失败
+int &#x26;&#x26;r2 = std::move(a);  # 编译通过
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="静态成员变量"><a aria-hidden="true" tabindex="-1" href="#静态成员变量" class="anchor"><span class="icon icon-link"></span></a>静态成员变量</h2>
+        <ul>
+          <li>所有对象共享一个静态数据，修改值，会全局修改所有对象的这个值。</li>
+          <li>静态变量，是在编译阶段就分配空间，对象还没有创建时，就已经分配空间。</li>
+          <li>在类中声明，在类外定义。</li>
+          <li>可以在类外直接定义，但是不能够直接访问。</li>
+        </ul>
+        <h2 id="静态成员函数"><a aria-hidden="true" tabindex="-1" href="#静态成员函数" class="anchor"><span class="icon icon-link"></span></a>静态成员函数</h2>
+        <ul>
+          <li>静态成员函数使用方式和静态变量一样，同样在对象没有创建前，即可通过类名调用。也可以通过对象调用。</li>
+          <li>静态成员函数主要为了访问静态变量，不能访问普通成员变量。</li>
+          <li>如果一个类的成员，既要实现共享，又要实现不可改变，那就用 static const 修饰。定义静态const数据成员时，最好在类内部初始化。</li>
+          <li>没有this指针。</li>
+        </ul>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#条件编译" class="tocs-link">条件编译</a></li>
+            <li><a href="#enum使用" class="tocs-link">enum使用</a></li>
+            <li><a href="#左值和右值" class="tocs-link">左值和右值</a></li>
+            <li><a href="#静态成员变量" class="tocs-link">静态成员变量</a></li>
+            <li><a href="#静态成员函数" class="tocs-link">静态成员函数</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>

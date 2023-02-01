@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>链表 iDoc</title>
+    <meta name="description" content="简单来说，数组就可以看成一个哈希表，哈希表中的关键码是在数组中索引下标，通过下标访问对应的元素。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/demo-preview.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
+            <li><a href="index.html" target="" class="active">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">README</a>
+            <label>Leetcode</label>
+            <a href="ch1.html" class="">数组</a>
+            <a href="ch2.html" class="">链表</a>
+            <a href="ch3.html" class="">哈希表</a>
+            <a href="ch4.html" class="">字符串</a>
+            <a href="ch5.html" class="">栈与队列</a>
+            <a href="ch6.html" class="">二叉树</a>
+            <a href="ch7.html" class="">回溯</a>
+            <a href="ch8.html" class="">贪心</a>
+            <a href="ch9.html" class="">动态规划</a>
+            <a href="ch10.html" class="">单调栈</a>
+            <a href="ch11.html" class="">排序</a>
+            <a href="ch12.html" class="">其他</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h2 id="哈希表"><a aria-hidden="true" tabindex="-1" href="#哈希表" class="anchor"><span class="icon icon-link"></span></a>哈希表</h2>
+        <p><strong>定义</strong></p>
+        <p>简单来说，数组就可以看成一个哈希表，哈希表中的<strong>关键码</strong>是在数组中索引下标，通过下标访问对应的元素。</p>
+        <p><strong>作用</strong></p>
+        <p>快速判断一个元素是否在集合内。</p>
+        <p><del>想到了用map&#x3C;string, int>来映射，或者是bool flag[object]一些用法</del>（原来这样的操作就是哈希结构了）。并且考虑到如果用枚举判断的话，需要O(n),而哈希表只需要O(1)。</p>
+        <p><strong>哈希函数</strong></p>
+        <p>通过一个函数将对象映射为特定的编码方式，例如将字符串形式转化为不同数值，对应为哈希表中的索引下标。</p>
+        <p>如果哈希函数得到的数值大于了tableSize，通过取模操作，保证在范围以内。</p>
+        <p><strong>哈希碰撞</strong></p>
+        <p>但是如果初始对象数量就大于哈希表大小，就会发生冲突。不同对象映射到同一个索引位置，称为哈希碰撞。可以通过拉链法、线性探测法解决。</p>
+        <p>拉链法：链式存储，在同一个索引位置，进行像链表形式一样链接在一起。</p>
+        <p>线性探测法：一定要保证tableSize（哈希表大小）大于dataSize（数据规模）。 我们需要依靠哈希表中的空位来解决碰撞问题。当发生哈希碰撞时，寻找一个空缺的位置存放冲突元素。</p>
+        <h2 id="哈希表用法"><a aria-hidden="true" tabindex="-1" href="#哈希表用法" class="anchor"><span class="icon icon-link"></span></a>哈希表用法</h2>
+        <p><strong>哈希结构</strong></p>
+        <p>常用的结构包括：</p>
+        <ul>
+          <li>数组</li>
+          <li>set（集合）</li>
+          <li>map（映射）</li>
+        </ul>
+        <p>在C++中，set 和 map 分别提供以下三种数据结构，其底层实现以及优劣如下表所示：</p>
+        <p>
+          <img src="http://pic.shixiaocaia.fun/202208130638920.png" alt="" title="size = 70%">
+        </p>
+        <p>
+          <img src="http://pic.shixiaocaia.fun/202208130639362.png" alt="" title="size = 70%">
+        </p>
+        <p>当我们要使用集合来解决哈希问题的时候，优先使用unordered_set，因为它的查询和增删效率是最优的；</p>
+        <p>如果需要集合是有序的，那么就用set；</p>
+        <p>如果要求不仅有序还要有重复数据的话，那么就用multiset；</p>
+        <p>对比之下，map在需要多个数值时可以考虑，分别引用key，value，例如LC.1。</p>
+        <h2 id="例题"><a aria-hidden="true" tabindex="-1" href="#例题" class="anchor"><span class="icon icon-link"></span></a>例题</h2>
+        <p><a href="https://leetcode.cn/problems/ransom-note/">LC383.赎金信</a></p>
+        <blockquote>
+          <p>模板题，将字母转为数组下标(ASCII值)，或者用map都可以。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/valid-anagram/">LC242.有效的字母异位词</a></p>
+        <blockquote>
+          <p>用数组存储string a中字母出现的次数，遍历string b在a中出现的次数，每出现一次对应-1，最好判断26个字母是否有非0的字母。</p>
+          <p>关键码：由于字母的特殊性，且全为小写字母，可以使用s[i] - 'a'，作为索引。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/intersection-of-two-arrays/">LC349. 两个数组的交集</a></p>
+        <blockquote>
+          <p>限制数据范围：数组B中的值在A中寻找是否出现，第一次出现的话加入ans中。O(n^2)。</p>
+          <p>不限数据范围：使用std::unordered_set，读写效率高，不需要排序，还能去重。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/intersection-of-two-arrays-ii/">LC350. 两个数组的交集II</a></p>
+        <blockquote>
+          <p>同样可以用数组解决。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/happy-number/">LC202.快乐数</a></p>
+        <blockquote>
+          <p>关键词“重复”，联想到哈希表。</p>
+          <p>思路：如果这个数重复出现过，说明非快乐数，否则遍历到判断为止。</p>
+          <p>用<code>unorder_set&#x3C;int></code>去重。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/two-sum/">LC1.两数之和</a></p>
+        <blockquote>
+          <ul>
+            <li>为什么会想到用哈希表</li>
+          </ul>
+          <p>target = num 1+ num2, 很容易想到遍历一个数，看num2 是否在map当中，并且</p>
+          <ul>
+            <li>哈希表为什么用map</li>
+          </ul>
+          <p>要判断一个数出现，同时还要返回这个数的下标，因此需要两个值，使用map的value key可以分别保存。</p>
+          <ul>
+            <li>本题map是用来存什么的</li>
+          </ul>
+          <p>存储数值中的另一半。最终一定能遍历num时，target - num 在map当中</p>
+          <ul>
+            <li>map中的key和value用来存什么的</li>
+          </ul>
+          <p>key 存储 数值，value存储下标。因为题意保证有唯一解，当遍历此时值的另一半不在map中时，添加此时的数值为key，下标为value到map中，直到遍历到另一半已经在map中结束。</p>
+        </blockquote>
+        <p>𖤐<a href="https://leetcode.cn/problems/3sum/">LC15.三树之和</a></p>
+        <blockquote>
+          <p>一开始想用哈希表，计算前两个数和，然后判断第三个数是否在map中，出现了error错误Expected member name or ';' after declaration specifiers，放弃了。</p>
+        </blockquote>
+        <blockquote>
+          <p>Expected member name or ';' after declaration specifiers</p>
+          <p>这个错误不一定是所指行，可能是前面的符号滥用。</p>
+        </blockquote>
+        <blockquote>
+          <p>题解版：用双指针维护 + 去重</p>
+          <p>a, b, c 三个数的去重，是难点。</p>
+        </blockquote>
+        <p>𖤐<a href="https://leetcode.cn/problems/4sum/">LC18. 四数之和</a></p>
+        <blockquote>
+          <p>对比三数之和，增加了一层外循环。</p>
+          <ul>
+            <li>总体思路：用两层for维护最小的两个数，然后双指针维护后面的部分。</li>
+            <li>第一层for ：当前数大于目标值时，并且当前数大于等于0，break。外加 if(i > 0 &#x26;&#x26; nums[i] == nums[i-1]) continue;进行剪枝。在这个数和前一个数大于0的情况下，后续有满足的组合，在前一种必然出现过。</li>
+            <li>第二层for : 即再上一层基础上初始值时nums[i] + nums[j]进行比较。</li>
+            <li>双指针同上一题一样进行维护。</li>
+          </ul>
+          <p>注意数据的溢出。</p>
+          <p>LC15 和18 的剪枝是难点。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/group-anagrams/">LC49. 字母异位词分组</a></p>
+        <blockquote>
+          <p>结合例题的<a href="https://leetcode.cn/problems/valid-anagram/">LC242.有效的字母异位词</a>。将一个单词的所有字母进行重新排列得到新的单词，那我们可以将每个单词按照一定顺序排列后的值，作为关键码，相同的放到一起，就想到了用哈希表实现。</p>
+          <p>区别之前的，这里的value值是vector存放多个string。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/two-sum/description/">LC1. 两数之和</a></p>
+        <blockquote>
+          <p>在一个表中查相应数据，联想到了哈希表。</p>
+          <p>找到返回，否则插入数值。</p>
+        </blockquote>
+        <h2 id="对比"><a aria-hidden="true" tabindex="-1" href="#对比" class="anchor"><span class="icon icon-link"></span></a>对比</h2>
+        <p>数组作为哈希表，比如<a href="https://leetcode.cn/problems/ransom-note/">LC383.赎金信</a>，我们知道明确的数组大小，可以将字母值转化为键值，对比用map，节省了开销。</p>
+        <p>set作为哈希表，比如<a href="https://leetcode.cn/problems/intersection-of-two-arrays/">LC349. 两个数组的交集</a>， 我们不清楚数组的大小情况，或者值的间隔特别大，会造成空间的浪费。此外数组可以set相比数组还可以去重。</p>
+        <p>map作为哈希表，<a href="https://leetcode.cn/problems/two-sum/">LC1.两数之和</a>，不仅需要判断key，还要记录位置，将位置作为value记录。</p>
+        <p>考虑到去重时</p>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#哈希表" class="tocs-link">哈希表</a></li>
+            <li><a href="#哈希表用法" class="tocs-link">哈希表用法</a></li>
+            <li><a href="#例题" class="tocs-link">例题</a></li>
+            <li><a href="#对比" class="tocs-link">对比</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>

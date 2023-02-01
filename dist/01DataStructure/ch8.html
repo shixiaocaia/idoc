@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>链表 iDoc</title>
+    <meta name="description" content="贪心算法一般分为如下四步：">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/demo-preview.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
+            <li><a href="index.html" target="" class="active">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">README</a>
+            <label>Leetcode</label>
+            <a href="ch1.html" class="">数组</a>
+            <a href="ch2.html" class="">链表</a>
+            <a href="ch3.html" class="">哈希表</a>
+            <a href="ch4.html" class="">字符串</a>
+            <a href="ch5.html" class="">栈与队列</a>
+            <a href="ch6.html" class="">二叉树</a>
+            <a href="ch7.html" class="">回溯</a>
+            <a href="ch8.html" class="">贪心</a>
+            <a href="ch9.html" class="">动态规划</a>
+            <a href="ch10.html" class="">单调栈</a>
+            <a href="ch11.html" class="">排序</a>
+            <a href="ch12.html" class="">其他</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h2 id="贪心"><a aria-hidden="true" tabindex="-1" href="#贪心" class="anchor"><span class="icon icon-link"></span></a>贪心</h2>
+        <p>贪心算法一般分为如下四步：</p>
+        <ul>
+          <li>将问题分解为若干个子问题</li>
+          <li>找出适合的贪心策略</li>
+          <li>求解每一个子问题的最优解</li>
+          <li>将局部最优解堆叠成全局最优解</li>
+        </ul>
+        <p>其实这个分的有点细了，真正做题的时候很难分出这么详细的解题步骤，可能就是因为贪心的题目往往还和其他方面的知识混在一起。</p>
+        <h2 id="例题"><a aria-hidden="true" tabindex="-1" href="#例题" class="anchor"><span class="icon icon-link"></span></a>例题</h2>
+        <p><strong><a href="https://leetcode.cn/problems/assign-cookies/">455. 分发饼干</a></strong></p>
+        <blockquote>
+          <p>采用一个思路，小饼干喂饱小饼干的人，把大的留给胃口更大的，这样的全局思路，喂饱更多的人。</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/wiggle-subsequence/">376. 摆动序列</a></strong></p>
+        <blockquote>
+          <p>实际上转换为了一个数值波峰序列，前后差值为正就是上坡，前后差值为负就是下坡。通知共有多个这样个上下的点。</p>
+          <p>贪心的情况即统计共有多少个峰值点即可，即也默认删除了一些中间没有正负变化点的点。</p>
+          <p>用一个变量记录前一个差值，即前一个的上下波动情况。</p>
+        </blockquote>
+        <blockquote>
+          <p>DP:</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></strong></p>
+        <blockquote>
+          <p>sum += nums[i]; //计算和</p>
+          <p>ans = max(sum, ans); //每次都更新最值，因为可能当前为正，后面越来越小但是和依旧为正</p>
+          <p>sum = max(0, sum); //如果当前和已经为负值了，对后面的序列都是负影响，不如直接从新开始。</p>
+        </blockquote>
+        <blockquote>
+          <p>DP:</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/">122. 买卖股票的最佳时机 II</a></strong></p>
+        <blockquote>
+          <p>赚的是差价。</p>
+          <p>计算相邻两天的差价，如果值为正说明前一次买今天赚，计算差值序列，统计所有正值情况即可。</p>
+          <p>如果持续为正收入差价即为正值差价和，如果否则就是前面正值。</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/jump-game/">55. 跳跃游戏</a></strong></p>
+        <blockquote>
+          <p>每次贪心取极限，最后判断覆盖的范围能够包含末尾。</p>
+          <p>特判：如果只有一个点，那即终点。</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/jump-game-ii/">45. 跳跃游戏 II</a></strong></p>
+        <blockquote>
+          <p>与上一题的区别，求最短的步数。局部最优是每一步尽可能走得远，全局最优是一步尽可能多走，继续往前走。</p>
+          <p>当我们当前这一步等于当前最远距离时：</p>
+          <ol>
+            <li>等于最远距离，跳出</li>
+            <li>不等于，那么步数+1，更新最远距离继续向前走</li>
+          </ol>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/maximize-sum-of-array-after-k-negations/">1005. K 次取反后最大化的数组和</a></strong></p>
+        <blockquote>
+          <p>很容易想到对负值取反，剩余的取反次数给绝对值最小的数进行操作。</p>
+          <p>这里没有想到的一个点是对nums数组的取绝对值之和，从大到小排序，这样我们能够优先对负数最小值取负变正。如果还剩余次数，对绝对值最小的取负也是影响最小的。</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/gas-station">134. 加油站</a></strong></p>
+        <blockquote>
+          <p>我们用 i, j 分别标记起点和终点，用 s 表示当前剩余汽油，而 cnt 表示当前行驶过的加油站数量。初始时，我们将起点设在最后一个位置，即 i=n-1。</p>
+          <p>开始行驶，移动 j。若发现当前剩余汽油小于 0，说明当前 i 作为起点不符合要求，我们将起点 i 循环左移，并且更新剩余汽油，直至剩余汽油是非负数。</p>
+          <p>当行驶过的加油站数量达到 n 时，结束。判断此时的剩余汽油是否非负，是则返回当前的 i 作为答案；否则返回 −1，表示无解。</p>
+        </blockquote>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">public</span><span class="token operator">:</span>
+</span><span class="code-line line-number" line="3">    <span class="token keyword">int</span> <span class="token function">canCompleteCircuit</span><span class="token punctuation">(</span>vector<span class="token operator">&#x3C;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&#x26;</span> gas<span class="token punctuation">,</span> vector<span class="token operator">&#x3C;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&#x26;</span> cost<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="4">        <span class="token comment">//从每个点作为起点出发</span>
+</span><span class="code-line line-number" line="5">        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&#x3C;</span> gas<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="6">            <span class="token keyword">int</span> tank <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">//剩余油量</span>
+</span><span class="code-line line-number" line="7">            <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">//经过了几个加油站</span>
+</span><span class="code-line line-number" line="8">            <span class="token keyword">int</span> current <span class="token operator">=</span> i<span class="token punctuation">;</span> <span class="token comment">//当前位置</span>
+</span><span class="code-line line-number" line="9">            <span class="token keyword">while</span><span class="token punctuation">(</span>count <span class="token operator">&#x3C;</span> gas<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="10">                tank <span class="token operator">+=</span> gas<span class="token punctuation">[</span>current<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">//add oil</span>
+</span><span class="code-line line-number" line="11">                <span class="token keyword">if</span><span class="token punctuation">(</span>tank <span class="token operator">&#x3C;</span> cost<span class="token punctuation">[</span>current<span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span> <span class="token comment">// cant go to next</span>
+</span><span class="code-line line-number" line="12">                tank <span class="token operator">-=</span> cost<span class="token punctuation">[</span>current<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// go to next </span>
+</span><span class="code-line line-number" line="13">                current <span class="token operator">=</span> <span class="token punctuation">(</span>current <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token operator">%</span> gas<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// loop the oil</span>
+</span><span class="code-line line-number" line="14">                <span class="token keyword">if</span><span class="token punctuation">(</span><span class="token operator">++</span>count <span class="token operator">==</span> gas<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">return</span> i<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="15">            <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="16">            <span class="token comment">// 执行完上述的while循环以后</span>
+</span><span class="code-line line-number" line="17">            <span class="token comment">// 1. current &#x3C; i 时候说明终点小于起点位置，已经i后面的几种情况不用遍历了</span>
+</span><span class="code-line line-number" line="18">            <span class="token comment">// 2. 其他情况下，current目前处于无法前往的下一站，在这之前到达此站一定是tank >= 0 情况，所以从i 到curent之间的加油站肯定无法作为起始站点</span>
+</span><span class="code-line line-number" line="19">            <span class="token comment">//    毕竟早一个站点开始一定多出一部分油量，或者为0</span>
+</span><span class="code-line line-number" line="20">            <span class="token keyword">if</span><span class="token punctuation">(</span>current <span class="token operator">&#x3C;</span> i<span class="token punctuation">)</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="21">            <span class="token keyword">else</span> i <span class="token operator">=</span> current<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="22">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="23">        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="24">    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="25"><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="class Solution {
+public:
+    int canCompleteCircuit(vector<int>&#x26; gas, vector<int>&#x26; cost) {
+        //从每个点作为起点出发
+        for(int i = 0; i < gas.size(); i++){
+            int tank = 0; //剩余油量
+            int count = 0; //经过了几个加油站
+            int current = i; //当前位置
+            while(count < gas.size()){
+                tank += gas[current]; //add oil
+                if(tank < cost[current]) break; // cant go to next
+                tank -= cost[current]; // go to next 
+                current = (current + 1)% gas.size(); // loop the oil
+                if(++count == gas.size()) return i;
+            }
+            // 执行完上述的while循环以后
+            // 1. current < i 时候说明终点小于起点位置，已经i后面的几种情况不用遍历了
+            // 2. 其他情况下，current目前处于无法前往的下一站，在这之前到达此站一定是tank >= 0 情况，所以从i 到curent之间的加油站肯定无法作为起始站点
+            //    毕竟早一个站点开始一定多出一部分油量，或者为0
+            if(current < i) break;
+            else i = current;
+        }
+        return -1;
+    }
+};
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p><strong><a href="https://leetcode.cn/problems/candy/">135. 分发糖果</a></strong></p>
+        <blockquote>
+          <p>Hard。</p>
+          <p>分两次遍历找寻答案，第一遍前序，第二遍后续。</p>
+          <p>第一遍保证右边大于左边，第二遍后续遍历才能保证可以使用之前的顺序性。</p>
+          <p>反向遍历时，保证candy[i] > candy[ i + 1], 取 candy [i] = max(candy[i], candy [ i + 1] + 1), 这样也能保证前序的大小关系。</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/lemonade-change/">860. 柠檬水找零</a></strong></p>
+        <blockquote>
+          <p>以为有什么特殊贪心，实际就是最优化给20找零的情况，5美元是公用的。</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/queue-reconstruction-by-height/">406. 根据身高重建队列</a></strong></p>
+        <blockquote>
+          <p>想到要按照一定的顺序的排序。没有A出。</p>
+          <p>这题联系135，相当于需要维护两个权度。可以先考虑一方面，再去维护另一个方面。</p>
+          <p>如果先将身高排序，同身高再按照k小的排，那么一定可以保证后面按照排序后的直接进行插入。</p>
+          <p>此时身高高，且比他们高的人少，不会产生冲突。</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/">452. 用最少数量的箭引爆气球</a></strong></p>
+        <blockquote>
+          <p>如果这个气球能被上一箭射中，就跳过，否则 + 1，但是右边界需要不断维护最小的。</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/non-overlapping-intervals/description/">435. 无重叠区间</a></strong></p>
+        <blockquote>
+          <p>计算去除交叉区间 == 总区间 - 计算不交叉区间</p>
+          <p>计算不交叉区间，考虑排序判断边界，这里考虑右边界排序，然后从左向右遍历，选择左边界尽可能小的，腾出空间给后面的。</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/partition-labels/description/">763. 划分字母区间</a></strong></p>
+        <blockquote>
+          <p>本来想的联系上一题，计算每个字母的左右边界，来考虑，发现不可行。</p>
+          <p>先计算每一个字母的最远边界，然后不断更新一个区间内某个字母的最远位置，当此时下标等于这个区间最远位置字母的位置时，说明这是一个划分区间，再记录下此时的值作为左边界，最后区间长度做差即可得到。</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/monotone-increasing-digits/">738.单调递增的数字</a></strong></p>
+        <blockquote>
+          <p>能想到一位位判断每个位置的数，但是剩下的就一头雾水了。</p>
+          <p>题解是从后向前判断数字的递增性，如果strNum[i - 1] > strNum[i]的话，就strNum[i - 1] - 1,而 strNum[i] 一维置 9。先把递增行维护好，最后一次性置9.</p>
+          <p>这里有两个重要的函数，stoi和to_string。</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/binary-tree-cameras/description/">738.单调递增的数字</a></strong></p>
+        <blockquote>
+          <p>遍历顺序是后续，左右中。</p>
+          <p>然后考虑用数字标记，0，没有覆盖，1 放摄像头，2被覆盖。</p>
+          <p>后又考虑怎么放摄像头比较好，从叶子节点看，应该尽可能给叶子节点父节点放，如果在叶子节点放会造成浪费。</p>
+          <ol>
+            <li>左右节点都有覆盖，那么这个节点就是无覆盖</li>
+            <li>左右节点至少有一个无覆盖，那么应该放摄像头</li>
+            <li>左右节点至少有一个有摄像头，覆盖状态</li>
+            <li>头结点没有覆盖，最后特判下。</li>
+          </ol>
+        </blockquote>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#贪心" class="tocs-link">贪心</a></li>
+            <li><a href="#例题" class="tocs-link">例题</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>

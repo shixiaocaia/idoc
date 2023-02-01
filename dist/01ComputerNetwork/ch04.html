@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LC iDoc</title>
+    <meta name="description" content="网络层的主要任务就是将分组从源主机经过多个网络和多段链路传输到目的主机，可以将该任务划分为分组转发和路由选择两种重要的功能，向上提供面向连接的虚电路服务，无连接的数据报服务。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/demo-preview.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="index.html" target="" class="active">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">README</a>
+            <label>深入浅出计算机网络</label>
+            <a href="ch04.html" class="">网络层</a>
+            <a href="ch05.html" class="">传输层</a>
+            <a href="ch06.html" class="">应用层</a>
+            <label>HTTP篇</label>
+            <label>TCP篇</label>
+            <label>IP篇</label>
+            <label>综合篇</label>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h2 id="网络层概述"><a aria-hidden="true" tabindex="-1" href="#网络层概述" class="anchor"><span class="icon icon-link"></span></a>网络层概述</h2>
+        <p>网络层的主要任务就是将分组从源主机经过多个网络和多段链路传输到目的主机，可以将该任务划分为分组转发和路由选择两种重要的功能，向上提供面向连接的虚电路服务，无连接的数据报服务。</p>
+        <p>位于OSI体系结构的第三层。</p>
+        <h3 id="分组转发"><a aria-hidden="true" tabindex="-1" href="#分组转发" class="anchor"><span class="icon icon-link"></span></a>分组转发</h3>
+        <p>当路由器收到某个接口所连接的链路上收到一个分组之后，将分组从自己其他适当的接口转发给下一跳路由器或者目的主机。</p>
+        <p>每个路由器会构建一个路由表，在此基础上维护成一个转发表，根据分组首部的转发标识在转发表中查询。</p>
+        <h3 id="路由选择"><a aria-hidden="true" tabindex="-1" href="#路由选择" class="anchor"><span class="icon icon-link"></span></a>路由选择</h3>
+        <p>源主机和目的主机之间存在多条路径，网络层需要决定选择哪一条路径来传送分组。</p>
+        <p>一般分为：</p>
+        <ol>
+          <li>集中式路由选择，由某个网路控制中心执行路由选择。</li>
+          <li>分布式路由选择，在每个路由器上运行路由选择协议，各路由器相互交换路由信息并各自计算路由。</li>
+          <li>人工路由选择，网络维护人员配置路由。</li>
+        </ol>
+        <h3 id="虚电路服务"><a aria-hidden="true" tabindex="-1" href="#虚电路服务" class="anchor"><span class="icon icon-link"></span></a>虚电路服务</h3>
+        <img src="http://pic.shixiaocaia.fun/202301301043503.png" alt="image-20221018092941879" style="zoom:50%;">
+        <blockquote>
+          <ol>
+            <li>核心思想是“可靠通信应由网络自身来保证”。</li>
+            <li>必须首先建立网络层连接一虚电路，以保证通信双方所需的一切网络资源。是一条逻辑链路。</li>
+            <li>通信双方沿着已建立的虚电路发送分组。</li>
+            <li>这种通信方式如果再使用可靠传输的网络协议，就可使所发送的分组最终正确（无差错按序到达、不丢失、不重复）到达接收方。</li>
+          </ol>
+        </blockquote>
+        <h3 id="无连接的数据报服务"><a aria-hidden="true" tabindex="-1" href="#无连接的数据报服务" class="anchor"><span class="icon icon-link"></span></a>无连接的数据报服务</h3>
+        <img src="http://pic.shixiaocaia.fun/202301301043388.png" alt="image-20221018094911308" style="zoom:50%;">
+        <blockquote>
+          <ol>
+            <li>核心思想是 可靠通信应由用户主机来保证</li>
+            <li>不需要建立网络层连接</li>
+            <li><strong>每个分组可走不同的路径 因此，每个分组的首部都必须携带目的主机的完整地址。</strong></li>
+            <li>通信结束后，没有需要释放的连接</li>
+          </ol>
+        </blockquote>
+        <p>由于网络自身不提供端到端的可靠传输服务，这就使得网络中的路由器可以做得比较简单，大大降低了网络造价。</p>
+        <h2 id="网际协议ip"><a aria-hidden="true" tabindex="-1" href="#网际协议ip" class="anchor"><span class="icon icon-link"></span></a>网际协议（IP）</h2>
+        <p>网际协议（Internet Protocol，IP）是TCP/IP体系结构网际层中的核心协议。</p>
+        <p>要将众多的异构型网络都互连起来，并且能够互相通信，则会面临许多需要解决的问题。</p>
+        <ul>
+          <li>不同的网络接入机制</li>
+          <li>不同的差错恢复方法</li>
+          <li>不同的路由选择技术</li>
+          <li>不同的寻址方案</li>
+          <li>不同的最大分组长度</li>
+          <li>不同的服务（面向连接服务和无连接服务）</li>
+        </ul>
+        <h3 id="ipv4地址的划分"><a aria-hidden="true" tabindex="-1" href="#ipv4地址的划分" class="anchor"><span class="icon icon-link"></span></a>IPv4地址的划分</h3>
+        <p>IPv4地址是给因特网（Internet）上的每一个主机（或路由器）的每一个接口分配的一个在全世界范围内唯一的32比特的标识符。</p>
+        <blockquote>
+          <p>网络号：标志主机（或路由器）的接口所连接到的网络</p>
+          <p>主机号：标志主机（或路由器）的接口</p>
+        </blockquote>
+        <img src="http://pic.shixiaocaia.fun/202301301043432.png" alt="image-20221019143705261" style="zoom:50%;">
+        <img src="http://pic.shixiaocaia.fun/202301301043090.png" alt="image-20221019143809984" style="zoom:50%;">
+        <img src="http://pic.shixiaocaia.fun/202301301043777.png" alt="image-20221019144013101" style="zoom:50%;">
+        <blockquote>
+          <p>A类地址的，127，0网络号保留，不可分配。</p>
+          <p>ABC地址的，主机号全0作为网络地址，全1作为广播地址。</p>
+        </blockquote>
+        <h3 id="分类编址"><a aria-hidden="true" tabindex="-1" href="#分类编址" class="anchor"><span class="icon icon-link"></span></a>分类编址</h3>
+        <p>上述的最一开始的，划分网络号，然后再分配主机号，造成了大量的IPv4地址浪费。比如一个C类网络号，最多可以分配地址254个，不足以给256个主机分配，得分配一个B类网络号，然后B类网络号使用又绰绰有余。</p>
+        <h3 id="划分子网"><a aria-hidden="true" tabindex="-1" href="#划分子网" class="anchor"><span class="icon icon-link"></span></a>划分子网</h3>
+        <p>可以将多余的主机号选出一部分作为子网号，这样我分配一个B类网络号后，可以划分子网，来给公司的不同局域网分配网络号，而不用重新申请一个新的网络号。</p>
+        <p>子网掩码可以表明分类IPv4地址的主机号部分被借用了几个比特作为子网号。用左起多个连续的比特1对应IPv4地址中的网络号和子网号，后面连续的0作为主机号。</p>
+        <h3 id="无分类编址"><a aria-hidden="true" tabindex="-1" href="#无分类编址" class="anchor"><span class="icon icon-link"></span></a>无分类编址</h3>
+        <p>尽管用划分子网的方法缓解了一部分浪费，但是C类网络中主机号过小还是造成了极大的浪费。</p>
+        <p>因此有了无分类域间路由选择（Classless Inter-Domain Routing，CIDR ）。</p>
+        <p>CIDR将地址划分为网络前缀，主机号，但是网络前缀不定长，配合子网掩码可以得到网络前缀和子网号的长度区别。</p>
+        <p><strong>路由聚合</strong></p>
+        <p>通过无分类编址方式，在同一个局域网下面，路由器的路由表可以利用CIDR地址块来查找目的地址。</p>
+        <p>可以找到最长的公共前缀，得到聚合后的CIDR地址块，这样得到的地址块更小，路由更加具体。</p>
+        <p><strong>子网掩码划分</strong></p>
+        <p>有利于子网的划分，避免地址的浪费。</p>
+        <h3 id="ipv4地址和mac地址"><a aria-hidden="true" tabindex="-1" href="#ipv4地址和mac地址" class="anchor"><span class="icon icon-link"></span></a>IPv4地址和MAC地址</h3>
+        <p><strong>封装的位置</strong></p>
+        <img src="http://pic.shixiaocaia.fun/202301301043484.png" alt="image-20221020144911905" style="zoom:50%;">
+        <blockquote>
+          <p>IP地址是由网际层及其以上各层使用的地址，而MAC地址是数据链路层使用的地址。</p>
+          <p>源IP地址和目的IP地址被封装在IP数据包的首部，源MAC地址和目的MAC地址被封装在帧的首部。</p>
+        </blockquote>
+        <p><strong>数据报传送过程中IPv4地址与MAC地址的变化情况</strong></p>
+        <img src="http://pic.shixiaocaia.fun/202301301043560.png" alt="image-20221020145323362" style="zoom:50%;">
+        <blockquote>
+          <p>始终以IP地址作为网络中发送接受路径判断的方向标。</p>
+          <p>如果仅仅使用MAC地址进行通信，必须考虑以下问题：</p>
+          <ol>
+            <li>每台路由器的路由表必须记录因特网上所有主机和路由器各个接口的MAC地址。</li>
+            <li>手动给各个路由配置路由表不可能，通过相互交换路由信息，由于MAC接口的数量巨大，从而会占用大量的资源。</li>
+            <li>不同设备的MAC地址不同，也会造成极大的解析任务。</li>
+          </ol>
+        </blockquote>
+        <p>实际当中，我们使用IP地址进行寻址，只需要记录部分网络的IP地址，路由器收到IP数据报后，基于路由表进行转发，不用记录大量的MAC地址。</p>
+        <p>当同时也要考虑如何根据IP地址，寻找对应的MAC地址，否则数据帧无法进行封装。</p>
+        <h3 id="地址解析协议-arp"><a aria-hidden="true" tabindex="-1" href="#地址解析协议-arp" class="anchor"><span class="icon icon-link"></span></a>地址解析协议 ARP</h3>
+        <p>每一台主机会维护一个ARP高速缓存表，记录有IP地址对应的MAC地址对应关系。每一条记录分为动态类型和静态类型。</p>
+        <blockquote>
+          <p>动态类型：是主机通过ARP协议自动获取的，有一定的生命周期，因为IP地址和MAC地址的对应关系会改变。</p>
+          <p>静态类型：用户或者网络维护人员手工配置的，生命周期也相应不同，重启后仍有效。</p>
+        </blockquote>
+        <p>当路由表没有查到相应的对应关系时：</p>
+        <blockquote>
+          <ol>
+            <li>主机会发送ARP请求报文获取MAC地址。（被封装在MAC帧中发送，这样可以使用广播地址FF-FF-FF-FF-FF-FF发送）</li>
+            <li>其他总线上的（同一个局域网），主机收到后解析ARP请求报文，不是自己的IP地址时就丢弃</li>
+            <li>当发现是查找自己的IP地址时，首先将请求方的IP地址和MAC地址关系记录到自己的ARP高速缓存表当中。然后发送响应报文，理论是发送单播帧，但是由于总线天然的广播特性，会群发。</li>
+            <li>各个主机收到后判断是不是自己需要的。</li>
+          </ol>
+        </blockquote>
+        <p>注意：ARP协议时解决同一个局域网上的设备IP地址和MAC地址映射问题。且ARP协议可能会有一些网络安全问题，没有相应的安全验证机制。</p>
+        <h3 id="ip数据包的发送和转发过程"><a aria-hidden="true" tabindex="-1" href="#ip数据包的发送和转发过程" class="anchor"><span class="icon icon-link"></span></a>IP数据包的发送和转发过程</h3>
+        <img src="http://pic.shixiaocaia.fun/202301301043654.png" alt="image-20221021140631281" style="zoom:50%;">
+        <p>如上图一个小型的互联网的网络拓扑结构。</p>
+        <blockquote>
+          <ol>
+            <li>路由器中的0，1两个接口，连接了两个以太网。</li>
+            <li>根据CIDR给两个以太网分配了地址块，也就是网络号。</li>
+            <li>路由器0，1接口的IP地址作为了两个以太网的默认网关。</li>
+          </ol>
+        </blockquote>
+        <p>网关：是一个网络通向其他网络的IP地址。</p>
+        <p>IP数据包的发送和转发主要包含：主机发送IP数据报，路由器转发IP数据报。</p>
+        <p><strong>直接交付</strong></p>
+        <p>同一个网络中的主机之间可以直接通信。</p>
+        <p>源主机通过ARP协议获取到同一网络中的目的主机的MAC地址，就可以把IP数据报封装成帧后发送给目的主机。</p>
+        <blockquote>
+          <p>怎么判断是同一个网络：</p>
+          <p>将IP地址与子网掩码相与就得到了所在以太网的网络地址，对比源IP地址和目的IP地址。</p>
+        </blockquote>
+        <p><strong>间接交付</strong></p>
+        <p>不同网络中的主机之间通信，需要通过默认网关（路由器）来中转。</p>
+        <p>假设路由器收到了正确的IP数据报，根据IP数据报的首部中的IP地址在自己的路由表中进行查询。</p>
+        <blockquote>
+          <p>查询到了，对应转发。</p>
+          <p>查询不到，就丢弃，回发主机错误报告。</p>
+        </blockquote>
+        <p>简单考虑：</p>
+        <p>路由器的路由表应该至少包含了所连接网络的路由条目，根据CIDR分配的的路由器接口的IP地址，结合子网掩码，可以推测出接口所连接的网络地址。</p>
+        <p>IP数据报到达路由器时，通过将目的IP地址与地址掩码相与判断对应的网络地址。</p>
+        <p>找到对应网络地址的接口进行转发，并且路由器通过ARP协议获取到同一个网络中的目的主机的MAC地址，进行转发。</p>
+        <blockquote>
+          <p>如果路由器收到的是广播地址的IP数据报，不会对其转发，可以用来隔离广播域，避免广播风暴，造成资源浪费。</p>
+          <p>CIDR方式的广播地址时，主机号全为1。</p>
+        </blockquote>
+        <h3 id="ip数据报"><a aria-hidden="true" tabindex="-1" href="#ip数据报" class="anchor"><span class="icon icon-link"></span></a>IP数据报</h3>
+        <img src="http://pic.shixiaocaia.fun/202301301043493.png" alt="image-20221022160042422" style="zoom:50%;">
+        <p><strong>首部长度</strong></p>
+        <p>用来表示IPv4数据报的首部长度（固定部分+可变部分)。</p>
+        <p>以4字节为单位，共24字节。</p>
+        <blockquote>
+          <p>0110, 即6，所以固定部分为20字节，可变部分为4字节。</p>
+        </blockquote>
+        <p><strong>可选字段</strong></p>
+        <p>用来支持排错、测量以及安全措施等功能。</p>
+        <p><strong>填充</strong></p>
+        <p>当首部长度（20字节固定部分+可变部分）的长度不是4字节整数倍时，填充相应数量的全0字节，以确保IPv4数据报的首部长度是4字节的整数倍。</p>
+        <p><strong>区分服务</strong></p>
+        <p>利用该字段的不同取值可提供不同等级的服务质量。</p>
+        <p><strong>总长度</strong></p>
+        <p>长度为16个比特，该字段的取值以字节为单位，用来表示IPv4数据报的长度（首部长度+数据载荷长度）。</p>
+        <p><strong>标识 标志 片偏移</strong></p>
+        <p>用来IPv4数据报的分片，否则下放到数据链路层时无法封装成帧，数据链路层设置了最大的MTU。</p>
+        <blockquote>
+          <p>片偏移必须是整数。</p>
+        </blockquote>
+        <p><strong>生存时间</strong></p>
+        <p>生存时间字段后来改为以“跳数”为单位，路由器收到待转发的IPv4数据报时，将其首部中的该字段的值减1，若结果不为0就转发，否则就丢弃。</p>
+        <blockquote>
+          <p>防止被错误路由的IPv4数据报无限制地在因特网中兜圈。</p>
+        </blockquote>
+        <p><strong>协议</strong></p>
+        <p>长度为8个比特，用来指明IPv4数据报的数据载荷是何种协议数据单元PDU。</p>
+        <p><strong>首部检验和</strong></p>
+        <p>长度为16个比特，用于检测IPv4数据报在传输过程中其首部是否出现了差错。</p>
+        <p>IPv4数据报每经过一个路由器，其首部中的某些字段的值（例如生存时间TTL、标志以及片偏移等）都可能发生变化，因此路由器都要重新计算一下首部检验和。</p>
+        <ol>
+          <li>将IPv4数据报的首部划分为若干个16比特字的序列，并把首部校验和记为0。进行反码算数运算求和，得到值给首部校验和。</li>
+          <li>接收方再进行一次反码算数运算求和。</li>
+          <li>结果为0表示首部无差错，否则表示首部出现差错！</li>
+        </ol>
+        <blockquote>
+          <p>由于网际层并不向其高层提供可靠传输的服务，并且计算首部检验和是一项耗时的操作，因此在IPv6中，路由器不再计算首部检验和，从而更快转发IP数据报。</p>
+        </blockquote>
+        <h2 id="静态路由转发"><a aria-hidden="true" tabindex="-1" href="#静态路由转发" class="anchor"><span class="icon icon-link"></span></a>静态路由转发</h2>
+        <p>静态路由配置是指用户或网络运维人员使用路由器的相关命令给路由器人工配置路由表。</p>
+        <p><strong>直连路由和非直连路由</strong></p>
+        <p>路由器根据运维人员给路由器接口配置的各个接口的IP地址和地址掩码，路由器自行推断出与接口相连的网路地址，得出的为直连路由。</p>
+        <p>由运维人员手动添加的是非直连路由，属于静态路由配置。</p>
+        <p><strong>默认路由</strong></p>
+        <p>设置一条路由表前面差不多的条目，默认下一跳都是此地址。</p>
+        <p>极大减少了路由表的存储空间和搜索时间。</p>
+        <p>一般设置为0.0.0.0/0，根据最长前缀匹配原则，它的优先级也很低。</p>
+        <p><strong>特定主机路由</strong></p>
+        <p>出于某种安全问题的考虑，同时为了使网络运维人员更方便地控制网络和测试网络，特别是在对网络的连接或路由表进行排错时，指明到某一台主机的特定主机路由是十分有用的。</p>
+        <h2 id="因特网的路由选择协议"><a aria-hidden="true" tabindex="-1" href="#因特网的路由选择协议" class="anchor"><span class="icon icon-link"></span></a>因特网的路由选择协议</h2>
+        <p>将整个因特网划分成多个较小的自治系统（Autonomous System，AS）。</p>
+        <p>自治系统之间的路由选择简称域间路由选择，使用外部网关协议，EGP。</p>
+        <p>自治系统内部的路由选择称为域内路由选择，使用内部网关协议，IGP。</p>
+        <h3 id="rip"><a aria-hidden="true" tabindex="-1" href="#rip" class="anchor"><span class="icon icon-link"></span></a>RIP</h3>
+        <p>路由信息协议 （Routing Information Protocol， RIP） 是内部网关协议中最先得到广泛使用的协议之一，其相关标准文档为[ RFC10581 ]。</p>
+        <p><strong>RIP距离</strong></p>
+        <p>RIP要求自治系统AS内的每一个路由器，都要维护从它自己到AS内其他每一个网络的距离记录。这是一组距离，称为距离向量 （Distance-Vector，D-V）。</p>
+        <p>RIP使用跳数 （Hopcount）作为度量 （Metric） 来衡量到达自的网络的距离。</p>
+        <pre><code class="code-highlight"><span class="code-line line-number" line="1">1. RIP将路由器到直连网络的距离定义为1。
+</span><span class="code-line line-number" line="2">2. RIP将路由器到非直连网络的距离定义为所经过的路由器数加1。
+</span><span class="code-line line-number" line="3">3. RIP允许一条路径最多只能包含15个路由器， 距离等于16时相当于不可达。因此RIP只适用于小型互联网。
+</span></code><input type="hidden" value="1. RIP将路由器到直连网络的距离定义为1。
+2. RIP将路由器到非直连网络的距离定义为所经过的路由器数加1。
+3. RIP允许一条路径最多只能包含15个路由器， 距离等于16时相当于不可达。因此RIP只适用于小型互联网。
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>
+          <img src="http://pic.shixiaocaia.fun/202301301044450.png" alt="image-20221023155051952">
+        </p>
+        <blockquote>
+          <p>RIP认为好的路由就是“距离短”的路由，也就是所通过路由器数量最少的路由。</p>
+          <p>当到达同一目的网络有多条RIP距离相等的路由时，可以进行等价负载均衡，也就是将通信量均衡地分布到多条等价的路径上。</p>
+        </blockquote>
+        <p><strong>RIP重要特点</strong></p>
+        <blockquote>
+          <ol>
+            <li>仅和<strong>相邻</strong>路由器交换信息。</li>
+            <li>
+              路由器自己的路由表。
+              即本路由器到所在自治系统AS中各网络的最短RIP距离，以及到各网络应经过的下一跳路由器。
+            </li>
+            <li>
+              周期性交换(例如，每个约30秒)。
+              为了加快RP的收敛速度，当网络拓扑发生变化时，路由器要及时向相邻路由器通告拓扑变化后的路由信息，这称为触发更新。
+            </li>
+          </ol>
+        </blockquote>
+        <p><strong>RIP基本工作流程</strong></p>
+        <blockquote>
+          <ol>
+            <li>路由器刚开始工作时，只知道自己到直连网络的RP距离为1.</li>
+            <li>每个路由器仅和相邻路由器周期性地交换并更新路由信息。</li>
+            <li>若干次交换和更新后，每个路由器都知道到达本自治系统S内各网络的最短距离和下一跳路由器，称为收敛。</li>
+          </ol>
+        </blockquote>
+        <p><strong>RIP的距离向量算法</strong></p>
+        <p>运行RIP的路由器周期性的向周围所有相邻的路由器发送RIP更新报文。</p>
+        <p>遵守以下的更新的原则：假设路由D收到路由C的路由更新报文。</p>
+        <blockquote>
+          <p>首先会将路由表的RIP距离 + 1，也就是D->C的距离。</p>
+          <p>当D中的下一跳是C，此条的路由信息的RIP距离发生改变，D中要进行更新。</p>
+          <p>当目的网络地址相同，但是D中的下一跳不是C时，比较RIP距离，如果经由C更短就更新。此外到达目的网络，不同的下一跳，RIP距离相等，可以等价<strong>负载均衡</strong>，也可以添加。</p>
+          <p>如果出现D中没有的路由信息，添加到D中。</p>
+        </blockquote>
+        <p><strong>RIP存在的问题</strong></p>
+        <p>当某条链路发生故障时，路由设置距离为16不可达，但是由于发送周期还没到，给其他路由造成误导，之后会相互发送错误的信息，直到更新为不可达的距离。</p>
+        <p>解决思路：</p>
+        <ol>
+          <li>限制最大的RIP距离。</li>
+          <li>当路由信息发生改变时，就更新，即触发更新。</li>
+          <li>水平切割（没看懂）</li>
+        </ol>
+        <p>RIP相关报文使用运输层的用户数据报协议UDP进行封装，使用的UDP端口号为520。</p>
+        <p>从RIP报文封装的角度看，RIP属于TCP/IP体系结构的应用层。</p>
+        <p>但RIP的核心功能是路由选择，这属于TCP/IP体系结构的网际层。</p>
+        <p><strong>优缺点</strong></p>
+        <p>优点：实现简单，开销小，好消息传的快（RIP距离）</p>
+        <p>缺点：RIP距离限制了AS规模。相邻路由器交换的路由信息是路由器中的完整路由表，随着网络规模的扩大，开销增大。坏消息传得慢。</p>
+        <hr>
+        <h3 id="ospf"><a aria-hidden="true" tabindex="-1" href="#ospf" class="anchor"><span class="icon icon-link"></span></a>OSPF</h3>
+        <p>开放最短路径优先（Open Shortest Path First，OSPF）协议是为了克服路由信息协议RIP的缺点在1989年开发出来的。</p>
+        <blockquote>
+          <p>开放表明协议是由多家厂商控制的。</p>
+          <p>最短路径优先是使用了Dijkstra算法。</p>
+        </blockquote>
+        <p>OSPF基于链路状态并采用最短路径算法计算路由，从算法上保证了不会产生路由环路。</p>
+        <blockquote>
+          <p>链路状态（Link State，LS）是指本路由器都和哪些路由器相邻，以及相应链路的“代价（cost）”。</p>
+          <p>“代价”用来表示费用、距离、时延和带宽等，这些都由网络管理人员来决定。</p>
+        </blockquote>
+        <p><strong>邻居关系的建立和维护</strong></p>
+        <p>OSPF相邻路由器之间通过交互问候（Hello）分组来建立和维护邻居关系。</p>
+        <p>问候（Hello）分组封装在IP数据报中，发往组播地址224.0.0.5。IP数据报首部中的协议号字段的取值为89，表明IP数据报的数据载荷为OSPF分组。</p>
+        <blockquote>
+          <p>问候（Hello）分组的发送周期为10秒。</p>
+          <p>若40秒未收到来自邻居路由器的问候（Hello）分组，则认为邻居路由器不可达。</p>
+          <p>每个路由器都会建立一张邻居表。</p>
+        </blockquote>
+        <img src="http://pic.shixiaocaia.fun/202301301044944.png" alt="image-20221023163929529" style="zoom:50%;">
+        <blockquote>
+          <p>OSPF分组直接使用网际层的IP数据报进行封装,从逐层封装的角度属于网际层协议。</p>
+          <p>RIP报文需要使用运输层用户数据报协议UDP封装，属于应用层协议，核心功能是路由选择，属于网际层。</p>
+        </blockquote>
+        <p><strong>链路状态通告</strong></p>
+        <p>使用OSPF的每个路由器都会产生链路状态通告（Link State Advertisement，LSA）。</p>
+        <p>LSA中包含以下两类链路状态信息： 1. 直连网络的链路状态信息 2. 邻居路由器的链路状态信息。</p>
+        <p><strong>链路状态更新分组</strong></p>
+        <p>链路状态通告LSA被封装在链路状态更新（Link State Update，LSU）分组中，采用可靠的洪泛法（Flooding）进行发送。</p>
+        <p>洪泛法的要点是路由器向自己所有的邻居路由器发送链路状态更新分组，收到该分组的各路由器又将该分组转发给自己所有的邻居路由器（但其上游路由器除外），以此类推。</p>
+        <p>可靠是指收到链路状态更新分组后要发送确认，收到重复的更新分组无需再次转发，但要发送一次确认。</p>
+        <p><strong>OSPF的工作流程</strong></p>
+        <ol>
+          <li>发送问候分组，判断与相邻路由器的可达性</li>
+          <li>建立邻居关系，给邻居路由器发送数据库描述分组（自己所有的链路状态条目）</li>
+          <li>如果缺少某些链路信息，就向对方发送链路状态请求分组，对方又发送链路状态更新分组给他</li>
+          <li>收到后进行更新，再会发确认分组</li>
+        </ol>
+        <p>最终达成一致性，可以称之为完全邻接的路由器。</p>
+        <p><strong>多点接入网络的OSPF路由器</strong></p>
+        <p>选举指定路由器（Designated Router，DR）和备用的指定路由器（Backup Designated Router，BDR）。</p>
+        <p>普通路由器只与DR或者BDR之间建立邻居关系，通过DR或者BDR来进行交换信息。</p>
+        <p><strong>OSPF划分区域</strong></p>
+        <p>使用OSPF协议能够用于规模很大的网络，将一个AS划分成多个区域，每个区域用32比特的区域标识符表示，不同的区域通过多种路由器进行相互通信。</p>
+        <p>划分区域后，使得泛洪法交换链路信息局限在每一个区域以内，使得一个区域内的信息通信量大大减小，适用于大规模的网络当中。</p>
+        <h3 id="bgp"><a aria-hidden="true" tabindex="-1" href="#bgp" class="anchor"><span class="icon icon-link"></span></a>BGP</h3>
+        <p>边界网关协议（Border Gateway Protocol，BGP）属于外部网关协议EGP这个类别，用于自治系统AS之间的路由选择协议。</p>
+        <p>由于在不同AS内度量路由的“代价”（距离、带宽、费用等）可能不同，因此对于AS之间的路由选择，使用统一的“代价”作为度量来寻找最佳路由是不行的。</p>
+        <p>BGP只能是力求寻找一条能够到达目的网络且比较好的路由（即不能兜圈子），而并非要寻找一条最佳路由。</p>
+        <p><strong>BGP边界路由器</strong></p>
+        <p>每一个AS至少选择出一个“BGP发言人”，一般来说，BGP发言人就是BGP边界路由器。两个BGP发言人都是通过一个共享网络连接在一起的。</p>
+        <blockquote>
+          <p>通过TCP连接。</p>
+          <p>在所建立的TCP连接上交换BGP报文以建立BGP会话。</p>
+          <p>利用BGP会话交换路由信息。</p>
+        </blockquote>
+        <p>使用TCP连接交换路由信息的两个BGP发言人，彼此称为对方的邻站（neighbor）或对等站（peer）。</p>
+        <p>当BGP发言人相互交换了网络可达性的信息后，各BGP发言人就根据所采用的策略，从收到的路由信息中找出到达各自治系统的较好的路由，也就是构造出树形结构且不存在环路的自治系统连通图。</p>
+        <p><strong>BGP报文信息</strong></p>
+        <p>OPEN：通信初始化</p>
+        <p>KEEPALIVE：周期性验证路由的连通性</p>
+        <p>UPDATE：更新路由信息</p>
+        <p>NOTIFICATION：用于发送检测到的差错。</p>
+        <p><strong>路由器的基本工作原理</strong></p>
+        <img src="http://pic.shixiaocaia.fun/202301301044695.png" alt="image-20221025095910672" style="zoom:50%;">
+        <p>看图说话。</p>
+        <h2 id="网际控制报文协议icmp"><a aria-hidden="true" tabindex="-1" href="#网际控制报文协议icmp" class="anchor"><span class="icon icon-link"></span></a>网际控制报文协议ICMP</h2>
+        <p>为了更有效地转发IP数据报以及提高IP数据报交付成功的机会，TCP/IP体系结构的网际层使用了网际控制报文协议（Internet Control Message Protocol，ICMP）[RFC 792]。</p>
+        <p>主机或路由器使用ICMP来发送差错报告报文和询问报文。</p>
+        <p>ICMP报文被<strong>封装在IP数据报</strong>中发送。</p>
+        <h3 id="差错报告报文"><a aria-hidden="true" tabindex="-1" href="#差错报告报文" class="anchor"><span class="icon icon-link"></span></a>差错报告报文</h3>
+        <p>用来向主机或路由器报告差错情况。</p>
+        <ul>
+          <li>终点不可达</li>
+          <li>源点抑制</li>
+          <li>时间超过 （超时）</li>
+          <li>参数问题（误码）</li>
+          <li>改变路由 （重定向）</li>
+        </ul>
+        <h3 id="询问报文"><a aria-hidden="true" tabindex="-1" href="#询问报文" class="anchor"><span class="icon icon-link"></span></a>询问报文</h3>
+        <p>用来向主机或路由器询问情况。</p>
+        <p><strong>回送请求和回答</strong></p>
+        <p>由主机或路由器向一个特定的目的主机或路由器发出。</p>
+        <p>收到此报文的主机或路由器必须给发送该报文的源主机或路由器发送ICMP回送回答报文。</p>
+        <p>这种询问报文用来<strong>测试目的站是否可达以及了解其有关状态</strong>。</p>
+        <p><strong>时间戳请求和回答</strong></p>
+        <p>用来请求某个主机或路由器回答当前的日期和时间。</p>
+        <p>在ICMP时间戳回答报文中有一个32比特的字段，其中写入的整数代表从1900年1月1日起到当前时刻一共有多少秒。</p>
+        <p>这种询问报文用来进行<strong>时钟同步和测量时间</strong>。</p>
+        <h3 id="应用-分组网间探测"><a aria-hidden="true" tabindex="-1" href="#应用-分组网间探测" class="anchor"><span class="icon icon-link"></span></a>应用-分组网间探测</h3>
+        <p>分组网间探测PING（Packet InterNet Groper，PING），用来测试主机或路由器之间的连通性。</p>
+        <ul>
+          <li>PING是TCP/IP体系结构的应用层直接使用网际层ICMP的一个例子，它并不使用运输层的TCP或UDP。</li>
+          <li>PING应用所使用的ICMP报文类型为回送请求和回答。</li>
+        </ul>
+        <h3 id="应用-跟踪路由"><a aria-hidden="true" tabindex="-1" href="#应用-跟踪路由" class="anchor"><span class="icon icon-link"></span></a>应用-跟踪路由</h3>
+        <p>跟踪路由应用traceroute，用于探测IP数据报从源主机到达目的主机要经过哪些路由器。</p>
+        <p>在不同操作系统中，traceroute应用的命令和实现机制有所不同。</p>
+        <img src="http://pic.shixiaocaia.fun/202301301044056.png" alt="image-20221028103741300" style="zoom:50%;">
+        <blockquote>
+          <p>时间中出现"*"号, 表示在超时时间内没有收到路由器发来的响应报文.</p>
+        </blockquote>
+        <p>通过不断发送ICMP回送请求报文,到达不同路由器时TTL减少,直到被抛弃发送ICMP差错报告报文,这样就知道经过路由器的IP地址,再发送TTL更长的报文,查看经过的路由器.</p>
+        <h2 id="虚拟专用网和网络地址转换"><a aria-hidden="true" tabindex="-1" href="#虚拟专用网和网络地址转换" class="anchor"><span class="icon icon-link"></span></a>虚拟专用网和网络地址转换</h2>
+        <h3 id="虚拟专用网"><a aria-hidden="true" tabindex="-1" href="#虚拟专用网" class="anchor"><span class="icon icon-link"></span></a>虚拟专用网</h3>
+        <p>虚拟专用网（Virtual Private Network，VPN）。使得在不同地点的专用网进行通信。又称为IP隧道技术，远程接入VPN。</p>
+        <blockquote>
+          <p>租用电信公司的通线线路成本高，简单。</p>
+          <p>利用公网的因特网作为通信载体。称为虚拟局域网。</p>
+        </blockquote>
+        <p>对于公司如果专用网使用TCP/IP协议栈，给每个主机分配IP地址，但是为了不直接将信息暴露在互联网上，分配的是在机构内部有效，称为专用地址（Private Address）。</p>
+        <blockquote>
+          <p>
+            10.0.0.0~10.255.255.255 （CIDR地址块10/8）
+            172.16.0.0~172.31.255.255 （CIDR地址块172.16/12）
+            192.168.0.0~192.168.255.255 （CIDR地址块192.168/16）
+          </p>
+          <p>这样的地址不用申请，并且多个机构重复使用也没关系，只在机构内部使用。</p>
+        </blockquote>
+        <p>大体的流程：</p>
+        <blockquote>
+          <p>VPN的技术对于公司而言，公司使用的是Private Address，在局域网内主机可以直接通信。</p>
+          <p>那我在不同区域要进行通信，为了避免计算机信息暴露在互联网中。</p>
+          <p>使用VPN技术，将数据报伪装成正常使用的IP数据报，也就是虚拟的意思。在原有的基础上，又套上了接受和发送的路由器IP地址作为源地址和目的地址。</p>
+          <p>接收收到后去除这些，再去解析原来的数据报的地址（专有地址）。</p>
+          <p>又称为IP-in-IP IP隧道技术。</p>
+        </blockquote>
+        <h3 id="网络地址转换"><a aria-hidden="true" tabindex="-1" href="#网络地址转换" class="anchor"><span class="icon icon-link"></span></a>网络地址转换</h3>
+        <p>网络地址转换（Network Address Translation，NAT）技术于1994年被提出，用来缓解IPv4地址空间即将耗尽的问题。</p>
+        <p>NAT能使大量使用内部专用地址的专用网络用户共享少量外部全球地址来访问因特网上的主机和资源。</p>
+        <p>这种方法需要在专用网络连接到因特网的路由器上安装NAT软件。装有NAT软件的路由器称为NAT路由器，它至少要有一个有效的外部全球地址IPG。这样，所有使用内部专用地址的主机在和外部因特网通信时，都要在NAT路由器上将其内部专用地址转换成IPG。</p>
+        <blockquote>
+          <p>简单上看就是将专用地址转换为NAT路由器上的一个公网IP地址，会在收发时根据NAT转换表进行转表</p>
+        </blockquote>
+        <p><strong>网络地址与端口号转换</strong></p>
+        <p>上面的技术，取决于NAT路由器他本身有多少个外网IP，那么对于最多同时使用的IP地址就有了限制，因此增加了对端口号的重新设置分配，即NAPT技术。</p>
+        <p>NAPT路由器会对端口号在进行重新分配，缓解路由器的外网IP不够用的情况。</p>
+        <p><strong>NAT技术的弊端</strong></p>
+        <p>NAT对网络技术并不完全透明，会对某些网络应用产生影响，例如P2P技术。</p>
+        <h2 id="ip多播"><a aria-hidden="true" tabindex="-1" href="#ip多播" class="anchor"><span class="icon icon-link"></span></a>IP多播</h2>
+        <p>多播（Multicast，也称为组播）是一种实现“一对多”通信的技术，与传统单播“一对一”通信相比，多播可以极大地节省网络资源。</p>
+        <p>在因特网上进行的多播，称为IP多播。</p>
+        <blockquote>
+          <p>单播方式下，路由器需要向主机发送多个相同的内容。</p>
+          <p>在局域网内硬件支持硬件多播功能时，不需要复制或者发送多个文件，多播组成员可以接收到这个文件。</p>
+        </blockquote>
+        <h3 id="ip多播地址与多播数据报"><a aria-hidden="true" tabindex="-1" href="#ip多播地址与多播数据报" class="anchor"><span class="icon icon-link"></span></a>IP多播地址与多播数据报</h3>
+        <p>在IPv4当中，将D类地址当作多播地址。</p>
+        <p>多播地址只能作为目的地址，不能作为源地址，常使用一个多播地址表示一个多播组，使用同一个多播地址接受多播数据报的所有主机构成了一个多播组。</p>
+        <blockquote>
+          <p>IP多播数据报是尽可能交付一个多播组内的所有硬件，并不保证百分百交付。</p>
+        </blockquote>
+        <h3 id="在局域网中进行硬件多播"><a aria-hidden="true" tabindex="-1" href="#在局域网中进行硬件多播" class="anchor"><span class="icon icon-link"></span></a>在局域网中进行硬件多播</h3>
+        <p>由于局域网内支持硬件多播（因为MAC地址具有多播MAC地址），这样我们可以IP多播数据报封装在局域网的MAC帧中，将MAC帧首部重点MAC地址字段的值设置为多播MAC地址。</p>
+        <blockquote>
+          <p>由于IP多播地址可变化的28比特的前5个比特无法映射到MAC多播地址，这会造成IP多播地址与多播MAC地址的映射关系并不是唯一的。</p>
+        </blockquote>
+        <h3 id="网际组管理协议"><a aria-hidden="true" tabindex="-1" href="#网际组管理协议" class="anchor"><span class="icon icon-link"></span></a>网际组管理协议</h3>
+        <p>网际组管理协议（Internet Group Management Protocol，IGMP）是TCP/IP体系结构网际层中的协议。</p>
+        <p>其作用是让连接在本地局域网上的多播路由器知道本局域网上是否有主机（实际上是主机中的某个进程）加入或退出了某个多播组。</p>
+        <p>IGMP仅在<strong>本网络</strong>有效，使用IGMP并不能知道多播组所包含的成员数量，也不能知道多播组的成员都分布在哪些网络中。</p>
+        <p>通过多播路由选择协议，使得多播数据报用最小的代价传送给组里的所有成员。</p>
+        <p><strong>多播路由选择协议</strong></p>
+        <p>创建一个多播转发树，连接多播源和所有拥有该多播组成员的路由器，IP多播数据报沿着转发树进行洪泛。</p>
+        <img src="http://pic.shixiaocaia.fun/202301301044990.png" alt="image-20221029105535764" style="zoom:50%;">
+        <h3 id="多播路由选择协议"><a aria-hidden="true" tabindex="-1" href="#多播路由选择协议" class="anchor"><span class="icon icon-link"></span></a>多播路由选择协议</h3>
+        <p>在多播路由器之间为每个多播组建立一个多播转发树。</p>
+        <p>多播转发树连接多播源和所有拥有该多播组成员的路由器。</p>
+        <p>主要包括以下两种构建多播转发树：</p>
+        <p><strong>基于源树的多播路由选择</strong></p>
+        <p>基于源树的多播路由选择的最典型算法是反向路径多播（Reverse Path Multicasting，RPM）算法。</p>
+        <p>RPM算法包含以下两个步骤：</p>
+        <ol>
+          <li>利用反向路径广播（Reverse Path Broadcasting，RPB）算法建立一个广播转发树。</li>
+          <li>利用剪枝（Pruning）算法，剪除广播转发树中的下游非成员路由器，获得一个多播转发树。</li>
+        </ol>
+        <p>要建立广播转发树，可以使用洪泛（Flooding）法。</p>
+        <blockquote>
+          <p>[!NOTE]</p>
+          <p>如果网络种存在环路，洪泛法会产生严重的问题，广播分组的一个副本在整个环路种永久兜圈。</p>
+        </blockquote>
+        <p>使用RPM算法，可以避免广播分组在环路中兜圈。</p>
+        <p>路由器收到一个广播分组时，会先判断这个分组是不是<strong>它和源站上最短路径上的路由器</strong>发送过来的，如果不是就会丢弃，避免环路中其他路由器发过来的分组导致风暴。</p>
+        <p>最后再通过剪枝，去除下游非成员路由器。</p>
+        <blockquote>
+          <p>为了保证多播转发树的连通性，部分非成员节点需要保留。</p>
+          <p>在考虑最短路径时，如果有多条最短路径，选择IP地址最小的那个。</p>
+        </blockquote>
+        <p><strong>组共享树多播路由选择</strong></p>
+        <p>组共享树多播路由选择采用基于核心的分布式生成树算法来建立共享树。该方法在每个多播组中指定一个<strong>核心（core）路由器</strong>，以该路由器为根，建立一棵连接多播组的所有成员路由器的生成树，作为多播转发树。</p>
+        <img src="http://pic.shixiaocaia.fun/202301301044537.png" alt="image-20221031185555282" style="zoom:50%;">
+        <blockquote>
+          <p>实际上因特网上的IP多播还没有得到广泛的应用，要改变已经成功、广泛应用的网络层协议是一件困难的事。</p>
+        </blockquote>
+        <h2 id="移动ip技术"><a aria-hidden="true" tabindex="-1" href="#移动ip技术" class="anchor"><span class="icon icon-link"></span></a>移动IP技术</h2>
+        <blockquote>
+          <p>[!NOTE]</p>
+          <p>尝试一个问题，我一开始接入一个网络，分配一个默认的IP地址，当我切换到其他网络时，如果重新分配一个IP地址，这样会导致之前的通信中断。</p>
+          <p>为此引入了移动IP地址，使得移动主机在各网络之间漫游时，仍然能够保持其原来的IP地址不变。</p>
+        </blockquote>
+        <h3 id="基本概念"><a aria-hidden="true" tabindex="-1" href="#基本概念" class="anchor"><span class="icon icon-link"></span></a>基本概念</h3>
+        <ol>
+          <li>
+            每个移动主机都有一个默认连接的网络或初始申请接入的网络，称为<strong>归属网络</strong>
+            （Home Network）。
+          </li>
+          <li>
+            移动主机在归属网络中的IP地址在其整个移动通信过程中是始终不变的，因此称为
+            永久地址 （Permanent Address） 或<strong>归属地址</strong> （Home Address） 。
+          </li>
+          <li>
+            在归属网络中，代表移动主机执行移动管理功能的实体称为<strong>归属代理</strong> （Home
+            Agent）。归属代理通常就是连接在归属网络上的路由器，然而它作为代理的特定功
+            能则是在网络层完成的。
+          </li>
+          <li>
+            移动主机当前漫游所在的网络称为<strong>外地网络</strong> （Foreign Network） 或被访网络 （Visited
+            Network）
+          </li>
+          <li>
+            在外地网络中， 帮助移动主机执行移动管理功能的实体称为<strong>外地代理</strong> （Foreign
+            Agent）
+          </li>
+          <li>
+            外地代理通常就是连接在外地网络上的路由器。外地代理会为移动主机提供一个临
+            时使用的属于外地网络的<strong>转交地址</strong> （Care-of Address）
+          </li>
+        </ol>
+        <h3 id="固定主机向移动主机发送ip数据报"><a aria-hidden="true" tabindex="-1" href="#固定主机向移动主机发送ip数据报" class="anchor"><span class="icon icon-link"></span></a>固定主机向移动主机发送IP数据报</h3>
+        <p>固定主机B会先给归属网络发送IP数据报，归属网络的路由器收到该数据报后重新封装一封IP数据报发送给身处外地网络的移动主机。</p>
+        <p>外地网络的路由器收到后会进行解析，查询目的地址对应的MAC地址封装成帧进行转发。</p>
+        <blockquote>
+          <p>[!NOTE]</p>
+          <p>归属代理会采用ARP代理技术，以自己的MAC地址接受发送过来的ARP请求，来接受分组。</p>
+          <p>转交地址是外地代理的地址而不是移动主机的地址，外地代理的移动主机共享同一个转交地址。</p>
+        </blockquote>
+        <h3 id="同址转交地址"><a aria-hidden="true" tabindex="-1" href="#同址转交地址" class="anchor"><span class="icon icon-link"></span></a>同址转交地址</h3>
+        <p>上面的归属代理和外地代理一般部署在相应网络的路由器上，也可以直接运行在移动主机上，但是需要运行额外的外地代理软件，需要DHCP。</p>
+        <h3 id="三角形路由问题"><a aria-hidden="true" tabindex="-1" href="#三角形路由问题" class="anchor"><span class="icon icon-link"></span></a>三角形路由问题</h3>
+        <p>当移动主机和固定主机在同一个网络时，再经过归属网路转发，这样就造成了低效性，称为三角形路由问题。</p>
+        <p>解决方式是给发送端的固定主机也配置一个通信代理，先从归属代理那里获得移动主机的转交地址之后，通过IP隧道技术，直接转发给移动主机的外地代理。</p>
+        <h2 id="ipv6"><a aria-hidden="true" tabindex="-1" href="#ipv6" class="anchor"><span class="icon icon-link"></span></a>IPv6</h2>
+        <h3 id="ipv4的缺陷"><a aria-hidden="true" tabindex="-1" href="#ipv4的缺陷" class="anchor"><span class="icon icon-link"></span></a>IPv4的缺陷</h3>
+        <p>早期设计没有考虑协议的广泛使用，现如今IPv4地址已经分配完。</p>
+        <p>目前通过NAT技术延续IPv4的使用。</p>
+        <h3 id="ipv6的优点"><a aria-hidden="true" tabindex="-1" href="#ipv6的优点" class="anchor"><span class="icon icon-link"></span></a>IPv6的优点</h3>
+        <h3 id="数据报首部格式"><a aria-hidden="true" tabindex="-1" href="#数据报首部格式" class="anchor"><span class="icon icon-link"></span></a>数据报首部格式</h3>
+        <img src="http://pic.shixiaocaia.fun/202301301044694.png" alt="image-20221104154142071" style="zoom:67%;">
+        <p><strong>与IPv4的区别</strong></p>
+        <ul>
+          <li>取消了首部长度字段，因为IPv6数据报的首部长度是固定的40字节。</li>
+          <li>取消了区分服务（服务类型）字段，因为IPv6数据报首部中的通信量类和流标号字段实现了区分服务字段的功能。</li>
+          <li>取消了总长度字段，改用有效载荷长度字段。这是因为IPv6数据报的首部长度是固定的40字节，只有其后面的有效载荷长度是可变的。</li>
+          <li>取消了标识、标志和片偏移字段，因为这些功能已包含在IPv6数据报的分片扩展首部中。</li>
+          <li>把生存时间TTL字段改称为跳数限制字段，这样名称与作用更加一致。</li>
+          <li>取消了协议字段，改用下一个首部字段。</li>
+          <li>取消了首部检验和字段，这样可以加快路由器处理IPv6数据报的速度。</li>
+          <li>取消了选项字段，改用扩展首部来实现选项功能。</li>
+        </ul>
+        <p><strong>各部分功能</strong></p>
+        <ul>
+          <li>版本字段：长度为4比特，用来表示IP协议的版本。对于IPv6该字段的值是6。</li>
+          <li>通信量类字段：长度为8比特，该字段用来区分不同的IPv6数据报的类别或优先级。目前正在进行不同的通信量类性能的实验。</li>
+          <li>流标号字段：长度为20比特。
+            <ul>
+              <li>“流”就是因特网上从特定源点到特定终点（单播或多播）的一系列IPv6数据报（如实时音视频数据的传送），而在这个“流”所经过的路径上的所有路由器都保证指明的服务质量。</li>
+              <li>所有属于同一个流的IPv6数据报都具有同样的流标号。换句话说，流标号用于资源分配。</li>
+            </ul>
+          </li>
+          <li>有效载荷长度字段：长度为16比特，它指明IPv6数据报基本首部后面的有效载荷（包括扩展首部和数据部分）的字节数量。</li>
+          <li>下一个首部字段：长度为8比特。该字段相当于IPv4数据报首部中的协议字段或可选字段。</li>
+          <li>跳数限制字段：长度为8比特。该字段用来防止IPv6数据报在因特网中永久兜圈。</li>
+        </ul>
+        <h3 id="ipv6地址"><a aria-hidden="true" tabindex="-1" href="#ipv6地址" class="anchor"><span class="icon icon-link"></span></a>IPv6地址</h3>
+        <p>在IPv6地址的冒号十六进制记法的基础上，再使用“左侧零”省略和“连续零”压缩，可使IPv6地址的表示更加简洁。</p>
+        <ul>
+          <li>“左侧零”省略是指两个冒号间的十六进制数中最前面的一串0可以省略不写。</li>
+          <li>“连续零”压缩是指一连串连续的0可以用一对冒号取代。<strong>只能用一次。</strong></li>
+        </ul>
+        <h3 id="ipv6地址的分类"><a aria-hidden="true" tabindex="-1" href="#ipv6地址的分类" class="anchor"><span class="icon icon-link"></span></a>Ipv6地址的分类</h3>
+        <p>单播：传统的点对点通信。</p>
+        <p>多播：一点对多点的通信。数据报发送到一组计算机中的每一个。IPv6没有采用广播的术语，而将广播看作多播的一个特例。</p>
+        <p>任播：这是IPv6新增的一种类型。任播的终点是一组计算机，但数据报只交付其中的一个，通常是按照路由算法得出的距离最近的一个。</p>
+        <hr>
+        <p>未指明地址：128个比特为“全0”的地址，可缩写为两个冒号“::”。</p>
+        <p>环回地址：最低比特为1，其余127个比特为“全0”，即0:0:0:0:0:0:0:1，可缩写为::1。</p>
+        <p>多播地址：最高8比特为“全1”的地址，可记为FF00::/8。</p>
+        <p>本地链路单播地址：最高10比特为1111111010的地址，可记为FE80::/10。</p>
+        <p>全球单播地址：除了上述地址以外的地址。</p>
+        <img src="http://pic.shixiaocaia.fun/202301301045251.png" alt="image-20221104160440624" style="zoom:67%;">
+        <h3 id="ipv4向ipv6过渡"><a aria-hidden="true" tabindex="-1" href="#ipv4向ipv6过渡" class="anchor"><span class="icon icon-link"></span></a>IPv4向IPv6过渡</h3>
+        <p><strong>使用双协议栈</strong></p>
+        <p>是指在完全过渡到IPv6之前，使一部分主机或路由器装有IPv4和IPv6两套协议栈。双协议栈主机或者路由器既可以和IPv6系统通信，又可以和IPv4系统通信。</p>
+        <p>双协议栈主机或路由器记为IPv6/IPv4，表明它具有一个IPv6地址和一个IPv4地址。</p>
+        <p><strong>使用隧道技术</strong></p>
+        <ol>
+          <li>
+            当1Pv6数据报要进入IPv4网络时，将IPv6数据报重新封装成IPv4数据报，即整个IPv6数据报成为IPv4数
+            据报的数据载荷。
+          </li>
+          <li>封装有IPv6数据报的IPv4数据报在IPv4网络中传输。</li>
+          <li>当IPv4数据报要离开IPv4网络时，再将其数据载荷(即原来的IPv6数据报)取出并转发到IPv6网络。</li>
+        </ol>
+        <h3 id="icmpv6"><a aria-hidden="true" tabindex="-1" href="#icmpv6" class="anchor"><span class="icon icon-link"></span></a>ICMPv6</h3>
+        <p>由于IPv6与IPv4一样，都不确保数据报的可靠交付，因此IPv6也需要使用网际控制报文协议ICMP来向发送IPv6数据报的源主机反馈一些差错信息，相应的ICMP版本为ICMPv6。</p>
+        <h2 id="sdn"><a aria-hidden="true" tabindex="-1" href="#sdn" class="anchor"><span class="icon icon-link"></span></a>SDN</h2>
+        <p>软件定义网络（Software Defined Network，SDN）。SDN最初只是学术界讨论的一种新型网络体系结构。</p>
+        <p>常用的路由器主要是作为传递主机间的分组以及路由信息的交换，控制层面和数据层面在同一个设备上。</p>
+        <p>而在SDN下，控制层面和数据层面分离，在控制层面中，有一个在逻辑上集中的远程控制器。</p>
+        <p>SDN这种新型网络体系结构的<strong>核心思想</strong>：把网络的控制层面和数据层面分离，而让控制层面利用软件来控制数据层面中的许多设备。</p>
+        <h3 id="openflow协议"><a aria-hidden="true" tabindex="-1" href="#openflow协议" class="anchor"><span class="icon icon-link"></span></a>OpenFlow协议</h3>
+        <ol>
+          <li>OpenFlow协议是一个得到高度认可的标准，在讨论SDN时往往与OpenFlow-一起讨论。</li>
+          <li>OpenFlow协议可被看成是SDN体系结构中控制层面与数据层面之间的通信接口。</li>
+          <li>OpenFlow协议使得控制层面的控制器可以对数据层面中的物理设备进行直接访问和控制。</li>
+        </ol>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#网络层概述" class="tocs-link">网络层概述</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#分组转发" class="tocs-link">分组转发</a></li>
+                <li><a href="#路由选择" class="tocs-link">路由选择</a></li>
+                <li><a href="#虚电路服务" class="tocs-link">虚电路服务</a></li>
+                <li><a href="#无连接的数据报服务" class="tocs-link">无连接的数据报服务</a></li>
+              </ol>
+            </li>
+            <li><a href="#网际协议ip" class="tocs-link">网际协议（IP）</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#ipv4地址的划分" class="tocs-link">IPv4地址的划分</a></li>
+                <li><a href="#分类编址" class="tocs-link">分类编址</a></li>
+                <li><a href="#划分子网" class="tocs-link">划分子网</a></li>
+                <li><a href="#无分类编址" class="tocs-link">无分类编址</a></li>
+                <li><a href="#ipv4地址和mac地址" class="tocs-link">IPv4地址和MAC地址</a></li>
+                <li><a href="#地址解析协议-arp" class="tocs-link">地址解析协议 ARP</a></li>
+                <li><a href="#ip数据包的发送和转发过程" class="tocs-link">IP数据包的发送和转发过程</a></li>
+                <li><a href="#ip数据报" class="tocs-link">IP数据报</a></li>
+              </ol>
+            </li>
+            <li><a href="#静态路由转发" class="tocs-link">静态路由转发</a></li>
+            <li><a href="#因特网的路由选择协议" class="tocs-link">因特网的路由选择协议</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#rip" class="tocs-link">RIP</a></li>
+                <li><a href="#ospf" class="tocs-link">OSPF</a></li>
+                <li><a href="#bgp" class="tocs-link">BGP</a></li>
+              </ol>
+            </li>
+            <li><a href="#网际控制报文协议icmp" class="tocs-link">网际控制报文协议ICMP</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#差错报告报文" class="tocs-link">差错报告报文</a></li>
+                <li><a href="#询问报文" class="tocs-link">询问报文</a></li>
+                <li><a href="#应用-分组网间探测" class="tocs-link">应用-分组网间探测</a></li>
+                <li><a href="#应用-跟踪路由" class="tocs-link">应用-跟踪路由</a></li>
+              </ol>
+            </li>
+            <li><a href="#虚拟专用网和网络地址转换" class="tocs-link">虚拟专用网和网络地址转换</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#虚拟专用网" class="tocs-link">虚拟专用网</a></li>
+                <li><a href="#网络地址转换" class="tocs-link">网络地址转换</a></li>
+              </ol>
+            </li>
+            <li><a href="#ip多播" class="tocs-link">IP多播</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#ip多播地址与多播数据报" class="tocs-link">IP多播地址与多播数据报</a></li>
+                <li><a href="#在局域网中进行硬件多播" class="tocs-link">在局域网中进行硬件多播</a></li>
+                <li><a href="#网际组管理协议" class="tocs-link">网际组管理协议</a></li>
+                <li><a href="#多播路由选择协议" class="tocs-link">多播路由选择协议</a></li>
+              </ol>
+            </li>
+            <li><a href="#移动ip技术" class="tocs-link">移动IP技术</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#基本概念" class="tocs-link">基本概念</a></li>
+                <li><a href="#固定主机向移动主机发送ip数据报" class="tocs-link">固定主机向移动主机发送IP数据报</a></li>
+                <li><a href="#同址转交地址" class="tocs-link">同址转交地址</a></li>
+                <li><a href="#三角形路由问题" class="tocs-link">三角形路由问题</a></li>
+              </ol>
+            </li>
+            <li><a href="#ipv6" class="tocs-link">IPv6</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#ipv4的缺陷" class="tocs-link">IPv4的缺陷</a></li>
+                <li><a href="#ipv6的优点" class="tocs-link">IPv6的优点</a></li>
+                <li><a href="#数据报首部格式" class="tocs-link">数据报首部格式</a></li>
+                <li><a href="#ipv6地址" class="tocs-link">IPv6地址</a></li>
+                <li><a href="#ipv6地址的分类" class="tocs-link">Ipv6地址的分类</a></li>
+                <li><a href="#ipv4向ipv6过渡" class="tocs-link">IPv4向IPv6过渡</a></li>
+                <li><a href="#icmpv6" class="tocs-link">ICMPv6</a></li>
+              </ol>
+            </li>
+            <li><a href="#sdn" class="tocs-link">SDN</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#openflow协议" class="tocs-link">OpenFlow协议</a></li>
+              </ol>
+            </li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>

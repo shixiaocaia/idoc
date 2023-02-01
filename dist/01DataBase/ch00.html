@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iDoc</title>
+    <meta name="description" content="数据库（database）：是一个以某种有组织的方式存储的数据集合，是保存有组织的数据的容器。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/demo-preview.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="index.html" target="" class="active">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <label>从动手开始</label>
+            <a href="index.html" class="">README</a>
+            <a href="ch00.html" class="">初见</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h2 id="一些基本概念"><a aria-hidden="true" tabindex="-1" href="#一些基本概念" class="anchor"><span class="icon icon-link"></span></a>一些基本概念</h2>
+        <p>数据库（database）：是一个以某种有组织的方式存储的数据集合，是保存有组织的数据的容器。</p>
+        <p>表（table）：某种特定类型数据的结构化清单，用来存储某种特定类型的数据。</p>
+        <blockquote>
+          <p>表由行（row）、列组成，其中每个表列具有相应的数据类型（datatype)。</p>
+          <p>表中每一行可以用一个主键（primary key）来唯一区分表中的每个行。</p>
+          <p>主键的使用习惯：</p>
+          <ol>
+            <li>应该总是定义主键，虽然不是必须的。</li>
+            <li>主键不一定定义再表的一列，可以定义为多列，但是注意不能重复。</li>
+            <li>不更新、不重用主键列的值、不在主键列中使用可能会更改的值。</li>
+          </ol>
+        </blockquote>
+        <p>结构化查询语言（SQL，Structure Query Language）：专门用来与数据库通信的语言，并且几乎所有重要的DBMS都支持SQL。</p>
+        <blockquote>
+          <p>[!NOTE]</p>
+          <ol>
+            <li>尽量给每一条SQL语句加上分号表示结束，虽然不是必要的。</li>
+            <li>SQL语句不区分大小写，但是一般把关键字是用大写，列和表使用小写，这样增加可读性。</li>
+          </ol>
+        </blockquote>
+        <hr>
+        <h2 id="初见mysql"><a aria-hidden="true" tabindex="-1" href="#初见mysql" class="anchor"><span class="icon icon-link"></span></a>初见MySQL</h2>
+        <p>正如所述，数据的所有存储、 检索、管理和处理实际上是由数据库软件——DBMS（数据库管理系统）完成的。MySQL是一种DBMS，即它是一种数据库软件。</p>
+        <p>DBMS可分为两类：一类为基于共享文件系统的DBMS，另一类为基于客户机—服务器的DBMS。MySQL属于C / S一类的DBMS。</p>
+        <h3 id="安装mysql"><a aria-hidden="true" tabindex="-1" href="#安装mysql" class="anchor"><span class="icon icon-link"></span></a>安装MySQL</h3>
+        <p><a href="https://www.sjkjc.com/mysql/install-on-windows/">参考</a></p>
+        <h3 id="使用mysql"><a aria-hidden="true" tabindex="-1" href="#使用mysql" class="anchor"><span class="icon icon-link"></span></a>使用MySQL</h3>
+        <ol>
+          <li>
+            <p>打开 cmd 命令行窗口，使用命令导航到 MySQL 服务器 bin 目录下</p>
+            <pre><code class="language-cmd code-highlight"><span class="code-line line-number" line="1">cd c:\Program Files\MySQL\MySQL Server 8.0\bin
+</span></code><input type="hidden" value="cd c:\Program Files\MySQL\MySQL Server 8.0\bin
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+          </li>
+          <li>
+            <p>请使用以下命令连接到 MySQL 服务器：</p>
+            <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">mysql <span class="token parameter variable">-u</span> root <span class="token parameter variable">-p</span>
+</span></code><input type="hidden" value="mysql -u root -p
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+            <p><code>-u root</code> 意味着使用 <code>root</code> 用户连接到 MySQL 服务器; <code>-p</code> 指示 <code>mysql</code> 提示输入密码。</p>
+            <p>然后根据提示输入 <code>root</code> 帐户的密码，并按下回车键。验证通过后，显示以下输出代表进入了 MySQL 控制台：</p>
+            <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">mysql<span class="token operator">></span>
+</span></code><input type="hidden" value="mysql>
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+          </li>
+          <li>
+            <p>链接成功后，使用 <code>SHOW DATABASES</code>]显示当前服务器中的所有数据库。</p>
+          </li>
+          <li>
+            <p>使用数据库</p>
+            <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">USE <span class="token builtin class-name">test</span>
+</span></code><input type="hidden" value="USE test
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+          </li>
+          <li>
+            <p>为了获得一个数据库内的表的列表，使用<code>SHOW TABLES</code></p>
+          </li>
+          <li>
+            <p>mysql服务进程打开和关闭</p>
+            <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">net stop mysql80
+</span><span class="code-line line-number" line="2">net start mysql80
+</span></code><input type="hidden" value="net stop mysql80
+net start mysql80
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+          </li>
+          <li>
+            <p>查看相关信息</p>
+            <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">mysql<span class="token operator">></span> status<span class="token punctuation">;</span>  <span class="token comment"># 显示当前mysql的version的各种信息</span>
+</span><span class="code-line line-number" line="2">mysql<span class="token operator">></span> <span class="token keyword">select</span> version<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment"># 显示当前mysql的version信息</span>
+</span><span class="code-line line-number" line="3">mysql<span class="token operator">></span> show global variables like <span class="token string">'port'</span><span class="token punctuation">;</span> <span class="token comment"># 查看MySQL端口号</span>
+</span></code><input type="hidden" value="mysql> status;  # 显示当前mysql的version的各种信息
+mysql> select version(); # 显示当前mysql的version信息
+mysql> show global variables like &#x27;port&#x27;; # 查看MySQL端口号
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+          </li>
+        </ol>
+        <hr>
+        <ol start="8">
+          <li>
+            <p>创建数据库</p>
+            <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">-- 创建一个名为 samp_db 的数据库，数据库字符编码指定为 gbk
+</span><span class="code-line line-number" line="2">create database samp_db character <span class="token builtin class-name">set</span> gbk<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="3">drop database samp_db<span class="token punctuation">;</span> -- 删除 库名为 samp_db 的库
+</span><span class="code-line line-number" line="4">show databases<span class="token punctuation">;</span>        -- 显示数据库列表。
+</span><span class="code-line line-number" line="5">use samp_db<span class="token punctuation">;</span>           -- 选择创建的数据库 samp_db 
+</span><span class="code-line line-number" line="6">show tables<span class="token punctuation">;</span>           -- 显示 samp_db 下面所有的表名字
+</span><span class="code-line line-number" line="7">describe 表名<span class="token punctuation">;</span>          -- 显示数据表的结构
+</span><span class="code-line line-number" line="8">delete from 表名<span class="token punctuation">;</span>       -- 清空表中记录
+</span></code><input type="hidden" value="-- 创建一个名为 samp_db 的数据库，数据库字符编码指定为 gbk
+create database samp_db character set gbk;
+drop database samp_db; -- 删除 库名为 samp_db 的库
+show databases;        -- 显示数据库列表。
+use samp_db;           -- 选择创建的数据库 samp_db 
+show tables;           -- 显示 samp_db 下面所有的表名字
+describe 表名;          -- 显示数据表的结构
+delete from 表名;       -- 清空表中记录
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+          </li>
+          <li>
+            <p>创建数据库表</p>
+            <blockquote>
+              <p><code>CREATE TABLE 语法</code> 语句用于从表中选取数据。</p>
+              <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> 表名称 <span class="token punctuation">(</span>
+</span><span class="code-line line-number" line="2">  列名称<span class="token number">1</span>  数据类型<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="3">  列名称<span class="token number">2</span>  数据类型<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="4">  列名称<span class="token number">3</span>  数据类型<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="5">  <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</span><span class="code-line line-number" line="6"><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="CREATE TABLE 表名称 (
+  列名称1  数据类型,
+  列名称2  数据类型,
+  列名称3  数据类型,
+  ....
+);
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+            </blockquote>
+            <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token comment">-- 如果数据库中存在user_accounts表，就把它从数据库中drop掉</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> <span class="token keyword">IF</span> <span class="token keyword">EXISTS</span> <span class="token identifier"><span class="token punctuation">`</span>user_accounts<span class="token punctuation">`</span></span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="3"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> <span class="token identifier"><span class="token punctuation">`</span>user_accounts<span class="token punctuation">`</span></span> <span class="token punctuation">(</span>
+</span><span class="code-line line-number" line="4">  <span class="token identifier"><span class="token punctuation">`</span>id<span class="token punctuation">`</span></span>             <span class="token keyword">int</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token keyword">unsigned</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">AUTO_INCREMENT</span> <span class="token keyword">primary</span> <span class="token keyword">key</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="5">  <span class="token identifier"><span class="token punctuation">`</span>password<span class="token punctuation">`</span></span>       <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">)</span>       <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">DEFAULT</span> <span class="token string">''</span> <span class="token keyword">COMMENT</span> <span class="token string">'用户密码'</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="6">  <span class="token identifier"><span class="token punctuation">`</span>reset_password<span class="token punctuation">`</span></span> <span class="token keyword">tinyint</span><span class="token punctuation">(</span><span class="token number">32</span><span class="token punctuation">)</span>       <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">DEFAULT</span> <span class="token number">0</span> <span class="token keyword">COMMENT</span> <span class="token string">'用户类型：0－不需要重置密码；1-需要重置密码'</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="7">  <span class="token identifier"><span class="token punctuation">`</span>mobile<span class="token punctuation">`</span></span>         <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span>       <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">DEFAULT</span> <span class="token string">''</span> <span class="token keyword">COMMENT</span> <span class="token string">'手机'</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="8">  <span class="token identifier"><span class="token punctuation">`</span>create_at<span class="token punctuation">`</span></span>      <span class="token keyword">timestamp</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span>      <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">CURRENT_TIMESTAMP</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="9">  <span class="token identifier"><span class="token punctuation">`</span>update_at<span class="token punctuation">`</span></span>      <span class="token keyword">timestamp</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span>      <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">CURRENT_TIMESTAMP</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span> <span class="token keyword">ON</span> <span class="token keyword">UPDATE</span> <span class="token keyword">CURRENT_TIMESTAMP</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="10">  <span class="token comment">-- 创建唯一索引，不允许重复</span>
+</span><span class="code-line line-number" line="11">  <span class="token keyword">UNIQUE</span> <span class="token keyword">INDEX</span> idx_user_mobile<span class="token punctuation">(</span><span class="token identifier"><span class="token punctuation">`</span>mobile<span class="token punctuation">`</span></span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="12"><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="13"><span class="token keyword">ENGINE</span><span class="token operator">=</span><span class="token keyword">InnoDB</span> <span class="token keyword">DEFAULT</span> <span class="token keyword">CHARSET</span><span class="token operator">=</span>utf8
+</span><span class="code-line line-number" line="14"><span class="token keyword">COMMENT</span><span class="token operator">=</span><span class="token string">'用户表信息'</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="-- 如果数据库中存在user_accounts表，就把它从数据库中drop掉
+DROP TABLE IF EXISTS &#x60;user_accounts&#x60;;
+CREATE TABLE &#x60;user_accounts&#x60; (
+  &#x60;id&#x60;             int(100) unsigned NOT NULL AUTO_INCREMENT primary key,
+  &#x60;password&#x60;       varchar(32)       NOT NULL DEFAULT &#x27;&#x27; COMMENT &#x27;用户密码&#x27;,
+  &#x60;reset_password&#x60; tinyint(32)       NOT NULL DEFAULT 0 COMMENT &#x27;用户类型：0－不需要重置密码；1-需要重置密码&#x27;,
+  &#x60;mobile&#x60;         varchar(20)       NOT NULL DEFAULT &#x27;&#x27; COMMENT &#x27;手机&#x27;,
+  &#x60;create_at&#x60;      timestamp(6)      NOT NULL DEFAULT CURRENT_TIMESTAMP(6),
+  &#x60;update_at&#x60;      timestamp(6)      NOT NULL DEFAULT CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6),
+  -- 创建唯一索引，不允许重复
+  UNIQUE INDEX idx_user_mobile(&#x60;mobile&#x60;)
+)
+ENGINE=InnoDB DEFAULT CHARSET=utf8
+COMMENT=&#x27;用户表信息&#x27;;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+            <p>数据类型的属性解释</p>
+            <ul>
+              <li>
+                <p><code>NULL</code>：数据列可包含NULL值；</p>
+              </li>
+              <li>
+                <p><code>NOT NULL</code>：数据列不允许包含NULL值；</p>
+              </li>
+              <li>
+                <p><code>DEFAULT</code>：默认值；</p>
+              </li>
+              <li>
+                <p><code>PRIMARY KEY</code>：主键；</p>
+              </li>
+              <li>
+                <p><code>AUTO_INCREMENT</code>：自动递增，适用于整数类型；</p>
+              </li>
+              <li>
+                <p><code>UNSIGNED</code>：是指数值类型只能为正数；</p>
+              </li>
+              <li>
+                <p><code>CHARACTER SET name</code>：指定一个字符集；</p>
+              </li>
+              <li>
+                <p><code>COMMENT</code>：对表或者字段说明；</p>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>删除数据库表</p>
+            <blockquote>
+              <p><code>DROP/TRUNCATE TABLE 语法</code> 语句用于删除数据库中的现有表。</p>
+              <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> 表名称<span class="token punctuation">;</span>     <span class="token comment">-- 用于删除数据库中的现有表。</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">TRUNCATE</span> <span class="token keyword">TABLE</span> 表名称<span class="token punctuation">;</span> <span class="token comment">-- 用于删除表内的数据，但不删除表本身。</span>
+</span></code><input type="hidden" value="DROP TABLE 表名称;     -- 用于删除数据库中的现有表。
+TRUNCATE TABLE 表名称; -- 用于删除表内的数据，但不删除表本身。
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+            </blockquote>
+            <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token comment">-- 删除现有表 Shippers：</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">DROP</span> <span class="token keyword">TABLE</span> Shippers<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="3"><span class="token comment">-- 删除现有表 Shippers 表内的数据，不删除表：</span>
+</span><span class="code-line line-number" line="4"><span class="token keyword">TRUNCATE</span> <span class="token keyword">TABLE</span> Shippers<span class="token punctuation">;</span>
+</span></code><input type="hidden" value="-- 删除现有表 Shippers：
+DROP TABLE Shippers;
+-- 删除现有表 Shippers 表内的数据，不删除表：
+TRUNCATE TABLE Shippers;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+          </li>
+        </ol>
+        <h2 id="检索数据"><a aria-hidden="true" tabindex="-1" href="#检索数据" class="anchor"><span class="icon icon-link"></span></a>检索数据</h2>
+        <h3 id="select"><a aria-hidden="true" tabindex="-1" href="#select" class="anchor"><span class="icon icon-link"></span></a>select</h3>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">select</span> name from student<span class="token punctuation">;</span>     //检索单个列
+</span><span class="code-line line-number" line="2"><span class="token keyword">select</span> * from student<span class="token punctuation">;</span>        //检索整个表格
+</span><span class="code-line line-number" line="3"><span class="token keyword">select</span> name, <span class="token function">id</span> from student<span class="token punctuation">;</span> //选择多行
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5"><span class="token keyword">select</span> distinct city from student<span class="token punctuation">;</span> //只返回city中不同的行
+</span><span class="code-line line-number" line="6"><span class="token keyword">select</span> name from student limit <span class="token number">5</span><span class="token punctuation">;</span>  //返回从头开始的5行
+</span><span class="code-line line-number" line="7"><span class="token keyword">select</span> name from student limit <span class="token number">5,3</span><span class="token punctuation">;</span>//返回从第5行开始的3行
+</span><span class="code-line line-number" line="8">
+</span><span class="code-line line-number" line="9"><span class="token keyword">select</span> student.name from student<span class="token punctuation">;</span>  //使用完全限定的表名
+</span></code><input type="hidden" value="select name from student;     //检索单个列
+select * from student;        //检索整个表格
+select name, id from student; //选择多行
+
+select distinct city from student; //只返回city中不同的行
+select name from student limit 5;  //返回从头开始的5行
+select name from student limit 5,3;//返回从第5行开始的3行
+
+select student.name from student;  //使用完全限定的表名
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#一些基本概念" class="tocs-link">一些基本概念</a></li>
+            <li><a href="#初见mysql" class="tocs-link">初见MySQL</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#安装mysql" class="tocs-link">安装MySQL</a></li>
+                <li><a href="#使用mysql" class="tocs-link">使用MySQL</a></li>
+              </ol>
+            </li>
+            <li><a href="#检索数据" class="tocs-link">检索数据</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#select" class="tocs-link">select</a></li>
+              </ol>
+            </li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>
