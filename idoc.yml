@@ -57,6 +57,7 @@ scope:
   - 01ComputerNetwork
   - 02MyWeb
   - 01DataBase
+  - 00Other
 
 ## Navigation Menu.
 # -----------------------
@@ -69,6 +70,7 @@ menus:
   ComputerNetwrok: 01ComputerNetwork/index.html
   DataBase: 01DataBase/index.html
   Webserver: 02MyWeb/index.html
+  Other: 00Other/index.html
 
 ## Copy Assets
 # -----------------------
