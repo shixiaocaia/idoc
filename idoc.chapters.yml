@@ -13,6 +13,8 @@
 - 01DataStructure/ch11.md: 排序
 - 01DataStructure/ch12.md: 其他
 
+- 01OperatingSystem: 计组
+- 01OperatingSystem/ch51.md: 优化程序性能 
 - 01OperatingSystem/README.md: README
 - 01OperatingSystem: 进程
 - 01OperatingSystem/ch81.md: 进程、线程、调度

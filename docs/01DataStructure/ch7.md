@@ -134,3 +134,7 @@ void dfs(XXX, int index){
 [200. 岛屿数量](https://leetcode.cn/problems/number-of-islands)
 
 > BFS模板题。
+
+[22. 括号生成](https://leetcode.cn/problems/generate-parentheses)
+
+> DFS。

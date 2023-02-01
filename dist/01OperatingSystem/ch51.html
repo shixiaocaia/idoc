@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Do a Pool Webserver iDoc</title>
-    <meta name="description" content="在操作系统中，是用进程控制块（process control block，PCB）数据结构来描述进程的。">
+    <meta name="description" content="编译器是保守的，为了避免错误，只使用安全优化。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -56,20 +56,35 @@
         </aside>
       </div>
       <markdown-style>
-        <h2 id="总览虚拟内存"><a aria-hidden="true" tabindex="-1" href="#总览虚拟内存" class="anchor"><span class="icon icon-link"></span></a>总览虚拟内存</h2>
-        <p>
-          <img src="http://pic.shixiaocaia.fun/202301271949081.png" alt="虚拟内存">
-        </p>
-        <h2 id="内存分配的过程是怎样的"><a aria-hidden="true" tabindex="-1" href="#内存分配的过程是怎样的" class="anchor"><span class="icon icon-link"></span></a>内存分配的过程是怎样的？</h2>
-        <p>
-          <img src="http://pic.shixiaocaia.fun/202301271951590.png" alt="内存分配">
-        </p>
+        <h2 id="优化程序性能"><a aria-hidden="true" tabindex="-1" href="#优化程序性能" class="anchor"><span class="icon icon-link"></span></a>优化程序性能</h2>
+        <h3 id="编写高效的程序的建议"><a aria-hidden="true" tabindex="-1" href="#编写高效的程序的建议" class="anchor"><span class="icon icon-link"></span></a>编写高效的程序的建议</h3>
+        <blockquote>
+          <ol>
+            <li>选择合适的算法和数据结构</li>
+            <li>编译器的能力和局限性</li>
+            <li>探索并行化</li>
+          </ol>
+        </blockquote>
+        <p><strong>优化编译器的能力</strong></p>
+        <p>编译器是保守的，为了避免错误，只使用安全优化。</p>
+        <p><strong>表示程序的性能</strong></p>
+        <p>引入每元素的周期数（CPI）作为表示程序的性能，执行每条指令需要的时钟周期。</p>
+        <p>系统有“4GHz”处理器，表示处理器时钟的运行频率为每秒4×10<sup>9</sup>个周期。</p>
+        <p><strong>消除循环的低效率</strong></p>
+        <p>代码移动，比如将循环里<code>i &#x3C; strlen(s)</code>移至循环外，用<code>len = strlen(s)</code>，能够有效提高效率。</p>
+        <h2 id="数据流图"><a aria-hidden="true" tabindex="-1" href="#数据流图" class="anchor"><span class="icon icon-link"></span></a>数据流图</h2>
+        <h2 id="循环展开"><a aria-hidden="true" tabindex="-1" href="#循环展开" class="anchor"><span class="icon icon-link"></span></a>循环展开</h2>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#总览虚拟内存" class="tocs-link">总览虚拟内存</a></li>
-            <li><a href="#内存分配的过程是怎样的" class="tocs-link">内存分配的过程是怎样的？</a></li>
+            <li><a href="#优化程序性能" class="tocs-link">优化程序性能</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#编写高效的程序的建议" class="tocs-link">编写高效的程序的建议</a></li>
+              </ol>
+            </li>
+            <li><a href="#数据流图" class="tocs-link">数据流图</a></li>
+            <li><a href="#循环展开" class="tocs-link">循环展开</a></li>
           </ol>
         </aside>
       </nav>
