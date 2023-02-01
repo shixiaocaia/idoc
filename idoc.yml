@@ -1,0 +1,92 @@
+# yaml-language-server: $schema=./schema
+## directory of document source files
+## defalut: `docs`
+# -----------------------
+# dir: docs
+
+
+## output directory of generated documents
+## defalut: `dist`
+# -----------------------
+output: dist
+
+
+## site name
+# -----------------------
+site: iDoc
+
+
+cacheFileStat: true
+
+homepage: https://wangchujiang.com/idoc/
+
+## Customize theme settings.
+## defalut: `default`
+# -----------------------
+theme: themes/default
+
+
+## Website logo icon
+## defalut: `data:image/png;base64,iVBOR......`
+# -----------------------
+logo: ./logo.png
+
+## Website favicon icon
+## defalut: `data:image/png;base64,iVBOR......`
+# -----------------------
+favicon: ./logo.png
+
+## The keywords of your website. Supports multiple values
+# -----------------------
+keywords: notebook
+
+## Show open source button
+# -----------------------
+openSource: https://github.com/shixiaocaia
+
+## Display the edit button.
+# -----------------------
+
+
+## chapters scopes
+# -----------------------
+scope: 
+  - 01DataStructure
+  - 01OperatingSystem
+  - 00CPP
+  - 01ComputerNetwork
+  - 02MyWeb
+  - 01DataBase
+
+## Navigation Menu.
+# -----------------------
+menus:
+  Home: index.html
+  # Label: <URL> [scope]
+  Cpp: 00CPP/index.html
+  DataStructure: 01DataStructure/index.html
+  OperatingSystem: 01OperatingSystem/index.html
+  ComputerNetwrok: 01ComputerNetwork/index.html
+  DataBase: 01DataBase/index.html
+  Webserver: 02MyWeb/index.html
+
+## Copy Assets
+# -----------------------
+# https://github.com/micromatch/micromatch
+# 
+# copyAssets: '**/assets/*.{mp3,ogm}'
+
+footer: |
+  Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a></br>
+  Think less and do more.
+  
+## Add Markdown files that are not in the specified directory.
+# -----------------------
+# sideEffectFiles:
+#   - README.zh.md
+
+## Template Data
+# -----------------------
+data: 
+  good: test
+  

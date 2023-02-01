@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "esnext",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "noImplicitAny": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "outDir": "lib",
+    "baseUrl": "./"
+  },
+  "include": ["src"],
+  "exclude": ["lib"]
+}

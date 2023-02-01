@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "$ref": "#/definitions/idoc",
+  "title": "JSON schema for idoc.yaml",
+  "definitions": {
+      "idoc": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "dir": {
+                  "type": "string",
+                  "description": "directory of document source files. defalut: `docs`"
+              },
+              "output": {
+                  "type": "string",
+                  "description": "output directory of generated documents. defalut: `dist`"
+              },
+              "site": {
+                  "type": "string",
+                  "description": "Website name"
+              },
+              "homepage": {
+                  "type": "string",
+                  "description": "Mainly used to generate [sitemap.txt] files"
+              },
+              "tocs": {
+                  "type": "boolean",
+                  "description": "page table of contents hidden"
+              },
+              "cacheFileStat": {
+                  "type": "boolean",
+                  "description": "cache md file stat"
+              },
+              "minify": {
+                  "type": "boolean",
+                  "description": "Compressed HTML"
+              },
+              "scope": {
+                "description": "chapters scopes",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "copyAssets": {
+                "description": "copy assets",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "scopePrivate": {
+                "description": "chapters scopes",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "sideEffectFiles": {
+                "description": "Add Markdown files that are not in the specified directory.",
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "title": {
+                  "type": "string",
+                  "description": "Content displayed at browser tabs, Default Markdown document first heading <h1>"
+              },
+              "description": {
+                  "type": "string",
+                  "description": "A brief overview of the web page, the first text of the current Markdown page is obtained by default"
+              },
+              "logo": {
+                  "type": "string",
+                  "description": "Website logo icon"
+              },
+              "favicon": {
+                  "type": "string",
+                  "description": "Website favicon icon"
+              },
+              "keywords": {
+                  "type": "string",
+                  "description": "The keywords of your website. Supports multiple values"
+              },
+              "theme": {
+                  "type": "string",
+                  "description": "Customize theme settings. defalut: `default`"
+              },
+
+              "openSource": {
+                "type": "string",
+                "format": "uri",
+                "description": "Show open source button",
+                "qt-uri-protocols": [
+                    "https"
+                ]
+              },
+              "editButton": {
+                  "$ref": "#/definitions/EditButton",
+                  "description": "Display the edit button."
+              },
+              "menus": {
+                  "description": "Navigation Menu.",
+                  "type": [
+                    "string",
+                    "object"
+                  ],
+                  "properties": {
+                    "url": {
+                      "type": "string"
+                    },
+                    "active": {
+                      "type": "boolean"
+                    },
+                    "target": {
+                      "type": "string",
+                      "pattern": "(__blank|_parent|_top|_self)",
+                      "enum": [
+                        "__blank",
+                        "_parent",
+                        "_top",
+                        "_self"
+                      ]
+                    }
+                  }
+              },
+              "footer": {
+                  "type": "string",
+                  "description": "The footer content is displayed."
+              },
+              "data": {
+                  "$ref": "#/definitions/Data",
+                  "description": "Template Data"
+              }
+          }
+      },
+      "Data": {
+          "type": "object",
+          "additionalProperties": true,
+          "title": "Template Data"
+      },
+      "EditButton": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+              "label": {
+                  "type": "string"
+              },
+              "url": {
+                  "type": "string",
+                  "format": "uri",
+                  "qt-uri-protocols": [
+                      "https"
+                  ]
+              }
+          },
+          "required": [
+              "label",
+              "url"
+          ],
+          "title": "Display the edit button"
+      }
+  }
+}
