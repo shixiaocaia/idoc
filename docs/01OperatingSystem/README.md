@@ -15,6 +15,8 @@
 
 ⬜操作系统 - 清华大学
 
+⬜[不周山-读薄读厚CSAPP](https://wdxtub.com/csapp/thin-csapp-0/2016/04/16/)
+
 <h2>Experiment</h2>
 
 ⬜[蓝桥杯操作系统课程实验](https://www.lanqiao.cn/courses/115) 
