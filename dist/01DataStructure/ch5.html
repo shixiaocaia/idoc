@@ -159,7 +159,7 @@
           <p>当遇到“(",如果栈为空，则需要更新start 为 i + 1，之前的括号序列不连续了。</p>
           <p>如果栈不为空，弹出栈顶下标，如果此时栈不为空，则答案为下一个左括号的下标（index.top()) 和当前下标i之间的距离，如果为空，则为start（起始左下标）到i之间的距离 + 1。</p>
         </blockquote>
-        <h1 id="单调栈"><a aria-hidden="true" tabindex="-1" href="#单调栈" class="anchor"><span class="icon icon-link"></span></a>单调栈</h1>
+        <h2 id="单调栈"><a aria-hidden="true" tabindex="-1" href="#单调栈" class="anchor"><span class="icon icon-link"></span></a>单调栈</h2>
         <h3 id="何时使用"><a aria-hidden="true" tabindex="-1" href="#何时使用" class="anchor"><span class="icon icon-link"></span></a>何时使用</h3>
         <p>通常是一维数组，要寻找任一个元素的右边或者左边第一个比自己大或者小的元素的位置，此时我们就要想到可以用单调栈了。</p>
         <p>本质是空间换时间，时间复杂度为O(n)。</p>
@@ -212,7 +212,7 @@ for (遍历这个数组)
 }
 
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <h2 id="例题-1"><a aria-hidden="true" tabindex="-1" href="#例题-1" class="anchor"><span class="icon icon-link"></span></a>例题</h2>
+        <h3 id="例题-1"><a aria-hidden="true" tabindex="-1" href="#例题-1" class="anchor"><span class="icon icon-link"></span></a>例题</h3>
         <p><strong><a href="https://leetcode.cn/problems/daily-temperatures/description/">739. 每日温度</a></strong></p>
         <blockquote>
           <p>维护一个单调递减的栈，当出现温度大于栈顶元素值时，记录答案。</p>
@@ -249,13 +249,14 @@ for (遍历这个数组)
           <ol class="tocs-list">
             <li><a href="#大顶堆小顶堆" class="tocs-link">大顶堆、小顶堆</a></li>
             <li><a href="#stl-优先队列" class="tocs-link">STL-优先队列</a></li>
-            <li><a href="#例题" class="tocs-link">例题</a>
+            <li><a href="#例题" class="tocs-link">例题</a></li>
+            <li><a href="#单调栈" class="tocs-link">单调栈</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#何时使用" class="tocs-link">何时使用</a></li>
                 <li><a href="#如何使用" class="tocs-link">如何使用</a></li>
+                <li><a href="#例题-1" class="tocs-link">例题</a></li>
               </ol>
             </li>
-            <li><a href="#例题-1" class="tocs-link">例题</a></li>
           </ol>
         </aside>
       </nav>

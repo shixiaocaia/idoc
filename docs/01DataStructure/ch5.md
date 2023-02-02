@@ -125,8 +125,7 @@ priority_queue< Node,vector< Node >,cmp > Q;
 >
 > 如果栈不为空，弹出栈顶下标，如果此时栈不为空，则答案为下一个左括号的下标（index.top()) 和当前下标i之间的距离，如果为空，则为start（起始左下标）到i之间的距离 + 1。
 
-单调栈
-===
+## 单调栈
 
 ### 何时使用
 
@@ -168,7 +167,7 @@ for (遍历这个数组)
 
 ```
 
-## 例题
+### 例题
 
 **[739. 每日温度](https://leetcode.cn/problems/daily-temperatures/description/)**
 
