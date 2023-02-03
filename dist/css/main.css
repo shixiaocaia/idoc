@@ -102,7 +102,7 @@ nav.tocs .inner {
 a.gototop {
   position: fixed;
   bottom: 10px;
-  right: 10px;
+  right: 640px;
   display: inline-block;
   background: var(--color-theme-text);
   padding: 5px;

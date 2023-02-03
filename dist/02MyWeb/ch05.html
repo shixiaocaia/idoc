@@ -73,6 +73,11 @@
         </ul>
         <p>利用<code>alarm</code>函数周期性地触发<code>SIGALRM</code>信号，信号处理函数利用管道通知主循环，主循环接收到该信号后对升序链表上所有定时器进行处理，若该段时间内没有交换数据，则将该连接关闭，释放所占用的资源。</p>
         <p>定时器处理非活动连接模块，主要分为两部分，其一为定时方法与信号通知流程，其二为定时器及其容器设计与定时任务的处理。</p>
+        <hr>
+        <blockquote>
+          <p>需要了解各种API</p>
+          <p>管道通信</p>
+        </blockquote>
         <h2 id="基础api"><a aria-hidden="true" tabindex="-1" href="#基础api" class="anchor"><span class="icon icon-link"></span></a>基础API</h2>
         <h3 id="sigaction结构体"><a aria-hidden="true" tabindex="-1" href="#sigaction结构体" class="anchor"><span class="icon icon-link"></span></a>sigaction结构体</h3>
         <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">struct sigaction {
