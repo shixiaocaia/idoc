@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>HTTP解析 iDoc</title>
-    <meta name="description" content="HTTP请求报文由请求行（request line）、请求头部（header）、空行和请求数据四个部分组成。">
+    <title>定时器处理非活动连接 iDoc</title>
+    <meta name="description" content="浏览器在与服务器建立连接后，如果长时间不交换数据，一直占用服务器端的文件描述符，导致资源的浪费。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -39,7 +39,7 @@
         </div>
       </article>
     </header>
-    <div class="warpper-content warpper sidebar notocs">
+    <div class="warpper-content warpper sidebar">
       <div class="sidebar-border">
         <aside class="sidebar" role="navigation">
           <div>
@@ -56,7 +56,191 @@
           </div>
         </aside>
       </div>
-      <markdown-style></markdown-style>
+      <markdown-style>
+        <h1 id="定时器处理非活动连接"><a aria-hidden="true" tabindex="-1" href="#定时器处理非活动连接" class="anchor"><span class="icon icon-link"></span></a>定时器处理非活动连接</h1>
+        <h2 id="整体思路"><a aria-hidden="true" tabindex="-1" href="#整体思路" class="anchor"><span class="icon icon-link"></span></a>整体思路</h2>
+        <p>浏览器在与服务器建立连接后，如果长时间不交换数据，一直占用服务器端的文件描述符，导致资源的浪费。</p>
+        <p>在本项目中，服务器主循环为每一个连接创建一个定时器，并对每个连接另外，利用升序时间链表容器将所有定时器串联起来，若主循环接收到定时通知，则在链表中依次执行定时任务。</p>
+        <blockquote>
+          <p><code>定时器</code>，是指利用结构体或其他形式，将多种定时事件进行封装起来。具体的，这里只涉及一种定时事件，即定期检测非活跃连接，这里将该定时事件与连接资源封装为一个结构体定时器。</p>
+          <p><code>定时器容器</code>，是指使用某种容器类数据结构，将上述多个定时器组合起来，便于对定时事件统一管理。具体的，项目中使用升序链表将所有定时器串联组织起来。</p>
+        </blockquote>
+        <p><code>Linux</code>下提供了三种定时的方法:</p>
+        <ul>
+          <li>socket选项SO_RECVTIMEO和SO_SNDTIMEO</li>
+          <li>SIGALRM信号</li>
+          <li>I/O复用系统调用的超时参数</li>
+        </ul>
+        <p>利用<code>alarm</code>函数周期性地触发<code>SIGALRM</code>信号，信号处理函数利用管道通知主循环，主循环接收到该信号后对升序链表上所有定时器进行处理，若该段时间内没有交换数据，则将该连接关闭，释放所占用的资源。</p>
+        <p>定时器处理非活动连接模块，主要分为两部分，其一为定时方法与信号通知流程，其二为定时器及其容器设计与定时任务的处理。</p>
+        <h2 id="基础api"><a aria-hidden="true" tabindex="-1" href="#基础api" class="anchor"><span class="icon icon-link"></span></a>基础API</h2>
+        <h3 id="sigaction结构体"><a aria-hidden="true" tabindex="-1" href="#sigaction结构体" class="anchor"><span class="icon icon-link"></span></a>sigaction结构体</h3>
+        <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">struct sigaction {
+</span><span class="code-line line-number" line="2">   void (*sa_handler)(int);
+</span><span class="code-line line-number" line="3">   void (*sa_sigaction)(int, siginfo_t *, void *);
+</span><span class="code-line line-number" line="4">   sigset_t sa_mask;
+</span><span class="code-line line-number" line="5">   int sa_flags;
+</span><span class="code-line line-number" line="6">   void (*sa_restorer)(void);
+</span><span class="code-line line-number" line="7">}
+</span></code><input type="hidden" value="struct sigaction {
+   void (*sa_handler)(int);
+   void (*sa_sigaction)(int, siginfo_t *, void *);
+   sigset_t sa_mask;
+   int sa_flags;
+   void (*sa_restorer)(void);
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>
+            <p>sa_handler是一个函数指针，指向信号处理函数</p>
+          </li>
+          <li>
+            <p>sa_sigaction同样是信号处理函数，有三个参数，可以获得关于信号更详细的信息</p>
+          </li>
+          <li>
+            <p>sa_mask用来指定在信号处理函数执行期间需要被屏蔽的信号</p>
+          </li>
+          <li>
+            <p>sa_flags用于指定信号处理的行为</p>
+            <ul>
+              <li>SA_RESTART，使被信号打断的系统调用自动重新发起</li>
+              <li>SA_NOCLDSTOP，使父进程在它的子进程暂停或继续运行时不会收到 SIGCHLD 信号</li>
+              <li>SA_NOCLDWAIT，使父进程在它的子进程退出时不会收到 SIGCHLD 信号，这时子进程如果退出也不会成为僵尸进程</li>
+              <li>SA_NODEFER，使对信号的屏蔽无效，即在信号处理函数执行期间仍能发出这个信号</li>
+              <li>SA_RESETHAND，信号处理之后重新设置为默认的处理方式</li>
+              <li>SA_SIGINFO，使用 sa_sigaction 成员而不是 sa_handler 作为信号处理函数</li>
+            </ul>
+          </li>
+          <li>
+            <p>sa_restorer一般不使用</p>
+          </li>
+        </ul>
+        <h3 id="sigaction函数"><a aria-hidden="true" tabindex="-1" href="#sigaction函数" class="anchor"><span class="icon icon-link"></span></a>sigaction函数</h3>
+        <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">#include &#x3C;signal.h>
+</span><span class="code-line line-number" line="2">int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
+</span></code><input type="hidden" value="#include <signal.h>
+int sigaction(int signum, const struct sigaction *act, struct sigaction *oldact);
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>signum表示操作的信号。</li>
+          <li>act表示对信号设置新的处理方式。</li>
+          <li>oldact表示信号原来的处理方式，默认值<code>NULL</code>。</li>
+          <li>返回值，0 表示成功，-1 表示有错误发生。</li>
+        </ul>
+        <h3 id="sigfillset函数"><a aria-hidden="true" tabindex="-1" href="#sigfillset函数" class="anchor"><span class="icon icon-link"></span></a>sigfillset函数</h3>
+        <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">#include &#x3C;signal.h>
+</span><span class="code-line line-number" line="2">int sigfillset(sigset_t *set);
+</span></code><input type="hidden" value="#include <signal.h>
+int sigfillset(sigset_t *set);
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>用来将参数set信号集初始化，然后把所有的信号加入到此信号集里。</p>
+        <h3 id="sigalrmsigterm信号"><a aria-hidden="true" tabindex="-1" href="#sigalrmsigterm信号" class="anchor"><span class="icon icon-link"></span></a>SIGALRM、SIGTERM信号</h3>
+        <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">#define SIGALRM  14     //由alarm系统调用产生timer时钟信号
+</span><span class="code-line line-number" line="2">#define SIGTERM  15     //终端发送的终止信号
+</span></code><input type="hidden" value="#define SIGALRM  14     //由alarm系统调用产生timer时钟信号
+#define SIGTERM  15     //终端发送的终止信号
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="alarm函数"><a aria-hidden="true" tabindex="-1" href="#alarm函数" class="anchor"><span class="icon icon-link"></span></a>alarm函数</h3>
+        <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">#include &#x3C;unistd.h>;
+</span><span class="code-line line-number" line="2">unsigned int alarm(unsigned int seconds);
+</span></code><input type="hidden" value="#include <unistd.h>;
+unsigned int alarm(unsigned int seconds);
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>设置信号传送闹钟，即用来设置信号SIGALRM在经过参数seconds秒数后发送给目前的进程。如果未设置信号SIGALRM的处理函数，那么alarm()默认处理终止进程.</p>
+        <h3 id="socketpair函数"><a aria-hidden="true" tabindex="-1" href="#socketpair函数" class="anchor"><span class="icon icon-link"></span></a>socketpair函数</h3>
+        <p>在linux下，使用socketpair函数能够创建一对套接字进行通信，项目中使用管道通信。</p>
+        <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">#include &#x3C;sys/types.h>
+</span><span class="code-line line-number" line="2">#include &#x3C;sys/socket.h>
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4">int socketpair(int domain, int type, int protocol, int sv[2]);
+</span></code><input type="hidden" value="#include <sys/types.h>
+#include <sys/socket.h>
+
+int socketpair(int domain, int type, int protocol, int sv[2]);
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>domain表示协议族，PF_UNIX或者AF_UNIX</li>
+          <li>type表示协议，可以是SOCK_STREAM或者SOCK_DGRAM，SOCK_STREAM基于TCP，SOCK_DGRAM基于UDP</li>
+          <li>protocol表示类型，只能为0</li>
+          <li>sv[2]表示套节字柄对，该两个句柄作用相同，均能进行读写双向操作</li>
+          <li>返回结果， 0为创建成功，-1为创建失败</li>
+        </ul>
+        <h3 id="send函数"><a aria-hidden="true" tabindex="-1" href="#send函数" class="anchor"><span class="icon icon-link"></span></a>send函数</h3>
+        <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">#include &#x3C;sys/types.h>
+</span><span class="code-line line-number" line="2">#include &#x3C;sys/socket.h>
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4">ssize_t send(int sockfd, const void *buf, size_t len, int flags);
+</span></code><input type="hidden" value="#include <sys/types.h>
+#include <sys/socket.h>
+
+ssize_t send(int sockfd, const void *buf, size_t len, int flags);
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>当套接字发送缓冲区变满时，send通常会阻塞，除非套接字设置为非阻塞模式，当缓冲区变满时，返回EAGAIN或者EWOULDBLOCK错误，此时可以调用select函数来监视何时可以发送数据。</p>
+        <h2 id="信号通知流程"><a aria-hidden="true" tabindex="-1" href="#信号通知流程" class="anchor"><span class="icon icon-link"></span></a>信号通知流程</h2>
+        <p>Linux下的信号采用的<strong>异步处理机制</strong>，信号处理函数和当前进程是两条不同的执行路线。具体的，当进程收到信号时，操作系统会中断进程当前的正常流程，转而进入信号处理函数执行操作，完成后再返回中断的地方继续执行。</p>
+        <p>为避免信号竞态现象发生，信号处理期间系统不会再次触发它。所以，为确保该信号不被屏蔽太久，信号处理函数需要尽可能快地执行完毕。</p>
+        <p>一般的信号处理函数需要处理该信号对应的逻辑，当该逻辑比较复杂时，信号处理函数执行时间过长，会导致信号屏蔽太久。</p>
+        <p>这里的解决方案是，信号处理函数仅仅发送信号通知程序主循环，将信号对应的处理逻辑放在程序主循环中，由主循环执行信号对应的逻辑代码。</p>
+        <h3 id="统一事件源"><a aria-hidden="true" tabindex="-1" href="#统一事件源" class="anchor"><span class="icon icon-link"></span></a>统一事件源</h3>
+        <p>统一事件源，是指将信号事件与其他事件一样被处理。</p>
+        <p>具体的，信号处理函数使用<strong>管道</strong>将信号传递给主循环，信号处理函数往管道的写端写入信号值，主循环则从管道的读端读出信号值，使用I/O复用系统调用来监听管道读端的可读事件，这样信号事件与其他文件描述符都可以通过epoll来监测，从而实现统一处理。</p>
+        <h3 id="信号处理机制"><a aria-hidden="true" tabindex="-1" href="#信号处理机制" class="anchor"><span class="icon icon-link"></span></a>信号处理机制</h3>
+        <p>每个进程之中，都有存着一个表，里面存着每种信号所代表的含义，内核通过设置表项中每一个位来标识对应的信号类型。</p>
+        <p>
+          <img src="http://pic.shixiaocaia.fun/202302022142420.png" alt="无标题-2023-02-02-2054">
+        </p>
+        <ul>
+          <li>
+            <p>信号的接收</p>
+            <ul>
+              <li>接收信号的任务是由内核代理的，当内核接收到信号后，会将其放到对应进程的信号队列中，同时向进程发送一个中断，使其陷入内核态。注意，此时信号还只是在队列中，对进程来说暂时是不知道有信号到来的。</li>
+            </ul>
+          </li>
+          <li>
+            <p>信号的检测</p>
+            <ul>
+              <li>进程从内核态返回到用户态前进行信号检测</li>
+              <li>进程在内核态中，从睡眠状态被唤醒的时候进行信号检测</li>
+              <li>进程陷入内核态后，有两种场景会对信号进行检测：</li>
+              <li>当发现有新信号时，便会进入下一步，信号的处理。</li>
+            </ul>
+          </li>
+          <li>
+            <p>信号的处理</p>
+            <ul>
+              <li>( <strong>内核</strong> )信号处理函数是运行在用户态的，调用处理函数前，内核会将当前内核栈的内容备份拷贝到用户栈上，并且修改指令寄存器（eip）将其指向信号处理函数。</li>
+              <li>( <strong>用户</strong> )接下来进程返回到用户态中，执行相应的信号处理函数。</li>
+              <li>( <strong>内核</strong> )信号处理函数执行完成后，还需要返回内核态，检查是否还有其它信号未处理。</li>
+              <li>( <strong>用户</strong> )如果所有信号都处理完成，就会将内核栈恢复（从用户栈的备份拷贝回来），同时恢复指令寄存器（eip）将其指向中断前的运行位置，最后回到用户态继续执行进程。</li>
+            </ul>
+          </li>
+        </ul>
+        <p>至此，一个完整的信号处理流程便结束了，如果同时有多个信号到达，上面的处理流程会在第2步和第3步骤间重复进行。</p>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#整体思路" class="tocs-link">整体思路</a></li>
+            <li><a href="#基础api" class="tocs-link">基础API</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#sigaction结构体" class="tocs-link">sigaction结构体</a></li>
+                <li><a href="#sigaction函数" class="tocs-link">sigaction函数</a></li>
+                <li><a href="#sigfillset函数" class="tocs-link">sigfillset函数</a></li>
+                <li><a href="#sigalrmsigterm信号" class="tocs-link">SIGALRM、SIGTERM信号</a></li>
+                <li><a href="#alarm函数" class="tocs-link">alarm函数</a></li>
+                <li><a href="#socketpair函数" class="tocs-link">socketpair函数</a></li>
+                <li><a href="#send函数" class="tocs-link">send函数</a></li>
+              </ol>
+            </li>
+            <li><a href="#信号通知流程" class="tocs-link">信号通知流程</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#统一事件源" class="tocs-link">统一事件源</a></li>
+                <li><a href="#信号处理机制" class="tocs-link">信号处理机制</a></li>
+              </ol>
+            </li>
+          </ol>
+        </aside>
+      </nav>
     </div>
     <script src="../js/demo-preview.js?v=1.21.13"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
