@@ -40,6 +40,10 @@ priority_queue< Node,vector< Node >,cmp > Q;
 
 ## 例题
 
+[155. 最小栈](https://leetcode.cn/problems/min-stack)
+
+> 双栈。
+
 **[232. 用栈实现队列](https://leetcode.cn/problems/implement-queue-using-stacks/)**
 
 > 使用双栈，一个为输入栈，一个为输出栈。
@@ -107,13 +111,13 @@ priority_queue< Node,vector< Node >,cmp > Q;
 >
 > 做法2：快速选择。
 
-[ 23. 合并K个排序链表](https://leetcode.cn/problems/merge-k-sorted-lists)
+**[ 23. 合并K个排序链表](https://leetcode.cn/problems/merge-k-sorted-lists)**
 
 > 将非空的链表节点插入小顶堆中，然后不断弹出较小值，插入弹出节点的下一个节点值（非空的话）。
 >
 > 进阶：分治。
 
-[32. 最长有效括号](https://leetcode.cn/problems/longest-valid-parentheses)
+**[32. 最长有效括号](https://leetcode.cn/problems/longest-valid-parentheses)**
 
 > 最长，这里指的是连续，难点在于如何更新答案。
 >

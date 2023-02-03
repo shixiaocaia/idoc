@@ -85,6 +85,10 @@
 //定义了一个存放Node型元素，底层是用vector实现，优先级是通过cmp比较获得。
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <h2 id="例题"><a aria-hidden="true" tabindex="-1" href="#例题" class="anchor"><span class="icon icon-link"></span></a>例题</h2>
+        <p><a href="https://leetcode.cn/problems/min-stack">155. 最小栈</a></p>
+        <blockquote>
+          <p>双栈。</p>
+        </blockquote>
         <p><strong><a href="https://leetcode.cn/problems/implement-queue-using-stacks/">232. 用栈实现队列</a></strong></p>
         <blockquote>
           <p>使用双栈，一个为输入栈，一个为输出栈。</p>
@@ -145,12 +149,12 @@
           <p>维护一个大顶堆（父节点是最大值），栈中超过k个元素就弹出最小的值，最后返回栈顶即可。</p>
           <p>做法2：快速选择。</p>
         </blockquote>
-        <p><a href="https://leetcode.cn/problems/merge-k-sorted-lists">23. 合并K个排序链表</a></p>
+        <p><strong><a href="https://leetcode.cn/problems/merge-k-sorted-lists">23. 合并K个排序链表</a></strong></p>
         <blockquote>
           <p>将非空的链表节点插入小顶堆中，然后不断弹出较小值，插入弹出节点的下一个节点值（非空的话）。</p>
           <p>进阶：分治。</p>
         </blockquote>
-        <p><a href="https://leetcode.cn/problems/longest-valid-parentheses">32. 最长有效括号</a></p>
+        <p><strong><a href="https://leetcode.cn/problems/longest-valid-parentheses">32. 最长有效括号</a></strong></p>
         <blockquote>
           <p>最长，这里指的是连续，难点在于如何更新答案。</p>
           <p>这里引入了一个start表示左边括号的开始，维护一个左括号的下标栈。</p>
