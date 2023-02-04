@@ -467,6 +467,10 @@ public:
             <li>后者相对前者，少了左右都存在的情况。因为作为子节点时，一条路如果同时包含左右，根就被包含了2次，不符合题目只出现一次的限制了。</li>
           </ol>
         </blockquote>
+        <p><a href="https://leetcode.cn/problems/diameter-of-binary-tree">543. 二叉树的直径</a></p>
+        <blockquote>
+          <p>这里只有一个点，就是需要计算树的节点数和路径差1，3个点两条边。</p>
+        </blockquote>
         <h3 id="构造二叉树"><a aria-hidden="true" tabindex="-1" href="#构造二叉树" class="anchor"><span class="icon icon-link"></span></a>构造二叉树</h3>
         <p><strong><a href="https://leetcode.cn/problems/maximum-binary-tree/">654. 最大二叉树</a></strong></p>
         <blockquote>
@@ -510,6 +514,8 @@ public:
           <p>一刷错在，左子树上每一个点都是小于根节点上的值，右子树上每一个点都是大于根节点上的值。</p>
           <p>关键一个知识点：二叉搜索树的中序遍历是一个有序序列。</p>
           <p>二刷没问题。</p>
+          <p>三刷已经忘记了通过中序遍历判断有序性。</p>
+          <p>直接遍历，需要判断pre是否完成初始化，加一个标志位判断是不是第一个节点，是的话不比较当前值和前驱结点的值。</p>
         </blockquote>
         <p><strong><a href="https://leetcode.cn/problems/search-in-a-binary-search-tree/">700.二叉搜索树中的搜索</a></strong></p>
         <blockquote>
