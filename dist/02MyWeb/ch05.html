@@ -60,7 +60,7 @@
         <h1 id="定时器处理非活动连接-1"><a aria-hidden="true" tabindex="-1" href="#定时器处理非活动连接-1" class="anchor"><span class="icon icon-link"></span></a>定时器处理非活动连接-1</h1>
         <h2 id="整体思路"><a aria-hidden="true" tabindex="-1" href="#整体思路" class="anchor"><span class="icon icon-link"></span></a>整体思路</h2>
         <p>浏览器在与服务器建立连接后，如果长时间不交换数据，一直占用服务器端的文件描述符，导致资源的浪费。</p>
-        <p>在本项目中，服务器主循环为每一个连接创建一个定时器，并对每个连接另外，利用升序时间链表容器将所有定时器串联起来，若主循环接收到定时通知，则在链表中依次执行定时任务。</p>
+        <p>在本项目中，服务器主循环为每一个连接创建一个定时器，并对每个连接进行定时。另外，利用升序时间链表容器将所有定时器串联起来，若主循环接收到定时通知，则在链表中依次执行定时任务。</p>
         <blockquote>
           <p><code>定时器</code>，是指利用结构体或其他形式，将多种定时事件进行封装起来。具体的，这里只涉及一种定时事件，即定期检测非活跃连接，这里将该定时事件与连接资源封装为一个结构体定时器。</p>
           <p><code>定时器容器</code>，是指使用某种容器类数据结构，将上述多个定时器组合起来，便于对定时事件统一管理。具体的，项目中使用升序链表将所有定时器串联组织起来。</p>
@@ -71,7 +71,7 @@
           <li>SIGALRM信号</li>
           <li>I/O复用系统调用的超时参数</li>
         </ul>
-        <p>利用<code>alarm</code>函数周期性地触发<code>SIGALRM</code>信号，信号处理函数利用管道通知主循环，主循环接收到该信号后对升序链表上所有定时器进行处理，若该段时间内没有交换数据，则将该连接关闭，释放所占用的资源。</p>
+        <p>在本项目中是利用<code>alarm</code>函数周期性地触发<code>SIGALRM</code>信号，信号处理函数利用管道通知主循环，主循环接收到该信号后对升序链表上所有定时器进行处理，若该段时间内没有交换数据，则将该连接关闭，释放所占用的资源。</p>
         <p>定时器处理非活动连接模块，主要分为两部分，其一为定时方法与信号通知流程，其二为定时器及其容器设计与定时任务的处理。</p>
         <h2 id="问题总结"><a aria-hidden="true" tabindex="-1" href="#问题总结" class="anchor"><span class="icon icon-link"></span></a>问题总结</h2>
         <ol>
@@ -89,6 +89,20 @@
             </ul>
           </li>
         </ol>
+        <h2 id="管道"><a aria-hidden="true" tabindex="-1" href="#管道" class="anchor"><span class="icon icon-link"></span></a>管道</h2>
+        <p>管道也叫无名管道，本质上是一个内核在内存中维护的缓冲器。</p>
+        <blockquote>
+          <ol>
+            <li>管道拥有文件的特质：读操作、写操作，匿名管道没有文件实体，有名管道有文件实体， 但不存储数据。可以按照操作文件的方式对管道进行操作。</li>
+            <li>一个管道是一个字节流，可以从管道中读取任意大小的数据块。</li>
+            <li>通过管道的数据是顺序的，读取时的字节顺序和写入管道时的顺序完全一样。</li>
+            <li>管道是半双工的，一段写入，一段读取。</li>
+            <li>从管道中读取数据是一次性操作，数据一旦被读取，它就从管道中被抛弃，释放空间以便于写于更多的数据。</li>
+            <li>只能在具有公共祖先的进程（父进程与子进程，或者两个兄弟进程，具有亲缘 关系）之间使用。</li>
+          </ol>
+        </blockquote>
+        <p>在本项目中，信号处理函数利用管道通知主循环，主循环接收到该信号后对升序链表上所有定时器进行处理，若该段时间内没有交换数据，则将该连接关闭，释放所占用的资源。</p>
+        <p>信号处理函数使用<strong>管道</strong>将信号传递给主循环，信号处理函数往管道的写端写入信号值，主循环则从管道的读端读出信号值，使用I/O复用系统调用来监听管道读端的可读事件，这样信号事件与其他文件描述符都可以通过epoll来监测，从而实现统一处理。</p>
         <h2 id="基础api"><a aria-hidden="true" tabindex="-1" href="#基础api" class="anchor"><span class="icon icon-link"></span></a>基础API</h2>
         <h3 id="sigaction结构体"><a aria-hidden="true" tabindex="-1" href="#sigaction结构体" class="anchor"><span class="icon icon-link"></span></a>sigaction结构体</h3>
         <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">struct sigaction {
@@ -200,7 +214,7 @@ ssize_t send(int sockfd, const void *buf, size_t len, int flags);
         <p>当套接字发送缓冲区变满时，send通常会阻塞，除非套接字设置为非阻塞模式，当缓冲区变满时，返回EAGAIN或者EWOULDBLOCK错误，此时可以调用select函数来监视何时可以发送数据。</p>
         <h2 id="信号通知流程"><a aria-hidden="true" tabindex="-1" href="#信号通知流程" class="anchor"><span class="icon icon-link"></span></a>信号通知流程</h2>
         <p>Linux下的信号采用的<strong>异步处理机制</strong>，信号处理函数和当前进程是两条不同的执行路线。具体的，当进程收到信号时，操作系统会中断进程当前的正常流程，转而进入信号处理函数执行操作，完成后再返回中断的地方继续执行。</p>
-        <p>为避免信号竞态现象发生，信号处理期间系统不会再次触发它。所以，为确保该信号不被屏蔽太久，信号处理函数需要尽可能快地执行完毕。</p>
+        <p>为避免信号<strong>竞态现象</strong>发生，信号处理期间系统不会再次触发它。所以，为确保该信号不被屏蔽太久，信号处理函数需要尽可能快地执行完毕。</p>
         <p>一般的信号处理函数需要处理该信号对应的逻辑，当该逻辑比较复杂时，信号处理函数执行时间过长，会导致信号屏蔽太久。</p>
         <p>这里的解决方案是，信号处理函数仅仅发送信号通知程序主循环，将信号对应的处理逻辑放在程序主循环中，由主循环执行信号对应的逻辑代码。</p>
         <h3 id="统一事件源"><a aria-hidden="true" tabindex="-1" href="#统一事件源" class="anchor"><span class="icon icon-link"></span></a>统一事件源</h3>
@@ -223,7 +237,7 @@ ssize_t send(int sockfd, const void *buf, size_t len, int flags);
             <ul>
               <li>进程从内核态返回到用户态前进行信号检测</li>
               <li>进程在内核态中，从睡眠状态被唤醒的时候进行信号检测</li>
-              <li>进程陷入内核态后，有两种场景会对信号进行检测：</li>
+              <li>进程陷入内核态后，有两种场景会对信号进行检测</li>
               <li>当发现有新信号时，便会进入下一步，信号的处理。</li>
             </ul>
           </li>
@@ -272,9 +286,9 @@ void addsig(int sig, void(handler)(int), bool restart = true); //信号函数
           </li>
           <li>
             <p>利用I/O复用系统监听管道读端文件描述符的可读事件</p>
-            <ul>
-              <li><code>addfd(epollfd, pipefd[0], false);</code></li>
-            </ul>
+            <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">addfd(epollfd, pipefd[0], false);
+</span></code><input type="hidden" value="addfd(epollfd, pipefd[0], false);
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
           </li>
           <li>
             <p>信息值传递给主循环，主循环再根据接收到的信号值执行目标信号对应的逻辑代码</p>
@@ -286,6 +300,7 @@ void addsig(int sig, void(handler)(int), bool restart = true); //信号函数
           <ol class="tocs-list">
             <li><a href="#整体思路" class="tocs-link">整体思路</a></li>
             <li><a href="#问题总结" class="tocs-link">问题总结</a></li>
+            <li><a href="#管道" class="tocs-link">管道</a></li>
             <li><a href="#基础api" class="tocs-link">基础API</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#sigaction结构体" class="tocs-link">sigaction结构体</a></li>
