@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C++ 标准库 iDoc</title>
+    <meta name="description" content="STL从广义上分为:">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="index.html" target="" class="active">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+            <li><a href="../00Other/index.html" target="" class="">Other</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <label>C++ primer</label>
+            <a href="ch00.html" class="">语法问题</a>
+            <a href="ch01.html" class="">指针&#x26;引用</a>
+            <a href="ch02.html" class="">函数</a>
+            <a href="ch10.html" class="">模板</a>
+            <a href="ch15.html" class="">异常处理</a>
+            <a href="ch16.html" class="">内存管理</a>
+            <label>STL</label>
+            <a href="ch20.html" class="">标准库</a>
+            <a href="ch21.html" class="">容器</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="c-标准库"><a aria-hidden="true" tabindex="-1" href="#c-标准库" class="anchor"><span class="icon icon-link"></span></a>C++ 标准库</h1>
+        <p><strong>STL(Standard Template Library)</strong></p>
+        <p>STL从广义上分为:</p>
+        <ol>
+          <li>容器(container)</li>
+          <li>分配器（Allocator)</li>
+          <li>算法(algorithm)</li>
+          <li>迭代器(iterator)</li>
+          <li>适配器(Adapter)</li>
+          <li>仿函数(Functors)</li>
+        </ol>
+        <p><strong>前闭后开区间</strong></p>
+        <p><code>c.begin()</code>包含了开头</p>
+        <p><code>c.end()</code>不包含结尾</p>
+        <h2 id="容器的分类"><a aria-hidden="true" tabindex="-1" href="#容器的分类" class="anchor"><span class="icon icon-link"></span></a>容器的分类</h2>
+        <ol>
+          <li>序列式容器</li>
+          <li>关联式容器</li>
+          <li>不定序容器</li>
+        </ol>
+        <h3 id="sequence-containers"><a aria-hidden="true" tabindex="-1" href="#sequence-containers" class="anchor"><span class="icon icon-link"></span></a>Sequence Containers</h3>
+        <ul>
+          <li>array 固定大小</li>
+          <li>vector 不定大小</li>
+        </ul>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1">vector<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&#x3C;</span> vector<span class="token punctuation">.</span><span class="token function">capacity</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">//一般增长是翻倍增长的</span>
+</span><span class="code-line line-number" line="2">vector<span class="token punctuation">.</span><span class="token function">data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token comment">// 所占用的连续一片内存空间的开始位置</span>
+</span></code><input type="hidden" value="vector.size() < vector.capacity() //一般增长是翻倍增长的
+vector.data() // 所占用的连续一片内存空间的开始位置
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>deque 双向队列</li>
+        </ul>
+        <blockquote>
+          <p>实际上是多端buffer，分别指向，当某一段满了之后，自动跳转到下一段的buffer。</p>
+          <p>可以向两端扩充buffer。</p>
+        </blockquote>
+        <ul>
+          <li>list 双向链表</li>
+          <li>forward-list 单向链表</li>
+          <li>stack</li>
+          <li>queue</li>
+        </ul>
+        <h3 id="associative-containers"><a aria-hidden="true" tabindex="-1" href="#associative-containers" class="anchor"><span class="icon icon-link"></span></a>Associative Containers</h3>
+        <p>关联式容器，便于查找等操作。</p>
+        <p>底层是红黑树、二叉平衡树。</p>
+        <ol>
+          <li>Set / Multiset</li>
+          <li>Map / Multimap</li>
+        </ol>
+        <h3 id="unordered-containers"><a aria-hidden="true" tabindex="-1" href="#unordered-containers" class="anchor"><span class="icon icon-link"></span></a>Unordered Containers</h3>
+        <p>篮子比元素多。</p>
+        <ol>
+          <li>Unordered Set / Multiset</li>
+          <li>Unordered Map / Multimap</li>
+        </ol>
+        <h3 id="hash-table-separate-chaining"><a aria-hidden="true" tabindex="-1" href="#hash-table-separate-chaining" class="anchor"><span class="icon icon-link"></span></a>Hash Table Separate Chaining</h3>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#容器的分类" class="tocs-link">容器的分类</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#sequence-containers" class="tocs-link">Sequence Containers</a></li>
+                <li><a href="#associative-containers" class="tocs-link">Associative Containers</a></li>
+                <li><a href="#unordered-containers" class="tocs-link">Unordered Containers</a></li>
+                <li><a href="#hash-table-separate-chaining" class="tocs-link">Hash Table Separate Chaining</a></li>
+              </ol>
+            </li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>

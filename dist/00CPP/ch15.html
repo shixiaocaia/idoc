@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>异常处理 iDoc</title>
+    <meta name="description" content="对expr求值，如果表示为假，则输出信息并终止程序的执行。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="index.html" target="" class="active">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+            <li><a href="../00Other/index.html" target="" class="">Other</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <label>C++ primer</label>
+            <a href="ch00.html" class="">语法问题</a>
+            <a href="ch01.html" class="">指针&#x26;引用</a>
+            <a href="ch02.html" class="">函数</a>
+            <a href="ch10.html" class="">模板</a>
+            <a href="ch15.html" class="">异常处理</a>
+            <a href="ch16.html" class="">内存管理</a>
+            <label>STL</label>
+            <a href="ch20.html" class="">标准库</a>
+            <a href="ch21.html" class="">容器</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="异常处理"><a aria-hidden="true" tabindex="-1" href="#异常处理" class="anchor"><span class="icon icon-link"></span></a>异常处理</h1>
+        <h2 id="assert"><a aria-hidden="true" tabindex="-1" href="#assert" class="anchor"><span class="icon icon-link"></span></a>assert</h2>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token function">assert</span><span class="token punctuation">(</span>expr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="assert(expr);
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>对expr求值，如果表示为假，则输出信息并终止程序的执行。</p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token function">assert</span><span class="token punctuation">(</span>word<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">></span> threshold<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="2"><span class="token comment">//要求所有单词的长度大于某个阈值，否则退出。</span>
+</span></code><input type="hidden" value="assert(word.size() > threshold);
+//要求所有单词的长度大于某个阈值，否则退出。
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="ndebug"><a aria-hidden="true" tabindex="-1" href="#ndebug" class="anchor"><span class="icon icon-link"></span></a>NDEBUG</h2>
+        <p>assert依赖于NDEBUG的预处理变量的状态，如果定义了NDEBUG，assert失效。</p>
+        <h2 id="catch"><a aria-hidden="true" tabindex="-1" href="#catch" class="anchor"><span class="icon icon-link"></span></a>catch</h2>
+        <h2 id="perror"><a aria-hidden="true" tabindex="-1" href="#perror" class="anchor"><span class="icon icon-link"></span></a>perror</h2>
+        <h2 id="异常的基本处理"><a aria-hidden="true" tabindex="-1" href="#异常的基本处理" class="anchor"><span class="icon icon-link"></span></a>异常的基本处理</h2>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">int</span> <span class="token function">myDevide</span><span class="token punctuation">(</span><span class="token keyword">int</span> a <span class="token punctuation">,</span><span class="token keyword">int</span> b<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="2"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="3">	<span class="token keyword">if</span> <span class="token punctuation">(</span>b <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="4">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="5">		<span class="token comment">//如果b是异常 抛出异常</span>
+</span><span class="code-line line-number" line="6">		<span class="token comment">//return -1;</span>
+</span><span class="code-line line-number" line="7">
+</span><span class="code-line line-number" line="8">		<span class="token comment">//throw 1; 抛出int类型异常</span>
+</span><span class="code-line line-number" line="9">		<span class="token comment">//throw 3.14; //抛出double类型异常  异常必须处理，如果不处理 就挂掉</span>
+</span><span class="code-line line-number" line="10">
+</span><span class="code-line line-number" line="11">		<span class="token comment">//throw 'a';</span>
+</span><span class="code-line line-number" line="12">		
+</span><span class="code-line line-number" line="13">		<span class="token comment">//栈解旋</span>
+</span><span class="code-line line-number" line="14">		<span class="token comment">//从try开始  到 throw 抛出异常之前  所有栈上的对象 都会被释放 这个过程称为栈解旋</span>
+</span><span class="code-line line-number" line="15">		<span class="token comment">//构造和析构顺序相反</span>
+</span><span class="code-line line-number" line="16">		Person p1<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="17">		Person p2<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="18">
+</span><span class="code-line line-number" line="19">		<span class="token keyword">throw</span> <span class="token function">myException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//匿名对象</span>
+</span><span class="code-line line-number" line="20">
+</span><span class="code-line line-number" line="21">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="22">	<span class="token keyword">return</span> a <span class="token operator">/</span> b<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="23"><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="24">
+</span><span class="code-line line-number" line="25">
+</span><span class="code-line line-number" line="26">
+</span><span class="code-line line-number" line="27"><span class="token keyword">void</span> <span class="token function">test01</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="28"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="29">	<span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="30">	<span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="31">
+</span><span class="code-line line-number" line="32">	<span class="token comment">//int ret = myDevide(a, b); //早期如果返回-1 无法区分到底是结果还是异常</span>
+</span><span class="code-line line-number" line="33">
+</span><span class="code-line line-number" line="34">	<span class="token comment">//C++中异常处理</span>
+</span><span class="code-line line-number" line="35">
+</span><span class="code-line line-number" line="36">	<span class="token keyword">try</span> <span class="token comment">//试一试</span>
+</span><span class="code-line line-number" line="37">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="38">		<span class="token function">myDevide</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="39">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="40">	<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token comment">//捕获异常</span>
+</span><span class="code-line line-number" line="41">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="42">		cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"int类型异常捕获"</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="43">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="44">	<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">double</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="45">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="46">		<span class="token comment">//如果不想处理这个异常 ，可以继续向上抛出</span>
+</span><span class="code-line line-number" line="47">		<span class="token keyword">throw</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="48">		cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"double类型异常捕获"</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="49">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="50">	<span class="token keyword">catch</span> <span class="token punctuation">(</span>myException e<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="51">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="52">		e<span class="token punctuation">.</span><span class="token function">printError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="53">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="54">	<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="55">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="56">		cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"其他类型异常捕获"</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="57">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="58">
+</span><span class="code-line line-number" line="59"><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="60">
+</span><span class="code-line line-number" line="61">
+</span><span class="code-line line-number" line="62"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="63">
+</span><span class="code-line line-number" line="64">	<span class="token keyword">try</span>
+</span><span class="code-line line-number" line="65">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="66">		<span class="token function">test01</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="67">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="68">	<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token keyword">char</span> <span class="token punctuation">)</span> <span class="token comment">//如果异常都没有处理，那么成员terminate函数，使程序中断</span>
+</span><span class="code-line line-number" line="69">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="70">		cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"main 函数中 double类型异常捕获"</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="71">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="72">	<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="73">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="74">		cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"main函数中 其他类型异常捕获"</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="75">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="76">	
+</span><span class="code-line line-number" line="77">
+</span><span class="code-line line-number" line="78">	<span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"pause"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="79">	<span class="token keyword">return</span> EXIT_SUCCESS<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="80"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="int myDevide(int a ,int b)
+{
+	if (b == 0)
+	{
+		//如果b是异常 抛出异常
+		//return -1;
+
+		//throw 1; 抛出int类型异常
+		//throw 3.14; //抛出double类型异常  异常必须处理，如果不处理 就挂掉
+
+		//throw &#x27;a&#x27;;
+		
+		//栈解旋
+		//从try开始  到 throw 抛出异常之前  所有栈上的对象 都会被释放 这个过程称为栈解旋
+		//构造和析构顺序相反
+		Person p1;
+		Person p2;
+
+		throw myException(); //匿名对象
+
+	}
+	return a / b;
+}
+
+
+
+void test01()
+{
+	int a = 10;
+	int b = 0;
+
+	//int ret = myDevide(a, b); //早期如果返回-1 无法区分到底是结果还是异常
+
+	//C++中异常处理
+
+	try //试一试
+	{
+		myDevide(a, b);
+	}
+	catch (int) //捕获异常
+	{
+		cout << &#x22;int类型异常捕获&#x22; << endl;
+	}
+	catch (double)
+	{
+		//如果不想处理这个异常 ，可以继续向上抛出
+		throw;
+		cout << &#x22;double类型异常捕获&#x22; << endl;
+	}
+	catch (myException e)
+	{
+		e.printError();
+	}
+	catch (...)
+	{
+		cout << &#x22;其他类型异常捕获&#x22; << endl;
+	}
+
+}
+
+
+int main(){
+
+	try
+	{
+		test01();
+	}
+	catch (char ) //如果异常都没有处理，那么成员terminate函数，使程序中断
+	{
+		cout << &#x22;main 函数中 double类型异常捕获&#x22; << endl;
+	}
+	catch (...)
+	{
+		cout << &#x22;main函数中 其他类型异常捕获&#x22; << endl;
+	}
+	
+
+	system(&#x22;pause&#x22;);
+	return EXIT_SUCCESS;
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="自定义异常进行捕获"><a aria-hidden="true" tabindex="-1" href="#自定义异常进行捕获" class="anchor"><span class="icon icon-link"></span></a>自定义异常进行捕获</h2>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">myException</span> <span class="token comment">//自定义异常类</span>
+</span><span class="code-line line-number" line="2"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="3"><span class="token keyword">public</span><span class="token operator">:</span>
+</span><span class="code-line line-number" line="4">	<span class="token keyword">void</span> <span class="token function">printError</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="5">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="6">		cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"自定义的异常"</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="7">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="8"><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="9">
+</span><span class="code-line line-number" line="10"><span class="token keyword">int</span> <span class="token function">myDevide</span><span class="token punctuation">(</span><span class="token keyword">int</span> a <span class="token punctuation">,</span><span class="token keyword">int</span> b<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="11"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="12">	<span class="token keyword">if</span> <span class="token punctuation">(</span>b <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="13">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="14">		<span class="token keyword">throw</span> <span class="token function">myException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//匿名对象</span>
+</span><span class="code-line line-number" line="15">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="16">	<span class="token keyword">return</span> a <span class="token operator">/</span> b<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="17"><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="18"><span class="token keyword">void</span> <span class="token function">test01</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="19"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="20">	<span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="21">	<span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="22">    <span class="token keyword">try</span> <span class="token comment">//试一试</span>
+</span><span class="code-line line-number" line="23">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="24">		<span class="token function">myDevide</span><span class="token punctuation">(</span>a<span class="token punctuation">,</span> b<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="25">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="26">	<span class="token keyword">catch</span> <span class="token punctuation">(</span>myException e<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="27">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="28">		e<span class="token punctuation">.</span><span class="token function">printError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="29">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="30">	<span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="31">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="32">		cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"其他类型异常捕获"</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="33">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="34"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="class myException //自定义异常类
+{
+public:
+	void printError()
+	{
+		cout << &#x22;自定义的异常&#x22; << endl;
+	}
+};
+
+int myDevide(int a ,int b)
+{
+	if (b == 0)
+	{
+		throw myException(); //匿名对象
+	}
+	return a / b;
+}
+void test01()
+{
+	int a = 10;
+	int b = 0;
+    try //试一试
+	{
+		myDevide(a, b);
+	}
+	catch (myException e)
+	{
+		e.printError();
+	}
+	catch (...)
+	{
+		cout << &#x22;其他类型异常捕获&#x22; << endl;
+	}
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p><strong>栈解旋</strong></p>
+        <p>从try开始 到 throw 抛出异常之前 所有栈上的对象 都会被释放 这个过程称为栈解旋</p>
+        <p><strong>异常的接口声明</strong></p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">void</span> <span class="token function">func</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">throw</span> <span class="token keyword">int</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">    
+</span><span class="code-line line-number" line="3">    <span class="token keyword">throw</span> <span class="token number">1</span><span class="token punctuation">;</span><span class="token comment">//只能抛出int</span>
+</span><span class="code-line line-number" line="4"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="void func() throw int{
+    
+    throw 1;//只能抛出int
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p><strong>异常变量的生命周期</strong></p>
+        <p>C++ 异常throw抛出一个匿名对象的地址，catch捕获类型为该匿名对象的指针，运行起来的效果是没有执行到catch下的异常输出，对象就已经被释放掉了，当改为抛出匿名对象时，catch处引用接收就不会发生这样的问题。</p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">MyException</span>
+</span><span class="code-line line-number" line="2"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="3"><span class="token keyword">public</span><span class="token operator">:</span>
+</span><span class="code-line line-number" line="4">	<span class="token function">MyException</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="5">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="6">		cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"MyException的默认构造"</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="7">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="8">	<span class="token function">MyException</span><span class="token punctuation">(</span><span class="token keyword">const</span> MyException <span class="token operator">&#x26;</span> e<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="9">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="10">		cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"MyException的拷贝构造"</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="11">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="12"> 
+</span><span class="code-line line-number" line="13">	<span class="token operator">~</span><span class="token function">MyException</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="14">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="15">		cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"MyException的析构调用"</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="16">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="17"> 
+</span><span class="code-line line-number" line="18">	<span class="token keyword">void</span> <span class="token function">printError</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="19">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="20">		<span class="token keyword">this</span><span class="token operator">-></span>m_A <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="21">		cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"error"</span>  <span class="token operator">&#x3C;&#x3C;</span> m_A<span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="22">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="23"> 
+</span><span class="code-line line-number" line="24">	<span class="token keyword">int</span> m_A<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="25"> 
+</span><span class="code-line line-number" line="26"><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="27"> 
+</span><span class="code-line line-number" line="28"><span class="token keyword">void</span> <span class="token function">doWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="29"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="30">	<span class="token keyword">throw</span>  <span class="token function">MyException</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="31"><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="32"> 
+</span><span class="code-line line-number" line="33"><span class="token keyword">void</span> <span class="token function">test01</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="34"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="35">	<span class="token keyword">try</span>
+</span><span class="code-line line-number" line="36">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="37">		<span class="token function">doWork</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="38">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="39">	<span class="token keyword">catch</span> <span class="token punctuation">(</span>MyException <span class="token operator">&#x26;</span>e<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="40">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="41">        e<span class="token operator">-></span><span class="token function">printError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="42">		
+</span><span class="code-line line-number" line="43">		cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"捕获异常"</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="44"> 
+</span><span class="code-line line-number" line="45">		<span class="token comment">//delete e; //靠自觉 释放对象</span>
+</span><span class="code-line line-number" line="46">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="47"><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="48">
+</span><span class="code-line line-number" line="49"><span class="token keyword">int</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="50">	<span class="token function">test01</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="51">	<span class="token function">system</span><span class="token punctuation">(</span><span class="token string">"pause"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="52">	<span class="token keyword">return</span> EXIT_SUCCESS<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="53"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="class MyException
+{
+public:
+	MyException()
+	{
+		cout << &#x22;MyException的默认构造&#x22; << endl;
+	}
+	MyException(const MyException &#x26; e)
+	{
+		cout << &#x22;MyException的拷贝构造&#x22; << endl;
+	}
+ 
+	~MyException()
+	{
+		cout << &#x22;MyException的析构调用&#x22; << endl;
+	}
+ 
+	void printError()
+	{
+		this->m_A = 100;
+		cout << &#x22;error&#x22;  << m_A<< endl;
+	}
+ 
+	int m_A;
+ 
+};
+ 
+void doWork()
+{
+	throw  MyException();
+}
+ 
+void test01()
+{
+	try
+	{
+		doWork();
+	}
+	catch (MyException &#x26;e)
+	{
+        e->printError();
+		
+		cout << &#x22;捕获异常&#x22; << endl;
+ 
+		//delete e; //靠自觉 释放对象
+	}
+}
+
+int main(){
+	test01();
+	system(&#x22;pause&#x22;);
+	return EXIT_SUCCESS;
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p><strong>异常的多态</strong></p>
+        <p><strong>使用系统的标准异常</strong></p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&#x3C;stdexcept></span></span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">class</span> <span class="token class-name">Person</span>
+</span><span class="code-line line-number" line="3"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="4"><span class="token keyword">public</span><span class="token operator">:</span>
+</span><span class="code-line line-number" line="5">	<span class="token function">Person</span><span class="token punctuation">(</span>string name<span class="token punctuation">,</span> <span class="token keyword">int</span> age<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="6">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="7">		<span class="token keyword">this</span><span class="token operator">-></span>m_Name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="8">		<span class="token comment">//年龄做检测</span>
+</span><span class="code-line line-number" line="9">
+</span><span class="code-line line-number" line="10">		<span class="token keyword">if</span> <span class="token punctuation">(</span>age <span class="token operator">&#x3C;</span> <span class="token number">0</span> <span class="token operator">||</span> age <span class="token operator">></span> <span class="token number">200</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="11">		<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="12">			<span class="token comment">//抛出越界异常</span>
+</span><span class="code-line line-number" line="13">			<span class="token comment">//throw  out_of_range("年龄越界了！");</span>
+</span><span class="code-line line-number" line="14">
+</span><span class="code-line line-number" line="15">			<span class="token keyword">throw</span> <span class="token function">length_error</span><span class="token punctuation">(</span><span class="token string">"长度越界"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="16">		<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="17">
+</span><span class="code-line line-number" line="18">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="19">
+</span><span class="code-line line-number" line="20">
+</span><span class="code-line line-number" line="21">	string m_Name<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="22">	<span class="token keyword">int</span> m_Age<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="23"><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="24">
+</span><span class="code-line line-number" line="25"><span class="token keyword">void</span> <span class="token function">test01</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="26"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="27">	<span class="token keyword">try</span>
+</span><span class="code-line line-number" line="28">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="29">		Person <span class="token function">p</span><span class="token punctuation">(</span><span class="token string">"张三"</span><span class="token punctuation">,</span><span class="token number">300</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="30">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="31">	<span class="token keyword">catch</span> <span class="token punctuation">(</span>out_of_range <span class="token operator">&#x26;</span> e<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="32">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="33">		cout <span class="token operator">&#x3C;&#x3C;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="34">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="35">	<span class="token keyword">catch</span> <span class="token punctuation">(</span>length_error <span class="token operator">&#x26;</span> e<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="36">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="37">		cout <span class="token operator">&#x3C;&#x3C;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="38">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="39">
+</span><span class="code-line line-number" line="40"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="#include <stdexcept>
+class Person
+{
+public:
+	Person(string name, int age)
+	{
+		this->m_Name = name;
+		//年龄做检测
+
+		if (age < 0 || age > 200)
+		{
+			//抛出越界异常
+			//throw  out_of_range(&#x22;年龄越界了！&#x22;);
+
+			throw length_error(&#x22;长度越界&#x22;);
+		}
+
+	}
+
+
+	string m_Name;
+	int m_Age;
+};
+
+void test01()
+{
+	try
+	{
+		Person p(&#x22;张三&#x22;,300);
+	}
+	catch (out_of_range &#x26; e)
+	{
+		cout << e.what() << endl;
+	}
+	catch (length_error &#x26; e)
+	{
+		cout << e.what() << endl;
+	}
+
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p><strong>编写自己的异常类</strong></p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name">_CRT_SECURE_NO_WARNINGS</span></span>
+</span><span class="code-line line-number" line="2"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&#x3C;iostream></span></span>
+</span><span class="code-line line-number" line="3"><span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="4"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&#x3C;string></span></span>
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6"><span class="token keyword">class</span> <span class="token class-name">MyOutOfRangeException</span><span class="token operator">:</span><span class="token base-clause"><span class="token keyword">public</span> <span class="token class-name">exception</span></span>
+</span><span class="code-line line-number" line="7"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="8">
+</span><span class="code-line line-number" line="9"><span class="token keyword">public</span><span class="token operator">:</span>
+</span><span class="code-line line-number" line="10">
+</span><span class="code-line line-number" line="11">	<span class="token function">MyOutOfRangeException</span><span class="token punctuation">(</span>string errorInfo<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="12">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="13">		<span class="token keyword">this</span><span class="token operator">-></span>m_ErrorInfo <span class="token operator">=</span> errorInfo<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="14">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="15">
+</span><span class="code-line line-number" line="16">	<span class="token keyword">virtual</span>  <span class="token operator">~</span><span class="token function">MyOutOfRangeException</span><span class="token punctuation">(</span> <span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="17">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="18">
+</span><span class="code-line line-number" line="19">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="20">	<span class="token keyword">virtual</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span>  <span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">const</span>
+</span><span class="code-line line-number" line="21">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="22">		<span class="token comment">//返回 错误信息</span>
+</span><span class="code-line line-number" line="23">		<span class="token comment">//string 转 char *     .c_str()</span>
+</span><span class="code-line line-number" line="24">		<span class="token keyword">return</span> <span class="token keyword">this</span><span class="token operator">-></span>m_ErrorInfo<span class="token punctuation">.</span><span class="token function">c_str</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="25">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="26">	string m_ErrorInfo<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="27"><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="28"><span class="token keyword">class</span> <span class="token class-name">Person</span>
+</span><span class="code-line line-number" line="29"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="30"><span class="token keyword">public</span><span class="token operator">:</span>
+</span><span class="code-line line-number" line="31">	<span class="token function">Person</span><span class="token punctuation">(</span>string name<span class="token punctuation">,</span> <span class="token keyword">int</span> age<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="32">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="33">		<span class="token keyword">this</span><span class="token operator">-></span>m_Name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="34">		<span class="token comment">//年龄做检测</span>
+</span><span class="code-line line-number" line="35">
+</span><span class="code-line line-number" line="36">		<span class="token keyword">if</span> <span class="token punctuation">(</span>age <span class="token operator">&#x3C;</span> <span class="token number">0</span> <span class="token operator">||</span> age <span class="token operator">></span> <span class="token number">200</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="37">		<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="38">			<span class="token keyword">throw</span> <span class="token function">MyOutOfRangeException</span><span class="token punctuation">(</span> <span class="token function">string</span><span class="token punctuation">(</span><span class="token string">"我自己的年龄越界异常"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="39">		<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="40">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="41">	string m_Name<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="42">	<span class="token keyword">int</span> m_Age<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="43"><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="44">
+</span><span class="code-line line-number" line="45"><span class="token keyword">void</span> <span class="token function">test01</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="46"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="47">	<span class="token keyword">try</span>
+</span><span class="code-line line-number" line="48">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="49">		Person <span class="token function">p</span><span class="token punctuation">(</span><span class="token string">"张三"</span><span class="token punctuation">,</span> <span class="token number">300</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="50">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="51">	<span class="token keyword">catch</span> <span class="token punctuation">(</span> MyOutOfRangeException <span class="token operator">&#x26;</span> e  <span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="52">	<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="53">		cout <span class="token operator">&#x3C;&#x3C;</span> e<span class="token punctuation">.</span><span class="token function">what</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="54">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="55"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="#define _CRT_SECURE_NO_WARNINGS
+#include<iostream>
+using namespace std;
+#include <string>
+
+class MyOutOfRangeException:public exception
+{
+
+public:
+
+	MyOutOfRangeException(string errorInfo)
+	{
+		this->m_ErrorInfo = errorInfo;
+	}
+
+	virtual  ~MyOutOfRangeException( )
+	{
+
+	}
+	virtual const char *  what() const
+	{
+		//返回 错误信息
+		//string 转 char *     .c_str()
+		return this->m_ErrorInfo.c_str();
+	}
+	string m_ErrorInfo;
+};
+class Person
+{
+public:
+	Person(string name, int age)
+	{
+		this->m_Name = name;
+		//年龄做检测
+
+		if (age < 0 || age > 200)
+		{
+			throw MyOutOfRangeException( string(&#x22;我自己的年龄越界异常&#x22;));
+		}
+	}
+	string m_Name;
+	int m_Age;
+};
+
+void test01()
+{
+	try
+	{
+		Person p(&#x22;张三&#x22;, 300);
+	}
+	catch ( MyOutOfRangeException &#x26; e  )
+	{
+		cout << e.what() << endl;
+	}
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ol>
+          <li>
+            <p>继承于exception</p>
+          </li>
+          <li>
+            <p>重写 虚析构 what（）</p>
+          </li>
+          <li>
+            <p>内部维护以错误信息 字符串</p>
+          </li>
+          <li>
+            <p>构造时候传入 错误信息字符串，what返回这个字符串</p>
+          </li>
+        </ol>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#assert" class="tocs-link">assert</a></li>
+            <li><a href="#ndebug" class="tocs-link">NDEBUG</a></li>
+            <li><a href="#catch" class="tocs-link">catch</a></li>
+            <li><a href="#perror" class="tocs-link">perror</a></li>
+            <li><a href="#异常的基本处理" class="tocs-link">异常的基本处理</a></li>
+            <li><a href="#自定义异常进行捕获" class="tocs-link">自定义异常进行捕获</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>

@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>语法知识 iDoc</title>
+    <meta name="description" content="函数只能定义一次，但可以声明多次，在头文件中进行函数声明，在源文件中定义。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="index.html" target="" class="active">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+            <li><a href="../00Other/index.html" target="" class="">Other</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <label>C++ primer</label>
+            <a href="ch00.html" class="">语法问题</a>
+            <a href="ch01.html" class="">指针&#x26;引用</a>
+            <a href="ch02.html" class="">函数</a>
+            <a href="ch10.html" class="">模板</a>
+            <a href="ch15.html" class="">异常处理</a>
+            <a href="ch16.html" class="">内存管理</a>
+            <label>STL</label>
+            <a href="ch20.html" class="">标准库</a>
+            <a href="ch21.html" class="">容器</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h2 id="函数声明"><a aria-hidden="true" tabindex="-1" href="#函数声明" class="anchor"><span class="icon icon-link"></span></a>函数声明</h2>
+        <p>函数只能定义一次，但可以声明多次，在头文件中进行函数声明，在源文件中定义。</p>
+        <blockquote>
+          <p>含有函数声明的头文件应该被包含到定义函数的源文件中。</p>
+        </blockquote>
+        <h2 id="内联函数"><a aria-hidden="true" tabindex="-1" href="#内联函数" class="anchor"><span class="icon icon-link"></span></a>内联函数</h2>
+        <p><strong>define的缺陷</strong></p>
+        <ul>
+          <li>预定义宏函数没有作用域概念，无法作为一个类的成员函数，也就是说预定义宏没有办法表示类的范围。</li>
+          <li>没有类型检查，不安全。</li>
+        </ul>
+        <p><strong>inline</strong></p>
+        <ul>
+          <li>增加关键字inline, 代替宏。</li>
+          <li>内联函数用空间换时间（节省了压栈、跳转和返回的时间，没有普通函数调用时的额外开销）</li>
+          <li>内联函数是一个特殊的函数，会进行类型检查；</li>
+          <li>是对编译器的一种请求，编译器有可能拒绝这种请求。</li>
+          <li>C++中inline的限制，不存在任何形式的循环语句，不能存在过多的条件判断语句，函数体不能过大，内联函数声明必须在调用语句之前。</li>
+        </ul>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">define</span> <span class="token macro-name function">ADD</span><span class="token expression"><span class="token punctuation">(</span>x<span class="token punctuation">,</span>y<span class="token punctuation">)</span> x<span class="token operator">+</span>y</span></span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">inline</span> <span class="token keyword">int</span> <span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">int</span> x<span class="token punctuation">,</span><span class="token keyword">int</span> y<span class="token punctuation">)</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="3">	<span class="token keyword">return</span> x <span class="token operator">+</span> y<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="4"><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="5"><span class="token keyword">void</span> <span class="token function">test</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="6">	<span class="token keyword">int</span> ret1 <span class="token operator">=</span> <span class="token function">ADD</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment">//希望的结果是300</span>
+</span><span class="code-line line-number" line="7">	<span class="token keyword">int</span> ret2 <span class="token operator">=</span> <span class="token function">Add</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token number">20</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment">//希望结果也是300</span>
+</span><span class="code-line line-number" line="8">	cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"ret1:"</span> <span class="token operator">&#x3C;&#x3C;</span> ret1 <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span> <span class="token comment">//210</span>
+</span><span class="code-line line-number" line="9">	cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"ret2:"</span> <span class="token operator">&#x3C;&#x3C;</span> ret2 <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span> <span class="token comment">//300</span>
+</span><span class="code-line line-number" line="10"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="#define ADD(x,y) x+y
+inline int Add(int x,int y){
+	return x + y;
+}
+void test(){
+	int ret1 = ADD(10, 20) * 10; //希望的结果是300
+	int ret2 = Add(10, 20) * 10; //希望结果也是300
+	cout << &#x22;ret1:&#x22; << ret1 << endl; //210
+	cout << &#x22;ret2:&#x22; << ret2 << endl; //300
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>class 中成员函数默认加inline关键字（编译器优化），以下特殊情况，即使加了inline<strong>也不会</strong>进行内联编译处理。</p>
+        <ul>
+          <li>
+            <p>不能存在任何形式的循环语句</p>
+          </li>
+          <li>
+            <p>不能存在过多的条件判断语句</p>
+          </li>
+          <li>
+            <p>函数体不能过于庞大</p>
+          </li>
+          <li>
+            <p>不能对函数进行取址操作</p>
+          </li>
+        </ul>
+        <blockquote>
+          <p>函数若在class body内定义完成，便自动成为inline候选人，不代表百分百成为inline函数，注意上述的情况。</p>
+          <p>一般放在头文件中，保证所有源文件中定义完全相同。</p>
+          <p>一般在类外定义时声明inline。</p>
+        </blockquote>
+        <h2 id="constexpr-函数"><a aria-hidden="true" tabindex="-1" href="#constexpr-函数" class="anchor"><span class="icon icon-link"></span></a>constexpr 函数</h2>
+        <p>constexpr函数（constexprfunction）是指能用于常量表达式的函数。</p>
+        <p>定义constexpr函数的方法与其他函数类似，不过要遵循几项约定：</p>
+        <ol>
+          <li>函数的返回类型及所有形参的类型都得是字面值类型，返回值是常量或者常量表达式。</li>
+          <li>而且函数体中必须有且只有一条return语句。</li>
+        </ol>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">constexpr</span> <span class="token keyword">int</span> <span class="token function">new_sz</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token keyword">return</span> <span class="token number">42</span><span class="token punctuation">;</span><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">constexpr</span> <span class="token keyword">int</span> foo <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token function">_sz</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="constexpr int new_sz() {return 42;}
+constexpr int foo = new _sz();
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <blockquote>
+          <p>内联函数和constexpr函数为了避免重复定义，通常定义在头文件中。</p>
+        </blockquote>
+        <h2 id="函数参数"><a aria-hidden="true" tabindex="-1" href="#函数参数" class="anchor"><span class="icon icon-link"></span></a>函数参数</h2>
+        <p><strong>默认参数</strong></p>
+        <p>声明带默认参数，实现不需要。</p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">void</span> <span class="token function">TestFunc01</span><span class="token punctuation">(</span><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">	cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"a + b  = "</span> <span class="token operator">&#x3C;&#x3C;</span> a <span class="token operator">+</span> b <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="3"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="void TestFunc01(int a = 10, int b = 20){
+	cout << &#x22;a + b  = &#x22; << a + b << endl;
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <blockquote>
+          <p>一旦某个形参有了默认值，该参数的后面的形参都应该有默认值。</p>
+          <p>尽量让不怎么使用默认值的形参放在前面，便于修改。</p>
+        </blockquote>
+        <p><strong>占位参数</strong></p>
+        <p>区分前置和后置递增运算符的重载。。</p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1">Complex<span class="token operator">&#x26;</span> <span class="token keyword">operator</span><span class="token operator">++</span><span class="token punctuation">(</span>Complex<span class="token operator">&#x26;</span> p<span class="token punctuation">)</span> <span class="token comment">//前置</span>
+</span><span class="code-line line-number" line="2">Complex<span class="token operator">&#x26;</span> <span class="token keyword">operator</span><span class="token operator">++</span><span class="token punctuation">(</span><span class="token keyword">int</span><span class="token punctuation">)</span> <span class="token comment">//后置</span>
+</span></code><input type="hidden" value="Complex&#x26; operator++(Complex&#x26; p) //前置
+Complex&#x26; operator++(int) //后置
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="函数重写override"><a aria-hidden="true" tabindex="-1" href="#函数重写override" class="anchor"><span class="icon icon-link"></span></a>函数重写（override)</h2>
+        <p>以实现不同的功能，一般适用于子类在继承父类时，重写父类方法。</p>
+        <p>规则：</p>
+        <ol>
+          <li>重写方法的参数列表，返回值，所抛出的异常与重写方法一致。</li>
+          <li>被重写的方法不能为private。</li>
+          <li>静态方法不能被重写为非静态的方法。</li>
+          <li>重写的方法的访问修饰符一定要大于被重写方法的访问修饰符（pubilc>protected>default>private)。</li>
+        </ol>
+        <h2 id="函数重载overload"><a aria-hidden="true" tabindex="-1" href="#函数重载overload" class="anchor"><span class="icon icon-link"></span></a>函数重载(overload)</h2>
+        <p>在c中是允许出现<strong>同名</strong>的函数，这种现象称为函数重载。</p>
+        <p>条件：1. 必须在同一个作用域下。2. 函数的参数个数、类型、顺序不同。</p>
+        <blockquote>
+          <p>[!NOTE]</p>
+          <ol>
+            <li>函数返回值不可以作为判断重载的条件。</li>
+            <li>函数重载和默认参数之间注意二义性问题。</li>
+            <li>实际上编译器是将函数重载进行了重命名进行区分。</li>
+          </ol>
+        </blockquote>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">int</span> <span class="token function">lookup</span><span class="token punctuation">(</span>account<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">int</span> <span class="token function">lookup</span><span class="token punctuation">(</span><span class="token keyword">const</span> account<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+</span><span class="code-line line-number" line="3"><span class="token keyword">int</span> <span class="token function">lookup</span><span class="token punctuation">(</span>account<span class="token operator">*</span> <span class="token keyword">const</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="4"><span class="token comment">//顶层的const无法区分重载</span>
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6"><span class="token keyword">int</span> <span class="token function">lookup</span><span class="token punctuation">(</span>account<span class="token operator">&#x26;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="7"><span class="token keyword">int</span> <span class="token function">lookup</span><span class="token punctuation">(</span><span class="token keyword">const</span> account<span class="token operator">&#x26;</span><span class="token punctuation">)</span><span class="token punctuation">;</span> 
+</span><span class="code-line line-number" line="8">
+</span><span class="code-line line-number" line="9"><span class="token keyword">int</span> <span class="token function">lookup</span><span class="token punctuation">(</span>account<span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="10"><span class="token keyword">int</span> <span class="token function">lookup</span><span class="token punctuation">(</span><span class="token keyword">const</span> account<span class="token operator">*</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="11"><span class="token comment">//底层const可以区分</span>
+</span></code><input type="hidden" value="int lookup(account);
+int lookup(const account); 
+int lookup(account* const);
+//顶层的const无法区分重载
+
+int lookup(account&#x26;);
+int lookup(const account&#x26;); 
+
+int lookup(account*);
+int lookup(const account*);
+//底层const可以区分
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p><strong>const_cast和重载</strong></p>
+        <p><strong>候选函数和可行函数</strong></p>
+        <p>函数匹配的第一步是选定本次调用对应的重载函数集，集合中的函数称为候选函数。</p>
+        <p>
+          候选函数具备两个典型特征：一是与被调用的函数同名，二是其声明在调用点可见。
+          函数匹配的第二步是考查本次调用提供的实参，然后从候选函数中选出能被这组实参调用的函数，这些新选出的函数称为可行函数。
+        </p>
+        <p>可行函数也有两个特征：是其形参数量与本次调用提供的实参数量相等，二是每个实参的类型与对应的形参类型相同或者能转换成形参的类型。</p>
+        <h2 id="函数指针"><a aria-hidden="true" tabindex="-1" href="#函数指针" class="anchor"><span class="icon icon-link"></span></a>函数指针</h2>
+        <p>函数指针指向的是函数而非对象。函数的类型由返回类型和形参类型共同决定，与函数名无关。</p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">bool</span> <span class="token function">lengthCompare</span><span class="token punctuation">(</span><span class="token keyword">const</span> string <span class="token operator">&#x26;</span><span class="token punctuation">,</span> <span class="token keyword">const</span> string <span class="token operator">&#x26;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3"><span class="token keyword">bool</span> <span class="token punctuation">(</span><span class="token operator">*</span>pr<span class="token punctuation">)</span><span class="token punctuation">(</span><span class="token keyword">const</span> string <span class="token operator">&#x26;</span><span class="token punctuation">,</span> <span class="token keyword">const</span> string <span class="token operator">&#x26;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="bool lengthCompare(const string &#x26;, const string &#x26;);
+
+bool (*pr)(const string &#x26;, const string &#x26;);
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>由上面我们可以看到，用一个指针指向该函数，用指针替代han'shu</p>
+        <h2 id="extern-c浅析"><a aria-hidden="true" tabindex="-1" href="#extern-c浅析" class="anchor"><span class="icon icon-link"></span></a>extern “C”浅析</h2>
+        <ul>
+          <li>
+            <p>c函数: void MyFunc(){} , 被编译成函数: MyFunc</p>
+          </li>
+          <li>
+            <p>c函数: void MyFunc(){}, 被编译成函数: _Z6Myfuncv</p>
+          </li>
+          <li>
+            <p>使用extern "C" void show(), show方法按照C语言方式做链接</p>
+          </li>
+        </ul>
+        <h2 id="c语言下的封装和c下的封装"><a aria-hidden="true" tabindex="-1" href="#c语言下的封装和c下的封装" class="anchor"><span class="icon icon-link"></span></a>c语言下的封装和C++下的封装</h2>
+        <p>C++中的封装 严格类型转换检测，让属性和行为绑定一起。C语言中struct只能定义属性，不能定义函数。</p>
+        <p>C++中类的权限：public, protected , private</p>
+        <p>struct 默认权限是 public，class默认权限是private，私有只能在类的内部访问。protected 保护权限，类的内部访问，外部不可以访问，类的子类可以访问。</p>
+        <p>一般情况将class所有成员熟悉设置为private，通过public间接的读和写。</p>
+        <h2 id="构造函数和析构函数"><a aria-hidden="true" tabindex="-1" href="#构造函数和析构函数" class="anchor"><span class="icon icon-link"></span></a>构造函数和析构函数</h2>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">"chead"</span></span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">class</span> <span class="token class-name">Person</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="3"><span class="token keyword">public</span><span class="token operator">:</span>
+</span><span class="code-line line-number" line="4">	<span class="token function">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="5">		cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"构造函数(普通、无参)的调用"</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="6">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="7">	<span class="token function">Person</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="8">		cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"构造函数(普通、有参)的调用"</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="9">		age <span class="token operator">=</span> a<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="10">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="11">
+</span><span class="code-line line-number" line="12">	<span class="token comment">//根据类型又分为上面的普通和拷贝</span>
+</span><span class="code-line line-number" line="13">	<span class="token function">Person</span><span class="token punctuation">(</span><span class="token keyword">const</span> Person<span class="token operator">&#x26;</span> p<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="14">		age <span class="token operator">=</span> p<span class="token punctuation">.</span>age<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="15">		cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"构造函数(拷贝、有参)的调用,使用另一个对象初始化本对象"</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="16">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="17">
+</span><span class="code-line line-number" line="18">	<span class="token comment">//析构函数</span>
+</span><span class="code-line line-number" line="19">	<span class="token operator">~</span><span class="token function">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="20">		cout<span class="token operator">&#x3C;&#x3C;</span><span class="token string">"析构函数的调用"</span> <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="21">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="22">
+</span><span class="code-line line-number" line="23">	<span class="token keyword">int</span> age<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="24"><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="25">
+</span><span class="code-line line-number" line="26"><span class="token keyword">void</span> <span class="token function">test01</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="27">	<span class="token comment">//</span>
+</span><span class="code-line line-number" line="28">	Person <span class="token function">p1</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//有参构造函数调用</span>
+</span><span class="code-line line-number" line="29">	p1<span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="30">	Person <span class="token function">p2</span><span class="token punctuation">(</span>p1<span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token comment">//拷贝构造函数调用，p2.age = 10;</span>
+</span><span class="code-line line-number" line="31">
+</span><span class="code-line line-number" line="32">	Person p3<span class="token punctuation">;</span> <span class="token comment">//无参构造函数调用，不要加(),加()当作了函数声明</span>
+</span><span class="code-line line-number" line="33">
+</span><span class="code-line line-number" line="34">	Person p4 <span class="token operator">=</span> <span class="token function">Person</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//显示调用 等价于有参调用</span>
+</span><span class="code-line line-number" line="35">	Person p5 <span class="token operator">=</span> <span class="token function">Person</span><span class="token punctuation">(</span>p5<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//显示调用 拷贝构造函数</span>
+</span><span class="code-line line-number" line="36">
+</span><span class="code-line line-number" line="37">	<span class="token function">Person</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//匿名对象，编译对象发现对象是匿名，运行话此行后就会被释放。</span>
+</span><span class="code-line line-number" line="38">
+</span><span class="code-line line-number" line="39">	<span class="token function">Person</span><span class="token punctuation">(</span>p5<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//不能用拷贝构造函数 初始化匿名对象，被当作了对象声明，重定义</span>
+</span><span class="code-line line-number" line="40">
+</span><span class="code-line line-number" line="41"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="#include&#x22;chead&#x22;
+class Person {
+public:
+	Person() {
+		cout << &#x22;构造函数(普通、无参)的调用&#x22; << endl;
+	}
+	Person(int a) {
+		cout << &#x22;构造函数(普通、有参)的调用&#x22; << endl;
+		age = a;
+	}
+
+	//根据类型又分为上面的普通和拷贝
+	Person(const Person&#x26; p) {
+		age = p.age;
+		cout << &#x22;构造函数(拷贝、有参)的调用,使用另一个对象初始化本对象&#x22; << endl;
+	}
+
+	//析构函数
+	~Person() {
+		cout<<&#x22;析构函数的调用&#x22; << endl;
+	}
+
+	int age;
+};
+
+void test01() {
+	//
+	Person p1(1);//有参构造函数调用
+	p1.age = 10;
+	Person p2(p1);//拷贝构造函数调用，p2.age = 10;
+
+	Person p3; //无参构造函数调用，不要加(),加()当作了函数声明
+
+	Person p4 = Person(100); //显示调用 等价于有参调用
+	Person p5 = Person(p5); //显示调用 拷贝构造函数
+
+	Person(100); //匿名对象，编译对象发现对象是匿名，运行话此行后就会被释放。
+
+	Person(p5); //不能用拷贝构造函数 初始化匿名对象，被当作了对象声明，重定义
+
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <blockquote>
+          <ol>
+            <li>Sales_data( ) = default;//完全等价于合成默认构造函数，即系统自己生成的构造函数</li>
+            <li>一个const成员函数如果以引用的形式返回*this，那么它的返回类型将是常量的引用。</li>
+            <li>如果成员是const、引用，或者属于某种未提供默认构造函数的类类型，我们必须通过构造函数初始值列表为这些成员提供初值。养成用构造函数赋初值的习惯。</li>
+            <li>、成员的初始化顺序与它们在类定义中的出现顺序一致，与初始化列表中的顺序无关。</li>
+          </ol>
+        </blockquote>
+        <h3 id="委托构造函数"><a aria-hidden="true" tabindex="-1" href="#委托构造函数" class="anchor"><span class="icon icon-link"></span></a>委托构造函数</h3>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">Sales_data</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">public</span><span class="token operator">:</span>
+</span><span class="code-line line-number" line="3">    <span class="token function">Sales_data</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>string s<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> cnt<span class="token punctuation">,</span> <span class="token keyword">double</span> price<span class="token punctuation">)</span><span class="token operator">:</span>
+</span><span class="code-line line-number" line="4">        <span class="token function">bookNo</span><span class="token punctuation">(</span>s<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">units_sold</span><span class="token punctuation">(</span>cnt<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">revenue</span><span class="token punctuation">(</span>cnt<span class="token operator">*</span>price<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6">    <span class="token function">Sales_data</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">Sales_data</span><span class="token punctuation">(</span><span class="token string">""</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="7">    <span class="token function">Sales_data</span><span class="token punctuation">(</span>std<span class="token double-colon punctuation">::</span>string s<span class="token punctuation">)</span><span class="token operator">:</span> <span class="token function">Sales_data</span><span class="token punctuation">(</span>s<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="8">    
+</span><span class="code-line line-number" line="9"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="class Sales_data {
+public:
+    Sales_data(std::string s, unsigned cnt, double price):
+        bookNo(s), units_sold(cnt), revenue(cnt*price) {}
+
+    Sales_data() : Sales_data(&#x22;&#x22;, 0, 0);
+    Sales_data(std::string s): Sales_data(s, 0, 0) {}
+    
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>首先定义了一个默认构造函数，后面两个接受参数后，还是委托给第一个构造函数。</p>
+        <h3 id="explicit关键字"><a aria-hidden="true" tabindex="-1" href="#explicit关键字" class="anchor"><span class="icon icon-link"></span></a>explicit关键字</h3>
+        <p>explicit关键字的作用就是禁止隐式转换这个特性，凡是用explicit关键字修饰的构造函数，编译时就不会进行自动转换，而会报错。如下例所示：</p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">A</span>
+</span><span class="code-line line-number" line="2"><span class="token punctuation">{</span>               
+</span><span class="code-line line-number" line="3">    <span class="token function">A</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>     
+</span><span class="code-line line-number" line="4"><span class="token punctuation">}</span><span class="token punctuation">;</span>  
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6"><span class="token keyword">int</span> <span class="token function">Function</span><span class="token punctuation">(</span>A a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="class A
+{               
+    A(int a);     
+};  
+
+int Function(A a);
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>当调用Function(2)的时候，2会隐式转换为A类型。这种情况常常不是程序员想要的结果，所以，要避免之，就可以这样写：</p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">A</span>
+</span><span class="code-line line-number" line="2"><span class="token punctuation">{</span>               
+</span><span class="code-line line-number" line="3">    <span class="token keyword">explicit</span> <span class="token function">A</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">)</span><span class="token punctuation">;</span>     
+</span><span class="code-line line-number" line="4"><span class="token punctuation">}</span><span class="token punctuation">;</span>  
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6"><span class="token keyword">int</span> <span class="token function">Function</span><span class="token punctuation">(</span>A a<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="class A
+{               
+    explicit A(int a);     
+};  
+
+int Function(A a);
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>这样，当调用<code>Function(2)</code>的时候，编译器会给出错误信息（除非Function有个以int为参数的重载形式），这就避免了在程序员毫不知情的情况下出现错误。</p>
+        <blockquote>
+          <p>explicit只对一个实参的构造函数有效，需要多个实参的构造函数不能用于执行隐式转化。多个实参的构造函数只能在类内部声明时使用explict，外部定义时不能用。</p>
+        </blockquote>
+        <h2 id="静态变量"><a aria-hidden="true" tabindex="-1" href="#静态变量" class="anchor"><span class="icon icon-link"></span></a>静态变量</h2>
+        <h3 id="静态成员变量"><a aria-hidden="true" tabindex="-1" href="#静态成员变量" class="anchor"><span class="icon icon-link"></span></a>静态成员变量</h3>
+        <ul>
+          <li>无论建立了多少个对象，都是对一个静态数据的拷贝和使用，所有对象共享。因此修改值全局修改所有对象的这个值。</li>
+          <li>静态变量，是在编译阶段就分配空间，对象还没有创建时，就已经分配空间。</li>
+        </ul>
+        <blockquote>
+          <p>在类中声明，类外定义。</p>
+          <p>可以在类外直接定义，但是不能够直接访问。</p>
+          <p>不能声明成const的。</p>
+        </blockquote>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">Person</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">public</span><span class="token operator">:</span>
+</span><span class="code-line line-number" line="3">	<span class="token keyword">static</span> <span class="token keyword">int</span> sNum<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="4"><span class="token keyword">private</span><span class="token operator">:</span>
+</span><span class="code-line line-number" line="5">	<span class="token keyword">static</span> <span class="token keyword">int</span> sOther<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="6"><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="7">
+</span><span class="code-line line-number" line="8"><span class="token comment">//类外初始化，初始化时不加static</span>
+</span><span class="code-line line-number" line="9"><span class="token comment">// 静态数据成员不属于的任何一个对象，初始化应该在外部</span>
+</span><span class="code-line line-number" line="10"><span class="token keyword">int</span> Person<span class="token double-colon punctuation">::</span>sNum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="11"><span class="token keyword">int</span> Person<span class="token double-colon punctuation">::</span>sOther <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="class Person{
+public:
+	static int sNum;
+private:
+	static int sOther;
+};
+
+//类外初始化，初始化时不加static
+// 静态数据成员不属于的任何一个对象，初始化应该在外部
+int Person::sNum = 0;
+int Person::sOther = 0;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p><strong>静态成员变量的访问</strong></p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token comment">//1. 通过类名直接访问</span>
+</span><span class="code-line line-number" line="2">Person<span class="token double-colon punctuation">::</span>sNum <span class="token operator">=</span> <span class="token number">100</span><span class="token punctuation">;</span> <span class="token comment">//实际上当作在类中访问初始化</span>
+</span><span class="code-line line-number" line="3">cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"Person::sNum:"</span> <span class="token operator">&#x3C;&#x3C;</span> Person<span class="token double-colon punctuation">::</span>sNum <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span><span class="token comment">//error</span>
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5"><span class="token comment">//2. 通过对象访问</span>
+</span><span class="code-line line-number" line="6">Person p1<span class="token punctuation">,</span> p2<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="7">p1<span class="token punctuation">.</span>sNum <span class="token operator">=</span> <span class="token number">200</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="//1. 通过类名直接访问
+Person::sNum = 100; //实际上当作在类中访问初始化
+cout << &#x22;Person::sNum:&#x22; << Person::sNum << endl;//error
+
+//2. 通过对象访问
+Person p1, p2;
+p1.sNum = 200;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="静态成员函数"><a aria-hidden="true" tabindex="-1" href="#静态成员函数" class="anchor"><span class="icon icon-link"></span></a>静态成员函数</h3>
+        <p>静态成员函数使用方式和静态变量一样，同样在对象没有创建前，即可通过类名调用。也可以通过对象调用。</p>
+        <p>静态成员函数主要为了访问静态变量，但是，不能访问普通成员变量。</p>
+        <p>如果一个类的成员，既要实现共享，又要实现不可改变，那就用 static const 修饰。定义静态const数据成员时，最好在类内部初始化。</p>
+        <h3 id="单例模式"><a aria-hidden="true" tabindex="-1" href="#单例模式" class="anchor"><span class="icon icon-link"></span></a>单例模式</h3>
+        <ul>
+          <li>为了让类只有一个实例，实例不需要自己释放</li>
+          <li>对默认构造函数、拷贝构造函数进行私有化</li>
+          <li>内部维护一个对象指针</li>
+          <li>私有化唯一指针</li>
+          <li>对外提供getinstance方法来访问这个指针</li>
+          <li>保证类中只能实例化唯一一个对象</li>
+        </ul>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">A</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">public</span><span class="token operator">:</span>
+</span><span class="code-line line-number" line="3">    <span class="token keyword">static</span> A<span class="token operator">&#x26;</span> <span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="4">    <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="5"><span class="token keyword">private</span><span class="token operator">:</span>
+</span><span class="code-line line-number" line="6">    <span class="token function">A</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//对默认构造函数、拷贝构造函数进行私有化</span>
+</span><span class="code-line line-number" line="7">    <span class="token function">A</span><span class="token punctuation">(</span><span class="token keyword">const</span> A<span class="token operator">&#x26;</span> rhs<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="8">    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</span><span class="code-line line-number" line="9"><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="10"><span class="token comment">//对外提供getinstance方法来访问这个指针</span>
+</span><span class="code-line line-number" line="11">A<span class="token operator">&#x26;</span> <span class="token class-name">A</span><span class="token double-colon punctuation">::</span><span class="token function">getInstance</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="12">    <span class="token keyword">static</span> A a<span class="token punctuation">;</span> <span class="token comment">//保证类中只能实例化唯一一个对象,并且有人使用时才会建立</span>
+</span><span class="code-line line-number" line="13">    <span class="token keyword">return</span> a<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="14"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="class A {
+public:
+    static A&#x26; getInstance();
+    setup() {...};
+private:
+    A(); //对默认构造函数、拷贝构造函数进行私有化
+    A(const A&#x26; rhs);
+    ...
+};
+//对外提供getinstance方法来访问这个指针
+A&#x26; A::getInstance(){
+    static A a; //保证类中只能实例化唯一一个对象,并且有人使用时才会建立
+    return a;
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="友元"><a aria-hidden="true" tabindex="-1" href="#友元" class="anchor"><span class="icon icon-link"></span></a>友元</h2>
+        <h3 id="友元函数"><a aria-hidden="true" tabindex="-1" href="#友元函数" class="anchor"><span class="icon icon-link"></span></a>友元函数</h3>
+        <h3 id="友元类"><a aria-hidden="true" tabindex="-1" href="#友元类" class="anchor"><span class="icon icon-link"></span></a>友元类</h3>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">Screen</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">    <span class="token keyword">friend</span> <span class="token keyword">class</span> <span class="token class-name">Window</span><span class="token operator">+</span>mgr<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="3"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="class Screen {
+    friend class Window+mgr;
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>这样Window_Mgr 类可以访问Screen中private部分。</p>
+        <h2 id="深拷贝和浅拷贝"><a aria-hidden="true" tabindex="-1" href="#深拷贝和浅拷贝" class="anchor"><span class="icon icon-link"></span></a>深拷贝和浅拷贝</h2>
+        <p>同一类型的对象之间可以赋值，使得两个对象的成员变量的值（地址）相同，两个对象仍然是独立的两个对象，这种情况被称为<strong>浅拷贝</strong>。浅拷贝后，可能会导致两次释放堆区空间，导致挂掉。</p>
+        <p>解决：使用自建的拷贝构造函数，进行<strong>深拷贝</strong>，指向不同的堆区，避免重复的释放。</p>
+        <h2 id="初始化列表"><a aria-hidden="true" tabindex="-1" href="#初始化列表" class="anchor"><span class="icon icon-link"></span></a>初始化列表</h2>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token comment">//初始化列表方式，构造函数后面增加 属性（值，参数），属性（值，参数）</span>
+</span><span class="code-line line-number" line="2"><span class="token comment">//无参</span>
+</span><span class="code-line line-number" line="3"><span class="token function">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span><span class="token function">m_A</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">m_B</span><span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">m_C</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="4"><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="5"><span class="token comment">//有参</span>
+</span><span class="code-line line-number" line="6"><span class="token function">Person</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">,</span> <span class="token keyword">int</span> c<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">m_A</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">m_B</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">m_C</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="7"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="//初始化列表方式，构造函数后面增加 属性（值，参数），属性（值，参数）
+//无参
+Person() :m_A(10), m_B(11), m_C(12) {
+}
+//有参
+Person(int a, int b, int c) : m_A(a), m_B(b), m_C(c) {
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <blockquote>
+          <p>我们一般使用初始化列表的方式初始化变量，设定有参构造，更加简洁有效。</p>
+        </blockquote>
+        <h2 id="隐式类型转换"><a aria-hidden="true" tabindex="-1" href="#隐式类型转换" class="anchor"><span class="icon icon-link"></span></a>隐式类型转换</h2>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">People</span> 
+</span><span class="code-line line-number" line="2"><span class="token punctuation">{</span> 
+</span><span class="code-line line-number" line="3"><span class="token keyword">public</span><span class="token operator">:</span> 
+</span><span class="code-line line-number" line="4">    <span class="token keyword">int</span> age<span class="token punctuation">;</span> 
+</span><span class="code-line line-number" line="5">    <span class="token function">People</span> <span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">)</span>  <span class="token punctuation">{</span>  age<span class="token operator">=</span>a<span class="token punctuation">;</span>  <span class="token punctuation">}</span> 
+</span><span class="code-line line-number" line="6"><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="7">
+</span><span class="code-line line-number" line="8"><span class="token keyword">void</span> <span class="token function">foo</span> <span class="token punctuation">(</span> <span class="token keyword">void</span> <span class="token punctuation">)</span> 
+</span><span class="code-line line-number" line="9"><span class="token punctuation">{</span>   
+</span><span class="code-line line-number" line="10">    People <span class="token function">p1</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">//方式一  </span>
+</span><span class="code-line line-number" line="11">    People<span class="token operator">*</span> p_p2<span class="token operator">=</span><span class="token keyword">new</span> <span class="token function">People</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//方式二  </span>
+</span><span class="code-line line-number" line="12">    People p3<span class="token operator">=</span><span class="token number">10</span><span class="token punctuation">;</span> <span class="token comment">//方式三 </span>
+</span><span class="code-line line-number" line="13"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="class People 
+{ 
+public: 
+    int age; 
+    People (int a)  {  age=a;  } 
+};
+
+void foo ( void ) 
+{   
+    People p1(10);  //方式一  
+    People* p_p2=new People(10); //方式二  
+    People p3=10; //方式三 
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>
+          该例中，方式一和方式二都是平时编程过程中常用到的对象定义方式，而方式三即是特殊的方式，因为C/C++是一种强类型语言，不同的数据类型是不能随意转换的，如果要进行类型转换，必须进行显示强制类型转换，而这里，没有进行任何显示的转换，直接将一个整形数据赋值给类类变量p3。
+          因此，可以说，方式三中进行了一次隐式类型转换，编译器自动将对应于构造函数参数类型的数据转换为了该类的对象，因此方式三经编译器自动转换后和方式一最终的实现方式是一样的。
+        </p>
+        <h2 id="new运算符使用"><a aria-hidden="true" tabindex="-1" href="#new运算符使用" class="anchor"><span class="icon icon-link"></span></a>new运算符使用</h2>
+        <p>代替c语言 malloc动态分配类型，是在堆区开辟空间。</p>
+        <table>
+          <thead>
+            <tr>
+              <th>new</th>
+              <th>malloc</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>返回该类型的指针</td>
+              <td>返回void*指针,并且需要强转</td>
+            </tr>
+            <tr>
+              <td>调用构造</td>
+              <td>不调用构造</td>
+            </tr>
+            <tr>
+              <td>delete释放</td>
+              <td>free释放</td>
+            </tr>
+            <tr>
+              <td>是一个运算符</td>
+              <td>是一个函数</td>
+            </tr>
+          </tbody>
+        </table>
+        <ul>
+          <li>
+            <p>无法释放<code>void *p = new Person</code> 构造的指针。</p>
+          </li>
+          <li>
+            <p>通过new开辟数组，<strong>一定会调用默认构造函数，所以一定要提供默认构造函数。在自定义有参构造函数后，系统不会默认提供，要手动添加。</strong></p>
+          </li>
+          <li>
+            <p>注：<code>Person p[2] = {Person(1), Person(2)}</code>开辟空间是在栈区，是可以指定开的。</p>
+          </li>
+          <li>
+            <p>释放数组要中括号，告知有多个对象需要释放。<code>delete [] p;</code>这样才能调用多次的析构函数，否则只调用一次析构函数，造成内存的泄露。</p>
+          </li>
+        </ul>
+        <blockquote>
+          <p>new：先分配memory，再调用ctor（构造）</p>
+          <p>delete：先调用dtor（析构），再释放memory</p>
+        </blockquote>
+        <h2 id="含有可变形参的函数"><a aria-hidden="true" tabindex="-1" href="#含有可变形参的函数" class="anchor"><span class="icon icon-link"></span></a>含有可变形参的函数</h2>
+        <p>为了编写能处理不同数量的实参的函数，C++11新标准提供了两种主要的方法：如果所有的实参类型相同，可以传递一个名为<code>initializer_list</code>的标准库类型，如果实参的类型不同，需要自己编写特殊的函数。</p>
+        <h3 id="initializer_list"><a aria-hidden="true" tabindex="-1" href="#initializer_list" class="anchor"><span class="icon icon-link"></span></a>initializer_list</h3>
+        <p>可以用来使用initializer_list 类型的形参，是一种标准库类型。列表中的元素是const。</p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1">initializer_list<span class="token operator">&#x3C;</span>T<span class="token operator">></span> lst<span class="token punctuation">;</span> <span class="token comment">//T 是类型，列表中的元素是const</span>
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3"><span class="token keyword">void</span> <span class="token function">error_msg</span><span class="token punctuation">(</span>initializer_list<span class="token operator">&#x3C;</span>string<span class="token operator">></span> il<span class="token punctuation">)</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="4">    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">auto</span> beg <span class="token operator">=</span> il<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> beg <span class="token operator">!=</span> il<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token operator">++</span>beg<span class="token punctuation">)</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="5">        cout<span class="token operator">&#x3C;&#x3C;</span> <span class="token operator">*</span>beg <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">" "</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="6">    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="7">    cout<span class="token operator">&#x3C;&#x3C;</span>endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="8"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="initializer_list<T> lst; //T 是类型，列表中的元素是const
+
+void error_msg(initializer_list<string> il){
+    for(auto beg = il.begin(); beg != il.end(); ++beg){
+        cout<< *beg << &#x22; &#x22;;
+    }
+    cout<<endl;
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>调用error_msg 可以传入不同的参数数量。</p>
+        <h3 id="省略符形参"><a aria-hidden="true" tabindex="-1" href="#省略符形参" class="anchor"><span class="icon icon-link"></span></a>省略符形参</h3>
+        <p>为了便于C++程序访问某些特殊的C代码而设置的，这些代码使用了名为varargs的C标准库功能。</p>
+        <p>只能出现在形参列表的最后一个位置，</p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span>parm_list<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">void</span> <span class="token function">foo</span><span class="token punctuation">(</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="void foo(parm_list, ...);
+void foo(...);
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p><strong>不要返回局部对象的引用或指针</strong></p>
+        <p>返回的引用时函数开始之前就存在的对象，返回该引用是有效的，如果返回是函数的局部变量，随着函数的结束局部变量也失效了，此时返回引用无效。</p>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#函数声明" class="tocs-link">函数声明</a></li>
+            <li><a href="#内联函数" class="tocs-link">内联函数</a></li>
+            <li><a href="#constexpr-函数" class="tocs-link">constexpr 函数</a></li>
+            <li><a href="#函数参数" class="tocs-link">函数参数</a></li>
+            <li><a href="#函数重写override" class="tocs-link">函数重写（override)</a></li>
+            <li><a href="#函数重载overload" class="tocs-link">函数重载(overload)</a></li>
+            <li><a href="#函数指针" class="tocs-link">函数指针</a></li>
+            <li><a href="#extern-c浅析" class="tocs-link">extern “C”浅析</a></li>
+            <li><a href="#c语言下的封装和c下的封装" class="tocs-link">c语言下的封装和C++下的封装</a></li>
+            <li><a href="#构造函数和析构函数" class="tocs-link">构造函数和析构函数</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#委托构造函数" class="tocs-link">委托构造函数</a></li>
+                <li><a href="#explicit关键字" class="tocs-link">explicit关键字</a></li>
+              </ol>
+            </li>
+            <li><a href="#静态变量" class="tocs-link">静态变量</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#静态成员变量" class="tocs-link">静态成员变量</a></li>
+                <li><a href="#静态成员函数" class="tocs-link">静态成员函数</a></li>
+                <li><a href="#单例模式" class="tocs-link">单例模式</a></li>
+              </ol>
+            </li>
+            <li><a href="#友元" class="tocs-link">友元</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#友元函数" class="tocs-link">友元函数</a></li>
+                <li><a href="#友元类" class="tocs-link">友元类</a></li>
+              </ol>
+            </li>
+            <li><a href="#深拷贝和浅拷贝" class="tocs-link">深拷贝和浅拷贝</a></li>
+            <li><a href="#初始化列表" class="tocs-link">初始化列表</a></li>
+            <li><a href="#隐式类型转换" class="tocs-link">隐式类型转换</a></li>
+            <li><a href="#new运算符使用" class="tocs-link">new运算符使用</a></li>
+            <li><a href="#含有可变形参的函数" class="tocs-link">含有可变形参的函数</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#initializer_list" class="tocs-link">initializer_list</a></li>
+                <li><a href="#省略符形参" class="tocs-link">省略符形参</a></li>
+              </ol>
+            </li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>

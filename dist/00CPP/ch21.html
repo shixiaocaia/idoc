@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>容器 iDoc</title>
+    <meta name="description" content="顺序容器提供了快速顺序访问元素的能力，但是在：">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+  </head>
+  <body id="idoctotop"><a href="#idoctotop" class="gototop">top</a>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="index.html" target="" class="active">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+            <li><a href="../00Other/index.html" target="" class="">Other</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <label>C++ primer</label>
+            <a href="ch00.html" class="">语法问题</a>
+            <a href="ch01.html" class="">指针&#x26;引用</a>
+            <a href="ch02.html" class="">函数</a>
+            <a href="ch10.html" class="">模板</a>
+            <a href="ch15.html" class="">异常处理</a>
+            <a href="ch16.html" class="">内存管理</a>
+            <label>STL</label>
+            <a href="ch20.html" class="">标准库</a>
+            <a href="ch21.html" class="">容器</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="容器"><a aria-hidden="true" tabindex="-1" href="#容器" class="anchor"><span class="icon icon-link"></span></a>容器</h1>
+        <h2 id="顺序容器"><a aria-hidden="true" tabindex="-1" href="#顺序容器" class="anchor"><span class="icon icon-link"></span></a>顺序容器</h2>
+        <p>顺序容器提供了快速顺序访问元素的能力，但是在：</p>
+        <ol>
+          <li>向容器添加或向容器中删除元素的代价</li>
+          <li>非顺序访问容器中的元素的代价</li>
+        </ol>
+        <p>作出了折中。</p>
+        <p>顺序容器包括了：vector、deque、list、forward_list、array、string。</p>
+        <hr>
+        <h3 id="vector"><a aria-hidden="true" tabindex="-1" href="#vector" class="anchor"><span class="icon icon-link"></span></a>vector</h3>
+        <p><strong>size和capacity</strong></p>
+        <p>capacity >= size。</p>
+        <p>可以通过shrink_to_fit 来要求vector将超出当前大小的多余内存退回系统，当然这只是一个请求，不能保证归还。</p>
+        <hr>
+        <h3 id="string"><a aria-hidden="true" tabindex="-1" href="#string" class="anchor"><span class="icon icon-link"></span></a>string</h3>
+        <p><strong>搜索操作</strong></p>
+        <p><code>find</code>函数返回第一个匹配位置的首字母下标。</p>
+        <p><code>rfind</code>函数查找最后一次出现的位置的下标。</p>
+        <p><strong>compare函数</strong></p>
+        <p>类似C的<code>strcmp</code>函数。</p>
+        <p><strong>数值转换</strong></p>
+        <p><code>to_string</code>函数整数转字符。</p>
+        <hr>
+        <h3 id="容器适配器"><a aria-hidden="true" tabindex="-1" href="#容器适配器" class="anchor"><span class="icon icon-link"></span></a>容器适配器</h3>
+        <p>默认情况下，stack和queue是基于deque实现的。</p>
+        <p>priority_queue是在vector之上实现的。</p>
+        <h2 id="泛型算法"><a aria-hidden="true" tabindex="-1" href="#泛型算法" class="anchor"><span class="icon icon-link"></span></a>泛型算法</h2>
+        <p><strong>谓词</strong></p>
+        <blockquote>
+          <p>一元谓词：表示它们只接受单一参数。</p>
+          <p>二元谓词：表示接受两个参数。</p>
+        </blockquote>
+        <h3 id="lambda-表达式"><a aria-hidden="true" tabindex="-1" href="#lambda-表达式" class="anchor"><span class="icon icon-link"></span></a>lambda 表达式</h3>
+        <p>对于一个对象或者一个表达式，如果可以对其使用调用运算符，则可以称它为可调用的。</p>
+        <p>一个lambda表示一个可调用的代码单元，可以理解为一个未命名的inline函数。</p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">[</span>capture list<span class="token punctuation">]</span><span class="token punctuation">(</span>parameter list<span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">return</span> type <span class="token punctuation">{</span>function body<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="2"><span class="token punctuation">[</span>capture list<span class="token punctuation">]</span>  <span class="token punctuation">{</span>function body<span class="token punctuation">}</span>
+</span></code><input type="hidden" value="[capture list](parameter list) -> return type {function body}
+[capture list]  {function body}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>[capture list] 是所在函数中定义的局部变量的列表（通常为空）</p>
+        <p>lambda根据函数体中的代码推断出返回类型。如果函数体只是 一个 return 语句，则返回类型从返回的表达式的类型推断而来。否则，返回类型为void。</p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">auto</span> f <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token punctuation">{</span><span class="token keyword">return</span> <span class="token number">42</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="2">cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">&#x3C;&#x3C;</span>endl<span class="token punctuation">;</span>
+</span></code><input type="hidden" value="auto f = [] {return 42};
+cout << f() <<endl;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <blockquote>
+          <p>lambda不能带有默认参数。</p>
+          <p>lambda的capture list是在创建时进行拷贝，而不是调用时拷贝。也可以通过引用捕获，同步变化。</p>
+        </blockquote>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">auto</span> wc <span class="token operator">=</span> <span class="token function">find_if</span><span class="token punctuation">(</span>words<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> words<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+</span><span class="code-line line-number" line="2">     <span class="token punctuation">[</span>sz<span class="token punctuation">]</span> <span class="token punctuation">(</span><span class="token keyword">const</span> string <span class="token operator">&#x26;</span>a<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="3">          <span class="token punctuation">{</span> <span class="token keyword">return</span> a<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">>=</span> sz<span class="token punctuation">;</span><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="4"><span class="token comment">// 查找第一个长度大于等于sz的元素,返回一个迭代器，指向第一个长度不小于给定参数sz的元素，如果不存在，返回一个结尾的靠白</span>
+</span><span class="code-line line-number" line="5">               
+</span><span class="code-line line-number" line="6"><span class="token function">for_each</span><span class="token punctuation">(</span>wc<span class="token punctuation">,</span> words<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="7">        <span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword">const</span> string <span class="token operator">&#x26;</span>s<span class="token punctuation">)</span> <span class="token punctuation">{</span>couts <span class="token operator">&#x3C;&#x3C;</span> s <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">" "</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="8"><span class="token comment">//接受一个可调用的对象，输出此对象</span>
+</span></code><input type="hidden" value="auto wc = find_if(words.begin(), words.end(), 
+     [sz] (const string &#x26;a)
+          { return a.size() >= sz;}
+// 查找第一个长度大于等于sz的元素,返回一个迭代器，指向第一个长度不小于给定参数sz的元素，如果不存在，返回一个结尾的靠白
+               
+for_each(wc, words.end(),
+        [](const string &#x26;s) {couts << s << &#x22; &#x22;;});
+//接受一个可调用的对象，输出此对象
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p><strong>显示捕获与隐式捕获</strong></p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token function">for_each</span><span class="token punctuation">(</span>words<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> words<span class="token punctuation">.</span><span class="token function">end</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">[</span><span class="token operator">=</span><span class="token punctuation">,</span><span class="token operator">&#x26;</span>os<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token keyword">const</span> string <span class="token operator">&#x26;</span>s<span class="token punctuation">)</span> <span class="token punctuation">{</span>os<span class="token operator">&#x3C;&#x3C;</span> s <span class="token operator">&#x3C;&#x3C;</span> c<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="2"><span class="token comment">//os 显示捕获，引用捕获方式；c隐式捕获，值捕获方式</span>
+</span><span class="code-line line-number" line="3"><span class="token comment">//当我们使用隐式和显式混合是，捕获列表中的第一个元素必须是隐式的&#x26; =</span>
+</span><span class="code-line line-number" line="4"><span class="token comment">//混合使用时，必须一个是值捕获，一个是引用捕获</span>
+</span></code><input type="hidden" value="for_each(words.begin(), words.end(), [=,&#x26;os](const string &#x26;s) {os<< s << c});
+//os 显示捕获，引用捕获方式；c隐式捕获，值捕获方式
+//当我们使用隐式和显式混合是，捕获列表中的第一个元素必须是隐式的&#x26; =
+//混合使用时，必须一个是值捕获，一个是引用捕获
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p><strong>可变lambda</strong></p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1">size_t v1 <span class="token operator">=</span> <span class="token number">42</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">auto</span> f <span class="token operator">=</span> <span class="token punctuation">[</span>v1<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">mutable</span>
+</span><span class="code-line line-number" line="3"><span class="token punctuation">{</span> <span class="token keyword">return</span> <span class="token operator">++</span>v1<span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="4">v1 <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="5"><span class="token keyword">auto</span> j <span class="token operator">=</span> <span class="token function">f</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="6">cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"v1 = "</span> <span class="token operator">&#x3C;&#x3C;</span> v1 <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="7">cout <span class="token operator">&#x3C;&#x3C;</span> j <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="8">
+</span><span class="code-line line-number" line="9"><span class="token comment">//一般情况下，v1值在lambda拷贝后，但是不可以改变其值，想要改变加上关键字 mutable</span>
+</span><span class="code-line line-number" line="10"><span class="token comment">//如果是引用，不需要加 mutable</span>
+</span></code><input type="hidden" value="size_t v1 = 42;
+auto f = [v1]() mutable
+{ return ++v1; };
+v1 = 0;
+auto j = f();
+cout << &#x22;v1 = &#x22; << v1 << endl;
+cout << j << endl;
+
+//一般情况下，v1值在lambda拷贝后，但是不可以改变其值，想要改变加上关键字 mutable
+//如果是引用，不需要加 mutable
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p><strong>指定lambda返回类型</strong></p>
+        <p>如果一个lambda体包含return之外的任何语句，则编译器假定此lambda返回void。</p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">auto</span> f <span class="token operator">=</span> <span class="token punctuation">[</span>v1<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token keyword">mutable</span> <span class="token punctuation">{</span><span class="token keyword">if</span><span class="token punctuation">(</span>v1<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token operator">++</span>v1<span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">//编译错误</span>
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3"><span class="token keyword">auto</span> f <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token operator">&#x26;</span>v1<span class="token punctuation">]</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-></span> <span class="token keyword">int</span> <span class="token punctuation">{</span><span class="token keyword">if</span><span class="token punctuation">(</span>v1<span class="token punctuation">)</span> <span class="token keyword">return</span> <span class="token operator">++</span>v1<span class="token punctuation">;</span> <span class="token punctuation">}</span><span class="token punctuation">;</span> <span class="token comment">//使用尾置返回类型</span>
+</span></code><input type="hidden" value="auto f = [v1]() mutable {if(v1) return ++v1; }; //编译错误
+
+auto f = [&#x26;v1]() -> int {if(v1) return ++v1; }; //使用尾置返回类型
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="参数传递"><a aria-hidden="true" tabindex="-1" href="#参数传递" class="anchor"><span class="icon icon-link"></span></a>参数传递</h3>
+        <p><strong>标准库bind函数</strong></p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&#x3C;functional></span></span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">auto</span> newCallable <span class="token operator">=</span> <span class="token function">bind</span><span class="token punctuation">(</span>callable<span class="token punctuation">,</span> arg_list<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="3"><span class="token comment">// 调用newCallable时，调用callable，传入arg_list参数</span>
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5"><span class="token keyword">auto</span> check6 <span class="token operator">=</span> <span class="token function">bind</span><span class="token punctuation">(</span>check_size<span class="token punctuation">,</span> _1<span class="token punctuation">,</span> <span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="6"><span class="token comment">//_1 表示newCallable的第一个参数</span>
+</span></code><input type="hidden" value="#include<functional>
+auto newCallable = bind(callable, arg_list)
+// 调用newCallable时，调用callable，传入arg_list参数
+
+auto check6 = bind(check_size, _1, 6);
+//_1 表示newCallable的第一个参数
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p><strong>使用placeholders名字</strong></p>
+        <p>名字_n都定义在一个名为placeholders的命名空间中，而这个命名空间本身定义在std命名空间当中。</p>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">using</span> std<span class="token double-colon punctuation">::</span>placeholders<span class="token double-colon punctuation">::</span>_1<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">using</span> <span class="token keyword">namespace</span> std<span class="token double-colon punctuation">::</span>placeholders<span class="token punctuation">;</span>
+</span></code><input type="hidden" value="using std::placeholders::_1;
+using namespace std::placeholders;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="关联容器"><a aria-hidden="true" tabindex="-1" href="#关联容器" class="anchor"><span class="icon icon-link"></span></a>关联容器</h2>
+        <h3 id="pair类型"><a aria-hidden="true" tabindex="-1" href="#pair类型" class="anchor"><span class="icon icon-link"></span></a>pair类型</h3>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&#x3C;utility></span></span>
+</span><span class="code-line line-number" line="2">pair<span class="token operator">&#x3C;</span>T1<span class="token punctuation">,</span> T2<span class="token operator">></span> anon<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="3">pair<span class="token operator">&#x3C;</span>T1<span class="token punctuation">,</span> T2<span class="token operator">></span> <span class="token function">anon</span><span class="token punctuation">(</span>v1<span class="token punctuation">,</span> v2<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="4"><span class="token function">make_pair</span><span class="token punctuation">(</span>v1<span class="token punctuation">,</span> v2<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 自动推理类型</span>
+</span><span class="code-line line-number" line="5">cout <span class="token operator">&#x3C;&#x3C;</span> anon<span class="token punctuation">.</span>first<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="6">cout <span class="token operator">&#x3C;&#x3C;</span> anon<span class="token punctuation">.</span>second<span class="token punctuation">;</span>
+</span></code><input type="hidden" value="#include<utility>
+pair<T1, T2> anon;
+pair<T1, T2> anon(v1, v2);
+make_pair(v1, v2); // 自动推理类型
+cout << anon.first;
+cout << anon.second;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>pair的默认构造函数会对数据成员进行初始化。</p>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#顺序容器" class="tocs-link">顺序容器</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#vector" class="tocs-link">vector</a></li>
+                <li><a href="#string" class="tocs-link">string</a></li>
+                <li><a href="#容器适配器" class="tocs-link">容器适配器</a></li>
+              </ol>
+            </li>
+            <li><a href="#泛型算法" class="tocs-link">泛型算法</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#lambda-表达式" class="tocs-link">lambda 表达式</a></li>
+                <li><a href="#参数传递" class="tocs-link">参数传递</a></li>
+              </ol>
+            </li>
+            <li><a href="#关联容器" class="tocs-link">关联容器</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#pair类型" class="tocs-link">pair类型</a></li>
+              </ol>
+            </li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>

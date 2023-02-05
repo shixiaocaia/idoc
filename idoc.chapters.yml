@@ -24,8 +24,17 @@
 - 01OperatingSystem/ch91.md: 虚拟内存
 - 01OperatingSystem/ch92.md: 问题
 
-- 00CPP/README.md: README
-- 00CPP: 总结
+- 00CPP/README.md: ↩️README
+- 00CPP: C++ primer
+- 00CPP/ch00.md: 语法问题
+- 00CPP/ch01.md: 指针&引用
+- 00CPP/ch02.md: 函数
+- 00CPP/ch10.md: 模板
+- 00CPP/ch15.md: 异常处理
+- 00CPP/ch16.md: 内存管理
+- 00CPP: STL
+- 00CPP/ch20.md: 标准库
+- 00CPP/ch21.md: 容器
 
 - 01ComputerNetwork/README.md: ↩️README
 - 01ComputerNetwork: 深入浅出计算机网络
