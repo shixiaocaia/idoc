@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>操作系统 iDoc</title>
-    <meta name="description" content="主要是阅读CSAPP的内容，笔记主要来源于书中，以及看了九曲阑干的视频，阅读整理了小林图解系统的内容。">
+    <title>iDoc</title>
+    <meta name="description" content="在C++11中可以取地址的、有名字的就是左值，反之，不能取地址的、没有名字的就是右值。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -26,11 +26,11 @@
             <li><a href="../index.html" target="" class="">Home</a></li>
             <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
             <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
-            <li><a href="index.html" target="" class="active">OperatingSystem</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
             <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
             <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
             <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
-            <li><a href="../00Other/index.html" target="" class="">Other</a></li>
+            <li><a href="index.html" target="" class="active">Other</a></li>
           </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
             </svg></a>
@@ -38,45 +38,17 @@
         </div>
       </article>
     </header>
-    <div class="warpper-content warpper sidebar">
+    <div class="warpper-content warpper sidebar notocs">
       <div class="sidebar-border">
         <aside class="sidebar" role="navigation">
           <div>
             <a href="index.html" class="">↩️README</a>
-            <label>计组</label>
-            <a href="ch51.html" class="">优化程序性能</a>
-            <a href="ch61.html" class="">存储器</a>
-            <label>进程</label>
-            <a href="ch81.html" class="">进程、线程、调度</a>
-            <a href="ch82.html" class="">问题</a>
-            <label>虚拟内存</label>
-            <a href="ch91.html" class="">虚拟内存</a>
-            <a href="ch92.html" class="">问题</a>
+            <a href="vim.html" class="">Vim</a>
+            <a href="git.html" class="">Git</a>
           </div>
         </aside>
       </div>
-      <markdown-style>
-        <h1 id="操作系统"><a aria-hidden="true" tabindex="-1" href="#操作系统" class="anchor"><span class="icon icon-link"></span></a>操作系统</h1>
-        <p>主要是阅读CSAPP的内容，笔记主要来源于书中，以及看了<a href="https://space.bilibili.com/354767108/">九曲阑干</a>的视频，阅读整理了<a href="https://xiaolincoding.com/os/">小林图解系统</a>的内容。</p>
-        <p>特别感谢小林Coding的开源内容。</p>
-        <h2 id="source"><a aria-hidden="true" tabindex="-1" href="#source" class="anchor"><span class="icon icon-link"></span></a>🎏Source</h2>
-        <p>⬜<a href="https://xiaolincoding.com/os/">小林图解系统</a></p>
-        <p>⬜<a href="https://space.bilibili.com/354767108/">九曲阑干</a></p>
-        <p>⬜<a href="https://space.bilibili.com/202224425/video">蒋炎岩</a></p>
-        <p>⬜操作系统 - 清华大学</p>
-        <p>⬜<a href="https://wdxtub.com/csapp/thin-csapp-0/2016/04/16/">不周山-读薄读厚CSAPP</a></p>
-        <h2 id="experiment"><a aria-hidden="true" tabindex="-1" href="#experiment" class="anchor"><span class="icon icon-link"></span></a>Experiment</h2>
-        <p>⬜<a href="https://www.lanqiao.cn/courses/115">蓝桥杯操作系统课程实验</a></p>
-        <p>⬜<a href="https://www.bilibili.com/video/BV1wW41167Av/?from=search&#x26;seid=2265296002609085661">清华大学操作系统课程实验</a></p>
-      </markdown-style>
-      <nav class="tocs">
-        <aside class="inner toc">
-          <ol class="tocs-list">
-            <li><a href="#source" class="tocs-link">🎏Source</a></li>
-            <li><a href="#experiment" class="tocs-link">Experiment</a></li>
-          </ol>
-        </aside>
-      </nav>
+      <markdown-style></markdown-style>
     </div>
     <script src="../js/demo-preview.js?v=1.21.13"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
