@@ -10,21 +10,22 @@
 
 <p>
     <label for="file">LC hot 100：</label>
-    <progress max="100" value="30"></progress>
+    <progress max="100" value="47"></progress>
 </p>
 <p>
     <label for="file">CSAPP：</label>
-    <progress max="43" value="20"></progress>
+    <progress max="43" value="30"></progress>
 </p>
 <p>
     <label for="file">MySQL：</label>
     <progress max="100" value="10"></progress>
 </p>
 <p>
-    <label for="file">HTTP/TCPIP：</label>
+    <label for="file">HTTP/TCP IP：</label>
     <progress max="100" value="10"></progress>
 </p>
 <p>
     <label for="file">Webserver：</label>
     <progress max="100" value="50"></progress>
 </p>
+
