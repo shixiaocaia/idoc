@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>定时器处理非活动连接-1 iDoc</title>
+    <title>定时器的设计 iDoc</title>
     <meta name="description" content="浏览器在与服务器建立连接后，如果长时间不交换数据，一直占用服务器端的文件描述符，导致资源的浪费。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
@@ -57,7 +57,7 @@
         </aside>
       </div>
       <markdown-style>
-        <h1 id="定时器处理非活动连接-1"><a aria-hidden="true" tabindex="-1" href="#定时器处理非活动连接-1" class="anchor"><span class="icon icon-link"></span></a>定时器处理非活动连接-1</h1>
+        <h1 id="定时器的设计"><a aria-hidden="true" tabindex="-1" href="#定时器的设计" class="anchor"><span class="icon icon-link"></span></a>定时器的设计</h1>
         <h2 id="整体思路"><a aria-hidden="true" tabindex="-1" href="#整体思路" class="anchor"><span class="icon icon-link"></span></a>整体思路</h2>
         <p>浏览器在与服务器建立连接后，如果长时间不交换数据，一直占用服务器端的文件描述符，导致资源的浪费。</p>
         <p>在本项目中，服务器主循环为每一个连接创建一个定时器，并对每个连接进行定时。另外，利用升序时间链表容器将所有定时器串联起来，若主循环接收到定时通知，则在链表中依次执行定时任务。</p>
