@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>身边的计网 iDoc</title>
-    <meta name="description" content="网络层的主要任务就是将分组从源主机经过多个网络和多段链路传输到目的主机，可以将该任务划分为分组转发和路由选择两种重要的功能，向上提供面向连接的虚电路服务，无连接的数据报服务。">
+    <title>网络层概述 iDoc</title>
+    <meta name="description" content="网络层位于OSI体系结构的第三层，主要任务就是将分组从源主机经过多个网络和多段链路传输到目的主机，可以将该任务划分为分组转发和路由选择两种重要的功能，向上提供面向连接的虚电路服务，无连接的数据报服务。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -77,9 +77,9 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </aside>
       </div>
       <markdown-style>
-        <h2 id="网络层概述"><a aria-hidden="true" tabindex="-1" href="#网络层概述" class="anchor"><span class="icon icon-link"></span></a>网络层概述</h2>
-        <p>网络层的主要任务就是将分组从源主机经过多个网络和多段链路传输到目的主机，可以将该任务划分为分组转发和路由选择两种重要的功能，向上提供面向连接的虚电路服务，无连接的数据报服务。</p>
-        <p>位于OSI体系结构的第三层。</p>
+        <h1 id="网络层概述"><a aria-hidden="true" tabindex="-1" href="#网络层概述" class="anchor"><span class="icon icon-link"></span></a>网络层概述</h1>
+        <h2 id="提供服务"><a aria-hidden="true" tabindex="-1" href="#提供服务" class="anchor"><span class="icon icon-link"></span></a>提供服务</h2>
+        <p>网络层位于OSI体系结构的第三层，主要任务就是将分组从源主机经过多个网络和多段链路传输到目的主机，可以将该任务划分为<strong>分组转发</strong>和<strong>路由选择</strong>两种重要的功能，向上提供面向连接的<strong>虚电路</strong>服务，无连接的<strong>数据报</strong>服务。</p>
         <h3 id="分组转发"><a aria-hidden="true" tabindex="-1" href="#分组转发" class="anchor"><span class="icon icon-link"></span></a>分组转发</h3>
         <p>当路由器收到某个接口所连接的链路上收到一个分组之后，将分组从自己其他适当的接口转发给下一跳路由器或者目的主机。</p>
         <p>每个路由器会构建一个路由表，在此基础上维护成一个转发表，根据分组首部的转发标识在转发表中查询。</p>
@@ -93,24 +93,20 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </ol>
         <h3 id="虚电路服务"><a aria-hidden="true" tabindex="-1" href="#虚电路服务" class="anchor"><span class="icon icon-link"></span></a>虚电路服务</h3>
         <img src="http://pic.shixiaocaia.fun/202301301043503.png" alt="image-20221018092941879" style="zoom:50%;">
-        <blockquote>
-          <ol>
-            <li>核心思想是“可靠通信应由网络自身来保证”。</li>
-            <li>必须首先建立网络层连接一虚电路，以保证通信双方所需的一切网络资源。是一条逻辑链路。</li>
-            <li>通信双方沿着已建立的虚电路发送分组。</li>
-            <li>这种通信方式如果再使用可靠传输的网络协议，就可使所发送的分组最终正确（无差错按序到达、不丢失、不重复）到达接收方。</li>
-          </ol>
-        </blockquote>
+        <ol>
+          <li>核心思想是“可靠通信应由网络自身来保证”。</li>
+          <li>必须首先建立网络层连接一虚电路，以保证通信双方所需的一切网络资源，是一条逻辑链路。</li>
+          <li>通信双方沿着已建立的虚电路发送分组。</li>
+          <li>如果再使用可靠传输的网络协议，就可使所发送的分组最终正确（无差错按序到达、不丢失、不重复）到达接收方。</li>
+        </ol>
         <h3 id="无连接的数据报服务"><a aria-hidden="true" tabindex="-1" href="#无连接的数据报服务" class="anchor"><span class="icon icon-link"></span></a>无连接的数据报服务</h3>
         <img src="http://pic.shixiaocaia.fun/202301301043388.png" alt="image-20221018094911308" style="zoom:50%;">
-        <blockquote>
-          <ol>
-            <li>核心思想是 可靠通信应由用户主机来保证</li>
-            <li>不需要建立网络层连接</li>
-            <li><strong>每个分组可走不同的路径 因此，每个分组的首部都必须携带目的主机的完整地址。</strong></li>
-            <li>通信结束后，没有需要释放的连接</li>
-          </ol>
-        </blockquote>
+        <ol>
+          <li>核心思想是可靠通信应由用户主机来保证</li>
+          <li>不需要建立网络层连接</li>
+          <li><strong>每个分组可走不同的路径，因此每个分组的首部都必须携带目的主机的完整地址</strong></li>
+          <li>通信结束后，没有需要释放的连接</li>
+        </ol>
         <p>由于网络自身不提供端到端的可靠传输服务，这就使得网络中的路由器可以做得比较简单，大大降低了网络造价。</p>
         <h2 id="网际协议ip"><a aria-hidden="true" tabindex="-1" href="#网际协议ip" class="anchor"><span class="icon icon-link"></span></a>网际协议（IP）</h2>
         <p>网际协议（Internet Protocol，IP）是TCP/IP体系结构网际层中的核心协议。</p>
@@ -126,8 +122,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <h3 id="ipv4地址的划分"><a aria-hidden="true" tabindex="-1" href="#ipv4地址的划分" class="anchor"><span class="icon icon-link"></span></a>IPv4地址的划分</h3>
         <p>IPv4地址是给因特网（Internet）上的每一个主机（或路由器）的每一个接口分配的一个在全世界范围内唯一的32比特的标识符。</p>
         <blockquote>
-          <p>网络号：标志主机（或路由器）的接口所连接到的网络</p>
-          <p>主机号：标志主机（或路由器）的接口</p>
+          <p>网络号：标志主机（或路由器）的接口所连接到的网络段</p>
+          <p>主机号：标志主机（或路由器）的接口，用来区分设备</p>
         </blockquote>
         <img src="http://pic.shixiaocaia.fun/202301301043432.png" alt="image-20221019143705261" style="zoom:50%;">
         <img src="http://pic.shixiaocaia.fun/202301301043090.png" alt="image-20221019143809984" style="zoom:50%;">
@@ -145,12 +141,10 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p>尽管用划分子网的方法缓解了一部分浪费，但是C类网络中主机号过小还是造成了极大的浪费。</p>
         <p>因此有了无分类域间路由选择（Classless Inter-Domain Routing，CIDR ）。</p>
         <p>CIDR将地址划分为网络前缀，主机号，但是网络前缀不定长，配合子网掩码可以得到网络前缀和子网号的长度区别。</p>
-        <p><strong>路由聚合</strong></p>
-        <p>通过无分类编址方式，在同一个局域网下面，路由器的路由表可以利用CIDR地址块来查找目的地址。</p>
-        <p>可以找到最长的公共前缀，得到聚合后的CIDR地址块，这样得到的地址块更小，路由更加具体。</p>
-        <p><strong>子网掩码划分</strong></p>
-        <p>有利于子网的划分，避免地址的浪费。</p>
-        <h3 id="ipv4地址和mac地址"><a aria-hidden="true" tabindex="-1" href="#ipv4地址和mac地址" class="anchor"><span class="icon icon-link"></span></a>IPv4地址和MAC地址</h3>
+        <blockquote>
+          <p>现代的IP地址划分，采用的是CIDR方式，并将IP地址分为公有IP和私有IP地址，在局域网和广域网间使用。</p>
+        </blockquote>
+        <h2 id="ipv4地址和mac地址"><a aria-hidden="true" tabindex="-1" href="#ipv4地址和mac地址" class="anchor"><span class="icon icon-link"></span></a>IPv4地址和MAC地址</h2>
         <p><strong>封装的位置</strong></p>
         <img src="http://pic.shixiaocaia.fun/202301301043484.png" alt="image-20221020144911905" style="zoom:50%;">
         <blockquote>
@@ -159,19 +153,20 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </blockquote>
         <p><strong>数据报传送过程中IPv4地址与MAC地址的变化情况</strong></p>
         <img src="http://pic.shixiaocaia.fun/202301301043560.png" alt="image-20221020145323362" style="zoom:50%;">
+        <p>始终以IP地址作为网络中发送接受路径判断的方向标。</p>
+        <p>如果仅仅使用MAC地址进行通信，必须考虑以下问题：</p>
         <blockquote>
-          <p>始终以IP地址作为网络中发送接受路径判断的方向标。</p>
-          <p>如果仅仅使用MAC地址进行通信，必须考虑以下问题：</p>
           <ol>
             <li>每台路由器的路由表必须记录因特网上所有主机和路由器各个接口的MAC地址。</li>
             <li>手动给各个路由配置路由表不可能，通过相互交换路由信息，由于MAC接口的数量巨大，从而会占用大量的资源。</li>
             <li>不同设备的MAC地址不同，也会造成极大的解析任务。</li>
           </ol>
         </blockquote>
-        <p>实际当中，我们使用IP地址进行寻址，只需要记录部分网络的IP地址，路由器收到IP数据报后，基于路由表进行转发，不用记录大量的MAC地址。</p>
-        <p>当同时也要考虑如何根据IP地址，寻找对应的MAC地址，否则数据帧无法进行封装。</p>
-        <h3 id="地址解析协议-arp"><a aria-hidden="true" tabindex="-1" href="#地址解析协议-arp" class="anchor"><span class="icon icon-link"></span></a>地址解析协议 ARP</h3>
-        <p>每一台主机会维护一个ARP高速缓存表，记录有IP地址对应的MAC地址对应关系。每一条记录分为动态类型和静态类型。</p>
+        <p>因此实际当中，我们使用IP地址进行寻址，只需要记录部分网络的IP地址，路由器收到IP数据报后，基于路由表进行转发，不用记录大量的MAC地址。</p>
+        <p>但同时也要考虑如何根据IP地址，寻找对应的MAC地址，否则数据帧无法进行封装，如此引出了<strong>ARP协议</strong>。</p>
+        <h2 id="地址解析协议-arp"><a aria-hidden="true" tabindex="-1" href="#地址解析协议-arp" class="anchor"><span class="icon icon-link"></span></a>地址解析协议 ARP</h2>
+        <p>每一台主机会维护一个ARP高速缓存表，记录IP地址与MAC地址对应关系。</p>
+        <p>每一条记录分为动态类型和静态类型。</p>
         <blockquote>
           <p>动态类型：是主机通过ARP协议自动获取的，有一定的生命周期，因为IP地址和MAC地址的对应关系会改变。</p>
           <p>静态类型：用户或者网络维护人员手工配置的，生命周期也相应不同，重启后仍有效。</p>
@@ -185,42 +180,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <li>各个主机收到后判断是不是自己需要的。</li>
           </ol>
         </blockquote>
-        <p>注意：ARP协议时解决同一个局域网上的设备IP地址和MAC地址映射问题。且ARP协议可能会有一些网络安全问题，没有相应的安全验证机制。</p>
-        <h3 id="ip数据包的发送和转发过程"><a aria-hidden="true" tabindex="-1" href="#ip数据包的发送和转发过程" class="anchor"><span class="icon icon-link"></span></a>IP数据包的发送和转发过程</h3>
-        <img src="http://pic.shixiaocaia.fun/202301301043654.png" alt="image-20221021140631281" style="zoom:50%;">
-        <p>如上图一个小型的互联网的网络拓扑结构。</p>
-        <blockquote>
-          <ol>
-            <li>路由器中的0，1两个接口，连接了两个以太网。</li>
-            <li>根据CIDR给两个以太网分配了地址块，也就是网络号。</li>
-            <li>路由器0，1接口的IP地址作为了两个以太网的默认网关。</li>
-          </ol>
-        </blockquote>
-        <p>网关：是一个网络通向其他网络的IP地址。</p>
-        <p>IP数据包的发送和转发主要包含：主机发送IP数据报，路由器转发IP数据报。</p>
-        <p><strong>直接交付</strong></p>
-        <p>同一个网络中的主机之间可以直接通信。</p>
-        <p>源主机通过ARP协议获取到同一网络中的目的主机的MAC地址，就可以把IP数据报封装成帧后发送给目的主机。</p>
-        <blockquote>
-          <p>怎么判断是同一个网络：</p>
-          <p>将IP地址与子网掩码相与就得到了所在以太网的网络地址，对比源IP地址和目的IP地址。</p>
-        </blockquote>
-        <p><strong>间接交付</strong></p>
-        <p>不同网络中的主机之间通信，需要通过默认网关（路由器）来中转。</p>
-        <p>假设路由器收到了正确的IP数据报，根据IP数据报的首部中的IP地址在自己的路由表中进行查询。</p>
-        <blockquote>
-          <p>查询到了，对应转发。</p>
-          <p>查询不到，就丢弃，回发主机错误报告。</p>
-        </blockquote>
-        <p>简单考虑：</p>
-        <p>路由器的路由表应该至少包含了所连接网络的路由条目，根据CIDR分配的的路由器接口的IP地址，结合子网掩码，可以推测出接口所连接的网络地址。</p>
-        <p>IP数据报到达路由器时，通过将目的IP地址与地址掩码相与判断对应的网络地址。</p>
-        <p>找到对应网络地址的接口进行转发，并且路由器通过ARP协议获取到同一个网络中的目的主机的MAC地址，进行转发。</p>
-        <blockquote>
-          <p>如果路由器收到的是广播地址的IP数据报，不会对其转发，可以用来隔离广播域，避免广播风暴，造成资源浪费。</p>
-          <p>CIDR方式的广播地址时，主机号全为1。</p>
-        </blockquote>
-        <h3 id="ip数据报"><a aria-hidden="true" tabindex="-1" href="#ip数据报" class="anchor"><span class="icon icon-link"></span></a>IP数据报</h3>
+        <p>注意：虽然ARP协议时解决同一个局域网上的设备IP地址和MAC地址映射问题，ARP协议可能会有一些网络安全问题，没有相应的安全验证机制。</p>
+        <h2 id="ip数据报"><a aria-hidden="true" tabindex="-1" href="#ip数据报" class="anchor"><span class="icon icon-link"></span></a>IP数据报</h2>
         <img src="http://pic.shixiaocaia.fun/202301301043493.png" alt="image-20221022160042422" style="zoom:50%;">
         <p><strong>首部长度</strong></p>
         <p>用来表示IPv4数据报的首部长度（固定部分+可变部分)。</p>
@@ -259,6 +220,40 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <blockquote>
           <p>由于网际层并不向其高层提供可靠传输的服务，并且计算首部检验和是一项耗时的操作，因此在IPv6中，路由器不再计算首部检验和，从而更快转发IP数据报。</p>
         </blockquote>
+        <h2 id="ip数据包的发送和转发过程"><a aria-hidden="true" tabindex="-1" href="#ip数据包的发送和转发过程" class="anchor"><span class="icon icon-link"></span></a>IP数据包的发送和转发过程</h2>
+        <img src="http://pic.shixiaocaia.fun/202301301043654.png" alt="image-20221021140631281" style="zoom:50%;">
+        <p>如上图一个小型的互联网的网络拓扑结构。</p>
+        <blockquote>
+          <ol>
+            <li>路由器中的0，1两个接口，连接了两个以太网。</li>
+            <li>根据CIDR给两个以太网分配了地址块，也就是网络号。</li>
+            <li>路由器0，1接口的IP地址作为了两个以太网的默认网关。</li>
+          </ol>
+        </blockquote>
+        <p>网关：是一个网络通向其他网络的IP地址。</p>
+        <p>IP数据包的发送和转发主要包含：主机发送IP数据报，路由器转发IP数据报。</p>
+        <p><strong>直接交付</strong></p>
+        <p>同一个网络中的主机之间可以直接通信。</p>
+        <p>源主机通过ARP协议获取到同一网络中的目的主机的MAC地址，就可以把IP数据报封装成帧后发送给目的主机。</p>
+        <blockquote>
+          <p>怎么判断是同一个网络：</p>
+          <p>将IP地址与子网掩码相与就得到了所在以太网的网络地址，对比源IP地址和目的IP地址。</p>
+        </blockquote>
+        <p><strong>间接交付</strong></p>
+        <p>不同网络中的主机之间通信，需要通过默认网关（路由器）来中转。</p>
+        <p>假设路由器收到了正确的IP数据报，根据IP数据报的首部中的IP地址在自己的路由表中进行查询。</p>
+        <blockquote>
+          <p>查询到了，对应转发。</p>
+          <p>查询不到，就丢弃，回发主机错误报告。</p>
+        </blockquote>
+        <p>简单考虑：</p>
+        <p>路由器的路由表应该至少包含了所连接网络的路由条目，根据CIDR分配的的路由器接口的IP地址，结合子网掩码，可以推测出接口所连接的网络地址。</p>
+        <p>IP数据报到达路由器时，通过将目的IP地址与地址掩码相与判断对应的网络地址。</p>
+        <p>找到对应网络地址的接口进行转发，并且路由器通过ARP协议获取到同一个网络中的目的主机的MAC地址，进行转发。</p>
+        <blockquote>
+          <p>如果路由器收到的是广播地址的IP数据报，不会对其转发，可以用来隔离广播域，避免广播风暴，造成资源浪费。</p>
+          <p>CIDR方式的广播地址时，主机号全为1。</p>
+        </blockquote>
         <h2 id="静态路由转发"><a aria-hidden="true" tabindex="-1" href="#静态路由转发" class="anchor"><span class="icon icon-link"></span></a>静态路由转发</h2>
         <p>静态路由配置是指用户或网络运维人员使用路由器的相关命令给路由器人工配置路由表。</p>
         <p><strong>直连路由和非直连路由</strong></p>
@@ -279,13 +274,11 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p><strong>RIP距离</strong></p>
         <p>RIP要求自治系统AS内的每一个路由器，都要维护从它自己到AS内其他每一个网络的距离记录。这是一组距离，称为距离向量 （Distance-Vector，D-V）。</p>
         <p>RIP使用跳数 （Hopcount）作为度量 （Metric） 来衡量到达自的网络的距离。</p>
-        <pre><code class="code-highlight"><span class="code-line line-number" line="1">1. RIP将路由器到直连网络的距离定义为1。
-</span><span class="code-line line-number" line="2">2. RIP将路由器到非直连网络的距离定义为所经过的路由器数加1。
-</span><span class="code-line line-number" line="3">3. RIP允许一条路径最多只能包含15个路由器， 距离等于16时相当于不可达。因此RIP只适用于小型互联网。
-</span></code><input type="hidden" value="1. RIP将路由器到直连网络的距离定义为1。
-2. RIP将路由器到非直连网络的距离定义为所经过的路由器数加1。
-3. RIP允许一条路径最多只能包含15个路由器， 距离等于16时相当于不可达。因此RIP只适用于小型互联网。
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ol>
+          <li>RIP将路由器到直连网络的距离定义为1。</li>
+          <li>RIP将路由器到非直连网络的距离定义为所经过的路由器数加1。</li>
+          <li>RIP允许一条路径最多只能包含15个路由器， 距离等于16时相当于不可达。因此RIP只适用于小型互联网。</li>
+        </ol>
         <p>
           <img src="http://pic.shixiaocaia.fun/202301301044450.png" alt="image-20221023155051952">
         </p>
@@ -421,13 +414,29 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <h3 id="询问报文"><a aria-hidden="true" tabindex="-1" href="#询问报文" class="anchor"><span class="icon icon-link"></span></a>询问报文</h3>
         <p>用来向主机或路由器询问情况。</p>
         <p><strong>回送请求和回答</strong></p>
-        <p>由主机或路由器向一个特定的目的主机或路由器发出。</p>
-        <p>收到此报文的主机或路由器必须给发送该报文的源主机或路由器发送ICMP回送回答报文。</p>
-        <p>这种询问报文用来<strong>测试目的站是否可达以及了解其有关状态</strong>。</p>
+        <ul>
+          <li>
+            <p>由主机或路由器向一个特定的目的主机或路由器发出。</p>
+          </li>
+          <li>
+            <p>收到此报文的主机或路由器必须给发送该报文的源主机或路由器发送ICMP回送回答报文。</p>
+          </li>
+          <li>
+            <p>这种询问报文用来<strong>测试目的站是否可达以及了解其有关状态</strong>。</p>
+          </li>
+        </ul>
         <p><strong>时间戳请求和回答</strong></p>
-        <p>用来请求某个主机或路由器回答当前的日期和时间。</p>
-        <p>在ICMP时间戳回答报文中有一个32比特的字段，其中写入的整数代表从1900年1月1日起到当前时刻一共有多少秒。</p>
-        <p>这种询问报文用来进行<strong>时钟同步和测量时间</strong>。</p>
+        <ul>
+          <li>
+            <p>用来请求某个主机或路由器回答当前的日期和时间。</p>
+          </li>
+          <li>
+            <p>在ICMP时间戳回答报文中有一个32比特的字段，其中写入的整数代表从1900年1月1日起到当前时刻一共有多少秒。</p>
+          </li>
+          <li>
+            <p>这种询问报文用来进行<strong>时钟同步和测量时间</strong>。</p>
+          </li>
+        </ul>
         <h3 id="应用-分组网间探测"><a aria-hidden="true" tabindex="-1" href="#应用-分组网间探测" class="anchor"><span class="icon icon-link"></span></a>应用-分组网间探测</h3>
         <p>分组网间探测PING（Packet InterNet Groper，PING），用来测试主机或路由器之间的连通性。</p>
         <ul>
@@ -442,14 +451,13 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <p>时间中出现"*"号, 表示在超时时间内没有收到路由器发来的响应报文.</p>
         </blockquote>
         <p>通过不断发送ICMP回送请求报文,到达不同路由器时TTL减少,直到被抛弃发送ICMP差错报告报文,这样就知道经过路由器的IP地址,再发送TTL更长的报文,查看经过的路由器.</p>
-        <h2 id="虚拟专用网和网络地址转换"><a aria-hidden="true" tabindex="-1" href="#虚拟专用网和网络地址转换" class="anchor"><span class="icon icon-link"></span></a>虚拟专用网和网络地址转换</h2>
-        <h3 id="虚拟专用网"><a aria-hidden="true" tabindex="-1" href="#虚拟专用网" class="anchor"><span class="icon icon-link"></span></a>虚拟专用网</h3>
+        <h2 id="虚拟专用网"><a aria-hidden="true" tabindex="-1" href="#虚拟专用网" class="anchor"><span class="icon icon-link"></span></a>虚拟专用网</h2>
         <p>虚拟专用网（Virtual Private Network，VPN）。使得在不同地点的专用网进行通信。又称为IP隧道技术，远程接入VPN。</p>
         <blockquote>
           <p>租用电信公司的通线线路成本高，简单。</p>
           <p>利用公网的因特网作为通信载体。称为虚拟局域网。</p>
         </blockquote>
-        <p>对于公司如果专用网使用TCP/IP协议栈，给每个主机分配IP地址，但是为了不直接将信息暴露在互联网上，分配的是在机构内部有效，称为专用地址（Private Address）。</p>
+        <p>对于公司如果专用网使用TCP/IP协议栈，给每个主机分配IP地址，但是为了不直接将信息暴露在互联网上，分配的IP地址是仅在机构内部有效，称为专用地址（Private Address）。</p>
         <blockquote>
           <p>
             10.0.0.0~10.255.255.255 （CIDR地址块10/8）
@@ -463,13 +471,13 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <p>VPN的技术对于公司而言，公司使用的是Private Address，在局域网内主机可以直接通信。</p>
           <p>那我在不同区域要进行通信，为了避免计算机信息暴露在互联网中。</p>
           <p>使用VPN技术，将数据报伪装成正常使用的IP数据报，也就是虚拟的意思。在原有的基础上，又套上了接受和发送的路由器IP地址作为源地址和目的地址。</p>
-          <p>接收收到后去除这些，再去解析原来的数据报的地址（专有地址）。</p>
+          <p>接收方收到后去除这些，再去解析原来的数据报的地址（专有地址）。</p>
           <p>又称为IP-in-IP IP隧道技术。</p>
         </blockquote>
-        <h3 id="网络地址转换"><a aria-hidden="true" tabindex="-1" href="#网络地址转换" class="anchor"><span class="icon icon-link"></span></a>网络地址转换</h3>
+        <h2 id="网络地址转换"><a aria-hidden="true" tabindex="-1" href="#网络地址转换" class="anchor"><span class="icon icon-link"></span></a>网络地址转换</h2>
         <p>网络地址转换（Network Address Translation，NAT）技术于1994年被提出，用来缓解IPv4地址空间即将耗尽的问题。</p>
         <p>NAT能使大量使用内部专用地址的专用网络用户共享少量外部全球地址来访问因特网上的主机和资源。</p>
-        <p>这种方法需要在专用网络连接到因特网的路由器上安装NAT软件。装有NAT软件的路由器称为NAT路由器，它至少要有一个有效的外部全球地址IPG。这样，所有使用内部专用地址的主机在和外部因特网通信时，都要在NAT路由器上将其内部专用地址转换成IPG。</p>
+        <p>这种方法需要在专用网络连接到因特网的<strong>路由器</strong>上安装NAT软件。装有NAT软件的路由器称为NAT路由器，它至少要有一个有效的外部全球地址IPG。这样，所有使用内部专用地址的主机在和外部因特网通信时，都要在NAT路由器上将其内部专用地址转换成IPG。</p>
         <blockquote>
           <p>简单上看就是将专用地址转换为NAT路由器上的一个公网IP地址，会在收发时根据NAT转换表进行转表</p>
         </blockquote>
@@ -517,7 +525,6 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </ol>
         <p>要建立广播转发树，可以使用洪泛（Flooding）法。</p>
         <blockquote>
-          <p>[!NOTE]</p>
           <p>如果网络种存在环路，洪泛法会产生严重的问题，广播分组的一个副本在整个环路种永久兜圈。</p>
         </blockquote>
         <p>使用RPM算法，可以避免广播分组在环路中兜圈。</p>
@@ -534,11 +541,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <p>实际上因特网上的IP多播还没有得到广泛的应用，要改变已经成功、广泛应用的网络层协议是一件困难的事。</p>
         </blockquote>
         <h2 id="移动ip技术"><a aria-hidden="true" tabindex="-1" href="#移动ip技术" class="anchor"><span class="icon icon-link"></span></a>移动IP技术</h2>
-        <blockquote>
-          <p>[!NOTE]</p>
-          <p>尝试一个问题，我一开始接入一个网络，分配一个默认的IP地址，当我切换到其他网络时，如果重新分配一个IP地址，这样会导致之前的通信中断。</p>
-          <p>为此引入了移动IP地址，使得移动主机在各网络之间漫游时，仍然能够保持其原来的IP地址不变。</p>
-        </blockquote>
+        <p>尝试一个问题，我一开始接入一个网络，分配一个默认的IP地址，当我切换到其他网络时，如果重新分配一个IP地址，这样会导致之前的通信中断。</p>
+        <p>为此引入了移动IP地址，使得移动主机在各网络之间漫游时，仍然能够保持其原来的IP地址不变。</p>
         <h3 id="基本概念"><a aria-hidden="true" tabindex="-1" href="#基本概念" class="anchor"><span class="icon icon-link"></span></a>基本概念</h3>
         <ol>
           <li>
@@ -571,7 +575,6 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p>固定主机B会先给归属网络发送IP数据报，归属网络的路由器收到该数据报后重新封装一封IP数据报发送给身处外地网络的移动主机。</p>
         <p>外地网络的路由器收到后会进行解析，查询目的地址对应的MAC地址封装成帧进行转发。</p>
         <blockquote>
-          <p>[!NOTE]</p>
           <p>归属代理会采用ARP代理技术，以自己的MAC地址接受发送过来的ARP请求，来接受分组。</p>
           <p>转交地址是外地代理的地址而不是移动主机的地址，外地代理的移动主机共享同一个转交地址。</p>
         </blockquote>
@@ -584,20 +587,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <h3 id="ipv4的缺陷"><a aria-hidden="true" tabindex="-1" href="#ipv4的缺陷" class="anchor"><span class="icon icon-link"></span></a>IPv4的缺陷</h3>
         <p>早期设计没有考虑协议的广泛使用，现如今IPv4地址已经分配完。</p>
         <p>目前通过NAT技术延续IPv4的使用。</p>
-        <h3 id="ipv6的优点"><a aria-hidden="true" tabindex="-1" href="#ipv6的优点" class="anchor"><span class="icon icon-link"></span></a>IPv6的优点</h3>
         <h3 id="数据报首部格式"><a aria-hidden="true" tabindex="-1" href="#数据报首部格式" class="anchor"><span class="icon icon-link"></span></a>数据报首部格式</h3>
         <img src="http://pic.shixiaocaia.fun/202301301044694.png" alt="image-20221104154142071" style="zoom:67%;">
-        <p><strong>与IPv4的区别</strong></p>
-        <ul>
-          <li>取消了首部长度字段，因为IPv6数据报的首部长度是固定的40字节。</li>
-          <li>取消了区分服务（服务类型）字段，因为IPv6数据报首部中的通信量类和流标号字段实现了区分服务字段的功能。</li>
-          <li>取消了总长度字段，改用有效载荷长度字段。这是因为IPv6数据报的首部长度是固定的40字节，只有其后面的有效载荷长度是可变的。</li>
-          <li>取消了标识、标志和片偏移字段，因为这些功能已包含在IPv6数据报的分片扩展首部中。</li>
-          <li>把生存时间TTL字段改称为跳数限制字段，这样名称与作用更加一致。</li>
-          <li>取消了协议字段，改用下一个首部字段。</li>
-          <li>取消了首部检验和字段，这样可以加快路由器处理IPv6数据报的速度。</li>
-          <li>取消了选项字段，改用扩展首部来实现选项功能。</li>
-        </ul>
         <p><strong>各部分功能</strong></p>
         <ul>
           <li>版本字段：长度为4比特，用来表示IP协议的版本。对于IPv6该字段的值是6。</li>
@@ -613,7 +604,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li>跳数限制字段：长度为8比特。该字段用来防止IPv6数据报在因特网中永久兜圈。</li>
         </ul>
         <h3 id="ipv6地址"><a aria-hidden="true" tabindex="-1" href="#ipv6地址" class="anchor"><span class="icon icon-link"></span></a>IPv6地址</h3>
-        <p>在IPv6地址的冒号十六进制记法的基础上，再使用“左侧零”省略和“连续零”压缩，可使IPv6地址的表示更加简洁。</p>
+        <p>在IPv6地址的冒号十六进制记法的基础上，再使用 “ 左侧零 ” 省略和 “ 连续零 ” 压缩，可使IPv6地址的表示更加简洁。</p>
         <ul>
           <li>“左侧零”省略是指两个冒号间的十六进制数中最前面的一串0可以省略不写。</li>
           <li>“连续零”压缩是指一连串连续的0可以用一对冒号取代。<strong>只能用一次。</strong></li>
@@ -629,37 +620,11 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p>本地链路单播地址：最高10比特为1111111010的地址，可记为FE80::/10。</p>
         <p>全球单播地址：除了上述地址以外的地址。</p>
         <img src="http://pic.shixiaocaia.fun/202301301045251.png" alt="image-20221104160440624" style="zoom:67%;">
-        <h3 id="ipv4向ipv6过渡"><a aria-hidden="true" tabindex="-1" href="#ipv4向ipv6过渡" class="anchor"><span class="icon icon-link"></span></a>IPv4向IPv6过渡</h3>
-        <p><strong>使用双协议栈</strong></p>
-        <p>是指在完全过渡到IPv6之前，使一部分主机或路由器装有IPv4和IPv6两套协议栈。双协议栈主机或者路由器既可以和IPv6系统通信，又可以和IPv4系统通信。</p>
-        <p>双协议栈主机或路由器记为IPv6/IPv4，表明它具有一个IPv6地址和一个IPv4地址。</p>
-        <p><strong>使用隧道技术</strong></p>
-        <ol>
-          <li>
-            当1Pv6数据报要进入IPv4网络时，将IPv6数据报重新封装成IPv4数据报，即整个IPv6数据报成为IPv4数
-            据报的数据载荷。
-          </li>
-          <li>封装有IPv6数据报的IPv4数据报在IPv4网络中传输。</li>
-          <li>当IPv4数据报要离开IPv4网络时，再将其数据载荷(即原来的IPv6数据报)取出并转发到IPv6网络。</li>
-        </ol>
-        <h3 id="icmpv6"><a aria-hidden="true" tabindex="-1" href="#icmpv6" class="anchor"><span class="icon icon-link"></span></a>ICMPv6</h3>
-        <p>由于IPv6与IPv4一样，都不确保数据报的可靠交付，因此IPv6也需要使用网际控制报文协议ICMP来向发送IPv6数据报的源主机反馈一些差错信息，相应的ICMP版本为ICMPv6。</p>
-        <h2 id="sdn"><a aria-hidden="true" tabindex="-1" href="#sdn" class="anchor"><span class="icon icon-link"></span></a>SDN</h2>
-        <p>软件定义网络（Software Defined Network，SDN）。SDN最初只是学术界讨论的一种新型网络体系结构。</p>
-        <p>常用的路由器主要是作为传递主机间的分组以及路由信息的交换，控制层面和数据层面在同一个设备上。</p>
-        <p>而在SDN下，控制层面和数据层面分离，在控制层面中，有一个在逻辑上集中的远程控制器。</p>
-        <p>SDN这种新型网络体系结构的<strong>核心思想</strong>：把网络的控制层面和数据层面分离，而让控制层面利用软件来控制数据层面中的许多设备。</p>
-        <h3 id="openflow协议"><a aria-hidden="true" tabindex="-1" href="#openflow协议" class="anchor"><span class="icon icon-link"></span></a>OpenFlow协议</h3>
-        <ol>
-          <li>OpenFlow协议是一个得到高度认可的标准，在讨论SDN时往往与OpenFlow-一起讨论。</li>
-          <li>OpenFlow协议可被看成是SDN体系结构中控制层面与数据层面之间的通信接口。</li>
-          <li>OpenFlow协议使得控制层面的控制器可以对数据层面中的物理设备进行直接访问和控制。</li>
-        </ol>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#网络层概述" class="tocs-link">网络层概述</a>
+            <li><a href="#提供服务" class="tocs-link">提供服务</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#分组转发" class="tocs-link">分组转发</a></li>
                 <li><a href="#路由选择" class="tocs-link">路由选择</a></li>
@@ -673,12 +638,12 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                 <li><a href="#分类编址" class="tocs-link">分类编址</a></li>
                 <li><a href="#划分子网" class="tocs-link">划分子网</a></li>
                 <li><a href="#无分类编址" class="tocs-link">无分类编址</a></li>
-                <li><a href="#ipv4地址和mac地址" class="tocs-link">IPv4地址和MAC地址</a></li>
-                <li><a href="#地址解析协议-arp" class="tocs-link">地址解析协议 ARP</a></li>
-                <li><a href="#ip数据包的发送和转发过程" class="tocs-link">IP数据包的发送和转发过程</a></li>
-                <li><a href="#ip数据报" class="tocs-link">IP数据报</a></li>
               </ol>
             </li>
+            <li><a href="#ipv4地址和mac地址" class="tocs-link">IPv4地址和MAC地址</a></li>
+            <li><a href="#地址解析协议-arp" class="tocs-link">地址解析协议 ARP</a></li>
+            <li><a href="#ip数据报" class="tocs-link">IP数据报</a></li>
+            <li><a href="#ip数据包的发送和转发过程" class="tocs-link">IP数据包的发送和转发过程</a></li>
             <li><a href="#静态路由转发" class="tocs-link">静态路由转发</a></li>
             <li><a href="#因特网的路由选择协议" class="tocs-link">因特网的路由选择协议</a>
               <ol class="tocs-list is-collapsed">
@@ -695,12 +660,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                 <li><a href="#应用-跟踪路由" class="tocs-link">应用-跟踪路由</a></li>
               </ol>
             </li>
-            <li><a href="#虚拟专用网和网络地址转换" class="tocs-link">虚拟专用网和网络地址转换</a>
-              <ol class="tocs-list is-collapsed">
-                <li><a href="#虚拟专用网" class="tocs-link">虚拟专用网</a></li>
-                <li><a href="#网络地址转换" class="tocs-link">网络地址转换</a></li>
-              </ol>
-            </li>
+            <li><a href="#虚拟专用网" class="tocs-link">虚拟专用网</a></li>
+            <li><a href="#网络地址转换" class="tocs-link">网络地址转换</a></li>
             <li><a href="#ip多播" class="tocs-link">IP多播</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#ip多播地址与多播数据报" class="tocs-link">IP多播地址与多播数据报</a></li>
@@ -720,17 +681,9 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <li><a href="#ipv6" class="tocs-link">IPv6</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#ipv4的缺陷" class="tocs-link">IPv4的缺陷</a></li>
-                <li><a href="#ipv6的优点" class="tocs-link">IPv6的优点</a></li>
                 <li><a href="#数据报首部格式" class="tocs-link">数据报首部格式</a></li>
                 <li><a href="#ipv6地址" class="tocs-link">IPv6地址</a></li>
                 <li><a href="#ipv6地址的分类" class="tocs-link">Ipv6地址的分类</a></li>
-                <li><a href="#ipv4向ipv6过渡" class="tocs-link">IPv4向IPv6过渡</a></li>
-                <li><a href="#icmpv6" class="tocs-link">ICMPv6</a></li>
-              </ol>
-            </li>
-            <li><a href="#sdn" class="tocs-link">SDN</a>
-              <ol class="tocs-list is-collapsed">
-                <li><a href="#openflow协议" class="tocs-link">OpenFlow协议</a></li>
               </ol>
             </li>
           </ol>
