@@ -133,7 +133,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </blockquote>
         <p><strong><a href="https://leetcode.cn/problems/combination-sum/">39. 组合总和</a></strong></p>
         <blockquote>
-          <p>在写这题的时候，纠结出现重复的情况，实际上就是下一个寻址的起始位置，仍然包含本身，可以重复拿。</p>
+          <p>考虑去重，需要加一个起始坐标index，求组合数而不是排列数。</p>
+          <p>由于同一个数字可以拿多个，所以每次更新index从当前的i更新。</p>
         </blockquote>
         <p><strong><a href="https://leetcode.cn/problems/combination-sum-ii/">🆙40. 组合总和 II</a></strong></p>
         <blockquote>

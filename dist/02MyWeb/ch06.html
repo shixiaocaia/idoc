@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>定时器的设计 iDoc</title>
-    <meta name="description" content="===">
+    <meta name="description" content="定时器设计，将连接资源和定时事件等封装起来，具体包括连接资源、超时时间和回调函数，这里的回调函数指向定时事件。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -78,7 +78,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </aside>
       </div>
       <markdown-style>
-        <p>===</p>
+        <h1 id="定时器的设计"><a aria-hidden="true" tabindex="-1" href="#定时器的设计" class="anchor"><span class="icon icon-link"></span></a>定时器的设计</h1>
         <h2 id="整体思路"><a aria-hidden="true" tabindex="-1" href="#整体思路" class="anchor"><span class="icon icon-link"></span></a>整体思路</h2>
         <p><code>定时器设计</code>，将连接资源和定时事件等封装起来，具体包括连接资源、超时时间和回调函数，这里的回调函数指向定时事件。</p>
         <p><code>定时器容器设计</code>，将多个定时器串联组织起来统一处理，具体包括升序链表设计。</p>
@@ -101,7 +101,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           </li>
         </ul>
         <h2 id="定时器容器设计"><a aria-hidden="true" tabindex="-1" href="#定时器容器设计" class="anchor"><span class="icon icon-link"></span></a>定时器容器设计</h2>
-        <p>项目中的定时器容器为带头尾结点的升序双向链表，具体的为每个连接创建一个定时器，将其添加到链表中，并按照超时时间升序排列。执行定时任务时，将到期的定时器从链表中删除。</p>
+        <p>项目中的定时器容器为带头尾结点的<strong>升序双向链表</strong>，具体的为每个连接创建一个定时器，将其添加到链表中，并按照超时时间升序排列。执行定时任务时，将到期的定时器从链表中删除。</p>
         <p>从实现上看，主要涉及双向链表的插入，删除操作，其中添加定时器的事件复杂度是O(n),删除定时器的事件复杂度是O(1)。</p>
         <p>升序双向链表主要逻辑如下，具体的，</p>
         <ul>
@@ -110,17 +110,21 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           </li>
           <li>
             <p>add_timer函数，将目标定时器添加到链表中，添加时按照升序添加</p>
-          </li>
-          <li>
             <ul>
-              <li>若当前链表中只有头尾节点，直接插入</li>
-              <li>否则，将定时器按升序插入</li>
+              <li>
+                <p>若当前链表中只有头尾节点，直接插入</p>
+              </li>
+              <li>
+                <p>否则，将定时器按升序插入</p>
+              </li>
             </ul>
+            <blockquote>
+              <p>在prev和tmp之间插入timer，然后更新前后驱节点。</p>
+              <p>如果是尾节点在做特殊处理，并更新tail节点。</p>
+            </blockquote>
           </li>
           <li>
             <p>adjust_timer函数，当定时任务发生变化,调整对应定时器在链表中的位置</p>
-          </li>
-          <li>
             <ul>
               <li>客户端在设定时间内有数据收发,则当前时刻对该定时器重新设定时间，这里只是往后延长超时时间</li>
               <li>被调整的目标定时器在尾部，或定时器新的超时值仍然小于下一个定时器的超时，不用调整</li>
@@ -129,12 +133,18 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           </li>
           <li>
             <p>del_timer函数将超时的定时器从链表中删除</p>
-          </li>
-          <li>
             <ul>
               <li>常规双向链表删除结点</li>
             </ul>
           </li>
+        </ul>
+        <h2 id="定时任务处理函数"><a aria-hidden="true" tabindex="-1" href="#定时任务处理函数" class="anchor"><span class="icon icon-link"></span></a>定时任务处理函数</h2>
+        <p>使用统一事件源，SIGALRM信号每次被触发，主循环中调用一次定时任务处理函数，处理链表容器中到期的定时器。</p>
+        <p>具体的逻辑如下，</p>
+        <ul>
+          <li>遍历定时器升序链表容器，从头结点开始依次处理每个定时器，直到遇到尚未到期的定时器</li>
+          <li>若当前时间小于定时器超时时间，跳出循环，即未找到到期的定时器</li>
+          <li>若当前时间大于定时器超时时间，即找到了到期的定时器，执行回调函数，然后将它从链表中删除，然后继续遍历。</li>
         </ul>
       </markdown-style>
       <nav class="tocs">
@@ -143,6 +153,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <li><a href="#整体思路" class="tocs-link">整体思路</a></li>
             <li><a href="#定时器设计" class="tocs-link">定时器设计</a></li>
             <li><a href="#定时器容器设计" class="tocs-link">定时器容器设计</a></li>
+            <li><a href="#定时任务处理函数" class="tocs-link">定时任务处理函数</a></li>
           </ol>
         </aside>
       </nav>

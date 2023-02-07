@@ -409,6 +409,50 @@ select * from student where city regexp [123]; # &#x27;1|2|3&#x27;
 select * from student where city regexp &#x27;[1-5] Ton&#x27;; # 匹配 1 Ton, 2 Ton,3 Ton...
 select * from student where city regexp &#x27;[a-c] Ton&#x27;; # 匹配 a Ton, b Ton,c Ton...
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="匹配特殊字符"><a aria-hidden="true" tabindex="-1" href="#匹配特殊字符" class="anchor"><span class="icon icon-link"></span></a>匹配特殊字符</h3>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1">select <span class="token operator">*</span> from student where city regexp <span class="token char">'\\.'</span>
+</span><span class="code-line line-number" line="2">select <span class="token operator">*</span> from student where city regexp <span class="token char">'\\f'</span>
+</span><span class="code-line line-number" line="3">\\f 换页
+</span><span class="code-line line-number" line="4">\\n 换行
+</span><span class="code-line line-number" line="5">\\r 回车
+</span><span class="code-line line-number" line="6">\\t 制表
+</span><span class="code-line line-number" line="7">\\v 纵向制表
+</span><span class="code-line line-number" line="8">\\ 转义符号
+</span></code><input type="hidden" value="select * from student where city regexp &#x27;\\.&#x27;
+select * from student where city regexp &#x27;\\f&#x27;
+\\f 换页
+\\n 换行
+\\r 回车
+\\t 制表
+\\v 纵向制表
+\\ 转义符号
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="匹配字符类"><a aria-hidden="true" tabindex="-1" href="#匹配字符类" class="anchor"><span class="icon icon-link"></span></a>匹配字符类</h3>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">[</span><span class="token operator">:</span>alnum<span class="token operator">:</span><span class="token punctuation">]</span> 任意字母和数字（同<span class="token punctuation">[</span>a<span class="token operator">-</span>zA<span class="token operator">-</span>Z0<span class="token operator">-</span><span class="token number">9</span><span class="token punctuation">]</span>）
+</span><span class="code-line line-number" line="2"><span class="token punctuation">[</span><span class="token operator">:</span>alpha<span class="token operator">:</span><span class="token punctuation">]</span> 任意字符（同<span class="token punctuation">[</span>a<span class="token operator">-</span>zA<span class="token operator">-</span>Z<span class="token punctuation">]</span>）
+</span><span class="code-line line-number" line="3"><span class="token punctuation">[</span><span class="token operator">:</span>blank<span class="token operator">:</span><span class="token punctuation">]</span> 空格和制表（同<span class="token punctuation">[</span>\\t<span class="token punctuation">]</span>）
+</span><span class="code-line line-number" line="4"><span class="token punctuation">[</span><span class="token operator">:</span>cntr1<span class="token operator">:</span><span class="token punctuation">]</span> ASCII控制字符（ASCII到<span class="token number">31</span>和<span class="token number">127</span>）
+</span><span class="code-line line-number" line="5"><span class="token punctuation">[</span><span class="token operator">:</span>digit<span class="token operator">:</span><span class="token punctuation">]</span> 任意数字（同<span class="token punctuation">[</span><span class="token number">0</span><span class="token operator">-</span><span class="token number">9</span><span class="token punctuation">]</span>）
+</span><span class="code-line line-number" line="6"><span class="token punctuation">[</span><span class="token operator">:</span>graph<span class="token operator">:</span><span class="token punctuation">]</span> 与<span class="token punctuation">[</span>：print<span class="token operator">:</span><span class="token punctuation">]</span>相同，但不包括空格
+</span><span class="code-line line-number" line="7"><span class="token punctuation">[</span><span class="token operator">:</span>lower<span class="token operator">:</span>  任意小写字母（同<span class="token punctuation">[</span>a<span class="token operator">-</span>z<span class="token punctuation">]</span>）
+</span><span class="code-line line-number" line="8"><span class="token punctuation">[</span><span class="token operator">:</span>print<span class="token operator">:</span><span class="token punctuation">]</span> 任意可打印字符
+</span><span class="code-line line-number" line="9"><span class="token punctuation">[</span><span class="token operator">:</span>punct<span class="token operator">:</span><span class="token punctuation">]</span> 既不在<span class="token punctuation">[</span>：alnum<span class="token operator">:</span><span class="token punctuation">]</span>又不在<span class="token punctuation">[</span>：cntr1<span class="token operator">:</span><span class="token punctuation">]</span>中的任意字符
+</span><span class="code-line line-number" line="10"><span class="token punctuation">[</span><span class="token operator">:</span>space<span class="token operator">:</span><span class="token punctuation">]</span> 包括空格在内的任意空白字符（同<span class="token punctuation">[</span>\\fl\nl\rlltllv<span class="token punctuation">]</span>）
+</span><span class="code-line line-number" line="11"><span class="token punctuation">[</span><span class="token operator">:</span>upper<span class="token operator">:</span><span class="token punctuation">]</span> 任意大写字母（同<span class="token punctuation">[</span>A<span class="token operator">-</span>Z<span class="token punctuation">]</span>）
+</span><span class="code-line line-number" line="12"><span class="token punctuation">[</span><span class="token operator">:</span>xdigit<span class="token operator">:</span><span class="token punctuation">]</span> 任意十六进制数字（同<span class="token punctuation">[</span>a<span class="token operator">-</span>fA<span class="token operator">-</span>F0<span class="token operator">-</span><span class="token number">9</span><span class="token punctuation">]</span>）
+</span></code><input type="hidden" value="[:alnum:] 任意字母和数字（同[a-zA-Z0-9]）
+[:alpha:] 任意字符（同[a-zA-Z]）
+[:blank:] 空格和制表（同[\\t]）
+[:cntr1:] ASCII控制字符（ASCII到31和127）
+[:digit:] 任意数字（同[0-9]）
+[:graph:] 与[：print:]相同，但不包括空格
+[:lower:  任意小写字母（同[a-z]）
+[:print:] 任意可打印字符
+[:punct:] 既不在[：alnum:]又不在[：cntr1:]中的任意字符
+[:space:] 包括空格在内的任意空白字符（同[\\fl\nl\rlltllv]）
+[:upper:] 任意大写字母（同[A-Z]）
+[:xdigit:] 任意十六进制数字（同[a-fA-F0-9]）
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -423,7 +467,12 @@ select * from student where city regexp &#x27;[a-c] Ton&#x27;; # 匹配 a Ton, b
             <li><a href="#order" class="tocs-link">order</a></li>
             <li><a href="#where" class="tocs-link">where</a></li>
             <li><a href="#like" class="tocs-link">like</a></li>
-            <li><a href="#正则表达式" class="tocs-link">正则表达式</a></li>
+            <li><a href="#正则表达式" class="tocs-link">正则表达式</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#匹配特殊字符" class="tocs-link">匹配特殊字符</a></li>
+                <li><a href="#匹配字符类" class="tocs-link">匹配字符类</a></li>
+              </ol>
+            </li>
           </ol>
         </aside>
       </nav>
