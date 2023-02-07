@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>身边的计网 iDoc</title>
+    <title>网络层概述 iDoc</title>
     <meta name="description" content="运输层作为OSI体系结构自下而上的第四层，其主要任务是为相互通信的应用进程提供逻辑通信服务，为运行在不同主机上的应用进程提供直接的逻辑通信服务。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
@@ -87,7 +87,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p>运输层向应用层实体屏蔽了下面网络核心的细节（例如网络拓扑、所采用的路由选择协议等），它使应用进程看见的就<strong>好像是在两个运输层实体之间有一条端到端的逻辑通信信道。</strong></p>
         <p>根据应用需求的不同，因特网的运输层为应用层提供了两种不同的运输层协议，即面向连接的TCP和无连接的UDP。</p>
         <blockquote>
-          <p>在网际层，网际层为主机提供逻辑通信服务，是一种尽最大努力的数据报服务，可能会出现各种错误，但是对于实时性要求高的服务，这是可以忽略的。</p>
+          <p>在网络层，网络层为主机提供逻辑通信服务，是一种尽最大努力的数据报服务，可能会出现各种错误，但是对于实时性要求高的服务，这是可以忽略的。</p>
           <p>而对于电子邮件、文件传输等需要可靠传输通信的服务，需要使用TCP/ IP体系结构的运输层太提供可靠服务。</p>
         </blockquote>
         <h3 id="用户数据报协议-udp"><a aria-hidden="true" tabindex="-1" href="#用户数据报协议-udp" class="anchor"><span class="icon icon-link"></span></a>用户数据报协议 UDP</h3>
@@ -137,6 +137,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p>UDP首部十分简单，只加了用于区分应用进程的端口。</p>
         <p>UDP在计算校验和时需要增加12字节的伪首部。</p>
         <h2 id="tcp"><a aria-hidden="true" tabindex="-1" href="#tcp" class="anchor"><span class="icon icon-link"></span></a>TCP</h2>
+        <h3 id="tcp报文"><a aria-hidden="true" tabindex="-1" href="#tcp报文" class="anchor"><span class="icon icon-link"></span></a>TCP报文</h3>
         <img src="http://pic.shixiaocaia.fun/202301301045118.png" alt="image-20221107170614878" style="zoom:50%;">
         <p><strong>序号、确认号、确认标志位ACK</strong></p>
         <blockquote>
@@ -240,8 +241,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <blockquote>
           <ol>
             <li>第一次握手，SYN = 1，确认客户端能发送数据。此时服务端能确认自己接受和客户端的发送</li>
-            <li>第二次握手，服务端 ACK = 1，SYN = 1， 客户端确认了服务端发送和接受能力，客户端确认自己的发送和接受没问题。</li>
-            <li>第三次握手，客户端 ACK = 1，服务端接收后确认了自己 的发送没问题。</li>
+            <li>第二次握手，服务端 ACK = 1，SYN = 1， 客户端确认了服务端发送和接受能力，客户端确认自己的发送和接受没问题</li>
+            <li>第三次握手，客户端 ACK = 1，服务端接收后确认了自己 的发送没问题</li>
           </ol>
         </blockquote>
         <p><strong>TCP是面向字节流，怎么确认发送数据的完整、顺序正确</strong></p>
@@ -249,7 +250,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <ol>
             <li>发送端发送seq = x, SYN = 1</li>
             <li>接收端收到后，对上面的seq确认，回复ACK = 1，ack = x + 1。同时也发送了SYN = 1， seq = y</li>
-            <li>发送端收到后回复ACK = 1， ack = y + 1表示对server端报文的确认，seq = x + 1。</li>
+            <li>发送端收到后回复ACK = 1， ack = y + 1表示对server端报文的确认，seq = x + 1</li>
           </ol>
         </blockquote>
         <h3 id="滑动窗口"><a aria-hidden="true" tabindex="-1" href="#滑动窗口" class="anchor"><span class="icon icon-link"></span></a>滑动窗口</h3>
@@ -257,15 +258,17 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <img src="http://pic.shixiaocaia.fun/202301301045568.png" alt="image-20221221094649438">
         </p>
         <blockquote>
-          <p>
-            发送方的缓冲区：
-            白色格子：空用的空间
-            灰色格子：数据已经被发送出去了，但是还没有被接受
-            紫色格子：还没有发送出去的据
-            接收方的缓冲区：
-            白色格子：空闲的空间
-            紫色格子：已经接收到的数据
-          </p>
+          <p>发送方的缓冲区：</p>
+          <ul>
+            <li>白色格子：空用的空间</li>
+            <li>灰色格子：数据已经被发送出去了，但是还没有被接受</li>
+            <li>紫色格子：还没有发送出去的据</li>
+          </ul>
+          <p>接收方的缓冲区：</p>
+          <ul>
+            <li>白色格子：空闲的空间</li>
+            <li>紫色格子：已经接收到的数据</li>
+          </ul>
         </blockquote>
         <p>
           <img src="http://pic.shixiaocaia.fun/202301301045979.png" alt="image-20221221095319037">
@@ -293,7 +296,6 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <h3 id="四次挥手"><a aria-hidden="true" tabindex="-1" href="#四次挥手" class="anchor"><span class="icon icon-link"></span></a>四次挥手</h3>
         <p>四次回收发生在断开连接的时候，当程序中调用close()会使用TCP协议进行四次挥手。</p>
         <p>客户端和服务端都可以主动发起断开连接。</p>
-        <img src="http://pic.shixiaocaia.fun/202211111234964.png" alt="image-20221111123348144" style="zoom:50%;">
         <blockquote>
           <ol>
             <li>客户端应用进程通知其主动关闭TCP连接，TCP客户进程发送TCP连接释放报文段，状态变化如图。</li>
@@ -434,6 +436,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <li><a href="#udp和tcp的对比" class="tocs-link">UDP和TCP的对比</a></li>
             <li><a href="#tcp" class="tocs-link">TCP</a>
               <ol class="tocs-list is-collapsed">
+                <li><a href="#tcp报文" class="tocs-link">TCP报文</a></li>
                 <li><a href="#三次握手" class="tocs-link">三次握手</a></li>
                 <li><a href="#滑动窗口" class="tocs-link">滑动窗口</a></li>
                 <li><a href="#四次挥手" class="tocs-link">四次挥手</a></li>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网络层概述 iDoc</title>
+    <title>应用层 iDoc</title>
     <meta name="description" content="作用：解决通过应用进程的交互来实现特定网络应用的问题。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
@@ -77,7 +77,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </aside>
       </div>
       <markdown-style>
-        <h2 id="简介"><a aria-hidden="true" tabindex="-1" href="#简介" class="anchor"><span class="icon icon-link"></span></a>简介</h2>
+        <h1 id="应用层"><a aria-hidden="true" tabindex="-1" href="#应用层" class="anchor"><span class="icon icon-link"></span></a>应用层</h1>
+        <h2 id="设备关系"><a aria-hidden="true" tabindex="-1" href="#设备关系" class="anchor"><span class="icon icon-link"></span></a>设备关系</h2>
         <p>作用：解决通过应用进程的交互来实现特定网络应用的问题。</p>
         <p>开发一种新的网络应用，首先要考虑网络应用在各种端系统上的组织方式和他们之间的关系，目前主要流行的是：</p>
         <ul>
@@ -116,8 +117,6 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <blockquote>
           <p>客户端使用ARP：使用前确保未被其他主机使用。</p>
           <p>服务端使用ARP：确保所挑选的IP地址未被其他主机使用。</p>
-        </blockquote>
-        <blockquote>
           <p>发送报文未必是广播的，看TCP/IP协议栈</p>
         </blockquote>
         <h3 id="中继代理"><a aria-hidden="true" tabindex="-1" href="#中继代理" class="anchor"><span class="icon icon-link"></span></a>中继代理</h3>
@@ -127,7 +126,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <blockquote>
           <p>域名级别最低的写在最左边。</p>
         </blockquote>
-        <h3 id="域名解析"><a aria-hidden="true" tabindex="-1" href="#域名解析" class="anchor"><span class="icon icon-link"></span></a>域名解析</h3>
+        <p><strong>域名解析</strong></p>
         <p>查询方式有递归和迭代查询。</p>
         <blockquote>
           <p>递归方式：从主机到本地（本区域服务器）去查询，然后去根域名服务器，顶级域名服务器，查到再向上返回。</p>
@@ -156,7 +155,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#简介" class="tocs-link">简介</a>
+            <li><a href="#设备关系" class="tocs-link">设备关系</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#cs" class="tocs-link">CS</a></li>
                 <li><a href="#p2p" class="tocs-link">P2P</a></li>
@@ -168,11 +167,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                 <li><a href="#中继代理" class="tocs-link">中继代理</a></li>
               </ol>
             </li>
-            <li><a href="#域名系统" class="tocs-link">域名系统</a>
-              <ol class="tocs-list is-collapsed">
-                <li><a href="#域名解析" class="tocs-link">域名解析</a></li>
-              </ol>
-            </li>
+            <li><a href="#域名系统" class="tocs-link">域名系统</a></li>
             <li><a href="#其他概念" class="tocs-link">其他概念</a></li>
           </ol>
         </aside>
