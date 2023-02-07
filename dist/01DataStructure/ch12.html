@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>力扣Hot 100 iDoc</title>
-    <meta name="description" content="[left,right]闭区间版本">
+    <meta name="description" content="链表是一种通过指针串联在一起的线性结构，每一个节点由两部分组成，一个是数据域，一个是指针域（存放指向下一个节点的指针），最后一个节点的指针域指向null。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -146,6 +146,18 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <blockquote>
           <p>摩尔投票法: 遇到相同的数，就投一票，遇到不同的数，就减一票，最后还存在票的数就是众数。</p>
           <p>语文证明：candidate为擂台，count 为擂台上的人数，擂台上没有人的时候，直接上台。如果有人并且是一伙的则上台（同时站在台上）；如果发现擂台上有人但不是一伙的，则不上台，同时拉下去一个。由于非maj的人数比maj的人数少并且还会自相残杀，非maj们无法吧maj们全拉下来。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/search-a-2d-matrix-ii">240. 搜索二维矩阵 II</a></p>
+        <blockquote>
+          <p>自己想的思路是：TL</p>
+          <ul>
+            <li>通过先横向搜索，如果当前数小于target，纵向搜索</li>
+            <li>如果当前数大于target，换到下一行。</li>
+            <li>这样的三层for，O(mnm)。</li>
+            <li>直接两层for暴力都过了。</li>
+          </ul>
+          <p>看到有序想到二分，在每一行中进行二分查找。</p>
+          <p>优化二分搜索。</p>
         </blockquote>
       </markdown-style>
     </div>

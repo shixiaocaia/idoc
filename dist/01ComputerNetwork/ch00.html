@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>iDoc</title>
+    <title>身边的计网 iDoc</title>
+    <meta name="description" content="对比于传统的IP地址分配，现如今采用的方式是CIDR的分配方式。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -47,10 +48,10 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
             <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
             <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
-            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="index.html" target="" class="active">ComputerNetwrok</a></li>
             <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
             <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
-            <li><a href="index.html" target="" class="active">Other</a></li>
+            <li><a href="../00Other/index.html" target="" class="">Other</a></li>
           </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
             </svg></a>
@@ -58,17 +59,42 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </div>
       </article>
     </header>
-    <div class="warpper-content warpper sidebar notocs">
+    <div class="warpper-content warpper sidebar">
       <div class="sidebar-border">
         <aside class="sidebar" role="navigation">
           <div>
             <a href="index.html" class="">↩️README</a>
-            <a href="vim.html" class="">Vim</a>
-            <a href="git.html" class="">Git</a>
+            <a href="ch00.html" class="">身边的计网</a>
+            <label>深入浅出计算机网络</label>
+            <a href="ch04.html" class="">网络层</a>
+            <a href="ch05.html" class="">传输层</a>
+            <a href="ch06.html" class="">应用层</a>
+            <label>HTTP篇</label>
+            <label>TCP篇</label>
+            <label>IP篇</label>
+            <label>综合篇</label>
           </div>
         </aside>
       </div>
-      <markdown-style></markdown-style>
+      <markdown-style>
+        <h1 id="身边的计网"><a aria-hidden="true" tabindex="-1" href="#身边的计网" class="anchor"><span class="icon icon-link"></span></a>身边的计网</h1>
+        <h2 id="内网ip和公网ip"><a aria-hidden="true" tabindex="-1" href="#内网ip和公网ip" class="anchor"><span class="icon icon-link"></span></a>内网IP和公网IP</h2>
+        <p>对比于传统的IP地址分配，现如今采用的方式是CIDR的分配方式。</p>
+        <p>通过将网络分为广域网和局域网来表示更多的主机设备。</p>
+        <ul>
+          <li>同一个局域网内的设备对外使用同一个IP，称为公网IP，在局域网内部的设备IP地址通过路由器进行分配。</li>
+          <li>此外，局域网内还能嵌套局域网，从而表示更多的主机设备。</li>
+          <li>根据需要不同的公网IP数量，在选择合适的ABC类IP地址进行划分，常见的使用C类，那么IP地址的开头就是192.168开头。</li>
+        </ul>
+        <p>由此，IPv4地址到现如今还在继续使用。</p>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#内网ip和公网ip" class="tocs-link">内网IP和公网IP</a></li>
+          </ol>
+        </aside>
+      </nav>
     </div>
     <script src="../js/demo-preview.js?v=1.21.13"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
