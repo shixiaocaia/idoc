@@ -151,6 +151,12 @@ markdown-style abbr[title] {
 markdown-style b,
 markdown-style strong {
   font-weight: 600;
+  margin: 0 0.1em;
+  padding: 0 0.4em;
+  border-radius: 0.8em 0.3em;
+  background: 0 0;
+  background-image: linear-gradient( to right,rgba(255,225,0,.1),rgba(255,225,0,.7) 4%,rgba(255,225,0,.3) );
+  -webkit-box-decoration-break: clone;
 }
 
 markdown-style dfn {
