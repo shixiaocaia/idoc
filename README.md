@@ -10,7 +10,7 @@
 
 <p>
     <label for="file">LC hot 100：</label>
-    <progress max="100" value="47"></progress>
+    <progress max="100" value="52"></progress>
 </p>
 <p>
     <label for="file">CSAPP：</label>
@@ -26,5 +26,10 @@
 </p>
 <p>
     <label for="file">Webserver：</label>
-    <progress max="100" value="50"></progress>
+    <progress max="100" value="60"></progress>
 </p>
+<p>
+    <label for="file">Effective C++：</label>
+    <progress max="55" value="3"></progress>
+</p>
+

@@ -654,3 +654,9 @@ int main() {
 [64. 最小路径和](https://leetcode.cn/problems/minimum-path-sum)
 
 > 模板题。
+
+[221. 最大正方形](https://leetcode.cn/problems/maximal-square)
+
+> 主要是没有理解这里dp数组的含义，表示当前当前位置可围成的正方形的边长。
+>
+> 转移方程，当前字符是1时，可以由上方，左上方，左方的最小值决定（木桶效应），此外当`i == 0 || j == 0`，显然只能为1。当前字符为0时，肯定为0。

@@ -135,6 +135,27 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <p>CPU倾向于访问一个固定的工作集，当这个工作集大小超过缓存大小时，会导致容量不命中。</p>
         </blockquote>
         <p>最灵活的方式是任意的放置。但是再访问时定位代价较高。</p>
+        <h2 id="高速缓存存储器"><a aria-hidden="true" tabindex="-1" href="#高速缓存存储器" class="anchor"><span class="icon icon-link"></span></a>高速缓存存储器</h2>
+        <p>由于CPU和主存之间存在着较大的性能差异，因此又在CPU和主存之间插入了三个级别的<strong>高速缓存</strong>。</p>
+        <p><strong>CPU如何判断读取的字节在高速缓存中命中</strong></p>
+        <blockquote>
+          <ol>
+            <li>由组索引找到对应的高速缓存组</li>
+            <li>根据标记位确定所在的行</li>
+            <li>最后根据设置的有效位和对应地址的标记位 匹配，再加上块偏移找到在对应数据块中的位置</li>
+          </ol>
+        </blockquote>
+        <h3 id="直接映射高速缓存"><a aria-hidden="true" tabindex="-1" href="#直接映射高速缓存" class="anchor"><span class="icon icon-link"></span></a>直接映射高速缓存</h3>
+        <p>每一个组只有一个行的高速缓存称为直接高速缓存。</p>
+        <p>对比上面的高速缓存，每一个组只有一个行，省去了行的匹配，此外在进行不命中时的行替换直接替换当前的行。</p>
+        <p><strong>抖动</strong></p>
+        <p>这样也可能会带来冲突不命中的问题，即使拥有足够的高速缓存空间，但是交替映射到了同一个组的块位置。</p>
+        <p>解决办法是留有一定字节的填充（申请更大的空间存放更多的数据）。</p>
+        <h3 id="组相联高速缓存"><a aria-hidden="true" tabindex="-1" href="#组相联高速缓存" class="anchor"><span class="icon icon-link"></span></a>组相联高速缓存</h3>
+        <p>相比前者，使得每一组的行数可以大于1，但是同时带来了缓存不命中时行替换的选择问题，最简单的替换策略是随机选择替换的行。</p>
+        <h3 id="全相联高速缓存"><a aria-hidden="true" tabindex="-1" href="#全相联高速缓存" class="anchor"><span class="icon icon-link"></span></a>全相联高速缓存</h3>
+        <p>一个组包含所有缓存行，不需要组索引位。</p>
+        <p>因为高速缓存电路必须并行地搜索许多相匹配的标记，构造一个又大又快的相联高速缓存困难且安规，因此全相联高速缓存只是适合做小的高速缓存，例如TLB。</p>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -152,6 +173,13 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                 <li><a href="#缓存命中" class="tocs-link">缓存命中</a></li>
                 <li><a href="#缓存不命中" class="tocs-link">缓存不命中</a></li>
                 <li><a href="#缓存不命中的种类" class="tocs-link">缓存不命中的种类</a></li>
+              </ol>
+            </li>
+            <li><a href="#高速缓存存储器" class="tocs-link">高速缓存存储器</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#直接映射高速缓存" class="tocs-link">直接映射高速缓存</a></li>
+                <li><a href="#组相联高速缓存" class="tocs-link">组相联高速缓存</a></li>
+                <li><a href="#全相联高速缓存" class="tocs-link">全相联高速缓存</a></li>
               </ol>
             </li>
           </ol>

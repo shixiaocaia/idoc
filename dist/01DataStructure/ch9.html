@@ -813,6 +813,11 @@ dp[i][j] = dp[i-1][j-1] + 1;//替换一个字符，此时不用增加元素，�
         <blockquote>
           <p>模板题。</p>
         </blockquote>
+        <p><a href="https://leetcode.cn/problems/maximal-square">221. 最大正方形</a></p>
+        <blockquote>
+          <p>主要是没有理解这里dp数组的含义，表示当前当前位置可围成的正方形的边长。</p>
+          <p>转移方程，当前字符是1时，可以由上方，左上方，左方的最小值决定（木桶效应），此外当<code>i == 0 || j == 0</code>，显然只能为1。当前字符为0时，肯定为0。</p>
+        </blockquote>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
