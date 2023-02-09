@@ -26,6 +26,7 @@
 let mybutton = document.getElementById("myBtn");
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
 function scrollFunction() {
 if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 mybutton.style.display = "block";
@@ -65,15 +66,16 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <div>
             <a href="index.html" class="">↩️README</a>
             <a href="ch00.html" class="">CPP语法</a>
-            <a href="ch01.html" class="">封装类</a>
+            <a href="ch01.html" class="">线程同步机制封装类</a>
             <a href="ch02.html" class="">半同步/半反应堆线程池</a>
             <a href="ch03.html" class="">I/O多路复用</a>
             <a href="ch04.html" class="">HTTP连接请求处理类</a>
             <a href="ch05.html" class="">定时器处理非活动链接 - 1</a>
             <a href="ch06.html" class="">定时器处理非活动链接 - 2</a>
-            <a href="ch07.html" class="">日志系统</a>
-            <a href="ch08.html" class="">数据库连接池</a>
-            <a href="ch09.html" class="">注册登录</a>
+            <a href="ch07.html" class="">日志系统 - 1</a>
+            <a href="ch08.html" class="">日志系统 - 2</a>
+            <a href="ch09.html" class="">数据库连接池</a>
+            <a href="ch010.html" class="">注册登录</a>
           </div>
         </aside>
       </div>
@@ -120,29 +122,6 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <blockquote>
           <p>worker如果是一个普通的类成员函数，那么自带的默认参数this指针，和函数原型的<code>void *</code>冲突了。</p>
         </blockquote>
-        <h2 id="函数实现"><a aria-hidden="true" tabindex="-1" href="#函数实现" class="anchor"><span class="icon icon-link"></span></a>函数实现</h2>
-        <p><strong>线程池创建与回收</strong></p>
-        <blockquote>
-          <p>初始化线程池。</p>
-          <p>构造函数中创建线程池,pthread_create函数中将类的对象作为参数传递给静态函数(worker),在静态函数中引用这个对象,并调用其动态方法(run)。</p>
-          <p>具体的，类对象传递时用this指针，传递给静态函数后，将其转换为线程池类，并调用私有成员函数run。</p>
-        </blockquote>
-        <p><strong>析构</strong></p>
-        <blockquote>
-          <p>释放线程池。</p>
-        </blockquote>
-        <p><strong>向请求任务队列插入请求</strong></p>
-        <blockquote>
-          <p>通过list容器创建请求队列，向队列中添加时，通过互斥锁保证线程安全，添加完成后通过信号量提醒有任务要处理，最后注意线程同步。</p>
-        </blockquote>
-        <p><strong>线程处理函数</strong></p>
-        <blockquote>
-          <p>内部访问私有成员函数run，完成线程处理要求。</p>
-        </blockquote>
-        <p><strong>run执行任务</strong></p>
-        <blockquote>
-          <p>主要实现，工作线程从请求队列中取出某个任务进行处理，注意线程同步。</p>
-        </blockquote>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -155,7 +134,6 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             </li>
             <li><a href="#进程和线程的区别" class="tocs-link">进程和线程的区别</a></li>
             <li><a href="#问题" class="tocs-link">问题</a></li>
-            <li><a href="#函数实现" class="tocs-link">函数实现</a></li>
           </ol>
         </aside>
       </nav>

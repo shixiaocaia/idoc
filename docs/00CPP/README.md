@@ -3,13 +3,15 @@ CPP
 
 ## 参考书籍
 
-C++ primer 第五版 
-
-- ✅ 完成到13章
+✅C++ primer 第五版
+-  ✅[习题答案](https://github.com/applenob/Cpp_Primer_Practice)
+-  ✅ 完成到13章
 
 ⬜Effective C++
 
 ⬜STL源码解析
+
+⬜ [现代 C++ 教程](https://changkun.de/modern-cpp/)
 
 ## 参考视频
 
@@ -21,7 +23,5 @@ C++ primer 第五版
 
 ⬜侯捷 C++ 11
 
-⬜侯捷 内存管理与分析
-
-⬜[阿布编程](https://space.bilibili.com/261582436/channel/collectiondetail?sid=59030)
+⬜侯捷内存管理与分析
 

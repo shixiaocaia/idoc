@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>类 iDoc</title>
+    <title>各类函数 iDoc</title>
     <meta name="description" content="函数只能定义一次，但可以声明多次，在头文件中进行函数声明，在源文件中定义。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
@@ -26,6 +26,7 @@
 let mybutton = document.getElementById("myBtn");
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
 function scrollFunction() {
 if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 mybutton.style.display = "block";
@@ -83,6 +84,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </aside>
       </div>
       <markdown-style>
+        <h1 id="各类函数"><a aria-hidden="true" tabindex="-1" href="#各类函数" class="anchor"><span class="icon icon-link"></span></a>各类函数</h1>
         <h2 id="函数声明"><a aria-hidden="true" tabindex="-1" href="#函数声明" class="anchor"><span class="icon icon-link"></span></a>函数声明</h2>
         <p>函数只能定义一次，但可以声明多次，在头文件中进行函数声明，在源文件中定义。</p>
         <blockquote>
@@ -160,7 +162,7 @@ constexpr int foo = new _sz();
         </blockquote>
         <h2 id="函数参数"><a aria-hidden="true" tabindex="-1" href="#函数参数" class="anchor"><span class="icon icon-link"></span></a>函数参数</h2>
         <p><strong>默认参数</strong></p>
-        <p>声明带默认参数，实现不需要。</p>
+        <p>声明带默认参数，实现不需要，实现时带默认参数会出错。</p>
         <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">void</span> <span class="token function">TestFunc01</span><span class="token punctuation">(</span><span class="token keyword">int</span> a <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span> <span class="token keyword">int</span> b <span class="token operator">=</span> <span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="2">	cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"a + b  = "</span> <span class="token operator">&#x3C;&#x3C;</span> a <span class="token operator">+</span> b <span class="token operator">&#x3C;&#x3C;</span> endl<span class="token punctuation">;</span>
 </span><span class="code-line line-number" line="3"><span class="token punctuation">}</span>
@@ -179,7 +181,7 @@ constexpr int foo = new _sz();
 </span></code><input type="hidden" value="Complex&#x26; operator++(Complex&#x26; p) //前置
 Complex&#x26; operator++(int) //后置
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <h2 id="函数重写override"><a aria-hidden="true" tabindex="-1" href="#函数重写override" class="anchor"><span class="icon icon-link"></span></a>函数重写（override)</h2>
+        <h2 id="函数重写"><a aria-hidden="true" tabindex="-1" href="#函数重写" class="anchor"><span class="icon icon-link"></span></a>函数重写</h2>
         <p>以实现不同的功能，一般适用于子类在继承父类时，重写父类方法。</p>
         <p>规则：</p>
         <ol>
@@ -188,11 +190,10 @@ Complex&#x26; operator++(int) //后置
           <li>静态方法不能被重写为非静态的方法。</li>
           <li>重写的方法的访问修饰符一定要大于被重写方法的访问修饰符（pubilc>protected>default>private)。</li>
         </ol>
-        <h2 id="函数重载overload"><a aria-hidden="true" tabindex="-1" href="#函数重载overload" class="anchor"><span class="icon icon-link"></span></a>函数重载(overload)</h2>
+        <h2 id="函数重载"><a aria-hidden="true" tabindex="-1" href="#函数重载" class="anchor"><span class="icon icon-link"></span></a>函数重载</h2>
         <p>在c中是允许出现<strong>同名</strong>的函数，这种现象称为函数重载。</p>
         <p>条件：1. 必须在同一个作用域下。2. 函数的参数个数、类型、顺序不同。</p>
         <blockquote>
-          <p>[!NOTE]</p>
           <ol>
             <li>函数返回值不可以作为判断重载的条件。</li>
             <li>函数重载和默认参数之间注意二义性问题。</li>
@@ -509,25 +510,6 @@ A&#x26; A::getInstance(){
         <h2 id="深拷贝和浅拷贝"><a aria-hidden="true" tabindex="-1" href="#深拷贝和浅拷贝" class="anchor"><span class="icon icon-link"></span></a>深拷贝和浅拷贝</h2>
         <p>同一类型的对象之间可以赋值，使得两个对象的成员变量的值（地址）相同，两个对象仍然是独立的两个对象，这种情况被称为<strong>浅拷贝</strong>。浅拷贝后，可能会导致两次释放堆区空间，导致挂掉。</p>
         <p>解决：使用自建的拷贝构造函数，进行<strong>深拷贝</strong>，指向不同的堆区，避免重复的释放。</p>
-        <h2 id="初始化列表"><a aria-hidden="true" tabindex="-1" href="#初始化列表" class="anchor"><span class="icon icon-link"></span></a>初始化列表</h2>
-        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token comment">//初始化列表方式，构造函数后面增加 属性（值，参数），属性（值，参数）</span>
-</span><span class="code-line line-number" line="2"><span class="token comment">//无参</span>
-</span><span class="code-line line-number" line="3"><span class="token function">Person</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">:</span><span class="token function">m_A</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">m_B</span><span class="token punctuation">(</span><span class="token number">11</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">m_C</span><span class="token punctuation">(</span><span class="token number">12</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="4"><span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="5"><span class="token comment">//有参</span>
-</span><span class="code-line line-number" line="6"><span class="token function">Person</span><span class="token punctuation">(</span><span class="token keyword">int</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> b<span class="token punctuation">,</span> <span class="token keyword">int</span> c<span class="token punctuation">)</span> <span class="token operator">:</span> <span class="token function">m_A</span><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">m_B</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">m_C</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="7"><span class="token punctuation">}</span>
-</span></code><input type="hidden" value="//初始化列表方式，构造函数后面增加 属性（值，参数），属性（值，参数）
-//无参
-Person() :m_A(10), m_B(11), m_C(12) {
-}
-//有参
-Person(int a, int b, int c) : m_A(a), m_B(b), m_C(c) {
-}
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <blockquote>
-          <p>我们一般使用初始化列表的方式初始化变量，设定有参构造，更加简洁有效。</p>
-        </blockquote>
         <h2 id="隐式类型转换"><a aria-hidden="true" tabindex="-1" href="#隐式类型转换" class="anchor"><span class="icon icon-link"></span></a>隐式类型转换</h2>
         <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">People</span> 
 </span><span class="code-line line-number" line="2"><span class="token punctuation">{</span> 
@@ -646,8 +628,8 @@ void foo(...);
             <li><a href="#内联函数" class="tocs-link">内联函数</a></li>
             <li><a href="#constexpr-函数" class="tocs-link">constexpr 函数</a></li>
             <li><a href="#函数参数" class="tocs-link">函数参数</a></li>
-            <li><a href="#函数重写override" class="tocs-link">函数重写（override)</a></li>
-            <li><a href="#函数重载overload" class="tocs-link">函数重载(overload)</a></li>
+            <li><a href="#函数重写" class="tocs-link">函数重写</a></li>
+            <li><a href="#函数重载" class="tocs-link">函数重载</a></li>
             <li><a href="#函数指针" class="tocs-link">函数指针</a></li>
             <li><a href="#extern-c浅析" class="tocs-link">extern “C”浅析</a></li>
             <li><a href="#c语言下的封装和c下的封装" class="tocs-link">c语言下的封装和C++下的封装</a></li>
@@ -671,7 +653,6 @@ void foo(...);
               </ol>
             </li>
             <li><a href="#深拷贝和浅拷贝" class="tocs-link">深拷贝和浅拷贝</a></li>
-            <li><a href="#初始化列表" class="tocs-link">初始化列表</a></li>
             <li><a href="#隐式类型转换" class="tocs-link">隐式类型转换</a></li>
             <li><a href="#new运算符使用" class="tocs-link">new运算符使用</a></li>
             <li><a href="#含有可变形参的函数" class="tocs-link">含有可变形参的函数</a>

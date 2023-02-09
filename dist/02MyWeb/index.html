@@ -26,6 +26,7 @@
 let mybutton = document.getElementById("myBtn");
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
 function scrollFunction() {
 if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 mybutton.style.display = "block";
@@ -65,15 +66,16 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <div>
             <a href="index.html" class="">↩️README</a>
             <a href="ch00.html" class="">CPP语法</a>
-            <a href="ch01.html" class="">封装类</a>
+            <a href="ch01.html" class="">线程同步机制封装类</a>
             <a href="ch02.html" class="">半同步/半反应堆线程池</a>
             <a href="ch03.html" class="">I/O多路复用</a>
             <a href="ch04.html" class="">HTTP连接请求处理类</a>
             <a href="ch05.html" class="">定时器处理非活动链接 - 1</a>
             <a href="ch06.html" class="">定时器处理非活动链接 - 2</a>
-            <a href="ch07.html" class="">日志系统</a>
-            <a href="ch08.html" class="">数据库连接池</a>
-            <a href="ch09.html" class="">注册登录</a>
+            <a href="ch07.html" class="">日志系统 - 1</a>
+            <a href="ch08.html" class="">日志系统 - 2</a>
+            <a href="ch09.html" class="">数据库连接池</a>
+            <a href="ch010.html" class="">注册登录</a>
           </div>
         </aside>
       </div>

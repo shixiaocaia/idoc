@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>应用层 iDoc</title>
-    <meta name="description" content="✅深入浅出计算机网络">
+    <title>日志系统 iDoc</title>
+    <meta name="description" content="本项目中，使用单例模式创建日志系统，对服务器运行状态、错误信息和访问数据进行记录，该系统可以实现按天分类，超行分类功能，可以根据实际情况分别使用同步和异步写入两种方式。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -49,9 +49,9 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
             <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
             <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
-            <li><a href="index.html" target="" class="active">ComputerNetwrok</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
             <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
-            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+            <li><a href="index.html" target="" class="active">Webserver</a></li>
             <li><a href="../00Other/index.html" target="" class="">Other</a></li>
           </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
@@ -60,52 +60,26 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </div>
       </article>
     </header>
-    <div class="warpper-content warpper sidebar">
+    <div class="warpper-content warpper sidebar notocs">
       <div class="sidebar-border">
         <aside class="sidebar" role="navigation">
           <div>
             <a href="index.html" class="">↩️README</a>
-            <a href="ch00.html" class="">身边的计网</a>
-            <label>深入浅出计算机网络</label>
-            <a href="ch04.html" class="">网络层</a>
-            <a href="ch05.html" class="">传输层</a>
-            <a href="ch06.html" class="">应用层</a>
-            <label>HTTP篇</label>
-            <label>TCP篇</label>
-            <label>IP篇</label>
-            <label>综合篇</label>
+            <a href="ch00.html" class="">CPP语法</a>
+            <a href="ch01.html" class="">线程同步机制封装类</a>
+            <a href="ch02.html" class="">半同步/半反应堆线程池</a>
+            <a href="ch03.html" class="">I/O多路复用</a>
+            <a href="ch04.html" class="">HTTP连接请求处理类</a>
+            <a href="ch05.html" class="">定时器处理非活动链接 - 1</a>
+            <a href="ch06.html" class="">定时器处理非活动链接 - 2</a>
+            <a href="ch07.html" class="">日志系统 - 1</a>
+            <a href="ch08.html" class="">日志系统 - 2</a>
+            <a href="ch09.html" class="">数据库连接池</a>
+            <a href="ch010.html" class="">注册登录</a>
           </div>
         </aside>
       </div>
-      <markdown-style>
-        <h2 id="看书"><a aria-hidden="true" tabindex="-1" href="#看书" class="anchor"><span class="icon icon-link"></span></a>看书</h2>
-        <p>✅深入浅出计算机网络</p>
-        <p>✅图解HTTP</p>
-        <p>⬜图解TCP/IP</p>
-        <p>⬜<a href="https://xiaolincoding.com/network/">小林图解网络</a></p>
-        <p>⬜<a href="https://space.bilibili.com/327247876/">技术蛋</a></p>
-        <hr>
-        <p>⬜计算机⽹络 - ⾃顶向下⽅法</p>
-        <p>⬜TCP/IP 详解 卷⼀：协议：难啃，主要看其中的TCP篇</p>
-        <h2 id="知轻重"><a aria-hidden="true" tabindex="-1" href="#知轻重" class="anchor"><span class="icon icon-link"></span></a>知轻重</h2>
-        <ul>
-          <li>网络层：简单了解IPv4、IPv6</li>
-          <li>传输层：TCP 、 UDP：整个建立连接、断开连接、数据传输的过程。
-            <ul>
-              <li>Linux提供的TCP内核参数作用</li>
-            </ul>
-          </li>
-          <li>应用层：HTTP、HTTPS</li>
-        </ul>
-      </markdown-style>
-      <nav class="tocs">
-        <aside class="inner toc">
-          <ol class="tocs-list">
-            <li><a href="#看书" class="tocs-link">看书</a></li>
-            <li><a href="#知轻重" class="tocs-link">知轻重</a></li>
-          </ol>
-        </aside>
-      </nav>
+      <markdown-style></markdown-style>
     </div>
     <script src="../js/demo-preview.js?v=1.21.13"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>

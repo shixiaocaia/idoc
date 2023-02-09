@@ -26,6 +26,7 @@
 let mybutton = document.getElementById("myBtn");
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
 function scrollFunction() {
 if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 mybutton.style.display = "block";
@@ -182,6 +183,11 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <p>当遇到")"入栈下边。</p>
           <p>当遇到“(",如果栈为空，则需要更新start 为 i + 1，之前的括号序列不连续了。</p>
           <p>如果栈不为空，弹出栈顶下标，如果此时栈不为空，则答案为下一个左括号的下标（index.top()) 和当前下标i之间的距离，如果为空，则为start（起始左下标）到i之间的距离 + 1。</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/decode-string">394. 字符串解码</a></strong></p>
+        <blockquote>
+          <p>用双栈或者单个栈存放数字和字母。当字符为"["时，入栈数字和字符，当字符为"]"，出栈数字和字符。</p>
+          <p>用<code>stoi函数</code>完成str转换数字。</p>
         </blockquote>
         <h2 id="单调栈"><a aria-hidden="true" tabindex="-1" href="#单调栈" class="anchor"><span class="icon icon-link"></span></a>单调栈</h2>
         <h3 id="何时使用"><a aria-hidden="true" tabindex="-1" href="#何时使用" class="anchor"><span class="icon icon-link"></span></a>何时使用</h3>

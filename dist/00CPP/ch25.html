@@ -26,6 +26,7 @@
 let mybutton = document.getElementById("myBtn");
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
 function scrollFunction() {
 if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 mybutton.style.display = "block";
@@ -153,6 +154,32 @@ std::vector<int>::const_iterator iter = vec.begin(); //iter的作用是一个con
         <p>初始化列表的构造顺序是根据变量声明的顺序，因此尽可能按照声明的顺序进行列表初始化更加优雅。</p>
         <p>对于<strong>const和reference</strong>一定需要初值，而不是赋值。</p>
         <p>对于<strong>non-local static</strong>对象（非在函数内的static对象），应该以local static对象替换，即通过调用函数生成local static然后返回引用，这样保证了static变量在使用时一定经过了初始化，而non-local static对象是随意经过初始化的，对初始化的顺序没有明确的定义。</p>
+        <h2 id="c默认编写调用了哪些函数"><a aria-hidden="true" tabindex="-1" href="#c默认编写调用了哪些函数" class="anchor"><span class="icon icon-link"></span></a>C++默认编写调用了哪些函数</h2>
+        <p>当创建空类时，编译器会默认创建default构造函数，copy构造函数，copy assignment操作符，以及析构函数。</p>
+        <blockquote>
+          <p>当我们创建了构造函数时，默认构造函数不会生成。</p>
+          <p>当成员具有reference或者const时，编译器拒绝生成<code>operator=</code>。</p>
+        </blockquote>
+        <h2 id="拒绝编译器自动生成的函数"><a aria-hidden="true" tabindex="-1" href="#拒绝编译器自动生成的函数" class="anchor"><span class="icon icon-link"></span></a>拒绝编译器自动生成的函数</h2>
+        <p>由编译器自动生成的函数是<code>public</code>的，因此我们可以将不需要的copy构造函数定义为<code>private</code>，并且故意不定义，这样可以阻止函数的生成。</p>
+        <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">class test{
+</span><span class="code-line line-number" line="2">public:
+</span><span class="code-line line-number" line="3">    test();
+</span><span class="code-line line-number" line="4">    ~test();
+</span><span class="code-line line-number" line="5">private:
+</span><span class="code-line line-number" line="6">    test(const test&#x26;);
+</span><span class="code-line line-number" line="7">    test&#x26; operator=(const test&#x26;);
+</span><span class="code-line line-number" line="8">}
+</span></code><input type="hidden" value="class test{
+public:
+    test();
+    ~test();
+private:
+    test(const test&#x26;);
+    test&#x26; operator=(const test&#x26;);
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>从而避免了一些实例的拷贝、赋值操作。</p>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -160,6 +187,8 @@ std::vector<int>::const_iterator iter = vec.begin(); //iter的作用是一个con
             <li><a href="#尽量替换-define" class="tocs-link">尽量替换 #define</a></li>
             <li><a href="#尽可能使用const" class="tocs-link">尽可能使用const</a></li>
             <li><a href="#确定对象使用前已初始化" class="tocs-link">确定对象使用前已初始化</a></li>
+            <li><a href="#c默认编写调用了哪些函数" class="tocs-link">C++默认编写调用了哪些函数</a></li>
+            <li><a href="#拒绝编译器自动生成的函数" class="tocs-link">拒绝编译器自动生成的函数</a></li>
           </ol>
         </aside>
       </nav>

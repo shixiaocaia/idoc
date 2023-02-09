@@ -16,6 +16,7 @@
 - 01OperatingSystem: 计组
 - 01OperatingSystem/ch51.md: 优化程序性能
 - 01OperatingSystem/ch61.md: 存储器
+- 01OperatingSystem/ch71.md: 链接
 
 - 01OperatingSystem: 进程
 - 01OperatingSystem/ch81.md: 进程、线程、调度
@@ -60,15 +61,16 @@
 
 - 02MyWeb/README.md: ↩️README
 - 02MyWeb/ch00.md: CPP语法
-- 02MyWeb/ch01.md: 封装类
+- 02MyWeb/ch01.md: 线程同步机制封装类
 - 02MyWeb/ch02.md: 半同步/半反应堆线程池
 - 02MyWeb/ch03.md: I/O多路复用
 - 02MyWeb/ch04.md: HTTP连接请求处理类
 - 02MyWeb/ch05.md: 定时器处理非活动链接 - 1
 - 02MyWeb/ch06.md: 定时器处理非活动链接 - 2
-- 02MyWeb/ch07.md: 日志系统
-- 02MyWeb/ch08.md: 数据库连接池
-- 02MyWeb/ch09.md: 注册登录
+- 02MyWeb/ch07.md: 日志系统 - 1
+- 02MyWeb/ch08.md: 日志系统 - 2
+- 02MyWeb/ch09.md: 数据库连接池
+- 02MyWeb/ch010.md: 注册登录
 
 - 00Other/README.md: ↩️README
 - 00Other/vim.md: Vim

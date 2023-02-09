@@ -26,6 +26,7 @@
 let mybutton = document.getElementById("myBtn");
 // When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
 function scrollFunction() {
 if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
 mybutton.style.display = "block";
@@ -67,6 +68,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <label>计组</label>
             <a href="ch51.html" class="">优化程序性能</a>
             <a href="ch61.html" class="">存储器</a>
+            <a href="ch71.html" class="">链接</a>
             <label>进程</label>
             <a href="ch81.html" class="">进程、线程、调度</a>
             <a href="ch82.html" class="">问题</a>
@@ -136,7 +138,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </blockquote>
         <p>最灵活的方式是任意的放置。但是再访问时定位代价较高。</p>
         <h2 id="高速缓存存储器"><a aria-hidden="true" tabindex="-1" href="#高速缓存存储器" class="anchor"><span class="icon icon-link"></span></a>高速缓存存储器</h2>
-        <p>由于CPU和主存之间存在着较大的性能差异，因此又在CPU和主存之间插入了三个级别的<strong>高速缓存</strong>。</p>
+        <p>由于CPU和主存之间存在着较大的性能差异，因此又在CPU和主存之间插入了三个级别的高速缓存。</p>
         <p><strong>CPU如何判断读取的字节在高速缓存中命中</strong></p>
         <blockquote>
           <ol>
@@ -156,6 +158,15 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <h3 id="全相联高速缓存"><a aria-hidden="true" tabindex="-1" href="#全相联高速缓存" class="anchor"><span class="icon icon-link"></span></a>全相联高速缓存</h3>
         <p>一个组包含所有缓存行，不需要组索引位。</p>
         <p>因为高速缓存电路必须并行地搜索许多相匹配的标记，构造一个又大又快的相联高速缓存困难且安规，因此全相联高速缓存只是适合做小的高速缓存，例如TLB。</p>
+        <h2 id="高速缓存的其他特性"><a aria-hidden="true" tabindex="-1" href="#高速缓存的其他特性" class="anchor"><span class="icon icon-link"></span></a>高速缓存的其他特性</h2>
+        <p>只保存指令的cache称为<code>i-cache</code>，只保存程序数据的高速缓存称为<code>d-cache</code>，二者都保存的称为<code>unified cache</code>。</p>
+        <h3 id="有关写的问题"><a aria-hidden="true" tabindex="-1" href="#有关写的问题" class="anchor"><span class="icon icon-link"></span></a>有关写的问题</h3>
+        <p>通常采用的方式是<strong>写回</strong>的策略，当发生写一个已经缓存的字时，通常是将高速缓存中的修改后，当块要被替换时，才会写入到低一层的存储当中，并不是立即直写。</p>
+        <h3 id="编写有利于高速缓存的代码"><a aria-hidden="true" tabindex="-1" href="#编写有利于高速缓存的代码" class="anchor"><span class="icon icon-link"></span></a>编写有利于高速缓存的代码</h3>
+        <ol>
+          <li>处理好核心函数里的循环，大部分时间花在了少量的循环当中。</li>
+          <li>尽量减小每个循环内部的缓存不命中的数量。</li>
+        </ol>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -180,6 +191,12 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                 <li><a href="#直接映射高速缓存" class="tocs-link">直接映射高速缓存</a></li>
                 <li><a href="#组相联高速缓存" class="tocs-link">组相联高速缓存</a></li>
                 <li><a href="#全相联高速缓存" class="tocs-link">全相联高速缓存</a></li>
+              </ol>
+            </li>
+            <li><a href="#高速缓存的其他特性" class="tocs-link">高速缓存的其他特性</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#有关写的问题" class="tocs-link">有关写的问题</a></li>
+                <li><a href="#编写有利于高速缓存的代码" class="tocs-link">编写有利于高速缓存的代码</a></li>
               </ol>
             </li>
           </ol>
