@@ -35,12 +35,6 @@
 - set（集合）
 - map（映射）
 
-在C++中，set 和 map 分别提供以下三种数据结构，其底层实现以及优劣如下表所示：
-
-![](http://pic.shixiaocaia.fun/202208130638920.png 'size = 70%')
-
-![](http://pic.shixiaocaia.fun/202208130639362.png 'size = 70%')
-
 当我们要使用集合来解决哈希问题的时候，优先使用unordered_set，因为它的查询和增删效率是最优的；
 
 如果需要集合是有序的，那么就用set；
@@ -134,12 +128,16 @@
 >
 > 找到返回，否则插入数值。
 
+[ 128. 最长连续序列](https://leetcode.cn/problems/longest-consecutive-sequence)
+
+> 查找连续的序列，就是判断 X，X+1，X+2是否存在，时间复杂度O(n)，想到哈希表，顺表还能去重。
+>
+> 遍历哈希表中数，且判断每一个数X是新开始（X-1不存在）。
+
 ## 对比
 
-数组作为哈希表，比如[LC383.赎金信](https://leetcode.cn/problems/ransom-note/)，我们知道明确的数组大小，可以将字母值转化为键值，对比用map，节省了开销。
+- 数组作为哈希表，比如[LC383.赎金信](https://leetcode.cn/problems/ransom-note/)，我们知道明确的数组大小，可以将字母值转化为键值，对比用map，节省了开销。
 
-set作为哈希表，比如[LC349. 两个数组的交集](https://leetcode.cn/problems/intersection-of-two-arrays/)， 我们不清楚数组的大小情况，或者值的间隔特别大，会造成空间的浪费。此外数组可以set相比数组还可以去重。
+- set作为哈希表，比如[LC349. 两个数组的交集](https://leetcode.cn/problems/intersection-of-two-arrays/)， 我们不清楚数组的大小情况，或者值的间隔特别大，会造成空间的浪费。此外数组可以set相比数组还可以去重。
 
-map作为哈希表，[LC1.两数之和](https://leetcode.cn/problems/two-sum/)，不仅需要判断key，还要记录位置，将位置作为value记录。
-
-考虑到去重时
+- map作为哈希表，[LC1.两数之和](https://leetcode.cn/problems/two-sum/)，不仅需要判断key，还要记录位置，将位置作为value记录。

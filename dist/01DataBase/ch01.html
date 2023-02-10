@@ -82,18 +82,125 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"> <span class="token keyword">select</span> concat<span class="token punctuation">(</span>city<span class="token punctuation">,</span><span class="token string">' '</span><span class="token punctuation">,</span>address<span class="token punctuation">)</span> <span class="token keyword">from</span> student<span class="token punctuation">;</span>         
 </span></code><input type="hidden" value=" select concat(city,&#x27; &#x27;,address) from student;         
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p><code>RTrim</code>和<code>LTrim</code>处理所选列的左右空格</p>
+        <p><code>RTrim</code>和<code>LTrim</code>处理所选列的左右空格。</p>
         <h3 id="使用别名"><a aria-hidden="true" tabindex="-1" href="#使用别名" class="anchor"><span class="icon icon-link"></span></a>使用别名</h3>
         <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"> <span class="token keyword">select</span> concat<span class="token punctuation">(</span>city<span class="token punctuation">,</span><span class="token string">' '</span><span class="token punctuation">,</span>RTrim<span class="token punctuation">(</span>address<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">as</span> newtitle <span class="token keyword">from</span> student<span class="token punctuation">;</span>
 </span></code><input type="hidden" value=" select concat(city,&#x27; &#x27;,RTrim(address)) as newtitle from student;
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p><code>as</code>给拼接字段的列起一个新的名字</p>
+        <p><code>as</code>给拼接字段的列起一个新的名字。</p>
         <h3 id="算数运算"><a aria-hidden="true" tabindex="-1" href="#算数运算" class="anchor"><span class="icon icon-link"></span></a>算数运算</h3>
         <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">select</span> name<span class="token punctuation">,</span>price<span class="token operator">*</span>nums <span class="token keyword">as</span> sum <span class="token keyword">from</span> fruits<span class="token punctuation">;</span>
 </span></code><input type="hidden" value="select name,price*nums as sum from fruits;
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <p>MySQL支持基本的加减乘除运算。</p>
         <h2 id="使用数据处理函数"><a aria-hidden="true" tabindex="-1" href="#使用数据处理函数" class="anchor"><span class="icon icon-link"></span></a>使用数据处理函数</h2>
+        <h3 id="文本处理函数"><a aria-hidden="true" tabindex="-1" href="#文本处理函数" class="anchor"><span class="icon icon-link"></span></a>文本处理函数</h3>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"> <span class="token keyword">select</span> concat<span class="token punctuation">(</span>city<span class="token punctuation">,</span><span class="token string">' '</span><span class="token punctuation">,</span>RTrim<span class="token punctuation">(</span>address<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">as</span> newtitle <span class="token keyword">from</span> student<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="2"> <span class="token comment"># RTrim /  LTrim() 去除空格</span>
+</span><span class="code-line line-number" line="3"> 
+</span><span class="code-line line-number" line="4"> <span class="token keyword">select</span> city<span class="token punctuation">,</span> upper<span class="token punctuation">(</span>address<span class="token punctuation">)</span> <span class="token keyword">as</span> newaddress <span class="token keyword">from</span> student<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="5"> <span class="token comment"># Upper() / Lower()文本大小写转换</span>
+</span><span class="code-line line-number" line="6"> 
+</span><span class="code-line line-number" line="7"> <span class="token keyword">Left</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">/</span>  <span class="token keyword">Right</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="8"> <span class="token comment"># 返回串左边 / 右边的字符</span>
+</span><span class="code-line line-number" line="9"> 
+</span><span class="code-line line-number" line="10"> Length<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="11"> <span class="token comment"># 返回串的长度</span>
+</span><span class="code-line line-number" line="12"> 
+</span><span class="code-line line-number" line="13"> Locate<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="14"> <span class="token comment"># 找出串的一个字串</span>
+</span><span class="code-line line-number" line="15"> 
+</span><span class="code-line line-number" line="16"> Soundex<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="17"> <span class="token comment"># 返回串的SOUNDEX值</span>
+</span><span class="code-line line-number" line="18"> <span class="token comment"># 将任何文本串转换为描述其语音表示的字母数字模式的算法</span>
+</span><span class="code-line line-number" line="19"> 
+</span><span class="code-line line-number" line="20"> SubString<span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="21"> <span class="token comment"># 返回子串的字符</span>
+</span></code><input type="hidden" value=" select concat(city,&#x27; &#x27;,RTrim(address)) as newtitle from student;
+ # RTrim /  LTrim() 去除空格
+ 
+ select city, upper(address) as newaddress from student;
+ # Upper() / Lower()文本大小写转换
+ 
+ Left() /  Right()
+ # 返回串左边 / 右边的字符
+ 
+ Length()
+ # 返回串的长度
+ 
+ Locate()
+ # 找出串的一个字串
+ 
+ Soundex()
+ # 返回串的SOUNDEX值
+ # 将任何文本串转换为描述其语音表示的字母数字模式的算法
+ 
+ SubString()
+ # 返回子串的字符
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="日期和时间处理函数"><a aria-hidden="true" tabindex="-1" href="#日期和时间处理函数" class="anchor"><span class="icon icon-link"></span></a>日期和时间处理函数</h3>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1">AddDate<span class="token punctuation">(</span><span class="token punctuation">)</span>     增加一个日期（天、周等）
+</span><span class="code-line line-number" line="2">AddTime<span class="token punctuation">(</span><span class="token punctuation">)</span>     增加一个时间（时、分等）
+</span><span class="code-line line-number" line="3">CurDate<span class="token punctuation">(</span><span class="token punctuation">)</span>     返回当前日期
+</span><span class="code-line line-number" line="4">CurTime<span class="token punctuation">(</span><span class="token punctuation">)</span>     返回当前时间
+</span><span class="code-line line-number" line="5"><span class="token keyword">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span>        返回日期时间的日期部分
+</span><span class="code-line line-number" line="6">DateDiff<span class="token punctuation">(</span><span class="token punctuation">)</span>    计算两个日期之差
+</span><span class="code-line line-number" line="7">Date_Add<span class="token punctuation">(</span><span class="token punctuation">)</span>    高度灵活的日期运算函数
+</span><span class="code-line line-number" line="8">Date_Format<span class="token punctuation">(</span><span class="token punctuation">)</span> 返回一个格式化的日期或时间串
+</span><span class="code-line line-number" line="9"><span class="token keyword">Day</span><span class="token punctuation">(</span><span class="token punctuation">)</span>         返回一个日期的天数部分
+</span><span class="code-line line-number" line="10">Dayofweek<span class="token punctuation">(</span><span class="token punctuation">)</span>   对于一个日期，返回对应的星期几
+</span><span class="code-line line-number" line="11"><span class="token keyword">Hour</span><span class="token punctuation">(</span><span class="token punctuation">)</span>        返回一个时间的小时部分
+</span><span class="code-line line-number" line="12"><span class="token keyword">Minute</span><span class="token punctuation">(</span><span class="token punctuation">)</span>      返回一个时间的分钟部分
+</span><span class="code-line line-number" line="13"><span class="token keyword">Month</span><span class="token punctuation">(</span><span class="token punctuation">)</span>       返回一个日期的月份部分
+</span><span class="code-line line-number" line="14">NowC<span class="token punctuation">(</span><span class="token punctuation">)</span>        返回当前日期和时间
+</span><span class="code-line line-number" line="15"><span class="token keyword">Second</span><span class="token punctuation">(</span><span class="token punctuation">)</span>      返回一个时间的秒部分
+</span><span class="code-line line-number" line="16"><span class="token keyword">Time</span><span class="token punctuation">(</span><span class="token punctuation">)</span>        返回一个日期时间的时间部分
+</span><span class="code-line line-number" line="17"><span class="token keyword">Year</span><span class="token punctuation">(</span><span class="token punctuation">)</span>        返回一个日期的年份部分
+</span></code><input type="hidden" value="AddDate()     增加一个日期（天、周等）
+AddTime()     增加一个时间（时、分等）
+CurDate()     返回当前日期
+CurTime()     返回当前时间
+Date()        返回日期时间的日期部分
+DateDiff()    计算两个日期之差
+Date_Add()    高度灵活的日期运算函数
+Date_Format() 返回一个格式化的日期或时间串
+Day()         返回一个日期的天数部分
+Dayofweek()   对于一个日期，返回对应的星期几
+Hour()        返回一个时间的小时部分
+Minute()      返回一个时间的分钟部分
+Month()       返回一个日期的月份部分
+NowC()        返回当前日期和时间
+Second()      返回一个时间的秒部分
+Time()        返回一个日期时间的时间部分
+Year()        返回一个日期的年份部分
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <blockquote>
+          <p>对于datatime的数据类型存储日期以及时间值，样例表中的值全具有时间值<code>00::00::00</code>，当我们直接使用<code>where order_date = '2005-09-01';</code>，与实际存储的<code>where order_data = '2005-09-01 11::30::14</code>冲突，应该用<code>where date(order_date) = '2005-09-01'</code>。</p>
+        </blockquote>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">where</span> <span class="token keyword">date</span><span class="token punctuation">(</span>order_date<span class="token punctuation">)</span> <span class="token operator">between</span> <span class="token string">'2005-09-01'</span> <span class="token operator">and</span> <span class="token string">'2005-10-01'</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="where date(order_date) between &#x27;2005-09-01&#x27; and &#x27;2005-10-01&#x27;;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="数值处理函数"><a aria-hidden="true" tabindex="-1" href="#数值处理函数" class="anchor"><span class="icon icon-link"></span></a>数值处理函数</h3>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1">Abs<span class="token punctuation">(</span><span class="token punctuation">)</span>  返回一个数的绝对值
+</span><span class="code-line line-number" line="2">Cos<span class="token punctuation">(</span><span class="token punctuation">)</span>  返回一个角度的余弦
+</span><span class="code-line line-number" line="3">Exp<span class="token punctuation">(</span><span class="token punctuation">)</span>  返回一个数的指数值
+</span><span class="code-line line-number" line="4"><span class="token function">Mod</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  返回除操作的余数
+</span><span class="code-line line-number" line="5">Pi<span class="token punctuation">(</span><span class="token punctuation">)</span>   返回圆周率
+</span><span class="code-line line-number" line="6">Rand<span class="token punctuation">(</span><span class="token punctuation">)</span> 返回一个随机数
+</span><span class="code-line line-number" line="7">Sin<span class="token punctuation">(</span><span class="token punctuation">)</span>  返回一个角度的正弦
+</span><span class="code-line line-number" line="8">Sqrt<span class="token punctuation">(</span><span class="token punctuation">)</span> 返回一个数的平方根
+</span><span class="code-line line-number" line="9">Tan<span class="token punctuation">(</span><span class="token punctuation">)</span>  返回一个角度的正切
+</span></code><input type="hidden" value="Abs()  返回一个数的绝对值
+Cos()  返回一个角度的余弦
+Exp()  返回一个数的指数值
+Mod()  返回除操作的余数
+Pi()   返回圆周率
+Rand() 返回一个随机数
+Sin()  返回一个角度的正弦
+Sqrt() 返回一个数的平方根
+Tan()  返回一个角度的正切
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="汇总数据"><a aria-hidden="true" tabindex="-1" href="#汇总数据" class="anchor"><span class="icon icon-link"></span></a>汇总数据</h2>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -105,7 +212,14 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                 <li><a href="#算数运算" class="tocs-link">算数运算</a></li>
               </ol>
             </li>
-            <li><a href="#使用数据处理函数" class="tocs-link">使用数据处理函数</a></li>
+            <li><a href="#使用数据处理函数" class="tocs-link">使用数据处理函数</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#文本处理函数" class="tocs-link">文本处理函数</a></li>
+                <li><a href="#日期和时间处理函数" class="tocs-link">日期和时间处理函数</a></li>
+                <li><a href="#数值处理函数" class="tocs-link">数值处理函数</a></li>
+              </ol>
+            </li>
+            <li><a href="#汇总数据" class="tocs-link">汇总数据</a></li>
           </ol>
         </aside>
       </nav>

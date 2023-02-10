@@ -232,12 +232,56 @@ pthread_mutex_unlock(&#x26;mutex);
         <h2 id="阻塞队列"><a aria-hidden="true" tabindex="-1" href="#阻塞队列" class="anchor"><span class="icon icon-link"></span></a>阻塞队列</h2>
         <p>阻塞队列类中封装了生产者-消费者模型，其中push成员是生产者，pop成员是消费者。</p>
         <p>阻塞队列中，使用了循环数组实现了队列，作为两者共享缓冲区，当然了，队列也可以使用STL中的queue。</p>
-        <h4 id="自定义队列"><a aria-hidden="true" tabindex="-1" href="#自定义队列" class="anchor"><span class="icon icon-link"></span></a><strong>自定义队列</strong></h4>
+        <h3 id="自定义队列"><a aria-hidden="true" tabindex="-1" href="#自定义队列" class="anchor"><span class="icon icon-link"></span></a>自定义队列</h3>
         <p>当队列为空时，从队列中获取元素的线程将会被挂起；当队列是满时，往队列里添加元素的线程将会挂起。</p>
         <p>阻塞队列类中，有些代码比较简单，这里仅对push和pop成员进行详解。</p>
         <blockquote>
           <p>消费时如果没有产品消费，那么就需要等待条件变量通知，同时多个消费者还需要竞争，如果没有竞争到那么就是解除当前的互斥锁，返回错误。</p>
         </blockquote>
+        <h3 id="功能实现"><a aria-hidden="true" tabindex="-1" href="#功能实现" class="anchor"><span class="icon icon-link"></span></a>功能实现</h3>
+        <p><strong>阻塞队列</strong></p>
+        <ul>
+          <li>block_queue(int max_size = 1000)
+            <ul>
+              <li>初始化阻塞队列</li>
+            </ul>
+          </li>
+          <li>clear()
+            <ul>
+              <li>重置阻塞队列</li>
+            </ul>
+          </li>
+          <li>~block_queue()
+            <ul>
+              <li>清空队列，内存管理</li>
+            </ul>
+          </li>
+          <li>获取private信息
+            <ul>
+              <li>full()</li>
+              <li>empty()</li>
+              <li>front()</li>
+              <li>back()</li>
+              <li>size()</li>
+              <li>max_size()</li>
+            </ul>
+          </li>
+          <li>push()</li>
+          <li>pop()
+            <ul>
+              <li>消费者</li>
+              <li>如果当前队列没有元素，将会等待条件变量</li>
+              <li>如果有元素，取出队首的元素，使用循环数组模拟的队列</li>
+            </ul>
+          </li>
+          <li>pop2()
+            <ul>
+              <li>超时处理</li>
+              <li>在本项目中没有使用到</li>
+              <li>在pthread_cond_wait基础上增加了等待的时间，只指定时间内能抢到互斥锁即可</li>
+            </ul>
+          </li>
+        </ul>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -262,7 +306,12 @@ pthread_mutex_unlock(&#x26;mutex);
                 <li><a href="#为什么使用生产者-消费者模型" class="tocs-link">为什么使用生产者-消费者模型</a></li>
               </ol>
             </li>
-            <li><a href="#阻塞队列" class="tocs-link">阻塞队列</a></li>
+            <li><a href="#阻塞队列" class="tocs-link">阻塞队列</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#自定义队列" class="tocs-link">自定义队列</a></li>
+                <li><a href="#功能实现" class="tocs-link">功能实现</a></li>
+              </ol>
+            </li>
           </ol>
         </aside>
       </nav>
