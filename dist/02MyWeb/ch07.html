@@ -65,7 +65,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <aside class="sidebar" role="navigation">
           <div>
             <a href="index.html" class="">↩️README</a>
-            <a href="ch00.html" class="">CPP语法</a>
+            <a href="ch00.html" class="">环境配置</a>
             <a href="ch01.html" class="">线程同步机制封装类</a>
             <a href="ch02.html" class="">半同步/半反应堆线程池</a>
             <a href="ch03.html" class="">I/O多路复用</a>
@@ -76,6 +76,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <a href="ch08.html" class="">日志系统 - 2</a>
             <a href="ch09.html" class="">数据库连接池</a>
             <a href="ch010.html" class="">注册登录</a>
+            <a href="ch011.html" class="">压力测试</a>
           </div>
         </aside>
       </div>
@@ -105,6 +106,9 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <h2 id="单例模式"><a aria-hidden="true" tabindex="-1" href="#单例模式" class="anchor"><span class="icon icon-link"></span></a>单例模式</h2>
         <p>单例模式作为最常用的设计模式之一，保证一个类仅有一个实例，并提供一个访问它的全局访问点，该实例被所有程序模块共享。</p>
         <p>实现思路：私有化它的构造函数，以防止外界创建单例类的对象；使用类的<strong>私有静态指针变量</strong>指向类的唯一实例，并用一个公有的静态方法获取该实例。</p>
+        <blockquote>
+          <p>static保证全局只有一个实例。</p>
+        </blockquote>
         <p>实现方法，分别是懒汉和饿汉模式。</p>
         <ul>
           <li>
@@ -117,6 +121,9 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <blockquote>
           <p>构造函数私有化后，不能在外部实例化这个对象的类。在类内实例化一个对象，然后返回一个对于该对象的引用。</p>
           <p>这样做的优点是，在内存里只有一个实例，减少了内存的开销，尤其是频繁的创建和销毁实例（比如管理学院首页页面缓存）；避免对资源的多重占用。</p>
+        </blockquote>
+        <blockquote>
+          <p>我的理解是通过单例模式，避免了重复的创建和构造，只需要一个实例完成日志文件的读写操作。</p>
         </blockquote>
         <h3 id="懒汉模式"><a aria-hidden="true" tabindex="-1" href="#懒汉模式" class="anchor"><span class="icon icon-link"></span></a>懒汉模式</h3>
         <ol>

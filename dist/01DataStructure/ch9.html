@@ -819,6 +819,12 @@ dp[i][j] = dp[i-1][j-1] + 1;//替换一个字符，此时不用增加元素，�
           <p>主要是没有理解这里dp数组的含义，表示当前当前位置可围成的正方形的边长。</p>
           <p>转移方程，当前字符是1时，可以由上方，左上方，左方的最小值决定（木桶效应），此外当<code>i == 0 || j == 0</code>，显然只能为1。当前字符为0时，肯定为0。</p>
         </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/maximum-product-subarray">152. 乘积最大子数组</a></strong></p>
+        <blockquote>
+          <p>最大值再乘上一个负数可能变为最小值，最小值同样可能变为最大值。</p>
+          <p>因此维护一个maxNum，和一个minNum，<code>max(max(nums[i],nums[i]*f[i-1]),nums[i]*d[i-1]);</code>，表示从当前数开始，或者最小数乘负数更大，最大数乘整数更大。</p>
+          <p>由于新状态只与上一个状态有关，因此这里可以使用滚动数据，节省了空间，这样时间复杂度是O(n)，空间复杂度为O(1)。</p>
+        </blockquote>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">

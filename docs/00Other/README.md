@@ -6,6 +6,8 @@ Do sth for fun
 
 ![](http://pic.shixiaocaia.fun/202301241635615.png)
 
+### [计算机教育中缺失的一课](https://missing-semester-cn.github.io/)
+
 ### 编程语言 
 
 **C ++**
@@ -19,6 +21,8 @@ Do sth for fun
 ✅侯捷《C++面向对象高级编程》
 
 ⬜侯捷《C++STL》
+
+**Go**
 
 ### 计算机网络
 
@@ -48,7 +52,7 @@ Do sth for fun
 
 ⬜CSAPP
 
-⬜操作系统内核[来自MIT的结课大作业MIT 6.828](https://github.com/woai3c/MIT6.828)
+⬜[MIT 6.828大作业-操作系统内核](https://github.com/woai3c/MIT6.828)
 
 ### 数据库
 
@@ -109,18 +113,14 @@ Docker/Grafana...
 
 ### WebServer
 
-> 项目资料多，重心放在技术难点、优化上。
->
-> [实现文档](https://docsify.shixiaocaia.fun/#/02MyWeb/README)。
->
-> 补充一个：真的难从0开始搭建自己的服务器框架：https://github.com/sylar-yin/sylar
+[TinyWebServer](https://github.com/qinguoyi/TinyWebServer)
 
 ###  STL
 
 [Github项目](https://github.com/Alinshans/MyTinySTL)
 
 
-### 手把手教你从零开始实现一个 JSON
+###  JSON
 
 [Github项目](https://github.com/miloyip/json-tutorial)
 
