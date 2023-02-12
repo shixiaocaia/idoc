@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>类 iDoc</title>
-    <meta name="description" content="函数只能定义一次，但可以声明多次，在头文件中进行函数声明，在源文件中定义。">
+    <title>CPP iDoc</title>
+    <meta name="description" content="在计算机科学中，trie，又称前缀树或字典树，是一种有序树，用于保存关联数组，其中的键通常是字符串。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -46,13 +46,13 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <div class="content">
           <ul class="menu">
             <li><a href="../index.html" target="" class="">Home</a></li>
-            <li><a href="index.html" target="" class="active">Cpp</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
             <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
             <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
             <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
             <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
             <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
-            <li><a href="../00Other/index.html" target="" class="">Other</a></li>
+            <li><a href="index.html" target="" class="active">Other</a></li>
           </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
             </svg></a>
@@ -65,50 +65,29 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <aside class="sidebar" role="navigation">
           <div>
             <a href="index.html" class="">↩️README</a>
-            <label>C++ primer</label>
-            <a href="ch00.html" class="">语法问题</a>
-            <a href="ch01.html" class="">指针&#x26;引用</a>
-            <a href="ch02.html" class="">函数</a>
-            <a href="ch03.html" class="">类</a>
-            <a href="ch10.html" class="">模板</a>
-            <a href="ch15.html" class="">异常处理</a>
-            <a href="ch16.html" class="">内存管理</a>
-            <label>STL</label>
-            <a href="ch20.html" class="">标准库</a>
-            <a href="ch21.html" class="">容器</a>
-            <label>Effective C++</label>
-            <a href="ch25.html" class="">条款1-25</a>
-            <label>读万里书</label>
-            <a href="ch31.html" class="">Effective C++</a>
+            <a href="vim.html" class="">Vim</a>
+            <a href="git.html" class="">Git</a>
           </div>
         </aside>
       </div>
       <markdown-style>
-        <h1 id="类"><a aria-hidden="true" tabindex="-1" href="#类" class="anchor"><span class="icon icon-link"></span></a>类</h1>
-        <h2 id="构造函数"><a aria-hidden="true" tabindex="-1" href="#构造函数" class="anchor"><span class="icon icon-link"></span></a>构造函数</h2>
-        <blockquote>
-          <ul>
-            <li>为了避免构造函数被用于隐式类型转换，通常会声明为<code>explict</code>。</li>
-          </ul>
-        </blockquote>
-        <h2 id="虚函数和纯虚函数"><a aria-hidden="true" tabindex="-1" href="#虚函数和纯虚函数" class="anchor"><span class="icon icon-link"></span></a>虚函数和纯虚函数</h2>
+        <h3 id="工作内容"><a aria-hidden="true" tabindex="-1" href="#工作内容" class="anchor"><span class="icon icon-link"></span></a>工作内容</h3>
         <ul>
-          <li>声明不同，虚函数是<code>virtual void funtion1(){};</code> ，纯虚函数是<code>virtual void funtion1()=0;</code> ，</li>
-          <li>虚函数必须实现的，哪怕是空实现，如果不实现，编译器会报错；纯虚函数一定没有实现，只是一个接口，用来规范派生类的行为。包含纯虚函数的类是抽象类，抽象类不能定义实例，但可以声明指向实现该抽象类的具体类的指针或引用。</li>
-          <li>虚函数在子类里面可以不重载；但纯虚必须在子类去实现；对于虚函数来说，父类和子类都有各自的版本。由多态方式调用的时候动态绑定。实现了纯虚函数的子类，该纯虚函数在子类中就编程了虚函数，子类的子类即孙子类可以覆盖该虚函数，由多态方式调用的时候动态绑定。</li>
           <li>
-            虚函数是C++中用于实现多态(polymorphism)的机制。核心理念就是通过基类访问派生类定义的函数。
-            在有动态分配堆上内存的时候，析构函数必须是虚函数，但没有必要是纯虚的。
+            <p>数据面：称为MOSN，是处理应用数据请求的一个独立代理模块，脱离于应用，为应用提供请求代理及一些复杂通信逻辑处理。</p>
           </li>
-          <li>友元不是成员函数，只有成员函数才可以是虚拟的，因此友元不能是虚拟函数。但可以通过让友元函数调用虚拟成员函数来解决友元的虚拟问题。</li>
-          <li>析构函数应当是虚函数，将调用相应对象类型的析构函数，因此，如果指针指向的是子类对象，将调用子类的析构函数，然后自动调用基类的析构函数。避免了”<strong>局部析构</strong>“问题。</li>
+          <li>
+            <p>控制面：称为SOFAMesh，管理应用配置及业务规则等（例如业务开关、服务路由规则），通过下发配置，“指挥”数据面去执行，满足不同阶段不同实现的业务支持。</p>
+          </li>
         </ul>
+        <h3 id="trie树"><a aria-hidden="true" tabindex="-1" href="#trie树" class="anchor"><span class="icon icon-link"></span></a>trie树</h3>
+        <p>在计算机科学中，trie，又称前缀树或字典树，是一种有序树，用于保存关联数组，其中的键通常是字符串。</p>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#构造函数" class="tocs-link">构造函数</a></li>
-            <li><a href="#虚函数和纯虚函数" class="tocs-link">虚函数和纯虚函数</a></li>
+            <li><a href="#工作内容" class="tocs-link">工作内容</a></li>
+            <li><a href="#trie树" class="tocs-link">trie树</a></li>
           </ol>
         </aside>
       </nav>

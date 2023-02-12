@@ -557,7 +557,7 @@ void foo ( void )
               <td>返回void*指针,并且需要强转</td>
             </tr>
             <tr>
-              <td>调用构造</td>
+              <td>先分配内存，再调用构造</td>
               <td>不调用构造</td>
             </tr>
             <tr>
@@ -567,6 +567,18 @@ void foo ( void )
             <tr>
               <td>是一个运算符</td>
               <td>是一个函数</td>
+            </tr>
+            <tr>
+              <td>不需要指定</td>
+              <td>指定分配内存的大小</td>
+            </tr>
+            <tr>
+              <td>new作为操作符可以被重载</td>
+              <td>不可以重载</td>
+            </tr>
+            <tr>
+              <td>从自由存储区为对象分配内存</td>
+              <td>从堆区分配内存</td>
             </tr>
           </tbody>
         </table>

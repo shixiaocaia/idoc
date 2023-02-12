@@ -123,17 +123,44 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <h3 id="中继代理"><a aria-hidden="true" tabindex="-1" href="#中继代理" class="anchor"><span class="icon icon-link"></span></a>中继代理</h3>
         <p>现实当中不可能给每个网络都设置DHCP服务器，而路由器又有<strong>隔离广播域</strong>的作用，因此要给路由器设定DHCP中级路由代理。</p>
         <h2 id="域名系统"><a aria-hidden="true" tabindex="-1" href="#域名系统" class="anchor"><span class="icon icon-link"></span></a>域名系统</h2>
-        <p>实际使用可以通过IP地址访问目的主机，但是IP地址不利于记忆，所以一般使用域名系统来访问。</p>
+        <p><strong>域名</strong>由若干个英文字符串组成（不区分大小写），各字符串之间用点号『.』分隔连接，其中越靠右的表示域名级别越高。域名级别最低的写在最左边。</p>
         <blockquote>
-          <p>域名级别最低的写在最左边。</p>
+          <p><a href="http://www.baidu.com">www.baidu.com</a></p>
+          <p>其中 <em>com</em> 是顶级域名（一级域名），<em>baidu</em> 是二级域名，<em>www</em> 是三级域名。</p>
         </blockquote>
-        <p><strong>域名解析</strong></p>
-        <p>查询方式有递归和迭代查询。</p>
+        <p><strong>域名服务器</strong>（也称为 DNS 服务器）负责存储域名和 IP 地址的映射关系，当我们需要获取某个域名对应的 IP 地址时，只需要从域名服务器中查询即可。</p>
+        <p>由于域名非常非常多，如果都存放在一台域名服务器中，那么不仅查询速度慢，服务器压力大，而且难以保证服务的可靠性。因此，<strong>DNS 采用了分布式的设计方案，大量的域名服务器之间通过<code>层次</code>方式组织，分布在全世界范围内。</strong></p>
+        <p><strong>域名解析流程</strong></p>
+        <p>
+          <img src="http://pic.shixiaocaia.fun/202302122034697.gif" alt="img">
+        </p>
+        <ol>
+          <li>请求主机向本地域名服务器发送 DNS 查询报文，询问 <em><a href="http://www.baidu.com">www.baidu.com</a></em> 的 IP 地址是什么；</li>
+          <li>本地域名服务器转发此查询报文到<strong>根域名服务器</strong>；</li>
+          <li><strong>根域名服务器</strong>发现要查询的顶级域名为 <em>com</em>，于是向本地域名服务器发送响应报文，报文中封装了负责 <em>com</em> 域的顶级域名服务器的 IP 地址列表；</li>
+          <li>本地域名服务器收到根域名服务器响应的报文后，选择其中一个<strong>顶级域名服务器</strong>的 IP 地址，并向其发送查询报文；</li>
+          <li><strong>顶级域名服务器</strong>发现要查询的二级域名为 <em>baidu</em>，于是向本地域名服务器发送响应报文，报文中封装了负责<em>baidu.com</em> 域的权威域名服务器的 IP 地址列表；</li>
+          <li>本地域名服务器收到顶级域名服务器响应的报文后，选择其中一个<strong>权威域名服务器</strong>的 IP 地址，并向其发送查询报文；</li>
+          <li><strong>权威域名服务器</strong>通过查询数据库，找到 <em><a href="http://www.baidau.com">www.baidau.com</a></em> 的 IP 地址，并将此信息封装为一个响应报文，发送给本地域名服务器；</li>
+          <li>本地域名服务器将响应报文发送给原请求主机。我们的主机就知道了百度的 IP 地址，DNS 查询过程结束。</li>
+        </ol>
         <blockquote>
+          <p>整个过程中，请求主机与本地域名服务器之间的交互称为<code>递归查询</code>，而本地域名服务器与域名服务器层次结构中相关服务器的交互称为<code>迭代查询</code>。</p>
           <p>递归方式：从主机到本地（本区域服务器）去查询，然后去根域名服务器，顶级域名服务器，查到再向上返回。</p>
           <p>迭代方式：不断告诉你去哪里查，及时反馈，再去下一个地方查，再反馈。</p>
         </blockquote>
         <p>为了减轻服务器的负担，域名服务器（例如本地区服务器）使用了高速缓存，用来存放最近查询过的域名以及映射信息，这样就不用一级级查找了。</p>
+        <p><strong>请求主机是如何知道本地域名服务器的 IP 地址的？</strong></p>
+        <p>当用户插上网线或者连上 WIFI 后，电脑会通过 DHCP 协议分配一个 IP 地址，与此同时，也会获取到本地域名服务器的 IP 地址！</p>
+        <p><strong>本地域名服务器是如何知道根域名服务器的 IP 地址的？</strong></p>
+        <p>因特网上一共有 13 个根域名服务器，它们的 IP 地址是固定不变的，因此被集成在了操作系统中，每台电脑都知道！</p>
+        <p>为了解析出百度域名的 IP 地址，一共发送了 8 份 DNS 报文。用户本来只是想和百度的服务器进行交互，却耗费了大量的时间进行域名解析，<strong>如果每次都这样搞，岂不是得慢死？因此就需要有一些提升域名解析速度的方式。</strong></p>
+        <h3 id="提升冲浪速度"><a aria-hidden="true" tabindex="-1" href="#提升冲浪速度" class="anchor"><span class="icon icon-link"></span></a>提升冲浪速度</h3>
+        <ul>
+          <li>DNS主要使用UDP，辅助域名服务器定时与主服务器交换信息实现同步，传输数据主要是TCP，UDP报文相比TC报文传输更快。</li>
+          <li>使用缓存技术，当用户访问了某个网站后，本地域名服务器会将解析出的域名和 IP 地址的映射关系缓存一定时间。<strong>在缓存过期前，用户再访问相同网站时，本地域名服务器就可以直接返回查询结果</strong>，而无需再去询问根域名服务器、顶级域名服务器等，这样就能大大减少传输的 DNS 报文数量！</li>
+          <li>切换本地域名服务器，防止自动获取的本地域名服务器过差。</li>
+        </ul>
         <h2 id="其他概念"><a aria-hidden="true" tabindex="-1" href="#其他概念" class="anchor"><span class="icon icon-link"></span></a>其他概念</h2>
         <ul>
           <li>
@@ -168,7 +195,11 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                 <li><a href="#中继代理" class="tocs-link">中继代理</a></li>
               </ol>
             </li>
-            <li><a href="#域名系统" class="tocs-link">域名系统</a></li>
+            <li><a href="#域名系统" class="tocs-link">域名系统</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#提升冲浪速度" class="tocs-link">提升冲浪速度</a></li>
+              </ol>
+            </li>
             <li><a href="#其他概念" class="tocs-link">其他概念</a></li>
           </ol>
         </aside>
