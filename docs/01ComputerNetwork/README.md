@@ -2,15 +2,7 @@
 
 ✅深入浅出计算机网络
 
-✅图解HTTP
-
-⬜图解TCP/IP
-
-⬜[小林图解网络](https://xiaolincoding.com/network/)
-
 ⬜[技术蛋](https://space.bilibili.com/327247876/)
-
----
 
 ⬜计算机⽹络 - ⾃顶向下⽅法
 
@@ -18,7 +10,9 @@
 
 ## 博客
 
-[一枫说码](https://www.cnblogs.com/yifeng-coding/)
+✅[一枫说码](https://www.cnblogs.com/yifeng-coding/)
+
+✅[小林图解网络](https://xiaolincoding.com/network/)
 
 ## 知轻重
 

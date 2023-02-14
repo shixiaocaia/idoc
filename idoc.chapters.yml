@@ -43,10 +43,7 @@
 - 00CPP/ch31.md: Effective C++
 
 - 01ComputerNetwork/README.md: ↩️README
-- 01ComputerNetwork: 深入浅出计算机网络
-- 01ComputerNetwork/ch04.md: 网络层
-- 01ComputerNetwork/ch05.md: 传输层
-- 01ComputerNetwork/ch06.md: 应用层
+- 01ComputerNetwork/ch00.md: 问题收集
 - 01ComputerNetwork: HTTP篇 
 - 01ComputerNetwork/ch11.md: 占个坑位
 - 01ComputerNetwork: TCP篇
