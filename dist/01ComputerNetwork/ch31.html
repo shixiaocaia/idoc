@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP知识全家桶 iDoc</title>
+    <meta name="description" content="IP 在 TCP/IP 参考模型中处于第三层，也就是网络层。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+    <script src="../js/jquery.min.js?v=1.21.13"></script>
+    <script src="../js/fancybox.umd.js?v=1.21.13"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="index.html" target="" class="active">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+            <li><a href="../00Other/index.html" target="" class="">Other</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <label>深入浅出计算机网络</label>
+            <a href="ch04.html" class="">网络层</a>
+            <a href="ch05.html" class="">传输层</a>
+            <a href="ch06.html" class="">应用层</a>
+            <label>HTTP篇</label>
+            <a href="ch11.html" class="">占个坑位</a>
+            <label>TCP篇</label>
+            <a href="ch21.html" class="">占个坑位</a>
+            <label>IP篇</label>
+            <a href="ch31.html" class="">IP知识全家桶</a>
+            <a href="ch32.html" class="">ping的工作原理</a>
+            <label>综合篇</label>
+            <a href="ch00.html" class="">身边的计网</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="ip知识全家桶"><a aria-hidden="true" tabindex="-1" href="#ip知识全家桶" class="anchor"><span class="icon icon-link"></span></a>IP知识全家桶</h1>
+        <h2 id="ip的基本认识"><a aria-hidden="true" tabindex="-1" href="#ip的基本认识" class="anchor"><span class="icon icon-link"></span></a>IP的基本认识</h2>
+        <p>IP 在 TCP/IP 参考模型中处于第三层，也就是<em>网络层</em>。</p>
+        <p>网络层的主要作用是：实现主机与主机之间的通信，也叫<em>点对点（end to end）通信</em>。</p>
+        <blockquote>
+          <p>网络层与数据链路层有什么关系呢？</p>
+          <ul>
+            <li>
+              <p>IP(网络层)用于实现主机与主机之间的通信</p>
+            </li>
+            <li>
+              <p>MAC(数据链路层)实现「直连」的两个设备之间通信。</p>
+            </li>
+          </ul>
+        </blockquote>
+        <p>在网络中数据包传输中也是如此，源IP地址和目标IP地址在传输过程中是不会变化的（前提：没有使用 NAT 网络），只有源 MAC 地址和目标 MAC 一直在变化。</p>
+        <h2 id="ip地址的基础知识"><a aria-hidden="true" tabindex="-1" href="#ip地址的基础知识" class="anchor"><span class="icon icon-link"></span></a>IP地址的基础知识</h2>
+        <p>在 TCP/IP 网络通信时，为了保证能正常通信，每个设备都需要配置正确的 IP 地址，否则无法实现正常的通信。</p>
+        <p>IP 地址（IPv4 地址）由 <code>32</code> 位正整数来表示，IP 地址在计算机是以二进制的方式处理的。</p>
+        <p>而人类为了方便记忆采用了<strong>点分十进制</strong>的标记方式，也就是将 32 位 IP 地址以每 8 位为组，共分为 <code>4</code> 组，每组以「<code>.</code>」隔开，再将每组转换成十进制。</p>
+        <p>理论上32位的IP地址只能够大约43亿计算机连接网络，但是实际中不是这样分配的，实际中是根据<strong>网卡</strong>分配IP地址。</p>
+        <h3 id="ip地址分类"><a aria-hidden="true" tabindex="-1" href="#ip地址分类" class="anchor"><span class="icon icon-link"></span></a>IP地址分类</h3>
+        <h4 id="abcde"><a aria-hidden="true" tabindex="-1" href="#abcde" class="anchor"><span class="icon icon-link"></span></a>ABCDE</h4>
+        <p>最早IP 地址分类成了 5 种类型，分别是 A 类、B 类、C 类、D 类、E 类。</p>
+        <p>每个地址划分为网络号和地址号两部分。</p>
+        <blockquote>
+          <p>网络号：负责标识该 IP 地址是属于哪个「子网」的；</p>
+          <p>主机号：负责标识同一「子网」下的不同主机，用来区分设备。</p>
+        </blockquote>
+        <p>
+          <img src="http://pic.shixiaocaia.fun/202301301043432.png" alt="">
+        </p>
+        <p>每一类地址的最大主机数是根据主机号位数再减去(主机号)全0和全1的网络地址和广播地址。</p>
+        <blockquote>
+          <p>广播地址用于在同一个链路中相互连接的主机之间发送数据包。</p>
+          <p>本地广播（本网络内）：网络地址为 192.168.0.0/24 向192.168.0.255/24</p>
+          <p>直接广播（跨网络）：网络地址为 192.168.0.0/24 向192.168.1.255/24</p>
+        </blockquote>
+        <p>而 D 类和 E 类地址是没有主机号的，所以不可用于主机 IP，D 类常被用于<strong>多播</strong>，E 类是预留的分类，暂时未使用。</p>
+        <blockquote>
+          <p>多播用于将包发送给特定组内的所有主机。</p>
+        </blockquote>
+        <p>由于广播无法穿透路由，若想给其他网段发送同样的包，就可以使用可以穿透路由的多播。</p>
+        <blockquote>
+          <ol>
+            <li>IP分类后，有利于更快找到网络地址和主机地址。</li>
+            <li>上述ABCDE分类后，在同一网络下不利于继续分类，缺少地址的灵活性，不同类的地址数量不能很好的适应地址需求。</li>
+          </ol>
+        </blockquote>
+        <h4 id="无分类地址地址-cidr"><a aria-hidden="true" tabindex="-1" href="#无分类地址地址-cidr" class="anchor"><span class="icon icon-link"></span></a>无分类地址地址 CIDR</h4>
+        <p>这种方式不再有分类地址的概念，32 比特的 IP 地址被划分为两部分，前面是<strong>网络号</strong>，后面是<strong>主机号</strong>。</p>
+        <p>将子网掩码和 IP 地址按位计算 AND，就可得到网络号。</p>
+        <blockquote>
+          <p>通过前面的网络号判断计算机是否在一个处于同一个广播域内，即网络地址是否相同。如果网络地址相同，表明接受方在本网络上，那么可以把数据包直接发送到目标主机。</p>
+          <p>路由器也是经过网络号来匹配转发到对应子网中。</p>
+        </blockquote>
+        <p>通过子网掩码可以对子网在进行划分，对主机号进行划分使用。比如可以借两位主机号，从而将子网划分为四个段。</p>
+        <h4 id="公有ip地址和私有ip地址"><a aria-hidden="true" tabindex="-1" href="#公有ip地址和私有ip地址" class="anchor"><span class="icon icon-link"></span></a>公有IP地址和私有IP地址</h4>
+        <p>往往我们在学校是使用的是私有IP地址，当我们访问网络时，网站看到是一个公网IP地址。</p>
+        <p>私有 IP 地址通常是内部的 IT 人员管理，公有 IP 地址是由 <code>ICANN</code> 组织管理，中文叫「互联网名称与数字地址分配机构」。</p>
+        <blockquote>
+          <p>IPV4地址仍在使用的原因</p>
+          <p>通过将网络分为广域网和局域网来表示更多的主机设备。</p>
+          <ul>
+            <li>同一个局域网内的设备对外使用同一个IP，称为公网IP，在局域网内部的设备IP地址通过路由器进行分配。</li>
+            <li>此外，局域网内还能嵌套局域网，从而表示更多的主机设备。</li>
+            <li>根据需要不同的公网IP数量，在选择合适的ABC类IP地址进行划分，常见的使用C类，那么IP地址的开头就是192.168开头。</li>
+          </ul>
+          <p>由此，IPv4地址到现如今还在继续使用。</p>
+        </blockquote>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#ip的基本认识" class="tocs-link">IP的基本认识</a></li>
+            <li><a href="#ip地址的基础知识" class="tocs-link">IP地址的基础知识</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#ip地址分类" class="tocs-link">IP地址分类</a>
+                  <ol class="tocs-list is-collapsed">
+                    <li><a href="#abcde" class="tocs-link">ABCDE</a></li>
+                    <li><a href="#无分类地址地址-cidr" class="tocs-link">无分类地址地址 CIDR</a></li>
+                    <li><a href="#公有ip地址和私有ip地址" class="tocs-link">公有IP地址和私有IP地址</a></li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>

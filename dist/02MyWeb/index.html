@@ -187,8 +187,16 @@ string databasename = &#x22;yourdb&#x22;;
           <li>各种锁的机制，优缺点，使用场景是什么</li>
           <li>Webbench错误</li>
           <li>如何解决段错误</li>
-          <li>后期重做时，进行压力测试，理解性能的bian'hua</li>
+          <li>后期重做时，进行压力测试，理解性能的变化</li>
         </ol>
+        <p><strong>可改进点</strong></p>
+        <ul>
+          <li>map管理http连接取代固定数组，用智能指针管理连接生命期，避免串话和内存泄漏：</li>
+          <li>基于vector
+            <char>封装Buffer作为http连接的输入输出缓冲，基于readv高效读取，支持自动扩容；</char>
+          </li>
+          <li>日志系统改为前端和后端双授冲，避免生产者和消费者的锁竞争，进一步提高写效率</li>
+        </ul>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">

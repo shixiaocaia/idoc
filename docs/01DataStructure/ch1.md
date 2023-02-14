@@ -304,6 +304,93 @@ while j < len(nums):
 
 > 滑动窗口，当出现重现字符时，更新左边界，如果没有重复出现就更新答案。
 
+## 前缀和
+
+前缀和主要适用的场景是原始数组不会被修改的情况下，频繁查询某个区间的累加和。
+
+```cpp
+int subarraySum(int[] nums, int k) {
+    int n = nums.length;
+    // 构造前缀和
+    int[] sum = new int[n + 1];
+    sum[0] = 0; 
+    for (int i = 0; i < n; i++)
+        sum[i + 1] = sum[i] + nums[i];
+    
+    int ans = 0;
+    // 穷举所有子数组
+    for (int i = 1; i <= n; i++)
+        for (int j = 0; j < i; j++)
+            // sum of nums[j..i-1]
+            if (sum[i] - sum[j] == k)
+                ans++;
+ 
+    return ans;
+}
+```
+
+[560. 和为K的子数组](https://leetcode.cn/problems/subarray-sum-equals-k)
+
+直接的前缀和TL，O(n^2)。
+
+![无标题-2023-02-13-1914](http://pic.shixiaocaia.fun/202302131920381.png)
+
+
+
+## 差分
+
+差分数组的主要适用场景是频繁对原始数组的某个区间的元素进行增减。
+
+```cpp
+class Difference {
+    // 差分数组
+    private int[] diff;
+
+    public Difference(int[] nums) {
+        assert nums.length > 0;
+        diff = new int[nums.length];
+        // 构造差分数组
+        diff[0] = nums[0];
+        for (int i = 1; i < nums.length; i++) {
+            diff[i] = nums[i] - nums[i - 1];
+        }
+    }
+
+    /* 给闭区间 [i,j] 增加 val（可以是负数）*/
+    public void increment(int i, int j, int val) {
+        diff[i] += val;
+        if (j + 1 < diff.length) {
+            diff[j + 1] -= val;
+        }
+    }
+
+    public int[] result() {
+        int[] res = new int[diff.length];
+        // 根据差分数组构造结果数组
+        res[0] = diff[0];
+        for (int i = 1; i < diff.length; i++) {
+            res[i] = res[i - 1] + diff[i];
+        }
+        return res;
+    }
+}
+
+```
+
+```cpp
+diff[i] = num[i] - num[i - 1];
+
+diff[i] += k;
+diff[j] -= k;
+
+num[i] = num[i - 1] + diff[i];
+num[i + 1] = num[i] + diff[i + 1]; //diff[i] + k,导致num[i] + k,后面都加了k
+
+//对diff[j + 1] - k,后面的num[j + 1] - k和前面的+ k抵消。
+```
+
+[1109. 航班预订统计](https://leetcode.cn/problems/corporate-flight-bookings)
+
 ## 模拟
 
 > [LC59.螺旋矩阵2](https://leetcode.cn/problems/spiral-matrix-ii/)

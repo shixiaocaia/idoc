@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>网络层概述 iDoc</title>
-    <meta name="description" content="网络层位于OSI体系结构的第三层，主要任务就是将分组从源主机经过多个网络和多段链路传输到目的主机，可以将该任务划分为分组转发和路由选择两种重要的功能，向上提供面向连接的虚电路服务，无连接的数据报服务。">
+    <title>网络层 iDoc</title>
+    <meta name="description" content="作为应用间数据传输的媒介，帮助实现应用到应用的通信，而实际的传输功能就交给下一层，也就是网络层（Internet Layer）。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -65,20 +65,25 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <aside class="sidebar" role="navigation">
           <div>
             <a href="index.html" class="">↩️README</a>
-            <a href="ch00.html" class="">身边的计网</a>
             <label>深入浅出计算机网络</label>
             <a href="ch04.html" class="">网络层</a>
             <a href="ch05.html" class="">传输层</a>
             <a href="ch06.html" class="">应用层</a>
             <label>HTTP篇</label>
+            <a href="ch11.html" class="">占个坑位</a>
             <label>TCP篇</label>
+            <a href="ch21.html" class="">占个坑位</a>
             <label>IP篇</label>
+            <a href="ch31.html" class="">IP知识全家桶</a>
+            <a href="ch32.html" class="">ping的工作原理</a>
             <label>综合篇</label>
+            <a href="ch00.html" class="">身边的计网</a>
           </div>
         </aside>
       </div>
       <markdown-style>
-        <h1 id="网络层概述"><a aria-hidden="true" tabindex="-1" href="#网络层概述" class="anchor"><span class="icon icon-link"></span></a>网络层概述</h1>
+        <h1 id="网络层"><a aria-hidden="true" tabindex="-1" href="#网络层" class="anchor"><span class="icon icon-link"></span></a>网络层</h1>
+        <p>作为应用间数据传输的媒介，帮助实现应用到应用的通信，而实际的传输功能就交给下一层，也就是<strong>网络层</strong>（<em>Internet Layer</em>）。</p>
         <h2 id="提供服务"><a aria-hidden="true" tabindex="-1" href="#提供服务" class="anchor"><span class="icon icon-link"></span></a>提供服务</h2>
         <p>网络层位于OSI体系结构的第三层，主要任务就是将分组从源主机经过多个网络和多段链路传输到目的主机，可以将该任务划分为<strong>分组转发</strong>和<strong>路由选择</strong>两种重要的功能，向上提供面向连接的<strong>虚电路</strong>服务，无连接的<strong>数据报</strong>服务。</p>
         <h3 id="分组转发"><a aria-hidden="true" tabindex="-1" href="#分组转发" class="anchor"><span class="icon icon-link"></span></a>分组转发</h3>
@@ -109,52 +114,20 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li>通信结束后，没有需要释放的连接</li>
         </ol>
         <p>由于网络自身不提供端到端的可靠传输服务，这就使得网络中的路由器可以做得比较简单，大大降低了网络造价。</p>
-        <h2 id="网际协议ip"><a aria-hidden="true" tabindex="-1" href="#网际协议ip" class="anchor"><span class="icon icon-link"></span></a>网际协议（IP）</h2>
-        <p>网际协议（Internet Protocol，IP）是TCP/IP体系结构网际层中的核心协议。</p>
-        <p>要将众多的异构型网络都互连起来，并且能够互相通信，则会面临许多需要解决的问题。</p>
-        <ul>
-          <li>不同的网络接入机制</li>
-          <li>不同的差错恢复方法</li>
-          <li>不同的路由选择技术</li>
-          <li>不同的寻址方案</li>
-          <li>不同的最大分组长度</li>
-          <li>不同的服务（面向连接服务和无连接服务）</li>
-        </ul>
-        <h3 id="ipv4地址的划分"><a aria-hidden="true" tabindex="-1" href="#ipv4地址的划分" class="anchor"><span class="icon icon-link"></span></a>IPv4地址的划分</h3>
-        <p>IPv4地址是给因特网（Internet）上的每一个主机（或路由器）的每一个接口分配的一个在全世界范围内唯一的32比特的标识符。</p>
-        <blockquote>
-          <p>网络号：标志主机（或路由器）的接口所连接到的网络段</p>
-          <p>主机号：标志主机（或路由器）的接口，用来区分设备</p>
-        </blockquote>
-        <img src="http://pic.shixiaocaia.fun/202301301043432.png" alt="image-20221019143705261" style="zoom:50%;">
-        <img src="http://pic.shixiaocaia.fun/202301301043090.png" alt="image-20221019143809984" style="zoom:50%;">
-        <img src="http://pic.shixiaocaia.fun/202301301043777.png" alt="image-20221019144013101" style="zoom:50%;">
-        <blockquote>
-          <p>A类地址的，127，0网络号保留，不可分配。</p>
-          <p>ABC地址的，主机号全0作为网络地址，全1作为广播地址。</p>
-        </blockquote>
-        <h3 id="分类编址"><a aria-hidden="true" tabindex="-1" href="#分类编址" class="anchor"><span class="icon icon-link"></span></a>分类编址</h3>
-        <p>上述的最一开始的，划分网络号，然后再分配主机号，造成了大量的IPv4地址浪费。比如一个C类网络号，最多可以分配地址254个，不足以给256个主机分配，得分配一个B类网络号，然后B类网络号使用又绰绰有余。</p>
-        <h3 id="划分子网"><a aria-hidden="true" tabindex="-1" href="#划分子网" class="anchor"><span class="icon icon-link"></span></a>划分子网</h3>
-        <p>可以将多余的主机号选出一部分作为子网号，这样我分配一个B类网络号后，可以划分子网，来给公司的不同局域网分配网络号，而不用重新申请一个新的网络号。</p>
-        <p>子网掩码可以表明分类IPv4地址的主机号部分被借用了几个比特作为子网号。用左起多个连续的比特1对应IPv4地址中的网络号和子网号，后面连续的0作为主机号。</p>
-        <h3 id="无分类编址"><a aria-hidden="true" tabindex="-1" href="#无分类编址" class="anchor"><span class="icon icon-link"></span></a>无分类编址</h3>
-        <p>尽管用划分子网的方法缓解了一部分浪费，但是C类网络中主机号过小还是造成了极大的浪费。</p>
-        <p>因此有了无分类域间路由选择（Classless Inter-Domain Routing，CIDR ）。</p>
-        <p>CIDR将地址划分为网络前缀，主机号，但是网络前缀不定长，配合子网掩码可以得到网络前缀和子网号的长度区别。</p>
-        <blockquote>
-          <p>现代的IP地址划分，采用的是CIDR方式，并将IP地址分为公有IP和私有IP地址，在局域网和广域网间使用。</p>
-        </blockquote>
-        <h2 id="ipv4地址和mac地址"><a aria-hidden="true" tabindex="-1" href="#ipv4地址和mac地址" class="anchor"><span class="icon icon-link"></span></a>IPv4地址和MAC地址</h2>
-        <p><strong>封装的位置</strong></p>
+        <h2 id="ip地址和mac地址"><a aria-hidden="true" tabindex="-1" href="#ip地址和mac地址" class="anchor"><span class="icon icon-link"></span></a>IP地址和MAC地址</h2>
+        <h3 id="封装位置"><a aria-hidden="true" tabindex="-1" href="#封装位置" class="anchor"><span class="icon icon-link"></span></a>封装位置</h3>
         <img src="http://pic.shixiaocaia.fun/202301301043484.png" alt="image-20221020144911905" style="zoom:50%;">
         <blockquote>
           <p>IP地址是由网际层及其以上各层使用的地址，而MAC地址是数据链路层使用的地址。</p>
           <p>源IP地址和目的IP地址被封装在IP数据包的首部，源MAC地址和目的MAC地址被封装在帧的首部。</p>
         </blockquote>
-        <p><strong>数据报传送过程中IPv4地址与MAC地址的变化情况</strong></p>
+        <h3 id="ip寻址"><a aria-hidden="true" tabindex="-1" href="#ip寻址" class="anchor"><span class="icon icon-link"></span></a>IP寻址</h3>
         <img src="http://pic.shixiaocaia.fun/202301301043560.png" alt="image-20221020145323362" style="zoom:50%;">
-        <p>始终以IP地址作为网络中发送接受路径判断的方向标。</p>
+        <p>始终以IP地址作为网络中发送接受路径判断的方向标，这是IP协议的<strong>寻址作用</strong>。</p>
+        <p>但是IP 头部中的接收方 IP 地址表示网络包的目的地，通过这个地址我们就可以判断要将包发到哪里，需要判断发送到以太网中的哪个设备。</p>
+        <blockquote>
+          <p>电脑上的以太网接口，Wi-Fi接口，以太网交换机、路由器上的千兆，万兆以太网口，还有网线，它们都是以太网的组成部分。</p>
+        </blockquote>
         <p>如果仅仅使用MAC地址进行通信，必须考虑以下问题：</p>
         <blockquote>
           <ol>
@@ -221,7 +194,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <blockquote>
           <p>由于网际层并不向其高层提供可靠传输的服务，并且计算首部检验和是一项耗时的操作，因此在IPv6中，路由器不再计算首部检验和，从而更快转发IP数据报。</p>
         </blockquote>
-        <h2 id="ip数据包的发送和转发过程"><a aria-hidden="true" tabindex="-1" href="#ip数据包的发送和转发过程" class="anchor"><span class="icon icon-link"></span></a>IP数据包的发送和转发过程</h2>
+        <h3 id="发送和转发过程"><a aria-hidden="true" tabindex="-1" href="#发送和转发过程" class="anchor"><span class="icon icon-link"></span></a>发送和转发过程</h3>
         <img src="http://pic.shixiaocaia.fun/202301301043654.png" alt="image-20221021140631281" style="zoom:50%;">
         <p>如上图一个小型的互联网的网络拓扑结构。</p>
         <blockquote>
@@ -633,18 +606,18 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                 <li><a href="#无连接的数据报服务" class="tocs-link">无连接的数据报服务</a></li>
               </ol>
             </li>
-            <li><a href="#网际协议ip" class="tocs-link">网际协议（IP）</a>
+            <li><a href="#ip地址和mac地址" class="tocs-link">IP地址和MAC地址</a>
               <ol class="tocs-list is-collapsed">
-                <li><a href="#ipv4地址的划分" class="tocs-link">IPv4地址的划分</a></li>
-                <li><a href="#分类编址" class="tocs-link">分类编址</a></li>
-                <li><a href="#划分子网" class="tocs-link">划分子网</a></li>
-                <li><a href="#无分类编址" class="tocs-link">无分类编址</a></li>
+                <li><a href="#封装位置" class="tocs-link">封装位置</a></li>
+                <li><a href="#ip寻址" class="tocs-link">IP寻址</a></li>
               </ol>
             </li>
-            <li><a href="#ipv4地址和mac地址" class="tocs-link">IPv4地址和MAC地址</a></li>
             <li><a href="#地址解析协议-arp" class="tocs-link">地址解析协议 ARP</a></li>
-            <li><a href="#ip数据报" class="tocs-link">IP数据报</a></li>
-            <li><a href="#ip数据包的发送和转发过程" class="tocs-link">IP数据包的发送和转发过程</a></li>
+            <li><a href="#ip数据报" class="tocs-link">IP数据报</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#发送和转发过程" class="tocs-link">发送和转发过程</a></li>
+              </ol>
+            </li>
             <li><a href="#静态路由转发" class="tocs-link">静态路由转发</a></li>
             <li><a href="#因特网的路由选择协议" class="tocs-link">因特网的路由选择协议</a>
               <ol class="tocs-list is-collapsed">
