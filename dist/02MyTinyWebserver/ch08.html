@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日志类 iDoc</title>
+    <meta name="description" content="用于写入字符串。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+    <script src="../js/jquery.min.js?v=1.21.13"></script>
+    <script src="../js/fancybox.umd.js?v=1.21.13"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+            <li><a href="../00Other/index.html" target="" class="">Other</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper">
+      <markdown-style>
+        <h1 id="日志类"><a aria-hidden="true" tabindex="-1" href="#日志类" class="anchor"><span class="icon icon-link"></span></a>日志类</h1>
+        <h2 id="基础api"><a aria-hidden="true" tabindex="-1" href="#基础api" class="anchor"><span class="icon icon-link"></span></a>基础API</h2>
+        <h3 id="fputs"><a aria-hidden="true" tabindex="-1" href="#fputs" class="anchor"><span class="icon icon-link"></span></a>fputs</h3>
+        <p>用于写入字符串。</p>
+        <h3 id="可变参数"><a aria-hidden="true" tabindex="-1" href="#可变参数" class="anchor"><span class="icon icon-link"></span></a>可变参数</h3>
+        <p>__VA_ARGS__是一个可变参数的宏，定义时宏定义中参数列表的最后一个参数为省略号，在实际使用时会发现有时会加##，有时又不加。</p>
+        <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">#define my_print1(...)  printf(__VA_ARGS__)
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3">//搭配va_list的format使用
+</span><span class="code-line line-number" line="4">#define my_print2(format, ...) printf(format, __VA_ARGS__) 
+</span><span class="code-line line-number" line="5">#define my_print3(format, ...) printf(format, ##__VA_ARGS__)
+</span></code><input type="hidden" value="#define my_print1(...)  printf(__VA_ARGS__)
+
+//搭配va_list的format使用
+#define my_print2(format, ...) printf(format, __VA_ARGS__) 
+#define my_print3(format, ...) printf(format, ##__VA_ARGS__)
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>__VA_ARGS__宏前面加上##的作用在于，当可变参数的个数为0时，这里printf参数列表中的的##会把前面多余的","去掉，否则会编译出错，建议使用后面这种，使得程序更加健壮。</p>
+        <hr>
+        <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">#include &#x3C;stdarg.h>			     //引入头文件
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3">void fun1(int a, double b, ...); //给出确定的几个参数，其他用省略号
+</span><span class="code-line line-number" line="4">void fun2(int a ...);            //省略号前有或者没有逗号都是可以的
+</span><span class="code-line line-number" line="5">void fun3(...);                  //也可以不确定任何参数，但和没有参数是不一样的
+</span></code><input type="hidden" value="#include <stdarg.h>			     //引入头文件
+
+void fun1(int a, double b, ...); //给出确定的几个参数，其他用省略号
+void fun2(int a ...);            //省略号前有或者没有逗号都是可以的
+void fun3(...);                  //也可以不确定任何参数，但和没有参数是不一样的
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>使用步骤：</p>
+        <p>a）定义一个va_list类型的变量，变量是指向参数的指针。</p>
+        <p>b）va_start初始化刚定义的变量，第二个参数是最后一个显式声明的参数。</p>
+        <p>c）va_arg返回变长参数的值，第二个参数是该变长参数的类型。</p>
+        <p>d）va_end将a)定义的变量重置为NULL，避免内存泄漏。</p>
+        <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">#include &#x3C;stdio.h>
+</span><span class="code-line line-number" line="2">#include &#x3C;stdarg.h>
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4">void print_args(int count, ...);
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6">int main(int argc, char* argv[]) {
+</span><span class="code-line line-number" line="7">	print_args(5,1,2,3,4,5);
+</span><span class="code-line line-number" line="8">	return 0; 
+</span><span class="code-line line-number" line="9">}
+</span><span class="code-line line-number" line="10">
+</span><span class="code-line line-number" line="11">void print_args(int count, ...) {
+</span><span class="code-line line-number" line="12">	int i, value;
+</span><span class="code-line line-number" line="13">	va_list arg_ptr;
+</span><span class="code-line line-number" line="14">	va_start(arg_ptr, count);
+</span><span class="code-line line-number" line="15">	for(i=0; i&#x3C;count; i++) {
+</span><span class="code-line line-number" line="16">		value = va_arg(arg_ptr,int);
+</span><span class="code-line line-number" line="17">		printf("position %d = %d\n", i+1, value);
+</span><span class="code-line line-number" line="18">	}
+</span><span class="code-line line-number" line="19">	va_end(arg_ptr);
+</span><span class="code-line line-number" line="20">}
+</span></code><input type="hidden" value="#include <stdio.h>
+#include <stdarg.h>
+
+void print_args(int count, ...);
+
+int main(int argc, char* argv[]) {
+	print_args(5,1,2,3,4,5);
+	return 0; 
+}
+
+void print_args(int count, ...) {
+	int i, value;
+	va_list arg_ptr;
+	va_start(arg_ptr, count);
+	for(i=0; i<count; i++) {
+		value = va_arg(arg_ptr,int);
+		printf(&#x22;position %d = %d\n&#x22;, i+1, value);
+	}
+	va_end(arg_ptr);
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="fflush"><a aria-hidden="true" tabindex="-1" href="#fflush" class="anchor"><span class="icon icon-link"></span></a>fflush</h3>
+        <p>fflush()会强迫将缓冲区内的数据写回参数stream 指定的文件中，如果参数stream 为NULL，<code>fflush()</code>会将所有打开的文件数据更新。</p>
+        <p>在使用多个输出函数连续进行多次输出到控制台时，有可能下一个数据再上一个数据还没输出完毕，还在输出缓冲区中时，下一个printf就把另一个数据加入输出缓冲区，结果冲掉了原来的数据，出现输出错误。</p>
+        <p>在<code>prinf()</code>后加上<code>fflush(stdout); </code>强制马上输出到控制台，可以避免出现上述错误。</p>
+        <h3 id="snprintf"><a aria-hidden="true" tabindex="-1" href="#snprintf" class="anchor"><span class="icon icon-link"></span></a>snprintf</h3>
+        <pre class="language-c"><code class="language-c code-highlight"><span class="code-line line-number" line="1"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span><span class="token string">&#x3C;stdio></span></span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">int</span> <span class="token function">snprintf</span> <span class="token punctuation">(</span> <span class="token keyword">char</span> <span class="token operator">*</span> s<span class="token punctuation">,</span> <span class="token class-name">size_t</span> n<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">char</span> <span class="token operator">*</span> format<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4"><span class="token macro property"><span class="token directive-hash">#</span><span class="token directive keyword">include</span> <span class="token string">&#x3C;stdio.h></span></span>
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6"><span class="token keyword">int</span> <span class="token function">main</span> <span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="7"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="8">  <span class="token keyword">char</span> buffer <span class="token punctuation">[</span><span class="token number">100</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="9">  <span class="token keyword">int</span> cx<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="10">
+</span><span class="code-line line-number" line="11">  cx <span class="token operator">=</span> <span class="token function">snprintf</span> <span class="token punctuation">(</span> buffer<span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">,</span> <span class="token string">"The half of %d is %d"</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token operator">/</span><span class="token number">2</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="12">
+</span><span class="code-line line-number" line="13">  <span class="token keyword">if</span> <span class="token punctuation">(</span>cx<span class="token operator">>=</span><span class="token number">0</span> <span class="token operator">&#x26;&#x26;</span> cx<span class="token operator">&#x3C;</span><span class="token number">100</span><span class="token punctuation">)</span>      <span class="token comment">// check returned value</span>
+</span><span class="code-line line-number" line="14">
+</span><span class="code-line line-number" line="15">    <span class="token function">snprintf</span> <span class="token punctuation">(</span> buffer<span class="token operator">+</span>cx<span class="token punctuation">,</span> <span class="token number">100</span><span class="token operator">-</span>cx<span class="token punctuation">,</span> <span class="token string">", and the half of that is %d."</span><span class="token punctuation">,</span> <span class="token number">60</span><span class="token operator">/</span><span class="token number">2</span><span class="token operator">/</span><span class="token number">2</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="16">
+</span><span class="code-line line-number" line="17">  <span class="token function">puts</span> <span class="token punctuation">(</span>buffer<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="18">
+</span><span class="code-line line-number" line="19">  <span class="token keyword">return</span> <span class="token number">0</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="20"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="#include<stdio>
+int snprintf ( char * s, size_t n, const char * format, ... );
+
+#include <stdio.h>
+
+int main ()
+{
+  char buffer [100];
+  int cx;
+
+  cx = snprintf ( buffer, 100, &#x22;The half of %d is %d&#x22;, 60, 60/2 );
+
+  if (cx>=0 &#x26;&#x26; cx<100)      // check returned value
+
+    snprintf ( buffer+cx, 100-cx, &#x22;, and the half of that is %d.&#x22;, 60/2/2 );
+
+  puts (buffer);
+
+  return 0;
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>将大小为n的string输出到*s所指的存储区当中。</p>
+        <h2 id="日志类-1"><a aria-hidden="true" tabindex="-1" href="#日志类-1" class="anchor"><span class="icon icon-link"></span></a>日志类</h2>
+        <p>
+          <img src="..\..\..\Code\Typorapic\无标题-2023-02-10-1431.png" alt="">
+        </p>
+        <p>通过局部变量的懒汉单例模式创建日志实例，对其进行初始化生成日志文件后，格式化输出内容，并根据不同的写入方式，完成对应逻辑，写入日志文件。</p>
+        <p>日志类包括但不限于如下方法，</p>
+        <ul>
+          <li>公有的实例获取方法</li>
+          <li>初始化日志文件方法</li>
+          <li>异步日志写入方法，内部调用私有异步方法</li>
+          <li>内容格式化方法</li>
+          <li>刷新缓冲区</li>
+          <li>…</li>
+        </ul>
+        <p><code>init函数</code>实现日志创建、写入方式的判断。</p>
+        <p><code>write_log函数</code>完成写入日志文件中的具体内容，主要实现日志分级、分文件、格式化输出内容。</p>
+        <h3 id="生成日志文件--判断写入方式"><a aria-hidden="true" tabindex="-1" href="#生成日志文件--判断写入方式" class="anchor"><span class="icon icon-link"></span></a>生成日志文件 &#x26;&#x26; 判断写入方式</h3>
+        <p>通过单例模式获取唯一的日志类，调用init方法，初始化生成日志文件，服务器启动按当前时刻创建日志，前缀为时间，后缀为自定义log文件名，并记录创建日志的时间day和行数count。</p>
+        <p>判断file_name如果有<code>/</code>，输出到对应的文件夹中。</p>
+        <p>写入方式通过初始化时是否设置队列大小（表示在队列中可以放几条数据）来判断，若队列大小为0，则为同步，否则为异步。</p>
+        <h3 id="日志分级与分文件"><a aria-hidden="true" tabindex="-1" href="#日志分级与分文件" class="anchor"><span class="icon icon-link"></span></a>日志分级与分文件</h3>
+        <p>日志分级的实现大同小异，一般的会提供五种级别，具体的，</p>
+        <ul>
+          <li>Debug，调试代码时的输出，在系统实际运行时，一般不使用。</li>
+          <li>Warn，这种警告与调试时终端的warning类似，同样是调试代码时使用。</li>
+          <li>Info，报告系统当前的状态，当前执行的流程或接收的信息等。</li>
+          <li>Error和Fatal，输出系统的错误信息。</li>
+        </ul>
+        <p>上述的使用方法仅仅是个人理解，在开发中具体如何选择等级因人而异。项目中给出了除Fatal外的四种分级，实际使用了Debug，Info和Error三种。</p>
+        <p>超行、按天分文件逻辑，具体的，</p>
+        <ul>
+          <li>日志写入前会判断当前day是否为创建日志的时间，行数是否超过最大行限制
+            <ul>
+              <li>若为创建日志时间，写入日志，否则按当前时间创建新log，更新创建时间和行数</li>
+              <li>若行数超过最大行限制，在当前日志的末尾加count/max_lines为后缀创建新log</li>
+            </ul>
+          </li>
+        </ul>
+        <p>将系统信息格式化后输出，具体为：格式化时间 + 格式化内容</p>
+        <h2 id="问题"><a aria-hidden="true" tabindex="-1" href="#问题" class="anchor"><span class="icon icon-link"></span></a>问题</h2>
+        <ol>
+          <li>
+            <p>什么时候调用<code>flush</code>刷新，每一次输出后应该及时刷新缓冲区</p>
+            <blockquote>
+              <p>在Log::Error时为什么不需要即时刷新缓冲区？</p>
+            </blockquote>
+          </li>
+        </ol>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#基础api" class="tocs-link">基础API</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#fputs" class="tocs-link">fputs</a></li>
+                <li><a href="#可变参数" class="tocs-link">可变参数</a></li>
+                <li><a href="#fflush" class="tocs-link">fflush</a></li>
+                <li><a href="#snprintf" class="tocs-link">snprintf</a></li>
+              </ol>
+            </li>
+            <li><a href="#日志类-1" class="tocs-link">日志类</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#生成日志文件--判断写入方式" class="tocs-link">生成日志文件 &#x26;&#x26; 判断写入方式</a></li>
+                <li><a href="#日志分级与分文件" class="tocs-link">日志分级与分文件</a></li>
+              </ol>
+            </li>
+            <li><a href="#问题" class="tocs-link">问题</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>

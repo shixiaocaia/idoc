@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>线程池 iDoc</title>
-    <meta name="description" content="线程同步机制包装类。
-使用信号量、互斥锁、条件变量实现了多线程同步，确保任一时刻只能有一个线程能进入关键代码段。">
+    <title>线程同步机制类 iDoc</title>
+    <meta name="description" content="在本项目中使用互斥锁、条件变量、信号量来保证线程的安全。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -66,7 +65,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <aside class="sidebar" role="navigation">
           <div>
             <a href="index.html" class="">↩️README</a>
-            <a href="ch00.html" class="">环境配置</a>
+            <a href="ch00.html" class="">问题收集</a>
             <a href="ch01.html" class="">线程同步机制封装类</a>
             <a href="ch02.html" class="">半同步/半反应堆线程池</a>
             <a href="ch03.html" class="">I/O多路复用</a>
@@ -82,22 +81,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </aside>
       </div>
       <markdown-style>
-        <h1 id="线程池"><a aria-hidden="true" tabindex="-1" href="#线程池" class="anchor"><span class="icon icon-link"></span></a>线程池</h1>
-        <h2 id="总体目标"><a aria-hidden="true" tabindex="-1" href="#总体目标" class="anchor"><span class="icon icon-link"></span></a>总体目标</h2>
-        <p>
-          线程同步机制包装类。
-          使用信号量、互斥锁、条件变量实现了多线程同步，确保任一时刻只能有一个线程能进入关键代码段。
-        </p>
-        <h2 id="问题"><a aria-hidden="true" tabindex="-1" href="#问题" class="anchor"><span class="icon icon-link"></span></a>问题</h2>
-        <p>叙述三部分的作用。</p>
-        <p><strong>信号量</strong></p>
-        <p>记录线程池中，任务数量，是否还有任务需要处理了</p>
-        <p><strong>互斥锁</strong></p>
-        <p>保护关键代码段，用于同步线程对共享数据的<strong>访问</strong>。</p>
-        <p>在这里保护请求队列</p>
-        <p><strong>条件变量</strong></p>
-        <p>用于线程之间同步共享数据的<strong>值</strong>。</p>
-        <p>条件变量提供了一种线程间的通知机制，当某个共享数据达到某个值时候，唤醒等待这个贡献数据的线程。</p>
+        <h1 id="线程同步机制类"><a aria-hidden="true" tabindex="-1" href="#线程同步机制类" class="anchor"><span class="icon icon-link"></span></a>线程同步机制类</h1>
+        <p>在本项目中使用互斥锁、条件变量、信号量来保证线程的安全。</p>
         <h2 id="class-sem-信号量"><a aria-hidden="true" tabindex="-1" href="#class-sem-信号量" class="anchor"><span class="icon icon-link"></span></a>class sem 信号量</h2>
         <p>需要实现</p>
         <blockquote>
@@ -245,8 +230,6 @@ int pthread_cond_broadcast(pthread_cond_t *cond);
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#总体目标" class="tocs-link">总体目标</a></li>
-            <li><a href="#问题" class="tocs-link">问题</a></li>
             <li><a href="#class-sem-信号量" class="tocs-link">class sem 信号量</a></li>
             <li><a href="#class-locker-互斥锁" class="tocs-link">class locker 互斥锁</a></li>
             <li><a href="#class-cond-条件变量" class="tocs-link">class cond 条件变量</a></li>

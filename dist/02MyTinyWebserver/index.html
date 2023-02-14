@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数据库 iDoc</title>
-    <meta name="description" content="在计算机科学中，trie，又称前缀树或字典树，是一种有序树，用于保存关联数组，其中的键通常是字符串。">
+    <title>数据库连接池 iDoc</title>
+    <meta name="description" content="Linux下的轻量级Web服务器">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -52,7 +52,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
             <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
             <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
-            <li><a href="index.html" target="" class="active">Other</a></li>
+            <li><a href="../00Other/index.html" target="" class="">Other</a></li>
           </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
             </svg></a>
@@ -60,34 +60,35 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </div>
       </article>
     </header>
-    <div class="warpper-content warpper sidebar">
-      <div class="sidebar-border">
-        <aside class="sidebar" role="navigation">
-          <div>
-            <a href="index.html" class="">↩️README</a>
-            <a href="vim.html" class="">Vim</a>
-            <a href="git.html" class="">Git</a>
-          </div>
-        </aside>
-      </div>
+    <div class="warpper-content warpper">
       <markdown-style>
-        <h3 id="工作内容"><a aria-hidden="true" tabindex="-1" href="#工作内容" class="anchor"><span class="icon icon-link"></span></a>工作内容</h3>
+        <h2 id="mytinywebserver"><a aria-hidden="true" tabindex="-1" href="#mytinywebserver" class="anchor"><span class="icon icon-link"></span></a>MyTinyWebserver</h2>
+        <p>Linux下的轻量级Web服务器</p>
+        <h2 id="环境"><a aria-hidden="true" tabindex="-1" href="#环境" class="anchor"><span class="icon icon-link"></span></a>环境</h2>
         <ul>
-          <li>
-            <p>数据面：称为MOSN，是处理应用数据请求的一个独立代理模块，脱离于应用，为应用提供请求代理及一些复杂通信逻辑处理。</p>
-          </li>
-          <li>
-            <p>控制面：称为SOFAMesh，管理应用配置及业务规则等（例如业务开关、服务路由规则），通过下发配置，“指挥”数据面去执行，满足不同阶段不同实现的业务支持。</p>
-          </li>
+          <li>Ubuntu 18.04</li>
+          <li>mysql</li>
         </ul>
-        <h3 id="trie树"><a aria-hidden="true" tabindex="-1" href="#trie树" class="anchor"><span class="icon icon-link"></span></a>trie树</h3>
-        <p>在计算机科学中，trie，又称前缀树或字典树，是一种有序树，用于保存关联数组，其中的键通常是字符串。</p>
+        <h2 id="核心功能"><a aria-hidden="true" tabindex="-1" href="#核心功能" class="anchor"><span class="icon icon-link"></span></a>核心功能</h2>
+        <h2 id="并发模式"><a aria-hidden="true" tabindex="-1" href="#并发模式" class="anchor"><span class="icon icon-link"></span></a>并发模式</h2>
+        <h2 id="运行实例"><a aria-hidden="true" tabindex="-1" href="#运行实例" class="anchor"><span class="icon icon-link"></span></a>运行实例</h2>
+        <h2 id="项目完善"><a aria-hidden="true" tabindex="-1" href="#项目完善" class="anchor"><span class="icon icon-link"></span></a>项目完善</h2>
+        <h2 id="参考"><a aria-hidden="true" tabindex="-1" href="#参考" class="anchor"><span class="icon icon-link"></span></a>参考</h2>
+        <ul>
+          <li>《TCP/IP网络编程》——尹圣雨</li>
+          <li>《Linux高性能服务器编程》——游双</li>
+        </ul>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#工作内容" class="tocs-link">工作内容</a></li>
-            <li><a href="#trie树" class="tocs-link">trie树</a></li>
+            <li><a href="#mytinywebserver" class="tocs-link">MyTinyWebserver</a></li>
+            <li><a href="#环境" class="tocs-link">环境</a></li>
+            <li><a href="#核心功能" class="tocs-link">核心功能</a></li>
+            <li><a href="#并发模式" class="tocs-link">并发模式</a></li>
+            <li><a href="#运行实例" class="tocs-link">运行实例</a></li>
+            <li><a href="#项目完善" class="tocs-link">项目完善</a></li>
+            <li><a href="#参考" class="tocs-link">参考</a></li>
           </ol>
         </aside>
       </nav>

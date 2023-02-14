@@ -64,7 +64,7 @@
 
 
 - 02MyWeb/README.md: ↩️README
-- 02MyWeb/ch00.md: 环境配置
+- 02MyWeb/ch00.md: 问题收集
 - 02MyWeb/ch01.md: 线程同步机制封装类
 - 02MyWeb/ch02.md: 半同步/半反应堆线程池
 - 02MyWeb/ch03.md: I/O多路复用

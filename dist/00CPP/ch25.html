@@ -90,13 +90,13 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p><code>#define AspectRatio 10</code>会在编译时，大量用10替换AspectRatio，而编译器并不知道。</p>
         <p>而使用<code>const int AspectRatio = 10</code>，避免了重复的替换，可能会导致较小的代码量。</p>
         <p>而且在类中常量，也不可以使用<code>#define</code>进行定义，在类中我们一般使用<code>const</code>进行定义一个常量。</p>
-        <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">class test{
-</span><span class="code-line line-number" line="2">    private:
-</span><span class="code-line line-number" line="3">    	static const double pi; //static class常量在class中声明
-</span><span class="code-line line-number" line="4">    ...
-</span><span class="code-line line-number" line="5">};
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">test</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">    <span class="token keyword">private</span><span class="token operator">:</span>
+</span><span class="code-line line-number" line="3">    	<span class="token keyword">static</span> <span class="token keyword">const</span> <span class="token keyword">double</span> pi<span class="token punctuation">;</span> <span class="token comment">//static class常量在class中声明</span>
+</span><span class="code-line line-number" line="4">    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</span><span class="code-line line-number" line="5"><span class="token punctuation">}</span><span class="token punctuation">;</span>
 </span><span class="code-line line-number" line="6">
-</span><span class="code-line line-number" line="7">const double test:: pi = 3.14;  //在实现文件中定义
+</span><span class="code-line line-number" line="7"><span class="token keyword">const</span> <span class="token keyword">double</span> test<span class="token double-colon punctuation">::</span> pi <span class="token operator">=</span> <span class="token number">3.14</span><span class="token punctuation">;</span>  <span class="token comment">//在实现文件中定义</span>
 </span></code><input type="hidden" value="class test{
     private:
     	static const double pi; //static class常量在class中声明
@@ -106,14 +106,14 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 const double test:: pi = 3.14;  //在实现文件中定义
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <p>如果坚持在编译期间使用一个常量作为数组的大小，可以通过使用<code>enum</code>定义一个常量来使用。</p>
-        <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">class test{
-</span><span class="code-line line-number" line="2">    private:
-</span><span class="code-line line-number" line="3">    	enum {Num = 5};
-</span><span class="code-line line-number" line="4">    	int scores[Num];
-</span><span class="code-line line-number" line="5">    ...
-</span><span class="code-line line-number" line="6">};
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">test</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">    <span class="token keyword">private</span><span class="token operator">:</span>
+</span><span class="code-line line-number" line="3">    	<span class="token keyword">enum</span> <span class="token punctuation">{</span>Num <span class="token operator">=</span> <span class="token number">5</span><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="4">    	<span class="token keyword">int</span> scores<span class="token punctuation">[</span>Num<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="5">    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+</span><span class="code-line line-number" line="6"><span class="token punctuation">}</span><span class="token punctuation">;</span>
 </span><span class="code-line line-number" line="7">
-</span><span class="code-line line-number" line="8">const double test:: pi = 3.14;  //在实现文件中定义
+</span><span class="code-line line-number" line="8"><span class="token keyword">const</span> <span class="token keyword">double</span> test<span class="token double-colon punctuation">::</span> pi <span class="token operator">=</span> <span class="token number">3.14</span><span class="token punctuation">;</span>  <span class="token comment">//在实现文件中定义</span>
 </span></code><input type="hidden" value="class test{
     private:
     	enum {Num = 5};
@@ -128,13 +128,13 @@ const double test:: pi = 3.14;  //在实现文件中定义
         <p>如果const出现在星号左边，表示被指物为常量；</p>
         <p>如果const出现在星号右边，表示指针本身为常量；</p>
         <p>如果出现在两侧，表示二者都是常量。</p>
-        <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">std::vector&#x3C;int> vec;
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1">std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&#x3C;</span><span class="token keyword">int</span><span class="token operator">></span> vec<span class="token punctuation">;</span>
 </span><span class="code-line line-number" line="2">
-</span><span class="code-line line-number" line="3">const std::vector&#x3C;int>::iterator iter = vec.begin(); //iter的作用是一个T* const
-</span><span class="code-line line-number" line="4">//指针本身是一个常量，不可以移动
+</span><span class="code-line line-number" line="3"><span class="token keyword">const</span> std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&#x3C;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token double-colon punctuation">::</span>iterator iter <span class="token operator">=</span> vec<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//iter的作用是一个T* const</span>
+</span><span class="code-line line-number" line="4"><span class="token comment">//指针本身是一个常量，不可以移动</span>
 </span><span class="code-line line-number" line="5">
-</span><span class="code-line line-number" line="6">std::vector&#x3C;int>::const_iterator iter = vec.begin(); //iter的作用是一个const T*
-</span><span class="code-line line-number" line="7">//被指物是一个常量，不可改变
+</span><span class="code-line line-number" line="6">std<span class="token double-colon punctuation">::</span>vector<span class="token operator">&#x3C;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token double-colon punctuation">::</span>const_iterator iter <span class="token operator">=</span> vec<span class="token punctuation">.</span><span class="token function">begin</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">//iter的作用是一个const T*</span>
+</span><span class="code-line line-number" line="7"><span class="token comment">//被指物是一个常量，不可改变</span>
 </span></code><input type="hidden" value="std::vector<int> vec;
 
 const std::vector<int>::iterator iter = vec.begin(); //iter的作用是一个T* const

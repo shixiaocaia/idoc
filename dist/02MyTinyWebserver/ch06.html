@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>定时器的设计 iDoc</title>
+    <meta name="description" content="定时器设计，将连接资源和定时事件等封装起来，具体包括连接资源、超时时间和回调函数，这里的回调函数指向定时事件。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+    <script src="../js/jquery.min.js?v=1.21.13"></script>
+    <script src="../js/fancybox.umd.js?v=1.21.13"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+            <li><a href="../00Other/index.html" target="" class="">Other</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper">
+      <markdown-style>
+        <h1 id="定时器的设计"><a aria-hidden="true" tabindex="-1" href="#定时器的设计" class="anchor"><span class="icon icon-link"></span></a>定时器的设计</h1>
+        <h2 id="整体思路"><a aria-hidden="true" tabindex="-1" href="#整体思路" class="anchor"><span class="icon icon-link"></span></a>整体思路</h2>
+        <p><code>定时器设计</code>，将连接资源和定时事件等封装起来，具体包括连接资源、超时时间和回调函数，这里的回调函数指向定时事件。</p>
+        <p><code>定时器容器设计</code>，将多个定时器串联组织起来统一处理，具体包括升序链表设计。</p>
+        <p><code>定时任务处理函数</code>，该函数封装在容器类中，具体的，函数遍历升序链表容器，根据超时时间，处理对应的定时器。</p>
+        <p><code>代码分析-使用定时器</code>，通过代码分析，如何在项目中使用定时器。</p>
+        <h2 id="定时器设计"><a aria-hidden="true" tabindex="-1" href="#定时器设计" class="anchor"><span class="icon icon-link"></span></a>定时器设计</h2>
+        <p>项目中将连接资源、定时事件和超时时间封装为定时器类，具体的，</p>
+        <ul>
+          <li>
+            <p>连接资源包括客户端套接字地址、文件描述符和定时器</p>
+          </li>
+          <li>
+            <p>定时事件为回调函数，将其封装起来由用户自定义，这里是删除非活动socket上的注册事件，并关闭</p>
+          </li>
+          <li>
+            <p>定时器超时时间 = 浏览器和服务器连接时刻 + 固定时间(TIMESLOT)，可以看出，定时器使用绝对时间作为超时值，这里alarm设置为5秒，连接超时为15秒。</p>
+          </li>
+          <li>
+            <p>定时事件，具体的，从内核事件表删除事件，关闭文件描述符，释放连接资源。</p>
+          </li>
+        </ul>
+        <h2 id="定时器容器设计"><a aria-hidden="true" tabindex="-1" href="#定时器容器设计" class="anchor"><span class="icon icon-link"></span></a>定时器容器设计</h2>
+        <p>项目中的定时器容器为带头尾结点的<strong>升序双向链表</strong>，具体的为每个连接创建一个定时器，将其添加到链表中，并按照超时时间升序排列。执行定时任务时，将到期的定时器从链表中删除。</p>
+        <p>从实现上看，主要涉及双向链表的插入，删除操作，其中添加定时器的事件复杂度是O(n),删除定时器的事件复杂度是O(1)。</p>
+        <p>升序双向链表主要逻辑如下，具体的，</p>
+        <ul>
+          <li>
+            <p>创建头尾节点，其中头尾节点没有意义，仅仅统一方便调整</p>
+          </li>
+          <li>
+            <p>add_timer函数，将目标定时器添加到链表中，添加时按照升序添加</p>
+            <ul>
+              <li>
+                <p>若当前链表中只有头尾节点，直接插入</p>
+              </li>
+              <li>
+                <p>否则，将定时器按升序插入</p>
+              </li>
+            </ul>
+            <blockquote>
+              <p>在prev和tmp之间插入timer，然后更新前后驱节点。</p>
+              <p>如果是尾节点在做特殊处理，并更新tail节点。</p>
+            </blockquote>
+          </li>
+          <li>
+            <p>adjust_timer函数，当定时任务发生变化,调整对应定时器在链表中的位置</p>
+            <ul>
+              <li>客户端在设定时间内有数据收发,则当前时刻对该定时器重新设定时间，这里只是往后延长超时时间</li>
+              <li>被调整的目标定时器在尾部，或定时器新的超时值仍然小于下一个定时器的超时，不用调整</li>
+              <li>否则先将定时器从链表取出，重新插入链表</li>
+            </ul>
+          </li>
+          <li>
+            <p>del_timer函数将超时的定时器从链表中删除</p>
+            <ul>
+              <li>常规双向链表删除结点</li>
+            </ul>
+          </li>
+          <li>
+            <p>tick函数，相当于一个心搏函数，每隔一段时间固定执行一次，以检测并处理到期的任务。</p>
+          </li>
+        </ul>
+        <h2 id="定时任务处理函数"><a aria-hidden="true" tabindex="-1" href="#定时任务处理函数" class="anchor"><span class="icon icon-link"></span></a>定时任务处理函数</h2>
+        <p>使用统一事件源，SIGALRM信号每次被触发，主循环中调用一次定时任务处理函数，处理链表容器中到期的定时器。</p>
+        <p>具体的逻辑如下，</p>
+        <ul>
+          <li>遍历定时器升序链表容器，从头结点开始依次处理每个定时器，直到遇到尚未到期的定时器</li>
+          <li>若当前时间小于定时器超时时间，跳出循环，即未找到到期的定时器</li>
+          <li>若当前时间大于定时器超时时间，即找到了到期的定时器，执行回调函数，然后将它从链表中删除，然后继续遍历。</li>
+        </ul>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#整体思路" class="tocs-link">整体思路</a></li>
+            <li><a href="#定时器设计" class="tocs-link">定时器设计</a></li>
+            <li><a href="#定时器容器设计" class="tocs-link">定时器容器设计</a></li>
+            <li><a href="#定时任务处理函数" class="tocs-link">定时任务处理函数</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>

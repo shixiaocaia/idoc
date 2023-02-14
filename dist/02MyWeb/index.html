@@ -65,7 +65,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <aside class="sidebar" role="navigation">
           <div>
             <a href="index.html" class="">↩️README</a>
-            <a href="ch00.html" class="">环境配置</a>
+            <a href="ch00.html" class="">问题收集</a>
             <a href="ch01.html" class="">线程同步机制封装类</a>
             <a href="ch02.html" class="">半同步/半反应堆线程池</a>
             <a href="ch03.html" class="">I/O多路复用</a>
@@ -92,9 +92,6 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p>✅各类博客</p>
         <hr>
         <h2 id="整体流程"><a aria-hidden="true" tabindex="-1" href="#整体流程" class="anchor"><span class="icon icon-link"></span></a>整体流程</h2>
-        <p>
-          <img src="http://pic.shixiaocaia.fun/202301261440049.jpg" alt="">
-        </p>
         <h2 id="快速开始"><a aria-hidden="true" tabindex="-1" href="#快速开始" class="anchor"><span class="icon icon-link"></span></a>快速开始</h2>
         <ul>
           <li>
@@ -175,28 +172,6 @@ string databasename = &#x22;yourdb&#x22;;
         <p>⬜数据库连接池</p>
         <p>⬜注册登录</p>
         <p>⬜压力测试</p>
-        <h2 id="重构时候思考的问题"><a aria-hidden="true" tabindex="-1" href="#重构时候思考的问题" class="anchor"><span class="icon icon-link"></span></a>重构时候思考的问题</h2>
-        <ol>
-          <li>socket网络编程那边初始化，变量信息还需要熟悉。</li>
-          <li>对于异常情况的处理，使用函数时判断合法性。</li>
-          <li>程序结束时，处理上述用到的文件描述符。</li>
-          <li>文件的读写操作，需要熟悉。</li>
-          <li>HTTP报文解析部分，能不能通过正则表达式解析。</li>
-          <li>为什么在日志和数据库连接部分需要使用单例模式</li>
-          <li>proactor模式</li>
-          <li>各种锁的机制，优缺点，使用场景是什么</li>
-          <li>Webbench错误</li>
-          <li>如何解决段错误</li>
-          <li>后期重做时，进行压力测试，理解性能的变化</li>
-        </ol>
-        <p><strong>可改进点</strong></p>
-        <ul>
-          <li>map管理http连接取代固定数组，用智能指针管理连接生命期，避免串话和内存泄漏：</li>
-          <li>基于vector
-            <char>封装Buffer作为http连接的输入输出缓冲，基于readv高效读取，支持自动扩容；</char>
-          </li>
-          <li>日志系统改为前端和后端双授冲，避免生产者和消费者的锁竞争，进一步提高写效率</li>
-        </ul>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -205,7 +180,6 @@ string databasename = &#x22;yourdb&#x22;;
             <li><a href="#整体流程" class="tocs-link">整体流程</a></li>
             <li><a href="#快速开始" class="tocs-link">快速开始</a></li>
             <li><a href="#todolist" class="tocs-link">Todolist</a></li>
-            <li><a href="#重构时候思考的问题" class="tocs-link">重构时候思考的问题</a></li>
           </ol>
         </aside>
       </nav>
