@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>类 iDoc</title>
-    <meta name="description" content="函数只能定义一次，但可以声明多次，在头文件中进行函数声明，在源文件中定义。">
+    <meta name="description" content="在 C++ 中，每一个对象都能通过 this 指针来访问自己的地址。this 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -104,12 +104,16 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li>友元不是成员函数，只有成员函数才可以是虚拟的，因此友元不能是虚拟函数。但可以通过让友元函数调用虚拟成员函数来解决友元的虚拟问题。</li>
           <li>析构函数应当是虚函数，将调用相应对象类型的析构函数，因此，如果指针指向的是子类对象，将调用子类的析构函数，然后自动调用基类的析构函数。避免了”<strong>局部析构</strong>“问题。</li>
         </ul>
+        <h2 id="this指针"><a aria-hidden="true" tabindex="-1" href="#this指针" class="anchor"><span class="icon icon-link"></span></a>this指针</h2>
+        <p>在 C++ 中，每一个对象都能通过 <strong>this</strong> 指针来访问自己的地址。<strong>this</strong> 指针是所有成员函数的隐含参数。因此，在成员函数内部，它可以用来指向调用对象。</p>
+        <p>友元函数没有 <strong>this</strong> 指针，因为友元不是类的成员。只有成员函数才有 <strong>this</strong> 指针。</p>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
             <li><a href="#构造函数" class="tocs-link">构造函数</a></li>
             <li><a href="#虚函数和纯虚函数" class="tocs-link">虚函数和纯虚函数</a></li>
+            <li><a href="#this指针" class="tocs-link">this指针</a></li>
           </ol>
         </aside>
       </nav>

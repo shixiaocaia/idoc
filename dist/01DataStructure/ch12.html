@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>力扣Hot 100 iDoc</title>
-    <meta name="description" content="[left,right]闭区间版本">
+    <title>图论 iDoc</title>
+    <meta name="description" content="使得相邻两个元素比较大小，大的元素慢慢下沉，下次循环到len - 1 - i，因为底部有一部分已经排序完成了">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -60,7 +60,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </div>
       </article>
     </header>
-    <div class="warpper-content warpper sidebar notocs">
+    <div class="warpper-content warpper sidebar">
       <div class="sidebar-border">
         <aside class="sidebar" role="navigation">
           <div>
@@ -76,91 +76,26 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <a href="ch8.html" class="">贪心</a>
             <a href="ch9.html" class="">动态规划</a>
             <a href="ch11.html" class="">排序</a>
-            <a href="ch12.html" class="">其他</a>
+            <a href="ch12.html" class="">图论</a>
+            <a href="ch13.html" class="">其他</a>
           </div>
         </aside>
       </div>
       <markdown-style>
-        <h1 id="力扣hot-100"><a aria-hidden="true" tabindex="-1" href="#力扣hot-100" class="anchor"><span class="icon icon-link"></span></a>力扣Hot 100</h1>
-        <p><a href="https://leetcode.cn/problems/lru-cache/">146. LRU 缓存</a></p>
+        <h1 id="图论"><a aria-hidden="true" tabindex="-1" href="#图论" class="anchor"><span class="icon icon-link"></span></a>图论</h1>
+        <h2 id="例题"><a aria-hidden="true" tabindex="-1" href="#例题" class="anchor"><span class="icon icon-link"></span></a>例题</h2>
+        <p><a href="https://leetcode.cn/problems/course-schedule">207. 课程表</a></p>
         <blockquote>
-          <p>LRU 算法（Least Recently Used）就是一种缓存淘汰策略。也就是说我们认为最近使用过的数据应该是是「有用的」，很久都没用过的数据应该是无用的，内存满了就优先删那些很久没用过的数据。</p>
-          <p>比如手机后台使用程序，最近使用的app放在前面，之前的程序排在后面会被优先清理。</p>
-        </blockquote>
-        <blockquote>
-          <p>可以把cache理解成一个队列，最近使用的排在左边（队头），久未使用的放在右边（队尾）。</p>
-          <p>put的操作，如果之前队列没有会插入到队头，有的话会更新value，并放置到队头。如果内存满了，就要删除队尾的元素（久未使用），再插入到队头。</p>
-          <p>get的操作，如果队列中有，就返回值，并放置到前列，如果没有返回-1。</p>
-        </blockquote>
-        <blockquote>
-          <ol>
-            <li>
-              <p>因此本体需要考虑，cache中元素必须是有序的，以区分最近使用的和长久未使用的，当容量满了方便删除。</p>
-            </li>
-            <li>
-              <p>要在cache中快速找某个key，每次返回cache中的某个key，变更为最近使用的，所以cache要支持任意位置的快速插入和删除元素。</p>
-            </li>
-            <li>
-              <p>哈希表查找快，但是元素没有固定无法区分使用事件。链表有顺序之分，插入删除块，查找慢。</p>
-            </li>
-          </ol>
-        </blockquote>
-        <p><a href="https://leetcode.cn/problems/add-two-numbers">2. 两数相加</a></p>
-        <blockquote>
-          <p>我以为的两数相加，直接相加，链表反转。实际的两数相加，如果位数不统一怎么办，还有进位。</p>
-        </blockquote>
-        <blockquote>
-          <p>给长度不足的一方补0，同时记录进位。</p>
-          <p>最高位如果还有进位再补1。</p>
-        </blockquote>
-        <p><a href="https://leetcode.cn/problems/rotate-image">48. 旋转图像</a></p>
-        <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">情况一：顺时针转 90 度：先转置再左右镜像
-</span><span class="code-line line-number" line="2">1 2 3               7 4 1
-</span><span class="code-line line-number" line="3">4 5 6               8 5 2
-</span><span class="code-line line-number" line="4">7 8 9               9 6 3
-</span><span class="code-line line-number" line="5">情况二：顺时针转 180 度:先上下镜像，再左右镜像（先左右再上下也可）
-</span><span class="code-line line-number" line="6">1 2 3               9 8 7
-</span><span class="code-line line-number" line="7">4 5 6               6 5 4
-</span><span class="code-line line-number" line="8">7 8 9               3 2 1
-</span><span class="code-line line-number" line="9">情况三：顺时针转 270 度：先转置再上下镜像
-</span><span class="code-line line-number" line="10">1 2 3              3 6 9
-</span><span class="code-line line-number" line="11">4 5 6              2 5 8
-</span><span class="code-line line-number" line="12">7 8 9              1 4 7
-</span><span class="code-line line-number" line="13">    
-</span><span class="code-line line-number" line="14">//属实想不到这个规律
-</span></code><input type="hidden" value="情况一：顺时针转 90 度：先转置再左右镜像
-1 2 3               7 4 1
-4 5 6               8 5 2
-7 8 9               9 6 3
-情况二：顺时针转 180 度:先上下镜像，再左右镜像（先左右再上下也可）
-1 2 3               9 8 7
-4 5 6               6 5 4
-7 8 9               3 2 1
-情况三：顺时针转 270 度：先转置再上下镜像
-1 2 3              3 6 9
-4 5 6              2 5 8
-7 8 9              1 4 7
-    
-//属实想不到这个规律
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p><a href="https://leetcode.cn/problems/majority-element">169. 多数元素</a></p>
-        <blockquote>
-          <p>摩尔投票法: 遇到相同的数，就投一票，遇到不同的数，就减一票，最后还存在票的数就是众数。</p>
-          <p>语文证明：candidate为擂台，count 为擂台上的人数，擂台上没有人的时候，直接上台。如果有人并且是一伙的则上台（同时站在台上）；如果发现擂台上有人但不是一伙的，则不上台，同时拉下去一个。由于非maj的人数比maj的人数少并且还会自相残杀，非maj们无法吧maj们全拉下来。</p>
-        </blockquote>
-        <p><a href="https://leetcode.cn/problems/search-a-2d-matrix-ii">240. 搜索二维矩阵 II</a></p>
-        <blockquote>
-          <p>自己想的思路是：TL</p>
-          <ul>
-            <li>通过先横向搜索，如果当前数小于target，纵向搜索</li>
-            <li>如果当前数大于target，换到下一行。</li>
-            <li>这样的三层for，O(mnm)。</li>
-            <li>直接两层for暴力都过了。</li>
-          </ul>
-          <p>看到有序想到二分，在每一行中进行二分查找。</p>
-          <p>优化二分搜索。</p>
+          <p>排序和DFS、BFS都能写。</p>
         </blockquote>
       </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#例题" class="tocs-link">例题</a></li>
+          </ol>
+        </aside>
+      </nav>
     </div>
     <script src="../js/demo-preview.js?v=1.21.13"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>

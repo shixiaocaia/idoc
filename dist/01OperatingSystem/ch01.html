@@ -65,6 +65,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <aside class="sidebar" role="navigation">
           <div>
             <a href="index.html" class="">↩️README</a>
+            <a href="ch00.html" class="">问题收集</a>
             <label>计组</label>
             <a href="ch01.html" class="">《程序是怎么跑起来的》</a>
             <a href="ch51.html" class="">优化程序性能</a>
@@ -111,12 +112,40 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li>逻辑右移，高位不足是用0填补。</li>
           <li>算数右移，高位不足用移位前的符号位进行填补。</li>
         </ul>
+        <h2 id="熟练使用有棱有角的内存"><a aria-hidden="true" tabindex="-1" href="#熟练使用有棱有角的内存" class="anchor"><span class="icon icon-link"></span></a>熟练使用有棱有角的内存</h2>
+        <p>内存的实体是内存IC，一个内存IC中的地址信号引脚有10个，对应可以保存2^10 = 1024的地址，地址是用来表示数据的存储场，因此可以得出这个内存IC可以存储1024个字节的数据。</p>
+        <p>磁盘中的程序必须加载到内存中才能运行。</p>
+        <blockquote>
+          <p>负责解析和运行程序内容的CPU，需要通过内部程序计数器来指定内存地址，然后才能读出程序。</p>
+        </blockquote>
+        <h3 id="虚拟内存"><a aria-hidden="true" tabindex="-1" href="#虚拟内存" class="anchor"><span class="icon icon-link"></span></a>虚拟内存</h3>
+        <p>磁盘和内存的关系之二，使用一部分的磁盘空间作为内存使用。将需要执行的部分程序加载内存中，其他部分置换到磁盘当中。</p>
+        <p>虚拟内存的方法分为分页式和分段式。</p>
+        <p>为了实现虚拟内存的功能，Windows在磁盘上提供虚拟内存用的文件，由系统自动做成和管理。</p>
+        <p>但是虚拟内存不能从根本上解决内存不足的问题：1. 增加内存 ，2. 节约内存使用。</p>
+        <ul>
+          <li>通过DDL文件实现函数共有，从而节省内存。将多个文件需要的函数作为独立的DDL文件，进行动态链接调用，节省内存。
+            <ul>
+              <li>操作系统本身也就是多个DLL文件的集合体。</li>
+            </ul>
+          </li>
+          <li>通过_stdcall来减小程序文件的大小
+            <ul>
+              <li>通过栈清理处理将不需要的数据从接受和传递函数的参数从内存上的栈区域中清理出去，程序编译时由编译器自动附加导程序main中。</li>
+            </ul>
+          </li>
+        </ul>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
             <li><a href="#对程序员而言cpu是什么" class="tocs-link">对程序员而言CPU是什么</a></li>
             <li><a href="#数据使用二进制数表示的" class="tocs-link">数据使用二进制数表示的</a></li>
+            <li><a href="#熟练使用有棱有角的内存" class="tocs-link">熟练使用有棱有角的内存</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#虚拟内存" class="tocs-link">虚拟内存</a></li>
+              </ol>
+            </li>
           </ol>
         </aside>
       </nav>

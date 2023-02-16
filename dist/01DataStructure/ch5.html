@@ -76,7 +76,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <a href="ch8.html" class="">贪心</a>
             <a href="ch9.html" class="">动态规划</a>
             <a href="ch11.html" class="">排序</a>
-            <a href="ch12.html" class="">其他</a>
+            <a href="ch12.html" class="">图论</a>
+            <a href="ch13.html" class="">其他</a>
           </div>
         </aside>
       </div>
@@ -188,6 +189,13 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <blockquote>
           <p>用双栈或者单个栈存放数字和字母。当字符为"["时，入栈数字和字符，当字符为"]"，出栈数字和字符。</p>
           <p>用<code>stoi函数</code>完成str转换数字。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/sort-list">148. 排序链表</a></p>
+        <blockquote>
+          <p>想到了优先队列，从小到大存入优先级队列，最后再弹出每个结点</p>
+          <p>卡了很久的点是结尾的点没有指向nullptr，折磨住了，当然了实际中我们应该使得每个操作合法化，这里可能是答案遍历时出了问题。</p>
+          <p>也可以直接取出结点，sort然后放入。</p>
+          <p>二刷应该考虑排序的方法，优化时间复杂度。</p>
         </blockquote>
         <h2 id="单调栈"><a aria-hidden="true" tabindex="-1" href="#单调栈" class="anchor"><span class="icon icon-link"></span></a>单调栈</h2>
         <h3 id="何时使用"><a aria-hidden="true" tabindex="-1" href="#何时使用" class="anchor"><span class="icon icon-link"></span></a>何时使用</h3>

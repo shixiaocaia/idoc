@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>读Effective C++感受 iDoc</title>
-    <meta name="description" content="整体笔记还是归纳到C++ primer那一栏中，在这里记录一些琐碎的感受。">
+    <title>问题收集 iDoc</title>
+    <meta name="description" content="⬜MySql必知必会">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -46,9 +46,9 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <div class="content">
           <ul class="menu">
             <li><a href="../index.html" target="" class="">Home</a></li>
-            <li><a href="index.html" target="" class="active">Cpp</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
             <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
-            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="index.html" target="" class="active">OperatingSystem</a></li>
             <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
             <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
             <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
@@ -65,44 +65,45 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <aside class="sidebar" role="navigation">
           <div>
             <a href="index.html" class="">↩️README</a>
-            <label>C++ primer</label>
-            <a href="ch00.html" class="">语法问题</a>
-            <a href="ch01.html" class="">指针&#x26;引用</a>
-            <a href="ch02.html" class="">函数</a>
-            <a href="ch03.html" class="">类</a>
-            <a href="ch10.html" class="">模板</a>
-            <a href="ch15.html" class="">异常处理</a>
-            <a href="ch16.html" class="">内存管理</a>
-            <label>STL</label>
-            <a href="ch20.html" class="">标准库</a>
-            <a href="ch21.html" class="">容器</a>
-            <label>Effective C++</label>
-            <a href="ch25.html" class="">条款1-25</a>
-            <label>读万里书</label>
-            <a href="ch31.html" class="">Effective C++</a>
+            <a href="ch00.html" class="">问题收集</a>
+            <label>计组</label>
+            <a href="ch01.html" class="">《程序是怎么跑起来的》</a>
+            <a href="ch51.html" class="">优化程序性能</a>
+            <a href="ch61.html" class="">存储器</a>
+            <a href="ch71.html" class="">链接</a>
+            <label>进程</label>
+            <a href="ch81.html" class="">进程、线程、调度</a>
+            <a href="ch82.html" class="">问题</a>
+            <label>虚拟内存</label>
+            <a href="ch91.html" class="">虚拟内存</a>
+            <a href="ch92.html" class="">问题</a>
           </div>
         </aside>
       </div>
       <markdown-style>
-        <h1 id="读effective-c感受"><a aria-hidden="true" tabindex="-1" href="#读effective-c感受" class="anchor"><span class="icon icon-link"></span></a>读Effective C++感受</h1>
-        <p>整体笔记还是归纳到C++ primer那一栏中，在这里记录一些琐碎的感受。</p>
-        <h2 id="导读"><a aria-hidden="true" tabindex="-1" href="#导读" class="anchor"><span class="icon icon-link"></span></a>导读</h2>
-        <p>在读导读时候能联想到侯捷老师讲课的语气，在导读部分用词十分日常化。</p>
-        <h3 id="lhs-和-rhs"><a aria-hidden="true" tabindex="-1" href="#lhs-和-rhs" class="anchor"><span class="icon icon-link"></span></a>lhs 和 rhs</h3>
-        <p>在刷题时候，也会看到这两个参数名称。</p>
-        <p>全称为<code>left-hand-side</code>左手端，<code>right-hand-side</code>右手端。</p>
-        <p>另外<code>pt</code>指针名，表示的是一个指向<code>T类型</code>的指针。</p>
-        <hr>
-        <p>我感觉Effective C++可以当作八股来读了。</p>
+        <h1 id="问题收集"><a aria-hidden="true" tabindex="-1" href="#问题收集" class="anchor"><span class="icon icon-link"></span></a>问题收集</h1>
+        <h2 id="计组相关"><a aria-hidden="true" tabindex="-1" href="#计组相关" class="anchor"><span class="icon icon-link"></span></a>计组相关</h2>
+        <ol>
+          <li>在32位内存系统地址的环境中，指针变量的长度是多少位</li>
+        </ol>
+        <blockquote>
+          <p>在主要的32 位机器程序设计环境中，指针、“int”变量、“long”变量全部都是32 位长。 然而，在64 位机器下的许多程序设计环境，“int”变量仍然是32 位宽，不过“long”和指针是64位宽。</p>
+        </blockquote>
+        <ol start="2">
+          <li>栈和队列的进出顺序</li>
+        </ol>
+        <blockquote>
+          <p>栈是一种后入先出的（LIFO = Last In First Out)。</p>
+          <p>队列是先入先出（FIFO = First In First Out)，队列一般是环状缓冲区。</p>
+        </blockquote>
+        <ol start="3">
+          <li></li>
+        </ol>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#导读" class="tocs-link">导读</a>
-              <ol class="tocs-list is-collapsed">
-                <li><a href="#lhs-和-rhs" class="tocs-link">lhs 和 rhs</a></li>
-              </ol>
-            </li>
+            <li><a href="#计组相关" class="tocs-link">计组相关</a></li>
           </ol>
         </aside>
       </nav>

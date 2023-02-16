@@ -10,9 +10,11 @@
 - 01DataStructure/ch8.md: 贪心
 - 01DataStructure/ch9.md: 动态规划
 - 01DataStructure/ch11.md: 排序
-- 01DataStructure/ch12.md: 其他
+- 01DataStructure/ch12.md: 图论
+- 01DataStructure/ch13.md: 其他
 
 - 01OperatingSystem/README.md: ↩️README
+- 01OperatingSystem/ch00.md: 问题收集
 - 01OperatingSystem: 计组
 - 01OperatingSystem/ch01.md: 《程序是怎么跑起来的》
 - 01OperatingSystem/ch51.md: 优化程序性能

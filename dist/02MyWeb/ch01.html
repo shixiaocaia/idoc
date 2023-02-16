@@ -83,8 +83,15 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       <markdown-style>
         <h1 id="线程同步机制类"><a aria-hidden="true" tabindex="-1" href="#线程同步机制类" class="anchor"><span class="icon icon-link"></span></a>线程同步机制类</h1>
         <p>在本项目中使用互斥锁、条件变量、信号量来保证线程的安全。</p>
-        <h2 id="class-sem-信号量"><a aria-hidden="true" tabindex="-1" href="#class-sem-信号量" class="anchor"><span class="icon icon-link"></span></a>class sem 信号量</h2>
-        <p>需要实现</p>
+        <h2 id="基础api"><a aria-hidden="true" tabindex="-1" href="#基础api" class="anchor"><span class="icon icon-link"></span></a>基础API</h2>
+        <h3 id="raii"><a aria-hidden="true" tabindex="-1" href="#raii" class="anchor"><span class="icon icon-link"></span></a>RAII</h3>
+        <ul>
+          <li>RAII全称是“Resource Acquisition is Initialization”，直译过来是“资源获取即初始化”.</li>
+          <li>在构造函数中申请分配资源，在析构函数中释放资源。因为C++的语言机制保证了，当一个对象创建的时候，自动调用构造函数，当对象超出作用域的时候会自动调用析构函数。所以，在RAII的指导下，我们应该使用类来管理资源，将资源和对象的生命周期绑定</li>
+          <li>RAII的核心思想是将资源或者状态与对象的生命周期绑定，通过C++的语言机制，实现资源和状态的安全管理,<strong>智能指针</strong>是RAII最好的例子。</li>
+        </ul>
+        <h3 id="信号量"><a aria-hidden="true" tabindex="-1" href="#信号量" class="anchor"><span class="icon icon-link"></span></a>信号量</h3>
+        <p>需要实现的</p>
         <blockquote>
           <ul>
             <li>初始化信号量</li>
@@ -93,42 +100,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <li>对信号解锁，将信号量加一,信号量大于0时,唤醒调用sem_post的线程</li>
           </ul>
         </blockquote>
-        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">int</span> <span class="token function">sem_init</span><span class="token punctuation">(</span>sem_t <span class="token operator">*</span>sem<span class="token punctuation">,</span> <span class="token keyword">int</span> pshared<span class="token punctuation">,</span> <span class="token keyword">unsigned</span> <span class="token keyword">int</span> value<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="2"><span class="token operator">-</span> 初始化信号量
-</span><span class="code-line line-number" line="3"><span class="token operator">-</span> 参数：
-</span><span class="code-line line-number" line="4">    <span class="token operator">-</span> sem <span class="token operator">:</span> 信号量变量的地址
-</span><span class="code-line line-number" line="5">    <span class="token operator">-</span> pshared <span class="token operator">:</span> <span class="token number">0</span> 用在线程间 ，非<span class="token number">0</span> 用在进程间
-</span><span class="code-line line-number" line="6">    <span class="token operator">-</span> value <span class="token operator">:</span> 信号量中的值
-</span><span class="code-line line-number" line="7">
-</span><span class="code-line line-number" line="8"><span class="token keyword">int</span> <span class="token function">sem_destroy</span><span class="token punctuation">(</span>sem_t <span class="token operator">*</span>sem<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="9"><span class="token operator">-</span> 释放资源
-</span><span class="code-line line-number" line="10">
-</span><span class="code-line line-number" line="11"><span class="token keyword">int</span> <span class="token function">sem_wait</span><span class="token punctuation">(</span>sem_t <span class="token operator">*</span>sem<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="12"><span class="token operator">-</span> 对信号量加锁，调用一次对信号量的值<span class="token operator">-</span><span class="token number">1</span>，如果值为<span class="token number">0</span>，就阻塞
-</span><span class="code-line line-number" line="13">
-</span><span class="code-line line-number" line="14"><span class="token keyword">int</span> <span class="token function">sem_post</span><span class="token punctuation">(</span>sem_t <span class="token operator">*</span>sem<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="15"><span class="token operator">-</span> 对信号量解锁，调用一次对信号量的值<span class="token operator">+</span><span class="token number">1</span>，当信号量值大于<span class="token number">0</span>是，调用sem_wait等待信号量的线程将被唤醒。
-</span><span class="code-line line-number" line="16">    
-</span><span class="code-line line-number" line="17"><span class="token comment">//上述函数成功返回0，否则返回-1并设置errno</span>
-</span></code><input type="hidden" value="int sem_init(sem_t *sem, int pshared, unsigned int value);
-- 初始化信号量
-- 参数：
-    - sem : 信号量变量的地址
-    - pshared : 0 用在线程间 ，非0 用在进程间
-    - value : 信号量中的值
-
-int sem_destroy(sem_t *sem);
-- 释放资源
-
-int sem_wait(sem_t *sem);
-- 对信号量加锁，调用一次对信号量的值-1，如果值为0，就阻塞
-
-int sem_post(sem_t *sem);
-- 对信号量解锁，调用一次对信号量的值+1，当信号量值大于0是，调用sem_wait等待信号量的线程将被唤醒。
-    
-//上述函数成功返回0，否则返回-1并设置errno
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <h2 id="class-locker-互斥锁"><a aria-hidden="true" tabindex="-1" href="#class-locker-互斥锁" class="anchor"><span class="icon icon-link"></span></a>class locker 互斥锁</h2>
+        <p>以上，成功返回0，失败返回errno</p>
+        <h3 id="互斥锁"><a aria-hidden="true" tabindex="-1" href="#互斥锁" class="anchor"><span class="icon icon-link"></span></a>互斥锁</h3>
         <p>为避免线程更新共享变量时出现问题，可以使用互斥量（mutex 是 mutual exclusion 的缩写）来确保同时仅有一个线程可以访问某项共享资源。可以使用互斥量来保证对任意共享资源的原子访问。</p>
         <p>需要实现</p>
         <blockquote>
@@ -139,46 +112,8 @@ int sem_post(sem_t *sem);
             <li>互斥锁解锁</li>
           </ul>
         </blockquote>
-        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1">pthread_mutex_t m_mutex<span class="token punctuation">;</span> <span class="token comment">//互斥量的类型 </span>
-</span><span class="code-line line-number" line="2">    
-</span><span class="code-line line-number" line="3"><span class="token keyword">int</span> <span class="token function">pthread_mutex_init</span><span class="token punctuation">(</span>pthread_mutex_t <span class="token operator">*</span>restrict mutex<span class="token punctuation">,</span> <span class="token keyword">const</span> pthread_mutexattr_t <span class="token operator">*</span>restrict attr<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="4"><span class="token operator">-</span> 初始化互斥量
-</span><span class="code-line line-number" line="5">    <span class="token operator">-</span> 参数 ：
-</span><span class="code-line line-number" line="6">    <span class="token operator">-</span> mutex ： 需要初始化的互斥量变量
-</span><span class="code-line line-number" line="7">    <span class="token operator">-</span> attr ： 互斥量相关的属性，一般设置为 <span class="token constant">NULL</span>
-</span><span class="code-line line-number" line="8">
-</span><span class="code-line line-number" line="9"><span class="token keyword">int</span> <span class="token function">pthread_mutex_destroy</span><span class="token punctuation">(</span>pthread_mutex_t <span class="token operator">*</span>mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="10"><span class="token operator">-</span> 释放互斥量的资源
-</span><span class="code-line line-number" line="11">
-</span><span class="code-line line-number" line="12"><span class="token keyword">int</span> <span class="token function">pthread_mutex_lock</span><span class="token punctuation">(</span>pthread_mutex_t <span class="token operator">*</span>mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="13"><span class="token operator">-</span> 加锁，阻塞的，如果有一个线程加锁了，那么其他的线程只能阻塞等待
-</span><span class="code-line line-number" line="14">
-</span><span class="code-line line-number" line="15"><span class="token keyword">int</span> <span class="token function">pthread_mutex_trylock</span><span class="token punctuation">(</span>pthread_mutex_t <span class="token operator">*</span>mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="16"><span class="token operator">-</span> 尝试加锁，如果加锁失败，不会阻塞，会直接返回。
-</span><span class="code-line line-number" line="17">
-</span><span class="code-line line-number" line="18"><span class="token keyword">int</span> <span class="token function">pthread_mutex_unlock</span><span class="token punctuation">(</span>pthread_mutex_t <span class="token operator">*</span>mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="19"><span class="token operator">-</span> 解锁
-</span></code><input type="hidden" value="pthread_mutex_t m_mutex; //互斥量的类型 
-    
-int pthread_mutex_init(pthread_mutex_t *restrict mutex, const pthread_mutexattr_t *restrict attr);
-- 初始化互斥量
-    - 参数 ：
-    - mutex ： 需要初始化的互斥量变量
-    - attr ： 互斥量相关的属性，一般设置为 NULL
-
-int pthread_mutex_destroy(pthread_mutex_t *mutex);
-- 释放互斥量的资源
-
-int pthread_mutex_lock(pthread_mutex_t *mutex);
-- 加锁，阻塞的，如果有一个线程加锁了，那么其他的线程只能阻塞等待
-
-int pthread_mutex_trylock(pthread_mutex_t *mutex);
-- 尝试加锁，如果加锁失败，不会阻塞，会直接返回。
-
-int pthread_mutex_unlock(pthread_mutex_t *mutex);
-- 解锁
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <h2 id="class-cond-条件变量"><a aria-hidden="true" tabindex="-1" href="#class-cond-条件变量" class="anchor"><span class="icon icon-link"></span></a>class cond 条件变量</h2>
+        <p>以上，成功返回0，失败返回errno</p>
+        <h3 id="条件变量"><a aria-hidden="true" tabindex="-1" href="#条件变量" class="anchor"><span class="icon icon-link"></span></a>条件变量</h3>
         <p>条件变量提供了一种线程间的通知机制,当某个共享数据达到某个值时,唤醒等待这个共享数据的线程.</p>
         <p>需要实现</p>
         <blockquote>
@@ -189,50 +124,21 @@ int pthread_mutex_unlock(pthread_mutex_t *mutex);
             <li>signal broadcast唤醒所有等待的线程</li>
           </ul>
         </blockquote>
-        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1">pthread_cond_t m_cond<span class="token punctuation">;</span> <span class="token comment">//条件变量的类型</span>
-</span><span class="code-line line-number" line="2">
-</span><span class="code-line line-number" line="3"><span class="token keyword">int</span> <span class="token function">pthread_cond_init</span><span class="token punctuation">(</span>pthread_cond_t <span class="token operator">*</span>restrict cond<span class="token punctuation">,</span> <span class="token keyword">const</span> pthread_condattr_t <span class="token operator">*</span>restrict attr<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="4">
-</span><span class="code-line line-number" line="5"><span class="token keyword">int</span> <span class="token function">pthread_cond_destroy</span><span class="token punctuation">(</span>pthread_cond_t <span class="token operator">*</span>cond<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="6">
-</span><span class="code-line line-number" line="7"><span class="token keyword">int</span> <span class="token function">pthread_cond_wait</span><span class="token punctuation">(</span>pthread_cond_t <span class="token operator">*</span>restrict cond<span class="token punctuation">,</span> pthread_mutex_t <span class="token operator">*</span>restrict mutex<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="8">    <span class="token operator">-</span> 等待，调用了该函数，线程会阻塞。
-</span><span class="code-line line-number" line="9">    <span class="token operator">-</span> 在调用前，确保互斥锁已经加锁
-</span><span class="code-line line-number" line="10">
-</span><span class="code-line line-number" line="11"><span class="token keyword">int</span> <span class="token function">pthread_cond_timedwait</span><span class="token punctuation">(</span>pthread_cond_t <span class="token operator">*</span>restrict cond<span class="token punctuation">,</span> pthread_mutex_t <span class="token operator">*</span>restrict mutex<span class="token punctuation">,</span> <span class="token keyword">const</span> <span class="token keyword">struct</span> <span class="token class-name">timespec</span> <span class="token operator">*</span>restrict abstime<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="12">    <span class="token operator">-</span> 等待多长时间，调用了这个函数，线程会阻塞，直到指定的时间结束。
-</span><span class="code-line line-number" line="13">
-</span><span class="code-line line-number" line="14"><span class="token keyword">int</span> <span class="token function">pthread_cond_signal</span><span class="token punctuation">(</span>pthread_cond_t <span class="token operator">*</span>cond<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="15">    <span class="token operator">-</span> 唤醒一个或者多个等待的线程
-</span><span class="code-line line-number" line="16">
-</span><span class="code-line line-number" line="17"><span class="token keyword">int</span> <span class="token function">pthread_cond_broadcast</span><span class="token punctuation">(</span>pthread_cond_t <span class="token operator">*</span>cond<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="18">    <span class="token operator">-</span> 唤醒所有的等待的线程
-</span></code><input type="hidden" value="pthread_cond_t m_cond; //条件变量的类型
-
-int pthread_cond_init(pthread_cond_t *restrict cond, const pthread_condattr_t *restrict attr);
-
-int pthread_cond_destroy(pthread_cond_t *cond);
-
-int pthread_cond_wait(pthread_cond_t *restrict cond, pthread_mutex_t *restrict mutex);
-    - 等待，调用了该函数，线程会阻塞。
-    - 在调用前，确保互斥锁已经加锁
-
-int pthread_cond_timedwait(pthread_cond_t *restrict cond, pthread_mutex_t *restrict mutex, const struct timespec *restrict abstime);
-    - 等待多长时间，调用了这个函数，线程会阻塞，直到指定的时间结束。
-
-int pthread_cond_signal(pthread_cond_t *cond);
-    - 唤醒一个或者多个等待的线程
-
-int pthread_cond_broadcast(pthread_cond_t *cond);
-    - 唤醒所有的等待的线程
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="功能"><a aria-hidden="true" tabindex="-1" href="#功能" class="anchor"><span class="icon icon-link"></span></a>功能</h2>
+        <p>主要是Linux下三种锁进行封装，将锁的创建于销毁函数封装在类的构造与析构函数中，实现RAII机制。</p>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#class-sem-信号量" class="tocs-link">class sem 信号量</a></li>
-            <li><a href="#class-locker-互斥锁" class="tocs-link">class locker 互斥锁</a></li>
-            <li><a href="#class-cond-条件变量" class="tocs-link">class cond 条件变量</a></li>
+            <li><a href="#基础api" class="tocs-link">基础API</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#raii" class="tocs-link">RAII</a></li>
+                <li><a href="#信号量" class="tocs-link">信号量</a></li>
+                <li><a href="#互斥锁" class="tocs-link">互斥锁</a></li>
+                <li><a href="#条件变量" class="tocs-link">条件变量</a></li>
+              </ol>
+            </li>
+            <li><a href="#功能" class="tocs-link">功能</a></li>
           </ol>
         </aside>
       </nav>
