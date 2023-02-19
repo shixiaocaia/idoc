@@ -54,7 +54,7 @@
 - 01ComputerNetwork/ch31.md: IP知识全家桶
 - 01ComputerNetwork/ch32.md: ping的工作原理
 - 01ComputerNetwork: 综合篇
-- 01ComputerNetwork/ch00.md: 身边的计网
+- 01ComputerNetwork/ch41.md: 什么都有
 
 - 01DataBase/README.md: ↩️README
 - 01DataBase: 从动手开始
@@ -66,7 +66,7 @@
 - 02MyWeb/ch00.md: 问题收集
 - 02MyWeb/ch01.md: 线程同步机制封装类
 - 02MyWeb/ch02.md: 半同步/半反应堆线程池
-- 02MyWeb/ch03.md: I/O多路复用
+- 02MyWeb/ch03.md: 监听事件
 - 02MyWeb/ch04.md: HTTP连接请求处理类
 - 02MyWeb/ch05.md: 定时器处理非活动链接 - 1
 - 02MyWeb/ch06.md: 定时器处理非活动链接 - 2

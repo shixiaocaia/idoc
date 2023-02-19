@@ -135,6 +135,56 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             </ul>
           </li>
         </ul>
+        <h2 id="试着压缩数据"><a aria-hidden="true" tabindex="-1" href="#试着压缩数据" class="anchor"><span class="icon icon-link"></span></a>试着压缩数据</h2>
+        <p>文件的大小之所以用XXKB，XXMB来表示是因为文件是以字节B为单位保存的。</p>
+        <h3 id="rle算法"><a aria-hidden="true" tabindex="-1" href="#rle算法" class="anchor"><span class="icon icon-link"></span></a>RLE算法</h3>
+        <p>Run lenght Encoding算法，按照数据×重复次数形式表示压缩算法，比起AAA，A3只需要两个字节表示。</p>
+        <p>但这并不适合文字压缩，真正文字连续重复出现的很少。</p>
+        <h3 id="哈夫曼算法"><a aria-hidden="true" tabindex="-1" href="#哈夫曼算法" class="anchor"><span class="icon icon-link"></span></a>哈夫曼算法</h3>
+        <p><em>莫尔斯编码</em>是通过滴答长短点来传递文本消息的。一般讲文中出现频率搞得字符用短编码表示，通过长短码表示字符，替代直接用1个英文版半圆角字符为1个字节存储的方法。实际压缩率并不高。</p>
+        <p><em>哈夫曼编码</em>是为各压缩对象文件分别构造最佳的编码体系，并以该编码体系为基础进行压缩。</p>
+        <p>哈夫曼编码中间需要加入间隔符，来区分字符，但是在实际当中我们是通过哈夫曼树构造编码体系，不需要字符区分符号。</p>
+        <p>使用哈夫曼树后，出现频率越高的数据所占用的数据位数就越少，数据的区分也越明显。</p>
+        <h2 id="程序是在何种环境中运行的"><a aria-hidden="true" tabindex="-1" href="#程序是在何种环境中运行的" class="anchor"><span class="icon icon-link"></span></a>程序是在何种环境中运行的</h2>
+        <p>运行环境 = 操作系统 + 硬件。</p>
+        <p>JAVA虚拟机是一边把JAVA字节代码注意转换为本地代码一边运行的，虚拟JAVA虚拟可以用在Window，PDA等各种操作系统上。</p>
+        <p>程序运行的环境中存在BIOS（Basic Input / Output System）的系统，BISO存储在ROM中，是预先内置在计算机主机内部的程序。其内部包好了键盘、磁盘、显卡等基本控制程序，还有引导程序。</p>
+        <p>在开机后，BIOS会确认硬件是否正常运行，没有问题启动引导程序。引导程序就把硬盘等记录的OS加载到内存中运行。</p>
+        <h2 id="从源文件到可执行文件"><a aria-hidden="true" tabindex="-1" href="#从源文件到可执行文件" class="anchor"><span class="icon icon-link"></span></a>从源文件到可执行文件</h2>
+        <p>源文件经过<strong>编译</strong>得到目标文件，多个目标文件<strong>链接</strong>成一个可执行文件。</p>
+        <ul>
+          <li>CPU能够直接解析的是机器语言代码（本地代码）。</li>
+          <li>把EXE文件内容，每个字节用2位十六进制数表示，所以用记事本打开EXE文件是各种数值罗列。</li>
+          <li>也就是说计算机就是把所有信息作为数值的集合来处理。</li>
+        </ul>
+        <h3 id="库文件"><a aria-hidden="true" tabindex="-1" href="#库文件" class="anchor"><span class="icon icon-link"></span></a>库文件</h3>
+        <p>是把多个目标文件集成保存到一个文件中的形式。</p>
+        <p>链接器会指定库文件后，就会从中把需要的文件从目标文件中提取出来。</p>
+        <blockquote>
+          <p>例如<code>sprintf()</code>等函数是通过目标文件链接的。</p>
+          <p>通过包含多个目标文件的库文件来提供函数，这样就可以不公开源代码。</p>
+        </blockquote>
+        <h3 id="api"><a aria-hidden="true" tabindex="-1" href="#api" class="anchor"><span class="icon icon-link"></span></a>API</h3>
+        <p>Windows以函数形式为应用提供功能，也就是API接口，例如<code>MessageBox()</code>提供了显示消息框的功能。</p>
+        <p>API通常保存在DLL文件的特殊库文件当中。</p>
+        <p><code>import32.lib</code>这样库文件称为导入库，并不包含实际的目标文件实体。</p>
+        <p>而存储目标文件实体，并且直接和EXE文件结合的库文件形式称为<em>静态链接库</em>，例如cw32lib就是，存放了<code>sprintf()</code>目标文件。</p>
+        <h3 id="exe文件"><a aria-hidden="true" tabindex="-1" href="#exe文件" class="anchor"><span class="icon icon-link"></span></a>EXE文件</h3>
+        <p>EXE文件中包含了：1.再配置信息 2. 变量组 3. 函数组</p>
+        <p>当点击可执行文件时，加载到内存中运行时，在这其中函数、变量分配的是虚拟的内存地址空间。</p>
+        <p>链接器会在EXE文件的开头追加转换内存地址必要信息，并且链接后变量函数会变成一个连续的排列，然后通过基地址+偏移量的形式进行访问。</p>
+        <p>此外，在加载时会额外生成<strong>堆和栈</strong>两个组。</p>
+        <ul>
+          <li>
+            <p><em>栈</em>中存放了函数内部临时使用的变量信息，函数调用所用的参数的内存区域</p>
+          </li>
+          <li>
+            <p>栈中数据存储与丢弃代码是由编译器自动生成的，每当函数被调用申请分配内存，用完后会自动释放。</p>
+          </li>
+          <li>
+            <p>堆中存放时程序运行时任意的数据以及对象内存区域，由程序员自由申请和释放，因此需要注意，避免内存泄漏问题。</p>
+          </li>
+        </ul>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -144,6 +194,20 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <li><a href="#熟练使用有棱有角的内存" class="tocs-link">熟练使用有棱有角的内存</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#虚拟内存" class="tocs-link">虚拟内存</a></li>
+              </ol>
+            </li>
+            <li><a href="#试着压缩数据" class="tocs-link">试着压缩数据</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#rle算法" class="tocs-link">RLE算法</a></li>
+                <li><a href="#哈夫曼算法" class="tocs-link">哈夫曼算法</a></li>
+              </ol>
+            </li>
+            <li><a href="#程序是在何种环境中运行的" class="tocs-link">程序是在何种环境中运行的</a></li>
+            <li><a href="#从源文件到可执行文件" class="tocs-link">从源文件到可执行文件</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#库文件" class="tocs-link">库文件</a></li>
+                <li><a href="#api" class="tocs-link">API</a></li>
+                <li><a href="#exe文件" class="tocs-link">EXE文件</a></li>
               </ol>
             </li>
           </ol>

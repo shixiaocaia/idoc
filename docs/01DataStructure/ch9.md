@@ -640,6 +640,8 @@ int main() {
 >
 > 关联[5. 最长回文子串](https://leetcode.cn/problems/longest-palindromic-substring)
 
+> 时间和空间复杂度都是O(n^2)。
+
 **[516. 最长回文子序列](https://leetcode.cn/problems/longest-palindromic-subsequence/)**
 
 > `dp[i][j]`表示[i,j]的最长回文串

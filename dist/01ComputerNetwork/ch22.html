@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CPP iDoc</title>
-    <meta name="description" content="在计算机科学中，trie，又称前缀树或字典树，是一种有序树，用于保存关联数组，其中的键通常是字符串。">
+    <title>抓个包看看 iDoc</title>
+    <meta name="description" content="tcpdump 和 Wireshark 有什么区别？">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -49,10 +49,10 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
             <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
             <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
-            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="index.html" target="" class="active">ComputerNetwrok</a></li>
             <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
             <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
-            <li><a href="index.html" target="" class="active">Other</a></li>
+            <li><a href="../00Other/index.html" target="" class="">Other</a></li>
           </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
             </svg></a>
@@ -65,29 +65,37 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <aside class="sidebar" role="navigation">
           <div>
             <a href="index.html" class="">↩️README</a>
-            <a href="vim.html" class="">Vim</a>
-            <a href="git.html" class="">Git</a>
+            <a href="ch00.html" class="">问题收集</a>
+            <label>HTTP篇</label>
+            <a href="ch11.html" class="">占个坑位</a>
+            <label>TCP篇</label>
+            <a href="ch21.html" class="">占个坑位</a>
+            <label>IP篇</label>
+            <a href="ch31.html" class="">IP知识全家桶</a>
+            <a href="ch32.html" class="">ping的工作原理</a>
+            <label>综合篇</label>
+            <a href="ch41.html" class="">什么都有</a>
           </div>
         </aside>
       </div>
       <markdown-style>
-        <h3 id="工作内容"><a aria-hidden="true" tabindex="-1" href="#工作内容" class="anchor"><span class="icon icon-link"></span></a>工作内容</h3>
-        <ul>
-          <li>
-            <p>数据面：称为MOSN，是处理应用数据请求的一个独立代理模块，脱离于应用，为应用提供请求代理及一些复杂通信逻辑处理。</p>
-          </li>
-          <li>
-            <p>控制面：称为SOFAMesh，管理应用配置及业务规则等（例如业务开关、服务路由规则），通过下发配置，“指挥”数据面去执行，满足不同阶段不同实现的业务支持。</p>
-          </li>
-        </ul>
-        <h3 id="trie树"><a aria-hidden="true" tabindex="-1" href="#trie树" class="anchor"><span class="icon icon-link"></span></a>trie树</h3>
-        <p>在计算机科学中，trie，又称前缀树或字典树，是一种有序树，用于保存关联数组，其中的键通常是字符串。</p>
+        <h1 id="抓个包看看"><a aria-hidden="true" tabindex="-1" href="#抓个包看看" class="anchor"><span class="icon icon-link"></span></a>抓个包看看</h1>
+        <h2 id="前言"><a aria-hidden="true" tabindex="-1" href="#前言" class="anchor"><span class="icon icon-link"></span></a>前言</h2>
+        <p>tcpdump 和 Wireshark 有什么区别？</p>
+        <blockquote>
+          <p>tcpdump 和 Wireshark 就是最常用的网络抓包和分析工具，更是分析网络性能必不可少的利器。</p>
+          <p>tcpdump 仅支持命令行格式使用，常用在 Linux 服务器中抓取和分析网络包。</p>
+          <p>Wireshark 除了可以抓包外，还提供了可视化分析网络包的图形页面。</p>
+          <p>所以，这两者实际上是搭配使用的，先用 tcpdump 命令在 Linux 服务器上抓包，接着把抓包的文件拖出到 Windows 电脑后，用 Wireshark 可视化分析。</p>
+        </blockquote>
+        <blockquote>
+          <p>ubuntu下安装tcpdump，<code>sudo apt-get install tcpdump</code></p>
+        </blockquote>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#工作内容" class="tocs-link">工作内容</a></li>
-            <li><a href="#trie树" class="tocs-link">trie树</a></li>
+            <li><a href="#前言" class="tocs-link">前言</a></li>
           </ol>
         </aside>
       </nav>

@@ -232,6 +232,33 @@ Widget&#x26; operator+=(const Widget&#x26; rhs){
         <p>一个derived class的构造函数，在你自定义自己的copy构造函数之后，进行初始化时少了一部分初始化，编译器不太会报错，不会主动把子类的部分成员属性复制给父类进行构造。</p>
         <p>我们应该主动调用父类的copy构造函数，初始化列表一部分子类的变量，以此确保复制“对象内的所有成员变量”和“所有base class成分”。</p>
         <p>也不应该在copy构造中调用operator=。</p>
+        <h2 id="以对象管理资源raii"><a aria-hidden="true" tabindex="-1" href="#以对象管理资源raii" class="anchor"><span class="icon icon-link"></span></a>以对象管理资源（RAII）</h2>
+        <p>尽量在创建对象时就移动到管理类当中。</p>
+        <p>当一块已经申请的内存空间，由于函数内过早的return，或者在循环内过早的退出，或者由于异常函数的抛出，导出没有及时的delete，会造成内存泄漏等一些列问题。</p>
+        <p>由此引出，我们应该尽量将资源放入对象中，依赖C++的析构函数来自动释放，确保资源被释放。</p>
+        <p>在这其中智能指针就是一个很好的例子，但是智能指针在析构函数内并不能做<code>delete[]</code>动作。</p>
+        <h2 id="在资源管理类中小心copying行为"><a aria-hidden="true" tabindex="-1" href="#在资源管理类中小心copying行为" class="anchor"><span class="icon icon-link"></span></a>在资源管理类中小心copying行为</h2>
+        <ul>
+          <li>复制RAII对象必须一并复制它所管理的资源，所以资源得copying行为决定了RAII对象的copying行为。</li>
+        </ul>
+        <blockquote>
+          <p>大部分时候，允许RAII对象被复制并不合理。</p>
+        </blockquote>
+        <ul>
+          <li>普通而常见得RAII class copying行为是：抑制copying、施行引用计数法。</li>
+        </ul>
+        <p><strong>禁止复制</strong></p>
+        <p>假设我们现在有一个互斥器Mutex，用来保证多线程安全。对互斥器加锁，则互斥器所关联的临界资源就无法被其他线程访问。当使用结束以后需要解锁，释放互斥器。</p>
+        <p>这里我们设计了一个Lock类用来管理互斥器这个资源。在它的构造函数中对互斥器加锁，析构函数中解锁。</p>
+        <p>设想一下我们要复制Lock对象，会发生什么？一个Lock对象管理Mutex，现在我们试图复制Lock，就表明我们又要用另一个Lock对象管理同一个Mutex，这显然不合理。一个互斥器仅需要也仅能够被一个Lock对象管理，因为不可以对同一个Mutex加两次锁。所以这里我们需要拒绝复制行为。</p>
+        <p><strong>对底层资源使用引用计数</strong></p>
+        <p>现在让我们回到智能指针上面来。假设我们new了一块动态内存，并用一个智能指针来保存，在智能指针的析构函数中释放这块内存。现在我们需要另一个智能指针也指向这块内存，这是非常常见的事情。一个对象当然可以被多个指针引用，所以这里我们无法拒绝禁止复制这一操作。</p>
+        <p>但如果不禁止的话，一个智能指针生命期结束了就会调用析构函数释放内存。而另一个指针指向的就是一块被释放的内存。这也是非常严重的错误。</p>
+        <p>我们可以引入引用计数法。也就是直到最后一个智能指针被销毁，我们才释放这块内存资源。</p>
+        <p><strong>复制底层资源</strong></p>
+        <p>这就属于深拷贝了，我们不仅复制了一个资源管理对象，底层的资源也复制了一份。这两个资源管理对象和底层资源就是互不干扰的，各自负责管理各自的资源。</p>
+        <p><strong>转移底部资源的拥有权</strong></p>
+        <p>相当于移交管理权。之前的那个资源管理对象就不负责管理这块资源了。unique_ptr就属于这种，一个unique_ptr对象在被赋值后，原始的对象会将指针置为空。</p>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -247,6 +274,8 @@ Widget&#x26; operator+=(const Widget&#x26; rhs){
             <li><a href="#令operator返回一个reference-to-this" class="tocs-link">令operator=返回一个reference to *this</a></li>
             <li><a href="#在operator-中处理自我赋值" class="tocs-link">在operator= 中处理“自我赋值”</a></li>
             <li><a href="#复制对象时勿忘每一个成分" class="tocs-link">复制对象时勿忘每一个成分</a></li>
+            <li><a href="#以对象管理资源raii" class="tocs-link">以对象管理资源（RAII）</a></li>
+            <li><a href="#在资源管理类中小心copying行为" class="tocs-link">在资源管理类中小心copying行为</a></li>
           </ol>
         </aside>
       </nav>
