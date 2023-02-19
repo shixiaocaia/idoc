@@ -6,7 +6,11 @@ Do sth for fun
 
 ![](http://pic.shixiaocaia.fun/202301241635615.png)
 
-### [计算机教育中缺失的一课](https://missing-semester-cn.github.io/)
+### 前言
+
+- [计算机教育中缺失的一课](https://missing-semester-cn.github.io/)
+
+- [写一份简历](https://www.mujicv.com/)
 
 ### 编程语言 
 
