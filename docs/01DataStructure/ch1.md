@@ -216,8 +216,6 @@ public:
 >
 > 最后不能忘记最后一组区间需要手动存入。
 
-
-
 **其他章节双指针思路题**
 
 > [LC19.删除链表的倒数第N个节点](https://leetcode.cn/problems/remove-nth-node-from-end-of-list/)
@@ -301,6 +299,8 @@ while j < len(nums):
 > 注意如果p长度大于s，那么一定没有结果，直接返回。
 >
 > 然后记录p数组的字母构成数量。维护一个滑动窗口。当前的字母数量小于0维护左边界。最好当前窗口长度等于p长度时，记录左边界。
+>
+> 
 
 [LC3.无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
 

@@ -377,6 +377,13 @@ int partition(vector<int>&#x26; nums, int left, int right) {
         <h2 id="归并排序"><a aria-hidden="true" tabindex="-1" href="#归并排序" class="anchor"><span class="icon icon-link"></span></a>归并排序</h2>
         <h3 id="例题-1"><a aria-hidden="true" tabindex="-1" href="#例题-1" class="anchor"><span class="icon icon-link"></span></a>例题</h3>
         <p><a href="https://leetcode.cn/problems/next-permutation">31. 下一个排列</a></p>
+        <h2 id="拓扑排序"><a aria-hidden="true" tabindex="-1" href="#拓扑排序" class="anchor"><span class="icon icon-link"></span></a>拓扑排序</h2>
+        <p><a href="https://leetcode.cn/problems/course-schedule">207. 课程表</a></p>
+        <blockquote>
+          <p>首先将入度为0（也就是没有先修课程的，肯定可以学）入队，然后不断弹出这些课（学了），找需要先修这门课的，如果这门课入度为0了（先修课修完了），入队。</p>
+          <p>最后判断学完的所有数量和当前的numCourses是否相等即可。</p>
+          <p>时间复杂度：O(E+V)。这里 E 表示邻边的条数，V 表示结点的个数。</p>
+        </blockquote>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -398,6 +405,7 @@ int partition(vector<int>&#x26; nums, int left, int right) {
                 <li><a href="#例题-1" class="tocs-link">例题</a></li>
               </ol>
             </li>
+            <li><a href="#拓扑排序" class="tocs-link">拓扑排序</a></li>
           </ol>
         </aside>
       </nav>
