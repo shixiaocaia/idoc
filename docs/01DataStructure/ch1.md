@@ -216,6 +216,12 @@ public:
 >
 > 最后不能忘记最后一组区间需要手动存入。
 
+[ 75. 颜色分类](https://leetcode.cn/problems/sort-colors)
+
+> 刷油漆战略。
+>
+> 由于num <= 2，我们线全部刷成2，如果小于等于1，刷一个1（有一个错误的2刷成了1），如果小于0，刷一个0（纠正了一个错误1），分别用两个指针指向0，1的起始位置。                                                                                 
+
 **其他章节双指针思路题**
 
 > [LC19.删除链表的倒数第N个节点](https://leetcode.cn/problems/remove-nth-node-from-end-of-list/)

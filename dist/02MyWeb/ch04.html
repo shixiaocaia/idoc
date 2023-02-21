@@ -221,51 +221,144 @@ Content-Type:text/html;charset=UTF-8
             <li>响应正文，服务器返回给客户端的文本信息。空行后面的html部分为响应正文。</li>
           </ul>
         </blockquote>
-        <h3 id="http状态码"><a aria-hidden="true" tabindex="-1" href="#http状态码" class="anchor"><span class="icon icon-link"></span></a>HTTP状态码</h3>
-        <blockquote>
-          <p>HTTP有5种类型的状态码，具体的：</p>
-          <ul>
-            <li>
-              <p>1xx：指示信息--表示请求已接收，继续处理。</p>
-            </li>
-            <li>
-              <p>2xx：成功--表示请求正常处理完毕。</p>
-            </li>
-            <li>
-              <ul>
-                <li>200 OK：客户端请求被正常处理。</li>
-                <li>206 Partial content：客户端进行了范围请求。</li>
-              </ul>
-            </li>
-            <li>
-              <p>3xx：重定向--要完成请求必须进行更进一步的操作。</p>
-            </li>
-            <li>
-              <ul>
-                <li>301 Moved Permanently：永久重定向，该资源已被永久移动到新位置，将来任何对该资源的访问都要使用本响应返回的若干个URI之一。</li>
-                <li>302 Found：临时重定向，请求的资源现在临时从不同的URI中获得。</li>
-              </ul>
-            </li>
-            <li>
-              <p>4xx：客户端错误--请求有语法错误，服务器无法处理请求。</p>
-            </li>
-            <li>
-              <ul>
-                <li>400 Bad Request：请求报文存在语法错误。</li>
-                <li>403 Forbidden：请求被服务器拒绝。</li>
-                <li>404 Not Found：请求不存在，服务器上找不到请求的资源。</li>
-              </ul>
-            </li>
-            <li>
-              <p>5xx：服务器端错误--服务器处理请求出错。</p>
-            </li>
-            <li>
-              <ul>
-                <li>500 Internal Server Error：服务器在执行请求时出现错误。</li>
-              </ul>
-            </li>
-          </ul>
-        </blockquote>
+        <h3 id="enum表示状态"><a aria-hidden="true" tabindex="-1" href="#enum表示状态" class="anchor"><span class="icon icon-link"></span></a>enum表示状态</h3>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token comment">//报文请求的方法，本文主要就是POST，GET</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">enum</span> <span class="token class-name">METHOD</span>
+</span><span class="code-line line-number" line="3"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="4">    GET <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="5">    POST<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="6">    HEAD<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="7">    PUT<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="8">    DELETE<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="9">    TRACE<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="10">    OPTIONS<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="11">    CONNECT<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="12">    PATH
+</span><span class="code-line line-number" line="13"><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="14">
+</span><span class="code-line line-number" line="15"><span class="token comment">//主状态机的状态</span>
+</span><span class="code-line line-number" line="16"><span class="token keyword">enum</span> <span class="token class-name">CHECK_STATE</span>
+</span><span class="code-line line-number" line="17"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="18">    CHECK_STATE_REQUESTLINE <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>            <span class="token comment">//检查请求行</span>
+</span><span class="code-line line-number" line="19">    CHECK_STATE_HEAD<span class="token punctuation">,</span>                       <span class="token comment">//检查请求头</span>
+</span><span class="code-line line-number" line="20">    CHECK_STATE_CONTENT                     <span class="token comment">//检查请求体</span>
+</span><span class="code-line line-number" line="21"><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="22">
+</span><span class="code-line line-number" line="23"><span class="token comment">//报文解析的结果</span>
+</span><span class="code-line line-number" line="24"><span class="token keyword">enum</span> <span class="token class-name">HTTP_CODE</span>
+</span><span class="code-line line-number" line="25"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="26">    NO_REQUEST<span class="token punctuation">,</span>         <span class="token comment">//回复NO_REQUEST继续往后处理</span>
+</span><span class="code-line line-number" line="27">    GET_REQUEST<span class="token punctuation">,</span>        <span class="token comment">//GET请求</span>
+</span><span class="code-line line-number" line="28">    BAD_REQUEST<span class="token punctuation">,</span>        <span class="token comment">//语法错误</span>
+</span><span class="code-line line-number" line="29">    NO_RESOURCE<span class="token punctuation">,</span>        <span class="token comment">//无请求资源</span>
+</span><span class="code-line line-number" line="30">    FORBIDDEN_REQUEST<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="31">    FILE_REQUEST<span class="token punctuation">,</span>       <span class="token comment">//请求资源</span>
+</span><span class="code-line line-number" line="32">    INTERNAL_ERROR<span class="token punctuation">,</span>     <span class="token comment">//内部错误</span>
+</span><span class="code-line line-number" line="33">    CLOSED_CONNECTION   <span class="token comment">//关闭连接</span>
+</span><span class="code-line line-number" line="34"><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="35">
+</span><span class="code-line line-number" line="36"><span class="token comment">//从状态机的状态</span>
+</span><span class="code-line line-number" line="37"><span class="token keyword">enum</span> <span class="token class-name">LINE_STATE</span>
+</span><span class="code-line line-number" line="38"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="39">    LINE_OK <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span>                            <span class="token comment">//行解析成功</span>
+</span><span class="code-line line-number" line="40">    LINE_BAD<span class="token punctuation">,</span>                               <span class="token comment">//语法错误</span>
+</span><span class="code-line line-number" line="41">    LINE_OPEN                               <span class="token comment">//未获取到一行</span>
+</span><span class="code-line line-number" line="42"><span class="token punctuation">}</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="//报文请求的方法，本文主要就是POST，GET
+enum METHOD
+{
+    GET = 0,
+    POST,
+    HEAD,
+    PUT,
+    DELETE,
+    TRACE,
+    OPTIONS,
+    CONNECT,
+    PATH
+};
+
+//主状态机的状态
+enum CHECK_STATE
+{
+    CHECK_STATE_REQUESTLINE = 0,            //检查请求行
+    CHECK_STATE_HEAD,                       //检查请求头
+    CHECK_STATE_CONTENT                     //检查请求体
+};
+
+//报文解析的结果
+enum HTTP_CODE
+{
+    NO_REQUEST,         //回复NO_REQUEST继续往后处理
+    GET_REQUEST,        //GET请求
+    BAD_REQUEST,        //语法错误
+    NO_RESOURCE,        //无请求资源
+    FORBIDDEN_REQUEST,
+    FILE_REQUEST,       //请求资源
+    INTERNAL_ERROR,     //内部错误
+    CLOSED_CONNECTION   //关闭连接
+};
+
+//从状态机的状态
+enum LINE_STATE
+{
+    LINE_OK = 0,                            //行解析成功
+    LINE_BAD,                               //语法错误
+    LINE_OPEN                               //未获取到一行
+};
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="http_code"><a aria-hidden="true" tabindex="-1" href="#http_code" class="anchor"><span class="icon icon-link"></span></a>HTTP_CODE</h3>
+        <p>表示HTTP请求的处理结果，在头文件中初始化了八种情形，在报文解析时只涉及到四种。</p>
+        <ul>
+          <li>
+            <p>NO_REQUEST</p>
+            <ul>
+              <li>请求不完整，需要继续读取请求报文数据</li>
+              <li>跳转主线程继续监测读事件</li>
+            </ul>
+          </li>
+          <li>
+            <p>GET_REQUEST</p>
+            <ul>
+              <li>获得了完整的HTTP请求</li>
+              <li>调用do_request完成请求资源映射</li>
+            </ul>
+          </li>
+          <li>
+            <p>NO_RESOURCE</p>
+            <ul>
+              <li>请求资源不存在</li>
+              <li>跳转process_write完成响应报文</li>
+            </ul>
+          </li>
+          <li>
+            <p>BAD_REQUEST</p>
+            <ul>
+              <li>HTTP请求报文有语法错误或请求资源为目录</li>
+              <li>跳转process_write完成响应报文</li>
+            </ul>
+          </li>
+          <li>
+            <p>FORBIDDEN_REQUEST</p>
+            <ul>
+              <li>请求资源禁止访问，没有读取权限</li>
+              <li>跳转process_write完成响应报文</li>
+            </ul>
+          </li>
+          <li>
+            <p>FILE_REQUEST</p>
+            <ul>
+              <li>请求资源可以正常访问</li>
+              <li>跳转process_write完成响应报文</li>
+            </ul>
+          </li>
+          <li>
+            <p>INTERNAL_ERROR</p>
+            <ul>
+              <li>服务器内部错误，该结果在主状态机逻辑switch的default下，一般不会触发</li>
+            </ul>
+          </li>
+        </ul>
         <h2 id="有限状态机"><a aria-hidden="true" tabindex="-1" href="#有限状态机" class="anchor"><span class="icon icon-link"></span></a>有限状态机</h2>
         <p>有限状态机一种逻辑单元内部的一种高效编程方法，在服务器编程中，服务器可以根据不同状态或者消息类型进行相应的处理逻辑，使得程序逻辑清晰易懂。</p>
         <p>
@@ -307,7 +400,8 @@ Content-Type:text/html;charset=UTF-8
               <ol class="tocs-list is-collapsed">
                 <li><a href="#请求报文" class="tocs-link">请求报文</a></li>
                 <li><a href="#响应报文" class="tocs-link">响应报文</a></li>
-                <li><a href="#http状态码" class="tocs-link">HTTP状态码</a></li>
+                <li><a href="#enum表示状态" class="tocs-link">enum表示状态</a></li>
+                <li><a href="#http_code" class="tocs-link">HTTP_CODE</a></li>
               </ol>
             </li>
             <li><a href="#有限状态机" class="tocs-link">有限状态机</a>
