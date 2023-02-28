@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>链接 iDoc</title>
+    <meta name="description" content="学习链接为了：">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+    <script src="../js/jquery.min.js?v=1.21.13"></script>
+    <script src="../js/fancybox.umd.js?v=1.21.13"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="index.html" target="" class="active">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+            <li><a href="../00Other/index.html" target="" class="">Other</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <a href="ch00.html" class="">问题收集</a>
+            <label>计组</label>
+            <a href="ch01.html" class="">《程序是怎么跑起来的》</a>
+            <a href="ch51.html" class="">优化程序性能</a>
+            <a href="ch61.html" class="">存储器</a>
+            <a href="ch71.html" class="">链接</a>
+            <label>进程</label>
+            <a href="ch81.html" class="">进程、线程、调度</a>
+            <a href="ch82.html" class="">问题</a>
+            <label>虚拟内存</label>
+            <a href="ch91.html" class="">虚拟内存</a>
+            <a href="ch92.html" class="">问题</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="链接"><a aria-hidden="true" tabindex="-1" href="#链接" class="anchor"><span class="icon icon-link"></span></a>链接</h1>
+        <p>学习链接为了：</p>
+        <ul>
+          <li>构造大型程序
+            <ul>
+              <li>每次编译只需要编译更改的程序</li>
+              <li>再进行链接</li>
+            </ul>
+          </li>
+          <li>避免一些危险的编程错误</li>
+          <li>理解语言的作用域如何实现的</li>
+          <li>理解其他重要的系统概念</li>
+          <li>更好的利用共享库</li>
+        </ul>
+        <h2 id="可重定位目标文件"><a aria-hidden="true" tabindex="-1" href="#可重定位目标文件" class="anchor"><span class="icon icon-link"></span></a>可重定位目标文件</h2>
+        <p>
+          <img src="http://pic.shixiaocaia.fun/202302251612568.png" alt="image-20230225161144829">
+        </p>
+        <pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line line-number" line="1">gcc <span class="token parameter variable">-Og</span> <span class="token parameter variable">-o</span> prog main.c sun.c
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3"><span class="token parameter variable">-Og</span> 生成的汇编的代码尽可能与源代码一致性，实际中一般用-O1,-O2
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5">cpp <span class="token parameter variable">-o</span>  main.i main.c
+</span><span class="code-line line-number" line="6">gcc <span class="token parameter variable">-E</span> <span class="token parameter variable">-o</span> main.i main.c
+</span><span class="code-line line-number" line="7">//cpp <span class="token operator">=</span> c comiler<span class="token punctuation">(</span>C 编译器<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="8">//-E只进行预处理，不执行编译链接部分
+</span><span class="code-line line-number" line="9">
+</span><span class="code-line line-number" line="10">cc <span class="token parameter variable">-S</span> <span class="token parameter variable">-o</span> main.s main.i
+</span><span class="code-line line-number" line="11">gcc <span class="token parameter variable">-S</span> <span class="token parameter variable">-o</span> main.s main.i
+</span><span class="code-line line-number" line="12">//cc <span class="token operator">=</span> c compiler
+</span><span class="code-line line-number" line="13">//-S只进行编译操作
+</span><span class="code-line line-number" line="14">
+</span><span class="code-line line-number" line="15">as <span class="token parameter variable">-o</span> main.o main.s
+</span><span class="code-line line-number" line="16">//as: assembler<span class="token punctuation">(</span>汇编器<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="17">
+</span><span class="code-line line-number" line="18">ld <span class="token parameter variable">-static</span> <span class="token parameter variable">-o</span> prog main.o sum.o
+</span><span class="code-line line-number" line="19">//ld 链接器
+</span></code><input type="hidden" value="gcc -Og -o prog main.c sun.c
+
+-Og 生成的汇编的代码尽可能与源代码一致性，实际中一般用-O1,-O2
+
+cpp -o  main.i main.c
+gcc -E -o main.i main.c
+//cpp = c comiler(C 编译器)
+//-E只进行预处理，不执行编译链接部分
+
+cc -S -o main.s main.i
+gcc -S -o main.s main.i
+//cc = c compiler
+//-S只进行编译操作
+
+as -o main.o main.s
+//as: assembler(汇编器)
+
+ld -static -o prog main.o sum.o
+//ld 链接器
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>
+            <p>在实际中链接这个过程，可能发生在多个过程当中。</p>
+          </li>
+          <li>
+            <p>在shell中调用操作系统中一个叫做加载器<code>loader</code>的函数，它将可执行文件prog中的代码和数据复制到内存当中，然后将控制转移到这个程序的开头。</p>
+          </li>
+        </ul>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1">gcc <span class="token operator">-</span>c main<span class="token punctuation">.</span>c
+</span><span class="code-line line-number" line="2">    
+</span><span class="code-line line-number" line="3">readelf <span class="token operator">-</span>h main<span class="token punctuation">.</span>o
+</span><span class="code-line line-number" line="4"><span class="token comment">//读取ELF Header</span>
+</span></code><input type="hidden" value="gcc -c main.c
+    
+readelf -h main.o
+//读取ELF Header
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="符号表"><a aria-hidden="true" tabindex="-1" href="#符号表" class="anchor"><span class="icon icon-link"></span></a>符号表</h2>
+        <h2 id="静态链接"><a aria-hidden="true" tabindex="-1" href="#静态链接" class="anchor"><span class="icon icon-link"></span></a>静态链接</h2>
+        <p>为了构造可执行文件，链接器必须完成两个主要任务：</p>
+        <ul>
+          <li>符号解析：将目标文件中定义和引用的符号，每个符号与对应的函数、全局变量或者一个静态变量相关联起来</li>
+          <li>重定位：编译器和汇编器将从地址0开始生成代码和数字节，将每部分代码与内存位置对应关联起来，修改所有对这些符号的引用，指向相应的内存地址。</li>
+        </ul>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#可重定位目标文件" class="tocs-link">可重定位目标文件</a></li>
+            <li><a href="#符号表" class="tocs-link">符号表</a></li>
+            <li><a href="#静态链接" class="tocs-link">静态链接</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>

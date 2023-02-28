@@ -291,6 +291,8 @@ vector<vector<int>> dp(m, vector<int>(n, 0)); // 初始化一个二维数组
 >
 > 背包的遍历都是从后向前更新的。
 
+[494. 目标和](https://leetcode.cn/problems/target-sum)
+
 ## 完全背包
 
 > 有N件物品和一个最多能背重量为W的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。**每件物品都有无限个（也就是可以放入背包多次）**，求解将哪些物品装入背包里物品价值总和最大。

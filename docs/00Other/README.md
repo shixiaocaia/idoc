@@ -94,7 +94,9 @@ Do sth for fun
 
 ### 常用工具
 
-Docker/Grafana...
+⬜Docker / Grafana...
+
+⬜cmake / makefile
 
 > 如何理解需求，用工具实现。
 

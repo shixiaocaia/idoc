@@ -202,6 +202,14 @@ while(1) {
         <blockquote>
           <p>此外，epoll_wait 实现的内核代码中调用了 <code>__put_user</code> 函数，这个函数就是将数据从内核拷贝到用户空间，没有共享内容。</p>
         </blockquote>
+        <p>其中events表示感兴趣的事件和被触发的事件，可能的取值为：</p>
+        <ul>
+          <li>EPOLLIN：表示对应的文件描述符可以读；</li>
+          <li>EPOLLOUT：表示对应的文件描述符可以写；</li>
+          <li>EPOLLERR：表示对应的文件描述符发生错误；</li>
+          <li>EPOLLHUP：表示对应的文件描述符被挂断；</li>
+          <li>EPOLLRDHUP：表示对应文件描述符断开。</li>
+        </ul>
         <h3 id="工作模式"><a aria-hidden="true" tabindex="-1" href="#工作模式" class="anchor"><span class="icon icon-link"></span></a>工作模式</h3>
         <p>epoll 支持两种事件触发模式，分别是边缘触发（edge-triggered，ET）和水平触发（level-triggered，LT）。</p>
         <ul>
@@ -244,8 +252,8 @@ while(1) {
           <li>
             <p>EPOLLONESHOT</p>
             <ul>
-              <li>一个线程读取某个socket上的数据后开始处理数据，在处理过程中该socket上又有新数据可读，此时另一个线程被唤醒读取，此时出现两个线程处理同一个socket</li>
-              <li>我们期望的是一个socket连接在任一时刻都只被一个线程处理，通过epoll_ctl对该文件描述符注册epolloneshot事件，一个线程处理socket时，其他线程将无法处理，当该线程处理完后，需要通过epoll_ctl重置epolloneshot事件</li>
+              <li>一个线程读取某个socket上的数据后开始处理数据，在处理过程中该socket上又有新数据可读，此时另一个线程被唤醒读取，此时出现两个线程处理同一个socket。</li>
+              <li>我们期望的是一个socket连接在任一时刻都只被一个线程处理，通过epoll_ctl对该文件描述符注册epolloneshot事件，一个线程处理socket时，其他线程将无法处理，当该线程处理完后，需要通过epoll_ctl重置epolloneshot事件，才能重新处理。</li>
             </ul>
           </li>
         </ul>
@@ -303,10 +311,6 @@ while(1) {
             </ul>
           </li>
         </ul>
-        <h2 id="eventlisten"><a aria-hidden="true" tabindex="-1" href="#eventlisten" class="anchor"><span class="icon icon-link"></span></a>EventListen</h2>
-        <ul>
-          <li></li>
-        </ul>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -326,7 +330,6 @@ while(1) {
                 <li><a href="#三者的区别" class="tocs-link">三者的区别</a></li>
               </ol>
             </li>
-            <li><a href="#eventlisten" class="tocs-link">EventListen</a></li>
           </ol>
         </aside>
       </nav>

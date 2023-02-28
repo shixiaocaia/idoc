@@ -105,7 +105,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li>常用的网络地址是大端地址还是小端地址</li>
           <li>为什么要进行I / O复用</li>
           <li>Webbench的工作原理</li>
-          <li></li>
+          <li>Http中epollfd和webserver类管理里的epollfd</li>
         </ol>
         <h2 id="重构时候思考的问题"><a aria-hidden="true" tabindex="-1" href="#重构时候思考的问题" class="anchor"><span class="icon icon-link"></span></a>重构时候思考的问题</h2>
         <ol>
@@ -120,6 +120,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li>Webbench错误</li>
           <li>如何解决段错误</li>
           <li>后期重做时，进行压力测试，理解性能的变化</li>
+          <li>内核事件表，Webserver内和Http内的epoll</li>
         </ol>
         <p><strong>可改进点</strong></p>
         <ul>
@@ -129,6 +130,12 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           </li>
           <li>日志系统改为前端和后端双授冲，避免生产者和消费者的锁竞争，进一步提高写效率</li>
         </ul>
+        <h2 id="段错误"><a aria-hidden="true" tabindex="-1" href="#段错误" class="anchor"><span class="icon icon-link"></span></a>段错误</h2>
+        <h3 id="可能出现的原因"><a aria-hidden="true" tabindex="-1" href="#可能出现的原因" class="anchor"><span class="icon icon-link"></span></a>可能出现的原因</h3>
+        <ol>
+          <li>数组越界</li>
+          <li>内存的越界访问</li>
+        </ol>
         <h2 id="mysql配置"><a aria-hidden="true" tabindex="-1" href="#mysql配置" class="anchor"><span class="icon icon-link"></span></a>MySQL配置</h2>
         <ul>
           <li>安装mysql</li>
@@ -405,6 +412,11 @@ Requests: 2641 susceed, 2 failed.
             <li><a href="#webserver类管理" class="tocs-link">Webserver类管理</a></li>
             <li><a href="#项目中问题" class="tocs-link">项目中问题</a></li>
             <li><a href="#重构时候思考的问题" class="tocs-link">重构时候思考的问题</a></li>
+            <li><a href="#段错误" class="tocs-link">段错误</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#可能出现的原因" class="tocs-link">可能出现的原因</a></li>
+              </ol>
+            </li>
             <li><a href="#mysql配置" class="tocs-link">MySQL配置</a></li>
             <li><a href="#webbench安装" class="tocs-link">Webbench安装</a>
               <ol class="tocs-list is-collapsed">
