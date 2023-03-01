@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>问题收集 iDoc</title>
+    <title>环境配置 iDoc</title>
     <meta name="description" content="如果遇到如下问题：">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
@@ -65,77 +65,21 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <aside class="sidebar" role="navigation">
           <div>
             <a href="index.html" class="">↩️README</a>
-            <a href="ch00.html" class="">问题收集</a>
+            <a href="ch00.html" class="">环境配置</a>
             <a href="ch01.html" class="">线程同步机制封装类</a>
             <a href="ch02.html" class="">半同步/半反应堆线程池</a>
             <a href="ch03.html" class="">监听事件</a>
             <a href="ch04.html" class="">HTTP连接请求处理类</a>
-            <a href="ch05.html" class="">定时器处理非活动链接 - 1</a>
-            <a href="ch06.html" class="">定时器处理非活动链接 - 2</a>
-            <a href="ch07.html" class="">日志系统 - 1</a>
-            <a href="ch08.html" class="">日志系统 - 2</a>
-            <a href="ch09.html" class="">数据库连接池</a>
-            <a href="ch010.html" class="">注册登录</a>
+            <a href="ch05.html" class="">请求/响应报文</a>
+            <a href="ch06.html" class="">定时器</a>
+            <a href="ch07.html" class="">日志系统</a>
+            <a href="ch010.html" class="">问题总结</a>
             <a href="ch011.html" class="">压力测试</a>
           </div>
         </aside>
       </div>
       <markdown-style>
-        <h1 id="问题收集"><a aria-hidden="true" tabindex="-1" href="#问题收集" class="anchor"><span class="icon icon-link"></span></a>问题收集</h1>
-        <h2 id="webserver类管理"><a aria-hidden="true" tabindex="-1" href="#webserver类管理" class="anchor"><span class="icon icon-link"></span></a>Webserver类管理</h2>
-        <ol>
-          <li>Webserver初始化
-            <ul>
-              <li>port一类信息</li>
-              <li>线程池初始化</li>
-              <li>监听事件</li>
-            </ul>
-          </li>
-          <li>Utils工具类
-            <ul>
-              <li>设置非阻塞问题</li>
-            </ul>
-          </li>
-          <li>ThreadPool</li>
-          <li>HTTP</li>
-        </ol>
-        <h2 id="项目中问题"><a aria-hidden="true" tabindex="-1" href="#项目中问题" class="anchor"><span class="icon icon-link"></span></a>项目中问题</h2>
-        <ol>
-          <li>描述五种I/O模型（看牛客的资料）</li>
-          <li>常用的网络地址是大端地址还是小端地址</li>
-          <li>为什么要进行I / O复用</li>
-          <li>Webbench的工作原理</li>
-          <li>Http中epollfd和webserver类管理里的epollfd</li>
-        </ol>
-        <h2 id="重构时候思考的问题"><a aria-hidden="true" tabindex="-1" href="#重构时候思考的问题" class="anchor"><span class="icon icon-link"></span></a>重构时候思考的问题</h2>
-        <ol>
-          <li>socket网络编程那边初始化，变量信息还需要熟悉。</li>
-          <li>对于异常情况的处理，使用函数时判断合法性。</li>
-          <li>程序结束时，处理上述用到的文件描述符。</li>
-          <li>文件的读写操作，需要熟悉。</li>
-          <li>HTTP报文解析部分，能不能通过正则表达式解析。</li>
-          <li>为什么在日志和数据库连接部分需要使用单例模式</li>
-          <li>proactor模式</li>
-          <li>各种锁的机制，优缺点，使用场景是什么</li>
-          <li>Webbench错误</li>
-          <li>如何解决段错误</li>
-          <li>后期重做时，进行压力测试，理解性能的变化</li>
-          <li>内核事件表，Webserver内和Http内的epoll</li>
-        </ol>
-        <p><strong>可改进点</strong></p>
-        <ul>
-          <li>map管理http连接取代固定数组，用智能指针管理连接生命期，避免串话和内存泄漏：</li>
-          <li>基于vector
-            <char>封装Buffer作为http连接的输入输出缓冲，基于readv高效读取，支持自动扩容；</char>
-          </li>
-          <li>日志系统改为前端和后端双授冲，避免生产者和消费者的锁竞争，进一步提高写效率</li>
-        </ul>
-        <h2 id="段错误"><a aria-hidden="true" tabindex="-1" href="#段错误" class="anchor"><span class="icon icon-link"></span></a>段错误</h2>
-        <h3 id="可能出现的原因"><a aria-hidden="true" tabindex="-1" href="#可能出现的原因" class="anchor"><span class="icon icon-link"></span></a>可能出现的原因</h3>
-        <ol>
-          <li>数组越界</li>
-          <li>内存的越界访问</li>
-        </ol>
+        <h1 id="环境配置"><a aria-hidden="true" tabindex="-1" href="#环境配置" class="anchor"><span class="icon icon-link"></span></a>环境配置</h1>
         <h2 id="mysql配置"><a aria-hidden="true" tabindex="-1" href="#mysql配置" class="anchor"><span class="icon icon-link"></span></a>MySQL配置</h2>
         <ul>
           <li>安装mysql</li>
@@ -409,14 +353,6 @@ Requests: 2641 susceed, 2 failed.
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#webserver类管理" class="tocs-link">Webserver类管理</a></li>
-            <li><a href="#项目中问题" class="tocs-link">项目中问题</a></li>
-            <li><a href="#重构时候思考的问题" class="tocs-link">重构时候思考的问题</a></li>
-            <li><a href="#段错误" class="tocs-link">段错误</a>
-              <ol class="tocs-list is-collapsed">
-                <li><a href="#可能出现的原因" class="tocs-link">可能出现的原因</a></li>
-              </ol>
-            </li>
             <li><a href="#mysql配置" class="tocs-link">MySQL配置</a></li>
             <li><a href="#webbench安装" class="tocs-link">Webbench安装</a>
               <ol class="tocs-list is-collapsed">
