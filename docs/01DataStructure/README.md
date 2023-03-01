@@ -7,19 +7,16 @@ LeetCode
 
 ✅大话数据结构
 
-⬜算法4
-
 **刷题**
 
 ✅代码随想录
 
-⬜[CodeTop](https://codetop.cc/home)
+✅[CodeTop Hot 100](https://codetop.cc/home)
 
 ⬜剑指offer
 
 ---
 
-二刷开始注意思路，时间复杂度，多种思路想法。
-
-> 待看：线性表，图论，数学知识，排序，查找。
+- 常见的思路：图论、DP、查找、排序。
+- 注意思路总结分析，时间、空间复杂度。
 
