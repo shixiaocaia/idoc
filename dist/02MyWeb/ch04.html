@@ -85,11 +85,45 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <h1 id="http报文解析"><a aria-hidden="true" tabindex="-1" href="#http报文解析" class="anchor"><span class="icon icon-link"></span></a>HTTP报文解析</h1>
         <h2 id="整体流程"><a aria-hidden="true" tabindex="-1" href="#整体流程" class="anchor"><span class="icon icon-link"></span></a>整体流程</h2>
         <p>
-          <img src="http://pic.shixiaocaia.fun/202302021546455.png" alt="无标题-2023-01-29-0952">
+          <img src="http://pic.shixiaocaia.fun/202302021546455.png" alt="">
         </p>
-        <p>
-          <img src="http://pic.shixiaocaia.fun/202301291533757.png" alt="Webserver服务器流程">
-        </p>
+        <ul>
+          <li>初始化线程池和内核时间表</li>
+          <li>浏览器键入网址，给服务器端发送请求报文GET</li>
+          <li>Epoll内核事件表来监听发生变化的sockfd
+            <ul>
+              <li>监听到listenfd变化，有新的连接接入
+                <ul>
+                  <li>初始化connfd</li>
+                  <li>connfd加入epoll内核事件表</li>
+                </ul>
+              </li>
+              <li>监听到其他connfd变化
+                <ul>
+                  <li>读操作</li>
+                  <li>写操作</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>将读写任务加入请求队列当中
+            <ul>
+              <li>读操作
+                <ul>
+                  <li>ReadOnce将数据读取到缓冲区</li>
+                  <li>ProcessRead处理请求报文</li>
+                </ul>
+              </li>
+              <li>写操作
+                <ul>
+                  <li>在上面处理完后会通过ModFd修改当前的事件状态为写事件**（并不是一开始就是写事件）**</li>
+                  <li>返回响应报文包括了html的信息，在浏览器界面再显示出来</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><strong>补充定时器的内容</strong></li>
+        </ul>
         <h2 id="基本api"><a aria-hidden="true" tabindex="-1" href="#基本api" class="anchor"><span class="icon icon-link"></span></a>基本API</h2>
         <h3 id="sockaddr_in"><a aria-hidden="true" tabindex="-1" href="#sockaddr_in" class="anchor"><span class="icon icon-link"></span></a>sockaddr_in</h3>
         <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">struct sockaddr_in
@@ -107,6 +141,11 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     char            sin_zero[8];  //不使用，一般用0填充
 };
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="可变参数"><a aria-hidden="true" tabindex="-1" href="#可变参数" class="anchor"><span class="icon icon-link"></span></a>可变参数</h3>
+        <h3 id="iov"><a aria-hidden="true" tabindex="-1" href="#iov" class="anchor"><span class="icon icon-link"></span></a>iov</h3>
+        <h3 id="umap"><a aria-hidden="true" tabindex="-1" href="#umap" class="anchor"><span class="icon icon-link"></span></a>umap</h3>
+        <h3 id="stat"><a aria-hidden="true" tabindex="-1" href="#stat" class="anchor"><span class="icon icon-link"></span></a>stat</h3>
+        <h3 id="writev"><a aria-hidden="true" tabindex="-1" href="#writev" class="anchor"><span class="icon icon-link"></span></a>writev</h3>
         <h2 id="http报文格式"><a aria-hidden="true" tabindex="-1" href="#http报文格式" class="anchor"><span class="icon icon-link"></span></a>HTTP报文格式</h2>
         <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token comment">//报文请求的方法，本文主要就是POST，GET</span>
 </span><span class="code-line line-number" line="2"><span class="token keyword">enum</span> <span class="token class-name">METHOD</span>
@@ -178,41 +217,33 @@ Connection:Keep-Alive
 空行
 name=Professional%20Ajax&#x26;publisher=Wiley
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <blockquote>
-          <ul>
-            <li>
-              <p>
-                <strong>请求行</strong>，用来说明请求类型,要访问的资源以及所使用的HTTP版本。
-                GET说明请求类型为GET，/562f25980001b1b106000338.jpg(URL)为要访问的资源，该行的最后一部分说明使用的是HTTP1.1版本。
-              </p>
-            </li>
-            <li>
-              <p><strong>请求头部</strong>，紧接着请求行（即第一行）之后的部分，用来说明服务器要使用的附加信息。</p>
-            </li>
-            <li>
-              <ul>
-                <li>HOST，给出请求资源所在服务器的域名。</li>
-                <li>User-Agent，HTTP客户端程序的信息，该信息由你发出请求使用的浏览器来定义,并且在每个请求中自动发送等。</li>
-                <li>Accept，说明用户代理可处理的媒体类型。</li>
-                <li>Accept-Encoding，说明用户代理支持的内容编码。</li>
-                <li>Accept-Language，说明用户代理能够处理的自然语言集。</li>
-                <li>Content-Type，说明实现主体的媒体类型。</li>
-                <li>Content-Length，说明实现主体的大小。</li>
-                <li>Connection，连接管理，可以是Keep-Alive或close。</li>
-              </ul>
-            </li>
-            <li>
-              <p><strong>空行</strong>，请求头部后面的空行是必须的即使第四部分的请求数据为空，也必须有空行。</p>
-            </li>
-            <li>
-              <p><strong>请求数据</strong>也叫主体，可以添加任意的其他数据。</p>
-            </li>
-          </ul>
-        </blockquote>
-        <p><strong>分析报文</strong></p>
-        <p>在HTTP报文中，每一行的数据由\r\n作为结束字符，空行则是仅仅是字符\r\n。因此，可以通过查找\r\n将报文拆解成单独的行进行解析，项目中便是利用了这一点。</p>
-        <p>从状态机负责读取buffer中的数据，将每行数据末尾的\r\n置为\0\0，并更新从状态机在buffer中读取的位置m_checked_idx，以此来驱动主状态机解析。</p>
-        <p>GET和POST请求报文的区别之一是有无消息体部分，GET请求没有消息体，当解析完空行之后，便完成了报文的解析。</p>
+        <ul>
+          <li>
+            <p>
+              <strong>请求行</strong>，用来说明请求类型,要访问的资源以及所使用的HTTP版本。
+              GET说明请求类型为GET，/562f25980001b1b106000338.jpg(URL)为要访问的资源，该行的最后一部分说明使用的是HTTP1.1版本。
+            </p>
+          </li>
+          <li>
+            <p><strong>请求头部</strong>，紧接着请求行（即第一行）之后的部分，用来说明服务器要使用的附加信息。</p>
+            <ul>
+              <li>HOST，给出请求资源所在服务器的域名。</li>
+              <li>User-Agent，HTTP客户端程序的信息，该信息由你发出请求使用的浏览器来定义,并且在每个请求中自动发送等。</li>
+              <li>Accept，说明用户代理可处理的媒体类型。</li>
+              <li>Accept-Encoding，说明用户代理支持的内容编码。</li>
+              <li>Accept-Language，说明用户代理能够处理的自然语言集。</li>
+              <li>Content-Type，说明实现主体的媒体类型。</li>
+              <li>Content-Length，说明实现主体的大小。</li>
+              <li>Connection，连接管理，可以是Keep-Alive或close。</li>
+            </ul>
+          </li>
+          <li>
+            <p><strong>空行</strong>，请求头部后面的空行是必须的即使第四部分的请求数据为空，也必须有空行。</p>
+          </li>
+          <li>
+            <p><strong>请求数据</strong>也叫主体，可以添加任意的其他数据。</p>
+          </li>
+        </ul>
         <h3 id="响应报文"><a aria-hidden="true" tabindex="-1" href="#响应报文" class="anchor"><span class="icon icon-link"></span></a>响应报文</h3>
         <pre><code class="language-htm code-highlight"><span class="code-line line-number" line="1">HTTP/1.12000K
 </span><span class="code-line line-number" line="2">Date:Fri,22 May 2009 06:07:21 GMT
@@ -301,50 +332,18 @@ Content-Type:text/html;charset=UTF-8
             </ul>
           </li>
         </ul>
-        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">enum</span> <span class="token class-name">HTTP_CODE</span>
-</span><span class="code-line line-number" line="2"><span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="3">    NO_REQUEST<span class="token punctuation">,</span>         <span class="token comment">//回复NO_REQUEST继续往后处理</span>
-</span><span class="code-line line-number" line="4">    GET_REQUEST<span class="token punctuation">,</span>        <span class="token comment">//GET请求</span>
-</span><span class="code-line line-number" line="5">    BAD_REQUEST<span class="token punctuation">,</span>        <span class="token comment">//语法错误</span>
-</span><span class="code-line line-number" line="6">    NO_RESOURCE<span class="token punctuation">,</span>        <span class="token comment">//无请求资源</span>
-</span><span class="code-line line-number" line="7">    FORBIDDEN_REQUEST<span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="8">    FILE_REQUEST<span class="token punctuation">,</span>       <span class="token comment">//请求资源</span>
-</span><span class="code-line line-number" line="9">    INTERNAL_ERROR<span class="token punctuation">,</span>     <span class="token comment">//内部错误</span>
-</span><span class="code-line line-number" line="10">    CLOSED_CONNECTION   <span class="token comment">//关闭连接</span>
-</span><span class="code-line line-number" line="11"><span class="token punctuation">}</span><span class="token punctuation">;</span>
-</span></code><input type="hidden" value="enum HTTP_CODE
-{
-    NO_REQUEST,         //回复NO_REQUEST继续往后处理
-    GET_REQUEST,        //GET请求
-    BAD_REQUEST,        //语法错误
-    NO_RESOURCE,        //无请求资源
-    FORBIDDEN_REQUEST,
-    FILE_REQUEST,       //请求资源
-    INTERNAL_ERROR,     //内部错误
-    CLOSED_CONNECTION   //关闭连接
-};
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <h2 id="函数分析"><a aria-hidden="true" tabindex="-1" href="#函数分析" class="anchor"><span class="icon icon-link"></span></a>函数分析</h2>
-        <h3 id="init"><a aria-hidden="true" tabindex="-1" href="#init" class="anchor"><span class="icon icon-link"></span></a>Init</h3>
+        <h3 id="分析报文"><a aria-hidden="true" tabindex="-1" href="#分析报文" class="anchor"><span class="icon icon-link"></span></a>分析报文</h3>
         <ul>
-          <li>初始化套接字地址，连接的客户端地址</li>
-          <li>添加监听事件到epollfd（static），连接数+1</li>
-          <li>初始化私有类的Init</li>
+          <li>
+            <p>在HTTP报文中，每一行的数据由\r\n作为结束字符，空行则是仅仅是字符\r\n。因此，可以通过查找\r\n将报文拆解成单独的行进行解析，项目中便是利用了这一点。</p>
+          </li>
+          <li>
+            <p>从状态机负责读取buffer中的数据，将每行数据末尾的\r\n置为\0\0，并更新从状态机在buffer中读取的位置m_checked_idx，以此来驱动主状态机解析。</p>
+          </li>
+          <li>
+            <p>GET和POST请求报文的区别之一是有<strong>无消息体部分</strong>，GET请求没有消息体，当解析完空行之后，便完成了报文的解析。</p>
+          </li>
         </ul>
-        <blockquote>
-          <ol>
-            <li>epollfd是static静态变量，全局的，每一个客户端连接后套接字加入其中进行监控。</li>
-            <li>public和private的Init通过形参区分重载。</li>
-          </ol>
-        </blockquote>
-        <h2 id="http处理流程"><a aria-hidden="true" tabindex="-1" href="#http处理流程" class="anchor"><span class="icon icon-link"></span></a>HTTP处理流程</h2>
-        <blockquote>
-          <ul>
-            <li>浏览器端发出http连接请求，主线程创建http对象接收请求并将所有数据读入对应buffer，将该对象插入任务队列，工作线程从任务队列中取出一个任务进行处理。</li>
-            <li>工作线程取出任务后，调用process_read函数，通过主、从状态机对请求报文进行解析。</li>
-            <li>解析完之后，跳转do_request函数生成响应报文，通过process_write写入buffer，返回给浏览器端。</li>
-          </ul>
-        </blockquote>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -353,6 +352,11 @@ Content-Type:text/html;charset=UTF-8
             <li><a href="#基本api" class="tocs-link">基本API</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#sockaddr_in" class="tocs-link">sockaddr_in</a></li>
+                <li><a href="#可变参数" class="tocs-link">可变参数</a></li>
+                <li><a href="#iov" class="tocs-link">iov</a></li>
+                <li><a href="#umap" class="tocs-link">umap</a></li>
+                <li><a href="#stat" class="tocs-link">stat</a></li>
+                <li><a href="#writev" class="tocs-link">writev</a></li>
               </ol>
             </li>
             <li><a href="#http报文格式" class="tocs-link">HTTP报文格式</a>
@@ -360,14 +364,9 @@ Content-Type:text/html;charset=UTF-8
                 <li><a href="#请求报文" class="tocs-link">请求报文</a></li>
                 <li><a href="#响应报文" class="tocs-link">响应报文</a></li>
                 <li><a href="#http_code" class="tocs-link">HTTP_CODE</a></li>
+                <li><a href="#分析报文" class="tocs-link">分析报文</a></li>
               </ol>
             </li>
-            <li><a href="#函数分析" class="tocs-link">函数分析</a>
-              <ol class="tocs-list is-collapsed">
-                <li><a href="#init" class="tocs-link">Init</a></li>
-              </ol>
-            </li>
-            <li><a href="#http处理流程" class="tocs-link">HTTP处理流程</a></li>
           </ol>
         </aside>
       </nav>
