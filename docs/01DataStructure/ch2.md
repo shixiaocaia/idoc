@@ -82,6 +82,8 @@ ListNod* head = new ListNode(5);
 
 ## 例题
 
+### 链表
+
 [21. 合并两个有序链表](https://leetcode.cn/problems/merge-two-sorted-lists/)
 
 模板题。
@@ -158,7 +160,17 @@ ListNod* head = new ListNode(5);
 > 1. 判断是否有环形：快慢指针，如果最终相遇就是有环形。
 > 2. 判断环形的入口：数学公式推导。
 
-### 双指针的应用
+[剑指 Offer 35. 复杂链表的复制](https://leetcode.cn/problems/fu-za-lian-biao-de-fu-zhi-lcof/description/)
+
+> 一开始没用读懂题意，不能直接遍历复制吗？
+>
+> 因为随机指针的存在，当我们拷贝节点时，「当前节点的随机指针指向的节点」可能还没创建。
+>
+> **random随机指向的节点位置，可能在新链表中还没有复制过来**
+>
+> 需要我们利用回溯的方式，让每个节点的拷贝操作相互独立。对于当前节点，我们首先要进行拷贝，然后我们进行「当前节点的后继节点」和「当前节点的随机指针指向的节点」拷贝，拷贝完成后将创建的新节点的指针返回，即可完成当前节点的两指针的赋值。
+
+### 双指针
 
 [21. 合并两个有序链表](https://leetcode.cn/problems/merge-two-sorted-lists/description/)
 

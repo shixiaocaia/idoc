@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>数组 iDoc</title>
-    <meta name="description" content="[left,right]闭区间版本">
+    <meta name="description" content="在一个有序数组中查找某一个数或者位置可以考虑二分">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -84,15 +84,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       <markdown-style>
         <h1 id="数组"><a aria-hidden="true" tabindex="-1" href="#数组" class="anchor"><span class="icon icon-link"></span></a>数组</h1>
         <h2 id="二分查找"><a aria-hidden="true" tabindex="-1" href="#二分查找" class="anchor"><span class="icon icon-link"></span></a>二分查找</h2>
-        <p><strong>二分搜索，可以归为两端向中心的双指针。</strong></p>
-        <h3 id="思路"><a aria-hidden="true" tabindex="-1" href="#思路" class="anchor"><span class="icon icon-link"></span></a>思路</h3>
-        <p><strong>使用前提</strong></p>
-        <ul>
-          <li>有序数组</li>
-          <li>无重复的元素</li>
-        </ul>
-        <p><strong>思路</strong></p>
-        <p>[left,right]闭区间版本</p>
+        <p>在一个<strong>有序</strong>数组中查找某一个数或者位置可以考虑二分</p>
         <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="2"><span class="token keyword">public</span><span class="token operator">:</span>
 </span><span class="code-line line-number" line="3">    <span class="token keyword">int</span> <span class="token function">search</span><span class="token punctuation">(</span>vector<span class="token operator">&#x3C;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&#x26;</span> nums<span class="token punctuation">,</span> <span class="token keyword">int</span> target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -132,62 +124,11 @@ public:
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <ul>
           <li>这里防止溢出是指，当left和right同为int较大型数据时候，(left+right)容易溢出，而left + (right - left) / 2，相等价也避免了溢出的问题。</li>
-        </ul>
-        <p>[left,right)左闭右开版本</p>
-        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="2"><span class="token keyword">public</span><span class="token operator">:</span>
-</span><span class="code-line line-number" line="3">    <span class="token keyword">int</span> <span class="token function">search</span><span class="token punctuation">(</span>vector<span class="token operator">&#x3C;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&#x26;</span> nums<span class="token punctuation">,</span> <span class="token keyword">int</span> target<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="4">        <span class="token keyword">int</span> left <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="5">        <span class="token keyword">int</span> right <span class="token operator">=</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="6">
-</span><span class="code-line line-number" line="7">        <span class="token keyword">while</span><span class="token punctuation">(</span>left <span class="token operator">&#x3C;</span> right<span class="token punctuation">)</span><span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="8">            <span class="token keyword">int</span> mid <span class="token operator">=</span> left <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>right <span class="token operator">-</span> left<span class="token punctuation">)</span> <span class="token operator">>></span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="9">            <span class="token keyword">if</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>mid<span class="token punctuation">]</span> <span class="token operator">></span> target<span class="token punctuation">)</span>
-</span><span class="code-line line-number" line="10">                right <span class="token operator">=</span> mid <span class="token punctuation">;</span> <span class="token comment">//右是开区间</span>
-</span><span class="code-line line-number" line="11">            <span class="token keyword">else</span> <span class="token keyword">if</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>mid<span class="token punctuation">]</span> <span class="token operator">&#x3C;</span> target<span class="token punctuation">)</span>
-</span><span class="code-line line-number" line="12">                left <span class="token operator">=</span> mid <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="13">            <span class="token keyword">else</span> <span class="token keyword">return</span> mid<span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="14">        <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="15">        <span class="token keyword">return</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="16">    <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="17"><span class="token punctuation">}</span><span class="token punctuation">;</span>
-</span></code><input type="hidden" value="class Solution {
-public:
-    int search(vector<int>&#x26; nums, int target) {
-        int left = 0;
-        int right = nums.size();
-
-        while(left < right){
-            int mid = left + ((right - left) >> 1);
-            if(nums[mid] > target)
-                right = mid ; //右是开区间
-            else if(nums[mid] < target)
-                left = mid + 1;
-            else return mid;
-        }
-        return -1;
-    }
-};
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <ul>
-          <li>位运算符优先级大于+-，注意括号</li>
-          <li>位运算符作除法速度大于除法</li>
+          <li>二分的时间复杂度：O(log n)</li>
         </ul>
         <h3 id="例题"><a aria-hidden="true" tabindex="-1" href="#例题" class="anchor"><span class="icon icon-link"></span></a>例题</h3>
-        <p><strong>模板题</strong></p>
+        <p><a href="https://leetcode.cn/problems/search-insert-position/">LC35.搜索插入位置</a></p>
         <blockquote>
-          <p>
-            <a href="https://leetcode.cn/problems/binary-search/">LC704.二分查找</a>
-            <strong><a href="https://leetcode.cn/problems/sqrtx/">LC69.x的平方</a></strong>
-          </p>
-          <blockquote>
-            <p>注意两数平方时越界，要加(long long)</p>
-          </blockquote>
-          <p><strong><a href="https://leetcode.cn/problems/valid-perfect-square/">LC367.有效的完全平方数</a></strong></p>
-        </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/search-insert-position/">LC35.搜索插入位置</a></strong></p>
-        <blockquote>
-          <p>二分：一共分为三（四）种情况：（按照[left,right]考虑）</p>
           <ol>
             <li>数组中找到，返回序号</li>
             <li>数组中插入，最终left==right时，若nums[right]&#x3C;target, 那么left=left+1（也等价于right+1,因为二者重合了，数值相同），若nums[left] > target, 那么right=right -1但是实际插入位置应该就在此处，因此为right+1，两种比值可以更新为一种right+1。</li>
@@ -195,10 +136,7 @@ public:
           </ol>
           <p>总结：最后如果没有找到这个数，最终都可以归纳为right+1情况。</p>
         </blockquote>
-        <blockquote>
-          <p>暴力循环，如果发现比target大的数，返回当前位置插入。如果遍历完没有，即在nums.size()处插入。</p>
-        </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/">LC34.在排序数组中查找元素的第一个和最后一个位置</a></strong></p>
+        <p><a href="https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/">LC34.在排序数组中查找元素的第一个和最后一个位置</a></p>
         <blockquote>
           <p>寻找左右边界，对于我们新手分开做，先找左边界，再找右边界。区别“数据不重复”的题，这里可能会遇到重复数据。</p>
           <ol>
@@ -206,9 +144,6 @@ public:
             <li>找右边界，从左边向右边推，当我们找到一个target时，应该继续向右边，找到边界点，同时做一个剪枝判断，如果后一个值大于target值或者当前为最后一个数时，跳出循环。</li>
           </ol>
           <p>本题卡了我很久一个点：<strong>数组越界访问问题</strong>，剪枝判断应该先判断越界问题再判断大小，否则会出现数组的越界访问。</p>
-          <p>🆙<strong>二刷：</strong></p>
-          <p>这边和后面处理贪心问题一样，先搞好一头再去排另一头，这里我们分开找两侧的边界。</p>
-          <p>过去二分相等时返回值，这里二分继续向左或者向右找到相等的值。</p>
         </blockquote>
         <p><strong><a href="https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/">167. 两数之和 II - 输入有序数组</a></strong></p>
         <blockquote>
@@ -615,7 +550,6 @@ num[i + 1] = num[i] + diff[i + 1]; //diff[i] + k,导致num[i] + k,后面都加�
           <ol class="tocs-list">
             <li><a href="#二分查找" class="tocs-link">二分查找</a>
               <ol class="tocs-list is-collapsed">
-                <li><a href="#思路" class="tocs-link">思路</a></li>
                 <li><a href="#例题" class="tocs-link">例题</a></li>
               </ol>
             </li>
