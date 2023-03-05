@@ -49,19 +49,13 @@ public:
 > 本题卡了我很久一个点：**数组越界访问问题**，剪枝判断应该先判断越界问题再判断大小，否则会出现数组的越界访问。
 >
 
- **[167. 两数之和 II - 输入有序数组](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/)**
+ [167. 两数之和 II - 输入有序数组](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/)
 
-> 自己写的是二分方法。
->
-> 可以用双指针，不断收缩左右区间，找到最终的答案。
->
-> （二分就是左右双指针，相向而行）
+> 二分、双指针，相向而行。
 
 [33. 搜索旋转排序数组](https://leetcode.cn/problems/search-in-rotated-sorted-array/description/)
 
->看到题解想到二分，去写了，忽略一个问题，这是旋转后的数组，**非有序的**。
->
->相对暴力点想法是：通过二分查找原数组的数组下标，将左边界更新为这个下标，然后右边界更新为`nums.size() - 1 + 原来nums[0]起始位置`。再做一次二分，数组下标溢出做取余处理就能得到当前的位置，解决了之前数组非有序无法直接用二分的问题。
+>找到原数组的left值，对`[left, nums.size() - 1 + left]`进行二分，再通过取余对应旋转后数组的下标数值。
 
 [ 287. 寻找重复数](https://leetcode.cn/problems/find-the-duplicate-number)
 
@@ -77,8 +71,6 @@ public:
 
 ## 双指针
 
-> [!NOTE]
->
 > 双指针主要分为两类：左右指针和快慢指针。
 >
 > 左右指针：两个指针相向而行或者向背而行
