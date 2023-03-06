@@ -75,30 +75,20 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <h1 id="vim-备忘清单"><a aria-hidden="true" tabindex="-1" href="#vim-备忘清单" class="anchor"><span class="icon icon-link"></span></a>Vim 备忘清单</h1>
         <h2 id="入门"><a aria-hidden="true" tabindex="-1" href="#入门" class="anchor"><span class="icon icon-link"></span></a>入门</h2>
         <h3 id="修改映射"><a aria-hidden="true" tabindex="-1" href="#修改映射" class="anchor"><span class="icon icon-link"></span></a>修改映射</h3>
-        <pre class="language-c"><code class="language-c code-highlight"><span class="code-line line-number" line="1"><span class="token string">"vim.handleKeys"</span><span class="token operator">:</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="2"><span class="token string">"&#x3C;C-c>"</span><span class="token operator">:</span> true
-</span><span class="code-line line-number" line="3"><span class="token punctuation">}</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="4"><span class="token string">"vim.insertModeKeyBindings"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="5"><span class="token string">"before"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-</span><span class="code-line line-number" line="6"><span class="token string">"j"</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="7"><span class="token string">"j"</span>
-</span><span class="code-line line-number" line="8"><span class="token punctuation">]</span><span class="token punctuation">,</span>
-</span><span class="code-line line-number" line="9"><span class="token string">"after"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
-</span><span class="code-line line-number" line="10"><span class="token string">"&#x3C;Esc>"</span>
-</span><span class="code-line line-number" line="11"><span class="token punctuation">]</span>
-</span><span class="code-line line-number" line="12"><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
-</span></code><input type="hidden" value="&#x22;vim.handleKeys&#x22;: {
-&#x22;<C-c>&#x22;: true
-},
-&#x22;vim.insertModeKeyBindings&#x22;: [{
-&#x22;before&#x22;: [
-&#x22;j&#x22;,
-&#x22;j&#x22;
-],
-&#x22;after&#x22;: [
-&#x22;<Esc>&#x22;
-]
-}],
+        <pre class="language-c"><code class="language-c code-highlight"><span class="code-line line-number" line="1"><span class="token string">"vim.insertModeKeyBindings"</span><span class="token operator">:</span> <span class="token punctuation">[</span>
+</span><span class="code-line line-number" line="2"> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="3">    <span class="token string">"before"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"j"</span><span class="token punctuation">,</span><span class="token string">"j"</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="4">    <span class="token string">"after"</span><span class="token operator">:</span> <span class="token punctuation">[</span><span class="token string">"&#x3C;Esc>"</span><span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="5"> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="6">    
+</span><span class="code-line line-number" line="7"><span class="token string">"vim.leader"</span><span class="token operator">:</span> <span class="token string">"&#x3C;space>"</span><span class="token punctuation">,</span>    
+</span></code><input type="hidden" value="&#x22;vim.insertModeKeyBindings&#x22;: [
+ {
+    &#x22;before&#x22;: [&#x22;j&#x22;,&#x22;j&#x22;],
+    &#x22;after&#x22;: [&#x22;<Esc>&#x22;]
+ },
+    
+&#x22;vim.leader&#x22;: &#x22;<space>&#x22;,    
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <h3 id="移动操作"><a aria-hidden="true" tabindex="-1" href="#移动操作" class="anchor"><span class="icon icon-link"></span></a>移动操作</h3>
         <table>
@@ -118,7 +108,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
               <td align="left">进入插入模式</td>
             </tr>
             <tr>
-              <td align="left">在插入模式按下<code>ESC</code>/ <code>ii</code></td>
+              <td align="left">在插入模式按下<code>ESC</code>/ <code>jj</code></td>
               <td align="left">退出插入模式</td>
             </tr>
             <tr>
@@ -174,7 +164,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             </tr>
           </tbody>
         </table>
-        <h3 wrap-class="row-span-2" id="插入操作"><a aria-hidden="true" tabindex="-1" href="#插入操作" class="anchor"><span class="icon icon-link"></span></a>插入操作</h3><!--rehype:wrap-class=row-span-2-->
+        <h3 id="插入操作"><a aria-hidden="true" tabindex="-1" href="#插入操作" class="anchor"><span class="icon icon-link"></span></a>插入操作</h3>
         <table>
           <thead>
             <tr>
@@ -213,7 +203,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             </tr>
           </tbody>
         </table>
-        <h3 id="置入操作"><a aria-hidden="true" tabindex="-1" href="#置入操作" class="anchor"><span class="icon icon-link"></span></a>置入操作</h3>
+        <h3 id="撤销操作"><a aria-hidden="true" tabindex="-1" href="#撤销操作" class="anchor"><span class="icon icon-link"></span></a>撤销操作</h3>
         <table>
           <thead>
             <tr>
@@ -297,8 +287,31 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             </tr>
           </tbody>
         </table>
+        <h3 id="注释操作"><a aria-hidden="true" tabindex="-1" href="#注释操作" class="anchor"><span class="icon icon-link"></span></a>注释操作</h3>
+        <table>
+          <thead>
+            <tr>
+              <th align="left">:-</th>
+              <th align="left">:-</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left">gcc</td>
+              <td align="left">第一次注释本行，第二次取消注释</td>
+            </tr>
+            <tr>
+              <td align="left">gc3j</td>
+              <td align="left">注释三行</td>
+            </tr>
+            <tr>
+              <td align="left">gc}</td>
+              <td align="left">注释到下一个}当中</td>
+            </tr>
+          </tbody>
+        </table>
         <h2 id="进阶"><a aria-hidden="true" tabindex="-1" href="#进阶" class="anchor"><span class="icon icon-link"></span></a>进阶</h2>
-        <h3 wrap-class="row-span-2" id="搜索"><a aria-hidden="true" tabindex="-1" href="#搜索" class="anchor"><span class="icon icon-link"></span></a>搜索</h3><!--rehype:wrap-class=row-span-2-->
+        <h3 id="搜索"><a aria-hidden="true" tabindex="-1" href="#搜索" class="anchor"><span class="icon icon-link"></span></a>搜索</h3>
         <table>
           <thead>
             <tr>
@@ -395,7 +408,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <thead>
             <tr>
               <th align="left">:-</th>
-              <th></th>
+              <th>:-</th>
             </tr>
           </thead>
           <tbody>
@@ -413,7 +426,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             </tr>
           </tbody>
         </table>
-        <h3 wrap-class="col-span-2" id="补全功能"><a aria-hidden="true" tabindex="-1" href="#补全功能" class="anchor"><span class="icon icon-link"></span></a>补全功能</h3><!--rehype:wrap-class=col-span-2-->
+        <h3 id="补全功能"><a aria-hidden="true" tabindex="-1" href="#补全功能" class="anchor"><span class="icon icon-link"></span></a>补全功能</h3>
         <pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line line-number" line="1"><span class="token number">1</span>. 请确保 Vim 不是在以兼容模式运行： :set nocp
 </span><span class="code-line line-number" line="2">
 </span><span class="code-line line-number" line="3"><span class="token number">2</span>. 查看一下当前目录下已经存在哪些文件，输入： :<span class="token operator">!</span>ls   或者  :<span class="token operator">!</span>dir
@@ -480,6 +493,29 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             </tr>
           </tbody>
         </table>
+        <h3 id="easymotion"><a aria-hidden="true" tabindex="-1" href="#easymotion" class="anchor"><span class="icon icon-link"></span></a>EasyMotion</h3>
+        <table>
+          <thead>
+            <tr>
+              <th align="left">:-</th>
+              <th align="left">:-</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="left"><code>&#x3C;leader>&#x3C;leader> s c</code></td>
+              <td align="left">表示搜索字符<code>c</code></td>
+            </tr>
+            <tr>
+              <td align="left"><code>&#x3C;leader>&#x3C;leader> f &#x3C;char></code></td>
+              <td align="left">向后搜索</td>
+            </tr>
+            <tr>
+              <td align="left"><code>&#x3C;leader>&#x3C;leader> F &#x3C;char></code></td>
+              <td align="left">向前搜索</td>
+            </tr>
+          </tbody>
+        </table>
         <h2 id="理解-vim"><a aria-hidden="true" tabindex="-1" href="#理解-vim" class="anchor"><span class="icon icon-link"></span></a>理解 Vim</h2>
         <h3 id="动词理解"><a aria-hidden="true" tabindex="-1" href="#动词理解" class="anchor"><span class="icon icon-link"></span></a>动词理解</h3>
         <pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line line-number" line="1">d  <span class="token comment"># 表示删除delete</span>
@@ -516,7 +552,7 @@ t  # 表示到...位置前 to
 f  # 表示到...位置上 forward
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <p>介词界定了待编辑文本的范围或者位置。</p>
-        <h3 wrap-class="col-span-2" id="数词理解"><a aria-hidden="true" tabindex="-1" href="#数词理解" class="anchor"><span class="icon icon-link"></span></a>数词理解</h3><!--rehype:wrap-class=col-span-2-->
+        <h3 id="数词理解"><a aria-hidden="true" tabindex="-1" href="#数词理解" class="anchor"><span class="icon icon-link"></span></a>数词理解</h3>
         <p>数词指定了待编辑文本对象的数量，从这个角度而言，数词也可以看作是一种介词。引入数词之后，文本编辑命令的语法就升级成了下面这样：</p>
         <pre class="language-shell"><code class="language-shell code-highlight"><span class="code-line line-number" line="1">动词 介词/数词 名词
 </span></code><input type="hidden" value="动词 介词/数词 名词
@@ -576,10 +612,11 @@ dfx # 删除文本直到字符“x”(包括字符“x”): delete forward x
                 <li><a href="#移动操作" class="tocs-link">移动操作</a></li>
                 <li><a href="#删除操作" class="tocs-link">删除操作</a></li>
                 <li><a href="#插入操作" class="tocs-link">插入操作</a></li>
-                <li><a href="#置入操作" class="tocs-link">置入操作</a></li>
+                <li><a href="#撤销操作" class="tocs-link">撤销操作</a></li>
                 <li><a href="#替换操作" class="tocs-link">替换操作</a></li>
                 <li><a href="#command" class="tocs-link">:&#x3C;command></a></li>
                 <li><a href="#复制粘贴" class="tocs-link">复制粘贴</a></li>
+                <li><a href="#注释操作" class="tocs-link">注释操作</a></li>
               </ol>
             </li>
             <li><a href="#进阶" class="tocs-link">进阶</a>
@@ -589,6 +626,7 @@ dfx # 删除文本直到字符“x”(包括字符“x”): delete forward x
                 <li><a href="#使用帮助" class="tocs-link">使用帮助</a></li>
                 <li><a href="#补全功能" class="tocs-link">补全功能</a></li>
                 <li><a href="#command-1" class="tocs-link">:&#x3C;command></a></li>
+                <li><a href="#easymotion" class="tocs-link">EasyMotion</a></li>
               </ol>
             </li>
             <li><a href="#理解-vim" class="tocs-link">理解 Vim</a>

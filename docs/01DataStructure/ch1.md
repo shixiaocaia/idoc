@@ -63,9 +63,9 @@ public:
 >
 > 这样我们遍历[1,n]，如果[0,mid]区间内小于mid的数大于mid，那么肯定在[0,mid]这个区间内容有重复的数。
 >
-> [1,2,3,4,2]
+> 时间复杂度：*O*(*N*log*N*)，在二分里面嵌套了一个for循环。
 >
-> (1 + 4)/2 = 2，小于等于2的数有3个，所以更新right = mid - 1去找。
+> 空间复杂度：O(1)，使用了一个 cnt 变量，因此空间复杂度为 O(1)。
 >
 > 双指针做法。
 
@@ -79,58 +79,9 @@ public:
 >
 > 双指针的经典应用，如果要删除倒数第n个节点，让fast移动n步，然后让fast和slow同时移动，直到fast指向链表末尾。删掉slow所指向的节点就可以了。
 
-**快慢指针**
+### 例题
 
-```cpp
-class Solution {
-public:
-    int removeElement(vector<int>& nums, int val) {
-        int slow = 0, fast = 0;
-        //指向不是删除元素时更新
-        //快指针是在原数组中寻找val，慢指针是最后的答案数组位置，用来更新
-        for(; fast < nums.size(); fast++){
-            if(nums[fast] != val){ 
-                nums[slow++] = nums[fast];
-            }
-        }
-        return slow;
-    }
-};
-```
-
-**优化**
-
-```cpp
-class Solution {
-public:
-    int removeElement(vector<int>& nums, int val) {
-       int leftIndex = 0;
-       int rightIndex = nums.size() - 1;
-       while(leftIndex <= rightIndex){
-           //找到左边等于val
-           while(leftIndex <= rightIndex && nums[leftIndex] != val){
-               leftIndex++;
-           }
-           //找到右边不等于val，如果等于，也会跳过这一个
-           while(leftIndex <= rightIndex && nums[rightIndex] ==val){
-               rightIndex--;
-           }
-           if(leftIndex < rightIndex)
-           {
-               nums[leftIndex++] = nums[rightIndex--];
-           }
-       }
-       //最后leftIndex 肯定指向下一个，返回
-       return leftIndex;
-    }
-};
-```
-
-**模板题**
-
-[LC24.删除重复元素](https://leetcode.cn/problems/remove-duplicates-from-sorted-array/)
-
-[LC26. 删除有序数组中的重复项](https://leetcode.cn/submissions/detail/387295751/)
+[LC26. 删除有序数组中的重复项](https://leetcode.cn/problems/remove-duplicates-from-sorted-array/)
 
 [LC83. 删除排序链表中的重复元素](https://leetcode.cn/problems/remove-duplicates-from-sorted-list/description/)
 
@@ -257,7 +208,6 @@ while j < len(nums):
 >
 > 然后记录p数组的字母构成数量。维护一个滑动窗口。当前的字母数量小于0维护左边界。最好当前窗口长度等于p长度时，记录左边界。
 >
-> 
 
 [LC3.无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
 

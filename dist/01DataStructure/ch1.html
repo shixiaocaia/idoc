@@ -157,8 +157,8 @@ public:
         <blockquote>
           <p>抽屉原理，把十个苹果放在九个抽屉里，肯定有个抽屉放多了一个。</p>
           <p>这样我们遍历[1,n]，如果[0,mid]区间内小于mid的数大于mid，那么肯定在[0,mid]这个区间内容有重复的数。</p>
-          <p>[1,2,3,4,2]</p>
-          <p>(1 + 4)/2 = 2，小于等于2的数有3个，所以更新right = mid - 1去找。</p>
+          <p>时间复杂度：<em>O</em>(<em>N</em>log<em>N</em>)，在二分里面嵌套了一个for循环。</p>
+          <p>空间复杂度：O(1)，使用了一个 cnt 变量，因此空间复杂度为 O(1)。</p>
           <p>双指针做法。</p>
         </blockquote>
         <h2 id="双指针"><a aria-hidden="true" tabindex="-1" href="#双指针" class="anchor"><span class="icon icon-link"></span></a>双指针</h2>
@@ -168,87 +168,8 @@ public:
           <p>快慢指针：两个指针同向而行，一快一慢。</p>
           <p>双指针的经典应用，如果要删除倒数第n个节点，让fast移动n步，然后让fast和slow同时移动，直到fast指向链表末尾。删掉slow所指向的节点就可以了。</p>
         </blockquote>
-        <p><strong>快慢指针</strong></p>
-        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="2"><span class="token keyword">public</span><span class="token operator">:</span>
-</span><span class="code-line line-number" line="3">    <span class="token keyword">int</span> <span class="token function">removeElement</span><span class="token punctuation">(</span>vector<span class="token operator">&#x3C;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&#x26;</span> nums<span class="token punctuation">,</span> <span class="token keyword">int</span> val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="4">        <span class="token keyword">int</span> slow <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">,</span> fast <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="5">        <span class="token comment">//指向不是删除元素时更新</span>
-</span><span class="code-line line-number" line="6">        <span class="token comment">//快指针是在原数组中寻找val，慢指针是最后的答案数组位置，用来更新</span>
-</span><span class="code-line line-number" line="7">        <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token punctuation">;</span> fast <span class="token operator">&#x3C;</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> fast<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="8">            <span class="token keyword">if</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>fast<span class="token punctuation">]</span> <span class="token operator">!=</span> val<span class="token punctuation">)</span><span class="token punctuation">{</span> 
-</span><span class="code-line line-number" line="9">                nums<span class="token punctuation">[</span>slow<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>fast<span class="token punctuation">]</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="10">            <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="11">        <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="12">        <span class="token keyword">return</span> slow<span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="13">    <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="14"><span class="token punctuation">}</span><span class="token punctuation">;</span>
-</span></code><input type="hidden" value="class Solution {
-public:
-    int removeElement(vector<int>&#x26; nums, int val) {
-        int slow = 0, fast = 0;
-        //指向不是删除元素时更新
-        //快指针是在原数组中寻找val，慢指针是最后的答案数组位置，用来更新
-        for(; fast < nums.size(); fast++){
-            if(nums[fast] != val){ 
-                nums[slow++] = nums[fast];
-            }
-        }
-        return slow;
-    }
-};
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p><strong>优化</strong></p>
-        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="2"><span class="token keyword">public</span><span class="token operator">:</span>
-</span><span class="code-line line-number" line="3">    <span class="token keyword">int</span> <span class="token function">removeElement</span><span class="token punctuation">(</span>vector<span class="token operator">&#x3C;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&#x26;</span> nums<span class="token punctuation">,</span> <span class="token keyword">int</span> val<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="4">       <span class="token keyword">int</span> leftIndex <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="5">       <span class="token keyword">int</span> rightIndex <span class="token operator">=</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="6">       <span class="token keyword">while</span><span class="token punctuation">(</span>leftIndex <span class="token operator">&#x3C;=</span> rightIndex<span class="token punctuation">)</span><span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="7">           <span class="token comment">//找到左边等于val</span>
-</span><span class="code-line line-number" line="8">           <span class="token keyword">while</span><span class="token punctuation">(</span>leftIndex <span class="token operator">&#x3C;=</span> rightIndex <span class="token operator">&#x26;&#x26;</span> nums<span class="token punctuation">[</span>leftIndex<span class="token punctuation">]</span> <span class="token operator">!=</span> val<span class="token punctuation">)</span><span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="9">               leftIndex<span class="token operator">++</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="10">           <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="11">           <span class="token comment">//找到右边不等于val，如果等于，也会跳过这一个</span>
-</span><span class="code-line line-number" line="12">           <span class="token keyword">while</span><span class="token punctuation">(</span>leftIndex <span class="token operator">&#x3C;=</span> rightIndex <span class="token operator">&#x26;&#x26;</span> nums<span class="token punctuation">[</span>rightIndex<span class="token punctuation">]</span> <span class="token operator">==</span>val<span class="token punctuation">)</span><span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="13">               rightIndex<span class="token operator">--</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="14">           <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="15">           <span class="token keyword">if</span><span class="token punctuation">(</span>leftIndex <span class="token operator">&#x3C;</span> rightIndex<span class="token punctuation">)</span>
-</span><span class="code-line line-number" line="16">           <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="17">               nums<span class="token punctuation">[</span>leftIndex<span class="token operator">++</span><span class="token punctuation">]</span> <span class="token operator">=</span> nums<span class="token punctuation">[</span>rightIndex<span class="token operator">--</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="18">           <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="19">       <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="20">       <span class="token comment">//最后leftIndex 肯定指向下一个，返回</span>
-</span><span class="code-line line-number" line="21">       <span class="token keyword">return</span> leftIndex<span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="22">    <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="23"><span class="token punctuation">}</span><span class="token punctuation">;</span>
-</span></code><input type="hidden" value="class Solution {
-public:
-    int removeElement(vector<int>&#x26; nums, int val) {
-       int leftIndex = 0;
-       int rightIndex = nums.size() - 1;
-       while(leftIndex <= rightIndex){
-           //找到左边等于val
-           while(leftIndex <= rightIndex &#x26;&#x26; nums[leftIndex] != val){
-               leftIndex++;
-           }
-           //找到右边不等于val，如果等于，也会跳过这一个
-           while(leftIndex <= rightIndex &#x26;&#x26; nums[rightIndex] ==val){
-               rightIndex--;
-           }
-           if(leftIndex < rightIndex)
-           {
-               nums[leftIndex++] = nums[rightIndex--];
-           }
-       }
-       //最后leftIndex 肯定指向下一个，返回
-       return leftIndex;
-    }
-};
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p><strong>模板题</strong></p>
-        <p><a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/">LC24.删除重复元素</a></p>
-        <p><a href="https://leetcode.cn/submissions/detail/387295751/">LC26. 删除有序数组中的重复项</a></p>
+        <h3 id="例题-1"><a aria-hidden="true" tabindex="-1" href="#例题-1" class="anchor"><span class="icon icon-link"></span></a>例题</h3>
+        <p><a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/">LC26. 删除有序数组中的重复项</a></p>
         <p><a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-list/description/">LC83. 删除排序链表中的重复元素</a></p>
         <p><a href="https://leetcode.cn/problems/remove-element/">LC27.移除元素</a></p>
         <p><a href="https://leetcode.cn/problems/move-zeroes/">LC283.移动零</a></p>
@@ -549,7 +470,11 @@ num[i + 1] = num[i] + diff[i + 1]; //diff[i] + k,导致num[i] + k,后面都加�
                 <li><a href="#例题" class="tocs-link">例题</a></li>
               </ol>
             </li>
-            <li><a href="#双指针" class="tocs-link">双指针</a></li>
+            <li><a href="#双指针" class="tocs-link">双指针</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#例题-1" class="tocs-link">例题</a></li>
+              </ol>
+            </li>
             <li><a href="#滑动窗口" class="tocs-link">滑动窗口</a></li>
             <li><a href="#前缀和" class="tocs-link">前缀和</a></li>
             <li><a href="#差分" class="tocs-link">差分</a></li>

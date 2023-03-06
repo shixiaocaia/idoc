@@ -152,7 +152,7 @@ std::vector<int>::const_iterator iter = vec.begin(); //iter的作用是一个con
         <p>尽量在使用前，初始化定义的变量。</p>
         <p>对于class中的对象，初始化任务交给构造函数，但是如果在进入构造函数中进行，那是先调用了<code>default</code>构造，然后再赋予指定的值，实际当中应该采用<strong>初始化列表</strong>的方式，进行copy构造，提高了效率。</p>
         <p>初始化列表的构造顺序是根据变量声明的顺序，因此尽可能按照声明的顺序进行列表初始化更加优雅。</p>
-        <p>对于<strong>const和reference</strong>一定需要初值，而不是赋值。</p>
+        <p>对于<strong>const和reference</strong>一定需要初始化，而不是赋值。</p>
         <p>对于<strong>non-local static</strong>对象（非在函数内的static对象），应该以local static对象替换，即通过调用函数生成local static然后返回引用，这样保证了static变量在使用时一定经过了初始化，而non-local static对象是随意经过初始化的，对初始化的顺序没有明确的定义。</p>
         <h2 id="c默认编写调用了哪些函数"><a aria-hidden="true" tabindex="-1" href="#c默认编写调用了哪些函数" class="anchor"><span class="icon icon-link"></span></a>C++默认编写调用了哪些函数</h2>
         <p>当创建空类时，编译器会默认创建default构造函数，copy构造函数，copy assignment操作符，以及析构函数。</p>
@@ -264,6 +264,13 @@ Widget&#x26; operator+=(const Widget&#x26; rhs){
         <blockquote>
           <p>这里都抛出异常了，不能直接处理吗，或者终止程序。</p>
         </blockquote>
+        <h2 id="让接口容易被使用不易被误用"><a aria-hidden="true" tabindex="-1" href="#让接口容易被使用不易被误用" class="anchor"><span class="icon icon-link"></span></a>让接口容易被使用，不易被误用</h2>
+        <p>比如在涉及类接口时，传入参数到构造函数当中，是否合法，比如传入参数含义是month，传入13是非法的。</p>
+        <p>以函数替换对象更加有效。</p>
+        <p>使用智能指针指定删除器问题。</p>
+        <h2 id="值传递和引用传递"><a aria-hidden="true" tabindex="-1" href="#值传递和引用传递" class="anchor"><span class="icon icon-link"></span></a>值传递和引用传递</h2>
+        <p>值传递带来了巨大的构造和析构对象，考虑到如果复制一个stuent类，同时student又继承了person，内部又有string等，代价巨大。因此提倡使用引用传递。</p>
+        <p>另一方面在使用引用传递可以避免参数的切割，比如以值传递传入的是A对象，但是B函数形参定义的类型是B，A以值传入会转换成B形式，造成参数的切割。</p>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -282,6 +289,8 @@ Widget&#x26; operator+=(const Widget&#x26; rhs){
             <li><a href="#以对象管理资源raii" class="tocs-link">以对象管理资源（RAII）</a></li>
             <li><a href="#在资源管理类中小心copying行为" class="tocs-link">在资源管理类中小心copying行为</a></li>
             <li><a href="#以独立语句将newed对象置入智能指针" class="tocs-link">以独立语句将newed对象置入智能指针</a></li>
+            <li><a href="#让接口容易被使用不易被误用" class="tocs-link">让接口容易被使用，不易被误用</a></li>
+            <li><a href="#值传递和引用传递" class="tocs-link">值传递和引用传递</a></li>
           </ol>
         </aside>
       </nav>
