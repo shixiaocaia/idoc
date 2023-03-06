@@ -259,6 +259,11 @@ Widget&#x26; operator+=(const Widget&#x26; rhs){
         <p>这就属于深拷贝了，我们不仅复制了一个资源管理对象，底层的资源也复制了一份。这两个资源管理对象和底层资源就是互不干扰的，各自负责管理各自的资源。</p>
         <p><strong>转移底部资源的拥有权</strong></p>
         <p>相当于移交管理权。之前的那个资源管理对象就不负责管理这块资源了。unique_ptr就属于这种，一个unique_ptr对象在被赋值后，原始的对象会将指针置为空。</p>
+        <h2 id="以独立语句将newed对象置入智能指针"><a aria-hidden="true" tabindex="-1" href="#以独立语句将newed对象置入智能指针" class="anchor"><span class="icon icon-link"></span></a>以独立语句将newed对象置入智能指针</h2>
+        <p>这样可以避免编译器任意的选择顺序。否则一旦异常抛出，而new出的对象没有放入智能指针当中，会造成内存的泄漏。</p>
+        <blockquote>
+          <p>这里都抛出异常了，不能直接处理吗，或者终止程序。</p>
+        </blockquote>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -276,6 +281,7 @@ Widget&#x26; operator+=(const Widget&#x26; rhs){
             <li><a href="#复制对象时勿忘每一个成分" class="tocs-link">复制对象时勿忘每一个成分</a></li>
             <li><a href="#以对象管理资源raii" class="tocs-link">以对象管理资源（RAII）</a></li>
             <li><a href="#在资源管理类中小心copying行为" class="tocs-link">在资源管理类中小心copying行为</a></li>
+            <li><a href="#以独立语句将newed对象置入智能指针" class="tocs-link">以独立语句将newed对象置入智能指针</a></li>
           </ol>
         </aside>
       </nav>

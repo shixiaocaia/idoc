@@ -171,6 +171,17 @@ readelf -h main.o
           <li>符号解析：将目标文件中定义和引用的符号，每个符号与对应的函数、全局变量或者一个静态变量相关联起来</li>
           <li>重定位：编译器和汇编器将从地址0开始生成代码和数字节，将每部分代码与内存位置对应关联起来，修改所有对这些符号的引用，指向相应的内存地址。</li>
         </ul>
+        <hr>
+        <h3 id="与静态库链接"><a aria-hidden="true" tabindex="-1" href="#与静态库链接" class="anchor"><span class="icon icon-link"></span></a>与静态库链接</h3>
+        <p>如果把所有标准C函数放在一个目标文件中，那么每个程序都需要一个标准函数的副本，这是一种内存浪费。</p>
+        <p>如果为每个函数都单独创建一个独立的可重定位的文件，把他们存放在一个文件中，对每一个单独文件的链接又会耗费大量时间，也有可能出错。</p>
+        <p>因此引出了静态库这一个概念，把相关函数封装成一个静态库。链接库会从其中复制使用到的相关模块到可执行文件当中。这样减少了不必要的模块的内存占用。</p>
+        <p>注意链接静态库的<strong>顺序</strong>，静态库文件一般放在最后。</p>
+        <h2 id="重定向"><a aria-hidden="true" tabindex="-1" href="#重定向" class="anchor"><span class="icon icon-link"></span></a>重定向</h2>
+        <h2 id="动态链接"><a aria-hidden="true" tabindex="-1" href="#动态链接" class="anchor"><span class="icon icon-link"></span></a>动态链接</h2>
+        <p>为了解决了静态库的更新问题以及重复代码复制到每个进程中占据过大的内存问题，有了动态链接库。</p>
+        <p>区别静态库链接，在链接阶段只进行了重定向、提取了符号表信息，等到加载到内存执行时，通过动态链接器从动态链接库中重定位文本和数据到内存当中。</p>
+        <p>这样实现了不同正在运行的进程共享动态链接库。</p>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -178,7 +189,13 @@ readelf -h main.o
             <li><a href="#for-what" class="tocs-link">For what</a></li>
             <li><a href="#可重定位目标文件" class="tocs-link">可重定位目标文件</a></li>
             <li><a href="#符号表" class="tocs-link">符号表</a></li>
-            <li><a href="#静态链接" class="tocs-link">静态链接</a></li>
+            <li><a href="#静态链接" class="tocs-link">静态链接</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#与静态库链接" class="tocs-link">与静态库链接</a></li>
+              </ol>
+            </li>
+            <li><a href="#重定向" class="tocs-link">重定向</a></li>
+            <li><a href="#动态链接" class="tocs-link">动态链接</a></li>
           </ol>
         </aside>
       </nav>
