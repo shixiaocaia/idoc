@@ -246,6 +246,100 @@ select min(id) from student;
         <blockquote>
           <p>注意逗号分割。</p>
         </blockquote>
+        <h2 id="分组数据"><a aria-hidden="true" tabindex="-1" href="#分组数据" class="anchor"><span class="icon icon-link"></span></a>分组数据</h2>
+        <h3 id="创建分组"><a aria-hidden="true" tabindex="-1" href="#创建分组" class="anchor"><span class="icon icon-link"></span></a>创建分组</h3>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">select</span> city<span class="token punctuation">,</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword">as</span> num_city <span class="token keyword">from</span> student
+</span><span class="code-line line-number" line="2"><span class="token keyword">group</span> <span class="token keyword">by</span> city<span class="token punctuation">;</span>
+</span></code><input type="hidden" value="select city, count(*) as num_city from student
+group by city;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="过滤分组"><a aria-hidden="true" tabindex="-1" href="#过滤分组" class="anchor"><span class="icon icon-link"></span></a>过滤分组</h3>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">select</span> city<span class="token punctuation">,</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword">as</span> num_city <span class="token keyword">from</span> student
+</span><span class="code-line line-number" line="2"><span class="token keyword">group</span> <span class="token keyword">by</span> city
+</span><span class="code-line line-number" line="3"><span class="token keyword">having</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token number">2</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="select city, count(*) as num_city from student
+group by city
+having count(*) >= 2;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <blockquote>
+          <p>where和having在大部分情况下都是等价的。</p>
+          <p>区别在于where在数据分组前进行过滤，having在数组分组后进行过滤。</p>
+          <p>在分组前加一个where可以过滤更多信息内容。</p>
+        </blockquote>
+        <h3 id="加排序"><a aria-hidden="true" tabindex="-1" href="#加排序" class="anchor"><span class="icon icon-link"></span></a>加排序</h3>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">select</span> city<span class="token punctuation">,</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword">as</span> num_city <span class="token keyword">from</span> student
+</span><span class="code-line line-number" line="2"><span class="token keyword">group</span> <span class="token keyword">by</span> city
+</span><span class="code-line line-number" line="3"><span class="token keyword">having</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">>=</span> <span class="token number">2</span>
+</span><span class="code-line line-number" line="4"><span class="token keyword">order</span> <span class="token keyword">by</span> num_city<span class="token punctuation">;</span>
+</span></code><input type="hidden" value="select city, count(*) as num_city from student
+group by city
+having count(*) >= 2
+order by num_city;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="使用子查询"><a aria-hidden="true" tabindex="-1" href="#使用子查询" class="anchor"><span class="icon icon-link"></span></a>使用子查询</h2>
+        <h3 id="子查询过滤"><a aria-hidden="true" tabindex="-1" href="#子查询过滤" class="anchor"><span class="icon icon-link"></span></a>子查询过滤</h3>
+        <p>通过子查询把一条select的结果用于另一条select语句的where子句。</p>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">select</span> cust_id
+</span><span class="code-line line-number" line="2"><span class="token keyword">from</span> orders
+</span><span class="code-line line-number" line="3"><span class="token keyword">where</span> order_num <span class="token operator">IN</span> <span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token keyword">order</span> num
+</span><span class="code-line line-number" line="4">                    <span class="token keyword">from</span> orderitems
+</span><span class="code-line line-number" line="5">                    <span class="token keyword">where</span> prod_id <span class="token operator">=</span> <span class="token string">'TNT2'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="select cust_id
+from orders
+where order_num IN (select order num
+                    from orderitems
+                    where prod_id = &#x27;TNT2&#x27;);
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <blockquote>
+          <p>使用子循环不限制规模，但是一般考虑到性能，不会嵌套太多。此外嵌套太多，难以阅读和调试。</p>
+        </blockquote>
+        <h3 id="作为计算字段使用子查询"><a aria-hidden="true" tabindex="-1" href="#作为计算字段使用子查询" class="anchor"><span class="icon icon-link"></span></a>作为计算字段使用子查询</h3>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">select</span> cust_name<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="2">	   cust_state<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="3">	   <span class="token punctuation">(</span><span class="token keyword">select</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="4">       <span class="token keyword">from</span> orders
+</span><span class="code-line line-number" line="5">       <span class="token keyword">where</span> orders<span class="token punctuation">.</span>cust_id <span class="token operator">=</span> customers<span class="token punctuation">.</span>cust_id<span class="token punctuation">)</span> <span class="token keyword">as</span> orders
+</span><span class="code-line line-number" line="6"><span class="token keyword">from</span> customers
+</span><span class="code-line line-number" line="7">ordered <span class="token keyword">by</span> cust_name<span class="token punctuation">;</span>
+</span></code><input type="hidden" value="select cust_name,
+	   cust_state,
+	   (select count(*)
+       from orders
+       where orders.cust_id = customers.cust_id) as orders
+from customers
+ordered by cust_name;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <blockquote>
+          <p>注意这里的orders.cust_id和customers.cust_id，否则默认是对比orders这个表中的id值，造成错误。</p>
+        </blockquote>
+        <h2 id="联结表"><a aria-hidden="true" tabindex="-1" href="#联结表" class="anchor"><span class="icon icon-link"></span></a>联结表</h2>
+        <h3 id="关系表"><a aria-hidden="true" tabindex="-1" href="#关系表" class="anchor"><span class="icon icon-link"></span></a>关系表</h3>
+        <p>关系表的实际是保证把信息分解成多个表，一类数据一个表。各个表通过某些常用的值（即关系设计中的关系）互相关联。</p>
+        <p>例如构建一个vendors表包含所有供应商的信息，每个供应商占一行，每个供应商具有唯一的表示id，作为主键。</p>
+        <p>products中存放产品信息，它除了存储供应商ID外不存储其他供应商信息，vendors表的主键ID作为products的<strong>外键</strong>，它讲vendors表和products表关联，利用供应商ID能从vendors表中找出相应供应商的详细信息。</p>
+        <h3 id="联结"><a aria-hidden="true" tabindex="-1" href="#联结" class="anchor"><span class="icon icon-link"></span></a>联结</h3>
+        <p>使用特殊语法，可以联结多个表返回一组输出，联结在运行时关联表中的正确行。</p>
+        <blockquote>
+          <p>应该保证所有的联结都有WHERE子句，否则MySQL将返回比想要的数据更多，出现笛卡尔积数量的数据。</p>
+          <p>联结表的数量没有限制，但是为了性能考虑，减少非必要的联结。</p>
+        </blockquote>
+        <h3 id="使用表别名"><a aria-hidden="true" tabindex="-1" href="#使用表别名" class="anchor"><span class="icon icon-link"></span></a>使用表别名</h3>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">select</span> cust_name<span class="token punctuation">,</span> cutst_contact
+</span><span class="code-line line-number" line="2"><span class="token keyword">from</span> customers <span class="token keyword">as</span> c<span class="token punctuation">,</span> orders <span class="token keyword">as</span> o<span class="token punctuation">,</span> orderitems <span class="token keyword">as</span> oi
+</span><span class="code-line line-number" line="3"><span class="token keyword">where</span> c<span class="token punctuation">.</span>cust_id <span class="token operator">=</span> o<span class="token punctuation">.</span>cust_id
+</span><span class="code-line line-number" line="4">	<span class="token operator">and</span> oi<span class="token punctuation">.</span>order_num <span class="token operator">=</span> o<span class="token punctuation">.</span>order_num
+</span><span class="code-line line-number" line="5">	<span class="token operator">and</span> prod_id <span class="token operator">=</span> <span class="token string">'TNT2'</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="select cust_name, cutst_contact
+from customers as c, orders as o, orderitems as oi
+where c.cust_id = o.cust_id
+	and oi.order_num = o.order_num
+	and prod_id = &#x27;TNT2&#x27;;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <blockquote>
+          <p>表别名可以用于WHERE子句，还可以用于SELECT的列表，ORDER BY子句等。</p>
+        </blockquote>
+        <h3 id="自联结"><a aria-hidden="true" tabindex="-1" href="#自联结" class="anchor"><span class="icon icon-link"></span></a>自联结</h3>
+        <p>自联结是通过使用两个相同的表，进行查询，在实际中可以<strong>对比和子查询</strong>的效率，择优选择。</p>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -269,6 +363,27 @@ select min(id) from student;
                 <li><a href="#聚集函数" class="tocs-link">聚集函数</a></li>
                 <li><a href="#聚合不同的值" class="tocs-link">聚合不同的值</a></li>
                 <li><a href="#组合聚集函数" class="tocs-link">组合聚集函数</a></li>
+              </ol>
+            </li>
+            <li><a href="#分组数据" class="tocs-link">分组数据</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#创建分组" class="tocs-link">创建分组</a></li>
+                <li><a href="#过滤分组" class="tocs-link">过滤分组</a></li>
+                <li><a href="#加排序" class="tocs-link">加排序</a></li>
+              </ol>
+            </li>
+            <li><a href="#使用子查询" class="tocs-link">使用子查询</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#子查询过滤" class="tocs-link">子查询过滤</a></li>
+                <li><a href="#作为计算字段使用子查询" class="tocs-link">作为计算字段使用子查询</a></li>
+              </ol>
+            </li>
+            <li><a href="#联结表" class="tocs-link">联结表</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#关系表" class="tocs-link">关系表</a></li>
+                <li><a href="#联结" class="tocs-link">联结</a></li>
+                <li><a href="#使用表别名" class="tocs-link">使用表别名</a></li>
+                <li><a href="#自联结" class="tocs-link">自联结</a></li>
               </ol>
             </li>
           </ol>

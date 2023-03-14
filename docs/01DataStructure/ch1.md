@@ -209,9 +209,11 @@ while j < len(nums):
 > 然后记录p数组的字母构成数量。维护一个滑动窗口。当前的字母数量小于0维护左边界。最好当前窗口长度等于p长度时，记录左边界。
 >
 
-[LC3.无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
+**[LC3.无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)**
 
 > 滑动窗口，当出现重现字符时，更新左边界，如果没有重复出现就更新答案。
+>
+> 双指针 + 哈希表。
 
 ## 前缀和
 

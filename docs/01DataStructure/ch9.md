@@ -15,8 +15,6 @@
 
 **找问题的最好方式就是把dp数组打印出来，看看究竟是不是按照自己思路推导的！**
 
-> [!NOTE]
->
 > DP的题有哪些状态，比如买或者不买，状态怎么转变的。
 
 ### 例子
@@ -672,3 +670,5 @@ int main() {
 > 因此维护一个maxNum，和一个minNum，`max(max(nums[i],nums[i]*f[i-1]),nums[i]*d[i-1]);`，表示从当前数开始，或者最小数乘负数更大，最大数乘整数更大。
 >
 > 由于新状态只与上一个状态有关，因此这里可以使用滚动数据，节省了空间，这样时间复杂度是O(n)，空间复杂度为O(1)。
+
+**[剑指 Offer 46. 把数字翻译成字符串](https://leetcode.cn/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fi7d972)**

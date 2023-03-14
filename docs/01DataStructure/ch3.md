@@ -134,6 +134,12 @@
 >
 > 遍历哈希表中数，且判断每一个数X是新开始（X-1不存在）。
 
+[剑指 Offer 50. 第一个只出现一次的字符](https://leetcode.cn/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/description/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fi7d972)
+
+> 哈希表，每次遍历一个字符判断是否在哈希表当中。
+>
+> 第二次遍历，第一个true的，是第一个单个字符的答案。
+
 ## 对比
 
 - 数组作为哈希表，比如[LC383.赎金信](https://leetcode.cn/problems/ransom-note/)，我们知道明确的数组大小，可以将字母值转化为键值，对比用map，节省了开销。

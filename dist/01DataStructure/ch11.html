@@ -174,8 +174,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <h2 id="插入排序"><a aria-hidden="true" tabindex="-1" href="#插入排序" class="anchor"><span class="icon icon-link"></span></a>插入排序</h2>
-        <p>在保证左边有序的情况下，当第i个元素数值小于i-1时，将之插入到左边有序序列当中。</p>
-        <p>找到左边有序序列中小于a[i]的位置j，将之插入到j + 1这个位置，如果j这个位置元素数值大于a[i]，向后移动a[j]这个位置元素。</p>
+        <p>在保证左边有序的情况下，当第i个元素数值小于<code>i-1</code>时，将之插入到左边有序序列当中。</p>
+        <p>找到左边有序序列中小于a[i]的位置<code>j</code>，将之插入到<code>j + 1</code>这个位置，如果<code>j</code>这个位置元素数值大于<code>a[i]</code>，向后移动<code>a[j]</code>这个位置元素。</p>
         <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">void</span> <span class="token function">print</span><span class="token punctuation">(</span>vector<span class="token operator">&#x3C;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&#x26;</span> a<span class="token punctuation">,</span> <span class="token keyword">int</span> n<span class="token punctuation">,</span> <span class="token keyword">int</span> i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="2">	cout <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">"step"</span><span class="token operator">&#x3C;&#x3C;</span> i <span class="token operator">&#x3C;&#x3C;</span> <span class="token string">": "</span><span class="token punctuation">;</span>
 </span><span class="code-line line-number" line="3">	<span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&#x3C;</span> n<span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -239,10 +239,10 @@ void insertionSort(vector<int>&#x26; a, int n) {//{ 9,1,5,6,2,3 }
 </span><span class="code-line line-number" line="14">            j<span class="token operator">--</span><span class="token punctuation">;</span>          <span class="token comment">// 从右向左找首个小于基准数的元素</span>
 </span><span class="code-line line-number" line="15">        <span class="token keyword">while</span> <span class="token punctuation">(</span>i <span class="token operator">&#x3C;</span> j <span class="token operator">&#x26;&#x26;</span> nums<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">&#x3C;=</span> nums<span class="token punctuation">[</span>left<span class="token punctuation">]</span><span class="token punctuation">)</span>
 </span><span class="code-line line-number" line="16">            i<span class="token operator">++</span><span class="token punctuation">;</span>          <span class="token comment">// 从左向右找首个大于基准数的元素</span>
-</span><span class="code-line line-number" line="17">        <span class="token function">swap</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> i<span class="token punctuation">,</span> j<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 交换这两个元素</span>
+</span><span class="code-line line-number" line="17">        <span class="token function">swap</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> i<span class="token punctuation">,</span> j<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 交换这两个元素，保证左边小于哨兵，右边大于哨兵,,</span>
 </span><span class="code-line line-number" line="18">    <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="19">    <span class="token function">swap</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> i<span class="token punctuation">,</span> left<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 将基准数交换至两子数组的分界线</span>
-</span><span class="code-line line-number" line="20">    <span class="token keyword">return</span> i<span class="token punctuation">;</span>             <span class="token comment">// 返回基准数的索引</span>
+</span><span class="code-line line-number" line="19">    <span class="token function">swap</span><span class="token punctuation">(</span>nums<span class="token punctuation">,</span> i<span class="token punctuation">,</span> left<span class="token punctuation">)</span><span class="token punctuation">;</span>  <span class="token comment">// 将哨兵交换到重合位置</span>
+</span><span class="code-line line-number" line="20">    <span class="token keyword">return</span> i<span class="token punctuation">;</span>             <span class="token comment">// 返回哨兵位置</span>
 </span><span class="code-line line-number" line="21"><span class="token punctuation">}</span>
 </span><span class="code-line line-number" line="22">
 </span><span class="code-line line-number" line="23"><span class="token comment">/* 快速排序 */</span>
@@ -272,10 +272,10 @@ int partition(vector<int>&#x26; nums, int left, int right) {
             j--;          // 从右向左找首个小于基准数的元素
         while (i < j &#x26;&#x26; nums[i] <= nums[left])
             i++;          // 从左向右找首个大于基准数的元素
-        swap(nums, i, j); // 交换这两个元素
+        swap(nums, i, j); // 交换这两个元素，保证左边小于哨兵，右边大于哨兵,,
     }
-    swap(nums, i, left);  // 将基准数交换至两子数组的分界线
-    return i;             // 返回基准数的索引
+    swap(nums, i, left);  // 将哨兵交换到重合位置
+    return i;             // 返回哨兵位置
 }
 
 /* 快速排序 */
@@ -290,7 +290,6 @@ void quickSort(vector<int>&#x26; nums, int left, int right) {
     quickSort(nums, pivot + 1, right);
 }
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>完成一次排序后，左子数组任意元素 &#x3C;= 哨兵 &#x3C;= 右子数组任意元素，是将一个数组划分两个子数组排序，将一个个数排好序。</p>
         <h3 id="时间复杂度"><a aria-hidden="true" tabindex="-1" href="#时间复杂度" class="anchor"><span class="icon icon-link"></span></a>时间复杂度</h3>
         <p><a href="https://www.cnblogs.com/tuyang1129/p/12857821.html#22-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6">参考博文</a></p>
         <p>快排的原理是基于<strong>二分法</strong>的思想，时间复杂度比较复杂，最好的情况是O(N)，最差的时候是O(N^2)，所以平时说的O(N*logN)为其平均时间复杂度。它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。</p>
@@ -316,25 +315,33 @@ void quickSort(vector<int>&#x26; nums, int left, int right) {
 </span><span class="code-line line-number" line="12">        return right;
 </span><span class="code-line line-number" line="13">}
 </span><span class="code-line line-number" line="14">
-</span><span class="code-line line-number" line="15">/* 哨兵划分（三数取中值） */
-</span><span class="code-line line-number" line="16">int partition(vector&#x3C;int>&#x26; nums, int left, int right) {
-</span><span class="code-line line-number" line="17">    // 选取三个候选元素的中位数
-</span><span class="code-line line-number" line="18">    int med = medianThree(nums, left, (left + right) / 2, right);
-</span><span class="code-line line-number" line="19">    // 将中位数交换至数组最左端
-</span><span class="code-line line-number" line="20">    swap(nums, left, med);
-</span><span class="code-line line-number" line="21">    // 以 nums[left] 作为基准数
-</span><span class="code-line line-number" line="22">    int i = left, j = right;
-</span><span class="code-line line-number" line="23">    while (i &#x3C; j) {
-</span><span class="code-line line-number" line="24">        while (i &#x3C; j &#x26;&#x26; nums[j] >= nums[left])
-</span><span class="code-line line-number" line="25">            j--;          // 从右向左找首个小于基准数的元素
-</span><span class="code-line line-number" line="26">        while (i &#x3C; j &#x26;&#x26; nums[i] &#x3C;= nums[left])
-</span><span class="code-line line-number" line="27">            i++;          // 从左向右找首个大于基准数的元素
-</span><span class="code-line line-number" line="28">        swap(nums, i, j); // 交换这两个元素
-</span><span class="code-line line-number" line="29">    }
-</span><span class="code-line line-number" line="30">    swap(nums, i, left);  // 将基准数交换至两子数组的分界线
-</span><span class="code-line line-number" line="31">    return i;             // 返回基准数的索引
-</span><span class="code-line line-number" line="32">}
-</span><span class="code-line line-number" line="33">
+</span><span class="code-line line-number" line="15">//随机选取基准
+</span><span class="code-line line-number" line="16">int SelectPivotRandom(vector&#x3C;int>&#x26; nums, int left, int right){
+</span><span class="code-line line-number" line="17">    srand((unsigned)time(NULL)); //保证随机数的不同
+</span><span class="code-line line-number" line="18">    int pivotPos = rand() % (right - left) + left;
+</span><span class="code-line line-number" line="19">    swap(nums[pivotPos], nums[left]);
+</span><span class="code-line line-number" line="20">    return left;
+</span><span class="code-line line-number" line="21">}
+</span><span class="code-line line-number" line="22">
+</span><span class="code-line line-number" line="23">/* 哨兵划分（三数取中值） */
+</span><span class="code-line line-number" line="24">int partition(vector&#x3C;int>&#x26; nums, int left, int right) {
+</span><span class="code-line line-number" line="25">    // 选取三个候选元素的中位数
+</span><span class="code-line line-number" line="26">    int med = medianThree(nums, left, (left + right) / 2, right);
+</span><span class="code-line line-number" line="27">    // 将中位数交换至数组最左端
+</span><span class="code-line line-number" line="28">    swap(nums, left, med);
+</span><span class="code-line line-number" line="29">    // 以 nums[left] 作为基准数
+</span><span class="code-line line-number" line="30">    int i = left, j = right;
+</span><span class="code-line line-number" line="31">    while (i &#x3C; j) {
+</span><span class="code-line line-number" line="32">        while (i &#x3C; j &#x26;&#x26; nums[j] >= nums[left])
+</span><span class="code-line line-number" line="33">            j--;          // 从右向左找首个小于基准数的元素
+</span><span class="code-line line-number" line="34">        while (i &#x3C; j &#x26;&#x26; nums[i] &#x3C;= nums[left])
+</span><span class="code-line line-number" line="35">            i++;          // 从左向右找首个大于基准数的元素
+</span><span class="code-line line-number" line="36">        swap(nums, i, j); // 交换这两个元素
+</span><span class="code-line line-number" line="37">    }
+</span><span class="code-line line-number" line="38">    swap(nums, i, left);  // 将基准数交换至两子数组的分界线
+</span><span class="code-line line-number" line="39">    return i;             // 返回基准数的索引
+</span><span class="code-line line-number" line="40">}
+</span><span class="code-line line-number" line="41">
 </span></code><input type="hidden" value="/* 选取三个元素的中位数 */
 int medianThree(vector<int>&#x26; nums, int left, int mid, int right) {
     // 使用了异或操作来简化代码
@@ -347,6 +354,14 @@ int medianThree(vector<int>&#x26; nums, int left, int mid, int right) {
         return mid;
     else
         return right;
+}
+
+//随机选取基准
+int SelectPivotRandom(vector<int>&#x26; nums, int left, int right){
+    srand((unsigned)time(NULL)); //保证随机数的不同
+    int pivotPos = rand() % (right - left) + left;
+    swap(nums[pivotPos], nums[left]);
+    return left;
 }
 
 /* 哨兵划分（三数取中值） */
@@ -373,6 +388,10 @@ int partition(vector<int>&#x26; nums, int left, int right) {
         <p>为了尽量避免这种情况发生，我们可以优化一下基准数的选取策略。首先，在哨兵划分中，我们可以 <strong>随机选取一个元素作为基准数</strong>。但如果运气很差，每次都选择到比较差的基准数，那么效率依然不好。</p>
         <p>进一步地，我们可以在数组中选取 3 个候选元素（一般为数组的首、尾、中点元素），<strong>并将三个候选元素的中位数作为基准数</strong>，这样基准数“既不大也不小”的概率就大大提升了。当然，如果数组很长的话，我们也可以选取更多候选元素，来进一步提升算法的稳健性。采取该方法后，时间复杂度劣化至 O(n*n) 的概率极低</p>
         <h3 id="例题"><a aria-hidden="true" tabindex="-1" href="#例题" class="anchor"><span class="icon icon-link"></span></a>例题</h3>
+        <p><a href="https://leetcode.cn/problems/sort-an-array">补充题4. 手撕快速排序</a></p>
+        <blockquote>
+          <p>除了需要随机选择中间点，还移动了povit相同的值，进一步缩小区别，避免几万个2的情况出现。</p>
+        </blockquote>
         <p><a href="https://leetcode.cn/problems/kth-largest-element-in-an-array/description/">215. 数组中的第K个最大元素</a></p>
         <p><a href="https://leetcode.cn/problems/sort-colors">75. 颜色分类</a></p>
         <h2 id="归并排序"><a aria-hidden="true" tabindex="-1" href="#归并排序" class="anchor"><span class="icon icon-link"></span></a>归并排序</h2>
@@ -386,6 +405,7 @@ int partition(vector<int>&#x26; nums, int left, int right) {
           <p>最后判断学完的所有数量和当前的numCourses是否相等即可。</p>
           <p>时间复杂度：O(E+V)。这里 E 表示邻边的条数，V 表示结点的个数。</p>
         </blockquote>
+        <h2 id="堆排序"><a aria-hidden="true" tabindex="-1" href="#堆排序" class="anchor"><span class="icon icon-link"></span></a>堆排序</h2>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -408,6 +428,7 @@ int partition(vector<int>&#x26; nums, int left, int right) {
               </ol>
             </li>
             <li><a href="#拓扑排序" class="tocs-link">拓扑排序</a></li>
+            <li><a href="#堆排序" class="tocs-link">堆排序</a></li>
           </ol>
         </aside>
       </nav>

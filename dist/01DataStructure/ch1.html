@@ -312,9 +312,10 @@ while j < len(nums):
           <p>注意如果p长度大于s，那么一定没有结果，直接返回。</p>
           <p>然后记录p数组的字母构成数量。维护一个滑动窗口。当前的字母数量小于0维护左边界。最好当前窗口长度等于p长度时，记录左边界。</p>
         </blockquote>
-        <p><a href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/">LC3.无重复字符的最长子串</a></p>
+        <p><strong><a href="https://leetcode.cn/problems/longest-substring-without-repeating-characters/">LC3.无重复字符的最长子串</a></strong></p>
         <blockquote>
           <p>滑动窗口，当出现重现字符时，更新左边界，如果没有重复出现就更新答案。</p>
+          <p>双指针 + 哈希表。</p>
         </blockquote>
         <h2 id="前缀和"><a aria-hidden="true" tabindex="-1" href="#前缀和" class="anchor"><span class="icon icon-link"></span></a>前缀和</h2>
         <p>前缀和主要适用的场景是原始数组不会被修改的情况下，频繁查询某个区间的累加和。</p>
