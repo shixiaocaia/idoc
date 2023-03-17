@@ -93,6 +93,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <li><a href="https://www.zhihu.com/search?type=content&#x26;q=%E5%8D%8A%E5%90%8C%E6%AD%A5%E5%8D%8A%E5%8F%8D%E5%BA%94%E5%A0%86">(90 封私信 / 83 条消息) 半同步半反应堆 - 搜索结果 - 知乎 (zhihu.com)</a></li>
           </ul>
         </blockquote>
+        <h2 id="自己问题"><a aria-hidden="true" tabindex="-1" href="#自己问题" class="anchor"><span class="icon icon-link"></span></a>自己问题</h2>
         <h2 id="为什么要做这样一个项目"><a aria-hidden="true" tabindex="-1" href="#为什么要做这样一个项目" class="anchor"><span class="icon icon-link"></span></a>为什么要做这样一个项目</h2>
         <h2 id="介绍下这个项目"><a aria-hidden="true" tabindex="-1" href="#介绍下这个项目" class="anchor"><span class="icon icon-link"></span></a>介绍下这个项目</h2>
         <ul>
@@ -168,7 +169,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <p>reactor、proactor、主从reactor模型的区别？</p>
             <ul>
               <li>
-                <p>Reactor模式：要求主线程（I/O处理单元）只负责监听文件描述符上是否有事件发生（可读、可写），若有，则立即通知工作线程，将socket可读可写事件放入请求队列，读写数据、接受新连接及处理客户请求均在工作线程中完成。(需要区别读和写事件)</p>
+                <p><strong>Reactor模式</strong>：要求主线程（I/O处理单元）只负责监听文件描述符上是否有事件发生（可读、可写），若有，则立即通知工作线程，将socket可读可写事件放入请求队列，读写数据、接受新连接及处理客户请求均在工作线程中完成。(需要区别读和写事件)</p>
               </li>
               <li>
                 <p>Proactor模式：主线程和内核负责处理读写数据、接受新连接等I/O操作，工作线程仅负责业务逻辑（给予相应的返回url），如处理客户请求。</p>
@@ -266,26 +267,50 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </ul>
         <h2 id="定时器"><a aria-hidden="true" tabindex="-1" href="#定时器" class="anchor"><span class="icon icon-link"></span></a>定时器</h2>
         <ul>
-          <li>为什么要用定时器
+          <li>
+            <p>为什么要用定时器</p>
             <ul>
               <li>处理定时任务，或者非活跃连接，节省系统资源；</li>
             </ul>
           </li>
-          <li>说一下定时器的工作原理？
+          <li>
+            <p>说一下定时器的工作原理？</p>
             <ul>
               <li>服务器就为各事件分配一个定时器。该项目使用SIGALRM信号来实现定时器，首先每一个定时事件都处于一个升序链表上，<strong>通过alarm()函数周期性触发SIGALRM信号</strong>，而后信号回调函数利用管道通知主循环，主循环接收到信号之后对升序链表上的定时器进行处理：若一定时间内无数据交换则关闭连接。</li>
             </ul>
           </li>
-          <li>双向链表啊，删除和添加的时间复杂度说一下？还可以优化吗？
+          <li>
+            <p>双向链表啊，删除和添加的时间复杂度说一下？还可以优化吗？</p>
             <ul>
               <li>添加一般情况下都是O(N)，删除只需要O(1)。从双向链表的方式优化不太现实，可以考虑使用最小堆、或者跳表的数据结构，跳表详见。‘</li>
             </ul>
           </li>
-          <li>最小堆优化？说一下时间复杂度和工作原理
+          <li>
+            <p>最小堆优化？说一下时间复杂度和工作原理</p>
             <ul>
               <li>最小堆以每个定时器的过期时间进行排序，最小的定时器位于堆顶，当SIGALRM信号触发tick（）函数时执行过期定时器清除，如果堆顶的定时器时间过期，则删除，并重新建堆，再判定是否过期，如此循环直到未过期为止。</li>
               <li>插入，O(logn)；</li>
               <li>删除，O(logN)；</li>
+            </ul>
+          </li>
+          <li>
+            <p>为什么管道写端为非阻塞</p>
+            <ul>
+              <li>send是将信息发送给套接字缓冲区，如果缓冲区满了，则会阻塞，这时候会进一步增加信号处理函数的执行时间，为此，将其修改为非阻塞。</li>
+            </ul>
+          </li>
+          <li>
+            <p>除了管道还有什么信息交换方式</p>
+          </li>
+          <li>
+            <p>中断系统调用</p>
+            <ul>
+              <li>
+                如果程序在执行处于阻塞状态的系统调用时接收到信号，并且我们为该信号设置了信
+                号处理函数，则默认情况下系统调用将被中断，并且errno被设置为ENTR。我们可以使
+                用sigaction函数（见后文）为信号设置SA_RESTART标志以自动重启被该信号中断的系
+                统调用。
+              </li>
             </ul>
           </li>
         </ul>
@@ -387,6 +412,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
+            <li><a href="#自己问题" class="tocs-link">自己问题</a></li>
             <li><a href="#为什么要做这样一个项目" class="tocs-link">为什么要做这样一个项目</a></li>
             <li><a href="#介绍下这个项目" class="tocs-link">介绍下这个项目</a></li>
             <li><a href="#线程池" class="tocs-link">线程池</a></li>
