@@ -7,13 +7,41 @@ Vim 备忘清单
 ### 修改映射
 
 ```c
-"vim.insertModeKeyBindings": [
- {
-    "before": ["j","j"],
-    "after": ["<Esc>"]
- },
-    
-"vim.leader": "<space>",    
+{
+    "workbench.colorTheme": "Dracula",
+    "editor.fontSize": 20,
+    "editor.fontFamily": "JetBrains Mono, Consolas, 'Courier New', monospace",
+    "editor.cursorSmoothCaretAnimation": "on",
+    "editor.minimap.enabled": false,
+    "editor.mouseWheelZoom": true,
+    "remote.SSH.remotePlatform": {
+        "Ubuntu-webserver": "linux"
+    },
+    "workbench.editorAssociations": {
+        "*.swp": "default"
+    },
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.formatOnType": true,
+    "cmake.configureOnOpen": true,
+    "explorer.confirmDelete": false,
+    "vim.insertModeKeyBindings": [
+     {
+        "before": ["j","j"],
+        "after": ["<Esc>"]
+     },
+     ],
+    "vim.leader": "<space>",
+    "editor.accessibilitySupport": "off",
+    "vim.easymotion": true,
+    "vim.sneak": true, // 启用vim-sneak
+    "vim.useSystemClipboard": true, //vim下粘贴
+    "vim.useCtrlKeys": true,
+    "vim.handleKeys":{
+        "<C-c>": false,
+        "<C-v>": false,
+        "<C-w>": false
+    },
+}   
 ```
 
 ### 移动操作
@@ -168,6 +196,25 @@ Vim 备忘清单
 | `<leader><leader> s c`      | 表示搜索字符`c` |
 | `<leader><leader> f <char>` | 向后搜索        |
 | `<leader><leader> F <char>` | 向前搜索        |
+
+### Vim surround
+
+| :-                           | :-   |
+| :--------------------------- | :--- |
+| `[operator]s[motion][symtol]` |      |
+| `y s iw )`                  | 添加括号 |
+| `c s ) ] ` | 更改括号为中括号 |
+| `d s ]` | 删除括号 |
+| `y s f r " ` | 从光标到r字符位置全部添加符号 |
+
+### Vim sneak
+
+## 打开文件
+
+| :-                           | :-   |
+| :--------------------------- | :--- |
+| `ctrl + p` | 打开文件 |
+| `gt / gT ` | 移动窗口 |
 
 理解 Vim
 ---

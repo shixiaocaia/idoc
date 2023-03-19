@@ -583,6 +583,17 @@ public:
           <p>Link到106如何构造一棵二叉树。</p>
           <p>题目给的nums实际上是数组的中序遍历结果，那么就可以从中间划分，取中间点作为根节点，左边剩余数组构造左子树，右边剩余数组构造右子树。</p>
         </blockquote>
+        <p><a href="https://leetcode.cn/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/?envType=study-plan&#x26;id=lcof&#x26;plan=lcof&#x26;plan_progress=fi7d972">剑指 Offer 34. 二叉树中和为某一值的路径</a></p>
+        <blockquote>
+          <p>注意叶子节点的判断。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/er-cha-sou-suo-shu-yu-shuang-xiang-lian-biao-lcof/?envType=study-plan&#x26;id=lcof&#x26;plan=lcof&#x26;plan_progress=fi7d972">剑指 Offer 36. 二叉搜索树与双向链表</a></p>
+        <blockquote>
+          <p>首先有序，肯定是中序遍历。</p>
+          <p>如何调整双向连接，就考虑了需要pre，来记录上一个节点，head用来记录头节点。</p>
+          <p>如果cur不为空，继续处理cur->left节点，如果为空直接返回。</p>
+          <p>不断递归到最底部时，pre节点为空，那么说明当前节点是head，head = cur，否则应该调整指向，pre->left = cur，cur->left = pre，然后当前节点作为下一个节点的前驱节点。</p>
+        </blockquote>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">

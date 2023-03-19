@@ -10,7 +10,7 @@
 
 <p>
     <label for="file">剑指offer：</label>
-    <progress max="100" value="10"></progress>
+    <progress max="100" value="30"></progress>
 </p>
 <p>
     <label for="file">MySQL：</label>

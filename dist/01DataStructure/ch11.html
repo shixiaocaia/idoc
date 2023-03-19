@@ -387,6 +387,11 @@ int partition(vector<int>&#x26; nums, int left, int right) {
         <p><strong>普通快速排序在某些输入下的时间效率变差</strong>。举个极端例子，假设输入数组是完全倒序的，由于我们选取最左端元素为基准数，那么在哨兵划分完成后，基准数被交换至数组最右端，从而 <strong>左子数组长度为 n−1、右子数组长度为 0</strong> 。这样进一步递归下去，<strong>每轮哨兵划分后的右子数组长度都为 0</strong> ，分治策略失效，快速排序退化为「冒泡排序」了。</p>
         <p>为了尽量避免这种情况发生，我们可以优化一下基准数的选取策略。首先，在哨兵划分中，我们可以 <strong>随机选取一个元素作为基准数</strong>。但如果运气很差，每次都选择到比较差的基准数，那么效率依然不好。</p>
         <p>进一步地，我们可以在数组中选取 3 个候选元素（一般为数组的首、尾、中点元素），<strong>并将三个候选元素的中位数作为基准数</strong>，这样基准数“既不大也不小”的概率就大大提升了。当然，如果数组很长的话，我们也可以选取更多候选元素，来进一步提升算法的稳健性。采取该方法后，时间复杂度劣化至 O(n*n) 的概率极低</p>
+        <h3 id="为什么要从右开始查找"><a aria-hidden="true" tabindex="-1" href="#为什么要从右开始查找" class="anchor"><span class="icon icon-link"></span></a>为什么要从右开始查找</h3>
+        <blockquote>
+          <p>快排没有一定要重右边开始，只是看你基数的位置，如果你基数选的是最左边的。你一定要确保，你交换基数的时候，保证那个数要小于基数。</p>
+          <p>基数选择了左边，但是还从左边开始，在<code>l &#x3C; r</code>的条件，不能保证交换时<code>num[l] &#x3C; num[povit]</code>。</p>
+        </blockquote>
         <h3 id="例题"><a aria-hidden="true" tabindex="-1" href="#例题" class="anchor"><span class="icon icon-link"></span></a>例题</h3>
         <p><a href="https://leetcode.cn/problems/sort-an-array">补充题4. 手撕快速排序</a></p>
         <blockquote>
@@ -395,7 +400,6 @@ int partition(vector<int>&#x26; nums, int left, int right) {
         <p><a href="https://leetcode.cn/problems/kth-largest-element-in-an-array/description/">215. 数组中的第K个最大元素</a></p>
         <p><a href="https://leetcode.cn/problems/sort-colors">75. 颜色分类</a></p>
         <h2 id="归并排序"><a aria-hidden="true" tabindex="-1" href="#归并排序" class="anchor"><span class="icon icon-link"></span></a>归并排序</h2>
-        <p>​</p>
         <h3 id="例题-1"><a aria-hidden="true" tabindex="-1" href="#例题-1" class="anchor"><span class="icon icon-link"></span></a>例题</h3>
         <p><a href="https://leetcode.cn/problems/next-permutation">31. 下一个排列</a></p>
         <h2 id="拓扑排序"><a aria-hidden="true" tabindex="-1" href="#拓扑排序" class="anchor"><span class="icon icon-link"></span></a>拓扑排序</h2>
@@ -403,9 +407,14 @@ int partition(vector<int>&#x26; nums, int left, int right) {
         <blockquote>
           <p>首先将入度为0（也就是没有先修课程的，肯定可以学）入队，然后不断弹出这些课（学了），找需要先修这门课的，如果这门课入度为0了（先修课修完了），入队。</p>
           <p>最后判断学完的所有数量和当前的numCourses是否相等即可。</p>
-          <p>时间复杂度：O(E+V)。这里 E 表示邻边的条数，V 表示结点的个数。</p>
+          <p>时间复杂度：<code>O(E+V)</code>。这里 E 表示邻边的条数，V 表示结点的个数。</p>
         </blockquote>
         <h2 id="堆排序"><a aria-hidden="true" tabindex="-1" href="#堆排序" class="anchor"><span class="icon icon-link"></span></a>堆排序</h2>
+        <h2 id="其他"><a aria-hidden="true" tabindex="-1" href="#其他" class="anchor"><span class="icon icon-link"></span></a>其他</h2>
+        <p><a href="https://leetcode.cn/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/?envType=study-plan&#x26;id=lcof&#x26;plan=lcof&#x26;plan_progress=fi7d972">面试题45. 把数组排成最小的数</a></p>
+        <blockquote>
+          <p>倒不如说是数学思路题了，满足顺子的条件，列出大小王的情况去做。</p>
+        </blockquote>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -419,6 +428,7 @@ int partition(vector<int>&#x26; nums, int left, int right) {
                 <li><a href="#基础版" class="tocs-link">基础版</a></li>
                 <li><a href="#时间复杂度" class="tocs-link">时间复杂度</a></li>
                 <li><a href="#基准数优化" class="tocs-link">基准数优化</a></li>
+                <li><a href="#为什么要从右开始查找" class="tocs-link">为什么要从右开始查找</a></li>
                 <li><a href="#例题" class="tocs-link">例题</a></li>
               </ol>
             </li>
@@ -429,6 +439,7 @@ int partition(vector<int>&#x26; nums, int left, int right) {
             </li>
             <li><a href="#拓扑排序" class="tocs-link">拓扑排序</a></li>
             <li><a href="#堆排序" class="tocs-link">堆排序</a></li>
+            <li><a href="#其他" class="tocs-link">其他</a></li>
           </ol>
         </aside>
       </nav>

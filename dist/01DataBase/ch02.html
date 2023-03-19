@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>向前一步 iDoc</title>
-    <meta name="description" content="字段（field）基本上与列（column）的意思相同，字段通常用在计算字段的连接上。">
+    <title>MySQL是怎么运行的 iDoc</title>
+    <meta name="description" content="运行着的MySQL的服务端和客户端程序实际上都是计算机中的一个进程，所以客户端进程向服务器进程发送请求并得到回复的过程本质上是一个进程间通信的过程。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -60,18 +60,85 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </div>
       </article>
     </header>
-    <div class="warpper-content warpper sidebar notocs">
+    <div class="warpper-content warpper sidebar">
       <div class="sidebar-border">
         <aside class="sidebar" role="navigation">
           <div>
             <a href="index.html" class="">↩️README</a>
             <label>从动手开始</label>
             <a href="ch00.html" class="">初见</a>
-            <a href="ch01.html" class="">向前一步</a>
+            <a href="ch01.html" class="">SQL</a>
+            <a href="ch02.html" class="">MySQL是怎么运行的</a>
           </div>
         </aside>
       </div>
-      <markdown-style></markdown-style>
+      <markdown-style>
+        <h1 id="mysql是怎么运行的"><a aria-hidden="true" tabindex="-1" href="#mysql是怎么运行的" class="anchor"><span class="icon icon-link"></span></a>MySQL是怎么运行的</h1>
+        <h2 id="客户端和服务器连接"><a aria-hidden="true" tabindex="-1" href="#客户端和服务器连接" class="anchor"><span class="icon icon-link"></span></a>客户端和服务器连接</h2>
+        <p>运行着的MySQL的服务端和客户端程序实际上都是计算机中的一个<strong>进程</strong>，所以客户端进程向服务器进程发送请求并得到回复的过程本质上是一个进程间通信的过程。</p>
+        <h3 id="tcpip"><a aria-hidden="true" tabindex="-1" href="#tcpip" class="anchor"><span class="icon icon-link"></span></a>TCP/IP</h3>
+        <p>真实环境中，服务端和客户端是运行在不同的主机中，因此之间通信需要网络。MySQL采用的是<strong>TCP</strong>作为服务器和客户端之间的网络通信协议。</p>
+        <p>如果某个进程有需要采用 TCP 协议进行网络通信方面的需求，可以向操作系统申请一个端口号。这样在网络中的其他进程就可以通过<strong>IP地址 + 端口号</strong>的方式来与这个进程连接。</p>
+        <p>MySQL默认是使用3306端口号，当被占用或者想要自定义时，可以使用<code>-p</code>添加自定义端口号。</p>
+        <h3 id="命名管道和共享内存"><a aria-hidden="true" tabindex="-1" href="#命名管道和共享内存" class="anchor"><span class="icon icon-link"></span></a>命名管道和共享内存</h3>
+        <p>如果你是一个 Windows 用户，那么客户端进程和服务器进程之间可以考虑使用 <strong>命名管道</strong> 或 <strong>共享内存</strong> 进行通 信。</p>
+        <p>使用<strong>共享内存</strong>方式进行通信的，服务端和客户端必须在同一台Windows主机中。</p>
+        <h3 id="unix域套接字文件"><a aria-hidden="true" tabindex="-1" href="#unix域套接字文件" class="anchor"><span class="icon icon-link"></span></a>Unix域套接字文件</h3>
+        <p>如果我们的服务器进程和客户端进程都运行在同一台操作系统为<strong>类 Unix</strong> 的机器上的话，我们可以使用 Unix域套 接字文件 来进行进程间通信。</p>
+        <h2 id="服务器处理客户端请求"><a aria-hidden="true" tabindex="-1" href="#服务器处理客户端请求" class="anchor"><span class="icon icon-link"></span></a>服务器处理客户端请求</h2>
+        <p>其实不论客户端进程和服务器进程是采用哪种方式进行通信，最后实现的效果都是：客户端进程向服务器进程发 送一段文本（MySQL语句），服务器进程处理后再向客户端进程发送一段文本（处理结果）。</p>
+        <h3 id="连接管理"><a aria-hidden="true" tabindex="-1" href="#连接管理" class="anchor"><span class="icon icon-link"></span></a>连接管理</h3>
+        <p>客户端连接可以采用上述三种方式，每当有一个客户端进程连接到服务器进程时，服务器进程都会创建一个<strong>线程</strong>来专门处理与客户端的交互。</p>
+        <p>当客户端断开与服务器之间连接时，服务器并不会立即把与该客户端交互的线程销毁掉，而 是把它缓存起来，在另一个新的客户端再进行连接时，把这个缓存的线程分配给该新客户端。这样就起到了不频繁创建和销毁线程的效果，从而节省开销。</p>
+        <p>此外每次连接都会创建线程，线程分配过多会影响系统性能，所以我们需要限制一下可以同时连接到服务器的客户端的数量。</p>
+        <p>进行连接时，需要提供用户名、密码等信息进行认证，如果认证失败，服务器程序会拒绝连接。如果不在一台计算上，我们还可以采用**SSL（安全套接字）**的网络连接进行通信，来保证数据传输的安全性。</p>
+        <h3 id="解析与优化"><a aria-hidden="true" tabindex="-1" href="#解析与优化" class="anchor"><span class="icon icon-link"></span></a>解析与优化</h3>
+        <p>在连接建立后，服务器只是收到了文本消息。还需要进行解析和优化。</p>
+        <p>MySQL服务器程序处理查询请求时，会把刚刚处理过的查询请求和结果<strong>缓存</strong>起来，发现相同的请求时，直接从缓存中查找结果，并且<strong>在不同客户端之间共享</strong>。</p>
+        <p>但是这样的缓存，会因为任务字符的不同，导致缓存不命中，另外如果查询请求中包含了某些系统函数，用户自定义变量和函数，那个查询请求不会缓存。</p>
+        <p>当MySQL的缓存系统会检测涉及到每张表的变化，只要该表的结构或者数据被修改，那么对该表的所有高速缓存查询都会变为无效，并从缓存中删除，<strong>缓存失效</strong>。</p>
+        <blockquote>
+          <p>查询缓存提高了系统性能，但是维护缓存也会造成开销，从MySQL 8.0中已经删除查询缓存。</p>
+        </blockquote>
+        <p>如果缓存没有命中，就要进入正式的查询，解析客户端发来的请求文本内容。</p>
+        <p>解析完成后，服务器程序获得到了需要的信息，由于我们写的SQL语句执行效率可能不高，还需要进一步优化，MySQL优化程序会执行一系列操作。</p>
+        <h3 id="存储引擎"><a aria-hidden="true" tabindex="-1" href="#存储引擎" class="anchor"><span class="icon icon-link"></span></a>存储引擎</h3>
+        <p>
+          截止到服务器程序完成了查询优化为止，还没有真正的去访问真实的数据表， MySQL 服务器把数据的存储和提取 操作都封装到了一个叫 <strong>存储引擎</strong> 的模块里。我们知道 表 是由一行一行的记录组成的，但这只是一个逻辑上的概 念，物理上如何表示记录，怎么从表中读取数据，怎么把数据写入具体的物理存储器上，这都是 存储引擎 负责
+          的事情。
+        </p>
+        <p>不同的<strong>存储引擎</strong>管理的表具体的存储结构可能不同，采取的存储算法也可能不同。</p>
+        <p>比较常用的是<strong>InnoDB</strong>和<strong>MyISAM</strong>，有时候会提一下<strong>Memory</strong>。</p>
+        <blockquote>
+          <p>InnoDB：具备外键支持功能的事务存储引擎。</p>
+          <p>MyISAM：主要的非事物处理存储引擎。</p>
+          <p>MEMORY：置于内存的表。</p>
+        </blockquote>
+        <pre><code class="language-mysql code-highlight"><span class="code-line line-number" line="1">show engines; # 查看当前服务器程序支持的存储引擎
+</span></code><input type="hidden" value="show engines; # 查看当前服务器程序支持的存储引擎
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>Transactions 列代表该存储引擎是否支持事务处理。 XA 列代 表着该存储引擎是否支持分布式事务。 Savepoints 代表着该列是否支持部分事务回滚。</p>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#客户端和服务器连接" class="tocs-link">客户端和服务器连接</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#tcpip" class="tocs-link">TCP/IP</a></li>
+                <li><a href="#命名管道和共享内存" class="tocs-link">命名管道和共享内存</a></li>
+                <li><a href="#unix域套接字文件" class="tocs-link">Unix域套接字文件</a></li>
+              </ol>
+            </li>
+            <li><a href="#服务器处理客户端请求" class="tocs-link">服务器处理客户端请求</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#连接管理" class="tocs-link">连接管理</a></li>
+                <li><a href="#解析与优化" class="tocs-link">解析与优化</a></li>
+                <li><a href="#存储引擎" class="tocs-link">存储引擎</a></li>
+              </ol>
+            </li>
+          </ol>
+        </aside>
+      </nav>
     </div>
     <script src="../js/demo-preview.js?v=1.21.13"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>

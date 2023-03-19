@@ -141,3 +141,5 @@ void dfs(XXX, int index){
 [22. 括号生成](https://leetcode.cn/problems/generate-parentheses)
 
 > DFS。
+
+**[剑指 Offer 12. 矩阵中的路径](https://leetcode.cn/problems/ju-zhen-zhong-de-lu-jing-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fi7d972)**
