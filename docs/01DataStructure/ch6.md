@@ -456,3 +456,10 @@ public:
 >
 > 不断递归到最底部时，pre节点为空，那么说明当前节点是head，head = cur，否则应该调整指向，pre->left = cur，cur->left = pre，然后当前节点作为下一个节点的前驱节点。
 
+[剑指 Offer 33. 二叉搜索树的后序遍历序](https://leetcode.cn/problems/er-cha-sou-suo-shu-de-hou-xu-bian-li-xu-lie-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fi7d972)
+
+> 处理不好数组越界，可以直接考虑索引问题，并且这是在原数组上进行操作。
+>
+> 后续遍历，最后一个值为root，那么前面必然能划分成左子树还是右子树，再去遍历左子树和右子树是否满足条件即可。
+>
+> 终止条件为访问单个节点，或者为空时。

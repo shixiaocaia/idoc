@@ -399,6 +399,12 @@ int partition(vector<int>&#x26; nums, int left, int right) {
         </blockquote>
         <p><a href="https://leetcode.cn/problems/kth-largest-element-in-an-array/description/">215. 数组中的第K个最大元素</a></p>
         <p><a href="https://leetcode.cn/problems/sort-colors">75. 颜色分类</a></p>
+        <p><a href="https://leetcode.cn/problems/zui-xiao-de-kge-shu-lcof/?envType=study-plan&#x26;id=lcof&#x26;plan=lcof&#x26;plan_progress=fi7d972">剑指 Offer 40. 最小的k个数</a></p>
+        <blockquote>
+          <p>剪枝，哨兵位置在 k 时，可以返回，即前k个小的数都在左边。</p>
+          <p>l > k，说明第 k + 1个数在左边序列，前k个数还可能乱，要再排一下；</p>
+          <p>l &#x3C; k，说明第 k + 1个数在右边序列，还没有选够k个数，要重新排一下。</p>
+        </blockquote>
         <h2 id="归并排序"><a aria-hidden="true" tabindex="-1" href="#归并排序" class="anchor"><span class="icon icon-link"></span></a>归并排序</h2>
         <h3 id="例题-1"><a aria-hidden="true" tabindex="-1" href="#例题-1" class="anchor"><span class="icon icon-link"></span></a>例题</h3>
         <p><a href="https://leetcode.cn/problems/next-permutation">31. 下一个排列</a></p>
@@ -411,9 +417,13 @@ int partition(vector<int>&#x26; nums, int left, int right) {
         </blockquote>
         <h2 id="堆排序"><a aria-hidden="true" tabindex="-1" href="#堆排序" class="anchor"><span class="icon icon-link"></span></a>堆排序</h2>
         <h2 id="其他"><a aria-hidden="true" tabindex="-1" href="#其他" class="anchor"><span class="icon icon-link"></span></a>其他</h2>
-        <p><a href="https://leetcode.cn/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/?envType=study-plan&#x26;id=lcof&#x26;plan=lcof&#x26;plan_progress=fi7d972">面试题45. 把数组排成最小的数</a></p>
+        <p><a href="https://leetcode.cn/problems/bu-ke-pai-zhong-de-shun-zi-lcof/?envType=study-plan&#x26;id=lcof&#x26;plan=lcof&#x26;plan_progress=fi7d972">面试题61. 扑克牌中的顺子</a></p>
         <blockquote>
           <p>倒不如说是数学思路题了，满足顺子的条件，列出大小王的情况去做。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/ba-shu-zu-pai-cheng-zui-xiao-de-shu-lcof/?envType=study-plan&#x26;id=lcof&#x26;plan=lcof&#x26;plan_progress=fi7d972">面试题45. 把数组排成最小的数</a></p>
+        <blockquote>
+          <p>想不到，通过a + b > b + a，来判断摆放的顺序。</p>
         </blockquote>
       </markdown-style>
       <nav class="tocs">

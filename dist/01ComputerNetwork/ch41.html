@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>什么都有 iDoc</title>
+    <title>键入网址到网页显示，期间发生了什么？ iDoc</title>
     <meta name="description" content="浏览器做的第一步工作是解析 URL">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
@@ -79,9 +79,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </aside>
       </div>
       <markdown-style>
-        <h1 id="什么都有"><a aria-hidden="true" tabindex="-1" href="#什么都有" class="anchor"><span class="icon icon-link"></span></a>什么都有</h1>
-        <h2 id="键入网址到网页显示期间发生了什么"><a aria-hidden="true" tabindex="-1" href="#键入网址到网页显示期间发生了什么" class="anchor"><span class="icon icon-link"></span></a>键入网址到网页显示，期间发生了什么？</h2>
-        <h3 id="http"><a aria-hidden="true" tabindex="-1" href="#http" class="anchor"><span class="icon icon-link"></span></a>HTTP</h3>
+        <h1 id="键入网址到网页显示期间发生了什么"><a aria-hidden="true" tabindex="-1" href="#键入网址到网页显示期间发生了什么" class="anchor"><span class="icon icon-link"></span></a>键入网址到网页显示，期间发生了什么？</h1>
+        <h2 id="http"><a aria-hidden="true" tabindex="-1" href="#http" class="anchor"><span class="icon icon-link"></span></a>HTTP</h2>
         <p>浏览器做的第一步工作是<strong>解析 URL</strong></p>
         <blockquote>
           <p><code>https://xiaolincoding.com/network/1_.html</code></p>
@@ -91,25 +90,42 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <li>后续是文件的路径名，当省略路径名时访问默认网页，一般是index.html</li>
           </ol>
         </blockquote>
-        <p>确定完服务器名和文件名后，根据信息生成HTTP请求报文。</p>
-        <h3 id="dns"><a aria-hidden="true" tabindex="-1" href="#dns" class="anchor"><span class="icon icon-link"></span></a>DNS</h3>
+        <p>确定完服务器名和文件名后，根据信息<strong>生成HTTP请求报文</strong>。</p>
+        <h2 id="dns"><a aria-hidden="true" tabindex="-1" href="#dns" class="anchor"><span class="icon icon-link"></span></a>DNS</h2>
         <p>在发送前，要查询对应的IP地址。</p>
         <p>详情去看<strong>域名解析流程</strong>。</p>
-        <h3 id="协议栈"><a aria-hidden="true" tabindex="-1" href="#协议栈" class="anchor"><span class="icon icon-link"></span></a>协议栈</h3>
+        <h2 id="协议栈"><a aria-hidden="true" tabindex="-1" href="#协议栈" class="anchor"><span class="icon icon-link"></span></a>协议栈</h2>
         <p>通过 DNS 获取到 IP 后，就可以把 HTTP 的传输工作交给操作系统中的<strong>协议栈</strong>。</p>
         <p>
           <img src="http://pic.shixiaocaia.fun/202302191215859.png" alt="img">
         </p>
         <h3 id="tcp"><a aria-hidden="true" tabindex="-1" href="#tcp" class="anchor"><span class="icon icon-link"></span></a>TCP</h3>
-        <p>了解TCP其中的报文信息。</p>
-        <p>三次握手，四次挥手。</p>
+        <p>了解TCP其中的报文信息，每一部分的作用。</p>
+        <p>三次握手，三次握手目的是<strong>保证双方都有发送和接收的能力</strong>。</p>
+        <p>如果 HTTP 请求消息比较长，超过了 <code>MSS</code> 的长度，这时 TCP 就需要把 HTTP 的数据拆解成一块块的数据发送，而不是一次性发送所有数据。</p>
+        <p>数据会被以 <code>MSS</code> 的长度为单位进行拆分，拆分出来的每一块数据都会被放进单独的网络包中。也就是在每个被拆分的数据加上 TCP 头信息，然后交给 IP 模块来发送数据。</p>
+        <blockquote>
+          <ul>
+            <li><code>MTU</code>：一个网络包的最大长度，以太网中一般为 <code>1500</code> 字节。</li>
+            <li><code>MSS</code>：除去 IP 和 TCP 头部之后，一个网络包所能容纳的 TCP 数据的最大长度。</li>
+          </ul>
+        </blockquote>
+        <p>TCP 协议里面会有两个端口，一个是浏览器监听的端口（通常是随机生成的），一个是 Web 服务器监听的端口（HTTP 默认端口号是 <code>80</code>， HTTPS 默认端口号是 <code>443</code>）。</p>
         <h3 id="ip"><a aria-hidden="true" tabindex="-1" href="#ip" class="anchor"><span class="icon icon-link"></span></a>IP</h3>
         <p>TCP 模块在执行连接、收发、断开等各阶段操作时，都需要委托 IP 模块将数据封装成<strong>网络包</strong>发送给通信对象。</p>
+        <p><strong>假设客户端有多个网卡，就会有多个 IP 地址，那 IP 头部的源地址应该选择哪个 IP 呢？</strong></p>
+        <blockquote>
+          <p>当存在多个网卡时，在填写源地址 IP 时，就需要判断到底应该填写哪个地址。这个判断相当于在多块网卡中判断应该使用哪个一块网卡来发送包。</p>
+          <p>这个时候就需要根据<strong>路由表</strong>规则，来判断哪一个网卡作为源地址 IP。</p>
+        </blockquote>
         <h3 id="mac"><a aria-hidden="true" tabindex="-1" href="#mac" class="anchor"><span class="icon icon-link"></span></a>MAC</h3>
         <p>TCP报文套上IP报文头后，又加上MAC地址。</p>
-        <h3 id="出口-网卡"><a aria-hidden="true" tabindex="-1" href="#出口-网卡" class="anchor"><span class="icon icon-link"></span></a>出口-网卡</h3>
-        <p>网卡将网络包转为电信号，通过网线发送出去。</p>
-        <h3 id="送别者-交换机"><a aria-hidden="true" tabindex="-1" href="#送别者-交换机" class="anchor"><span class="icon icon-link"></span></a>送别者-交换机</h3>
+        <p>在 MAC 包头里需要发送方 MAC 地址和接收方目标 MAC 地址，用于<strong>两点之间的传输</strong>。</p>
+        <p>在已知目的IP地址的情况，查路由表就可以找到相匹配的网关信息，然后到达对应网关后，通过ARP协议查询IP地址方式获取对应设备的MAC地址。此外操作系统根据每次查询的结果会维护一个<strong>ARP缓存</strong>的内存空间。</p>
+        <h2 id="出口-网卡"><a aria-hidden="true" tabindex="-1" href="#出口-网卡" class="anchor"><span class="icon icon-link"></span></a>出口-网卡</h2>
+        <p>在添加完MAC头部后构成了完整的网络包信息，需要将这些存放在内存中的二进制数字信息转为电信号，通过网线发送出去。</p>
+        <p>负责执行这部分操作的是<strong>网卡</strong>，以及控制网卡的驱动程序。</p>
+        <h2 id="送别者-交换机"><a aria-hidden="true" tabindex="-1" href="#送别者-交换机" class="anchor"><span class="icon icon-link"></span></a>送别者-交换机</h2>
         <p>将网络包原样转发到目的地。交换机工作在MAC层，也称为二层网络设备。</p>
         <p>首先，电信号到达网线接口，交换机里的模块进行接收，接下来交换机里的模块将电信号转换为数字信号。</p>
         <p>然后通过包末尾的 <code>FCS</code> 校验错误，如果没问题则放到缓冲区。这部分操作基本和计算机的网卡相同，但交换机的工作方式和网卡不同。</p>
@@ -120,17 +136,13 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li>一个是设备的 MAC 地址，</li>
           <li>另一个是该设备连接在交换机的哪个端口上。</li>
         </ul>
-        <p><strong>交换机根据 MAC 地址表查找 MAC 地址，然后将信号发送到相应的端口</strong>。</p>
+        <p><strong>当 MAC 地址表找不到指定的 MAC 地址会怎么样？</strong></p>
         <blockquote>
-          <p>交换机中的MAC地址与网线端口的映射表是怎么获取的。</p>
+          <p>地址表中找不到指定的 MAC 地址。这可能是因为具有该地址的设备还没有向交换机发送过包，或者这个设备一段时间没有工作导致地址被从地址表中删除了。</p>
+          <p>这种情况下，交换机无法判断应该把包转发到哪个端口，只能将包转发到除了源端口之外的所有端口上，无论该设备连接在哪个端口上都能收到这个包。</p>
+          <p>只有目的主机才会接受网络包，否则会直接丢弃。</p>
         </blockquote>
-        <blockquote>
-          <p>如果当 MAC 地址表找不到指定的 MAC 地址会怎么样？</p>
-        </blockquote>
-        <blockquote>
-          <p>交换机的作用</p>
-        </blockquote>
-        <h3 id="出境大门-路由器"><a aria-hidden="true" tabindex="-1" href="#出境大门-路由器" class="anchor"><span class="icon icon-link"></span></a>出境大门-路由器</h3>
+        <h2 id="出境大门-路由器"><a aria-hidden="true" tabindex="-1" href="#出境大门-路由器" class="anchor"><span class="icon icon-link"></span></a>出境大门-路由器</h2>
         <blockquote>
           <p>路由器与交换机的区别</p>
         </blockquote>
@@ -144,29 +156,31 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <blockquote>
           <p>路由器解析包开头的MAC头部，MAC 头部的作用就是将包送达路由器，其中的接收方 MAC 地址就是路由器端口的 MAC 地址。</p>
           <p>因此，当包到达路由器之后，MAC 头部的任务就完成了，于是 MAC 头部就会<strong>被丢弃</strong>。</p>
-          <p>接下来，路由器会根据 MAC 头部后方的 <code>IP</code> 头部中的内容进行包的转发操作。</p>
+          <p>接下来，路由器会根据 MAC 头部后方的 <code>IP</code> 头部中的内容进行包的转发操作，根据查询路由表判断转发目标。</p>
         </blockquote>
-        <h3 id="服务器端"><a aria-hidden="true" tabindex="-1" href="#服务器端" class="anchor"><span class="icon icon-link"></span></a>服务器端</h3>
+        <h2 id="服务器端"><a aria-hidden="true" tabindex="-1" href="#服务器端" class="anchor"><span class="icon icon-link"></span></a>服务器端</h2>
         <p>数据包抵达服务器后，服务器会先扒开数据包的 MAC 头部，查看是否和服务器自己的 MAC 地址符合，符合就将包收起来。</p>
         <p>接着解析报文。</p>
+        <h2 id="简单描述"><a aria-hidden="true" tabindex="-1" href="#简单描述" class="anchor"><span class="icon icon-link"></span></a>简单描述</h2>
+        <p><a href="https://www.cnblogs.com/yifeng-coding/p/16981971.html">https://www.cnblogs.com/yifeng-coding/p/16981971.html</a></p>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#键入网址到网页显示期间发生了什么" class="tocs-link">键入网址到网页显示，期间发生了什么？</a>
+            <li><a href="#http" class="tocs-link">HTTP</a></li>
+            <li><a href="#dns" class="tocs-link">DNS</a></li>
+            <li><a href="#协议栈" class="tocs-link">协议栈</a>
               <ol class="tocs-list is-collapsed">
-                <li><a href="#http" class="tocs-link">HTTP</a></li>
-                <li><a href="#dns" class="tocs-link">DNS</a></li>
-                <li><a href="#协议栈" class="tocs-link">协议栈</a></li>
                 <li><a href="#tcp" class="tocs-link">TCP</a></li>
                 <li><a href="#ip" class="tocs-link">IP</a></li>
                 <li><a href="#mac" class="tocs-link">MAC</a></li>
-                <li><a href="#出口-网卡" class="tocs-link">出口-网卡</a></li>
-                <li><a href="#送别者-交换机" class="tocs-link">送别者-交换机</a></li>
-                <li><a href="#出境大门-路由器" class="tocs-link">出境大门-路由器</a></li>
-                <li><a href="#服务器端" class="tocs-link">服务器端</a></li>
               </ol>
             </li>
+            <li><a href="#出口-网卡" class="tocs-link">出口-网卡</a></li>
+            <li><a href="#送别者-交换机" class="tocs-link">送别者-交换机</a></li>
+            <li><a href="#出境大门-路由器" class="tocs-link">出境大门-路由器</a></li>
+            <li><a href="#服务器端" class="tocs-link">服务器端</a></li>
+            <li><a href="#简单描述" class="tocs-link">简单描述</a></li>
           </ol>
         </aside>
       </nav>

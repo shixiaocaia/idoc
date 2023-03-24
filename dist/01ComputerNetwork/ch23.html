@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCP 三次握手与四次挥手 iDoc</title>
+    <meta name="description" content="TCP 是面向连接的、可靠的、基于字节流的传输层通信协议。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.21.13">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.21.13"></script>
+    <script src="../js/dark-mode.js?v=1.21.13"></script>
+    <script src="../js/markdown-style.js?v=1.21.13"></script>
+    <script src="../js/jquery.min.js?v=1.21.13"></script>
+    <script src="../js/fancybox.umd.js?v=1.21.13"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="index.html" target="" class="active">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+            <li><a href="../00Other/index.html" target="" class="">Other</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <a href="ch00.html" class="">问题收集</a>
+            <label>HTTP篇</label>
+            <a href="ch11.html" class="">占个坑位</a>
+            <label>TCP篇</label>
+            <a href="ch21.html" class="">占个坑位</a>
+            <label>IP篇</label>
+            <a href="ch31.html" class="">IP知识全家桶</a>
+            <a href="ch32.html" class="">ping的工作原理</a>
+            <label>综合篇</label>
+            <a href="ch41.html" class="">什么都有</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="tcp-三次握手与四次挥手"><a aria-hidden="true" tabindex="-1" href="#tcp-三次握手与四次挥手" class="anchor"><span class="icon icon-link"></span></a>TCP 三次握手与四次挥手</h1>
+        <h2 id="什么是tcp什么是tcp连接"><a aria-hidden="true" tabindex="-1" href="#什么是tcp什么是tcp连接" class="anchor"><span class="icon icon-link"></span></a>什么是TCP，什么是TCP连接</h2>
+        <p>TCP 是<strong>面向连接的、可靠的、基于字节流</strong>的传输层通信协议。</p>
+        <ul>
+          <li>面向连接：</li>
+          <li>可靠的：</li>
+          <li>字节流：</li>
+        </ul>
+        <p>TCP连接，<strong>用于保证可靠性和流量控制维护的某些状态信息，这些信息的组合，包括 Socket、序列号和窗口大小称为连接。</strong></p>
+        <h2 id="tcp头格式有哪些"><a aria-hidden="true" tabindex="-1" href="#tcp头格式有哪些" class="anchor"><span class="icon icon-link"></span></a>TCP头格式有哪些</h2>
+        <p>
+          <img src="http://pic.shixiaocaia.fun/202303201628435.png" alt="TCP 头格式">
+        </p>
+        <ul>
+          <li>
+            <p><strong>序列号</strong>：</p>
+          </li>
+          <li>
+            <p><strong>确认应答号</strong>：</p>
+          </li>
+          <li>
+            <p><strong>控制位</strong>：</p>
+            <ul>
+              <li>ACK：</li>
+              <li>RST：</li>
+              <li>SYN：</li>
+              <li>FIN：</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="为什么需要tcp协议tcp工作在哪一层"><a aria-hidden="true" tabindex="-1" href="#为什么需要tcp协议tcp工作在哪一层" class="anchor"><span class="icon icon-link"></span></a>为什么需要TCP协议？TCP工作在哪一层</h2>
+        <p><code>IP</code> 层是「不可靠」的，它不保证网络包的交付、不保证网络包的按序交付、也不保证网络包中的数据的完整性。</p>
+        <p>如果需要保障网络数据包的可靠性，那么就需要由上层（传输层）的 <code>TCP</code> 协议来负责。</p>
+        <p>因为 TCP 是一个工作在<strong>传输层</strong>的<strong>可靠</strong>数据传输的服务，它能确保接收端接收的网络包是<strong>无损坏、无间隔、非冗余和按序的。</strong></p>
+        <h2 id="如何唯一确定一个tcp连接"><a aria-hidden="true" tabindex="-1" href="#如何唯一确定一个tcp连接" class="anchor"><span class="icon icon-link"></span></a>如何唯一确定一个TCP连接</h2>
+        <p>TCP 四元组可以唯一的确定一个连接，四元组包括源地址和目的地址放在IP报文中，源端口和目的端口存放在TCP头部当中。</p>
+        <p>源地址和目的地址区分设备地址，而进程号则具体区分设备中的某个进程。</p>
+        <p><strong>有一个IP的服务端监听了一个端口，它的TCP的最大连接数是多少</strong></p>
+        <blockquote>
+          <p>服务器端口通常固定在某个本地端口上监听，等待客户端的连接请求。</p>
+          <p>变化的是客户端IP和端口，理论上最大的TCP连接数 = 客户端的IP数 × 客户端端口数</p>
+          <p>对 IPv4，客户端的 IP 数最多为 <code>2</code> 的 <code>32</code> 次方，客户端的端口数最多为 <code>2</code> 的 <code>16</code> 次方，也就是服务端单机最大 TCP 连接数，约为 <code>2</code> 的 <code>48</code> 次方。</p>
+          <p>当然，服务端最大并发 TCP 连接数远不能达到理论上限，会受以下因素影响：</p>
+          <ul>
+            <li>文件描述符限制每个 TCP 连接都是一个文件，如果文件描述符被占满了，会发生 Too many open files。Linux 对可打开的文件描述符的数量分别作了三个方面的限制：
+              <ul>
+                <li><strong>系统级</strong>：当前系统可打开的最大数量，通过 <code>cat /proc/sys/fs/file-max</code> 查看；</li>
+                <li><strong>用户级</strong>：指定用户可打开的最大数量，通过 <code>cat /etc/security/limits.conf</code> 查看；</li>
+                <li><strong>进程级</strong>：单个进程可打开的最大数量，通过 <code>cat /proc/sys/fs/nr_open</code> 查看；</li>
+              </ul>
+            </li>
+            <li><strong>内存限制</strong>，每个 TCP 连接都要占用一定内存，操作系统的内存是有限的，如果内存资源被占满后，会发生 OOM。</li>
+          </ul>
+        </blockquote>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#什么是tcp什么是tcp连接" class="tocs-link">什么是TCP，什么是TCP连接</a></li>
+            <li><a href="#tcp头格式有哪些" class="tocs-link">TCP头格式有哪些</a></li>
+            <li><a href="#为什么需要tcp协议tcp工作在哪一层" class="tocs-link">为什么需要TCP协议？TCP工作在哪一层</a></li>
+            <li><a href="#如何唯一确定一个tcp连接" class="tocs-link">如何唯一确定一个TCP连接</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.21.13"></script>
+  </body>
+</html>
