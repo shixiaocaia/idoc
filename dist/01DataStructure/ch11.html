@@ -109,28 +109,25 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 </span><span class="code-line line-number" line="2">    <span class="token keyword">int</span> n <span class="token operator">=</span> nums<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </span><span class="code-line line-number" line="3">    <span class="token keyword">bool</span> flag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
 </span><span class="code-line line-number" line="4">    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&#x3C;</span> n <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token operator">++</span>i<span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token comment">//i = 0 起，循环了n - 1趟，更符合规范理解</span>
-</span><span class="code-line line-number" line="5">    <span class="token comment">//for (int i = 0; i &#x3C; n; ++i) {//i = 0 起，循环了n 趟，不影响结果</span>
-</span><span class="code-line line-number" line="6">        flag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="7">        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&#x3C;</span> n <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">-</span> i<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="8">            <span class="token keyword">if</span> <span class="token punctuation">(</span>nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">></span> nums<span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="9">                <span class="token comment">//某一趟排序中，只要发生一次元素交换，flag就从false变为了true</span>
-</span><span class="code-line line-number" line="10">                <span class="token comment">//也即表示这一趟排序还不能确定所剩待排序列是否已经有序，应继续下一趟循环</span>
-</span><span class="code-line line-number" line="11">                <span class="token function">swap</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="12">                flag <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="13">            <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="14">        <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="15">        <span class="token comment">//但若某一趟中一次元素交换都没有，即依然为flag = false</span>
-</span><span class="code-line line-number" line="16">        <span class="token comment">//那么表明所剩待排序列已经有序</span>
-</span><span class="code-line line-number" line="17">        <span class="token comment">//不必再进行趟数比较，外层循环应该结束，即此时if (!flag) break; 跳出循环</span>
-</span><span class="code-line line-number" line="18">        <span class="token comment">/* if (flag) { break; } */</span>
-</span><span class="code-line line-number" line="19">        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>flag<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">break</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="20">    <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="21"><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="5">        flag <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="6">        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&#x3C;</span> n <span class="token operator">-</span> <span class="token number">1</span> <span class="token operator">-</span> i<span class="token punctuation">;</span> <span class="token operator">++</span>j<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="7">            <span class="token keyword">if</span> <span class="token punctuation">(</span>nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span> <span class="token operator">></span> nums<span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="8">                <span class="token comment">//某一趟排序中，只要发生一次元素交换，flag就从false变为了true</span>
+</span><span class="code-line line-number" line="9">                <span class="token comment">//也即表示这一趟排序还不能确定所剩待排序列是否已经有序，应继续下一趟循环</span>
+</span><span class="code-line line-number" line="10">                <span class="token function">swap</span><span class="token punctuation">(</span>nums<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">,</span> nums<span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="11">                flag <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="12">            <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="13">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="14">        <span class="token comment">//但若某一趟中一次元素交换都没有，即依然为flag = false</span>
+</span><span class="code-line line-number" line="15">        <span class="token comment">//那么表明所剩待排序列已经有序</span>
+</span><span class="code-line line-number" line="16">        <span class="token comment">//不必再进行趟数比较，外层循环应该结束，即此时if (!flag) break; 跳出循环</span>
+</span><span class="code-line line-number" line="17">        <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span>flag<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">break</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="18">    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="19"><span class="token punctuation">}</span>
 </span></code><input type="hidden" value="void bubbleSort(vector<int>&#x26; nums) {
     int n = nums.size();
     bool flag = false;
     for (int i = 0; i < n - 1; ++i) {//i = 0 起，循环了n - 1趟，更符合规范理解
-    //for (int i = 0; i < n; ++i) {//i = 0 起，循环了n 趟，不影响结果
         flag = false;
         for (int j = 0; j < n - 1 - i; ++j) {
             if (nums[j] > nums[j + 1]) {
@@ -143,11 +140,13 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         //但若某一趟中一次元素交换都没有，即依然为flag = false
         //那么表明所剩待排序列已经有序
         //不必再进行趟数比较，外层循环应该结束，即此时if (!flag) break; 跳出循环
-        /* if (flag) { break; } */
         if (!flag) { break; }
     }
 }
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>时间复杂度：O(n^2)，各论冒泡的遍历数组长度为n - 1, n - 2, ... , 2, 1，求和可得。</p>
+        <p>空间复杂度：O(1)。</p>
+        <p>稳定排序：不交换相等元素。</p>
         <h2 id="选择排序"><a aria-hidden="true" tabindex="-1" href="#选择排序" class="anchor"><span class="icon icon-link"></span></a>选择排序</h2>
         <p><strong>选择排序就是将找打数组中最小的元素，将它和数组的第一个元素交换位置，然后再剩下的元素中找最小的元素，和第二元素的位置交换，如此反复。</strong></p>
         <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">void</span> <span class="token function">selectSort</span><span class="token punctuation">(</span>vector<span class="token operator">&#x3C;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&#x26;</span> nums<span class="token punctuation">)</span> <span class="token punctuation">{</span>
@@ -219,8 +218,9 @@ void insertionSort(vector<int>&#x26; a, int n) {//{ 9,1,5,6,2,3 }
 	}
 }
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <h2 id="希尔排序"><a aria-hidden="true" tabindex="-1" href="#希尔排序" class="anchor"><span class="icon icon-link"></span></a>希尔排序</h2>
-        <p>略略略。</p>
+        <p>时间复杂度：O(n^2)。</p>
+        <p>空间复杂度：O(1)。</p>
+        <p>稳定排序：不交换相等元素。</p>
         <h2 id="快速排序"><a aria-hidden="true" tabindex="-1" href="#快速排序" class="anchor"><span class="icon icon-link"></span></a>快速排序</h2>
         <h3 id="基础版"><a aria-hidden="true" tabindex="-1" href="#基础版" class="anchor"><span class="icon icon-link"></span></a>基础版</h3>
         <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token comment">/* 元素交换 */</span>
@@ -290,16 +290,10 @@ void quickSort(vector<int>&#x26; nums, int left, int right) {
     quickSort(nums, pivot + 1, right);
 }
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <h3 id="时间复杂度"><a aria-hidden="true" tabindex="-1" href="#时间复杂度" class="anchor"><span class="icon icon-link"></span></a>时间复杂度</h3>
-        <p><a href="https://www.cnblogs.com/tuyang1129/p/12857821.html#22-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F%E7%9A%84%E6%97%B6%E9%97%B4%E5%A4%8D%E6%9D%82%E5%BA%A6">参考博文</a></p>
-        <p>快排的原理是基于<strong>二分法</strong>的思想，时间复杂度比较复杂，最好的情况是O(N)，最差的时候是O(N^2)，所以平时说的O(N*logN)为其平均时间复杂度。它的基本思想是：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列。</p>
-        <p>假设数组元素个数为 <code>N</code>，那么二叉树每一层的元素个数之和就是 <code>O(N)</code>；分界点分布均匀的理想情况下，树的层数为 <code>O(logN)</code>，所以理想的总时间复杂度为 <code>O(NlogN)</code>。</p>
-        <p>由于快速排序没有使用任何辅助数组，所以空间复杂度就是递归堆栈的深度，也就是树高 <code>O(logN)</code>。</p>
-        <p>所以我们说，快速排序理想情况的<strong>时间复杂度</strong>是 <code>O(NlogN)</code>，<strong>空间复杂度</strong> <code>O(logN)</code>，极端情况下的最坏时间复杂度是 <code>O(N^2)</code>，空间复杂度是 <code>O(N)</code>。</p>
-        <p>快速排序是不稳定排序。</p>
-        <blockquote>
-          <p>如果排序之后它们的相对位置没有发生改变，则称该排序算法为「稳定排序」，反之则为「不稳定排序」。</p>
-        </blockquote>
+        <p>平均时间复杂度：O(nlogn)，平均情况下，哨兵划分的递归层数为logn（基于二分的情况下考虑），每层中的总循环数为n，总体使用O(nlog)。</p>
+        <p>最差时间复杂度：O(n^2)，最拆的情况下，哨兵划分操作将长度为n的数组划分为长度为0和n - 1的两个子数组，此时递归的层数达到n层，每层的循环数为n，总体使用O(n^2)。</p>
+        <p>空间复杂度：O(n^2)。</p>
+        <p>非稳定排序：哨兵划分操作可能改变相等元素的相对位置。</p>
         <h3 id="基准数优化"><a aria-hidden="true" tabindex="-1" href="#基准数优化" class="anchor"><span class="icon icon-link"></span></a>基准数优化</h3>
         <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">/* 选取三个元素的中位数 */
 </span><span class="code-line line-number" line="2">int medianThree(vector&#x3C;int>&#x26; nums, int left, int mid, int right) {
@@ -406,8 +400,90 @@ int partition(vector<int>&#x26; nums, int left, int right) {
           <p>l &#x3C; k，说明第 k + 1个数在右边序列，还没有选够k个数，要重新排一下。</p>
         </blockquote>
         <h2 id="归并排序"><a aria-hidden="true" tabindex="-1" href="#归并排序" class="anchor"><span class="icon icon-link"></span></a>归并排序</h2>
+        <pre><code class="language-c++ code-highlight"><span class="code-line line-number" line="1">void merge(vector&#x3C;int>&#x26; nums, int left, int mid, int right){
+</span><span class="code-line line-number" line="2">    //开辟一段空间保存有序的两段空间，[left, mid],[mid + 1, right]，后续覆盖nums原数组的内容
+</span><span class="code-line line-number" line="3">    vector&#x3C;int> tmp = vector&#x3C;int>(nums.begin() + left, nums.begin() + right + 1);
+</span><span class="code-line line-number" line="4">    int leftstart = left - left, leftend = mid - left;
+</span><span class="code-line line-number" line="5">    int rightstart = mid - left + 1, rightend = right - left;
+</span><span class="code-line line-number" line="6">    //应该看已经排序好数的个数，而不是具体下标
+</span><span class="code-line line-number" line="7">    int i = leftstart, j = rightstart;
+</span><span class="code-line line-number" line="8">    //用两个指针，分别遍历左右子树的内容
+</span><span class="code-line line-number" line="9">    for (int k = left; k &#x3C;= right; k++){
+</span><span class="code-line line-number" line="10">        //左子树遍历完，选择右子树
+</span><span class="code-line line-number" line="11">        if(i > leftend){
+</span><span class="code-line line-number" line="12">            nums[k] = tmp[j++];
+</span><span class="code-line line-number" line="13">        }
+</span><span class="code-line line-number" line="14">        //右子树遍历完，或者tmp[i] &#x3C; tmp[j]，选择左子树
+</span><span class="code-line line-number" line="15">        else if(j > rightend || tmp[i] &#x3C;= tmp[j]){
+</span><span class="code-line line-number" line="16">            nums[k] = tmp[i++];
+</span><span class="code-line line-number" line="17">        }
+</span><span class="code-line line-number" line="18">        //tmp[i] > tmp[j]，选择右子树
+</span><span class="code-line line-number" line="19">        else{
+</span><span class="code-line line-number" line="20">            nums[k] = tmp[j++];
+</span><span class="code-line line-number" line="21">        }
+</span><span class="code-line line-number" line="22">    }
+</span><span class="code-line line-number" line="23">}
+</span><span class="code-line line-number" line="24">void mergesort(vector&#x3C;int>&#x26; nums, int left, int right){
+</span><span class="code-line line-number" line="25">    if(left >= right){
+</span><span class="code-line line-number" line="26">        return;
+</span><span class="code-line line-number" line="27">    }
+</span><span class="code-line line-number" line="28">
+</span><span class="code-line line-number" line="29">    int mid = (left + right) / 2;
+</span><span class="code-line line-number" line="30">
+</span><span class="code-line line-number" line="31">    mergesort(nums, left, mid);
+</span><span class="code-line line-number" line="32">    mergesort(nums, mid + 1, right);
+</span><span class="code-line line-number" line="33">
+</span><span class="code-line line-number" line="34">    merge(nums, left, mid, right);
+</span><span class="code-line line-number" line="35">}
+</span></code><input type="hidden" value="void merge(vector<int>&#x26; nums, int left, int mid, int right){
+    //开辟一段空间保存有序的两段空间，[left, mid],[mid + 1, right]，后续覆盖nums原数组的内容
+    vector<int> tmp = vector<int>(nums.begin() + left, nums.begin() + right + 1);
+    int leftstart = left - left, leftend = mid - left;
+    int rightstart = mid - left + 1, rightend = right - left;
+    //应该看已经排序好数的个数，而不是具体下标
+    int i = leftstart, j = rightstart;
+    //用两个指针，分别遍历左右子树的内容
+    for (int k = left; k <= right; k++){
+        //左子树遍历完，选择右子树
+        if(i > leftend){
+            nums[k] = tmp[j++];
+        }
+        //右子树遍历完，或者tmp[i] < tmp[j]，选择左子树
+        else if(j > rightend || tmp[i] <= tmp[j]){
+            nums[k] = tmp[i++];
+        }
+        //tmp[i] > tmp[j]，选择右子树
+        else{
+            nums[k] = tmp[j++];
+        }
+    }
+}
+void mergesort(vector<int>&#x26; nums, int left, int right){
+    if(left >= right){
+        return;
+    }
+
+    int mid = (left + right) / 2;
+
+    mergesort(nums, left, mid);
+    mergesort(nums, mid + 1, right);
+
+    merge(nums, left, mid, right);
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>时间复杂度：O(nlogn)，遍历划分高度为logn的递归树，每层合并的总操作数量为 n，总体时间为O(nlogn)。</p>
+        <p>空间复杂度：需借助辅助数组实现合并，使用O(n) 大小的额外空间；递归深度为 log⁡n ，使用 O(logn)大小的栈帧空间。</p>
+        <p>稳定排序：在合并时可保证相等元素的相对位置不变。</p>
+        <p>归并排序有一个很特别的优势，用于排序链表时有很好的性能表现，<strong>空间复杂度可被优化至O(1)</strong> ，这是因为：</p>
+        <ul>
+          <li>由于链表可仅通过改变指针来实现结点增删，因此“将两个短有序链表合并为一个长有序链表”无需使用额外空间，即回溯合并阶段不用像排序数组一样建立辅助数组 <code>tmp</code> ；</li>
+          <li>通过使用「迭代」代替「递归划分」，可省去递归使用的栈帧空间；</li>
+        </ul>
         <h3 id="例题-1"><a aria-hidden="true" tabindex="-1" href="#例题-1" class="anchor"><span class="icon icon-link"></span></a>例题</h3>
         <p><a href="https://leetcode.cn/problems/next-permutation">31. 下一个排列</a></p>
+        <p><a href="https://leetcode-cn.com/problems/sort-list/solution/sort-list-gui-bing-pai-xu-lian-biao-by-jyd/">148. 排序链表</a></p>
+        <h2 id="希尔排序"><a aria-hidden="true" tabindex="-1" href="#希尔排序" class="anchor"><span class="icon icon-link"></span></a>希尔排序</h2>
+        <p>略略略。</p>
         <h2 id="拓扑排序"><a aria-hidden="true" tabindex="-1" href="#拓扑排序" class="anchor"><span class="icon icon-link"></span></a>拓扑排序</h2>
         <p><a href="https://leetcode.cn/problems/course-schedule">207. 课程表</a></p>
         <blockquote>
@@ -432,11 +508,9 @@ int partition(vector<int>&#x26; nums, int left, int right) {
             <li><a href="#冒泡排序" class="tocs-link">冒泡排序</a></li>
             <li><a href="#选择排序" class="tocs-link">选择排序</a></li>
             <li><a href="#插入排序" class="tocs-link">插入排序</a></li>
-            <li><a href="#希尔排序" class="tocs-link">希尔排序</a></li>
             <li><a href="#快速排序" class="tocs-link">快速排序</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#基础版" class="tocs-link">基础版</a></li>
-                <li><a href="#时间复杂度" class="tocs-link">时间复杂度</a></li>
                 <li><a href="#基准数优化" class="tocs-link">基准数优化</a></li>
                 <li><a href="#为什么要从右开始查找" class="tocs-link">为什么要从右开始查找</a></li>
                 <li><a href="#例题" class="tocs-link">例题</a></li>
@@ -447,6 +521,7 @@ int partition(vector<int>&#x26; nums, int left, int right) {
                 <li><a href="#例题-1" class="tocs-link">例题</a></li>
               </ol>
             </li>
+            <li><a href="#希尔排序" class="tocs-link">希尔排序</a></li>
             <li><a href="#拓扑排序" class="tocs-link">拓扑排序</a></li>
             <li><a href="#堆排序" class="tocs-link">堆排序</a></li>
             <li><a href="#其他" class="tocs-link">其他</a></li>
