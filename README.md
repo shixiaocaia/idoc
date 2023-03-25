@@ -9,8 +9,8 @@
 ## 🍳最近在做点什么呢
 
 <p>
-    <label for="file">剑指offer：</label>
-    <progress max="100" value="30"></progress>
+    <label for="file">每日一题：</label>
+    <progress max="100" value="50"></progress>
 </p>
 <p>
     <label for="file">MySQL：</label>
@@ -18,10 +18,18 @@
 </p>
 <p>
     <label for="file">Webserver：</label>
-    <progress max="100" value="40"></progress>
+    <progress max="100" value="60"></progress>
 </p>
 <p>
     <label for="file">Effective C++：</label>
-    <progress max="55" value="14"></progress>
+    <progress max="55" value="31"></progress>
+</p>
+<p>
+    <label for="file">计算机网络：</label>
+    <progress max="100" value="10"></progress>
+</p>
+<p>
+    <label for="file">操作系统：</label>
+    <progress max="100" value="10"></progress>
 </p>
 
