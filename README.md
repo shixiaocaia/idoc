@@ -1,5 +1,7 @@
 # XIAOCAI
 
+![](https://bu.dusays.com/2023/01/06/63b81b782267b.jpg)
+
 ## 📪 简介
 
 👋，这里是小蔡的个人笔记站点，用于记录学习中内容，尽量减少直接的复制，多咀嚼。
@@ -33,4 +35,5 @@
     <progress max="100" value="10"></progress>
 </p>
 
-![](https://bu.dusays.com/2023/01/06/63b81b782267b.jpg)
+
+
