@@ -140,6 +140,8 @@
 >
 > 第二次遍历，第一个true的，是第一个单个字符的答案。
 
+[剑指 Offer 39. 数组中出现次数超过一半的](https://leetcode.cn/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fi7d972)
+
 ## 对比
 
 - 数组作为哈希表，比如[LC383.赎金信](https://leetcode.cn/problems/ransom-note/)，我们知道明确的数组大小，可以将字母值转化为键值，对比用map，节省了开销。

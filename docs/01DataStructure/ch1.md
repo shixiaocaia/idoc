@@ -311,6 +311,8 @@ num[i + 1] = num[i] + diff[i + 1]; //diff[i] + k,导致num[i] + k,后面都加�
 > 这边有个状态恢复，是因为加入当前的前缀和信息，只能针对它后续的子节点，比如左子树上的前缀和，不能影响另一侧的右子树上的前缀和（题目要求路径是向下的）。
 >
 
+[剑指 Offer 66. 构建乘积数组](https://leetcode.cn/problems/gou-jian-cheng-ji-shu-zu-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fi7d972)
+
 ## 模拟
 
 > [LC59.螺旋矩阵2](https://leetcode.cn/problems/spiral-matrix-ii/)
