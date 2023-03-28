@@ -356,11 +356,11 @@ int main() {
         <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1">vector<span class="token operator">&#x3C;</span>vector<span class="token operator">&#x3C;</span><span class="token keyword">int</span><span class="token operator">>></span> <span class="token function">dp</span><span class="token punctuation">(</span>m<span class="token punctuation">,</span> <span class="token generic-function"><span class="token function">vector</span><span class="token generic class-name"><span class="token operator">&#x3C;</span><span class="token keyword">int</span><span class="token operator">></span></span></span><span class="token punctuation">(</span>n<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 初始化一个二维数组</span>
 </span></code><input type="hidden" value="vector<vector<int>> dp(m, vector<int>(n, 0)); // 初始化一个二维数组
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p><strong><a href="https://leetcode.cn/problems/integer-break/">🆙343. 整数拆分</a></strong></p>
+        <p><strong><a href="https://leetcode.cn/problems/integer-break/">343. 整数拆分</a> / <a href="https://leetcode.cn/problems/jian-sheng-zi-lcof/?envType=study-plan&#x26;id=lcof&#x26;plan=lcof&#x26;plan_progress=fi7d972">剑指 Offer 14- I. 剪绳子</a></strong></p>
         <blockquote>
           <ol>
             <li>
-              <p>dp[i]表示 分拆数字i，可以得到的最大乘积为 dp[i]。</p>
+              <p>dp[i]表示分拆数字i，可以得到的最大乘积为 dp[i]。</p>
             </li>
             <li>
               <p>dp[i] 一种为 j * (i - j)，一种为j * dp[i - j] 是对 i - j 的再拆分至少两个数的最大值 <code>dp[i] = max(dp[i], max((i - j) * j, dp[i - j] * j));</code></p>
@@ -830,6 +830,12 @@ dp[i][j] = dp[i-1][j-1] + 1;//替换一个字符，此时不用增加元素，�
           <p>由于新状态只与上一个状态有关，因此这里可以使用滚动数据，节省了空间，这样时间复杂度是O(n)，空间复杂度为O(1)。</p>
         </blockquote>
         <p><strong><a href="https://leetcode.cn/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/?envType=study-plan&#x26;id=lcof&#x26;plan=lcof&#x26;plan_progress=fi7d972">剑指 Offer 46. 把数字翻译成字符串</a></strong></p>
+        <p><a href="https://leetcode.cn/problems/chou-shu-lcof/?envType=study-plan&#x26;id=lcof&#x26;plan=lcof&#x26;plan_progress=fi7d972">剑指 Offer 49. 丑数</a></p>
+        <blockquote>
+          <p>转移状态的判断，后一个丑数，应该由前面的数×2，×3，×5得出，要求出前n个数，所以每次生成的应该是当前能生成的丑数中最小的一个。</p>
+          <p>用a,b,c表示每个数是否乘过2，3，5，乘过就移动，不断判断。</p>
+          <p>怎么保证生成最小的数，是这三个下标数生成的。丑数 = 较小的丑数 * (2, 3, 5)</p>
+        </blockquote>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">

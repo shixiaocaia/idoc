@@ -215,6 +215,8 @@ while j < len(nums):
 >
 > 双指针 + 哈希表。
 
+[剑指 Offer 57 - II. 和为s的连续正数序列](https://leetcode.cn/problems/he-wei-sde-lian-xu-zheng-shu-xu-lie-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fi7d972)
+
 ## 前缀和
 
 前缀和主要适用的场景是原始数组不会被修改的情况下，频繁查询某个区间的累加和。

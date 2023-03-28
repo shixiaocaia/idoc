@@ -225,9 +225,9 @@ int main() {
 vector<vector<int>> dp(m, vector<int>(n, 0)); // 初始化一个二维数组
 ```
 
-**[🆙343. 整数拆分](https://leetcode.cn/problems/integer-break/)**
+**[343. 整数拆分](https://leetcode.cn/problems/integer-break/) / [剑指 Offer 14- I. 剪绳子](https://leetcode.cn/problems/jian-sheng-zi-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fi7d972)**
 
-> 1. dp[i]表示 分拆数字i，可以得到的最大乘积为 dp[i]。
+> 1. dp[i]表示分拆数字i，可以得到的最大乘积为 dp[i]。
 >
 > 2. dp[i] 一种为 j * (i - j)，一种为j * dp[i - j] 是对 i - j 的再拆分至少两个数的最大值 `dp[i] = max(dp[i], max((i - j) * j, dp[i - j] * j));`
 >
@@ -672,3 +672,11 @@ int main() {
 > 由于新状态只与上一个状态有关，因此这里可以使用滚动数据，节省了空间，这样时间复杂度是O(n)，空间复杂度为O(1)。
 
 **[剑指 Offer 46. 把数字翻译成字符串](https://leetcode.cn/problems/ba-shu-zi-fan-yi-cheng-zi-fu-chuan-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fi7d972)**
+
+[剑指 Offer 49. 丑数](https://leetcode.cn/problems/chou-shu-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fi7d972)
+
+> 转移状态的判断，后一个丑数，应该由前面的数×2，×3，×5得出，要求出前n个数，所以每次生成的应该是当前能生成的丑数中最小的一个。
+>
+> 用a,b,c表示每个数是否乘过2，3，5，乘过就移动，不断判断。
+>
+> 怎么保证生成最小的数，是这三个下标数生成的。丑数 = 较小的丑数 * (2, 3, 5)
