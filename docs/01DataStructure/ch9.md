@@ -680,3 +680,11 @@ int main() {
 > 用a,b,c表示每个数是否乘过2，3，5，乘过就移动，不断判断。
 >
 > 怎么保证生成最小的数，是这三个下标数生成的。丑数 = 较小的丑数 * (2, 3, 5)
+
+[剑指 Offer 60. n个骰子的点数](https://leetcode.cn/problems/nge-tou-zi-de-dian-shu-lcof/?envType=study-plan&id=lcof&plan=lcof&plan_progress=fi7d972)
+
+> `dp[i][j]`表示用i个骰子得出和为j的情况数。
+>
+> `times[i][j] = times[i - 1][j - 1] + times[i - 1][j - 2] + ... + times[i - 1][j - 6]`
+>
+> 计算出n枚骰子，[n, n * 6]情况的出现事件数，再除以总事件数，得出概率。
