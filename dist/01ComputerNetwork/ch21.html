@@ -84,29 +84,40 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <h2 id="什么是tcp什么是tcp连接"><a aria-hidden="true" tabindex="-1" href="#什么是tcp什么是tcp连接" class="anchor"><span class="icon icon-link"></span></a>什么是TCP，什么是TCP连接</h2>
         <p>TCP 是<strong>面向连接的、可靠的、基于字节流</strong>的传输层通信协议。</p>
         <ul>
-          <li>面向连接：</li>
-          <li>可靠的：</li>
-          <li>字节流：</li>
+          <li>面向连接：一对一的，不能多对多或者一对多。</li>
+          <li>可靠的：无论网络链路出现什么情况，一定保证报文的送达。</li>
+          <li>字节流：通过TCP传输，消息可能会被操作系统分组乘多个的TCP报文，不需要在IP分片。</li>
         </ul>
         <p>TCP连接，<strong>用于保证可靠性和流量控制维护的某些状态信息，这些信息的组合，包括 Socket、序列号和窗口大小称为连接。</strong></p>
+        <ul>
+          <li>
+            <p>socket：由IP地址和端口号组成。</p>
+          </li>
+          <li>
+            <p>序列号：用来解决乱序问题。</p>
+          </li>
+          <li>
+            <h1 id="窗口大小用来做流量控制"><a aria-hidden="true" tabindex="-1" href="#窗口大小用来做流量控制" class="anchor"><span class="icon icon-link"></span></a>窗口大小：用来做流量控制。</h1>
+          </li>
+        </ul>
         <h2 id="tcp头格式有哪些"><a aria-hidden="true" tabindex="-1" href="#tcp头格式有哪些" class="anchor"><span class="icon icon-link"></span></a>TCP头格式有哪些</h2>
         <p>
           <img src="http://pic.shixiaocaia.fun/202303201628435.png" alt="TCP 头格式">
         </p>
         <ul>
           <li>
-            <p><strong>序列号</strong>：</p>
+            <p><strong>序列号</strong>：在建立连接时随机生成数作为初始值，通过SYN包发送给对端主机，每发送一次数据，就「累加」一次该「数据字节数」的大小。用来解决网络包乱序问题。</p>
           </li>
           <li>
-            <p><strong>确认应答号</strong>：</p>
+            <p><strong>确认应答号</strong>：对之前收到报文的一个确认，也表示期待下一次收到的序列号，用来解决丢包问题。</p>
           </li>
           <li>
             <p><strong>控制位</strong>：</p>
             <ul>
-              <li>ACK：</li>
-              <li>RST：</li>
-              <li>SYN：</li>
-              <li>FIN：</li>
+              <li>ACK：为1表示，确认应答有效。</li>
+              <li>RST：为1表示，表示TCP连接中出现异常必须强制断开连接。</li>
+              <li>SYN：为1表示，希望能够建立连接，并在其「序列号」的字段进行序列号初始值的设定。</li>
+              <li>FIN：为1表示，表示今后不会再有数据发送，希望断开连接。</li>
             </ul>
           </li>
         </ul>
@@ -118,6 +129,10 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p>TCP 四元组可以唯一的确定一个连接，四元组包括源地址和目的地址放在IP报文中，源端口和目的端口存放在TCP头部当中。</p>
         <p>源地址和目的地址区分设备地址，而进程号则具体区分设备中的某个进程。</p>
         <p><strong>有一个IP的服务端监听了一个端口，它的TCP的最大连接数是多少</strong></p>
+        <blockquote>
+          <p>服务端一般固定在一个端口进行监测，但是受文件描述符，内存限制。</p>
+          <p>实际主要由客户端的IP数和端口数决定最大连接数。</p>
+        </blockquote>
         <h2 id="tcp连接建立"><a aria-hidden="true" tabindex="-1" href="#tcp连接建立" class="anchor"><span class="icon icon-link"></span></a>TCP连接建立</h2>
         <h3 id="三次握手的过程"><a aria-hidden="true" tabindex="-1" href="#三次握手的过程" class="anchor"><span class="icon icon-link"></span></a>三次握手的过程</h3>
         <p>
@@ -131,7 +146,6 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li>服务端收到确认报文后，建立连接。</li>
         </ol>
         <blockquote>
-          <p>NOTE:</p>
           <ol>
             <li>控制位的变化</li>
             <li>序列号、确认应答号的变化</li>
@@ -141,7 +155,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <h3 id="为什么需要三次不是两次四次"><a aria-hidden="true" tabindex="-1" href="#为什么需要三次不是两次四次" class="anchor"><span class="icon icon-link"></span></a>为什么需要三次，不是两次，四次</h3>
         <p>因为三次握手才能保证双方具有接收和发送的能力。</p>
         <p><strong>避免历史连接</strong></p>
-        <p>在发生网络拥塞时，或者客户端宕机时，延迟了一个<code>SYN</code>报文，当客户端重启，后客户端先收到了旧的<code>SYN</code>报文，如果是两次握手，那么服务端直接进入连接建立状态，开始发送数据，而客户端发现收到的<code>ACK</code>报文不是自己想要的（旧的），那么就会发送<code>RST</code>报文中止连接，造成了不必要的资源浪费，服务端在收到<code>RST</code>报文时，才会终止连接。</p>
+        <p>在发生网络拥塞时，或者客户端宕机时，延迟了一个<code>SYN</code>报文，当客户端重启，后服务端先收到了旧的<code>SYN</code>报文，如果是两次握手，那么服务端直接进入连接建立状态，开始发送数据，而客户端发现收到的<code>ACK</code>报文不是自己想要的（旧的），那么就会发送<code>RST</code>报文中止连接，造成了不必要的资源浪费，服务端在收到<code>RST</code>报文时，才会终止连接。</p>
         <p>通过三次回收，保证客户端确认是需要建立的连接，再进入连接建立状态更有效。</p>
         <p><strong>同步双方初始序列号</strong></p>
         <p>在第一次握手发送<code>SYN</code>报文时，客户端初始化了自己的序列号，服务端收到后对序列号进行了确认。</p>
@@ -248,7 +262,6 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li>保证「被动关闭连接」的一方，能被正确的关闭；
             <ul>
               <li>至少保证一次FIN报文的重发，让客户端安全的关闭。</li>
-              <li>客户端在收到服务端重传的 FIN 报文时，TIME_WAIT 状态的等待时间，会重置回 2MSL。</li>
               <li>如果没有这个状态，客户端直接进入CLOSE状态，服务端重发FIN报文，客户端收到后直接RST报文，这是一个不优雅的终止方式，服务端期盼收到的是之前FIN报文的ACK报文，而不是直接的RST报文，认为这是一个报文。</li>
             </ul>
           </li>
@@ -294,7 +307,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <ul>
           <li>打开 net.ipv4.tcp_tw_reuse 和 net.ipv4.tcp_timestamps 选项：复用处于 TIME_WAIT 的 socket 为新的连接所用，只能用于客户端。</li>
           <li>net.ipv4.tcp_max_tw_buckets：当系统中处于 TIME_WAIT 的连接一旦超过这个值时，系统就会将后面的 TIME_WAIT 连接状态重置，这个方法比较暴力。</li>
-          <li>程序中使用 SO_LINGER ，应用强制使用 RST 关闭：</li>
+          <li>程序中使用 SO_LINGER ，应用强制使用 RST 关闭。</li>
         </ul>
         <blockquote>
           <p>《UNIX网络编程》一书中却说道：TIME_WAIT 是我们的朋友，它是有助于我们的，不要试图避免这个状态，而是应该弄清楚它。</p>
