@@ -67,7 +67,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <a href="index.html" class="">↩️README</a>
             <a href="ch00.html" class="">问题收集</a>
             <label>HTTP篇</label>
-            <a href="ch11.html" class="">占个坑位</a>
+            <a href="ch11.html" class="">常见问题</a>
             <label>TCP篇</label>
             <a href="ch21.html" class="">三次握手/四次挥手</a>
             <a href="ch22.html" class="">socket</a>
@@ -97,7 +97,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <p>序列号：用来解决乱序问题。</p>
           </li>
           <li>
-            <h1 id="窗口大小用来做流量控制"><a aria-hidden="true" tabindex="-1" href="#窗口大小用来做流量控制" class="anchor"><span class="icon icon-link"></span></a>窗口大小：用来做流量控制。</h1>
+            <p>窗口大小：用来做流量控制。</p>
           </li>
         </ul>
         <h2 id="tcp头格式有哪些"><a aria-hidden="true" tabindex="-1" href="#tcp头格式有哪些" class="anchor"><span class="icon icon-link"></span></a>TCP头格式有哪些</h2>
@@ -240,7 +240,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <blockquote>
           <p>对于 close 函数关闭的连接，由于无法再发送和接收数据，所以<code>FIN_WAIT2</code> 状态不可以持续太久，而 <code>tcp_fin_timeout</code> 控制了这个状态下连接的持续时长，默认值是 60 秒。如果在 60 秒后还没有收到 FIN 报文，客户端（主动关闭方）的连接就会直接关闭。</p>
         </blockquote>
-        <p>但是注意，如果主动关闭方使用 <code>shutdown函数</code>关闭连接，指定了只关闭发送方向，而接收方向并没有关闭，那么意味着主动关闭方还是可以接收数据的。此时，如果主动关闭方一直没收到第三次挥手，那么主动关闭方的连接将会一直处于 <code>FIN_WAIT2</code> 状态（<code>tcp_fin_timeout</code> 无法控制 shutdown 关闭的连接）。</p>
+        <p>但是注意，如果主动关闭方使用 <code>shutdown函数</code>关闭连接，指定了只关闭发送方向，而接收方向并没有关闭，那么意味着主动关闭方还是可以接收数据的。此时，如果主动关闭方一直没收到第三次挥手，那么主动关闭方的连接将会一直处于 <code>FIN_WAIT2</code> 状态（<code>tcp_fin_timeout</code> 无法控制 <code>shutdown</code> 关闭的连接）。</p>
         <p>FIN报文丢失，导致客户端没有收到并发送ACK报文，那么服务端会重发FIN报文，有重传时间和间隔的设置，最终也会关闭连接。</p>
         <h3 id="第四次挥手丢失"><a aria-hidden="true" tabindex="-1" href="#第四次挥手丢失" class="anchor"><span class="icon icon-link"></span></a>第四次挥手丢失</h3>
         <p>收到服务端的FIN报文后，客户端会进入TIME_WAIT状态，等2MSL定时，最终关闭连接。</p>

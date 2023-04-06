@@ -138,12 +138,8 @@ public:
         </blockquote>
         <p><a href="https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/">LC34.在排序数组中查找元素的第一个和最后一个位置</a></p>
         <blockquote>
-          <p>寻找左右边界，对于我们新手分开做，先找左边界，再找右边界。区别“数据不重复”的题，这里可能会遇到重复数据。</p>
-          <ol>
-            <li>找左边界，从右边向左边推，当我们找到一个target值时，应该继续向左边移动，看看有没有重复值出现，同时这里做一个剪枝判断，如果前一个值小于target或者当前数为第一个数时，跳出循环。</li>
-            <li>找右边界，从左边向右边推，当我们找到一个target时，应该继续向右边，找到边界点，同时做一个剪枝判断，如果后一个值大于target值或者当前为最后一个数时，跳出循环。</li>
-          </ol>
           <p>本题卡了我很久一个点：<strong>数组越界访问问题</strong>，剪枝判断应该先判断越界问题再判断大小，否则会出现数组的越界访问。</p>
+          <p>三刷，合并左右遍历问题</p>
         </blockquote>
         <p><a href="https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/">167. 两数之和 II - 输入有序数组</a></p>
         <blockquote>
@@ -153,7 +149,7 @@ public:
         <blockquote>
           <p>找到原数组的left值，对<code>[left, nums.size() - 1 + left]</code>进行二分，再通过取余对应旋转后数组的下标数值。</p>
         </blockquote>
-        <p><a href="https://leetcode.cn/problems/find-the-duplicate-number">287. 寻找重复数</a></p>
+        <p><strong><a href="https://leetcode.cn/problems/find-the-duplicate-number">287. 寻找重复数</a></strong></p>
         <blockquote>
           <p>抽屉原理，把十个苹果放在九个抽屉里，肯定有个抽屉放多了一个。</p>
           <p>这样我们遍历[1,n]，如果[0,mid]区间内小于mid的数大于mid，那么肯定在[0,mid]这个区间内容有重复的数。</p>
@@ -167,15 +163,12 @@ public:
           <p>左右指针：两个指针相向而行或者向背而行</p>
           <p>快慢指针：两个指针同向而行，一快一慢。</p>
           <p>双指针的经典应用，如果要删除倒数第n个节点，让fast移动n步，然后让fast和slow同时移动，直到fast指向链表末尾。删掉slow所指向的节点就可以了。</p>
+          <p>多个指针，指向不同的下标，满足条件时移动对应的一个指针，指针用于划分数组部分。</p>
         </blockquote>
         <h3 id="例题-1"><a aria-hidden="true" tabindex="-1" href="#例题-1" class="anchor"><span class="icon icon-link"></span></a>例题</h3>
         <p><a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/">LC26. 删除有序数组中的重复项</a></p>
         <p><a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-list/description/">LC83. 删除排序链表中的重复元素</a></p>
-        <p><a href="https://leetcode.cn/problems/remove-element/">LC27.移除元素</a></p>
         <p><a href="https://leetcode.cn/problems/move-zeroes/">LC283.移动零</a></p>
-        <blockquote>
-          <p>一个指向0，一个指向非0，可以用来交换</p>
-        </blockquote>
         <p><a href="https://leetcode.cn/problems/backspace-string-compare/">LC844.比较含退格的字符串</a></p>
         <blockquote>
           <p>
@@ -187,8 +180,6 @@ public:
         </blockquote>
         <p><a href="https://leetcode.cn/problems/squares-of-a-sorted-array/">LC977.有序数组的平方</a></p>
         <blockquote>
-          <p>用了暴力。</p>
-          <p>排序待更新。</p>
           <p>使用双向指针，由于原数组按照非递减排序，那么平方后的数，应该在两头，通过双向指针指向头和尾，进行比较大小移动。</p>
           <p>每次比较左边和右边哪个数更大，更新左右边界，用一个k记录ans数组的位置。</p>
         </blockquote>
@@ -279,23 +270,22 @@ while j < len(nums):
     不断更新结果（注意在while外更新！）
     j += 1
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p><strong>模板题</strong></p>
+        <h3 id="例题-2"><a aria-hidden="true" tabindex="-1" href="#例题-2" class="anchor"><span class="icon icon-link"></span></a>例题</h3>
         <blockquote>
           <p><a href="https://leetcode.cn/problems/minimum-size-subarray-sum/">LC209.最小子串长度</a></p>
           <blockquote>
             <p>本题可以用前缀和+二分做，通过s[j]-s[i] >= target,可以变化为 s[j] >= s[i]+target。在s数组中寻找第一个大于 s[i]+target位置，进行更新大小，使用了C++ lower_bound()函数</p>
+            <p>也是双指针的思想。</p>
           </blockquote>
-          <p><a href="https://leetcode.cn/problems/fruit-into-baskets/">LC904.水果篮子</a></p>
+          <p><strong><a href="https://leetcode.cn/problems/fruit-into-baskets/">LC904.水果篮子</a></strong></p>
           <blockquote>
             <p>大佬的滑动窗口思路，我不断地把水果放到篮子中，当水果种类大于2种时，进行更新篮子中水果种类，最后更新result。</p>
             <p>这里的更新篮子思路是：从左边界left开始更新，将这个序号下的水果数-1，当移动到删除完这个水果数为0时，此时水果种类-1，加上前面右边界更新的一个新的，刚好为2种，继续更新答案。</p>
             <p>🆙二刷没做出来，没想到用map来映射这是第几种水果，如果遇到0的说明是新的一种，如果水果种树大于2时，更新左边界，而答案是时时更新的。</p>
           </blockquote>
           <p><a href="https://leetcode.cn/problems/minimum-window-substring/">LC76.最小覆盖字串</a></p>
-          <blockquote>
-            <p>自己做的时候，忽略了字符串重复出现问题。以及在移动左边界上欠缺考虑，看题解使用的方法是在左边的字符数量已经在后面出现次数大于了所需数量，再去更新右边界。</p>
-          </blockquote>
-          <p>🆙难点：字串问题划分为最大和最小，边界更新时机很重要。</p>
+          <p>自己做的时候，忽略了字符串重复出现问题。以及在移动左边界上欠缺考虑，看题解使用的方法是在左边的字符数量已经在后面出现次数大于了所需数量，再去更新右边界。</p>
+          <p>难点：字串问题划分为最大和最小，<strong>边界更新时机很重要</strong>。</p>
           <ol>
             <li>维护两个哈希表，一个hs，一个ht。</li>
             <li>定义两个指针，左指针j，右指针i，维护一个窗口[i, j]。</li>
@@ -478,7 +468,11 @@ num[i + 1] = num[i] + diff[i + 1]; //diff[i] + k,导致num[i] + k,后面都加�
                 <li><a href="#例题-1" class="tocs-link">例题</a></li>
               </ol>
             </li>
-            <li><a href="#滑动窗口" class="tocs-link">滑动窗口</a></li>
+            <li><a href="#滑动窗口" class="tocs-link">滑动窗口</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#例题-2" class="tocs-link">例题</a></li>
+              </ol>
+            </li>
             <li><a href="#前缀和" class="tocs-link">前缀和</a></li>
             <li><a href="#差分" class="tocs-link">差分</a></li>
             <li><a href="#模拟" class="tocs-link">模拟</a></li>

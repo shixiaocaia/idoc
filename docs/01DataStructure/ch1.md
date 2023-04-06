@@ -41,13 +41,9 @@ public:
 
 [LC34.在排序数组中查找元素的第一个和最后一个位置](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/)
 
-> 寻找左右边界，对于我们新手分开做，先找左边界，再找右边界。区别“数据不重复”的题，这里可能会遇到重复数据。
->
-> 1. 找左边界，从右边向左边推，当我们找到一个target值时，应该继续向左边移动，看看有没有重复值出现，同时这里做一个剪枝判断，如果前一个值小于target或者当前数为第一个数时，跳出循环。
-> 2. 找右边界，从左边向右边推，当我们找到一个target时，应该继续向右边，找到边界点，同时做一个剪枝判断，如果后一个值大于target值或者当前为最后一个数时，跳出循环。
->
 > 本题卡了我很久一个点：**数组越界访问问题**，剪枝判断应该先判断越界问题再判断大小，否则会出现数组的越界访问。
 >
+> 三刷，合并左右遍历问题
 
  [167. 两数之和 II - 输入有序数组](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/)
 
@@ -57,7 +53,7 @@ public:
 
 >找到原数组的left值，对`[left, nums.size() - 1 + left]`进行二分，再通过取余对应旋转后数组的下标数值。
 
-[ 287. 寻找重复数](https://leetcode.cn/problems/find-the-duplicate-number)
+**[ 287. 寻找重复数](https://leetcode.cn/problems/find-the-duplicate-number)**
 
 > 抽屉原理，把十个苹果放在九个抽屉里，肯定有个抽屉放多了一个。
 >
@@ -78,6 +74,8 @@ public:
 > 快慢指针：两个指针同向而行，一快一慢。
 >
 > 双指针的经典应用，如果要删除倒数第n个节点，让fast移动n步，然后让fast和slow同时移动，直到fast指向链表末尾。删掉slow所指向的节点就可以了。
+>
+> 多个指针，指向不同的下标，满足条件时移动对应的一个指针，指针用于划分数组部分。
 
 ### 例题
 
@@ -85,11 +83,7 @@ public:
 
 [LC83. 删除排序链表中的重复元素](https://leetcode.cn/problems/remove-duplicates-from-sorted-list/description/)
 
-[LC27.移除元素](https://leetcode.cn/problems/remove-element/)
-
 [LC283.移动零](https://leetcode.cn/problems/move-zeroes/)
-
-> 一个指向0，一个指向非0，可以用来交换
 
 [LC844.比较含退格的字符串](https://leetcode.cn/problems/backspace-string-compare/)
 
@@ -102,10 +96,6 @@ public:
 
 [LC977.有序数组的平方](https://leetcode.cn/problems/squares-of-a-sorted-array/)
 
-> 用了暴力。
->
-> 排序待更新。
->
 > 使用双向指针，由于原数组按照非递减排序，那么平方后的数，应该在两头，通过双向指针指向头和尾，进行比较大小移动。
 >
 > 每次比较左边和右边哪个数更大，更新左右边界，用一个k记录ans数组的位置。
@@ -172,13 +162,15 @@ while j < len(nums):
     j += 1
 ```
 
-**模板题**
+### 例题
 
 > [LC209.最小子串长度](https://leetcode.cn/problems/minimum-size-subarray-sum/)
 >
 > > 本题可以用前缀和+二分做，通过s[j]-s[i] >= target,可以变化为 s[j] >= s[i]+target。在s数组中寻找第一个大于 s[i]+target位置，进行更新大小，使用了C++ lower_bound()函数
+> >
+> > 也是双指针的思想。
 >
-> [LC904.水果篮子](https://leetcode.cn/problems/fruit-into-baskets/)
+> **[LC904.水果篮子](https://leetcode.cn/problems/fruit-into-baskets/)**
 >
 > > 大佬的滑动窗口思路，我不断地把水果放到篮子中，当水果种类大于2种时，进行更新篮子中水果种类，最后更新result。
 > >
@@ -188,9 +180,9 @@ while j < len(nums):
 >
 > [LC76.最小覆盖字串](https://leetcode.cn/problems/minimum-window-substring/)
 >
-> > 自己做的时候，忽略了字符串重复出现问题。以及在移动左边界上欠缺考虑，看题解使用的方法是在左边的字符数量已经在后面出现次数大于了所需数量，再去更新右边界。
+> 自己做的时候，忽略了字符串重复出现问题。以及在移动左边界上欠缺考虑，看题解使用的方法是在左边的字符数量已经在后面出现次数大于了所需数量，再去更新右边界。
 >
-> 🆙难点：字串问题划分为最大和最小，边界更新时机很重要。
+> 难点：字串问题划分为最大和最小，**边界更新时机很重要**。
 >
 > 1. 维护两个哈希表，一个hs，一个ht。
 > 2. 定义两个指针，左指针j，右指针i，维护一个窗口[i,  j]。
