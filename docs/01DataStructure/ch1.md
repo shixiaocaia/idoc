@@ -164,22 +164,20 @@ while j < len(nums):
 
 ### 例题
 
-> [LC209.最小子串长度](https://leetcode.cn/problems/minimum-size-subarray-sum/)
+[LC209.最小子串长度](https://leetcode.cn/problems/minimum-size-subarray-sum/)
+
+> 本题可以用前缀和+二分做，通过s[j]-s[i] >= target,可以变化为 s[j] >= s[i]+target。在s数组中寻找第一个大于 s[i]+target位置，进行更新大小，使用了C++ lower_bound()函数
+
+**[LC904.水果篮子](https://leetcode.cn/problems/fruit-into-baskets/)**
+
+> 大佬的滑动窗口思路，我不断地把水果放到篮子中，当水果种类大于2种时，进行更新篮子中水果种类，最后更新result。
 >
-> > 本题可以用前缀和+二分做，通过s[j]-s[i] >= target,可以变化为 s[j] >= s[i]+target。在s数组中寻找第一个大于 s[i]+target位置，进行更新大小，使用了C++ lower_bound()函数
-> >
-> > 也是双指针的思想。
+> 这里的更新篮子思路是：从左边界left开始更新，将这个序号下的水果数-1，当移动到删除完这个水果数为0时，此时水果种类-1，加上前面右边界更新的一个新的，刚好为2种，继续更新答案。
 >
-> **[LC904.水果篮子](https://leetcode.cn/problems/fruit-into-baskets/)**
->
-> > 大佬的滑动窗口思路，我不断地把水果放到篮子中，当水果种类大于2种时，进行更新篮子中水果种类，最后更新result。
-> >
-> > 这里的更新篮子思路是：从左边界left开始更新，将这个序号下的水果数-1，当移动到删除完这个水果数为0时，此时水果种类-1，加上前面右边界更新的一个新的，刚好为2种，继续更新答案。
-> >
-> > 🆙二刷没做出来，没想到用map来映射这是第几种水果，如果遇到0的说明是新的一种，如果水果种树大于2时，更新左边界，而答案是时时更新的。
->
-> [LC76.最小覆盖字串](https://leetcode.cn/problems/minimum-window-substring/)
->
+> 🆙二刷没做出来，没想到用map来映射这是第几种水果，如果遇到0的说明是新的一种，如果水果种树大于2时，更新左边界，而答案是时时更新的。
+
+[LC76.最小覆盖字串](https://leetcode.cn/problems/minimum-window-substring/)
+
 > 自己做的时候，忽略了字符串重复出现问题。以及在移动左边界上欠缺考虑，看题解使用的方法是在左边的字符数量已经在后面出现次数大于了所需数量，再去更新右边界。
 >
 > 难点：字串问题划分为最大和最小，**边界更新时机很重要**。
@@ -191,17 +189,16 @@ while j < len(nums):
 > 5. 当hs[s[j]] > ht[s[j]时，说明hs哈希表中s[j]的数量多于ht哈希表中s[j]的数量，此时我们就需要向右收缩滑动窗口，j++并使hs[s[j]]--，即hs[s[j ++ ]] --。每次更新保证这个字符数量是复合要求的，所以不更新cnt的大小。
 > 6. 当`cnt == t.size`时，说明此时滑动窗口包含符串 `t` 的全部字符。我们重复上述过程找到最小窗口即为答案。
 > 7. 更新答案时候保证这是复合字符串t长度的。
->
-> 三刷：[题解](https://leetcode.cn/problems/minimum-window-substring/solutions/872360/leetcode-76-zui-xiao-fu-gai-zi-chuan-cja-lmqz/)
 
-[LC438.找到字符串中所有字母异位词](https://leetcode.cn/problems/find-all-anagrams-in-a-string)
+**[LC438.找到字符串中所有字母异位词](https://leetcode.cn/problems/find-all-anagrams-in-a-string)**
 
 > 注意如果p长度大于s，那么一定没有结果，直接返回。
 >
 > 然后记录p数组的字母构成数量。维护一个滑动窗口。当前的字母数量小于0维护左边界。最好当前窗口长度等于p长度时，记录左边界。
 >
+> **左边界一定是满足p子串的开始，不会有浪费。**
 
-**[LC3.无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)**
+[LC3.无重复字符的最长子串](https://leetcode.cn/problems/longest-substring-without-repeating-characters/)
 
 > 滑动窗口，当出现重现字符时，更新左边界，如果没有重复出现就更新答案。
 >
@@ -238,49 +235,13 @@ int subarraySum(int[] nums, int k) {
 
 直接的前缀和TL，O(n^2)。
 
-![无标题-2023-02-13-1914](http://pic.shixiaocaia.fun/202302131920381.png)
+![ ](http://pic.shixiaocaia.fun/202302131920381.png)
 
 
 
 ## 差分
 
 差分数组的主要适用场景是频繁对原始数组的某个区间的元素进行增减。
-
-```cpp
-class Difference {
-    // 差分数组
-    private int[] diff;
-
-    public Difference(int[] nums) {
-        assert nums.length > 0;
-        diff = new int[nums.length];
-        // 构造差分数组
-        diff[0] = nums[0];
-        for (int i = 1; i < nums.length; i++) {
-            diff[i] = nums[i] - nums[i - 1];
-        }
-    }
-
-    /* 给闭区间 [i,j] 增加 val（可以是负数）*/
-    public void increment(int i, int j, int val) {
-        diff[i] += val;
-        if (j + 1 < diff.length) {
-            diff[j + 1] -= val;
-        }
-    }
-
-    public int[] result() {
-        int[] res = new int[diff.length];
-        // 根据差分数组构造结果数组
-        res[0] = diff[0];
-        for (int i = 1; i < diff.length; i++) {
-            res[i] = res[i - 1] + diff[i];
-        }
-        return res;
-    }
-}
-
-```
 
 ```cpp
 diff[i] = num[i] - num[i - 1];
@@ -314,3 +275,13 @@ num[i + 1] = num[i] + diff[i + 1]; //diff[i] + k,导致num[i] + k,后面都加�
 > [LC54.螺旋矩阵1](https://leetcode.cn/problems/spiral-matrix/)
 >
 > 上述两题的边界条件判断
+
+[1041.困于环中的机器人](https://leetcode.cn/problems/robot-bounded-in-circle/description/)
+
+> 通过计算四次操作距离，比较南北距离以及东西距离是否相等来判断能否回到原点。
+>
+> 如果一次操作后，指向北方，说明会一直往一个方向递增。
+>
+> 如果指向南方，再经过一次必然会反向回到原文。
+>
+> 如果指向东西方，最多需要四次回到原处。
