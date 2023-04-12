@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Socket编程 iDoc</title>
-    <meta name="description" content="在早期 Linux 内核 backlog 是 SYN 队列大小，也就是未完成的队列大小。">
+    <title>TCP 重传、滑动窗口、流量控制、拥塞控制 iDoc</title>
+    <meta name="description" content="常见的重传机制有：超时重传、快速重传、SACK、D-SACK。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
@@ -60,7 +60,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </div>
       </article>
     </header>
-    <div class="warpper-content warpper sidebar notocs">
+    <div class="warpper-content warpper sidebar">
       <div class="sidebar-border">
         <aside class="sidebar" role="navigation">
           <div>
@@ -71,6 +71,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <label>TCP篇</label>
             <a href="ch21.html" class="">三次握手/四次挥手</a>
             <a href="ch22.html" class="">socket</a>
+            <a href="ch23.html" class="">可靠的TCP</a>
             <label>IP篇</label>
             <a href="ch31.html" class="">IP知识全家桶</a>
             <a href="ch32.html" class="">ping的工作原理</a>
@@ -79,7 +80,49 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           </div>
         </aside>
       </div>
-      <markdown-style></markdown-style>
+      <markdown-style>
+        <h1 id="tcp-重传滑动窗口流量控制拥塞控制"><a aria-hidden="true" tabindex="-1" href="#tcp-重传滑动窗口流量控制拥塞控制" class="anchor"><span class="icon icon-link"></span></a>TCP 重传、滑动窗口、流量控制、拥塞控制</h1>
+        <h1 id="重传机制"><a aria-hidden="true" tabindex="-1" href="#重传机制" class="anchor"><span class="icon icon-link"></span></a>重传机制</h1>
+        <p>常见的重传机制有：超时重传、快速重传、SACK、D-SACK。</p>
+        <h2 id="超时重传"><a aria-hidden="true" tabindex="-1" href="#超时重传" class="anchor"><span class="icon icon-link"></span></a>超时重传</h2>
+        <p>在发送数据时，设定一个定时器，当超过指定的时间后，没有收到对方的 <code>ACK</code> 确认应答报文，就会重发该数据。</p>
+        <p>TCP 会在以下两种情况发生超时重传：</p>
+        <ul>
+          <li>数据包丢失</li>
+          <li>确认应答丢失</li>
+        </ul>
+        <hr>
+        <p><code>RTT</code>（Round-Trip Time 往返时延）：数据发送时刻导接受到确认的时刻点的差值。比如主机A发送SYN报文开始，到收到ACK报文为止。</p>
+        <p>超时重传时间是以 <code>RTO</code> （Retransmission Timeout 超时重传时间）表示。</p>
+        <ul>
+          <li><code>RTO</code>设置时间过长，会造成网络的间隙时间增大，降低了网络传输效率</li>
+          <li><code>RTO</code>设置时间过短，会造成不必要的重传，还没有接受到ACK报文，就直接进行了重发。</li>
+        </ul>
+        <p>综上所述，<code>RTO</code>时间应该<strong>略大于</strong>一次报文的往返时间<code>RTT</code>。</p>
+        <p>实际当中由于网络时常变化，因此<code>RTT</code>是一个变化的值，所以<code>RTO</code>也是一个变化的值。</p>
+        <hr>
+        <p>每当遇到一次超时重传时，都会将下一次超时时间间隔设为先前值的两倍。两次超时，就说明网络环境差，不宜频繁反复发送。</p>
+        <p><strong>超时周期可能会过长，引出「快速重传」机制来解决超时重发的时间等待。</strong></p>
+        <h2 id="快速重传"><a aria-hidden="true" tabindex="-1" href="#快速重传" class="anchor"><span class="icon icon-link"></span></a>快速重传</h2>
+        <p>当发送多个报文时，接收方发送ACK回应已经正确接受的报文，当发送seq5时，ACK回应多个ACK2，就表明中间有seq2没有正确接受，会重发seq2报文。</p>
+        <blockquote>
+          <p>ACK报文对已经接受的报文确认，但不能确定后续需要重发seq2，还是seq2以后的所有报文，因为seq2以后的报文有部分是正确的接受的。</p>
+        </blockquote>
+        <p>由于快速重传不能确认重传哪些TCP报文，有了<code>SACK</code>方法。</p>
+        <h2 id="sack方法"><a aria-hidden="true" tabindex="-1" href="#sack方法" class="anchor"><span class="icon icon-link"></span></a>SACK方法</h2>
+        <h1 id="滑动窗口"><a aria-hidden="true" tabindex="-1" href="#滑动窗口" class="anchor"><span class="icon icon-link"></span></a>滑动窗口</h1>
+        <h1 id="流量控制"><a aria-hidden="true" tabindex="-1" href="#流量控制" class="anchor"><span class="icon icon-link"></span></a>流量控制</h1>
+        <h1 id="拥塞控制"><a aria-hidden="true" tabindex="-1" href="#拥塞控制" class="anchor"><span class="icon icon-link"></span></a>拥塞控制</h1>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#超时重传" class="tocs-link">超时重传</a></li>
+            <li><a href="#快速重传" class="tocs-link">快速重传</a></li>
+            <li><a href="#sack方法" class="tocs-link">SACK方法</a></li>
+          </ol>
+        </aside>
+      </nav>
     </div>
     <script src="../js/demo-preview.js?v=1.21.13"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
