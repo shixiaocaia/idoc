@@ -1,6 +1,11 @@
 环境配置
 ===
 
+## iDoc环境
+
+- [Node.js](http://nodejs.org/) (版本需不低于 14，建议使用 Node.js `14+` 及以上版本)
+- 使用 npm 安装 idoc：`npm install -g idoc`
+
 ## VM_ubuntu 18.04
 
 ### 磁盘空间扩展问题

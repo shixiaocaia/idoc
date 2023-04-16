@@ -1,15 +1,52 @@
 Git
 ===
 
-## 基础
+## 安装
 
+```bash
+# 配置用户信息
+git config --global user.name "runoob"
+git config --global user.email test@runoob.com
+git config --list
 
+# 设置全局代理
+git config --global http.proxy socks5://127.0.0.1:10808
+git config --global https.proxy socks5://127.0.0.1:10808
 
-### 连接远程仓库
+# 配置SSH
+ssh-keygen -t rsa -C "这里换上你的邮箱"
+# 不需要密码，直接三次回车
+# 生成id_rsa和id_rsa.pub
+# 添加公钥pub文件内容，到Settings -- SSH and GPG keys
+# 测试配置成功
+ssh -T git@github.com 
+
+# 输入yes
+The authenticity of host 'github.com (20.205.243.166)' can't be established.
+ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+
+Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.
+Hi shixiaocaia! You've successfully authenticated, but GitHub does not provide shell access.
+
+# 登录信息
+Username for 'https://github.com'  # 完整的邮箱
+password # access key
+```
+
+## 连接远程仓库
 
 ```bash
 git init
 git remote add orgin url
+
+# ssh连接，不需要登陆验证
+git remote rm origin 
+git remote add origin git@....git
+
+# http连接，需要登陆验证
+https://github.com/deepthan/Front-end-resource-collection/issues/28
 
 git add .
 git commit -m"update"
@@ -17,7 +54,7 @@ git branch -m main
 git push origin main
 ```
 
-### 先commit再pull再push
+## 先commit再pull再push
 
 git中向远程仓库中提交代码时一定要先pull再push，本地代码进行commit后，仓库不会将本地代码与远程仓库的代码进行比较，不会识别出是否存在代码冲突，必须进行pull命令后，才会将本地代码与远程仓库的代码进行比较，如果两者的代码存在冲突，必须要解决冲突后重新commit ----> pull ----> push。
 
@@ -32,7 +69,7 @@ git pull origin main
 git push origin main
 ```
 
-### 关于分支
+## 关于分支
 
 ```bash
 git branch     # 查看本地分支
@@ -47,7 +84,7 @@ git push origin :[branch name]  # 删除远程分支，：表示删除
 git branch [branch_name] # 本地创建新的分支
 ```
 
-## Git clone后无代码
+## 版本控制
 
 在做MIT 6.S081时候，git clone源代码后发现看不到任何内容，应该是当前下载的分支没有代码。
 
@@ -165,3 +202,15 @@ git push github util:util
 
 **因此，需要每次push时候要注意是在使用什么分支，上传到哪一个分支里，和哪一个分支合并。**
 
+## 分支切换问题
+
+**Please commit your changes or stash them before you switch branches.**
+
+- 使用`git stash`暂存当前分支
+- 切换到主分支的其他分支当中
+  - `git status`发现没有需要提交的部分
+- 修改完分支，返回原来的dev分支
+  - `git checkout dev`切换到dev分支，`git status`发现没有东西需要提交，`git stash list`查看之前暂存的列表
+  - `git stash apply`恢复，但是stash并没有删除，`git stash drop stash@XXXX`，在尾部加上id
+  - 或者使用`git stash pop`恢复存储当中的内容，并且删除存储内容
+  - 这时候`git status`可以看到有改动未提交
