@@ -7,18 +7,18 @@
     <title>链表 iDoc</title>
     <meta name="description" content="链表是一种通过指针串联在一起的线性结构，每一个节点由两部分组成，一个是数据域，一个是指针域（存放指向下一个节点的指针），最后一个节点的指针域指向null。">
     <meta name="keywords" content="notebook">
-    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
-    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
-    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
-    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
-    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
-    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
     <link rel="icon" href="../logo.png" type="image/x-icon">
-    <script src="../js/copy.js?v=1.21.13"></script>
-    <script src="../js/dark-mode.js?v=1.21.13"></script>
-    <script src="../js/markdown-style.js?v=1.21.13"></script>
-    <script src="../js/jquery.min.js?v=1.21.13"></script>
-    <script src="../js/fancybox.umd.js?v=1.21.13"></script>
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
   </head>
   <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <script>
@@ -158,23 +158,21 @@ ListNod* head = new ListNode(5);
         <h3 id="链表-1"><a aria-hidden="true" tabindex="-1" href="#链表-1" class="anchor"><span class="icon icon-link"></span></a>链表</h3>
         <p><a href="https://leetcode.cn/problems/merge-two-sorted-lists/">21. 合并两个有序链表</a></p>
         <p>模板题。</p>
-        <p><strong><a href="https://leetcode.cn/problems/remove-linked-list-elements/">LC203.移除链表元素</a></strong></p>
+        <p><a href="https://leetcode.cn/problems/remove-linked-list-elements/">LC203.移除链表元素</a></p>
         <blockquote>
           <p>使用C++，注意释放删除的内存空间。</p>
           <p>通过增加一个哑节点，这样如果删除头结点的话，不会影响，因为最终返回的是哑节点的下一个节点。</p>
           <p>如果没有哑节点，无法进行这样的直接替换操作。而是需要单独移动头结点的位置，最好再释放。</p>
           <p>必须用一个中间变量来保存要删除的节点，否则<code>cur->next</code>指向的就不是要删除的点了。</p>
         </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/design-linked-list/">LC707.设计链表</a></strong></p>
+        <p><a href="https://leetcode.cn/problems/design-linked-list/">LC707.设计链表</a></p>
         <blockquote>
           <p>思路简单，但是全是细节的题。</p>
           <p>模拟了链表的各种操作。</p>
         </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/reverse-linked-list/">LC206.反转链表</a></strong></p>
+        <p><a href="https://leetcode.cn/problems/reverse-linked-list/">LC206.反转链表</a></p>
         <blockquote>
-          <p>方法1：递归</p>
-          <p>递归的方法与双指针的方法相同，简洁一些。</p>
-          <p>方法2：双指针</p>
+          <p>用中间指针，交替变化的过程。</p>
         </blockquote>
         <p><strong><a href="https://leetcode.cn/problems/swap-nodes-in-pairs/">🆙LC24. 两两交换链表中的节点</a></strong></p>
         <blockquote>
@@ -186,15 +184,13 @@ ListNod* head = new ListNode(5);
             <li>最后指向下一组的3</li>
           </ol>
         </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/">LC19.删除链表的倒数第N个节点</a></strong></p>
+        <p><a href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/">LC19.删除链表的倒数第N个节点</a></p>
         <blockquote>
           <p>处理数组、链表中的某部分——双指针</p>
           <p>将fast指针指向删除节点的前一个节点，然后fast指针遍历到NULL时，刚好slow指针遍历到要删除的节点。</p>
           <p>同样用哑节点，规避了分类头节点问题。</p>
-          <p>二刷没想到双指针用法。</p>
-          <p><strong>实现了单次遍历链表</strong></p>
         </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/">面试题 02.07. 链表相交</a></strong></p>
+        <p><a href="https://leetcode.cn/problems/intersection-of-two-linked-lists-lcci/">面试题 02.07. 链表相交</a></p>
         <blockquote>
           <p>先计算两个链表的长度，计算他们长度差，将指针移动到统一起点。</p>
           <p>开始遍历较长的链表（默认A，比较后交换），当二者指针相同相等时，找到了相交节点返回，否则返回NULL。</p>
@@ -221,11 +217,6 @@ ListNod* head = new ListNode(5);
           <p><strong>random随机指向的节点位置，可能在新链表中还没有复制过来</strong></p>
           <p>需要我们利用回溯的方式，让每个节点的拷贝操作相互独立。对于当前节点，我们首先要进行拷贝，然后我们进行「当前节点的后继节点」和「当前节点的随机指针指向的节点」拷贝，拷贝完成后将创建的新节点的指针返回，即可完成当前节点的两指针的赋值。</p>
         </blockquote>
-        <h3 id="双指针"><a aria-hidden="true" tabindex="-1" href="#双指针" class="anchor"><span class="icon icon-link"></span></a>双指针</h3>
-        <p><a href="https://leetcode.cn/problems/merge-two-sorted-lists/description/">21. 合并两个有序链表</a></p>
-        <blockquote>
-          <p>简单的双指针问题，比较大小插入。</p>
-        </blockquote>
         <p><a href="https://leetcode.cn/problems/partition-list/description/">86. 分隔链表</a></p>
         <blockquote>
           <p>建立两个单链表，分别存放大于等于和小于的节点值，然后合并两个节点。</p>
@@ -251,7 +242,6 @@ ListNod* head = new ListNode(5);
             <li><a href="#例题" class="tocs-link">例题</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#链表-1" class="tocs-link">链表</a></li>
-                <li><a href="#双指针" class="tocs-link">双指针</a></li>
               </ol>
             </li>
             <li><a href="#总结" class="tocs-link">总结</a></li>
@@ -259,8 +249,8 @@ ListNod* head = new ListNode(5);
         </aside>
       </nav>
     </div>
-    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
-    <script src="../js/tocbot.js?v=1.21.13"></script>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
   </body>
 </html>

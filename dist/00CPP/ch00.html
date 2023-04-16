@@ -7,18 +7,18 @@
     <title>语法知识 iDoc</title>
     <meta name="description" content="在C++11中可以取地址的、有名字的就是左值，反之，不能取地址的、没有名字的就是右值。">
     <meta name="keywords" content="notebook">
-    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
-    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
-    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
-    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
-    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
-    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
     <link rel="icon" href="../logo.png" type="image/x-icon">
-    <script src="../js/copy.js?v=1.21.13"></script>
-    <script src="../js/dark-mode.js?v=1.21.13"></script>
-    <script src="../js/markdown-style.js?v=1.21.13"></script>
-    <script src="../js/jquery.min.js?v=1.21.13"></script>
-    <script src="../js/fancybox.umd.js?v=1.21.13"></script>
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
   </head>
   <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <script>
@@ -447,6 +447,20 @@ int main()
           <li>C++中，struct增加了访问权限，且可以和类一样有成员函数，成员默认访问说明符为public（为了与C兼容）</li>
           <li>struct作为类的一种特例是用来自定义数据结构的。一个结构标记声明后，在C中必须在结构标记前加上struct，才能做结构类型名（除：typedef struct class{};）;C++中结构体标记（结构体名）可以直接作为结构体类型名使用，此外结构体struct在C++中被当作类的一种特例</li>
         </ul>
+        <h2 id="privatepublicprotected"><a aria-hidden="true" tabindex="-1" href="#privatepublicprotected" class="anchor"><span class="icon icon-link"></span></a>private,public,protected</h2>
+        <p>第一: private,public,protected的访问范围:</p>
+        <ul>
+          <li>private: 只能由该类中的函数、其友元函数访问,不能被任何其他访问，该类的对象也不能访问.</li>
+          <li>protected: 可以被该类中的函数、子类的函数、以及其友元函数访问,但不能被该类的对象访问</li>
+          <li>public: 可以被该类中的函数、子类的函数、其友元函数访问,也可以由该类的对象访问</li>
+          <li>注：友元函数包括两种：设为友元的全局函数，设为友元类中的成员函数</li>
+        </ul>
+        <p>第二:类的继承后方法属性变化:</p>
+        <ul>
+          <li>使用private继承,父类的所有方法在子类中变为private;</li>
+          <li>使用protected继承,父类的protected和public方法在子类中变为protected,private方法不变;</li>
+          <li>使用public继承,父类中的方法属性不发生改变;</li>
+        </ul>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -471,12 +485,13 @@ int main()
             <li><a href="#一个指针占多少字节" class="tocs-link">一个指针占多少字节？</a></li>
             <li><a href="#常量指针和指针常量区别" class="tocs-link">常量指针和指针常量区别？</a></li>
             <li><a href="#c中struct和class的区别" class="tocs-link">C++中struct和class的区别</a></li>
+            <li><a href="#privatepublicprotected" class="tocs-link">private,public,protected</a></li>
           </ol>
         </aside>
       </nav>
     </div>
-    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
-    <script src="../js/tocbot.js?v=1.21.13"></script>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
   </body>
 </html>

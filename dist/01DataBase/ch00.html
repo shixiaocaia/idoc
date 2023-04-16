@@ -7,18 +7,18 @@
     <title>基本概念 iDoc</title>
     <meta name="description" content="数据库（database）：是一个以某种有组织的方式存储的数据集合，是保存有组织的数据的容器。">
     <meta name="keywords" content="notebook">
-    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.21.13">
-    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.21.13">
-    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.21.13">
-    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.21.13">
-    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.21.13">
-    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.21.13">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
     <link rel="icon" href="../logo.png" type="image/x-icon">
-    <script src="../js/copy.js?v=1.21.13"></script>
-    <script src="../js/dark-mode.js?v=1.21.13"></script>
-    <script src="../js/markdown-style.js?v=1.21.13"></script>
-    <script src="../js/jquery.min.js?v=1.21.13"></script>
-    <script src="../js/fancybox.umd.js?v=1.21.13"></script>
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
   </head>
   <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <script>
@@ -273,6 +273,17 @@ TRUNCATE TABLE Shippers;
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
           </li>
         </ol>
+        <h2 id="问题"><a aria-hidden="true" tabindex="-1" href="#问题" class="anchor"><span class="icon icon-link"></span></a>问题</h2>
+        <h3 id="sql规范书写问题"><a aria-hidden="true" tabindex="-1" href="#sql规范书写问题" class="anchor"><span class="icon icon-link"></span></a>SQL规范书写问题</h3>
+        <ul>
+          <li>阿里巴巴规约：</li>
+        </ul>
+        <blockquote>
+          <p>表名、字段名必须使用小写字母或数字 ， 禁止出现数字开头，禁止两个下划线中间只 出现数字。数据库字段名的修改代价很大，因为无法进行预发布，所以字段名称需要慎重考虑。</p>
+        </blockquote>
+        <ul>
+          <li>SQL语句一律采用小写字母，避免无意义的踩坑。</li>
+        </ul>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -283,12 +294,17 @@ TRUNCATE TABLE Shippers;
                 <li><a href="#使用mysql" class="tocs-link">使用MySQL</a></li>
               </ol>
             </li>
+            <li><a href="#问题" class="tocs-link">问题</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#sql规范书写问题" class="tocs-link">SQL规范书写问题</a></li>
+              </ol>
+            </li>
           </ol>
         </aside>
       </nav>
     </div>
-    <script src="../js/demo-preview.js?v=1.21.13"></script>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
-    <script src="../js/tocbot.js?v=1.21.13"></script>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
   </body>
 </html>

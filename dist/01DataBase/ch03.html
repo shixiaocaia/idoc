@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>进程 iDoc</title>
-    <meta name="description" content="在操作系统中，是用进程控制块（process control block，PCB）数据结构来描述进程的。">
+    <title>MySQL是怎么运行的 iDoc</title>
+    <meta name="description" content="运行着的MySQL的服务端和客户端程序实际上都是计算机中的一个进程，所以客户端进程向服务器进程发送请求并得到回复的过程本质上是一个进程间通信的过程。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
@@ -48,9 +48,9 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <li><a href="../index.html" target="" class="">Home</a></li>
             <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
             <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
-            <li><a href="index.html" target="" class="active">OperatingSystem</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
             <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
-            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="index.html" target="" class="active">DataBase</a></li>
             <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
             <li><a href="../00Other/index.html" target="" class="">Other</a></li>
           </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -60,43 +60,19 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </div>
       </article>
     </header>
-    <div class="warpper-content warpper sidebar">
+    <div class="warpper-content warpper sidebar notocs">
       <div class="sidebar-border">
         <aside class="sidebar" role="navigation">
           <div>
             <a href="index.html" class="">↩️README</a>
-            <a href="ch00.html" class="">问题收集</a>
-            <label>计组</label>
-            <a href="ch51.html" class="">优化程序性能</a>
-            <a href="ch61.html" class="">存储器</a>
-            <a href="ch71.html" class="">链接</a>
-            <label>进程</label>
-            <a href="ch81.html" class="">进程、线程、调度</a>
-            <a href="ch82.html" class="">问题</a>
-            <label>虚拟内存</label>
-            <a href="ch91.html" class="">虚拟内存</a>
-            <a href="ch92.html" class="">问题</a>
+            <label>从动手开始</label>
+            <a href="ch00.html" class="">初见</a>
+            <a href="ch01.html" class="">SQL</a>
+            <a href="ch02.html" class="">MySQL是怎么运行的</a>
           </div>
         </aside>
       </div>
-      <markdown-style>
-        <h2 id="总览虚拟内存"><a aria-hidden="true" tabindex="-1" href="#总览虚拟内存" class="anchor"><span class="icon icon-link"></span></a>总览虚拟内存</h2>
-        <p>
-          <img src="http://pic.shixiaocaia.fun/202301271949081.png" alt="虚拟内存">
-        </p>
-        <h2 id="内存分配的过程是怎样的"><a aria-hidden="true" tabindex="-1" href="#内存分配的过程是怎样的" class="anchor"><span class="icon icon-link"></span></a>内存分配的过程是怎样的？</h2>
-        <p>
-          <img src="http://pic.shixiaocaia.fun/202301271951590.png" alt="内存分配">
-        </p>
-      </markdown-style>
-      <nav class="tocs">
-        <aside class="inner toc">
-          <ol class="tocs-list">
-            <li><a href="#总览虚拟内存" class="tocs-link">总览虚拟内存</a></li>
-            <li><a href="#内存分配的过程是怎样的" class="tocs-link">内存分配的过程是怎样的？</a></li>
-          </ol>
-        </aside>
-      </nav>
+      <markdown-style></markdown-style>
     </div>
     <script src="../js/demo-preview.js?v=1.25.0"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>

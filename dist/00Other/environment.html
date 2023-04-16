@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>环境配置 iDoc</title>
+    <meta name="description" content="docker必须部署在linux内核的系统上，所以如果windows想安装,需要先安装一个linux虚拟机,然后再在虚拟机中运行，而wsl中安装Ubuntu就相当于安装了虚拟机，wsl没有linux环境就不能正确使用docker。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+            <li><a href="index.html" target="" class="active">Other</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <a href="vim.html" class="">Vim</a>
+            <a href="git.html" class="">Git</a>
+            <a href="shell.html" class="">Shell</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="环境配置"><a aria-hidden="true" tabindex="-1" href="#环境配置" class="anchor"><span class="icon icon-link"></span></a>环境配置</h1>
+        <h2 id="vm_ubuntu-1804"><a aria-hidden="true" tabindex="-1" href="#vm_ubuntu-1804" class="anchor"><span class="icon icon-link"></span></a>VM_ubuntu 18.04</h2>
+        <h3 id="磁盘空间扩展问题"><a aria-hidden="true" tabindex="-1" href="#磁盘空间扩展问题" class="anchor"><span class="icon icon-link"></span></a>磁盘空间扩展问题</h3>
+        <ul>
+          <li>
+            <p>虚拟机设置中扩展磁盘空间</p>
+          </li>
+          <li>
+            <p>重新打开后黑屏</p>
+            <ul>
+              <li>
+                <p>进入ubuntu的bios模式进行选择CD启动，使用对象的ISO镜像文件，设备状态设置为<code>启动时连接</code></p>
+              </li>
+              <li>
+                <p>来不及选择BIOS界面，可以在虚拟机磁盘文件中，找到<code>（后缀为.vmx）</code>的文件</p>
+                <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token assign-left variable">bios.forcesetuponce</span><span class="token operator">=</span>“TRUE”
+</span><span class="code-line line-number" line="2"><span class="token assign-left variable">bios.bootdelay</span><span class="token operator">=</span>“5000” <span class="token comment"># 延长时间</span>
+</span></code><input type="hidden" value="bios.forcesetuponce=“TRUE”
+bios.bootdelay=“5000” # 延长时间
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+              </li>
+              <li>
+                <p>重新启动虚拟机，进入BIOS设置界面，切换到Boot下，通过键盘上"Shift"+"="将CD-ROM Drive移到最上面。</p>
+              </li>
+              <li>
+                <p>保存设置重新启动，进入系统重新分配</p>
+              </li>
+              <li>
+                <p>重新进入系统，此时系统显示Welcom界面，选择Try Ubuntu</p>
+              </li>
+              <li>
+                <p>搜索软件GParted，打开该软件，此时会显示新扩展的20G未分配空间</p>
+              </li>
+              <li>
+                <p>重新启动，取消镜像文件的<code>启动时连接</code></p>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p><a href="https://www.jianshu.com/p/5c483f6b53ab">参考文章</a></p>
+          </li>
+        </ul>
+        <h2 id="docker"><a aria-hidden="true" tabindex="-1" href="#docker" class="anchor"><span class="icon icon-link"></span></a>Docker</h2>
+        <p><strong>docker必须部署在linux内核的系统上</strong>，所以如果windows想安装,需要先安装一个linux虚拟机,然后再在虚拟机中运行，而wsl中安装Ubuntu就相当于安装了虚拟机，wsl没有linux环境就不能正确使用docker。</p>
+        <p><strong>网络问题</strong>：<code>netsh winsock reset</code></p>
+        <p>每次开机以管理员方式自动执行一次该命令。</p>
+        <p><strong>让所有程序都默认以管理员身份运行</strong></p>
+        <p>专业版系统具体步骤如下:</p>
+        <blockquote>
+          <p>
+            使用小娜搜索 secpol 或 “本地安全策略” （或运行 secpol.msc ），右键选择以管理员身份打开（或许需要）；
+            展开 本地策略，选择 安全选项，在右边找到“用户帐户控制：以管理员批准模式运行所有管理员”，双击它，将本地安全设置更改为“已禁用”；
+            然后重新启动计算机即可
+            完成操作后，通过 Win + R 执行命令 cmd 会发现输入框下面有一行小字”以管理员身份运行”
+          </p>
+        </blockquote>
+        <p>家庭版系统步骤如下(如果是家庭版用户没有组策略是无法像上述的专业版系统一样操作的):</p>
+        <blockquote>
+          <p>
+            打开注册表编辑器(运行 regedit)，展开注册表到 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System ，选择项 System 后，在右侧找到 EnableLUA ，将其值更改为0；
+            然后重新启动计算机即可。
+            完成操作后，通过 Win + R 执行命令 cmd 会发现输入框下面有一行小字”以管理员身份运行”
+          </p>
+        </blockquote>
+        <p><strong>开机自动执行命令</strong></p>
+        <blockquote>
+          <p>
+            win + r 打开命令行
+            输入 shell:startup
+            回车
+            进入一个文件夹
+            新建一个cmd脚本，如：netsh_winsock_reset.cmd，内容如下：
+            <code>netsh winsock reset</code>
+          </p>
+        </blockquote>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#vm_ubuntu-1804" class="tocs-link">VM_ubuntu 18.04</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#磁盘空间扩展问题" class="tocs-link">磁盘空间扩展问题</a></li>
+              </ol>
+            </li>
+            <li><a href="#docker" class="tocs-link">Docker</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>

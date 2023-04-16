@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>第0章 操作系统接口 iDoc</title>
+    <meta name="description" content="在操作系统中运行的各种程序，运行在同一个空间，用户空间（Userspace）。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+            <li><a href="../00Other/index.html" target="" class="">Other</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper">
+      <markdown-style>
+        <h1 id="第0章-操作系统接口"><a aria-hidden="true" tabindex="-1" href="#第0章-操作系统接口" class="anchor"><span class="icon icon-link"></span></a>第0章 操作系统接口</h1>
+        <h2 id="介绍部分"><a aria-hidden="true" tabindex="-1" href="#介绍部分" class="anchor"><span class="icon icon-link"></span></a>介绍部分</h2>
+        <p>在操作系统中运行的各种程序，运行在同一个空间，<em><strong>用户空间（Userspace）</strong></em>。</p>
+        <p>区别于用户空间程序，有一个特殊的程序总是会在运行，它称为<em><strong>Kernel</strong></em>。Kernel是计算机资源的守护者。当你打开计算机时，Kernel总是第一个被启动。</p>
+        <ul>
+          <li>Kernel程序只有一个，它维护数据来管理每一个用户空间进程。</li>
+          <li>Kernel同时还维护了大量的数据结构来帮助它管理各种各样的硬件资源，以供用户空间的程序使用。</li>
+          <li>Kernel同时还有大量内置的服务，例如文件系统，用户空间的程序与文件系统进行交互，文件系统再与磁盘进行交互。</li>
+        </ul>
+        <p>在这门课程中，我们主要关注点在Kernel、连接Kernal和用户空间程序的接口、Kernel内软件的架构。所以，我们会关心Kernel中的服务，其中一个服务是<em><strong>文件系统</strong></em>，另一个就是<em><strong>进程管理系统</strong></em>。</p>
+        <p>每一个用户空间程序都被称为一个进程，它们有自己的内存和共享的CPU时间。同时，Kernel会管理内存的分配。不同的进程需要不同数量的内存，Kernel会复用内存、划分内存，并为所有的进程分配内存。</p>
+        <p>应用程序是如何与Kernel交互，与Kernel的API有关，它决定了应用程序如何访问Kernel。通常来说，这里是通过所谓的*系统调用（System Call）*来完成。</p>
+        <ul>
+          <li>系统调用相比函数调用，会运行在<strong>系统内核中</strong>，并执行内核中对于系统调用的实现。</li>
+        </ul>
+        <h2 id="xv6是什么"><a aria-hidden="true" tabindex="-1" href="#xv6是什么" class="anchor"><span class="icon icon-link"></span></a>XV6是什么</h2>
+        <p>是一个简化的类似Unix的操作系统，Unix是很多操作系统的基础，例如Linux，OSX。</p>
+        <p>XV6运行在一个RISC-V<strong>微处理器</strong>上，对应有相应的指令集，理论上，可以在RISV-V计算机上运行XV6，实际中是在<strong>QEMU模拟器</strong>上运行XV6。</p>
+        <ul>
+          <li>Unix系统都会从文件描述符0读取数据，然后向文件描述符1写入数据。Unix系统都会从文件描述符0读取数据，然后向文件描述符1写入数据。</li>
+        </ul>
+        <blockquote>
+          <p>Shell会确保默认情况下，当一个程序启动时，文件描述符0连接到console的输入，文件描述符1连接到了console的输出，从文件描述符2输出错误（标准错误输出）。</p>
+        </blockquote>
+        <hr>
+        <ul>
+          <li>
+            <p><strong>fork产生的子进程与父进程的区别</strong></p>
+            <ul>
+              <li>子进程return0，父进程返回非0值。</li>
+              <li>除了fork的返回值，两个进程的指令、数据、栈都是一样的</li>
+              <li>两个进程有各自独立的地址空间，它们都认为自己的内存从0开始增长，但这里是不同的内存。</li>
+              <li>wait函数会等待接受的返回值，用于父进程等待子进程。
+                <ul>
+                  <li>fork的多个子进程需要多个wait返回，捕获其值。</li>
+                  <li>exit和wait用来回收资源。</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>关于Shell</p>
+            <ul>
+              <li>shell is a user program</li>
+              <li>主循环通过<code>getcmd</code>读取命令行的输入，然后调用<code>fork</code>生成一个shell进程副本</li>
+            </ul>
+          </li>
+          <li>
+            <p><strong>问：>、>>、&#x3C;以及|这几个是什么含义？</strong></p>
+          </li>
+        </ul>
+        <blockquote>
+          <ol>
+            <li>首先这几个linux命令都与I/O Redirection相关。</li>
+            <li>其中>>和>都属于输出重定向，&#x3C; 属于输入重定向，而 | 则是管道。
+              <ul>
+                <li>其中，>会覆盖目标的原有内容。当文件存在时会先删除原文件，再重新创建文件，然后把内容写入该文件，否则直接创建文件。</li>
+                <li>而>>会在目标原有内容后追加内容。当文件存在时直接在文件未尾进行内容追加，不会删除原文件，否则直接创建文件。</li>
+                <li>管道|，用来连接多个命令，即将命令1的输出当做命令2的输入,执行后,再把命令2的输出发送给命令3进行执行,以此持续.<strong>一般用作组合多种工具</strong></li>
+              </ul>
+            </li>
+          </ol>
+        </blockquote>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#介绍部分" class="tocs-link">介绍部分</a></li>
+            <li><a href="#xv6是什么" class="tocs-link">XV6是什么</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>
