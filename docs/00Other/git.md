@@ -35,6 +35,24 @@ Username for 'https://github.com'  # 完整的邮箱
 password # access key
 ```
 
+## 主体思路
+
+![无标题-2023-04-17-1505](http://pic.shixiaocaia.fun//%E6%97%A0%E6%A0%87%E9%A2%98-2023-04-17-1505.png)
+
+- 注意整体流程中的，合并过程的对比过程
+
+```bash
+git status # 查看状态信息
+git log    # 查看提交信息
+
+.gitignore # 添加忽略的信息
+
+git merge test # 将test分支和当前分支进行合并
+```
+
+- 实际中在主分支下创建分支，会复制其内容到子分支当中，除了gitignore中的文件是相互分离的，完成后，进行相关分支的合并操作
+- dowmload和clone的文件相比，没有相应的git操作信息
+
 ## 连接远程仓库
 
 ```bash
@@ -81,7 +99,9 @@ git checkout [branch_name] # 切换分支
 git branch -d local_branch_name # 删除本地分支
 git push origin :[branch name]  # 删除远程分支，：表示删除
 
-git branch [branch_name] # 本地创建新的分支
+git branch [branch_name] # 本地创建新的分支，文件来源于主分支的内容
+
+git reflog --date=local | grep <branchname> # 查看分支属于哪部分拉出来的
 ```
 
 ## 版本控制
