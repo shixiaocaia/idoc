@@ -63,6 +63,9 @@ git remote add orgin url
 git remote rm origin 
 git remote add origin git@....git
 
+# 带access的输入
+git remote set-url origin  https://GITHUB ACCESS@github.com/nlp-greyfoss/typora_notes.git/
+
 # http连接，需要登陆验证
 https://github.com/deepthan/Front-end-resource-collection/issues/28
 
@@ -195,7 +198,6 @@ git push origin <local_branch_name>:<remote_branch_name>
 # 当远程分支和本地分支同名时
 git push github util:util
 git push github util
-
 ```
 
 ### 创建测试分支
@@ -234,3 +236,23 @@ git push github util:util
   - `git stash apply`恢复，但是stash并没有删除，`git stash drop stash@XXXX`，在尾部加上id
   - 或者使用`git stash pop`恢复存储当中的内容，并且删除存储内容
   - 这时候`git status`可以看到有改动未提交
+
+## fatal: refusing to merge unrelated histories
+
+- 根本原因
+
+因为两个根本不相干的 git 库， 一个是本地库， 一个是远端库， 然后本地要去推送到远端， 远端觉得这个本地库跟自己不相干， 所以告知无法合并
+
+- 解决方案一
+
+git clone远程仓库到本地，将需要推送的内容放到该仓库下 ， 然后提交上去 ， 这样算是一次update操作
+
+- 解决方案二
+
+使用强制命令
+
+git pull origin master --allow-unrelated-historie 
+
+后面加上 --allow-unrelated-histories  ， 把两段不相干的分支进行强行合；这里可能会进入一个编辑页面，只需要先ESC，然后敲:q! 即可
+
+后面再push就可以了 git push -u origin master git

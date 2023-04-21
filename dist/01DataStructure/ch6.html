@@ -498,6 +498,23 @@ public:
         <blockquote>
           <p>这里只有一个点，就是需要计算树的节点数和路径差1，3个点两条边。</p>
         </blockquote>
+        <p><a href="https://leetcode.cn/problems/maximum-difference-between-node-and-ancestor/description/">1026.节点与其祖先之间的最大差值</a></p>
+        <blockquote>
+          <ul>
+            <li>
+              <p>能想到维护一个路径下的最大值和最小值，<code>ans = max(abs(min - root->val), abs(max - root->val));</code></p>
+            </li>
+            <li>
+              <p>与当前值做比较，保证了祖先和孩子节点的关系</p>
+            </li>
+            <li>
+              <p>没有想到该怎么维护是否为祖先的问题。</p>
+              <ul>
+                <li>实际中是在递归中，将min和max值放到递归参数中，这样递归结果肯定是祖先关系</li>
+              </ul>
+            </li>
+          </ul>
+        </blockquote>
         <h3 id="构造二叉树"><a aria-hidden="true" tabindex="-1" href="#构造二叉树" class="anchor"><span class="icon icon-link"></span></a>构造二叉树</h3>
         <p><strong><a href="https://leetcode.cn/problems/maximum-binary-tree/">654. 最大二叉树</a></strong></p>
         <blockquote>

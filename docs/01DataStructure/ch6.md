@@ -331,6 +331,15 @@ public:
 
 > 这里只有一个点，就是需要计算树的节点数和路径差1，3个点两条边。
 
+[1026.节点与其祖先之间的最大差值](https://leetcode.cn/problems/maximum-difference-between-node-and-ancestor/description/)
+
+> - 能想到维护一个路径下的最大值和最小值，`ans = max(abs(min - root->val), abs(max - root->val));`
+>
+> - 与当前值做比较，保证了祖先和孩子节点的关系
+>
+> - 没有想到该怎么维护是否为祖先的问题。
+>   - 实际中是在递归中，将min和max值放到递归参数中，这样递归结果肯定是祖先关系
+
 ### 构造二叉树
 
 **[654. 最大二叉树](https://leetcode.cn/problems/maximum-binary-tree/)**

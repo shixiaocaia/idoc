@@ -10,6 +10,12 @@ Docker
 ## 基本命令
 
 ```bash
+# 查看当前的容器
+docker ps -as
+
+# 启动容器
+docker container start 容器名或者容器id
+
 # 停止容器
 docker container stop 容器名或容器id
 # 或可简写为
@@ -19,11 +25,6 @@ docker stop 容器名或容器id
 docker container kill 容器名或容器id
 # 或可简写为
 docker kill 容器名或容器id
-
-# 启动容器
-docker container start 容器名或容器id
-# 或可简写为
-docker start 容器名或容器id
 ```
 
 ## 问题

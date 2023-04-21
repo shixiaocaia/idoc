@@ -62,3 +62,150 @@
 > 进入一个文件夹
 > 新建一个cmd脚本，如：netsh_winsock_reset.cmd，内容如下：
 > `netsh winsock reset`
+
+## Anaconda
+
+- [Anaconda下载](https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/)，这里选择的是5.0（python对应3.6）
+
+```bash
+conda --version 
+
+conda install pip   # 安装pip命令
+
+
+conda upgrade --all # 所有工具包进行升级
+
+```
+
+- anaconda navigator启动时一直卡在 loading applications 页面
+
+  - 在安装目录找到D:\anaconda\Lib\site-packages\anaconda_navigator\api
+    然后打开conda_api.py，
+    在1358行找到data = yaml.load(f)，将其改为data = yaml.safeload(f)
+    猜测为保证代码的安全性，因为关闭防火墙也可以作为一个可行操作
+
+  - 关闭防火墙
+
+  - 管理员运行
+
+  - 改
+
+    - 按ctrl+alt+delete打开任务管理器 ，在进程里把python都结束。
+
+    - 打开Anaconda  prompt ,输入anaconda-navigator,报错显示'str' object has no attribute 'get'（忘记截图了）
+
+    - 去自己安装anaconda的路径下修改anaconda_api.py文件
+
+    - 打开后做大概在800多行找到如下语句做如下修改保存。
+
+      把versions=[vsdata.get('productVersion')],改成versions=["1b8e8302e405050205e69b59abb3559592bb9e60"],
+
+      再次运行Anaconda navigator就可以正常打开了
+
+- 管理虚拟环境
+
+
+
+- 永久指定pip默认安装源
+  直接在user目录中创建一个pip目录，如：C:\Users\用户名\pip,创建完后再pip 目 录下新建文件pip.ini，添加以下内容：
+
+```bash
+[gobal]
+
+timeout = 6000
+
+index-url = http://pypi.douban.com/simple/
+
+trusted-host = pypi.douban.com
+```
+
+## VScode
+
+
+
+
+
+### 配置C++
+
+- 下载MinGW
+
+  - [下载文件](https://sourceforge.net/projects/mingw-w64/files/)：进入网站后不要点击 "Download Lasted Version"，往下滑，找到最新版的 "x86_64-posix-seh"。
+  - 解压到合适位置
+
+- 配置环境变量：添加`mingw64\bin`到`Path`当中
+
+  - `cmd`输入`g++`得到`g++: fatal error: no input files`
+
+- .cpp文件配置C++环境
+
+  - 进入调试界面添加配置环境，选择 C++(GDB/LLDB)，再选择 g++.exe，之后会自动生成 launch.json 配置文件
+  - 编辑 launch.json 配置文件
+
+  ```bash
+  {
+      // 使用 IntelliSense 了解相关属性。 
+      // 悬停以查看现有属性的描述。
+      // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+      "version": "0.2.0",
+      "configurations": [
+          {
+              "name": "g++.exe - 生成和调试活动文件",
+              "type": "cppdbg",
+              "request": "launch",
+              "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+              "args": [],
+              "stopAtEntry": false,
+              "cwd": "${fileDirname}",
+              "environment": [],
+              "externalConsole": true, // 修改此项为true,运行时可以弹出console终端
+              "preLaunchTask": "task g++",
+              "MIMode": "gdb",
+              "miDebuggerPath": "C:\\SoftWare\\Code_env\\mingw64\\bin\\gdb.exe", //修改为对应的mingw64目录
+              "setupCommands": [
+                  {
+                      "description": "为 gdb 启用整齐打印",
+                      "text": "-enable-pretty-printing",
+                      "ignoreFailures": true
+                  }
+              ],
+          }
+      ]
+  }
+  ```
+
+  - 返回.cpp文件，按F5进行调试，会弹出找不到任务"task g++"，选择 "配置任务"，会自动生成 tasks.json 文件
+  - 编辑 tasks.json 文件
+
+  ```bash
+  {
+      "version": "2.0.0",
+      "tasks": [
+          {
+              "type": "shell",
+              "label": "task g++",
+              "command": "C:\\SoftWare\\Code_env\\mingw64\\bin\\g++.exe", //更新g++路径
+              "args": [
+                  "-g",
+                  "${file}",
+                  "-o",
+                  "${fileDirname}\\${fileBasenameNoExtension}.exe"
+              ],
+              "options": {
+                  "cwd": "${workspaceFolder}"
+              },
+              "problemMatcher": [
+                  "$gcc"
+              ],
+              "group": "build",
+              "presentation": {
+                  "panel": "shared"
+              }
+          }
+      ]
+  }
+  ```
+
+  
+
+### 备份
+

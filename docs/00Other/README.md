@@ -34,13 +34,13 @@ Do sth for fun
 
 ### 计算机网络
 
-⬜计算机网络：自顶向下方法
-
-⬜TCP/IP详解
+✅图解HTTP、TCPIP
 
 ⬜小林图解网络
 
-✅图解HTTP、TCPIP
+⬜计算机网络：自顶向下方法
+
+⬜TCP/IP详解
 
 ### 数据结构
 
@@ -48,19 +48,15 @@ Do sth for fun
 
 ✅代码随想录
 
-⬜算法4
-
-⬜codetop
+✅codetop
 
 ### 操作系统
-
-⬜图解操作系统
 
 ⬜现代操作系统
 
 ⬜CSAPP
 
-⬜[MIT 6.828大作业-操作系统内核](https://github.com/woai3c/MIT6.828)
+⬜MIT6.S081
 
 ### 数据库
 
@@ -71,6 +67,12 @@ Do sth for fun
 ⬜MySql45讲
 
 ⬜B站编程技术宇宙讲Redis
+
+⬜黑马程序员Redis
+
+### 设计模式
+
+- 熟悉单例、工厂，了解观察者、策略、模板方法等
 
 ### 编译原理
 
@@ -101,6 +103,12 @@ Do sth for fun
 ⬜Docker / Grafana...
 
 ⬜cmake / makefile
+
+⬜Linux常见命令
+
+⬜GDB常见命令
+
+⬜Git常见命令
 
 > 如何理解需求，用工具实现。
 
@@ -142,5 +150,6 @@ Do sth for fun
 
 ###  参与开源
 
-星球朋友推荐的内容[链接](https://erdengk.github.io/gsoc-analyse/)
+- [开源总结](https://erdengk.github.io/gsoc-analyse/)
 
+- [开源之夏](https://summer-ospp.ac.cn/help/)
