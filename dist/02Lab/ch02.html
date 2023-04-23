@@ -94,18 +94,49 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li>
             <p>int fstat （int filedes，struct ＊buf）；</p>
             <ul>
-              <li>
-                <p>fstat（）用来将参数filedes 所指向的文件状态复制到参数buf 所指向的结构中（struct stat）</p>
-              </li>
-              <li>
-                <p>执行成功返回0，失败返回－1，错误代码保存在errno。</p>
-              </li>
-              <li>
-                <p>与stat函数功能相同</p>
+              <li>fstat（）用来将参数filedes 所指向的文件状态复制到参数buf 所指向的结构中（struct stat）</li>
+              <li>执行成功返回0，失败返回－1，错误代码保存在errno。</li>
+              <li>与stat函数功能相同</li>
+            </ul>
+          </li>
+          <li>
+            <p>void *memmove(void *str1, const void *str2, size_t n)</p>
+            <ul>
+              <li>对比memcpy，更加安全</li>
+            </ul>
+          </li>
+          <li>
+            <p>struct dirent de</p>
+            <ul>
+              <li>读取当前文件 / 文件夹内对应的内容</li>
+            </ul>
+          </li>
+        </ul>
+        <p>流程</p>
+        <ul>
+          <li>判断当前路径的权限</li>
+          <li>while打开当前路径的文件 / 文件夹
+            <ul>
+              <li>比如打开 <code>.</code></li>
+              <li>添加路径为<code>p = ./</code></li>
+              <li>读取当前路径的文件为，<code>de.name</code></li>
+              <li>当前一个文件路径可以表示为<code>./a</code></li>
+              <li>判断当前路径能够打开</li>
+              <li>判断这个路径的变量类型，是文件夹还是文件
+                <ul>
+                  <li>文件比较内容</li>
+                  <li>文件夹递归，但是避免递归<code>.</code>和<code>..</code></li>
+                </ul>
               </li>
             </ul>
           </li>
         </ul>
+        <blockquote>
+          <p>p指针的指向buf字符串，观察其变化</p>
+          <p>DIRSIZE是什么</p>
+          <p>gdb变量值的变化</p>
+          <p>及时关闭不用的文件描述符，包括异常时应该要关闭</p>
+        </blockquote>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">

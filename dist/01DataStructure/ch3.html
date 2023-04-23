@@ -109,23 +109,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p>对比之下，map在需要多个数值时可以考虑，分别引用key，value，例如LC.1。</p>
         <h2 id="例题"><a aria-hidden="true" tabindex="-1" href="#例题" class="anchor"><span class="icon icon-link"></span></a>例题</h2>
         <p><a href="https://leetcode.cn/problems/ransom-note/">LC383.赎金信</a></p>
-        <blockquote>
-          <p>模板题，将字母转为数组下标(ASCII值)，或者用map都可以。</p>
-        </blockquote>
         <p><a href="https://leetcode.cn/problems/valid-anagram/">LC242.有效的字母异位词</a></p>
-        <blockquote>
-          <p>用数组存储string a中字母出现的次数，遍历string b在a中出现的次数，每出现一次对应-1，最好判断26个字母是否有非0的字母。</p>
-          <p>关键码：由于字母的特殊性，且全为小写字母，可以使用s[i] - 'a'，作为索引。</p>
-        </blockquote>
         <p><a href="https://leetcode.cn/problems/intersection-of-two-arrays/">LC349. 两个数组的交集</a></p>
-        <blockquote>
-          <p>限制数据范围：数组B中的值在A中寻找是否出现，第一次出现的话加入ans中。O(n^2)。</p>
-          <p>不限数据范围：使用std::unordered_set，读写效率高，不需要排序，还能去重。</p>
-        </blockquote>
-        <p><a href="https://leetcode.cn/problems/intersection-of-two-arrays-ii/">LC350. 两个数组的交集II</a></p>
-        <blockquote>
-          <p>同样可以用数组解决。</p>
-        </blockquote>
         <p><a href="https://leetcode.cn/problems/happy-number/">LC202.快乐数</a></p>
         <blockquote>
           <p>关键词“重复”，联想到哈希表。</p>
@@ -151,7 +136,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           </ul>
           <p>key 存储 数值，value存储下标。因为题意保证有唯一解，当遍历此时值的另一半不在map中时，添加此时的数值为key，下标为value到map中，直到遍历到另一半已经在map中结束。</p>
         </blockquote>
-        <p>𖤐<a href="https://leetcode.cn/problems/3sum/">LC15.三树之和</a></p>
+        <p><strong><a href="https://leetcode.cn/problems/3sum/">LC15.三树之和</a></strong></p>
         <blockquote>
           <p>一开始想用哈希表，计算前两个数和，然后判断第三个数是否在map中，出现了error错误Expected member name or ';' after declaration specifiers，放弃了。</p>
         </blockquote>
@@ -163,7 +148,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <p>题解版：用双指针维护 + 去重</p>
           <p>a, b, c 三个数的去重，是难点。</p>
         </blockquote>
-        <p>𖤐<a href="https://leetcode.cn/problems/4sum/">LC18. 四数之和</a></p>
+        <p><strong><a href="https://leetcode.cn/problems/4sum/">LC18. 四数之和</a></strong></p>
         <blockquote>
           <p>对比三数之和，增加了一层外循环。</p>
           <ul>
@@ -206,6 +191,9 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           </li>
           <li>
             <p>map作为哈希表，<a href="https://leetcode.cn/problems/two-sum/">LC1.两数之和</a>，不仅需要判断key，还要记录位置，将位置作为value记录。</p>
+          </li>
+          <li>
+            <p>关键词，重复，查重。</p>
           </li>
         </ul>
       </markdown-style>

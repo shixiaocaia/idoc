@@ -47,23 +47,9 @@
 
 [LC383.赎金信](https://leetcode.cn/problems/ransom-note/)
 
-> 模板题，将字母转为数组下标(ASCII值)，或者用map都可以。
-
 [LC242.有效的字母异位词](https://leetcode.cn/problems/valid-anagram/)
 
-> 用数组存储string a中字母出现的次数，遍历string b在a中出现的次数，每出现一次对应-1，最好判断26个字母是否有非0的字母。
->
-> 关键码：由于字母的特殊性，且全为小写字母，可以使用s[i] - 'a'，作为索引。
-
 [LC349. 两个数组的交集](https://leetcode.cn/problems/intersection-of-two-arrays/)
-
-> 限制数据范围：数组B中的值在A中寻找是否出现，第一次出现的话加入ans中。O(n^2)。
->
-> 不限数据范围：使用std::unordered_set，读写效率高，不需要排序，还能去重。
-
-[LC350. 两个数组的交集II](https://leetcode.cn/problems/intersection-of-two-arrays-ii/)
-
-> 同样可以用数组解决。
 
 [LC202.快乐数](https://leetcode.cn/problems/happy-number/)
 
@@ -91,7 +77,7 @@
 >
 >  key 存储 数值，value存储下标。因为题意保证有唯一解，当遍历此时值的另一半不在map中时，添加此时的数值为key，下标为value到map中，直到遍历到另一半已经在map中结束。
 
-𖤐[LC15.三树之和](https://leetcode.cn/problems/3sum/)
+**[LC15.三树之和](https://leetcode.cn/problems/3sum/)**
 
 > 一开始想用哈希表，计算前两个数和，然后判断第三个数是否在map中，出现了error错误Expected member name or ';' after declaration specifiers，放弃了。
 
@@ -103,7 +89,7 @@
 >
 > a, b, c 三个数的去重，是难点。
 
-𖤐[LC18. 四数之和](https://leetcode.cn/problems/4sum/)
+**[LC18. 四数之和](https://leetcode.cn/problems/4sum/)**
 
 > 对比三数之和，增加了一层外循环。
 >
@@ -149,3 +135,5 @@
 - set作为哈希表，比如[LC349. 两个数组的交集](https://leetcode.cn/problems/intersection-of-two-arrays/)， 我们不清楚数组的大小情况，或者值的间隔特别大，会造成空间的浪费。此外数组可以set相比数组还可以去重。
 
 - map作为哈希表，[LC1.两数之和](https://leetcode.cn/problems/two-sum/)，不仅需要判断key，还要记录位置，将位置作为value记录。
+
+- 关键词，重复，查重。

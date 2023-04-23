@@ -117,39 +117,6 @@ deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy-security main restricted 
 </span></code><input type="hidden" value="sudo apt-get update
 sudo apt-get upgrade
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <h2 id="wsl迁移"><a aria-hidden="true" tabindex="-1" href="#wsl迁移" class="anchor"><span class="icon icon-link"></span></a>WSL迁移</h2>
-        <p>从Microsoft Store安装的话直接安装在了C盘，但是随着使用可能C盘空间会爆炸，考虑迁移到其他盘。</p>
-        <h3 id="关闭wsl并查看列表"><a aria-hidden="true" tabindex="-1" href="#关闭wsl并查看列表" class="anchor"><span class="icon icon-link"></span></a>关闭WSL并查看列表</h3>
-        <p>在管理员Powershell，使用<code>wsl --shutdown</code>关闭，输入<code>wsl --list --all -v</code>查看当前所有的子系统，我只安装了一个Ubuntu20.04，效果如图：</p>
-        <p>
-          <img src="https://www.lyroch.site/posts/973e27dc/wsl.jpg" alt="wsl">
-        </p>
-        <h3 id="导出备份"><a aria-hidden="true" tabindex="-1" href="#导出备份" class="anchor"><span class="icon icon-link"></span></a>导出备份</h3>
-        <pre><code class="code-highlight"><span class="code-line line-number" line="1">wsl --export 子系统 备份包的存放路径
-</span></code><input type="hidden" value="wsl --export 子系统 备份包的存放路径
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>子系统就是列表的NAME，选择你需要迁移的子系统；备份包的存放路径注意要写成…/xxx.tar的形式，xxx是你给备份包的命名，这里网上很多教程没有指明必须要有.tar后缀</p>
-        <h3 id="注销子系统"><a aria-hidden="true" tabindex="-1" href="#注销子系统" class="anchor"><span class="icon icon-link"></span></a>注销子系统</h3>
-        <pre><code class="code-highlight"><span class="code-line line-number" line="1">wsl --unregister 子系统
-</span></code><input type="hidden" value="wsl --unregister 子系统
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>此时如果再使用<code>wsl --list --all -v</code>就会发现已经没有了刚刚注销的子系统</p>
-        <h3 id="导入备份"><a aria-hidden="true" tabindex="-1" href="#导入备份" class="anchor"><span class="icon icon-link"></span></a>导入备份</h3>
-        <pre><code class="code-highlight"><span class="code-line line-number" line="1">wsl --import 子系统 子系统新路径 备份包的存放路径
-</span></code><input type="hidden" value="wsl --import 子系统 子系统新路径 备份包的存放路径
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>子系统新路径即为你打算迁移该子系统的位置</p>
-        <h3 id="设置登录默认用户"><a aria-hidden="true" tabindex="-1" href="#设置登录默认用户" class="anchor"><span class="icon icon-link"></span></a>设置登录默认用户</h3>
-        <p>此时能够打开子系统就成功迁移了，但是会发现用户登录默认是root，为了将其改为我们刚打开系统设置的用户，在powershell里输入：</p>
-        <pre><code class="code-highlight"><span class="code-line line-number" line="1">Ubuntu2004 config --default-user 你要的默认登录用户名
-</span></code><input type="hidden" value="Ubuntu2004 config --default-user 你要的默认登录用户名
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p><strong>注意这里的子系统</strong>，在网上看到了写Ubuntu-20.04的，写ubuntu的，我这里都报错，必须要用Ubuntu2004作为子系统名</p>
-        <h2 id="重装系统"><a aria-hidden="true" tabindex="-1" href="#重装系统" class="anchor"><span class="icon icon-link"></span></a>重装系统</h2>
-        <p>网上大多数都说从开始菜单，找到发行版（比如Ubuntu20.04），右键应用设置重置就可以了，然而我试了没有用，搜到另一个方法。在管理员PowerShell里输入<code>wsl -l</code>查看发行版名称，利用<code>wsl --unregister 子系统</code>注销，此时如果再次输入<code>wsl -l</code>就可以发现刚刚注销的发行版已经没有了，但是装的应用并没有删除，直接打开应用就重装了。</p>
-        <p>如果之前切换过盘符，当初导出的压缩包并没有删除，注销后进行重新import就可以了。</p>
-        <h2 id="文件互访"><a aria-hidden="true" tabindex="-1" href="#文件互访" class="anchor"><span class="icon icon-link"></span></a>文件互访</h2>
-        <p>Windows的所有资源挂载在WSL Linux的<code>/mnt/Windows完整路径</code>下，Windows资源管理器输入<code>\\wsl$</code>可以直接访问Linux文件。</p>
         <h2 id="xv6lab系统"><a aria-hidden="true" tabindex="-1" href="#xv6lab系统" class="anchor"><span class="icon icon-link"></span></a>XV6Lab系统</h2>
         <h3 id="环境配置"><a aria-hidden="true" tabindex="-1" href="#环境配置" class="anchor"><span class="icon icon-link"></span></a>环境配置</h3>
         <p>若是刚启动的系统，别忘了进行</p>
@@ -208,171 +175,23 @@ hart 1 starting
 hart 2 starting
 init: starting sh
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <h2 id="vscode配置"><a aria-hidden="true" tabindex="-1" href="#vscode配置" class="anchor"><span class="icon icon-link"></span></a>VSCode配置</h2>
-        <h3 id="普通gdb调试"><a aria-hidden="true" tabindex="-1" href="#普通gdb调试" class="anchor"><span class="icon icon-link"></span></a>普通gdb调试</h3>
-        <p>在目录下执行以下指令：</p>
-        <pre><code class="code-highlight"><span class="code-line line-number" line="1">make qemu-gdb
+        <h3 id="gdb"><a aria-hidden="true" tabindex="-1" href="#gdb" class="anchor"><span class="icon icon-link"></span></a>gdb</h3>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">make</span> qemu-gdb
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3">gdb-multiarch <span class="token punctuation">[</span>kernel/kernel<span class="token punctuation">]</span>
 </span></code><input type="hidden" value="make qemu-gdb
+
+gdb-multiarch [kernel/kernel]
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>另开一个终端，输入以下指令：</p>
-        <pre><code class="code-highlight"><span class="code-line line-number" line="1">gdb-multiarch kernel/kernel
-</span></code><input type="hidden" value="gdb-multiarch kernel/kernel
+        <p>注：提示warning时，修改用户目录下.gdbinit文件里添加下面这行就好了**（注意不是xv6目录下的）**，如果没有这个文件就自己创建一个。</p>
+        <pre class="language-text"><code class="language-text code-highlight"><span class="code-line line-number" line="1">add-auto-load-safe-path /home/fs/xv6-labs-2020/.gdbinit
+</span></code><input type="hidden" value="add-auto-load-safe-path /home/fs/xv6-labs-2020/.gdbinit
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>结果会出现一大段字和gdb的界面，字里有一个warning，我不知道是否需要，但是网友的教程把它修改掉了，执行以下指令（退出qemu和gdb后），其中<code>xxx</code>是自己文件夹的路径：</p>
-        <pre><code class="code-highlight"><span class="code-line line-number" line="1">echo "add-auto-load-safe-path xxx/xv6-labs-2021/.gdbinit" >> "xxx/.gdbinit"
-</span></code><input type="hidden" value="echo &#x22;add-auto-load-safe-path xxx/xv6-labs-2021/.gdbinit&#x22; >> &#x22;xxx/.gdbinit&#x22;
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <h3 id="wsl"><a aria-hidden="true" tabindex="-1" href="#wsl" class="anchor"><span class="icon icon-link"></span></a>WSL</h3>
+        <h3 id="remote-wsl"><a aria-hidden="true" tabindex="-1" href="#remote-wsl" class="anchor"><span class="icon icon-link"></span></a>Remote-WSL</h3>
         <ul>
           <li>下载<code>Remote-WSL</code>插件</li>
           <li>在Ubuntu中，输入<code>code .</code>，在这个文件夹中启动VSCode，会看到在远程资源管理器看到成功连接的界面。</li>
         </ul>
-        <h3 id="gdb调试"><a aria-hidden="true" tabindex="-1" href="#gdb调试" class="anchor"><span class="icon icon-link"></span></a>gdb调试</h3>
-        <ul>
-          <li>
-            <p>添加插件<code>C/C++</code></p>
-          </li>
-          <li>
-            <p>创建<code>.vscode</code>文件夹，添加文件<code>launch.json</code></p>
-            <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="2">    <span class="token string">"version"</span><span class="token builtin class-name">:</span> <span class="token string">"0.2.0"</span>,
-</span><span class="code-line line-number" line="3">    <span class="token string">"configurations"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
-</span><span class="code-line line-number" line="4">        <span class="token punctuation">{</span>
-</span><span class="code-line line-number" line="5">            <span class="token string">"name"</span><span class="token builtin class-name">:</span> <span class="token string">"xv6debug"</span>,
-</span><span class="code-line line-number" line="6">            <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"cppdbg"</span>,
-</span><span class="code-line line-number" line="7">            <span class="token string">"request"</span><span class="token builtin class-name">:</span> <span class="token string">"launch"</span>,
-</span><span class="code-line line-number" line="8">            <span class="token string">"program"</span><span class="token builtin class-name">:</span> <span class="token string">"<span class="token variable">${workspaceFolder}</span>/kernel/kernel"</span>,
-</span><span class="code-line line-number" line="9">            <span class="token string">"stopAtEntry"</span><span class="token builtin class-name">:</span> true,
-</span><span class="code-line line-number" line="10">            <span class="token string">"cwd"</span><span class="token builtin class-name">:</span> <span class="token string">"<span class="token variable">${workspaceFolder}</span>"</span>,
-</span><span class="code-line line-number" line="11">            <span class="token string">"miDebuggerServerAddress"</span><span class="token builtin class-name">:</span> <span class="token string">"127.0.0.1:26000"</span>, //见.gdbinit 中 target remote xxxx:xx
-</span><span class="code-line line-number" line="12">            <span class="token string">"miDebuggerPath"</span><span class="token builtin class-name">:</span> <span class="token string">"/usr/bin/gdb-multiarch"</span>, // <span class="token function">which</span> gdb-multiarch
-</span><span class="code-line line-number" line="13">            <span class="token string">"MIMode"</span><span class="token builtin class-name">:</span> <span class="token string">"gdb"</span>,
-</span><span class="code-line line-number" line="14">            <span class="token string">"preLaunchTask"</span><span class="token builtin class-name">:</span> <span class="token string">"xv6build"</span>
-</span><span class="code-line line-number" line="15">        <span class="token punctuation">}</span>
-</span><span class="code-line line-number" line="16">    <span class="token punctuation">]</span>
-</span><span class="code-line line-number" line="17"><span class="token punctuation">}</span>
-</span></code><input type="hidden" value="{
-    &#x22;version&#x22;: &#x22;0.2.0&#x22;,
-    &#x22;configurations&#x22;: [
-        {
-            &#x22;name&#x22;: &#x22;xv6debug&#x22;,
-            &#x22;type&#x22;: &#x22;cppdbg&#x22;,
-            &#x22;request&#x22;: &#x22;launch&#x22;,
-            &#x22;program&#x22;: &#x22;${workspaceFolder}/kernel/kernel&#x22;,
-            &#x22;stopAtEntry&#x22;: true,
-            &#x22;cwd&#x22;: &#x22;${workspaceFolder}&#x22;,
-            &#x22;miDebuggerServerAddress&#x22;: &#x22;127.0.0.1:26000&#x22;, //见.gdbinit 中 target remote xxxx:xx
-            &#x22;miDebuggerPath&#x22;: &#x22;/usr/bin/gdb-multiarch&#x22;, // which gdb-multiarch
-            &#x22;MIMode&#x22;: &#x22;gdb&#x22;,
-            &#x22;preLaunchTask&#x22;: &#x22;xv6build&#x22;
-        }
-    ]
-}
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-          </li>
-        </ul>
-        <p>其中<code>miDebuggerServerAddress</code>一项的内容，在目录下有一个<code>.gdbinit</code>文件，里面有"target remote …"，打开这个文件复制来地址后，将这一行注释掉（添加<code>@REM</code>）</p>
-        <ul>
-          <li>再添加文件<code>tasks.json</code>：</li>
-        </ul>
-        <pre><code class="code-highlight"><span class="code-line line-number" line="1">{
-</span><span class="code-line line-number" line="2">    "version": "2.0.0",
-</span><span class="code-line line-number" line="3">    "tasks": [
-</span><span class="code-line line-number" line="4">        {
-</span><span class="code-line line-number" line="5">            "label": "xv6build",
-</span><span class="code-line line-number" line="6">            "type": "shell",
-</span><span class="code-line line-number" line="7">            "isBackground": true,
-</span><span class="code-line line-number" line="8">            "command": "make qemu-gdb",
-</span><span class="code-line line-number" line="9">            "problemMatcher": [
-</span><span class="code-line line-number" line="10">                {
-</span><span class="code-line line-number" line="11">                    "pattern": [
-</span><span class="code-line line-number" line="12">                        {
-</span><span class="code-line line-number" line="13">                            "regexp": ".",
-</span><span class="code-line line-number" line="14">                            "file": 1,
-</span><span class="code-line line-number" line="15">                            "location": 2,
-</span><span class="code-line line-number" line="16">                            "message": 3
-</span><span class="code-line line-number" line="17">                        }
-</span><span class="code-line line-number" line="18">                    ],
-</span><span class="code-line line-number" line="19">                    "background": {
-</span><span class="code-line line-number" line="20">                        "beginsPattern": ".*Now run 'gdb' in another window.",
-</span><span class="code-line line-number" line="21">                        "endsPattern": "."
-</span><span class="code-line line-number" line="22">                    }
-</span><span class="code-line line-number" line="23">                }
-</span><span class="code-line line-number" line="24">            ]
-</span><span class="code-line line-number" line="25">        }
-</span><span class="code-line line-number" line="26">    ]
-</span><span class="code-line line-number" line="27">}
-</span></code><input type="hidden" value="{
-    &#x22;version&#x22;: &#x22;2.0.0&#x22;,
-    &#x22;tasks&#x22;: [
-        {
-            &#x22;label&#x22;: &#x22;xv6build&#x22;,
-            &#x22;type&#x22;: &#x22;shell&#x22;,
-            &#x22;isBackground&#x22;: true,
-            &#x22;command&#x22;: &#x22;make qemu-gdb&#x22;,
-            &#x22;problemMatcher&#x22;: [
-                {
-                    &#x22;pattern&#x22;: [
-                        {
-                            &#x22;regexp&#x22;: &#x22;.&#x22;,
-                            &#x22;file&#x22;: 1,
-                            &#x22;location&#x22;: 2,
-                            &#x22;message&#x22;: 3
-                        }
-                    ],
-                    &#x22;background&#x22;: {
-                        &#x22;beginsPattern&#x22;: &#x22;.*Now run &#x27;gdb&#x27; in another window.&#x22;,
-                        &#x22;endsPattern&#x22;: &#x22;.&#x22;
-                    }
-                }
-            ]
-        }
-    ]
-}
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <h2 id="git版本控制"><a aria-hidden="true" tabindex="-1" href="#git版本控制" class="anchor"><span class="icon icon-link"></span></a>Git版本控制</h2>
-        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">git</span> remote <span class="token function">add</span> xiaocai git@github.com:shixiaocaia/xv6-labs.git
-</span><span class="code-line line-number" line="2">
-</span><span class="code-line line-number" line="3">
-</span></code><input type="hidden" value="git remote add xiaocai git@github.com:shixiaocaia/xv6-labs.git
-
-
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <h2 id="配置ssh环境"><a aria-hidden="true" tabindex="-1" href="#配置ssh环境" class="anchor"><span class="icon icon-link"></span></a>配置SSH环境</h2>
-        <p>WSL 上的 SSH 服务器没有自动配置，需要手动重新安装，首先可以运行以下命令来检查</p>
-        <pre class="language-text"><code class="language-text code-highlight"><span class="code-line line-number" line="1">$ sudo service ssh stop
-</span><span class="code-line line-number" line="2">$ sudo /usr/sbin/sshd -d
-</span></code><input type="hidden" value="$ sudo service ssh stop
-$ sudo /usr/sbin/sshd -d
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>如果出现debug1，sshd：no hostkeys available --exiting等信息，说明找不到 key，重新安装 openssh-server 就可以解决问题</p>
-        <pre class="language-text"><code class="language-text code-highlight"><span class="code-line line-number" line="1">$ sudo apt purge openssh-server
-</span><span class="code-line line-number" line="2">$ sudo apt install openssh-server
-</span></code><input type="hidden" value="$ sudo apt purge openssh-server
-$ sudo apt install openssh-server
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>然后需要配置 /etc/ssh/sshd_config，用 sudo 权限运行 vim 修改如下三个关键字</p>
-        <p>记得删除 #</p>
-        <pre class="language-text"><code class="language-text code-highlight"><span class="code-line line-number" line="1">Port 22
-</span><span class="code-line line-number" line="2"># 这两行允许了 root 账户和密码登录
-</span><span class="code-line line-number" line="3">PermitRootLogin yes
-</span><span class="code-line line-number" line="4">PasswordAuthentication yes
-</span></code><input type="hidden" value="Port 22
-# 这两行允许了 root 账户和密码登录
-PermitRootLogin yes
-PasswordAuthentication yes
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>然后记得重启 ssh 服务</p>
-        <pre class="language-text"><code class="language-text code-highlight"><span class="code-line line-number" line="1">$ sudo service ssh restart
-</span><span class="code-line line-number" line="2">$ sudo service ssh status
-</span></code><input type="hidden" value="$ sudo service ssh restart
-$ sudo service ssh status
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>如果需要用密码登录 root 账户，还需要设置密码</p>
-        <pre class="language-text"><code class="language-text code-highlight"><span class="code-line line-number" line="1">$ sudo passwd root
-</span></code><input type="hidden" value="$ sudo passwd root
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>然后就可以使用 SSH 工具进行连接啦，本地直接 localhost 即可</p>
         <h2 id="验证环境"><a aria-hidden="true" tabindex="-1" href="#验证环境" class="anchor"><span class="icon icon-link"></span></a>验证环境</h2>
         <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">riscv64-unknown-elf-gcc <span class="token parameter variable">--version</span>
 </span><span class="code-line line-number" line="2">
@@ -394,6 +213,38 @@ ls
         <p>退出方式都是通过命令键的组合来实现。</p>
         <p>回到 monitor 界面：<code>ctrl + a</code>，然后按<code>c</code> ，即可退出 xv6 的 shell 界面，进入 QEMU 的 monitor 界面，输入<code>q</code> 按回车即可退出 QEMU。</p>
         <p>终止 QEMU 进程：<code>ctrl + a</code>，然后按<code>x</code>，即可终止 QEMU 进程，回到 Shell 界面。</p>
+        <h2 id="wsl其他问题"><a aria-hidden="true" tabindex="-1" href="#wsl其他问题" class="anchor"><span class="icon icon-link"></span></a>WSL其他问题</h2>
+        <h3 id="重装系统"><a aria-hidden="true" tabindex="-1" href="#重装系统" class="anchor"><span class="icon icon-link"></span></a>重装系统</h3>
+        <p>在管理员PowerShell里输入<code>wsl -l</code>查看发行版名称，利用<code>wsl --unregister 子系统</code>注销，此时如果再次输入<code>wsl -l</code>就可以发现刚刚注销的发行版已经没有了，但是装的应用并没有删除，直接打开应用就重装了。</p>
+        <p>如果之前切换过盘符，当初导出的压缩包并没有删除，注销后进行重新import就可以了。</p>
+        <h3 id="wsl迁移"><a aria-hidden="true" tabindex="-1" href="#wsl迁移" class="anchor"><span class="icon icon-link"></span></a>WSL迁移</h3>
+        <p>从Microsoft Store安装的话直接安装在了C盘，但是随着使用可能C盘空间会爆炸，考虑迁移到其他盘。</p>
+        <h4 id="关闭wsl并查看列表"><a aria-hidden="true" tabindex="-1" href="#关闭wsl并查看列表" class="anchor"><span class="icon icon-link"></span></a>关闭WSL并查看列表</h4>
+        <p>在管理员Powershell，使用<code>wsl --shutdown</code>关闭，输入<code>wsl --list --all -v</code>查看当前所有的子系统，我只安装了一个Ubuntu20.04，效果如图：</p>
+        <p>
+          <img src="https://www.lyroch.site/posts/973e27dc/wsl.jpg" alt="wsl">
+        </p>
+        <h4 id="导出备份"><a aria-hidden="true" tabindex="-1" href="#导出备份" class="anchor"><span class="icon icon-link"></span></a>导出备份</h4>
+        <pre><code class="code-highlight"><span class="code-line line-number" line="1">wsl --export 子系统 备份包的存放路径
+</span></code><input type="hidden" value="wsl --export 子系统 备份包的存放路径
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>子系统就是列表的NAME，选择你需要迁移的子系统；备份包的存放路径注意要写成…/xxx.tar的形式，xxx是你给备份包的命名，这里网上很多教程没有指明必须要有.tar后缀</p>
+        <h4 id="注销子系统"><a aria-hidden="true" tabindex="-1" href="#注销子系统" class="anchor"><span class="icon icon-link"></span></a>注销子系统</h4>
+        <pre><code class="code-highlight"><span class="code-line line-number" line="1">wsl --unregister 子系统
+</span></code><input type="hidden" value="wsl --unregister 子系统
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>此时如果再使用<code>wsl --list --all -v</code>就会发现已经没有了刚刚注销的子系统</p>
+        <h4 id="导入备份"><a aria-hidden="true" tabindex="-1" href="#导入备份" class="anchor"><span class="icon icon-link"></span></a>导入备份</h4>
+        <pre><code class="code-highlight"><span class="code-line line-number" line="1">wsl --import 子系统 子系统新路径 备份包的存放路径
+</span></code><input type="hidden" value="wsl --import 子系统 子系统新路径 备份包的存放路径
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>子系统新路径即为你打算迁移该子系统的位置</p>
+        <h4 id="设置登录默认用户"><a aria-hidden="true" tabindex="-1" href="#设置登录默认用户" class="anchor"><span class="icon icon-link"></span></a>设置登录默认用户</h4>
+        <p>此时能够打开子系统就成功迁移了，但是会发现用户登录默认是root，为了将其改为我们刚打开系统设置的用户，在powershell里输入：</p>
+        <pre><code class="code-highlight"><span class="code-line line-number" line="1">Ubuntu2004 config --default-user 你要的默认登录用户名
+</span></code><input type="hidden" value="Ubuntu2004 config --default-user 你要的默认登录用户名
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p><strong>注意这里的子系统</strong>，在网上看到了写Ubuntu-20.04的，写ubuntu的，我这里都报错，必须要用Ubuntu2004作为子系统名</p>
         <h2 id="参考文章"><a aria-hidden="true" tabindex="-1" href="#参考文章" class="anchor"><span class="icon icon-link"></span></a>参考文章</h2>
         <ul>
           <li>
@@ -418,34 +269,30 @@ ls
                 <li><a href="#更新" class="tocs-link">更新</a></li>
               </ol>
             </li>
-            <li><a href="#wsl迁移" class="tocs-link">WSL迁移</a>
-              <ol class="tocs-list is-collapsed">
-                <li><a href="#关闭wsl并查看列表" class="tocs-link">关闭WSL并查看列表</a></li>
-                <li><a href="#导出备份" class="tocs-link">导出备份</a></li>
-                <li><a href="#注销子系统" class="tocs-link">注销子系统</a></li>
-                <li><a href="#导入备份" class="tocs-link">导入备份</a></li>
-                <li><a href="#设置登录默认用户" class="tocs-link">设置登录默认用户</a></li>
-              </ol>
-            </li>
-            <li><a href="#重装系统" class="tocs-link">重装系统</a></li>
-            <li><a href="#文件互访" class="tocs-link">文件互访</a></li>
             <li><a href="#xv6lab系统" class="tocs-link">XV6Lab系统</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#环境配置" class="tocs-link">环境配置</a></li>
                 <li><a href="#从github下载" class="tocs-link">从Github下载</a></li>
                 <li><a href="#编译qemu" class="tocs-link">编译qemu</a></li>
+                <li><a href="#gdb" class="tocs-link">gdb</a></li>
+                <li><a href="#remote-wsl" class="tocs-link">Remote-WSL</a></li>
               </ol>
             </li>
-            <li><a href="#vscode配置" class="tocs-link">VSCode配置</a>
-              <ol class="tocs-list is-collapsed">
-                <li><a href="#普通gdb调试" class="tocs-link">普通gdb调试</a></li>
-                <li><a href="#wsl" class="tocs-link">WSL</a></li>
-                <li><a href="#gdb调试" class="tocs-link">gdb调试</a></li>
-              </ol>
-            </li>
-            <li><a href="#git版本控制" class="tocs-link">Git版本控制</a></li>
-            <li><a href="#配置ssh环境" class="tocs-link">配置SSH环境</a></li>
             <li><a href="#验证环境" class="tocs-link">验证环境</a></li>
+            <li><a href="#wsl其他问题" class="tocs-link">WSL其他问题</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#重装系统" class="tocs-link">重装系统</a></li>
+                <li><a href="#wsl迁移" class="tocs-link">WSL迁移</a>
+                  <ol class="tocs-list is-collapsed">
+                    <li><a href="#关闭wsl并查看列表" class="tocs-link">关闭WSL并查看列表</a></li>
+                    <li><a href="#导出备份" class="tocs-link">导出备份</a></li>
+                    <li><a href="#注销子系统" class="tocs-link">注销子系统</a></li>
+                    <li><a href="#导入备份" class="tocs-link">导入备份</a></li>
+                    <li><a href="#设置登录默认用户" class="tocs-link">设置登录默认用户</a></li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
             <li><a href="#参考文章" class="tocs-link">参考文章</a></li>
           </ol>
         </aside>
