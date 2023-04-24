@@ -61,29 +61,7 @@
 
 [LC1.两数之和](https://leetcode.cn/problems/two-sum/)
 
-> - 为什么会想到用哈希表
->
-> target = num 1+ num2, 很容易想到遍历一个数，看num2 是否在map当中，并且
->
-> - 哈希表为什么用map
->
->  要判断一个数出现，同时还要返回这个数的下标，因此需要两个值，使用map的value key可以分别保存。
->
-> - 本题map是用来存什么的
->
->  存储数值中的另一半。最终一定能遍历num时，target - num 在map当中
->
-> - map中的key和value用来存什么的
->
->  key 存储 数值，value存储下标。因为题意保证有唯一解，当遍历此时值的另一半不在map中时，添加此时的数值为key，下标为value到map中，直到遍历到另一半已经在map中结束。
-
 **[LC15.三树之和](https://leetcode.cn/problems/3sum/)**
-
-> 一开始想用哈希表，计算前两个数和，然后判断第三个数是否在map中，出现了error错误Expected member name or ';' after declaration specifiers，放弃了。
-
-> Expected member name or ';' after declaration specifiers
->
-> 这个错误不一定是所指行，可能是前面的符号滥用。
 
 > 题解版：用双指针维护 + 去重
 >
@@ -107,12 +85,6 @@
 > 结合例题的[LC242.有效的字母异位词](https://leetcode.cn/problems/valid-anagram/)。将一个单词的所有字母进行重新排列得到新的单词，那我们可以将每个单词按照一定顺序排列后的值，作为关键码，相同的放到一起，就想到了用哈希表实现。
 >
 > 区别之前的，这里的value值是vector存放多个string。
-
-[LC1. 两数之和](https://leetcode.cn/problems/two-sum/description/)
-
-> 在一个表中查相应数据，联想到了哈希表。
->
-> 找到返回，否则插入数值。
 
 [ 128. 最长连续序列](https://leetcode.cn/problems/longest-consecutive-sequence)
 

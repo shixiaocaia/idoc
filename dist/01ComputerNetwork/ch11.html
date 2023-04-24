@@ -95,6 +95,26 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p>
           <img src="http://pic.shixiaocaia.fun/202303301107244.png" alt=" 五大类 HTTP 状态码 ">
         </p>
+        <h3 id="常见字段"><a aria-hidden="true" tabindex="-1" href="#常见字段" class="anchor"><span class="icon icon-link"></span></a>常见字段</h3>
+        <ul>
+          <li>connection中的<code>keep-live</code>和TCP中的<code>keepalive</code>的区别</li>
+        </ul>
+        <h2 id="get-和post"><a aria-hidden="true" tabindex="-1" href="#get-和post" class="anchor"><span class="icon icon-link"></span></a>Get 和Post</h2>
+        <ul>
+          <li>一般情况下，安全和幂等关系，是否可以缓存</li>
+        </ul>
+        <h2 id="缓存原理"><a aria-hidden="true" tabindex="-1" href="#缓存原理" class="anchor"><span class="icon icon-link"></span></a>缓存原理</h2>
+        <p>对重复性的HTTP请求，每次得到数据都一样，把[请求 + 缓存]放在本地，下次直接读取本地数据</p>
+        <p>都要用到<code>Cache-control</code>和<code>expires</code>来判断缓存的过期情况。、</p>
+        <p>在第一次发送请求报文后，服务器在响应报文当中标注了<code>cache-control</code>，当报文过期后，向服务器发送请求时，会更新<code>cache-control</code>。</p>
+        <h3 id="强制缓存"><a aria-hidden="true" tabindex="-1" href="#强制缓存" class="anchor"><span class="icon icon-link"></span></a>强制缓存</h3>
+        <p>浏览器判断缓存有没有过期，没有过期会直接使用，决定权在浏览器。</p>
+        <h3 id="协商缓存"><a aria-hidden="true" tabindex="-1" href="#协商缓存" class="anchor"><span class="icon icon-link"></span></a>协商缓存</h3>
+        <p>浏览器判断过期的报文是否发生变更，通过<code>Last-Modified</code>和<code>ETag</code>两种标签判断。如果没有变更，会发送<code>304</code>报文告知客户端可以使用本地缓存。</p>
+        <p><code>If-Modified-Since</code></p>
+        <p><code>If-None-Match</code></p>
+        <h3 id="为什么etag与优先级更高"><a aria-hidden="true" tabindex="-1" href="#为什么etag与优先级更高" class="anchor"><span class="icon icon-link"></span></a>为什么ETag与优先级更高</h3>
+        <h2 id="http特性"><a aria-hidden="true" tabindex="-1" href="#http特性" class="anchor"><span class="icon icon-link"></span></a>HTTP特性</h2>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -102,8 +122,18 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <li><a href="#是什么" class="tocs-link">是什么</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#常见的状态码" class="tocs-link">常见的状态码</a></li>
+                <li><a href="#常见字段" class="tocs-link">常见字段</a></li>
               </ol>
             </li>
+            <li><a href="#get-和post" class="tocs-link">Get 和Post</a></li>
+            <li><a href="#缓存原理" class="tocs-link">缓存原理</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#强制缓存" class="tocs-link">强制缓存</a></li>
+                <li><a href="#协商缓存" class="tocs-link">协商缓存</a></li>
+                <li><a href="#为什么etag与优先级更高" class="tocs-link">为什么ETag与优先级更高</a></li>
+              </ol>
+            </li>
+            <li><a href="#http特性" class="tocs-link">HTTP特性</a></li>
           </ol>
         </aside>
       </nav>
