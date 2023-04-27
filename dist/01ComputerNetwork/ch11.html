@@ -99,20 +99,50 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <ul>
           <li>connection中的<code>keep-live</code>和TCP中的<code>keepalive</code>的区别</li>
         </ul>
-        <h2 id="get-和post"><a aria-hidden="true" tabindex="-1" href="#get-和post" class="anchor"><span class="icon icon-link"></span></a>Get 和Post</h2>
+        <h2 id="get和post"><a aria-hidden="true" tabindex="-1" href="#get和post" class="anchor"><span class="icon icon-link"></span></a>GET和POST</h2>
+        <h3 id="get"><a aria-hidden="true" tabindex="-1" href="#get" class="anchor"><span class="icon icon-link"></span></a>GET</h3>
         <ul>
+          <li>一般GET 的语义是从服务器获取指定的资源，包括文本、视频、页面等多个资源</li>
+          <li>GET一般写在url中，浏览器会对url的长度有限制</li>
           <li>一般情况下，安全和幂等关系，是否可以缓存</li>
         </ul>
+        <h3 id="post"><a aria-hidden="true" tabindex="-1" href="#post" class="anchor"><span class="icon icon-link"></span></a>POST</h3>
+        <ul>
+          <li>POST 的语义是根据请求负荷（报文body）对指定的资源做出处理。</li>
+          <li>POST 请求携带数据的位置一般是写在报文 body 中，body 中的数据可以是任意格式的数据，只要客户端与服务端协商好即可，而且浏览器不会对 body 大小做限制。</li>
+        </ul>
+        <h3 id="对比"><a aria-hidden="true" tabindex="-1" href="#对比" class="anchor"><span class="icon icon-link"></span></a>对比</h3>
+        <ul>
+          <li>一般情况下，安全和幂等关系，是否可以缓存
+            <ul>
+              <li>安全：不会破坏服务器资源</li>
+              <li>幂等：多次执行相同的操作，结果都是相同的</li>
+              <li>因此一般情况下，GET方法只读所以是安全和幂等的，POST方法会提交和修改数据是不安全和不幂等的。</li>
+              <li>实际中GET方法用于新增和修改数据就可能是不安全不幂等的，同理POST请求也是。</li>
+            </ul>
+          </li>
+          <li>GET请求可以带上body吗
+            <ul>
+              <li>任何请求都可以用上body，只是GET请求获取资源用不上body</li>
+              <li>同理，URL查询不是GET独有的，POST请求中URL也有参数</li>
+            </ul>
+          </li>
+        </ul>
         <h2 id="缓存原理"><a aria-hidden="true" tabindex="-1" href="#缓存原理" class="anchor"><span class="icon icon-link"></span></a>缓存原理</h2>
-        <p>对重复性的HTTP请求，每次得到数据都一样，把[请求 + 缓存]放在本地，下次直接读取本地数据</p>
-        <p>都要用到<code>Cache-control</code>和<code>expires</code>来判断缓存的过期情况。、</p>
+        <p>对重复性的HTTP请求，每次得到数据都一样，把[请求 + 缓存]放在本地，下次直接读取本地数据。</p>
+        <p>HTTP 协议的头部有不少是针对缓存的字段，实现缓存技术都要用到<code>Cache-control</code>和<code>expires</code>来判断缓存的过期情况。、</p>
         <p>在第一次发送请求报文后，服务器在响应报文当中标注了<code>cache-control</code>，当报文过期后，向服务器发送请求时，会更新<code>cache-control</code>。</p>
+        <p>
+          <img src="..\img\http缓存.png" alt="img">
+        </p>
         <h3 id="强制缓存"><a aria-hidden="true" tabindex="-1" href="#强制缓存" class="anchor"><span class="icon icon-link"></span></a>强制缓存</h3>
-        <p>浏览器判断缓存有没有过期，没有过期会直接使用，决定权在浏览器。</p>
+        <p>浏览器判断缓存有没有过期，没有过期会直接使用本地缓存，决定权在浏览器。</p>
+        <ul>
+          <li>强缓存是利用了<code>Cache-Control</code>相对时间和<code>Expires</code>相对时间来判断资源在客户端的有效期</li>
+          <li>如果 HTTP 响应头部同时有 Cache-Control 和 Expires 字段的话，<strong>Cache-Control 的优先级高于 Expires</strong></li>
+        </ul>
         <h3 id="协商缓存"><a aria-hidden="true" tabindex="-1" href="#协商缓存" class="anchor"><span class="icon icon-link"></span></a>协商缓存</h3>
         <p>浏览器判断过期的报文是否发生变更，通过<code>Last-Modified</code>和<code>ETag</code>两种标签判断。如果没有变更，会发送<code>304</code>报文告知客户端可以使用本地缓存。</p>
-        <p><code>If-Modified-Since</code></p>
-        <p><code>If-None-Match</code></p>
         <h3 id="为什么etag与优先级更高"><a aria-hidden="true" tabindex="-1" href="#为什么etag与优先级更高" class="anchor"><span class="icon icon-link"></span></a>为什么ETag与优先级更高</h3>
         <h2 id="http特性"><a aria-hidden="true" tabindex="-1" href="#http特性" class="anchor"><span class="icon icon-link"></span></a>HTTP特性</h2>
       </markdown-style>
@@ -125,7 +155,13 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                 <li><a href="#常见字段" class="tocs-link">常见字段</a></li>
               </ol>
             </li>
-            <li><a href="#get-和post" class="tocs-link">Get 和Post</a></li>
+            <li><a href="#get和post" class="tocs-link">GET和POST</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#get" class="tocs-link">GET</a></li>
+                <li><a href="#post" class="tocs-link">POST</a></li>
+                <li><a href="#对比" class="tocs-link">对比</a></li>
+              </ol>
+            </li>
             <li><a href="#缓存原理" class="tocs-link">缓存原理</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#强制缓存" class="tocs-link">强制缓存</a></li>
