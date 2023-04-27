@@ -4,7 +4,7 @@ Do sth for fun
 ## 计算机基础
 
 
-![](http://pic.shixiaocaia.fun/202301241635615.png)
+![](../../img/202301241635615.png)
 
 ### 前言
 

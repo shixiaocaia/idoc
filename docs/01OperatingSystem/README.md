@@ -25,7 +25,7 @@
 
 ⬜[CSAPP_Lab](https://zhuanlan.zhihu.com/p/505497911?utm_id=0)
 
-![图片](https://mmbiz.qpic.cn/mmbiz_png/wqfIPAmgib2W6WcNYMCCs4NlgUu7TOegj2AmwKbu7DFyXAgrBJNC0zPwzzW1iazC3WBrhyMmMbuwwrWSMw0BRqAQ/640?wx_fmt=png&wxfrom=5&wx_lazy=1&wx_co=1)
+![图片](../../img/640-1682606663567-63.png)
 
 
 

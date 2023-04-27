@@ -23,4 +23,4 @@
   
 - 应用层：HTTP、HTTPS
 
-  ![图片](https://mmbiz.qpic.cn/mmbiz_jpg/wqfIPAmgib2W6WcNYMCCs4NlgUu7TOegjN40c2bbZ0nnRJ63y09gRTEe0A2Dr0BagP8j7ArHPCE1Pch4S7odticQ/640?wx_fmt=jpeg&wxfrom=5&wx_lazy=1&wx_co=1)
+  ![图片](../../img/640.jpeg)
