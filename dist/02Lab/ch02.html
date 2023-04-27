@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Util iDoc</title>
+    <meta name="description" content="对于父进程中的pipefd[2]，在子进程中同样有这样一套，指向管道的两端，当我们封闭一段形成一个单向的管道时，因为管道是单向的，就可以进程间通信了。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
+            <li><a href="../00Other/index.html" target="" class="">Other</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper">
+      <markdown-style>
+        <h1 id="lab-util"><a aria-hidden="true" tabindex="-1" href="#lab-util" class="anchor"><span class="icon icon-link"></span></a>Lab Util</h1>
+        <h2 id="c"><a aria-hidden="true" tabindex="-1" href="#c" class="anchor"><span class="icon icon-link"></span></a>C</h2>
+        <ul>
+          <li>**, *,指针</li>
+          <li>static静态变量的定义和使用</li>
+        </ul>
+        <h2 id="sleep"><a aria-hidden="true" tabindex="-1" href="#sleep" class="anchor"><span class="icon icon-link"></span></a>Sleep</h2>
+        <h2 id="pingpong"><a aria-hidden="true" tabindex="-1" href="#pingpong" class="anchor"><span class="icon icon-link"></span></a>PingPong</h2>
+        <h3 id="管道"><a aria-hidden="true" tabindex="-1" href="#管道" class="anchor"><span class="icon icon-link"></span></a>管道</h3>
+        <ul>
+          <li>单向的，父子进程之间通信需要一对。</li>
+          <li>资源有限关闭用不到的管道端口</li>
+        </ul>
+        <p>
+          <img src="..\img\932246-20160909084013707-2039185528.png" alt="img">
+        </p>
+        <p>对于父进程中的pipefd[2]，在子进程中同样有这样一套，指向管道的两端，当我们封闭一段形成一个单向的管道时，因为管道是<strong>单向</strong>的，就可以进程间通信了。</p>
+        <p>如果需要进行双向通信，因为一个管道是单向的，需要两个管道。</p>
+        <p><a href="https://www.cnblogs.com/MrListening/p/5858358.html">https://www.cnblogs.com/MrListening/p/5858358.html</a></p>
+        <blockquote>
+          <ul>
+            <li>这里及时关闭一端管道，变成管道是只写只读，是为了节省资源，fd是有限的</li>
+            <li>close(fd)出于资源和安全</li>
+          </ul>
+        </blockquote>
+        <h2 id="prime"><a aria-hidden="true" tabindex="-1" href="#prime" class="anchor"><span class="icon icon-link"></span></a>Prime</h2>
+        <h2 id="find"><a aria-hidden="true" tabindex="-1" href="#find" class="anchor"><span class="icon icon-link"></span></a>find</h2>
+        <h3 id="api"><a aria-hidden="true" tabindex="-1" href="#api" class="anchor"><span class="icon icon-link"></span></a>API</h3>
+        <ul>
+          <li>
+            <p>int fstat （int filedes，struct ＊buf）；</p>
+            <ul>
+              <li>fstat（）用来将参数filedes 所指向的文件状态复制到参数buf 所指向的结构中（struct stat）</li>
+              <li>执行成功返回0，失败返回－1，错误代码保存在errno。</li>
+              <li>与stat函数功能相同</li>
+            </ul>
+          </li>
+          <li>
+            <p>void *memmove(void *str1, const void *str2, size_t n)</p>
+            <ul>
+              <li>对比memcpy，更加安全</li>
+            </ul>
+          </li>
+          <li>
+            <p>struct dirent de</p>
+            <ul>
+              <li>读取当前文件 / 文件夹内对应的内容</li>
+            </ul>
+          </li>
+        </ul>
+        <p>流程</p>
+        <ul>
+          <li>判断当前路径的权限</li>
+          <li>while打开当前路径的文件 / 文件夹
+            <ul>
+              <li>比如打开 <code>.</code></li>
+              <li>添加路径为<code>p = ./</code></li>
+              <li>读取当前路径的文件为，<code>de.name</code></li>
+              <li>当前一个文件路径可以表示为<code>./a</code></li>
+              <li>判断当前路径能够打开</li>
+              <li>判断这个路径的变量类型，是文件夹还是文件
+                <ul>
+                  <li>文件比较内容</li>
+                  <li>文件夹递归，但是避免递归<code>.</code>和<code>..</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <blockquote>
+          <p>p指针的指向buf字符串，观察其变化</p>
+          <p>DIRSIZE是什么</p>
+          <p>gdb变量值的变化</p>
+          <p>及时关闭不用的文件描述符，包括异常时应该要关闭</p>
+        </blockquote>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#c" class="tocs-link">C</a></li>
+            <li><a href="#sleep" class="tocs-link">Sleep</a></li>
+            <li><a href="#pingpong" class="tocs-link">PingPong</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#管道" class="tocs-link">管道</a></li>
+              </ol>
+            </li>
+            <li><a href="#prime" class="tocs-link">Prime</a></li>
+            <li><a href="#find" class="tocs-link">find</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#api" class="tocs-link">API</a></li>
+              </ol>
+            </li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>

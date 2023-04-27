@@ -142,7 +142,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li>如果 HTTP 响应头部同时有 Cache-Control 和 Expires 字段的话，<strong>Cache-Control 的优先级高于 Expires</strong></li>
         </ul>
         <h3 id="协商缓存"><a aria-hidden="true" tabindex="-1" href="#协商缓存" class="anchor"><span class="icon icon-link"></span></a>协商缓存</h3>
-        <p>浏览器判断过期的报文是否发生变更，通过<code>Last-Modified</code>和<code>ETag</code>两种标签判断。如果没有变更，会发送<code>304</code>报文告知客户端可以使用本地缓存。</p>
+        <p>浏览器判断过期的报文是否发生变更，通过本地缓存当中的<code>Last-Modified</code>和<code>ETag</code>两种标签判断。如果没有变更，会发送<code>304</code>报文告知客户端可以使用本地缓存，否则返回200有更新返回最新的资源，同时更新的标签值。</p>
         <h3 id="为什么etag与优先级更高"><a aria-hidden="true" tabindex="-1" href="#为什么etag与优先级更高" class="anchor"><span class="icon icon-link"></span></a>为什么ETag与优先级更高</h3>
         <h2 id="http特性"><a aria-hidden="true" tabindex="-1" href="#http特性" class="anchor"><span class="icon icon-link"></span></a>HTTP特性</h2>
       </markdown-style>

@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>问题收集 iDoc</title>
-    <meta name="description" content="简称RAM，分为SRAM (static RAMS) 和DRAM(Dynamic RAM)。">
+    <title>做一些Lab iDoc</title>
+    <meta name="description" content="注意WSL Git，需要重新配置参考链接">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
@@ -48,7 +48,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <li><a href="../index.html" target="" class="">Home</a></li>
             <li><a href="../00CPP/index.html" target="" class="">Cpp</a></li>
             <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
-            <li><a href="index.html" target="" class="active">OperatingSystem</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
             <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
             <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
             <li><a href="../02MyWeb/index.html" target="" class="">Webserver</a></li>
@@ -60,49 +60,62 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </div>
       </article>
     </header>
-    <div class="warpper-content warpper sidebar">
-      <div class="sidebar-border">
-        <aside class="sidebar" role="navigation">
-          <div>
-            <a href="index.html" class="">↩️README</a>
-            <a href="ch00.html" class="">问题收集</a>
-            <label>计组</label>
-            <a href="ch51.html" class="">优化程序性能</a>
-            <a href="ch61.html" class="">存储器</a>
-            <a href="ch71.html" class="">链接</a>
-            <label>进程</label>
-            <a href="ch81.html" class="">进程、线程、调度</a>
-            <a href="ch82.html" class="">问题</a>
-            <label>虚拟内存</label>
-            <a href="ch91.html" class="">虚拟内存</a>
-            <a href="ch92.html" class="">问题</a>
-          </div>
-        </aside>
-      </div>
+    <div class="warpper-content warpper">
       <markdown-style>
-        <h1 id="问题收集"><a aria-hidden="true" tabindex="-1" href="#问题收集" class="anchor"><span class="icon icon-link"></span></a>问题收集</h1>
-        <h2 id="计组相关"><a aria-hidden="true" tabindex="-1" href="#计组相关" class="anchor"><span class="icon icon-link"></span></a>计组相关</h2>
-        <ol>
-          <li>在32位内存系统地址的环境中，指针变量的长度是多少位</li>
-        </ol>
-        <blockquote>
-          <p>在主要的32 位机器程序设计环境中，指针、“int”变量、“long”变量全部都是32 位长。 然而，在64 位机器下的许多程序设计环境，“int”变量仍然是32 位宽，不过“long”和指针是64位宽。</p>
-        </blockquote>
-        <ol start="2">
-          <li>栈和队列的进出顺序</li>
-        </ol>
-        <blockquote>
-          <p>栈是一种后入先出的（LIFO = Last In First Out)。</p>
-          <p>队列是先入先出（FIFO = First In First Out)，队列一般是环状缓冲区。</p>
-        </blockquote>
-        <ol start="3">
-          <li></li>
-        </ol>
+        <h1 id="做一些lab"><a aria-hidden="true" tabindex="-1" href="#做一些lab" class="anchor"><span class="icon icon-link"></span></a>做一些Lab</h1>
+        <h2 id="mit6s081"><a aria-hidden="true" tabindex="-1" href="#mit6s081" class="anchor"><span class="icon icon-link"></span></a>MIT6.S081</h2>
+        <h3 id="环境配置"><a aria-hidden="true" tabindex="-1" href="#环境配置" class="anchor"><span class="icon icon-link"></span></a>环境配置</h3>
+        <p>注意WSL Git，需要重新配置<a href="https://zhuanlan.zhihu.com/p/252505037">参考链接</a></p>
+        <h3 id="教材"><a aria-hidden="true" tabindex="-1" href="#教材" class="anchor"><span class="icon icon-link"></span></a>教材</h3>
+        <ul>
+          <li>
+            <p><a href="https://pdos.csail.mit.edu/6.S081/2020/index.html">MIT6.S081官方课程</a></p>
+          </li>
+          <li>
+            <p><a href="https://mit-public-courses-cn-translatio.gitbook.io/mit6-s081/">MIT6.S081课程翻译</a></p>
+          </li>
+          <li>
+            <p><a href="https://th0ar.gitbooks.io/xv6-chinese/content/index.html">textbook-翻译-1</a></p>
+          </li>
+          <li>
+            <p><a href="https://www.bookstack.cn/read/xv6-chinese/README.md">textbook-翻译-2</a></p>
+          </li>
+        </ul>
+        <h3 id="视频讲解"><a aria-hidden="true" tabindex="-1" href="#视频讲解" class="anchor"><span class="icon icon-link"></span></a>视频讲解</h3>
+        <ul>
+          <li><a href="https://space.bilibili.com/28086502/video">黑色卡坤</a></li>
+        </ul>
+        <h3 id="博客"><a aria-hidden="true" tabindex="-1" href="#博客" class="anchor"><span class="icon icon-link"></span></a>博客</h3>
+        <ul>
+          <li><a href="https://mit-public-courses-cn-translatio.gitbook.io/mit6-s081/">MIT6.S081视频文稿</a></li>
+          <li><a href="https://th0ar.gitbooks.io/xv6-chinese/content/index.html">xv6中文文档</a></li>
+          <li><a href="https://tarplkpqsm.feishu.cn/docs/doccnBFsXFMsAr1oXEVsaT9E3Jg#">一起来学MIT6.S081</a></li>
+          <li><a href="https://fanxiao.tech/posts/2021-03-02-mit-6s081-notes/">Xiaofan</a></li>
+          <li><a href="http://doraemonzzz.com/tags/6-S081/">doraemonzzz</a></li>
+          <li><a href="https://blog.miigon.net/tags/operating-system/">Miigon's blog</a></li>
+          <li><a href="https://github.com/PKUFlyingPig/MIT6.S081-2020fall">PKUFlyingPig</a></li>
+          <li><a href="https://www.cnblogs.com/weijunji/tag/XV6/">星遥见</a></li>
+        </ul>
+        <h3 id="收获"><a aria-hidden="true" tabindex="-1" href="#收获" class="anchor"><span class="icon icon-link"></span></a>收获</h3>
+        <ul>
+          <li>Makefile的使用</li>
+          <li>gdb的使用</li>
+          <li>Vim熟悉</li>
+          <li>Git常用指令熟悉，多版本管理</li>
+        </ul>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#计组相关" class="tocs-link">计组相关</a></li>
+            <li><a href="#mit6s081" class="tocs-link">MIT6.S081</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#环境配置" class="tocs-link">环境配置</a></li>
+                <li><a href="#教材" class="tocs-link">教材</a></li>
+                <li><a href="#视频讲解" class="tocs-link">视频讲解</a></li>
+                <li><a href="#博客" class="tocs-link">博客</a></li>
+                <li><a href="#收获" class="tocs-link">收获</a></li>
+              </ol>
+            </li>
           </ol>
         </aside>
       </nav>
