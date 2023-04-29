@@ -99,6 +99,9 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p>DBMS可分为两类：一类为基于共享文件系统的DBMS，另一类为基于客户机—服务器的DBMS。MySQL属于C / S一类的DBMS。</p>
         <h3 id="安装mysql"><a aria-hidden="true" tabindex="-1" href="#安装mysql" class="anchor"><span class="icon icon-link"></span></a>安装MySQL</h3>
         <p><a href="https://www.sjkjc.com/mysql/install-on-windows/">参考</a></p>
+        <ul>
+          <li>中文计算机名</li>
+        </ul>
         <h3 id="使用mysql"><a aria-hidden="true" tabindex="-1" href="#使用mysql" class="anchor"><span class="icon icon-link"></span></a>使用MySQL</h3>
         <ol>
           <li>
@@ -204,12 +207,18 @@ delete from 表名;       -- 清空表中记录
 </span><span class="code-line line-number" line="7">	city <span class="token keyword">varchar</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span>
 </span><span class="code-line line-number" line="8"><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </span><span class="code-line line-number" line="9">
-</span><span class="code-line line-number" line="10"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> fruits <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'苹果'</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="11"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> fruits <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">'香蕉'</span><span class="token punctuation">,</span>  <span class="token number">3</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="12"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> fruits <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">'西瓜'</span><span class="token punctuation">,</span>  <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</span><span class="code-line line-number" line="13">
-</span><span class="code-line line-number" line="14"> 
-</span><span class="code-line line-number" line="15"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> student<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="10"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> student <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token string">'刘一'</span><span class="token punctuation">,</span> <span class="token string">'郑十家隔壁'</span><span class="token punctuation">,</span> <span class="token string">'河南'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="11"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> student <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token string">'陈二'</span><span class="token punctuation">,</span>  <span class="token string">'李四家隔壁'</span><span class="token punctuation">,</span> <span class="token string">'安徽'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="12"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> student <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">,</span> <span class="token string">'张三'</span><span class="token punctuation">,</span>  <span class="token string">'白娘子家隔壁'</span><span class="token punctuation">,</span> <span class="token string">'杭州'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="13"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> student <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">,</span> <span class="token string">'李四'</span><span class="token punctuation">,</span>  <span class="token string">'许仙家隔壁'</span><span class="token punctuation">,</span> <span class="token string">'杭州'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="14"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> student <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token string">'王五'</span><span class="token punctuation">,</span>  <span class="token string">'李四家隔壁'</span><span class="token punctuation">,</span> <span class="token string">'杭州'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="15"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> student <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span> <span class="token string">'赵六'</span><span class="token punctuation">,</span>  <span class="token string">'赵六家隔壁'</span><span class="token punctuation">,</span> <span class="token string">'杭州'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="16"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> student <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">7</span><span class="token punctuation">,</span> <span class="token string">'孙七'</span><span class="token punctuation">,</span>  <span class="token string">'张三家隔壁'</span><span class="token punctuation">,</span> <span class="token string">'杭州'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="17"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> student <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">,</span> <span class="token string">'周八'</span><span class="token punctuation">,</span>  <span class="token string">'雷峰塔附近'</span><span class="token punctuation">,</span> <span class="token string">'杭州'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="18"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> student <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">9</span><span class="token punctuation">,</span> <span class="token string">'吴九'</span><span class="token punctuation">,</span>  <span class="token string">'孙七家隔壁'</span><span class="token punctuation">,</span> <span class="token string">'杭州'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="19"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> student <span class="token keyword">VALUES</span> <span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span> <span class="token string">'郑十'</span><span class="token punctuation">,</span>  <span class="token string">'周八家隔壁'</span><span class="token punctuation">,</span> <span class="token string">'杭州'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="20"> 
+</span><span class="code-line line-number" line="21"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> student<span class="token punctuation">;</span>
 </span></code><input type="hidden" value="CREATE DATABASE test;
 use test;
 CREATE TABLE student (
@@ -219,10 +228,16 @@ CREATE TABLE student (
 	city varchar(255)
 );
 
-INSERT INTO fruits VALUES (1, &#x27;苹果&#x27;, 5, 3);
-INSERT INTO fruits VALUES (2, &#x27;香蕉&#x27;,  3, 10);
-INSERT INTO fruits VALUES (3, &#x27;西瓜&#x27;,  4, 15);
-
+INSERT INTO student VALUES (1, &#x27;刘一&#x27;, &#x27;郑十家隔壁&#x27;, &#x27;河南&#x27;);
+INSERT INTO student VALUES (2, &#x27;陈二&#x27;,  &#x27;李四家隔壁&#x27;, &#x27;安徽&#x27;);
+INSERT INTO student VALUES (3, &#x27;张三&#x27;,  &#x27;白娘子家隔壁&#x27;, &#x27;杭州&#x27;);
+INSERT INTO student VALUES (4, &#x27;李四&#x27;,  &#x27;许仙家隔壁&#x27;, &#x27;杭州&#x27;);
+INSERT INTO student VALUES (5, &#x27;王五&#x27;,  &#x27;李四家隔壁&#x27;, &#x27;杭州&#x27;);
+INSERT INTO student VALUES (6, &#x27;赵六&#x27;,  &#x27;赵六家隔壁&#x27;, &#x27;杭州&#x27;);
+INSERT INTO student VALUES (7, &#x27;孙七&#x27;,  &#x27;张三家隔壁&#x27;, &#x27;杭州&#x27;);
+INSERT INTO student VALUES (8, &#x27;周八&#x27;,  &#x27;雷峰塔附近&#x27;, &#x27;杭州&#x27;);
+INSERT INTO student VALUES (9, &#x27;吴九&#x27;,  &#x27;孙七家隔壁&#x27;, &#x27;杭州&#x27;);
+INSERT INTO student VALUES (10, &#x27;郑十&#x27;,  &#x27;周八家隔壁&#x27;, &#x27;杭州&#x27;);
  
 SELECT * FROM student;
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
@@ -271,6 +286,9 @@ DROP TABLE Shippers;
 -- 删除现有表 Shippers 表内的数据，不删除表：
 TRUNCATE TABLE Shippers;
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+          </li>
+          <li>
+            <p>添加<code>C:\Program Files\MySQL\MySQL Server 8.0\bin</code>到path当中。</p>
           </li>
         </ol>
         <h2 id="问题"><a aria-hidden="true" tabindex="-1" href="#问题" class="anchor"><span class="icon icon-link"></span></a>问题</h2>

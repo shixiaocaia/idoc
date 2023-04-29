@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>字符串 iDoc</title>
-    <meta name="description" content="在过去参加竞赛的经历当中，字符串类的题一般是暴力+选择合适的STL的题。在这次学习过程中，应该尽量少用直接的STL的函数，更能明白其中的原理。如果库函数仅仅是 解题过程中的一小部分，并且你已经很清楚这个库函数的内部实现原理的话，可以考虑使用">
+    <meta name="description" content="用一个前缀表next，当发现字符不匹配时，跳转至前面已经匹配的最长前后缀位置，而不用重新开始匹配，最坏情况是重头开始匹配字符串。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
@@ -83,12 +83,6 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       </div>
       <markdown-style>
         <h1 id="字符串"><a aria-hidden="true" tabindex="-1" href="#字符串" class="anchor"><span class="icon icon-link"></span></a>字符串</h1>
-        <p>在过去参加竞赛的经历当中，字符串类的题一般是暴力+选择合适的STL的题。在这次学习过程中，应该尽量少用直接的STL的函数，更能明白其中的原理。如果库函数仅仅是 解题过程中的一小部分，并且你已经很清楚这个库函数的内部实现原理的话，可以考虑使用库函数。</p>
-        <p><strong>string和vector&#x3C;char>之间的区别</strong></p>
-        <ol>
-          <li>在C语言通过'\0'来判断是否结束，在C++当中通过size接口判断字符串接口。</li>
-          <li>string和vector&#x3C;char>之间区别不大，但是string提供了更多的接口，并且重载了一定的运算符，因此处理字符串一般用string较好。</li>
-        </ol>
         <h2 id="kmp"><a aria-hidden="true" tabindex="-1" href="#kmp" class="anchor"><span class="icon icon-link"></span></a>KMP</h2>
         <p>用一个前缀表<code>next</code>，当发现字符不匹配时，跳转至前面已经匹配的<strong>最长前后缀</strong>位置，而不用重新开始匹配，最坏情况是重头开始匹配字符串。</p>
         <h3 id="如何求next数组"><a aria-hidden="true" tabindex="-1" href="#如何求next数组" class="anchor"><span class="icon icon-link"></span></a>如何求next数组</h3>

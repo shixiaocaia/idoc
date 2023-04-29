@@ -103,6 +103,90 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li>set（集合）</li>
           <li>map（映射）</li>
         </ul>
+        <table>
+          <thead>
+            <tr>
+              <th>集合</th>
+              <th>底层实现</th>
+              <th>是否有序</th>
+              <th>数值是否可以重复</th>
+              <th>能否更改数值</th>
+              <th>查询效率</th>
+              <th>增删效率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>std::set</td>
+              <td>红黑树</td>
+              <td>有序</td>
+              <td>否</td>
+              <td>否</td>
+              <td>O(log n)</td>
+              <td>O(log n)</td>
+            </tr>
+            <tr>
+              <td>std::multiset</td>
+              <td>红黑树</td>
+              <td>有序</td>
+              <td>是</td>
+              <td>否</td>
+              <td>O(logn)</td>
+              <td>O(logn)</td>
+            </tr>
+            <tr>
+              <td>std::unordered_set</td>
+              <td>哈希表</td>
+              <td>无序</td>
+              <td>否</td>
+              <td>否</td>
+              <td>O(1)</td>
+              <td>O(1)</td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <thead>
+            <tr>
+              <th>映射</th>
+              <th>底层实现</th>
+              <th>是否有序</th>
+              <th>数值是否可以重复</th>
+              <th>能否更改数值</th>
+              <th>查询效率</th>
+              <th>增删效率</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>std::map</td>
+              <td>红黑树</td>
+              <td>key有序</td>
+              <td>key不可重复</td>
+              <td>key不可修改</td>
+              <td>O(logn)</td>
+              <td>O(logn)</td>
+            </tr>
+            <tr>
+              <td>std::multimap</td>
+              <td>红黑树</td>
+              <td>key有序</td>
+              <td>key可重复</td>
+              <td>key不可修改</td>
+              <td>O(log n)</td>
+              <td>O(log n)</td>
+            </tr>
+            <tr>
+              <td>std::unordered_map</td>
+              <td>哈希表</td>
+              <td>key无序</td>
+              <td>key不可重复</td>
+              <td>key不可修改</td>
+              <td>O(1)</td>
+              <td>O(1)</td>
+            </tr>
+          </tbody>
+        </table>
         <p>当我们要使用集合来解决哈希问题的时候，优先使用unordered_set，因为它的查询和增删效率是最优的；</p>
         <p>如果需要集合是有序的，那么就用set；</p>
         <p>如果要求不仅有序还要有重复数据的话，那么就用multiset；</p>
@@ -140,10 +224,10 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <p>结合例题的<a href="https://leetcode.cn/problems/valid-anagram/">LC242.有效的字母异位词</a>。将一个单词的所有字母进行重新排列得到新的单词，那我们可以将每个单词按照一定顺序排列后的值，作为关键码，相同的放到一起，就想到了用哈希表实现。</p>
           <p>区别之前的，这里的value值是vector存放多个string。</p>
         </blockquote>
-        <p><a href="https://leetcode.cn/problems/longest-consecutive-sequence">128. 最长连续序列</a></p>
+        <p><strong><a href="https://leetcode.cn/problems/longest-consecutive-sequence">128. 最长连续序列</a></strong></p>
         <blockquote>
-          <p>查找连续的序列，就是判断 X，X+1，X+2是否存在，时间复杂度O(n)，想到哈希表，顺表还能去重。</p>
-          <p>遍历哈希表中数，且判断每一个数X是新开始（X-1不存在）。</p>
+          <p>查找连续的序列，就是判断 X，X+1，X+2是否存在，时间复杂度O(n)，想到哈希表，顺便还能去重。</p>
+          <p>遍历哈希表中数，且判断每一个数X是新开始（X-1不存在，否则长度不如前者）。</p>
         </blockquote>
         <p><a href="https://leetcode.cn/problems/di-yi-ge-zhi-chu-xian-yi-ci-de-zi-fu-lcof/description/?envType=study-plan&#x26;id=lcof&#x26;plan=lcof&#x26;plan_progress=fi7d972">剑指 Offer 50. 第一个只出现一次的字符</a></p>
         <blockquote>
@@ -151,28 +235,12 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <p>第二次遍历，第一个true的，是第一个单个字符的答案。</p>
         </blockquote>
         <p><a href="https://leetcode.cn/problems/shu-zu-zhong-chu-xian-ci-shu-chao-guo-yi-ban-de-shu-zi-lcof/?envType=study-plan&#x26;id=lcof&#x26;plan=lcof&#x26;plan_progress=fi7d972">剑指 Offer 39. 数组中出现次数超过一半的</a></p>
-        <h2 id="对比"><a aria-hidden="true" tabindex="-1" href="#对比" class="anchor"><span class="icon icon-link"></span></a>对比</h2>
-        <ul>
-          <li>
-            <p>数组作为哈希表，比如<a href="https://leetcode.cn/problems/ransom-note/">LC383.赎金信</a>，我们知道明确的数组大小，可以将字母值转化为键值，对比用map，节省了开销。</p>
-          </li>
-          <li>
-            <p>set作为哈希表，比如<a href="https://leetcode.cn/problems/intersection-of-two-arrays/">LC349. 两个数组的交集</a>， 我们不清楚数组的大小情况，或者值的间隔特别大，会造成空间的浪费。此外数组可以set相比数组还可以去重。</p>
-          </li>
-          <li>
-            <p>map作为哈希表，<a href="https://leetcode.cn/problems/two-sum/">LC1.两数之和</a>，不仅需要判断key，还要记录位置，将位置作为value记录。</p>
-          </li>
-          <li>
-            <p>关键词，重复，查重。</p>
-          </li>
-        </ul>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
             <li><a href="#哈希表用法" class="tocs-link">哈希表用法</a></li>
             <li><a href="#例题" class="tocs-link">例题</a></li>
-            <li><a href="#对比" class="tocs-link">对比</a></li>
           </ol>
         </aside>
       </nav>
