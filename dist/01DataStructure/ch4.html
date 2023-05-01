@@ -120,29 +120,6 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </blockquote>
         <h2 id="例题"><a aria-hidden="true" tabindex="-1" href="#例题" class="anchor"><span class="icon icon-link"></span></a>例题</h2>
         <p><a href="https://leetcode.cn/problems/reverse-string/">344. 反转字符串</a></p>
-        <blockquote>
-          <ol>
-            <li>
-              <p>string 中本来就有reverse实现倒叙。</p>
-            </li>
-            <li>
-              <p>进行字符串数组的模拟，swap交换首尾的数据</p>
-            </li>
-            <li>
-              <p>补充：最基本的值交换是：中间值。这里补充一个用异或运算符实现。</p>
-              <p>首先有个原理需要知道：</p>
-              <p>若a^b=c,则c^b=a,c^a=b</p>
-              <p>可通过穷举法进行证明</p>
-              <p>
-                <img src="http://pic.shixiaocaia.fun/202209042108856.gif" alt="img">
-              </p>
-              <p>那么就可以通过以下方式进行两个变量的交换</p>
-              <p>a=a^b;</p>
-              <p>b=a^b;</p>
-              <p>a=a^b;</p>
-            </li>
-          </ol>
-        </blockquote>
         <p><a href="https://leetcode.cn/problems/reverse-string-ii/">541. 反转字符串 II</a></p>
         <blockquote>
           <p>用一个变量维护一个区间，当这个区间内字符大于等于k的字符时，将前k个字符翻转。</p>
@@ -150,9 +127,6 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <p>所以处理是判断[i, i + k]是否在区间内，区间移动是加2k长度。</p>
         </blockquote>
         <p><a href="https://leetcode.cn/problems/ti-huan-kong-ge-lcof/">剑指 Offer 05. 替换空格</a></p>
-        <blockquote>
-          <p>在中间插入一段字符串，就想到什么时候插入，就联想到了用双指针的思路，一个指针维护原来字符串判断什么时候插入，一个指针记录新字符串的位置。</p>
-        </blockquote>
         <p><a href="https://leetcode.cn/problems/reverse-words-in-a-string/">151. 反转字符串中的单词</a></p>
         <blockquote>
           <p>整体思路：删除空格，反转字符串，反转单词还原</p>
@@ -161,7 +135,15 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </blockquote>
         <p><a href="https://leetcode.cn/problems/repeated-substring-pattern/">459. 重复的子字符串</a></p>
         <blockquote>
-          <p>暴力遍历：截取字串，由于必须有2个以上的子串构成，因此字串长度一定小于等于size/2。判断子串是否和前部分字串相等，满足一种情况时即可，遍历完所有情况找不到时，即错误。</p>
+          <p>暴力遍历：</p>
+          <ol>
+            <li>
+              <p>截取字串，由于必须有2个以上的子串构成，因此字串长度一定小于等于size/2。</p>
+            </li>
+            <li>
+              <p>判断子串是否和前部分字串相等，满足一种情况时即可，遍历完所有情况找不到时，即错误。</p>
+            </li>
+          </ol>
         </blockquote>
         <p><a href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/">28. 找出字符串中第一个匹配项的下标</a></p>
         <blockquote>

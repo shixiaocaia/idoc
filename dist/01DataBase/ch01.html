@@ -75,6 +75,10 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       <markdown-style>
         <h1 id="sql"><a aria-hidden="true" tabindex="-1" href="#sql" class="anchor"><span class="icon icon-link"></span></a>SQL</h1>
         <h2 id="select"><a aria-hidden="true" tabindex="-1" href="#select" class="anchor"><span class="icon icon-link"></span></a>select</h2>
+        <ul>
+          <li>查询列表可以是：表中的字段、常量值、表达式、函数</li>
+          <li>查询结果是一个虚拟的表格</li>
+        </ul>
         <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">select</span> name from student<span class="token punctuation">;</span>     //检索单个列
 </span><span class="code-line line-number" line="2"><span class="token keyword">select</span> * from student<span class="token punctuation">;</span>        //检索整个表格
 </span><span class="code-line line-number" line="3"><span class="token keyword">select</span> name, <span class="token function">id</span> from student<span class="token punctuation">;</span> //选择多行

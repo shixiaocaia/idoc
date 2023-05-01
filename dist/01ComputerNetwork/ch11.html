@@ -104,12 +104,11 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <ul>
           <li>一般GET 的语义是从服务器获取指定的资源，包括文本、视频、页面等多个资源</li>
           <li>GET一般写在url中，浏览器会对url的长度有限制</li>
-          <li>一般情况下，安全和幂等关系，是否可以缓存</li>
         </ul>
         <h3 id="post"><a aria-hidden="true" tabindex="-1" href="#post" class="anchor"><span class="icon icon-link"></span></a>POST</h3>
         <ul>
           <li>POST 的语义是根据请求负荷（报文body）对指定的资源做出处理。</li>
-          <li>POST 请求携带数据的位置一般是写在报文 body 中，body 中的数据可以是任意格式的数据，只要客户端与服务端协商好即可，而且浏览器不会对 body 大小做限制。</li>
+          <li>POST 请求携带数据的位置一般是写在报文 body 中，body中的数据可以是任意格式的数据，只要客户端与服务端协商好即可，而且浏览器不会对 body 大小做限制。</li>
         </ul>
         <h3 id="对比"><a aria-hidden="true" tabindex="-1" href="#对比" class="anchor"><span class="icon icon-link"></span></a>对比</h3>
         <ul>
@@ -129,8 +128,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           </li>
         </ul>
         <h2 id="缓存原理"><a aria-hidden="true" tabindex="-1" href="#缓存原理" class="anchor"><span class="icon icon-link"></span></a>缓存原理</h2>
-        <p>对重复性的HTTP请求，每次得到数据都一样，把[请求 + 缓存]放在本地，下次直接读取本地数据。</p>
-        <p>HTTP 协议的头部有不少是针对缓存的字段，实现缓存技术都要用到<code>Cache-control</code>和<code>expires</code>来判断缓存的过期情况。、</p>
+        <p>对重复性的HTTP请求，每次得到数据都一样时，把[请求 + 缓存]放在本地，下次直接读取本地数据。</p>
+        <p>HTTP 协议的头部有不少是针对缓存的字段，实现缓存技术都要用到<code>Cache-control</code>和<code>expires</code>来判断缓存的过期情况。</p>
         <p>在第一次发送请求报文后，服务器在响应报文当中标注了<code>cache-control</code>，当报文过期后，向服务器发送请求时，会更新<code>cache-control</code>。</p>
         <p>
           <img src="..\img\http缓存.png" alt="img">
@@ -299,7 +298,35 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </blockquote>
         <h2 id="https-的应用数据是如何保证完整性的"><a aria-hidden="true" tabindex="-1" href="#https-的应用数据是如何保证完整性的" class="anchor"><span class="icon icon-link"></span></a>HTTPS 的应用数据是如何保证完整性的？</h2>
         <h2 id="https-一定安全可靠吗"><a aria-hidden="true" tabindex="-1" href="#https-一定安全可靠吗" class="anchor"><span class="icon icon-link"></span></a>HTTPS 一定安全可靠吗？</h2>
-        <h2 id=""><a aria-hidden="true" tabindex="-1" href="#" class="anchor"><span class="icon icon-link"></span></a></h2>
+        <h2 id="http11http2http3-演变"><a aria-hidden="true" tabindex="-1" href="#http11http2http3-演变" class="anchor"><span class="icon icon-link"></span></a>HTTP/1.1、HTTP/2、HTTP/3 演变</h2>
+        <h3 id="http11"><a aria-hidden="true" tabindex="-1" href="#http11" class="anchor"><span class="icon icon-link"></span></a>HTTP/1.1</h3>
+        <ul>
+          <li>对比1.0 增加了长连接方式，改善了性能开销</li>
+          <li>支持管道传输（但是一般浏览器并不支持</li>
+        </ul>
+        <h3 id="http2"><a aria-hidden="true" tabindex="-1" href="#http2" class="anchor"><span class="icon icon-link"></span></a>HTTP/2</h3>
+        <ul>
+          <li>头部压缩（1.1只能压缩body）：如果你同时发出多个请求，他们的头是一样的或是相似的，那么，协议会帮你<strong>消除重复的部分</strong>。</li>
+          <li>二进制格式：头信息和数据体都是二进制，并且统称为帧（frame），计算机可以解析和传输报文信息，并不需要转码操作。</li>
+          <li>并发传输：在1.1中基于请求-响应报文，完成一个请求与响应，才能处理响应下一个，但是如果中途有一个阻塞，那么会造成后续的断发。在2.0当中引入Stream概念，多个Stream复用在一条TCP连接当中。</li>
+          <li>服务器主动推送资源：客户端和服务器<strong>双方都可以建立 Stream</strong>，传输消息。比如在1.1当中html和css分别作请求和响应，在2.0服务端可以主动推送需要的css进行渲染。</li>
+        </ul>
+        <blockquote>
+          <p>但是2.0虽然通过Stream的并发解决了1.0的队头阻塞问题，但是基于TCP实现的面向字节流，当一个报文的前1个字节延迟到达时，其他字节存放在缓冲区，全部到达后应用层才能从内核当中拿到数据。</p>
+        </blockquote>
+        <h3 id="http3"><a aria-hidden="true" tabindex="-1" href="#http3" class="anchor"><span class="icon icon-link"></span></a>HTTP/3</h3>
+        <ul>
+          <li>1.1通过stream解决了请求的队头阻塞，但是没有解决响应的队头阻塞。</li>
+          <li>2通过多个请求复用一个 TCP 连接解决了 HTTP 的队头阻塞 ，但是一旦发生丢包，就会阻塞住所有的 HTTP 请求，这属于 TCP 层队头阻塞。</li>
+        </ul>
+        <p>HTTP/3把下层的TCP协议改成了UDP。</p>
+        <p>UDP 发送是不管顺序，也不管丢包的，所以不会出现像 HTTP/2 队头阻塞的问题。大家都知道 UDP 是不可靠传输的，但基于 UDP 的 <strong>QUIC 协议</strong> 可以实现类似 TCP 的可靠性传输。</p>
+        <p>QUIC 有以下 3 个特点。</p>
+        <ul>
+          <li>无队头阻塞：某个流发生丢包时，只会阻塞这个流，不会影响其他的。</li>
+          <li>更快的连接建立：需要 QUIC 协议握手，但是这个握手过程只需要 1 RTT，握手的目的是为确认双方的「连接 ID」，连接迁移就是基于连接 ID 实现的。</li>
+          <li>连接迁移</li>
+        </ul>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -349,7 +376,13 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             </li>
             <li><a href="#https-的应用数据是如何保证完整性的" class="tocs-link">HTTPS 的应用数据是如何保证完整性的？</a></li>
             <li><a href="#https-一定安全可靠吗" class="tocs-link">HTTPS 一定安全可靠吗？</a></li>
-            <li><a href="#" class="tocs-link"></a></li>
+            <li><a href="#http11http2http3-演变" class="tocs-link">HTTP/1.1、HTTP/2、HTTP/3 演变</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#http11" class="tocs-link">HTTP/1.1</a></li>
+                <li><a href="#http2" class="tocs-link">HTTP/2</a></li>
+                <li><a href="#http3" class="tocs-link">HTTP/3</a></li>
+              </ol>
+            </li>
           </ol>
         </aside>
       </nav>

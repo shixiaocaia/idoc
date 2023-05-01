@@ -30,28 +30,6 @@ void getnext(vector<int>& next, string& needle){
 
 [344. 反转字符串](https://leetcode.cn/problems/reverse-string/)
 
-> 1. string 中本来就有reverse实现倒叙。
->
-> 2. 进行字符串数组的模拟，swap交换首尾的数据
->
-> 3. 补充：最基本的值交换是：中间值。这里补充一个用异或运算符实现。
->
->    首先有个原理需要知道：
->
->    若a\^b=c,则c\^b=a,c\^a=b
->
->    可通过穷举法进行证明
->    
->    ![img](http://pic.shixiaocaia.fun/202209042108856.gif)
->
->    那么就可以通过以下方式进行两个变量的交换
->
->    a=a^b;
->
->    b=a^b;
->
->    a=a^b;
-
 [541. 反转字符串 II](https://leetcode.cn/problems/reverse-string-ii/)
 
 > 用一个变量维护一个区间，当这个区间内字符大于等于k的字符时，将前k个字符翻转。
@@ -62,9 +40,8 @@ void getnext(vector<int>& next, string& needle){
 
 [剑指 Offer 05. 替换空格](https://leetcode.cn/problems/ti-huan-kong-ge-lcof/)
 
-> 在中间插入一段字符串，就想到什么时候插入，就联想到了用双指针的思路，一个指针维护原来字符串判断什么时候插入，一个指针记录新字符串的位置。
-
 [151. 反转字符串中的单词](https://leetcode.cn/problems/reverse-words-in-a-string/)
+
 > 整体思路：删除空格，反转字符串，反转单词还原
 >
 > 删除空格，用双指针删除中间空间，在特判开头和末尾。
@@ -73,7 +50,11 @@ void getnext(vector<int>& next, string& needle){
 
 [459. 重复的子字符串](https://leetcode.cn/problems/repeated-substring-pattern/)
 
-> 暴力遍历：截取字串，由于必须有2个以上的子串构成，因此字串长度一定小于等于size/2。判断子串是否和前部分字串相等，满足一种情况时即可，遍历完所有情况找不到时，即错误。
+> 暴力遍历：
+>
+> 1. 截取字串，由于必须有2个以上的子串构成，因此字串长度一定小于等于size/2。
+>
+> 2. 判断子串是否和前部分字串相等，满足一种情况时即可，遍历完所有情况找不到时，即错误。
 
 [28. 找出字符串中第一个匹配项的下标](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/)
 
