@@ -5,6 +5,8 @@
 
 用一个前缀表`next`，当发现字符不匹配时，跳转至前面已经匹配的**最长前后缀**位置，而不用重新开始匹配，最坏情况是重头开始匹配字符串。
 
+其中n为文本串长度，m为模式串长度，因为在匹配的过程中，根据前缀表不断调整匹配的位置，可以看出匹配的过程是O(n)，之前还要单独生成next数组，时间复杂度是O(m)。所以整个KMP算法的时间复杂度是O(n+m)的。
+
 ### 如何求next数组
 
 ```cpp
@@ -13,7 +15,7 @@ void getnext(vector<int>& next, string& needle){
     next[0] = j;
     for(int i = 1; i < needle.size(); i++){
         while(j >= 0 && needle[i] != needle[j + 1]){ //字符不匹配
-            j = next[j];
+            j = next[j];//向前回退，回退到开头j = -1了不能重新开始，j就是前一个，比较的是j + 1
         }
 
         if(needle[i] == needle[j + 1]){ //字符匹配时
@@ -24,7 +26,7 @@ void getnext(vector<int>& next, string& needle){
 }
 ```
 
-> 从-1下标开始只是标记的手段。
+> 从-1下标开始只是标记的手段，我理解也是告诉我们0位置不可继续回退匹配。
 
 ## 例题
 

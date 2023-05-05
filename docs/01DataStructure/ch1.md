@@ -270,11 +270,9 @@ num[i + 1] = num[i] + diff[i + 1]; //diff[i] + k,导致num[i] + k,后面都加�
 
 ## 模拟
 
-> [LC59.螺旋矩阵2](https://leetcode.cn/problems/spiral-matrix-ii/)
->
-> [LC54.螺旋矩阵1](https://leetcode.cn/problems/spiral-matrix/)
->
-> 上述两题的边界条件判断
+[LC59.螺旋矩阵2](https://leetcode.cn/problems/spiral-matrix-ii/)
+
+[LC54.螺旋矩阵1](https://leetcode.cn/problems/spiral-matrix/)
 
 [1041.困于环中的机器人](https://leetcode.cn/problems/robot-bounded-in-circle/description/)
 
@@ -285,3 +283,8 @@ num[i + 1] = num[i] + diff[i + 1]; //diff[i] + k,导致num[i] + k,后面都加�
 > 如果指向南方，再经过一次必然会反向回到原文。
 >
 > 如果指向东西方，最多需要四次回到原处。
+
+[697.数组的度](https://leetcode.cn/problems/degree-of-an-array/)
+
+[448. 找到所有数组中消失的数字](https://leetcode.cn/problems/find-all-numbers-disappeared-in-an-array/description/)
+

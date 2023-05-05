@@ -85,13 +85,14 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <h1 id="字符串"><a aria-hidden="true" tabindex="-1" href="#字符串" class="anchor"><span class="icon icon-link"></span></a>字符串</h1>
         <h2 id="kmp"><a aria-hidden="true" tabindex="-1" href="#kmp" class="anchor"><span class="icon icon-link"></span></a>KMP</h2>
         <p>用一个前缀表<code>next</code>，当发现字符不匹配时，跳转至前面已经匹配的<strong>最长前后缀</strong>位置，而不用重新开始匹配，最坏情况是重头开始匹配字符串。</p>
+        <p>其中n为文本串长度，m为模式串长度，因为在匹配的过程中，根据前缀表不断调整匹配的位置，可以看出匹配的过程是O(n)，之前还要单独生成next数组，时间复杂度是O(m)。所以整个KMP算法的时间复杂度是O(n+m)的。</p>
         <h3 id="如何求next数组"><a aria-hidden="true" tabindex="-1" href="#如何求next数组" class="anchor"><span class="icon icon-link"></span></a>如何求next数组</h3>
         <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">void</span> <span class="token function">getnext</span><span class="token punctuation">(</span>vector<span class="token operator">&#x3C;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&#x26;</span> next<span class="token punctuation">,</span> string<span class="token operator">&#x26;</span> needle<span class="token punctuation">)</span><span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="2">    <span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
 </span><span class="code-line line-number" line="3">    next<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> j<span class="token punctuation">;</span>
 </span><span class="code-line line-number" line="4">    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&#x3C;</span> needle<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="5">        <span class="token keyword">while</span><span class="token punctuation">(</span>j <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&#x26;&#x26;</span> needle<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> needle<span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token comment">//字符不匹配</span>
-</span><span class="code-line line-number" line="6">            j <span class="token operator">=</span> next<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="6">            j <span class="token operator">=</span> next<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//向前回退，回退到开头j = -1了不能重新开始，j就是前一个，比较的是j + 1</span>
 </span><span class="code-line line-number" line="7">        <span class="token punctuation">}</span>
 </span><span class="code-line line-number" line="8">
 </span><span class="code-line line-number" line="9">        <span class="token keyword">if</span><span class="token punctuation">(</span>needle<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> needle<span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token comment">//字符匹配时</span>
@@ -105,7 +106,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     next[0] = j;
     for(int i = 1; i < needle.size(); i++){
         while(j >= 0 &#x26;&#x26; needle[i] != needle[j + 1]){ //字符不匹配
-            j = next[j];
+            j = next[j];//向前回退，回退到开头j = -1了不能重新开始，j就是前一个，比较的是j + 1
         }
 
         if(needle[i] == needle[j + 1]){ //字符匹配时
@@ -116,7 +117,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <blockquote>
-          <p>从-1下标开始只是标记的手段。</p>
+          <p>从-1下标开始只是标记的手段，我理解也是告诉我们0位置不可继续回退匹配。</p>
         </blockquote>
         <h2 id="例题"><a aria-hidden="true" tabindex="-1" href="#例题" class="anchor"><span class="icon icon-link"></span></a>例题</h2>
         <p><a href="https://leetcode.cn/problems/reverse-string/">344. 反转字符串</a></p>

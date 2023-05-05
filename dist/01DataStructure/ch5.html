@@ -110,39 +110,16 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <h2 id="例题"><a aria-hidden="true" tabindex="-1" href="#例题" class="anchor"><span class="icon icon-link"></span></a>例题</h2>
         <p><a href="https://leetcode.cn/problems/min-stack">155. 最小栈</a></p>
         <blockquote>
-          <p>双栈。</p>
+          <p>双栈，minst保存了每个数之前的最小值。</p>
         </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/implement-queue-using-stacks/">232. 用栈实现队列</a></strong></p>
+        <p><a href="https://leetcode.cn/problems/implement-queue-using-stacks/">232. 用栈实现队列</a></p>
+        <p><a href="https://leetcode.cn/problems/implement-stack-using-queues/">225. 用队列实现栈</a></p>
         <blockquote>
-          <p>使用双栈，一个为输入栈，一个为输出栈。</p>
-          <p>输入栈用来存放入队操作，输出栈在pop时，一一弹出栈顶元素。当输出栈为空时，需要将输入栈中的元素全部push到输出栈中（<strong>此时就完成了反向堆中数据，可以实现先进的先出</strong>）。这样才能保证队列的先进先出，移动到两次出栈就变转换了顺序！并且如果不是一起出栈，后续有其他元素push进来会扰乱顺序。</p>
-          <p>返回队列元素，用一次pop，再压入一次即可</p>
-          <p>判断队列为空，只要两个栈都为空时即为空。</p>
+          <p>来换交换得到最底部的元素值，</p>
         </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/implement-stack-using-queues/">225. 用队列实现栈</a></strong></p>
-        <blockquote>
-          <p>对比用栈实现队列，用队列模拟栈，第二个队列只是用来备份的，将前n-1个数备份，然后弹出栈顶元素，最后再还原回去。</p>
-          <p>那么栈顶元素，只要back一下即可。</p>
-          <p>判断为空的，只要判断第一个队列是否为空即可。</p>
-        </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/valid-parentheses/">20. 有效的括号</a></strong></p>
-        <blockquote>
-          <p>用来栈的先进后出，将左括号压入栈中，遇到右括号时如果前一个匹配则出栈，否则入栈。并且在此处"([)]"是无效字符串。</p>
-        </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/">1047. 删除字符串中的所有相邻重复项</a></strong></p>
-        <blockquote>
-          <p>类似括号匹配，匹配前一个字符是否相同，相同就出栈，否则入栈。最后将栈的字符出栈保存到的ans中，但是由于栈是后进先出，所以要反转字符串。</p>
-        </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/evaluate-reverse-polish-notation/">150. 逆波兰表达式求值</a></strong></p>
-        <blockquote>
-          <p>
-            昨天写的时候把字符也入栈，导致要判断复数情况，实际上读取tokens,在过程中遇到运算符时，弹出计算即可.
-            还有需要主要弹出顺序，先出栈的是被减数num1,再出栈是减数num2,最后应该num2-num1。
-          </p>
-        </blockquote>
-        <blockquote>
-          <p>PS: 这题不配是中等题吧。</p>
-        </blockquote>
+        <p><a href="https://leetcode.cn/problems/valid-parentheses/">20. 有效的括号</a></p>
+        <p><a href="https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/">1047. 删除字符串中的所有相邻重复项</a></p>
+        <p><a href="https://leetcode.cn/problems/evaluate-reverse-polish-notation/">150. 逆波兰表达式求值</a></p>
         <p><strong><a href="https://leetcode.cn/problems/sliding-window-maximum/">239. 滑动窗口最大值</a></strong></p>
         <blockquote>
           <p>单调队列，始终维护队列中是一个单调递减，在k区间范围内的最大值。使用deque来模拟。</p>

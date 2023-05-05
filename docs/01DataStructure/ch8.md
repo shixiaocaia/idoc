@@ -161,3 +161,6 @@ public:
 >3. 左右节点至少有一个有摄像头，覆盖状态
 >4. 头结点没有覆盖，最后特判下。
 
+[665.非递减数列](https://leetcode.cn/problems/non-decreasing-array/description/)
+
+> 每次看贪心题目都觉得自己是笨比。
