@@ -12,9 +12,8 @@ Do sth for fun
 
 - [写一份简历](https://www.mujicv.com/)
 
-### 编程语言 
+### C++ 
 
-**C ++**
 
 ✅黑马程序员C++课
 
@@ -30,7 +29,6 @@ Do sth for fun
 
 ⬜侯捷《内存管理与分析》
 
-**Go**
 
 ### 计算机网络
 
@@ -70,19 +68,16 @@ Do sth for fun
 
 ⬜黑马程序员Redis
 
-### 设计模式
+### To be continue
 
-- 熟悉单例、工厂，了解观察者、策略、模板方法等
+- 设计模式
+  - 熟悉单例、工厂，了解观察者、策略、模板方法等
 
-### 编译原理
+- 编译原理
+  - 龙书
 
-⬜龙书
-
----
-
-### 分布式系统管理
-
-⬜MIT6.824
+- 分布式系统管理
+  - MIT6.824
 
 ---
 
@@ -116,11 +111,11 @@ Do sth for fun
 
 ### 常见内容
 
-| 项目名                                                       | 关键词 |
-| ------------------------------------------------------------ | ------ |
-| [TinyWebServer](https://github.com/qinguoyi/TinyWebServer)   |        |
-| [JSON](https://github.com/miloyip/json-tutorial)             |        |
-| [TinySTL](https://github.com/Alinshans/MyTinySTL)            |        |
+|                            项目名                            | 关键词 |
+| :----------------------------------------------------------: | :----: |
+|  [TinyWebServer](https://github.com/qinguoyi/TinyWebServer)  |        |
+|       [JSON](https://github.com/miloyip/json-tutorial)       |        |
+|      [TinySTL](https://github.com/Alinshans/MyTinySTL)       |        |
 | [KV存储仓库](https://15445.courses.cs.cmu.edu/fall2022/project0/) |        |
 |                                                              |        |
 |                                                              |        |
