@@ -58,13 +58,7 @@ priority_queue< Node,vector< Node >,cmp > Q;
 
 **[239. 滑动窗口最大值](https://leetcode.cn/problems/sliding-window-maximum/)**
 
-> 单调队列，始终维护队列中是一个单调递减，在k区间范围内的最大值。使用deque来模拟。
->
-> 每次出队，是第i-k数，如果这个数在队中就出栈，并且最前面的数一定是最大，序号最靠前的数，不会出多的数值。
->
-> 每次入队，从后面，当大于队尾数时，就出队队尾这个值，这个值肯定不是区间内的次大值。
->
-> 记录答案，一定是队首的数。
+> 用双端队列模拟进出，维护一个单调队列，队首的元素一定是当前窗口中最大的值。
 
 **[347. 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/)**
 

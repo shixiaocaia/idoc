@@ -205,7 +205,31 @@ trusted-host = pypi.douban.com
   }
   ```
 
-  
 
-### 备份
+
+
+## Go
+
+1. 下载安装包
+
+2. 环境变量配置，使得所有代码布置到指定的GOPATH目录下
+
+   这些路径下又必须分别包含三个规定的目录：`src`、`pkg` 和 `bin`，这三个目录分别用于存放源码文件、包文件和可执行文件。
+
+3. 设置代理
+
+4. Vscode下安装Go插件，并ctrl + shift + p安装`go install`
+
+5. dlv错误时，`go env -w GOARCH=amd64`，dlv调试工具不支持386。
+
+- [参考文章](https://mp.weixin.qq.com/s/J01LY7s6xMB8Lk10sxTFhg)
+
+```bash
+go version
+go env
+# 查看配置环境
+
+go env -w GOPROXY=https://goproxy.cn,https://goproxy.io,direct
+# 配置代理
+```
 

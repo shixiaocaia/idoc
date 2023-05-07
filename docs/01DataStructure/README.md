@@ -17,6 +17,8 @@ LeetCode
 
 ✅[Hello 算法](https://www.hello-algo.com/)
 
+✅[有没有人一起刷LC](https://leetcode.cn/circle/article/48kq9d/)
+
 ---
 
 - 常见的思路：图论、DP、查找、排序、

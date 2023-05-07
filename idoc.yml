@@ -64,12 +64,11 @@ scope:
 menus:
   Home: index.html
   # Label: <URL> [scope]
-  Cpp: 00CPP/index.html
+  Go: 00Go/index.html
   DataStructure: 01DataStructure/index.html
-  OperatingSystem: 01OperatingSystem/index.html
   ComputerNetwrok: 01ComputerNetwork/index.html
   DataBase: 01DataBase/index.html
-  Webserver: 02MyWeb/index.html
+  OperatingSystem: 01OperatingSystem/index.html
   Other: 00Other/index.html
 
 ## Copy Assets

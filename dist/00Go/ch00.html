@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello world iDoc</title>
+    <meta name="description" content="对于导入的包，编译器会首先在GOROOT中寻找，随后会在项目所对应的GOPATH中寻找，最后才是在全局GOPATH中寻找，如果都无法找到，编译器将会报错。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="index.html" target="" class="active">Go</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../00Other/index.html" target="" class="">Other</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper">
+      <markdown-style>
+        <h1 id="hello-world"><a aria-hidden="true" tabindex="-1" href="#hello-world" class="anchor"><span class="icon icon-link"></span></a>Hello world</h1>
+        <h2 id="安装"><a aria-hidden="true" tabindex="-1" href="#安装" class="anchor"><span class="icon icon-link"></span></a>安装</h2>
+        <h2 id="导包"><a aria-hidden="true" tabindex="-1" href="#导包" class="anchor"><span class="icon icon-link"></span></a>导包</h2>
+        <p>对于导入的包，编译器会首先在<code>GOROOT</code>中寻找，随后会在项目所对应的<code>GOPATH</code>中寻找，最后才是在<code>全局GOPATH</code>中寻找，如果都无法找到，编译器将会报错。</p>
+        <blockquote>
+          <p><code>import</code>导入的源文件的相对路径，而不是包名，包名是文件中开始的<code>package main</code>。</p>
+          <ul>
+            <li>
+              <p>在同一个文件内，只存在一种包名</p>
+            </li>
+            <li>
+              <p>如果多个文件夹下有相同名字的package，它们其实是彼此无关的package</p>
+            </li>
+          </ul>
+        </blockquote>
+        <h2 id="声明"><a aria-hidden="true" tabindex="-1" href="#声明" class="anchor"><span class="icon icon-link"></span></a>声明</h2>
+        <h3 id="变量的定义"><a aria-hidden="true" tabindex="-1" href="#变量的定义" class="anchor"><span class="icon icon-link"></span></a>变量的定义</h3>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">var</span> a <span class="token builtin">int</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">var</span> b <span class="token builtin">float32</span>
+</span><span class="code-line line-number" line="3"><span class="token keyword">var</span> c<span class="token punctuation">,</span> d <span class="token builtin">float64</span>
+</span><span class="code-line line-number" line="4"><span class="token comment">//变量名写在类型的前面</span>
+</span><span class="code-line line-number" line="5"><span class="token comment">//可以一次性声明多个</span>
+</span><span class="code-line line-number" line="6"><span class="token comment">//不初始化，默认0</span>
+</span><span class="code-line line-number" line="7">
+</span><span class="code-line line-number" line="8">
+</span><span class="code-line line-number" line="9">e<span class="token punctuation">,</span>f <span class="token operator">:=</span> <span class="token number">9</span><span class="token punctuation">,</span><span class="token number">10</span>
+</span><span class="code-line line-number" line="10"><span class="token keyword">var</span> g <span class="token operator">=</span> <span class="token string">"Hello world"</span>
+</span><span class="code-line line-number" line="11"><span class="token comment">//:=类型自动推导</span>
+</span><span class="code-line line-number" line="12"><span class="token comment">//如果初始化了，不需要在声明变量类型</span>
+</span></code><input type="hidden" value="var a int
+var b float32
+var c, d float64
+//变量名写在类型的前面
+//可以一次性声明多个
+//不初始化，默认0
+
+
+e,f := 9,10
+var g = &#x22;Hello world&#x22;
+//:=类型自动推导
+//如果初始化了，不需要在声明变量类型
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="匿名变量"><a aria-hidden="true" tabindex="-1" href="#匿名变量" class="anchor"><span class="icon icon-link"></span></a>匿名变量</h3>
+        <p>标识符为<code>_</code>（下划线）的变量，是系统保留的匿名变量，在赋值后，会被立即释放，称之为匿名变量。其作用是变量占位符，对其变量赋值结构。通常会在批量赋值时使用。</p>
+        <p>例如，函数返回多个值，我们仅仅需要<strong>其中部分</strong>，则不需要的使用_来占位</p>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">    <span class="token boolean">_</span><span class="token punctuation">,</span>v<span class="token punctuation">,</span><span class="token boolean">_</span> <span class="token operator">:=</span> <span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="3">    fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="4"><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6"><span class="token keyword">func</span> <span class="token function">getData</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">(</span><span class="token builtin">int</span><span class="token punctuation">,</span><span class="token builtin">int</span><span class="token punctuation">,</span><span class="token builtin">int</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="7">	<span class="token keyword">return</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">,</span> <span class="token number">8</span>
+</span><span class="code-line line-number" line="8"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="func main(){
+    _,v,_ := getData()
+    fmt.Println(v)
+}
+
+func getData() (int,int,int){
+	return 2, 4, 8
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="常量"><a aria-hidden="true" tabindex="-1" href="#常量" class="anchor"><span class="icon icon-link"></span></a>常量</h3>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">const</span> str <span class="token operator">=</span> <span class="token string">"Hello world"</span>
+</span></code><input type="hidden" value="const str = &#x22;Hello world&#x22;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>常量不能用<code>:=</code>标识。</p>
+        <h2 id="判断"><a aria-hidden="true" tabindex="-1" href="#判断" class="anchor"><span class="icon icon-link"></span></a>判断</h2>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">func</span> <span class="token function">pow</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> n<span class="token punctuation">,</span> lim <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">	<span class="token keyword">if</span> v <span class="token operator">:=</span> math<span class="token punctuation">.</span><span class="token function">Pow</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span> v <span class="token operator">&#x3C;</span> lim <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="3">	    <span class="token keyword">return</span> v
+</span><span class="code-line line-number" line="4">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="5">	<span class="token keyword">return</span> lim
+</span><span class="code-line line-number" line="6"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="func pow(x, n, lim float64) float64 {
+	if v := math.Pow(x, n); v < lim {
+	    return v
+	}
+	return lim
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>条件语句不需要小括号，但是大括号还是必须的</li>
+          <li>判断条件之前可以写一个简单的语句，用分号隔开，作用域就在当前的if-else当中</li>
+        </ul>
+        <h2 id="循环"><a aria-hidden="true" tabindex="-1" href="#循环" class="anchor"><span class="icon icon-link"></span></a>循环</h2>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">	sum <span class="token operator">:=</span> <span class="token number">0</span>
+</span><span class="code-line line-number" line="3">	<span class="token keyword">for</span> i <span class="token operator">:=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&#x3C;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="4">		sum <span class="token operator">+=</span> i
+</span><span class="code-line line-number" line="5">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="6">	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>sum<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="7"><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="8">
+</span><span class="code-line line-number" line="9">
+</span><span class="code-line line-number" line="10"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="11">	sum <span class="token operator">:=</span> <span class="token number">1</span>
+</span><span class="code-line line-number" line="12">	<span class="token keyword">for</span> sum <span class="token operator">&#x3C;</span> <span class="token number">1000</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="13">		sum <span class="token operator">+=</span> sum
+</span><span class="code-line line-number" line="14">	<span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="15">	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span>sum<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="16"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="func main() {
+	sum := 0
+	for i := 0; i < 10; i++ {
+		sum += i
+	}
+	fmt.Println(sum)
+}
+
+
+func main() {
+	sum := 1
+	for sum < 1000 {
+		sum += sum
+	}
+	fmt.Println(sum)
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>只有一种循环，同样没有小括号</li>
+        </ul>
+        <h2 id="函数"><a aria-hidden="true" tabindex="-1" href="#函数" class="anchor"><span class="icon icon-link"></span></a>函数</h2>
+        <p>在Golang的函数定义中，所有的函数都以<code>func</code>开头，并且Golang命名推荐使用驼峰命名法。</p>
+        <blockquote>
+          <p>注意，在Golang的函数中，如果首字母是小写，则只能在包内使用；如果首字母是大写，则可以在包外被引入使用。可以理解为，使用小写的函数，是<code>private</code>的，使用大写的函数，是<code>public</code>的。</p>
+        </blockquote>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">func</span> <span class="token function">add</span><span class="token punctuation">(</span>x <span class="token builtin">int</span><span class="token punctuation">,</span> y <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token builtin">int</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">	<span class="token keyword">return</span> x <span class="token operator">+</span> y
+</span><span class="code-line line-number" line="3"><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="6">	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token number">42</span><span class="token punctuation">,</span> <span class="token number">13</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="7"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="func add(x int, y int) int {
+	return x + y
+}
+
+func main() {
+	fmt.Println(add(42, 13))
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>返回值可以返回多个值</li>
+          <li><code>func</code> + 函数名 + 参数 + 返回类型</li>
+        </ul>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">func</span> <span class="token function">split</span><span class="token punctuation">(</span>sum <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">(</span>x<span class="token punctuation">,</span> y <span class="token builtin">int</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">	x <span class="token operator">=</span> sum <span class="token operator">*</span> <span class="token number">4</span> <span class="token operator">/</span> <span class="token number">9</span>
+</span><span class="code-line line-number" line="3">	y <span class="token operator">=</span> sum <span class="token operator">-</span> x
+</span><span class="code-line line-number" line="4">	<span class="token keyword">return</span>
+</span><span class="code-line line-number" line="5"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="func split(sum int) (x, y int) {
+	x = sum * 4 / 9
+	y = sum - x
+	return
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>默认会返回所有已经定义的变量值</p>
+        <h2 id="defer"><a aria-hidden="true" tabindex="-1" href="#defer" class="anchor"><span class="icon icon-link"></span></a>defer</h2>
+        <p><code>defer</code>语句会将函数推迟到外层函数返回之后执行。 推迟调用的函数其<strong>参数会立即求值</strong>，但直到外层函数返回前该函数都不会被调用。</p>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">	<span class="token keyword">defer</span> fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"world"</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4">	fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token string">"hello"</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="5"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="func main() {
+	defer fmt.Println(&#x22;world&#x22;)
+
+	fmt.Println(&#x22;hello&#x22;)
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <blockquote>
+          <p><code>defer</code>后面必须是函数调用，不能是其他语句。</p>
+          <p>使用场景：文件的关闭，或数据库连接的释放等，这样打开和关闭的代码写在一起，既可以使得代码更加的整洁，也可以防止出现开发者在写了长长的业务代码后，忘记关闭的情况。</p>
+          <p>底层实现：将后面的函数调用的地址压栈，后执行。</p>
+        </blockquote>
+        <h2 id="指针"><a aria-hidden="true" tabindex="-1" href="#指针" class="anchor"><span class="icon icon-link"></span></a>指针</h2>
+        <p>用<code>&#x26;</code>取地址，用<code>*</code>取地址中的值，但是没有指针运算。</p>
+        <p>在打印时，用<code>&#x26;</code>特殊标记，这是一个指针变量。</p>
+        <h2 id="数组"><a aria-hidden="true" tabindex="-1" href="#数组" class="anchor"><span class="icon icon-link"></span></a>数组</h2>
+        <p>常见的数组定义是</p>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">var</span> a <span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token builtin">int</span>
+</span></code><input type="hidden" value="var a [10]int
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="切片"><a aria-hidden="true" tabindex="-1" href="#切片" class="anchor"><span class="icon icon-link"></span></a>切片</h3>
+        <p>将一个数组按需切出自己所需的部分，很像是python的一部分。</p>
+        <ul>
+          <li>
+            <p>每个数组的大小是固定的，通过切片的方式实现动态数组，因此更加常用。</p>
+          </li>
+          <li>
+            <p>Golang中的切片，不是拷贝，而是定义了新的指针，指向原来数组位置，所以会修改原来的值。</p>
+          </li>
+          <li>
+            <p>切片可以用append增加元素。但是，如果此时底层数组容量不够，此时切片将会指向一个重新分配空间后进行拷贝的数组。</p>
+          </li>
+        </ul>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1">a<span class="token punctuation">[</span>low<span class="token punctuation">:</span> high<span class="token punctuation">]</span> <span class="token comment">// low到high，不包括hign位置变量</span>
+</span></code><input type="hidden" value="a[low: high] // low到high，不包括hign位置变量
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="make"><a aria-hidden="true" tabindex="-1" href="#make" class="anchor"><span class="icon icon-link"></span></a>make</h3>
+        <p>切片可以用内建函数 make 来创建，这也是你创建动态数组的方式。</p>
+        <blockquote>
+          <p>在此之前需要解释两个定义，len（长度）和cap（容量）。 len是数组的长度，指的是这个数组在定义的时候，所约定的长度。 cap是数组的容量，指的是底层数组的长度，也可以说是原数组在内存中的长度。 在前文中所提到的切片，如果我定义了一个str[0,0]的切片，此时的长度为0，但是容量依旧还是5。</p>
+        </blockquote>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1">a <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="2"><span class="token comment">// len(a) = cap(a) = 5</span>
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4">b <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">5</span><span class="token punctuation">)</span> <span class="token comment">// len(b)=0, cap(b)=5</span>
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6">b <span class="token operator">=</span> b<span class="token punctuation">[</span><span class="token punctuation">:</span><span class="token function">cap</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token comment">// len(b)=5, cap(b)=5</span>
+</span><span class="code-line line-number" line="7">b <span class="token operator">=</span> b<span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">:</span><span class="token punctuation">]</span>      <span class="token comment">// len(b)=4, cap(b)=4</span>
+</span></code><input type="hidden" value="a := make([]int, 5)
+// len(a) = cap(a) = 5
+
+b := make([]int, 0, 5) // len(b)=0, cap(b)=5
+
+b = b[:cap(b)] // len(b)=5, cap(b)=5
+b = b[1:]      // len(b)=4, cap(b)=4
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <blockquote>
+          <p>len，cap的区别</p>
+        </blockquote>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#安装" class="tocs-link">安装</a></li>
+            <li><a href="#导包" class="tocs-link">导包</a></li>
+            <li><a href="#声明" class="tocs-link">声明</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#变量的定义" class="tocs-link">变量的定义</a></li>
+                <li><a href="#匿名变量" class="tocs-link">匿名变量</a></li>
+                <li><a href="#常量" class="tocs-link">常量</a></li>
+              </ol>
+            </li>
+            <li><a href="#判断" class="tocs-link">判断</a></li>
+            <li><a href="#循环" class="tocs-link">循环</a></li>
+            <li><a href="#函数" class="tocs-link">函数</a></li>
+            <li><a href="#defer" class="tocs-link">defer</a></li>
+            <li><a href="#指针" class="tocs-link">指针</a></li>
+            <li><a href="#数组" class="tocs-link">数组</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#切片" class="tocs-link">切片</a></li>
+                <li><a href="#make" class="tocs-link">make</a></li>
+              </ol>
+            </li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>
