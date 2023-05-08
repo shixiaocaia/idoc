@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>环境配置 iDoc</title>
+    <meta name="description" content="docker必须部署在linux内核的系统上，所以如果windows想安装,需要先安装一个linux虚拟机,然后再在虚拟机中运行，而wsl中安装Ubuntu就相当于安装了虚拟机，wsl没有linux环境就不能正确使用docker。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00Go/index.html" target="" class="">Go</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="index.html" target="" class="active">Other</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <a href="environment.html" class="">配个环境</a>
+            <a href="vim.html" class="">Vim</a>
+            <a href="git.html" class="">Git</a>
+            <a href="shell.html" class="">Shell</a>
+            <a href="docker.html" class="">Docker</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="环境配置"><a aria-hidden="true" tabindex="-1" href="#环境配置" class="anchor"><span class="icon icon-link"></span></a>环境配置</h1>
+        <h2 id="idoc环境"><a aria-hidden="true" tabindex="-1" href="#idoc环境" class="anchor"><span class="icon icon-link"></span></a>iDoc环境</h2>
+        <ul>
+          <li><a href="http://nodejs.org/">Node.js</a> (版本需不低于 14，建议使用 Node.js <code>14+</code> 及以上版本)</li>
+          <li>使用 npm 安装 idoc：<code>npm install -g idoc</code></li>
+        </ul>
+        <h2 id="vm_ubuntu-1804"><a aria-hidden="true" tabindex="-1" href="#vm_ubuntu-1804" class="anchor"><span class="icon icon-link"></span></a>VM_ubuntu 18.04</h2>
+        <h3 id="磁盘空间扩展问题"><a aria-hidden="true" tabindex="-1" href="#磁盘空间扩展问题" class="anchor"><span class="icon icon-link"></span></a>磁盘空间扩展问题</h3>
+        <ul>
+          <li>
+            <p>虚拟机设置中扩展磁盘空间</p>
+          </li>
+          <li>
+            <p>重新打开后黑屏</p>
+            <ul>
+              <li>
+                <p>进入ubuntu的bios模式进行选择CD启动，使用对象的ISO镜像文件，设备状态设置为<code>启动时连接</code></p>
+              </li>
+              <li>
+                <p>来不及选择BIOS界面，可以在虚拟机磁盘文件中，找到<code>（后缀为.vmx）</code>的文件</p>
+                <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token assign-left variable">bios.forcesetuponce</span><span class="token operator">=</span>“TRUE”
+</span><span class="code-line line-number" line="2"><span class="token assign-left variable">bios.bootdelay</span><span class="token operator">=</span>“5000” <span class="token comment"># 延长时间</span>
+</span></code><input type="hidden" value="bios.forcesetuponce=“TRUE”
+bios.bootdelay=“5000” # 延长时间
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+              </li>
+              <li>
+                <p>重新启动虚拟机，进入BIOS设置界面，切换到Boot下，通过键盘上"Shift"+"="将CD-ROM Drive移到最上面。</p>
+              </li>
+              <li>
+                <p>保存设置重新启动，进入系统重新分配</p>
+              </li>
+              <li>
+                <p>重新进入系统，此时系统显示Welcom界面，选择Try Ubuntu</p>
+              </li>
+              <li>
+                <p>搜索软件GParted，打开该软件，此时会显示新扩展的20G未分配空间</p>
+              </li>
+              <li>
+                <p>重新启动，取消镜像文件的<code>启动时连接</code></p>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p><a href="https://www.jianshu.com/p/5c483f6b53ab">参考文章</a></p>
+          </li>
+        </ul>
+        <h2 id="docker"><a aria-hidden="true" tabindex="-1" href="#docker" class="anchor"><span class="icon icon-link"></span></a>Docker</h2>
+        <p><strong>docker必须部署在linux内核的系统上</strong>，所以如果windows想安装,需要先安装一个linux虚拟机,然后再在虚拟机中运行，而wsl中安装Ubuntu就相当于安装了虚拟机，wsl没有linux环境就不能正确使用docker。</p>
+        <p><strong>网络问题</strong>：<code>netsh winsock reset</code></p>
+        <p>每次开机以管理员方式自动执行一次该命令。</p>
+        <p><strong>让所有程序都默认以管理员身份运行</strong></p>
+        <p>专业版系统具体步骤如下:</p>
+        <blockquote>
+          <p>
+            使用小娜搜索 secpol 或 “本地安全策略” （或运行 secpol.msc ），右键选择以管理员身份打开（或许需要）；
+            展开 本地策略，选择 安全选项，在右边找到“用户帐户控制：以管理员批准模式运行所有管理员”，双击它，将本地安全设置更改为“已禁用”；
+            然后重新启动计算机即可
+            完成操作后，通过 Win + R 执行命令 cmd 会发现输入框下面有一行小字”以管理员身份运行”
+          </p>
+        </blockquote>
+        <p>家庭版系统步骤如下(如果是家庭版用户没有组策略是无法像上述的专业版系统一样操作的):</p>
+        <blockquote>
+          <p>
+            打开注册表编辑器(运行 regedit)，展开注册表到 HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System ，选择项 System 后，在右侧找到 EnableLUA ，将其值更改为0；
+            然后重新启动计算机即可。
+            完成操作后，通过 Win + R 执行命令 cmd 会发现输入框下面有一行小字”以管理员身份运行”
+          </p>
+        </blockquote>
+        <p><strong>开机自动执行命令</strong></p>
+        <blockquote>
+          <p>
+            win + r 打开命令行
+            输入 shell:startup
+            回车
+            进入一个文件夹
+            新建一个cmd脚本，如：netsh_winsock_reset.cmd，内容如下：
+            <code>netsh winsock reset</code>
+          </p>
+        </blockquote>
+        <h2 id="anaconda"><a aria-hidden="true" tabindex="-1" href="#anaconda" class="anchor"><span class="icon icon-link"></span></a>Anaconda</h2>
+        <ul>
+          <li><a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/">Anaconda下载</a>，这里选择的是5.0（python对应3.6）</li>
+        </ul>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">conda <span class="token parameter variable">--version</span> 
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3">conda <span class="token function">install</span> pip   <span class="token comment"># 安装pip命令</span>
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6">conda upgrade <span class="token parameter variable">--all</span> <span class="token comment"># 所有工具包进行升级</span>
+</span><span class="code-line line-number" line="7">
+</span></code><input type="hidden" value="conda --version 
+
+conda install pip   # 安装pip命令
+
+
+conda upgrade --all # 所有工具包进行升级
+
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>
+            <p>anaconda navigator启动时一直卡在 loading applications 页面</p>
+            <ul>
+              <li>
+                <p>
+                  在安装目录找到D:\anaconda\Lib\site-packages\anaconda_navigator\api
+                  然后打开conda_api.py，
+                  在1358行找到data = yaml.load(f)，将其改为data = yaml.safeload(f)
+                  猜测为保证代码的安全性，因为关闭防火墙也可以作为一个可行操作
+                </p>
+              </li>
+              <li>
+                <p>关闭防火墙</p>
+              </li>
+              <li>
+                <p>管理员运行</p>
+              </li>
+              <li>
+                <p>改</p>
+                <ul>
+                  <li>
+                    <p>按ctrl+alt+delete打开任务管理器 ，在进程里把python都结束。</p>
+                  </li>
+                  <li>
+                    <p>打开Anaconda prompt ,输入anaconda-navigator,报错显示'str' object has no attribute 'get'（忘记截图了）</p>
+                  </li>
+                  <li>
+                    <p>去自己安装anaconda的路径下修改anaconda_api.py文件</p>
+                  </li>
+                  <li>
+                    <p>打开后做大概在800多行找到如下语句做如下修改保存。</p>
+                    <p>把versions=[vsdata.get('productVersion')],改成versions=["1b8e8302e405050205e69b59abb3559592bb9e60"],</p>
+                    <p>再次运行Anaconda navigator就可以正常打开了</p>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <p>管理虚拟环境</p>
+          </li>
+          <li>
+            <p>
+              永久指定pip默认安装源
+              直接在user目录中创建一个pip目录，如：C:\Users\用户名\pip,创建完后再pip 目 录下新建文件pip.ini，添加以下内容：
+            </p>
+          </li>
+        </ul>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">[</span>gobal<span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3"><span class="token function">timeout</span> <span class="token operator">=</span> <span class="token number">6000</span>
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5">index-url <span class="token operator">=</span> http://pypi.douban.com/simple/
+</span><span class="code-line line-number" line="6">
+</span><span class="code-line line-number" line="7">trusted-host <span class="token operator">=</span> pypi.douban.com
+</span></code><input type="hidden" value="[gobal]
+
+timeout = 6000
+
+index-url = http://pypi.douban.com/simple/
+
+trusted-host = pypi.douban.com
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="vscode"><a aria-hidden="true" tabindex="-1" href="#vscode" class="anchor"><span class="icon icon-link"></span></a>VScode</h2>
+        <h3 id="配置c"><a aria-hidden="true" tabindex="-1" href="#配置c" class="anchor"><span class="icon icon-link"></span></a>配置C++</h3>
+        <ul>
+          <li>
+            <p>下载MinGW</p>
+            <ul>
+              <li><a href="https://sourceforge.net/projects/mingw-w64/files/">下载文件</a>：进入网站后不要点击 "Download Lasted Version"，往下滑，找到最新版的 "x86_64-posix-seh"。</li>
+              <li>解压到合适位置</li>
+            </ul>
+          </li>
+          <li>
+            <p>配置环境变量：添加<code>mingw64\bin</code>到<code>Path</code>当中</p>
+            <ul>
+              <li><code>cmd</code>输入<code>g++</code>得到<code>g++: fatal error: no input files</code></li>
+            </ul>
+          </li>
+          <li>
+            <p>.cpp文件配置C++环境</p>
+            <ul>
+              <li>进入调试界面添加配置环境，选择 C++(GDB/LLDB)，再选择 g++.exe，之后会自动生成 launch.json 配置文件</li>
+              <li>编辑 launch.json 配置文件</li>
+            </ul>
+            <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">    // 使用 IntelliSense 了解相关属性。 
+</span><span class="code-line line-number" line="3">    // 悬停以查看现有属性的描述。
+</span><span class="code-line line-number" line="4">    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid<span class="token operator">=</span><span class="token number">830387</span>
+</span><span class="code-line line-number" line="5">    <span class="token string">"version"</span><span class="token builtin class-name">:</span> <span class="token string">"0.2.0"</span>,
+</span><span class="code-line line-number" line="6">    <span class="token string">"configurations"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+</span><span class="code-line line-number" line="7">        <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="8">            <span class="token string">"name"</span><span class="token builtin class-name">:</span> <span class="token string">"g++.exe - 生成和调试活动文件"</span>,
+</span><span class="code-line line-number" line="9">            <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"cppdbg"</span>,
+</span><span class="code-line line-number" line="10">            <span class="token string">"request"</span><span class="token builtin class-name">:</span> <span class="token string">"launch"</span>,
+</span><span class="code-line line-number" line="11">            <span class="token string">"program"</span><span class="token builtin class-name">:</span> <span class="token string">"<span class="token variable">${fileDirname}</span><span class="token entity" title="\\">\\</span><span class="token variable">${fileBasenameNoExtension}</span>.exe"</span>,
+</span><span class="code-line line-number" line="12">            <span class="token string">"args"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>,
+</span><span class="code-line line-number" line="13">            <span class="token string">"stopAtEntry"</span><span class="token builtin class-name">:</span> false,
+</span><span class="code-line line-number" line="14">            <span class="token string">"cwd"</span><span class="token builtin class-name">:</span> <span class="token string">"<span class="token variable">${fileDirname}</span>"</span>,
+</span><span class="code-line line-number" line="15">            <span class="token string">"environment"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span><span class="token punctuation">]</span>,
+</span><span class="code-line line-number" line="16">            <span class="token string">"externalConsole"</span><span class="token builtin class-name">:</span> true, // 修改此项为true,运行时可以弹出console终端
+</span><span class="code-line line-number" line="17">            <span class="token string">"preLaunchTask"</span><span class="token builtin class-name">:</span> <span class="token string">"task g++"</span>,
+</span><span class="code-line line-number" line="18">            <span class="token string">"MIMode"</span><span class="token builtin class-name">:</span> <span class="token string">"gdb"</span>,
+</span><span class="code-line line-number" line="19">            <span class="token string">"miDebuggerPath"</span><span class="token builtin class-name">:</span> <span class="token string">"C:<span class="token entity" title="\\">\\</span>SoftWare<span class="token entity" title="\\">\\</span>Code_env<span class="token entity" title="\\">\\</span>mingw64<span class="token entity" title="\\">\\</span>bin<span class="token entity" title="\\">\\</span>gdb.exe"</span>, //修改为对应的mingw64目录
+</span><span class="code-line line-number" line="20">            <span class="token string">"setupCommands"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+</span><span class="code-line line-number" line="21">                <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="22">                    <span class="token string">"description"</span><span class="token builtin class-name">:</span> <span class="token string">"为 gdb 启用整齐打印"</span>,
+</span><span class="code-line line-number" line="23">                    <span class="token string">"text"</span><span class="token builtin class-name">:</span> <span class="token string">"-enable-pretty-printing"</span>,
+</span><span class="code-line line-number" line="24">                    <span class="token string">"ignoreFailures"</span><span class="token builtin class-name">:</span> <span class="token boolean">true</span>
+</span><span class="code-line line-number" line="25">                <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="26">            <span class="token punctuation">]</span>,
+</span><span class="code-line line-number" line="27">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="28">    <span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="29"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    &#x22;version&#x22;: &#x22;0.2.0&#x22;,
+    &#x22;configurations&#x22;: [
+        {
+            &#x22;name&#x22;: &#x22;g++.exe - 生成和调试活动文件&#x22;,
+            &#x22;type&#x22;: &#x22;cppdbg&#x22;,
+            &#x22;request&#x22;: &#x22;launch&#x22;,
+            &#x22;program&#x22;: &#x22;${fileDirname}\\${fileBasenameNoExtension}.exe&#x22;,
+            &#x22;args&#x22;: [],
+            &#x22;stopAtEntry&#x22;: false,
+            &#x22;cwd&#x22;: &#x22;${fileDirname}&#x22;,
+            &#x22;environment&#x22;: [],
+            &#x22;externalConsole&#x22;: true, // 修改此项为true,运行时可以弹出console终端
+            &#x22;preLaunchTask&#x22;: &#x22;task g++&#x22;,
+            &#x22;MIMode&#x22;: &#x22;gdb&#x22;,
+            &#x22;miDebuggerPath&#x22;: &#x22;C:\\SoftWare\\Code_env\\mingw64\\bin\\gdb.exe&#x22;, //修改为对应的mingw64目录
+            &#x22;setupCommands&#x22;: [
+                {
+                    &#x22;description&#x22;: &#x22;为 gdb 启用整齐打印&#x22;,
+                    &#x22;text&#x22;: &#x22;-enable-pretty-printing&#x22;,
+                    &#x22;ignoreFailures&#x22;: true
+                }
+            ],
+        }
+    ]
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+            <ul>
+              <li>返回.cpp文件，按F5进行调试，会弹出找不到任务"task g++"，选择 "配置任务"，会自动生成 tasks.json 文件</li>
+              <li>编辑 tasks.json 文件</li>
+            </ul>
+            <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">    <span class="token string">"version"</span><span class="token builtin class-name">:</span> <span class="token string">"2.0.0"</span>,
+</span><span class="code-line line-number" line="3">    <span class="token string">"tasks"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+</span><span class="code-line line-number" line="4">        <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="5">            <span class="token string">"type"</span><span class="token builtin class-name">:</span> <span class="token string">"shell"</span>,
+</span><span class="code-line line-number" line="6">            <span class="token string">"label"</span><span class="token builtin class-name">:</span> <span class="token string">"task g++"</span>,
+</span><span class="code-line line-number" line="7">            <span class="token string">"command"</span><span class="token builtin class-name">:</span> <span class="token string">"C:<span class="token entity" title="\\">\\</span>SoftWare<span class="token entity" title="\\">\\</span>Code_env<span class="token entity" title="\\">\\</span>mingw64<span class="token entity" title="\\">\\</span>bin<span class="token entity" title="\\">\\</span>g++.exe"</span>, //更新g++路径
+</span><span class="code-line line-number" line="8">            <span class="token string">"args"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+</span><span class="code-line line-number" line="9">                <span class="token string">"-g"</span>,
+</span><span class="code-line line-number" line="10">                <span class="token string">"<span class="token variable">${file}</span>"</span>,
+</span><span class="code-line line-number" line="11">                <span class="token string">"-o"</span>,
+</span><span class="code-line line-number" line="12">                <span class="token string">"<span class="token variable">${fileDirname}</span><span class="token entity" title="\\">\\</span><span class="token variable">${fileBasenameNoExtension}</span>.exe"</span>
+</span><span class="code-line line-number" line="13">            <span class="token punctuation">]</span>,
+</span><span class="code-line line-number" line="14">            <span class="token string">"options"</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="15">                <span class="token string">"cwd"</span><span class="token builtin class-name">:</span> <span class="token string">"<span class="token variable">${workspaceFolder}</span>"</span>
+</span><span class="code-line line-number" line="16">            <span class="token punctuation">}</span>,
+</span><span class="code-line line-number" line="17">            <span class="token string">"problemMatcher"</span><span class="token builtin class-name">:</span> <span class="token punctuation">[</span>
+</span><span class="code-line line-number" line="18">                <span class="token string">"<span class="token variable">$gcc</span>"</span>
+</span><span class="code-line line-number" line="19">            <span class="token punctuation">]</span>,
+</span><span class="code-line line-number" line="20">            <span class="token string">"group"</span><span class="token builtin class-name">:</span> <span class="token string">"build"</span>,
+</span><span class="code-line line-number" line="21">            <span class="token string">"presentation"</span><span class="token builtin class-name">:</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="22">                <span class="token string">"panel"</span><span class="token builtin class-name">:</span> <span class="token string">"shared"</span>
+</span><span class="code-line line-number" line="23">            <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="24">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="25">    <span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="26"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="{
+    &#x22;version&#x22;: &#x22;2.0.0&#x22;,
+    &#x22;tasks&#x22;: [
+        {
+            &#x22;type&#x22;: &#x22;shell&#x22;,
+            &#x22;label&#x22;: &#x22;task g++&#x22;,
+            &#x22;command&#x22;: &#x22;C:\\SoftWare\\Code_env\\mingw64\\bin\\g++.exe&#x22;, //更新g++路径
+            &#x22;args&#x22;: [
+                &#x22;-g&#x22;,
+                &#x22;${file}&#x22;,
+                &#x22;-o&#x22;,
+                &#x22;${fileDirname}\\${fileBasenameNoExtension}.exe&#x22;
+            ],
+            &#x22;options&#x22;: {
+                &#x22;cwd&#x22;: &#x22;${workspaceFolder}&#x22;
+            },
+            &#x22;problemMatcher&#x22;: [
+                &#x22;$gcc&#x22;
+            ],
+            &#x22;group&#x22;: &#x22;build&#x22;,
+            &#x22;presentation&#x22;: {
+                &#x22;panel&#x22;: &#x22;shared&#x22;
+            }
+        }
+    ]
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+          </li>
+        </ul>
+        <h2 id="go"><a aria-hidden="true" tabindex="-1" href="#go" class="anchor"><span class="icon icon-link"></span></a>Go</h2>
+        <ol>
+          <li>
+            <p>下载安装包</p>
+          </li>
+          <li>
+            <p>环境变量配置，使得所有代码布置到指定的GOPATH目录下</p>
+            <p>这些路径下又必须分别包含三个规定的目录：<code>src</code>、<code>pkg</code> 和 <code>bin</code>，这三个目录分别用于存放源码文件、包文件和可执行文件。</p>
+          </li>
+          <li>
+            <p>设置代理</p>
+          </li>
+          <li>
+            <p>Vscode下安装Go插件，并ctrl + shift + p安装<code>go install</code></p>
+          </li>
+          <li>
+            <p>dlv错误时，<code>go env -w GOARCH=amd64</code>，dlv调试工具不支持386。</p>
+          </li>
+        </ol>
+        <ul>
+          <li><a href="https://mp.weixin.qq.com/s/J01LY7s6xMB8Lk10sxTFhg">参考文章</a></li>
+        </ul>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">go version
+</span><span class="code-line line-number" line="2">go <span class="token function">env</span>
+</span><span class="code-line line-number" line="3"><span class="token comment"># 查看配置环境</span>
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5">go <span class="token function">env</span> <span class="token parameter variable">-w</span> <span class="token assign-left variable">GOPROXY</span><span class="token operator">=</span>https://goproxy.cn,https://goproxy.io,direct
+</span><span class="code-line line-number" line="6"><span class="token comment"># 配置代理</span>
+</span></code><input type="hidden" value="go version
+go env
+# 查看配置环境
+
+go env -w GOPROXY=https://goproxy.cn,https://goproxy.io,direct
+# 配置代理
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#idoc环境" class="tocs-link">iDoc环境</a></li>
+            <li><a href="#vm_ubuntu-1804" class="tocs-link">VM_ubuntu 18.04</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#磁盘空间扩展问题" class="tocs-link">磁盘空间扩展问题</a></li>
+              </ol>
+            </li>
+            <li><a href="#docker" class="tocs-link">Docker</a></li>
+            <li><a href="#anaconda" class="tocs-link">Anaconda</a></li>
+            <li><a href="#vscode" class="tocs-link">VScode</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#配置c" class="tocs-link">配置C++</a></li>
+              </ol>
+            </li>
+            <li><a href="#go" class="tocs-link">Go</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>

@@ -51,13 +51,12 @@ openSource: https://github.com/shixiaocaia
 ## chapters scopes
 # -----------------------
 scope: 
+  - 00Go
   - 01DataStructure
-  - 01OperatingSystem
-  - 00CPP
   - 01ComputerNetwork
-  - 02MyWeb
   - 01DataBase
-  - 00Other
+  - 01OperatingSystem
+  - 03Other
 
 ## Navigation Menu.
 # -----------------------
@@ -69,7 +68,7 @@ menus:
   ComputerNetwrok: 01ComputerNetwork/index.html
   DataBase: 01DataBase/index.html
   OperatingSystem: 01OperatingSystem/index.html
-  Other: 00Other/index.html
+  Other: 03Other/index.html
 
 ## Copy Assets
 # -----------------------

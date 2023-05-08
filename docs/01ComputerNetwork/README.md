@@ -16,11 +16,11 @@
 
 ## 知轻重
 
-- 网络层：简单了解IPv4、IPv6
+- 掌握OSI参考模型和TCP/IP网络模型
 
-- 传输层：TCP 、 UDP：整个建立连接、断开连接、数据传输的过程。
-  - Linux提供的TCP内核参数作用
-  
-- 应用层：HTTP、HTTPS
+- 掌握HTTP和HTTPS协议
 
-  ![图片](../../img/640.jpeg)
+- 掌握TCP和UDP协议
+
+- 掌握键入网址到显示过程中所有网络协议
+  （HTTP/HTTPS->DNS->TCP->IP->ARP）

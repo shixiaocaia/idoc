@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git iDoc</title>
+    <meta name="description" content="git中向远程仓库中提交代码时一定要先pull再push，本地代码进行commit后，仓库不会将本地代码与远程仓库的代码进行比较，不会识别出是否存在代码冲突，必须进行pull命令后，才会将本地代码与远程仓库的代码进行比较，如果两者的代码存在">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00Go/index.html" target="" class="">Go</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="index.html" target="" class="active">Other</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <a href="environment.html" class="">配个环境</a>
+            <a href="vim.html" class="">Vim</a>
+            <a href="git.html" class="">Git</a>
+            <a href="shell.html" class="">Shell</a>
+            <a href="docker.html" class="">Docker</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="git"><a aria-hidden="true" tabindex="-1" href="#git" class="anchor"><span class="icon icon-link"></span></a>Git</h1>
+        <h2 id="安装"><a aria-hidden="true" tabindex="-1" href="#安装" class="anchor"><span class="icon icon-link"></span></a>安装</h2>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 配置用户信息</span>
+</span><span class="code-line line-number" line="2"><span class="token function">git</span> config <span class="token parameter variable">--global</span> user.name <span class="token string">"runoob"</span>
+</span><span class="code-line line-number" line="3"><span class="token function">git</span> config <span class="token parameter variable">--global</span> user.email test@runoob.com
+</span><span class="code-line line-number" line="4"><span class="token function">git</span> config <span class="token parameter variable">--list</span>
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6"><span class="token comment"># 设置全局代理</span>
+</span><span class="code-line line-number" line="7"><span class="token function">git</span> config <span class="token parameter variable">--global</span> http.proxy socks5://127.0.0.1:10808
+</span><span class="code-line line-number" line="8"><span class="token function">git</span> config <span class="token parameter variable">--global</span> https.proxy socks5://127.0.0.1:10808
+</span><span class="code-line line-number" line="9">
+</span><span class="code-line line-number" line="10"><span class="token comment"># 配置SSH</span>
+</span><span class="code-line line-number" line="11">ssh-keygen <span class="token parameter variable">-t</span> rsa <span class="token parameter variable">-C</span> <span class="token string">"这里换上你的邮箱"</span>
+</span><span class="code-line line-number" line="12"><span class="token comment"># 不需要密码，直接三次回车</span>
+</span><span class="code-line line-number" line="13"><span class="token comment"># 生成id_rsa和id_rsa.pub</span>
+</span><span class="code-line line-number" line="14"><span class="token comment"># 添加公钥pub文件内容，到Settings -- SSH and GPG keys</span>
+</span><span class="code-line line-number" line="15"><span class="token comment"># 测试配置成功</span>
+</span><span class="code-line line-number" line="16"><span class="token function">ssh</span> <span class="token parameter variable">-T</span> git@github.com 
+</span><span class="code-line line-number" line="17">
+</span><span class="code-line line-number" line="18"><span class="token comment"># 输入yes</span>
+</span><span class="code-line line-number" line="19">The authenticity of <span class="token function">host</span> <span class="token string">'github.com (20.205.243.166)'</span> can<span class="token string">'t be established.
+</span></span><span class="code-line line-number" line="20"><span class="token string">ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.
+</span></span><span class="code-line line-number" line="21"><span class="token string">This key is not known by any other names.
+</span></span><span class="code-line line-number" line="22"><span class="token string">Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+</span></span><span class="code-line line-number" line="23"><span class="token string">
+</span></span><span class="code-line line-number" line="24"><span class="token string">Warning: Permanently added '</span>github.com<span class="token string">' (ED25519) to the list of known hosts.
+</span></span><span class="code-line line-number" line="25"><span class="token string">Hi shixiaocaia! You'</span>ve successfully authenticated, but GitHub does not provide shell access.
+</span><span class="code-line line-number" line="26">
+</span><span class="code-line line-number" line="27"><span class="token comment"># 登录信息</span>
+</span><span class="code-line line-number" line="28">Username <span class="token keyword">for</span> <span class="token string">'https://github.com'</span>  <span class="token comment"># 完整的邮箱</span>
+</span><span class="code-line line-number" line="29">password <span class="token comment"># access key</span>
+</span></code><input type="hidden" value="# 配置用户信息
+git config --global user.name &#x22;runoob&#x22;
+git config --global user.email test@runoob.com
+git config --list
+
+# 设置全局代理
+git config --global http.proxy socks5://127.0.0.1:10808
+git config --global https.proxy socks5://127.0.0.1:10808
+
+# 配置SSH
+ssh-keygen -t rsa -C &#x22;这里换上你的邮箱&#x22;
+# 不需要密码，直接三次回车
+# 生成id_rsa和id_rsa.pub
+# 添加公钥pub文件内容，到Settings -- SSH and GPG keys
+# 测试配置成功
+ssh -T git@github.com 
+
+# 输入yes
+The authenticity of host &#x27;github.com (20.205.243.166)&#x27; can&#x27;t be established.
+ED25519 key fingerprint is SHA256:+DiY3wvvV6TuJJhbpZisF/zLDA0zPMSvHdkr4UvCOqU.
+This key is not known by any other names.
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+
+Warning: Permanently added &#x27;github.com&#x27; (ED25519) to the list of known hosts.
+Hi shixiaocaia! You&#x27;ve successfully authenticated, but GitHub does not provide shell access.
+
+# 登录信息
+Username for &#x27;https://github.com&#x27;  # 完整的邮箱
+password # access key
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="主体思路"><a aria-hidden="true" tabindex="-1" href="#主体思路" class="anchor"><span class="icon icon-link"></span></a>主体思路</h2>
+        <p>
+          <img src="..\img\无标题-2023-04-17-1505.png" alt="无标题-2023-04-17-1505">
+        </p>
+        <ul>
+          <li>注意整体流程中的，合并过程的对比过程</li>
+        </ul>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">git</span> status <span class="token comment"># 查看状态信息</span>
+</span><span class="code-line line-number" line="2"><span class="token function">git</span> log    <span class="token comment"># 查看提交信息</span>
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4">.gitignore <span class="token comment"># 添加忽略的信息</span>
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6"><span class="token function">git</span> merge <span class="token builtin class-name">test</span> <span class="token comment"># 将test分支和当前分支进行合并</span>
+</span></code><input type="hidden" value="git status # 查看状态信息
+git log    # 查看提交信息
+
+.gitignore # 添加忽略的信息
+
+git merge test # 将test分支和当前分支进行合并
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>实际中在主分支下创建分支，会复制其内容到子分支当中，除了gitignore中的文件是相互分离的，完成后，进行相关分支的合并操作</li>
+          <li>dowmload和clone的文件相比，没有相应的git操作信息</li>
+        </ul>
+        <h2 id="连接远程仓库"><a aria-hidden="true" tabindex="-1" href="#连接远程仓库" class="anchor"><span class="icon icon-link"></span></a>连接远程仓库</h2>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">git</span> init
+</span><span class="code-line line-number" line="2"><span class="token function">git</span> remote <span class="token function">add</span> orgin url
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4"><span class="token comment"># ssh连接，不需要登陆验证</span>
+</span><span class="code-line line-number" line="5"><span class="token function">git</span> remote <span class="token function">rm</span> origin 
+</span><span class="code-line line-number" line="6"><span class="token function">git</span> remote <span class="token function">add</span> origin git@<span class="token punctuation">..</span><span class="token punctuation">..</span>git
+</span><span class="code-line line-number" line="7">
+</span><span class="code-line line-number" line="8"><span class="token comment"># 带access的输入</span>
+</span><span class="code-line line-number" line="9"><span class="token function">git</span> remote set-url origin  https://GITHUB ACCESS@github.com/nlp-greyfoss/typora_notes.git/
+</span><span class="code-line line-number" line="10">
+</span><span class="code-line line-number" line="11"><span class="token comment"># http连接，需要登陆验证</span>
+</span><span class="code-line line-number" line="12">https://github.com/deepthan/Front-end-resource-collection/issues/28
+</span><span class="code-line line-number" line="13">
+</span><span class="code-line line-number" line="14"><span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+</span><span class="code-line line-number" line="15"><span class="token function">git</span> commit -m<span class="token string">"update"</span>
+</span><span class="code-line line-number" line="16"><span class="token function">git</span> branch <span class="token parameter variable">-m</span> main
+</span><span class="code-line line-number" line="17"><span class="token function">git</span> push origin main
+</span></code><input type="hidden" value="git init
+git remote add orgin url
+
+# ssh连接，不需要登陆验证
+git remote rm origin 
+git remote add origin git@....git
+
+# 带access的输入
+git remote set-url origin  https://GITHUB ACCESS@github.com/nlp-greyfoss/typora_notes.git/
+
+# http连接，需要登陆验证
+https://github.com/deepthan/Front-end-resource-collection/issues/28
+
+git add .
+git commit -m&#x22;update&#x22;
+git branch -m main
+git push origin main
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="先commit再pull再push"><a aria-hidden="true" tabindex="-1" href="#先commit再pull再push" class="anchor"><span class="icon icon-link"></span></a>先commit再pull再push</h2>
+        <p>git中向远程仓库中提交代码时一定要先pull再push，本地代码进行commit后，仓库不会将本地代码与远程仓库的代码进行比较，不会识别出是否存在代码冲突，必须进行pull命令后，才会将本地代码与远程仓库的代码进行比较，如果两者的代码存在冲突，必须要解决冲突后重新commit ----> pull ----> push。</p>
+        <p>如果不存在冲突，则会在pull时直接合并代码，并不会将本地的代码覆盖掉。</p>
+        <p>因此正确操作</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">git</span> add.
+</span><span class="code-line line-number" line="2"><span class="token function">git</span> commit -m<span class="token string">"build"</span>
+</span><span class="code-line line-number" line="3"><span class="token function">git</span> pull origin main
+</span><span class="code-line line-number" line="4"><span class="token function">git</span> push origin main
+</span></code><input type="hidden" value="git add.
+git commit -m&#x22;build&#x22;
+git pull origin main
+git push origin main
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="关于分支"><a aria-hidden="true" tabindex="-1" href="#关于分支" class="anchor"><span class="icon icon-link"></span></a>关于分支</h2>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">git</span> branch     <span class="token comment"># 查看本地分支</span>
+</span><span class="code-line line-number" line="2"><span class="token function">git</span> branch <span class="token parameter variable">-r</span>  <span class="token comment"># 查看远程分支</span>
+</span><span class="code-line line-number" line="3"><span class="token function">git</span> branch <span class="token parameter variable">-a</span>  <span class="token comment"># 查看所有分支</span>
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5"><span class="token function">git</span> checkout <span class="token punctuation">[</span>branch_name<span class="token punctuation">]</span> <span class="token comment"># 切换分支</span>
+</span><span class="code-line line-number" line="6">
+</span><span class="code-line line-number" line="7"><span class="token function">git</span> branch <span class="token parameter variable">-d</span> local_branch_name <span class="token comment"># 删除本地分支</span>
+</span><span class="code-line line-number" line="8"><span class="token function">git</span> push origin :<span class="token punctuation">[</span>branch name<span class="token punctuation">]</span>  <span class="token comment"># 删除远程分支，：表示删除</span>
+</span><span class="code-line line-number" line="9">
+</span><span class="code-line line-number" line="10"><span class="token function">git</span> branch <span class="token punctuation">[</span>branch_name<span class="token punctuation">]</span> <span class="token comment"># 本地创建新的分支，文件来源于主分支的内容</span>
+</span><span class="code-line line-number" line="11">
+</span><span class="code-line line-number" line="12"><span class="token function">git</span> reflog <span class="token parameter variable">--date</span><span class="token operator">=</span>local <span class="token operator">|</span> <span class="token function">grep</span> <span class="token operator">&#x3C;</span>branchname<span class="token operator">></span> <span class="token comment"># 查看分支属于哪部分拉出来的</span>
+</span></code><input type="hidden" value="git branch     # 查看本地分支
+git branch -r  # 查看远程分支
+git branch -a  # 查看所有分支
+
+git checkout [branch_name] # 切换分支
+
+git branch -d local_branch_name # 删除本地分支
+git push origin :[branch name]  # 删除远程分支，：表示删除
+
+git branch [branch_name] # 本地创建新的分支，文件来源于主分支的内容
+
+git reflog --date=local | grep <branchname> # 查看分支属于哪部分拉出来的
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="版本控制"><a aria-hidden="true" tabindex="-1" href="#版本控制" class="anchor"><span class="icon icon-link"></span></a>版本控制</h2>
+        <p>在做MIT 6.S081时候，git clone源代码后发现看不到任何内容，应该是当前下载的分支没有代码。</p>
+        <h3 id="我是个傻叉"><a aria-hidden="true" tabindex="-1" href="#我是个傻叉" class="anchor"><span class="icon icon-link"></span></a>我是个傻叉</h3>
+        <p>拉取仓库所有代码后，需要切换到相应的分支才能看到对应分支的内容。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">git</span> branch <span class="token parameter variable">-a</span>
+</span><span class="code-line line-number" line="2">* master
+</span><span class="code-line line-number" line="3">  remotes/origin/HEAD -<span class="token operator">></span> origin/master
+</span><span class="code-line line-number" line="4">  remotes/origin/cow
+</span><span class="code-line line-number" line="5">  remotes/origin/fs
+</span><span class="code-line line-number" line="6">  remotes/origin/lazy
+</span><span class="code-line line-number" line="7">  remotes/origin/lock
+</span><span class="code-line line-number" line="8">  remotes/origin/master
+</span><span class="code-line line-number" line="9">  remotes/origin/mmap
+</span><span class="code-line line-number" line="10">  remotes/origin/net
+</span><span class="code-line line-number" line="11">  remotes/origin/pgtbl
+</span><span class="code-line line-number" line="12">  remotes/origin/riscv
+</span><span class="code-line line-number" line="13">  remotes/origin/syscall
+</span><span class="code-line line-number" line="14">  remotes/origin/thread
+</span><span class="code-line line-number" line="15">  remotes/origin/traps
+</span><span class="code-line line-number" line="16">  remotes/origin/util
+</span></code><input type="hidden" value="$ git branch -a
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/cow
+  remotes/origin/fs
+  remotes/origin/lazy
+  remotes/origin/lock
+  remotes/origin/master
+  remotes/origin/mmap
+  remotes/origin/net
+  remotes/origin/pgtbl
+  remotes/origin/riscv
+  remotes/origin/syscall
+  remotes/origin/thread
+  remotes/origin/traps
+  remotes/origin/util
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">git</span> checkout origin/util
+</span><span class="code-line line-number" line="2">Note: switching to <span class="token string">'origin/util'</span><span class="token builtin class-name">.</span>
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4">You are <span class="token keyword">in</span> <span class="token string">'detached HEAD'</span> state. You can <span class="token function">look</span> around, <span class="token function">make</span> experimental
+</span><span class="code-line line-number" line="5">changes and commit them, and you can discard any commits you <span class="token function">make</span> <span class="token keyword">in</span> this
+</span><span class="code-line line-number" line="6">state without impacting any branches by switching back to a branch.
+</span><span class="code-line line-number" line="7">
+</span><span class="code-line line-number" line="8">If you want to create a new branch to retain commits you create, you may
+</span><span class="code-line line-number" line="9"><span class="token keyword">do</span> so <span class="token punctuation">(</span>now or later<span class="token punctuation">)</span> by using <span class="token parameter variable">-c</span> with the switch command. Example:
+</span><span class="code-line line-number" line="10">
+</span><span class="code-line line-number" line="11">  <span class="token function">git</span> switch <span class="token parameter variable">-c</span> <span class="token operator">&#x3C;</span>new-branch-name<span class="token operator">></span>
+</span><span class="code-line line-number" line="12">
+</span><span class="code-line line-number" line="13">Or undo this operation with:
+</span><span class="code-line line-number" line="14">
+</span><span class="code-line line-number" line="15">  <span class="token function">git</span> switch -
+</span><span class="code-line line-number" line="16">
+</span><span class="code-line line-number" line="17">Turn off this advice by setting config variable advice.detachedHead to <span class="token boolean">false</span>
+</span><span class="code-line line-number" line="18">
+</span><span class="code-line line-number" line="19">HEAD is now at 40db4f0 wfi to save CPU <span class="token function">time</span> on Athena
+</span></code><input type="hidden" value="$ git checkout origin/util
+Note: switching to &#x27;origin/util&#x27;.
+
+You are in &#x27;detached HEAD&#x27; state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by switching back to a branch.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -c with the switch command. Example:
+
+  git switch -c <new-branch-name>
+
+Or undo this operation with:
+
+  git switch -
+
+Turn off this advice by setting config variable advice.detachedHead to false
+
+HEAD is now at 40db4f0 wfi to save CPU time on Athena
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>我们可以看到通过一个<code>head</code>指针操作当前指向的分支。</p>
+        <h3 id="添加git仓库地址"><a aria-hidden="true" tabindex="-1" href="#添加git仓库地址" class="anchor"><span class="icon icon-link"></span></a>添加git仓库地址</h3>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">$ <span class="token function">cat</span> .git/config
+</span><span class="code-line line-number" line="2"><span class="token punctuation">[</span>core<span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="3">        repositoryformatversion <span class="token operator">=</span> <span class="token number">0</span>
+</span><span class="code-line line-number" line="4">        filemode <span class="token operator">=</span> <span class="token boolean">false</span>
+</span><span class="code-line line-number" line="5">        bare <span class="token operator">=</span> <span class="token boolean">false</span>
+</span><span class="code-line line-number" line="6">        logallrefupdates <span class="token operator">=</span> <span class="token boolean">true</span>
+</span><span class="code-line line-number" line="7">        symlinks <span class="token operator">=</span> <span class="token boolean">false</span>
+</span><span class="code-line line-number" line="8">        ignorecase <span class="token operator">=</span> <span class="token boolean">true</span>
+</span><span class="code-line line-number" line="9"><span class="token punctuation">[</span>remote <span class="token string">"origin"</span><span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="10">        url <span class="token operator">=</span> git://g.csail.mit.edu/xv6-labs-2020
+</span><span class="code-line line-number" line="11">        fetch <span class="token operator">=</span> +refs/heads/*:refs/remotes/origin/*
+</span><span class="code-line line-number" line="12"><span class="token punctuation">[</span>branch <span class="token string">"master"</span><span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="13">        remote <span class="token operator">=</span> origin
+</span><span class="code-line line-number" line="14">        merge <span class="token operator">=</span> refs/heads/master
+</span></code><input type="hidden" value="$ cat .git/config
+[core]
+        repositoryformatversion = 0
+        filemode = false
+        bare = false
+        logallrefupdates = true
+        symlinks = false
+        ignorecase = true
+[remote &#x22;origin&#x22;]
+        url = git://g.csail.mit.edu/xv6-labs-2020
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch &#x22;master&#x22;]
+        remote = origin
+        merge = refs/heads/master
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>通过看到config文件，origin远程主机名并不是我们的（拉取的，对比自己的仓库是不同的），需要使用其他主机名对应到自己的仓库地址当中。</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">git</span> remote <span class="token function">add</span> <span class="token punctuation">[</span>remote_name<span class="token punctuation">]</span> <span class="token punctuation">[</span>your_own_link<span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3">$ <span class="token function">cat</span> .git/config
+</span></code><input type="hidden" value="git remote add [remote_name] [your_own_link]
+
+$ cat .git/config
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="push"><a aria-hidden="true" tabindex="-1" href="#push" class="anchor"><span class="icon icon-link"></span></a>push</h3>
+        <p>将本地分支版本上传远程并合并</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">git</span> push <span class="token operator">&#x3C;</span>remote_name<span class="token operator">></span> <span class="token operator">&#x3C;</span>local_branch_name<span class="token operator">></span>:<span class="token operator">&#x3C;</span>remote_branch_name<span class="token operator">></span>
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3"><span class="token comment"># 当用的自己的仓库时，origin就是自己的，那么</span>
+</span><span class="code-line line-number" line="4"><span class="token function">git</span> push origin <span class="token operator">&#x3C;</span>local_branch_name<span class="token operator">></span>:<span class="token operator">&#x3C;</span>remote_branch_name<span class="token operator">></span>
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6"><span class="token comment"># 当远程分支和本地分支同名时</span>
+</span><span class="code-line line-number" line="7"><span class="token function">git</span> push github util:util
+</span><span class="code-line line-number" line="8"><span class="token function">git</span> push github util
+</span></code><input type="hidden" value="git push <remote_name> <local_branch_name>:<remote_branch_name>
+
+# 当用的自己的仓库时，origin就是自己的，那么
+git push origin <local_branch_name>:<remote_branch_name>
+
+# 当远程分支和本地分支同名时
+git push github util:util
+git push github util
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="创建测试分支"><a aria-hidden="true" tabindex="-1" href="#创建测试分支" class="anchor"><span class="icon icon-link"></span></a>创建测试分支</h3>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">git</span> checkout util         <span class="token comment"># 切换到util分支</span>
+</span><span class="code-line line-number" line="2"><span class="token function">git</span> checkout <span class="token parameter variable">-b</span> util_test <span class="token comment"># 建立并切换到util的测试分支</span>
+</span></code><input type="hidden" value="git checkout util         # 切换到util分支
+git checkout -b util_test # 建立并切换到util的测试分支
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>当你在<code>util_test</code>分支中每测试通过一个作业，请提交（<code>git commit</code>）你的代码，并将所做的修改合并（<code>git merge</code>）到<code>util</code>中，然后提交（<code>git push</code>）到github.</p>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+</span><span class="code-line line-number" line="2"><span class="token function">git</span> commit <span class="token parameter variable">-m</span> <span class="token string">"完成了第一个作业"</span>
+</span><span class="code-line line-number" line="3"><span class="token function">git</span> checkout util
+</span><span class="code-line line-number" line="4"><span class="token function">git</span> merge util_test
+</span><span class="code-line line-number" line="5"><span class="token function">git</span> push github util:util
+</span></code><input type="hidden" value="git add .
+git commit -m &#x22;完成了第一个作业&#x22;
+git checkout util
+git merge util_test
+git push github util:util
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <blockquote>
+          <p>为什么创建util_test后，文件夹里还是util内容</p>
+          <ul>
+            <li>此时util_test和util是隔离的吗</li>
+            <li>因为util_test还是本地分支内容</li>
+          </ul>
+        </blockquote>
+        <p><strong>因此，需要每次push时候要注意是在使用什么分支，上传到哪一个分支里，和哪一个分支合并。</strong></p>
+        <h2 id="分支切换问题"><a aria-hidden="true" tabindex="-1" href="#分支切换问题" class="anchor"><span class="icon icon-link"></span></a>分支切换问题</h2>
+        <p><strong>Please commit your changes or stash them before you switch branches.</strong></p>
+        <ul>
+          <li>使用<code>git stash</code>暂存当前分支</li>
+          <li>切换到主分支的其他分支当中
+            <ul>
+              <li><code>git status</code>发现没有需要提交的部分</li>
+            </ul>
+          </li>
+          <li>修改完分支，返回原来的dev分支
+            <ul>
+              <li><code>git checkout dev</code>切换到dev分支，<code>git status</code>发现没有东西需要提交，<code>git stash list</code>查看之前暂存的列表</li>
+              <li><code>git stash apply</code>恢复，但是stash并没有删除，<code>git stash drop stash@XXXX</code>，在尾部加上id</li>
+              <li>或者使用<code>git stash pop</code>恢复存储当中的内容，并且删除存储内容</li>
+              <li>这时候<code>git status</code>可以看到有改动未提交</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="fatal-refusing-to-merge-unrelated-histories"><a aria-hidden="true" tabindex="-1" href="#fatal-refusing-to-merge-unrelated-histories" class="anchor"><span class="icon icon-link"></span></a>fatal: refusing to merge unrelated histories</h2>
+        <ul>
+          <li>根本原因</li>
+        </ul>
+        <p>因为两个根本不相干的 git 库， 一个是本地库， 一个是远端库， 然后本地要去推送到远端， 远端觉得这个本地库跟自己不相干， 所以告知无法合并</p>
+        <ul>
+          <li>解决方案一</li>
+        </ul>
+        <p>git clone远程仓库到本地，将需要推送的内容放到该仓库下 ， 然后提交上去 ， 这样算是一次update操作</p>
+        <ul>
+          <li>解决方案二</li>
+        </ul>
+        <p>使用强制命令</p>
+        <p>git pull origin master --allow-unrelated-historie</p>
+        <p>后面加上 --allow-unrelated-histories ， 把两段不相干的分支进行强行合；这里可能会进入一个编辑页面，只需要先ESC，然后敲:q! 即可</p>
+        <p>后面再push就可以了 git push -u origin master git</p>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#安装" class="tocs-link">安装</a></li>
+            <li><a href="#主体思路" class="tocs-link">主体思路</a></li>
+            <li><a href="#连接远程仓库" class="tocs-link">连接远程仓库</a></li>
+            <li><a href="#先commit再pull再push" class="tocs-link">先commit再pull再push</a></li>
+            <li><a href="#关于分支" class="tocs-link">关于分支</a></li>
+            <li><a href="#版本控制" class="tocs-link">版本控制</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#我是个傻叉" class="tocs-link">我是个傻叉</a></li>
+                <li><a href="#添加git仓库地址" class="tocs-link">添加git仓库地址</a></li>
+                <li><a href="#push" class="tocs-link">push</a></li>
+                <li><a href="#创建测试分支" class="tocs-link">创建测试分支</a></li>
+              </ol>
+            </li>
+            <li><a href="#分支切换问题" class="tocs-link">分支切换问题</a></li>
+            <li><a href="#fatal-refusing-to-merge-unrelated-histories" class="tocs-link">fatal: refusing to merge unrelated histories</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>

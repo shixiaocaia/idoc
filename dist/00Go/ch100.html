@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>八股 iDoc</title>
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="index.html" target="" class="active">Go</a></li>
+            <li><a href="../01DataStructure/index.html" target="" class="">DataStructure</a></li>
+            <li><a href="../01ComputerNetwork/index.html" target="" class="">ComputerNetwrok</a></li>
+            <li><a href="../01DataBase/index.html" target="" class="">DataBase</a></li>
+            <li><a href="../01OperatingSystem/index.html" target="" class="">OperatingSystem</a></li>
+            <li><a href="../03Other/index.html" target="" class="">Other</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar notocs">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <a href="ch00.html" class="">Hello World</a>
+            <a href="ch01.html" class="">数据结构</a>
+            <label>并发编程</label>
+            <label>Web编程</label>
+            <label>原理深入</label>
+            <label>微服务框架</label>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="八股"><a aria-hidden="true" tabindex="-1" href="#八股" class="anchor"><span class="icon icon-link"></span></a>八股</h1>
+        <ol>
+          <li>Golang的多态和C++的多态有什么区别</li>
+        </ol>
+        <blockquote>
+          <p>C++或者Java是需要主动声明基础类，而Golang，只需要实现某个interface的全部方法，那么就是实现了该类型。所以，<strong>Golang的继承关系是非侵入式的</strong>，这也是Golang的特色与优点。</p>
+        </blockquote>
+        <ol start="2">
+          <li>Array和Slice的区别</li>
+        </ol>
+        <blockquote>
+          <ol>
+            <li>Array的长度是固定的，不可以改变</li>
+            <li>Slice是一种引用，是动态数组，通过apend扩大Slice大小时，超过容量时，会将内容拷贝到一个新的数组当中，可以扩充大小，如果append后大小不超过底层数组的大小，不会改变引用</li>
+          </ol>
+        </blockquote>
+        <ol start="3">
+          <li>Map底层实现</li>
+        </ol>
+        <blockquote>
+          <p>维护一个哈希表。</p>
+        </blockquote>
+        <ol start="4">
+          <li>实现栈和队列</li>
+          <li>哪些线程是安全的</li>
+          <li>初步了解协程</li>
+        </ol>
+      </markdown-style>
+    </div>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>
