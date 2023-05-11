@@ -76,34 +76,79 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       <markdown-style>
         <h1 id="hello-world"><a aria-hidden="true" tabindex="-1" href="#hello-world" class="anchor"><span class="icon icon-link"></span></a>Hello world</h1>
         <h2 id="安装"><a aria-hidden="true" tabindex="-1" href="#安装" class="anchor"><span class="icon icon-link"></span></a>安装</h2>
+        <ol>
+          <li>下载<a href="https://link.segmentfault.com/?enc=GJ%2Fx51QtfKANYfOQDx%2FZYQ%3D%3D.yWqrklYSk2AczBi9JWI762tgQJX0HeUOlzJNhQgiCVc%3D">GO语言</a></li>
+          <li>安装msi文件，<code>go version</code>检测安装</li>
+          <li>msi安装会默认配置环境变量，修改GOPATH路径
+            <ul>
+              <li>创建GOPATH目录，在目录下创建三个文件夹</li>
+              <li>bin:用来存放编译后生成的可执行文件</li>
+              <li>pkg:用来存放编译后生成的归档文件</li>
+              <li>src:用来存放源码文件</li>
+            </ul>
+          </li>
+          <li>设置代理<code>go env -w GOPROXY=https://goproxy.cn,direct</code></li>
+          <li>开启go modules<code>go env -w GO111MODULE=on</code></li>
+        </ol>
         <h2 id="导包"><a aria-hidden="true" tabindex="-1" href="#导包" class="anchor"><span class="icon icon-link"></span></a>导包</h2>
         <p>对于导入的包，编译器会首先在<code>GOROOT</code>中寻找，随后会在项目所对应的<code>GOPATH</code>中寻找，最后才是在<code>全局GOPATH</code>中寻找，如果都无法找到，编译器将会报错。</p>
-        <p>包管理工具：</p>
+        <h3 id="包管理工具"><a aria-hidden="true" tabindex="-1" href="#包管理工具" class="anchor"><span class="icon icon-link"></span></a>包管理工具</h3>
         <ol>
           <li>
             <p><strong>GOPATH</strong>：把依赖包通过go get命令拉到本地GOPATH目录下，缺点是没法实现依赖包多版本管理。</p>
+            <ul>
+              <li>在工程经过<code>go build</code>、<code>go install</code>或 <code>go get</code>等指令后，会将拉取的第三方xxx依赖包放在<code>GOPATH/src</code>目录下</li>
+              <li>产生的二进制可执行文件放在<code>GOPATH/bin</code> 目录下</li>
+              <li>生成的中间缓存文件会被保存在 <code>GOPATH/pkg</code>下。</li>
+            </ul>
           </li>
           <li>
-            <p><strong>DEP</strong>：将依赖包通过DEP命令打包到工程下的vendor目录。Shopee金融团队、字节跳动教育团队用的就是DEP；</p>
+            <p><strong>DEP</strong>：将依赖包通过DEP命令打包到工程下的vendor目录。Shopee金融团队、字节跳动教育团队用的就是DEP</p>
+            <ul>
+              <li>编译 Go 代码会优先从工程目录下的<code>vendor</code>目录先寻找依赖包，如果没有找到，然后<code>GOPATH</code> 中查找，都没找到最后在 <code>GOROOT</code>中查找。</li>
+            </ul>
           </li>
           <li>
             <p><strong>GoMod</strong>：将依赖包拉取到统一的pkg目录下，分版本存储。腾讯云用GoMod的团队会比较多。</p>
+            <ul>
+              <li><code>GOMODULE</code>模式下所有依赖的包存放在<code>GOPATH/pkg/mod</code>目录下</li>
+              <li>所有第三方二进制可执行文件放在<code>GOPATH/bin</code>目录下</li>
+              <li>且工程项目可以放在<code>GOPATH</code>路径之外，但要求项目中需要有<code>go.mod</code>文件（该文件通过<code>go mod init</code>命令初始化可以生成）。</li>
+            </ul>
+            <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1">export GO111MODULE<span class="token operator">=</span>on
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3"><span class="token keyword">go</span> mod init
+</span><span class="code-line line-number" line="4">初始化当前文件夹，创建<span class="token keyword">go</span><span class="token punctuation">.</span>mod文件，事实上，如果你的环境中GO111MODULE<span class="token operator">=</span>on，使用类似goland的工具创建工程会自动生成<span class="token keyword">go</span><span class="token punctuation">.</span>mod
+</span><span class="code-line line-number" line="5"><span class="token keyword">go</span> mod tidy
+</span><span class="code-line line-number" line="6">包整理（多的删去、少的拉取），使用之前自然是<span class="token keyword">import</span>了需要的库了
+</span><span class="code-line line-number" line="7"><span class="token keyword">go</span> mod download
+</span><span class="code-line line-number" line="8">下载依赖到本地（默认为 GOPATH<span class="token operator">/</span>pkg<span class="token operator">/</span>mod 目录）
+</span><span class="code-line line-number" line="9"><span class="token keyword">go</span> mod vendor	
+</span><span class="code-line line-number" line="10">将依赖包复制到工程文件的vendor目录下
+</span><span class="code-line line-number" line="11"><span class="token keyword">go</span> mod verify
+</span><span class="code-line line-number" line="12">验证依赖是否正确
+</span></code><input type="hidden" value="export GO111MODULE=on
+
+go mod init
+初始化当前文件夹，创建go.mod文件，事实上，如果你的环境中GO111MODULE=on，使用类似goland的工具创建工程会自动生成go.mod
+go mod tidy
+包整理（多的删去、少的拉取），使用之前自然是import了需要的库了
+go mod download
+下载依赖到本地（默认为 GOPATH/pkg/mod 目录）
+go mod vendor	
+将依赖包复制到工程文件的vendor目录下
+go mod verify
+验证依赖是否正确
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
           </li>
         </ol>
         <blockquote>
-          <p><code>import</code>导入的源文件的相对路径，而不是包名，包名是文件中开始的<code>package main</code>。</p>
           <ul>
-            <li>
-              <p>在同一个文件内，只存在一种包名</p>
-            </li>
-            <li>
-              <p>如果多个文件夹下有相同名字的package，它们其实是彼此无关的package</p>
-            </li>
-            <li>
-              <p><code>GO111MODULE=on</code>开启后，项目只可以放任意位置，只要指定好GoPATH 和 GoROOT即可</p>
-            </li>
+            <li>go mod init testname后，引用该模块下的package时，作为共同的前缀，同时也是模块的标识。</li>
           </ul>
         </blockquote>
+        <h3 id="golang环境"><a aria-hidden="true" tabindex="-1" href="#golang环境" class="anchor"><span class="icon icon-link"></span></a>golang环境</h3>
+        <p>设置了Go Modules后，不能与$GOPATH共存,所以把项目从$GOPATH中移出即可，否则会提示go.mod exists but should not</p>
         <h2 id="hello-world-1"><a aria-hidden="true" tabindex="-1" href="#hello-world-1" class="anchor"><span class="icon icon-link"></span></a>Hello world</h2>
         <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">go</span> build main<span class="token punctuation">.</span><span class="token keyword">go</span> <span class="token comment">// 得到二进制文件</span>
 </span><span class="code-line line-number" line="2"><span class="token punctuation">.</span><span class="token operator">/</span>main 		     <span class="token comment">// 执行文件</span>
@@ -124,6 +169,11 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 </span><span class="code-line line-number" line="10"><span class="token keyword">var</span> g <span class="token operator">=</span> <span class="token string">"Hello world"</span>
 </span><span class="code-line line-number" line="11"><span class="token comment">//:=类型自动推导</span>
 </span><span class="code-line line-number" line="12"><span class="token comment">//如果初始化了，不需要在声明变量类型</span>
+</span><span class="code-line line-number" line="13">
+</span><span class="code-line line-number" line="14">p <span class="token operator">:=</span> <span class="token function">new</span><span class="token punctuation">(</span>T<span class="token punctuation">)</span> <span class="token comment">//创建一个未命名的T类型变量，初始化为T类型的处置，并返回其地址</span>
+</span><span class="code-line line-number" line="15">
+</span><span class="code-line line-number" line="16">m <span class="token operator">:=</span> <span class="token function">make</span><span class="token punctuation">(</span><span class="token keyword">map</span><span class="token punctuation">[</span><span class="token builtin">int</span><span class="token punctuation">]</span><span class="token builtin">int</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="17"><span class="token comment">//make 只能用于slice，channel，map</span>
 </span></code><input type="hidden" value="var a int
 var b float32
 var c, d float64
@@ -136,10 +186,16 @@ e,f := 9,10
 var g = &#x22;Hello world&#x22;
 //:=类型自动推导
 //如果初始化了，不需要在声明变量类型
+
+p := new(T) //创建一个未命名的T类型变量，初始化为T类型的处置，并返回其地址
+
+m := make(map[int]int)
+//make 只能用于slice，channel，map
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <blockquote>
           <p>全局变量如果要在包外访问，首字母需要大写，golang是<strong>以首字母大小</strong>写来区分对包外是否可见。</p>
           <p><code>:=</code> 推导变量类型，只能在函数体内使用。</p>
+          <p>定义在栈上的变量，会被自动回收</p>
         </blockquote>
         <h3 id="匿名变量"><a aria-hidden="true" tabindex="-1" href="#匿名变量" class="anchor"><span class="icon icon-link"></span></a>匿名变量</h3>
         <p>标识符为<code>_</code>（下划线）的变量，是系统保留的匿名变量，在赋值后，会被立即释放，称之为匿名变量。其作用是变量占位符，对其变量赋值结构。通常会在批量赋值时使用。</p>
@@ -163,9 +219,127 @@ func getData() (int,int,int){
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <h3 id="常量"><a aria-hidden="true" tabindex="-1" href="#常量" class="anchor"><span class="icon icon-link"></span></a>常量</h3>
         <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">const</span> str <span class="token operator">=</span> <span class="token string">"Hello world"</span>
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3"><span class="token keyword">const</span> <span class="token punctuation">(</span>
+</span><span class="code-line line-number" line="4">	e <span class="token operator">=</span> <span class="token number">2.23234234</span>
+</span><span class="code-line line-number" line="5">    pi <span class="token operator">=</span> <span class="token number">12.324234234</span>
+</span><span class="code-line line-number" line="6"><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="7">
+</span><span class="code-line line-number" line="8"><span class="token comment">// 常量生成器</span>
+</span><span class="code-line line-number" line="9"><span class="token keyword">type</span> Weekday <span class="token builtin">int</span>
+</span><span class="code-line line-number" line="10"><span class="token keyword">const</span> <span class="token punctuation">(</span>
+</span><span class="code-line line-number" line="11">	Sunday Weekday <span class="token operator">=</span> <span class="token boolean">iota</span>
+</span><span class="code-line line-number" line="12">    Monday
+</span><span class="code-line line-number" line="13">    Tuesday
+</span><span class="code-line line-number" line="14"><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="15"><span class="token comment">//Sunday = 0,后面 + 1递增</span>
 </span></code><input type="hidden" value="const str = &#x22;Hello world&#x22;
+
+const (
+	e = 2.23234234
+    pi = 12.324234234
+)
+
+// 常量生成器
+type Weekday int
+const (
+	Sunday Weekday = iota
+    Monday
+    Tuesday
+)
+//Sunday = 0,后面 + 1递增
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <p>常量不能用<code>:=</code>标识。</p>
+        <ul>
+          <li>
+            <p>常量不能用<code>:=</code>标识。</p>
+          </li>
+          <li>
+            <p>保证在编译阶段就计算出表达式的值，不需要等到运行阶段。</p>
+          </li>
+          <li>
+            <p>常量并不从属于任何具体类型，所以常量在声明时不说类型。</p>
+          </li>
+        </ul>
+        <h3 id="类型声明"><a aria-hidden="true" tabindex="-1" href="#类型声明" class="anchor"><span class="icon icon-link"></span></a>类型声明</h3>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">type</span> name underlying<span class="token operator">-</span><span class="token keyword">type</span>
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3"><span class="token keyword">type</span> FreezingC <span class="token builtin">float64</span>
+</span><span class="code-line line-number" line="4"><span class="token keyword">type</span> Fahrenheit <span class="token builtin">float64</span>
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6"><span class="token function">T</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token comment">//在具有相同的底层类型时，c</span>
+</span></code><input type="hidden" value="type name underlying-type
+
+type FreezingC float64
+type Fahrenheit float64
+
+T(x)//在具有相同的底层类型时，c
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>虽然摄氏温度和华氏温度的底层都是float64，但是他们仍然不是一种类型，二者之间计算需要通过显示类型转换，<strong>Go不具有隐式类型转换</strong>。</p>
+        <h2 id="io"><a aria-hidden="true" tabindex="-1" href="#io" class="anchor"><span class="icon icon-link"></span></a>IO</h2>
+        <h3 id="printf-print-println"><a aria-hidden="true" tabindex="-1" href="#printf-print-println" class="anchor"><span class="icon icon-link"></span></a>printf print println</h3>
+        <ul>
+          <li>Println输出后换行，Print 没有</li>
+          <li>printf是类似C的格式化输出，<a href="http://docscn.studygolang.com/pkg/fmt/">占位符</a></li>
+        </ul>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1">fmt<span class="token punctuation">.</span><span class="token function">Printf</span><span class="token punctuation">(</span><span class="token string">"%d %[1]o %#[1]o\n"</span><span class="token punctuation">,</span>o<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="2"><span class="token comment">//[1]表示重复使用第一个操作数o</span>
+</span><span class="code-line line-number" line="3"><span class="token comment">//#表示输出相应的前缀0、0x、0X</span>
+</span></code><input type="hidden" value="fmt.Printf(&#x22;%d %[1]o %#[1]o\n&#x22;,o)
+//[1]表示重复使用第一个操作数o
+//#表示输出相应的前缀0、0x、0X
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="数据类型"><a aria-hidden="true" tabindex="-1" href="#数据类型" class="anchor"><span class="icon icon-link"></span></a>数据类型</h2>
+        <h3 id="浮点数"><a aria-hidden="true" tabindex="-1" href="#浮点数" class="anchor"><span class="icon icon-link"></span></a>浮点数</h3>
+        <ul>
+          <li>浮点值可以用<code>%g</code>输出，会自动保持足够的精度，也可以用<code>%e %f</code>的形式来控制输出宽度和数值精度。</li>
+          <li>NaN（Not a Number)</li>
+          <li>+Inf</li>
+          <li>-Inf</li>
+        </ul>
+        <h3 id="复数"><a aria-hidden="true" tabindex="-1" href="#复数" class="anchor"><span class="icon icon-link"></span></a>复数</h3>
+        <ul>
+          <li>complex64和complex128，分别由float32和float64构成。</li>
+        </ul>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">var</span> x <span class="token builtin">complex128</span> <span class="token operator">=</span> <span class="token function">complex</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">//1 + 2i</span>
+</span><span class="code-line line-number" line="2">fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">real</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="3">fmt<span class="token punctuation">.</span><span class="token function">Println</span><span class="token punctuation">(</span><span class="token function">imag</span><span class="token punctuation">(</span>x<span class="token punctuation">)</span><span class="token punctuation">)</span>
+</span></code><input type="hidden" value="var x complex128 = complex(1, 2) //1 + 2i
+fmt.Println(real(x))
+fmt.Println(imag(x))
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="布尔值"><a aria-hidden="true" tabindex="-1" href="#布尔值" class="anchor"><span class="icon icon-link"></span></a>布尔值</h3>
+        <p>布尔值无法转换为数值，需要写一个函数显示转换</p>
+        <h3 id="字符串"><a aria-hidden="true" tabindex="-1" href="#字符串" class="anchor"><span class="icon icon-link"></span></a>字符串</h3>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1">s <span class="token operator">:=</span> <span class="token string">"hello world"</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">var</span> s <span class="token builtin">string</span> <span class="token operator">=</span> <span class="token string">"hello world"</span>
+</span><span class="code-line line-number" line="3">s2 <span class="token operator">:=</span> s<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">:</span><span class="token number">5</span><span class="token punctuation">]</span> <span class="token comment">// 创建[0,5)的子串</span>
+</span></code><input type="hidden" value="s := &#x22;hello world&#x22;
+var s string = &#x22;hello world&#x22;
+s2 := s[0:5] // 创建[0,5)的子串
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>支持字符串连接</li>
+          <li>支持字符串比较</li>
+          <li>字符串是不可以改变的，通过+=语句修改，是将新字符串赋值给变量
+            <ul>
+              <li>两个字符串可以安全共用一段底层内存</li>
+              <li>当发生+=，实际上是指向了新的内存地址，原来的底层没有发生变更</li>
+            </ul>
+          </li>
+          <li>Unicode（Unicode.org)，包括了世界上所有文书体系的全部字符等，每个字符被赋予一个叫做Unicode码点的标准数字，在Go中称为<strong>文字符号</strong>（rune)，数据类型是int32，因此rune类型作为int32类型的别名
+            <ul>
+              <li>每个文字符号序列可以表示成int32值序列，这种表示方式称作UTF-32或者UCS-4。</li>
+            </ul>
+          </li>
+          <li>相关包
+            <ul>
+              <li>strings包用于搜索、替换、比较、修正、切分与连接字符串</li>
+              <li>bytes包，用于操作slice</li>
+              <li>strconv包具备函数，主要用于转换布尔值、整数、浮点数与之对应的字符串形式...</li>
+              <li>unicode包具有判别文字符号值特性的函数</li>
+            </ul>
+          </li>
+        </ul>
         <h2 id="判断"><a aria-hidden="true" tabindex="-1" href="#判断" class="anchor"><span class="icon icon-link"></span></a>判断</h2>
         <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">func</span> <span class="token function">pow</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> n<span class="token punctuation">,</span> lim <span class="token builtin">float64</span><span class="token punctuation">)</span> <span class="token builtin">float64</span> <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="2">	<span class="token keyword">if</span> v <span class="token operator">:=</span> math<span class="token punctuation">.</span><span class="token function">Pow</span><span class="token punctuation">(</span>x<span class="token punctuation">,</span> n<span class="token punctuation">)</span><span class="token punctuation">;</span> v <span class="token operator">&#x3C;</span> lim <span class="token punctuation">{</span>
@@ -537,7 +711,7 @@ func main() {
         <p>T是接口类型，检测x类型与T是否符合</p>
         <h2 id="协程-goroutine"><a aria-hidden="true" tabindex="-1" href="#协程-goroutine" class="anchor"><span class="icon icon-link"></span></a>协程-goroutine</h2>
         <p>在协程出现之前，线程被作为调度的最小单位。协程可以理解是一种用户态，逻辑层面的线程。</p>
-        <p>协程Golang运行时调度，是充分利用了Golang多核的性能，同时执行多个方法</p>
+        <p>协程Golang运行时调度，是充分利用了Golang多核的性能，同时执行多个方法。</p>
         <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="2">  <span class="token keyword">go</span> <span class="token function">a</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
 </span><span class="code-line line-number" line="3">  <span class="token keyword">go</span> <span class="token function">b</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
@@ -549,6 +723,7 @@ func main() {
   ...
 }
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>main函数在一个goroutine中执行，然后go语句创建额外的goroutine。</p>
         <h2 id="通道-channel"><a aria-hidden="true" tabindex="-1" href="#通道-channel" class="anchor"><span class="icon icon-link"></span></a>通道-channel</h2>
         <ul>
           <li>
@@ -614,13 +789,32 @@ var ch4 chan *stu
         <aside class="inner toc">
           <ol class="tocs-list">
             <li><a href="#安装" class="tocs-link">安装</a></li>
-            <li><a href="#导包" class="tocs-link">导包</a></li>
+            <li><a href="#导包" class="tocs-link">导包</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#包管理工具" class="tocs-link">包管理工具</a></li>
+                <li><a href="#golang环境" class="tocs-link">golang环境</a></li>
+              </ol>
+            </li>
             <li><a href="#hello-world-1" class="tocs-link">Hello world</a></li>
             <li><a href="#声明" class="tocs-link">声明</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#变量的定义" class="tocs-link">变量的定义</a></li>
                 <li><a href="#匿名变量" class="tocs-link">匿名变量</a></li>
                 <li><a href="#常量" class="tocs-link">常量</a></li>
+                <li><a href="#类型声明" class="tocs-link">类型声明</a></li>
+              </ol>
+            </li>
+            <li><a href="#io" class="tocs-link">IO</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#printf-print-println" class="tocs-link">printf print println</a></li>
+              </ol>
+            </li>
+            <li><a href="#数据类型" class="tocs-link">数据类型</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#浮点数" class="tocs-link">浮点数</a></li>
+                <li><a href="#复数" class="tocs-link">复数</a></li>
+                <li><a href="#布尔值" class="tocs-link">布尔值</a></li>
+                <li><a href="#字符串" class="tocs-link">字符串</a></li>
               </ol>
             </li>
             <li><a href="#判断" class="tocs-link">判断</a></li>

@@ -213,6 +213,11 @@ select * from student where address like &#x27;_\__隔壁&#x27;;
         </blockquote>
         <h2 id="and-or-in-not-in"><a aria-hidden="true" tabindex="-1" href="#and-or-in-not-in" class="anchor"><span class="icon icon-link"></span></a>AND OR IN NOT IN</h2>
         <h2 id="is-null"><a aria-hidden="true" tabindex="-1" href="#is-null" class="anchor"><span class="icon icon-link"></span></a>IS NULL</h2>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1">expression <span class="token operator">IS</span> <span class="token boolean">NULL</span>
+</span><span class="code-line line-number" line="2">expression <span class="token operator">IS</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span>
+</span></code><input type="hidden" value="expression IS NULL
+expression IS NOT NULL
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <h2 id="exists"><a aria-hidden="true" tabindex="-1" href="#exists" class="anchor"><span class="icon icon-link"></span></a>EXISTS</h2>
         <h2 id="concat"><a aria-hidden="true" tabindex="-1" href="#concat" class="anchor"><span class="icon icon-link"></span></a>CONCAT</h2>
         <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"> <span class="token keyword">select</span> concat<span class="token punctuation">(</span>city<span class="token punctuation">,</span><span class="token string">' '</span><span class="token punctuation">,</span>address<span class="token punctuation">)</span> <span class="token keyword">from</span> student<span class="token punctuation">;</span>         
@@ -320,15 +325,133 @@ select * from student where city regexp &#x27;\\f&#x27;
 [:xdigit:] 任意十六进制数字（同[a-fA-F0-9]）
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <h2 id="using"><a aria-hidden="true" tabindex="-1" href="#using" class="anchor"><span class="icon icon-link"></span></a>USING</h2>
-        <p>等值查询</p>
+        <p>等值查询，必须满足关键字相同</p>
         <h2 id="join"><a aria-hidden="true" tabindex="-1" href="#join" class="anchor"><span class="icon icon-link"></span></a>JOIN</h2>
         <p>用于将数据库中的两个表或者多个表组合起来。</p>
         <ul>
-          <li>交叉连接：全匹配，m * n</li>
+          <li>交叉连接：全匹配，m * n，做型号和颜色匹配</li>
           <li>内连接：有条件的，不满足连接条件的不会显示</li>
           <li>左连接：左表匹配右表，如果匹配成功则将左表和右表的行组合成新的数据行返回；如果匹配不成功则将左表的行和 NULL 值组合成新的数据行返回</li>
           <li>右连接：与左连接相反</li>
+          <li>自连接：要给相同表起不同的名字，避免冲突</li>
+          <li>自然连接：让数据库自己筛选</li>
         </ul>
+        <blockquote>
+          <p>一般用左连接，显示一些右表NULL值的情况</p>
+        </blockquote>
+        <h2 id="union"><a aria-hidden="true" tabindex="-1" href="#union" class="anchor"><span class="icon icon-link"></span></a>UNION</h2>
+        <p>两端查询中间加一个<code>UNION</code>关键词，合并两次结果值。</p>
+        <ul>
+          <li>两次查询的<strong>列数、列顺序必须相同</strong>，否则mysql不知道如何合并。</li>
+          <li><code>UNION</code> 运算包括 <code>UNION DISTINCT</code> 和 <code>UNION ALL</code> 两种算法，其中 <code>UNION DISTINCT</code> 可以简写为 <code>UNION</code>。</li>
+          <li>多个表UNION，实际上是合成一个，再与下一个运算得到</li>
+          <li>当需要对 <code>UNION</code> 运算的结果进行排序时，最需要在 SQL 语句的最后添加 <code>ORDER BY</code> 子句。</li>
+          <li>参与 <code>UNION</code> 运算的结果集只要列数一样就可以。返回结果集的列名采用第一个结果集的列名。</li>
+        </ul>
+        <h2 id="insert"><a aria-hidden="true" tabindex="-1" href="#insert" class="anchor"><span class="icon icon-link"></span></a>INSERT</h2>
+        <p><code>INSERT</code> 语句用于将一行或者多行数据插入到数据表中。</p>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> table_name <span class="token punctuation">(</span>column_1<span class="token punctuation">,</span> column_2<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">VALUES</span> <span class="token punctuation">(</span>value_1<span class="token punctuation">,</span> value_2<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4"><span class="token keyword">INSERT</span> <span class="token keyword">INTO</span> table_name <span class="token punctuation">(</span>column_1<span class="token punctuation">,</span> column_2<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="5"><span class="token keyword">VALUES</span> <span class="token punctuation">(</span>value_11<span class="token punctuation">,</span> value_12<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="6">       <span class="token punctuation">(</span>value_21<span class="token punctuation">,</span> value_22<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="7">       <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="INSERT INTO table_name (column_1, column_2, ...)
+VALUES (value_1, value_2, ...);
+
+INSERT INTO table_name (column_1, column_2, ...)
+VALUES (value_11, value_12, ...),
+       (value_21, value_22, ...)
+       ...;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>
+            <p>如果想忽略插入过程中一些错误行，可使用 <code>IGNORE</code> 标识符。</p>
+          </li>
+          <li>
+            <p>插入分层行，多个表之间的插入问题。</p>
+          </li>
+          <li>
+            <p>复制新表时，主键和自动增减的属性会被忽略。</p>
+            <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">insert</span> <span class="token keyword">into</span> invoices_archive
+</span><span class="code-line line-number" line="2"><span class="token keyword">select</span> <span class="token operator">*</span>
+</span><span class="code-line line-number" line="3"><span class="token keyword">from</span> invoices
+</span><span class="code-line line-number" line="4"><span class="token keyword">where</span> payment_date <span class="token operator">IS</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6"><span class="token comment"># 直接筛选好合适的数据后，新建表格</span>
+</span><span class="code-line line-number" line="7"><span class="token keyword">create</span> <span class="token keyword">table</span> invoices_archive <span class="token keyword">as</span>
+</span><span class="code-line line-number" line="8"><span class="token keyword">select</span> 
+</span><span class="code-line line-number" line="9">	c<span class="token punctuation">.</span>name<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="10">    ia<span class="token punctuation">.</span>payment_date
+</span><span class="code-line line-number" line="11"><span class="token keyword">from</span> invoices_archive ia
+</span><span class="code-line line-number" line="12"><span class="token keyword">join</span> clients c
+</span><span class="code-line line-number" line="13">	<span class="token keyword">using</span> <span class="token punctuation">(</span>client_id<span class="token punctuation">)</span>
+</span></code><input type="hidden" value="insert into invoices_archive
+select *
+from invoices
+where payment_date IS NOT NULL;
+
+# 直接筛选好合适的数据后，新建表格
+create table invoices_archive as
+select 
+	c.name,
+    ia.payment_date
+from invoices_archive ia
+join clients c
+	using (client_id)
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+          </li>
+        </ul>
+        <h2 id="列的属性"><a aria-hidden="true" tabindex="-1" href="#列的属性" class="anchor"><span class="icon icon-link"></span></a>列的属性</h2>
+        <ul>
+          <li>PK 主键</li>
+          <li>NN 非空值（不可以为空）</li>
+          <li>AI 自动增减</li>
+          <li>default / Expression 默认值</li>
+        </ul>
+        <h2 id="更新数据"><a aria-hidden="true" tabindex="-1" href="#更新数据" class="anchor"><span class="icon icon-link"></span></a>更新数据</h2>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">update</span> invoices
+</span><span class="code-line line-number" line="2"><span class="token keyword">set</span> payment_total <span class="token operator">=</span> <span class="token number">10</span><span class="token punctuation">,</span> payment_date <span class="token operator">=</span> <span class="token string">'2019-03-01'</span>
+</span><span class="code-line line-number" line="3"><span class="token keyword">where</span> invoice_id <span class="token operator">=</span> <span class="token number">1</span>
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5"><span class="token keyword">update</span> customers
+</span><span class="code-line line-number" line="6"><span class="token keyword">set</span> points <span class="token operator">=</span> points <span class="token operator">+</span> <span class="token number">50</span>
+</span><span class="code-line line-number" line="7"><span class="token keyword">where</span> birth_date <span class="token operator">&#x3C;</span> <span class="token string">'1990-01-01'</span>
+</span><span class="code-line line-number" line="8"><span class="token comment"># 更新多行数据，需要关闭安全模式</span>
+</span><span class="code-line line-number" line="9">
+</span><span class="code-line line-number" line="10"><span class="token keyword">update</span> orders
+</span><span class="code-line line-number" line="11"><span class="token keyword">set</span> comments <span class="token operator">=</span> <span class="token string">'金牌客户'</span>
+</span><span class="code-line line-number" line="12"><span class="token keyword">where</span> customer_id <span class="token operator">IN</span> <span class="token punctuation">(</span>
+</span><span class="code-line line-number" line="13">	<span class="token keyword">select</span> customer_id
+</span><span class="code-line line-number" line="14">    <span class="token keyword">from</span> customers
+</span><span class="code-line line-number" line="15">    <span class="token keyword">where</span> points <span class="token operator">></span> <span class="token number">3000</span>
+</span><span class="code-line line-number" line="16"><span class="token punctuation">)</span>
+</span></code><input type="hidden" value="update invoices
+set payment_total = 10, payment_date = &#x27;2019-03-01&#x27;
+where invoice_id = 1
+
+update customers
+set points = points + 50
+where birth_date < &#x27;1990-01-01&#x27;
+# 更新多行数据，需要关闭安全模式
+
+update orders
+set comments = &#x27;金牌客户&#x27;
+where customer_id IN (
+	select customer_id
+    from customers
+    where points > 3000
+)
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="删除行"><a aria-hidden="true" tabindex="-1" href="#删除行" class="anchor"><span class="icon icon-link"></span></a>删除行</h2>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">delete</span> <span class="token keyword">from</span> orders <span class="token comment"># 删除全部</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">where</span> invoice_id <span class="token operator">=</span> <span class="token number">1</span>
+</span></code><input type="hidden" value="delete from orders # 删除全部
+where invoice_id = 1
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="恢复数据库"><a aria-hidden="true" tabindex="-1" href="#恢复数据库" class="anchor"><span class="icon icon-link"></span></a>恢复数据库</h2>
+        <p>重新执行创建数据库的脚本</p>
         <h2 id="处理函数"><a aria-hidden="true" tabindex="-1" href="#处理函数" class="anchor"><span class="icon icon-link"></span></a>处理函数</h2>
         <h3 id="文本处理函数"><a aria-hidden="true" tabindex="-1" href="#文本处理函数" class="anchor"><span class="icon icon-link"></span></a>文本处理函数</h3>
         <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">select</span> concat<span class="token punctuation">(</span>city<span class="token punctuation">,</span><span class="token string">' '</span><span class="token punctuation">,</span>RTrim<span class="token punctuation">(</span>address<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword">as</span> newtitle <span class="token keyword">from</span> student<span class="token punctuation">;</span>
@@ -594,6 +717,12 @@ select user();
             </li>
             <li><a href="#using" class="tocs-link">USING</a></li>
             <li><a href="#join" class="tocs-link">JOIN</a></li>
+            <li><a href="#union" class="tocs-link">UNION</a></li>
+            <li><a href="#insert" class="tocs-link">INSERT</a></li>
+            <li><a href="#列的属性" class="tocs-link">列的属性</a></li>
+            <li><a href="#更新数据" class="tocs-link">更新数据</a></li>
+            <li><a href="#删除行" class="tocs-link">删除行</a></li>
+            <li><a href="#恢复数据库" class="tocs-link">恢复数据库</a></li>
             <li><a href="#处理函数" class="tocs-link">处理函数</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#文本处理函数" class="tocs-link">文本处理函数</a></li>

@@ -60,21 +60,11 @@ priority_queue< Node,vector< Node >,cmp > Q;
 
 > 用双端队列模拟进出，维护一个单调队列，队首的元素一定是当前窗口中最大的值。
 
-**[347. 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/)**
+[347. 前 K 个高频元素](https://leetcode.cn/problems/top-k-frequent-elements/)
 
-> - 要统计元素出现频率
+> 模拟一个小根堆，重写cmp函数，输出前k个元素即可。
 >
-> 通过map统计次数。
->
-> - 对频率排序
->
-> 使用一种 容器适配器就是**优先级队列**。
->
-> - 找出前K个高频元素
->
-> 用小顶堆维护k个元素在堆中，当堆中元素大于k时，弹出最小频率的数。
->
-> 最后遍历队列中剩余元素即可。
+> 或者STL。
 
 [215. 数组中的第K个最大元素](https://leetcode.cn/problems/kth-largest-element-in-an-array/description/)
 
@@ -87,6 +77,8 @@ priority_queue< Node,vector< Node >,cmp > Q;
 **[ 23. 合并K个排序链表](https://leetcode.cn/problems/merge-k-sorted-lists)**
 
 > 将非空的链表节点插入小顶堆中，然后不断弹出较小值，插入弹出节点的下一个节点值（非空的话）。
+>
+> 排序所有值，构建新的链表返回。
 >
 > 进阶：分治。
 
