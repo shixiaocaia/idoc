@@ -1,6 +1,6 @@
 # XIAOCAI
 
-![](https://bu.dusays.com/2023/01/06/63b81b782267b.jpg)
+![12](img/alook.jpg)
 
 ## 📪 简介
 
@@ -22,5 +22,4 @@
     <label for="file">Podcast：</label>
     <progress max="100" value="40"></progress>
 </p>
-
 
