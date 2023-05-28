@@ -74,7 +74,7 @@ priority_queue< Node,vector< Node >,cmp > Q;
 >
 > 做法2：快速选择。
 
-**[ 23. 合并K个排序链表](https://leetcode.cn/problems/merge-k-sorted-lists)**
+[ 23. 合并K个排序链表](https://leetcode.cn/problems/merge-k-sorted-lists)
 
 > 将非空的链表节点插入小顶堆中，然后不断弹出较小值，插入弹出节点的下一个节点值（非空的话）。
 >
@@ -86,13 +86,11 @@ priority_queue< Node,vector< Node >,cmp > Q;
 
 > 最长，这里指的是连续，难点在于如何更新答案。
 >
-> 这里引入了一个start表示左边括号的开始，维护一个左括号的下标栈。
+> 不断存放最左侧满足的坐标。
 >
-> 当遇到")"入栈下边。
->
-> 当遇到“(",如果栈为空，则需要更新start 为 i + 1，之前的括号序列不连续了。
->
-> 如果栈不为空，弹出栈顶下标，如果此时栈不为空，则答案为下一个左括号的下标（index.top()) 和当前下标i之间的距离，如果为空，则为start（起始左下标）到i之间的距离 + 1。
+> 1. 遇到左括号，放入坐标值。
+>2. 遇到右括号时，如果当前栈为空，说明连续边界要更换`i + 1`
+> 3. 不为空说明开始匹配子串了，弹出一个坐标，如果不为空说明答案为`i - st.top()`，为空说明是一个连续的结束，`i - start + 1`
 
 **[394. 字符串解码](https://leetcode.cn/problems/decode-string)**
 

@@ -18,6 +18,9 @@
     <label for="file">Graduating：</label>
     <progress max="100" value="25"></progress>
 </p>
-
+<p>
+    <label for="file">Podcast：</label>
+    <progress max="100" value="40"></progress>
+</p>
 
 

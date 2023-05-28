@@ -233,3 +233,46 @@ go env -w GOPROXY=https://goproxy.cn,https://goproxy.io,direct
 # 配置代理
 ```
 
+## MiniConda环境管理
+
+```shell
+# 查看环境
+conda info --env
+
+# 创建新环境
+conda create --name python35 python=3.5  
+# 代表创建一个python3.5的环境，我们把它命名为python35
+
+# 激活新环境
+conda activate python35
+
+# 删除环境
+conda remove -n python35 --all
+
+# 添加到jupyter
+conda install ipykernel
+ipython kernel install --user --name=newone
+jupyter kernelspec list
+```
+
+### PIP换镜像源
+
+Windows下，你需要在当前对用户目录下（C:\Users\xx\pip，xx 表示当前使用对用户，比如张三）创建一个 pip.ini在pip.ini文件中输入以下内容：
+
+```
+[global]
+index-url = https://pypi.tuna.tsinghua.edu.cn/simple
+[install]
+trusted-host = pypi.tuna.tsinghua.edu.cn
+```
+
+### CUDA安装
+
+```shell
+nvcc --version
+```
+
+### 错误
+
+- **import keras的错误module ‘tensorflow.compat.v2‘ has no attribute ‘__internal__**
+  - tensorflow.keras.而不是keras.

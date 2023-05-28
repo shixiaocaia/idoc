@@ -9,5 +9,9 @@
 
 ⬜[MySql45讲](https://funnylog.gitee.io/mysql45/)
 
+## 标记
+
+- 了解join的底层原理
+
 
 

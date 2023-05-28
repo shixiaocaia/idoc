@@ -134,7 +134,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <p>维护一个大顶堆（父节点是最大值），栈中超过k个元素就弹出最小的值，最后返回栈顶即可。</p>
           <p>做法2：快速选择。</p>
         </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/merge-k-sorted-lists">23. 合并K个排序链表</a></strong></p>
+        <p><a href="https://leetcode.cn/problems/merge-k-sorted-lists">23. 合并K个排序链表</a></p>
         <blockquote>
           <p>将非空的链表节点插入小顶堆中，然后不断弹出较小值，插入弹出节点的下一个节点值（非空的话）。</p>
           <p>排序所有值，构建新的链表返回。</p>
@@ -143,10 +143,12 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p><strong><a href="https://leetcode.cn/problems/longest-valid-parentheses">32. 最长有效括号</a></strong></p>
         <blockquote>
           <p>最长，这里指的是连续，难点在于如何更新答案。</p>
-          <p>这里引入了一个start表示左边括号的开始，维护一个左括号的下标栈。</p>
-          <p>当遇到")"入栈下边。</p>
-          <p>当遇到“(",如果栈为空，则需要更新start 为 i + 1，之前的括号序列不连续了。</p>
-          <p>如果栈不为空，弹出栈顶下标，如果此时栈不为空，则答案为下一个左括号的下标（index.top()) 和当前下标i之间的距离，如果为空，则为start（起始左下标）到i之间的距离 + 1。</p>
+          <p>不断存放最左侧满足的坐标。</p>
+          <ol>
+            <li>遇到左括号，放入坐标值。</li>
+            <li>遇到右括号时，如果当前栈为空，说明连续边界要更换<code>i + 1</code></li>
+            <li>不为空说明开始匹配子串了，弹出一个坐标，如果不为空说明答案为<code>i - st.top()</code>，为空说明是一个连续的结束，<code>i - start + 1</code></li>
+          </ol>
         </blockquote>
         <p><strong><a href="https://leetcode.cn/problems/decode-string">394. 字符串解码</a></strong></p>
         <blockquote>

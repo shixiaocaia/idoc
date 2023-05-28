@@ -1,3 +1,13 @@
+- 00Go/README.md: ↩️README
+- 00Go: Hello World
+- 00Go/ch00.md: 基础语法
+- 00Go/ch01.md: 并发编程
+- 00Go: Todolist
+- 00Go: Web编程
+- 00Go: 原理深入
+- 00Go: 微服务框架
+
+
 - 01DataStructure/README.md: ↩️README
 - 01DataStructure: Leetcode
 - 01DataStructure/ch1.md: 数组
@@ -13,6 +23,29 @@
 - 01DataStructure/ch12.md: 图论
 - 01DataStructure/ch13.md: 其他
 
+
+- 01ComputerNetwork/README.md: ↩️README
+- 01ComputerNetwork/ch00.md: 问题收集
+- 01ComputerNetwork: HTTP篇 
+- 01ComputerNetwork/ch11.md: 常见问题
+- 01ComputerNetwork: TCP篇
+- 01ComputerNetwork/ch21.md: 三次握手/四次挥手
+- 01ComputerNetwork/ch22.md: socket
+- 01ComputerNetwork/ch23.md: 可靠的TCP
+- 01ComputerNetwork: IP篇
+- 01ComputerNetwork/ch31.md: IP知识全家桶
+- 01ComputerNetwork/ch32.md: ping的工作原理
+- 01ComputerNetwork: 综合篇
+- 01ComputerNetwork/ch41.md: 键入网址到网页显示，期间发生了什么？
+
+- 01DataBase/README.md: ↩️README
+- 01DataBase: MySQL
+- 01DataBase/ch00.md: 初见
+- 01DataBase/ch01.md: SQL
+- 01DataBase/ch02.md: MySQL是怎么运行的
+- 01DataBase: Redis
+- 01DataBase/ch11.md: 初见
+
 - 01OperatingSystem/README.md: ↩️README
 - 01OperatingSystem/ch00.md: 问题收集
 - 01OperatingSystem: 计组
@@ -25,6 +58,27 @@
 - 01OperatingSystem: 虚拟内存
 - 01OperatingSystem/ch91.md: 虚拟内存
 - 01OperatingSystem/ch92.md: 问题
+
+
+
+
+- 03Other/README.md: ↩️README
+- 03Other/environment.md: 配个环境
+- 03Other/vim.md: Vim
+- 03Other/git.md: Git
+- 03Other/shell.md: Shell
+- 03Other/docker.md: Docker
+
+
+
+
+
+
+
+
+
+
+
 
 - 00CPP/README.md: ↩️README
 - 00CPP: C++ primer
@@ -43,29 +97,9 @@
 - 00CPP: 读万里书
 - 00CPP/ch31.md: Effective C++
 
-- 01ComputerNetwork/README.md: ↩️README
-- 01ComputerNetwork/ch00.md: 问题收集
-- 01ComputerNetwork: HTTP篇 
-- 01ComputerNetwork/ch11.md: 常见问题
-- 01ComputerNetwork: TCP篇
-- 01ComputerNetwork/ch21.md: 三次握手/四次挥手
-- 01ComputerNetwork/ch22.md: socket
-- 01ComputerNetwork/ch23.md: 可靠的TCP
-- 01ComputerNetwork: IP篇
-- 01ComputerNetwork/ch31.md: IP知识全家桶
-- 01ComputerNetwork/ch32.md: ping的工作原理
-- 01ComputerNetwork: 综合篇
-- 01ComputerNetwork/ch41.md: 键入网址到网页显示，期间发生了什么？
 
-- 01DataBase/README.md: ↩️README
-- 01DataBase: 从动手开始
-- 01DataBase/ch00.md: 初见
-- 01DataBase/ch01.md: SQL
-- 01DataBase/ch02.md: MySQL是怎么运行的
-
-
-- 02MyWeb: 新手村
 - 02MyWeb/README.md: ↩️README
+- 02MyWeb: 新手村
 - 02MyWeb/ch00.md: 环境配置
 - 02MyWeb/ch01.md: 线程同步机制封装类
 - 02MyWeb/ch02.md: 半同步/半反应堆线程池
@@ -78,18 +112,3 @@
 - 02MyWeb: 总结
 - 02MyWeb/ch10.md: 问题总结
 - 02MyWeb/ch11.md: 压力测试
-
-- 03Other/README.md: ↩️README
-- 03Other/environment.md: 配个环境
-- 03Other/vim.md: Vim
-- 03Other/git.md: Git
-- 03Other/shell.md: Shell
-- 03Other/docker.md: Docker
-
-- 00Go/README.md: ↩️README
-- 00Go/ch00.md: Hello World
-- 00Go/ch01.md: 数据结构
-- 00Go: 并发编程
-- 00Go: Web编程
-- 00Go: 原理深入
-- 00Go: 微服务框架
