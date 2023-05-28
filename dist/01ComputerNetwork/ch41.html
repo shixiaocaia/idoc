@@ -82,7 +82,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       <markdown-style>
         <h1 id="键入网址到网页显示期间发生了什么"><a aria-hidden="true" tabindex="-1" href="#键入网址到网页显示期间发生了什么" class="anchor"><span class="icon icon-link"></span></a>键入网址到网页显示，期间发生了什么？</h1>
         <p>
-          <img src="..\img\2525618-20221214141443398-1836031785.png" alt="img">
+          <img src="..\img\键入Url.png" alt="键入Url">
         </p>
         <h2 id="url解析"><a aria-hidden="true" tabindex="-1" href="#url解析" class="anchor"><span class="icon icon-link"></span></a>URL解析</h2>
         <p>浏览器首先对 URL 解析，解析出协议、域名、端口、资源路径、参数等。</p>
@@ -114,7 +114,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <img src="..\img\2525618-20221214141516530-2128652891.png" alt="img">
         </p>
         <h2 id="tcp三次握手"><a aria-hidden="true" tabindex="-1" href="#tcp三次握手" class="anchor"><span class="icon icon-link"></span></a>TCP三次握手</h2>
-        <p>在通过DNS解析得到服务器IP后，向服务器发起TCP连接，<strong>保证双方都有发送和接收的能力</strong>。</p>
+        <p>向服务器发起TCP连接，<strong>保证双方都有发送和接收的能力</strong>。</p>
         <blockquote>
           <ul>
             <li>这里复习三次握手的过程。</li>
@@ -143,19 +143,23 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           </ul>
         </blockquote>
         <p>经过封装后IP报文，在TCP报文基础上，添加了IP头部。借此知道了出发的目的地和终点站。</p>
+        <p>在整个过程中IP地址不会变更，ARP协议通过IP地址查找主机或者路由器的MAC地址。</p>
         <h3 id="两点传输mac"><a aria-hidden="true" tabindex="-1" href="#两点传输mac" class="anchor"><span class="icon icon-link"></span></a>两点传输—MAC</h3>
         <p>生成IP报文后，还要加上MAC头部，用于两点之间的传输。</p>
         <p>关于MAC地址，疑问比较大。</p>
+        <ul>
+          <li>整体流程
+            <ul>
+              <li>一开始填写的MAC地址就是本机MAC地址，以及本局域网的<strong>默认网关</strong>的MAC地址。</li>
+              <li>先去查ARP高速缓存：本局域网网下各主机和路由器的IP地址和目的地址之间映射关系</li>
+              <li>缓存未中，通过ARP协议发起硬件广播，更新路由表。</li>
+            </ul>
+          </li>
+          <li>MAC地址在两点设备转发过程中不断变更，IP地址是自始至终不变的量。</li>
+        </ul>
         <blockquote>
-          <ul>
-            <li>MAC包头的格式
-              <ul>
-                <li>包括了两种协议，ARP / IP协议</li>
-                <li>是不是在不知道接收方MAC地址时，使用的。</li>
-              </ul>
-            </li>
-            <li>一开始封装后填写的MAC地址是谁的，是目标地址下设备对应的MAC地址吗</li>
-          </ul>
+          <p>这里我理解先转发到默认网关，便于进一步转发。</p>
+          <p>一开始可能也不知道目标主机的MAC地址。</p>
         </blockquote>
         <h2 id="硬件传输"><a aria-hidden="true" tabindex="-1" href="#硬件传输" class="anchor"><span class="icon icon-link"></span></a>硬件传输</h2>
         <h3 id="出口网卡"><a aria-hidden="true" tabindex="-1" href="#出口网卡" class="anchor"><span class="icon icon-link"></span></a>出口—网卡</h3>
@@ -164,7 +168,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <h3 id="送别者交换机"><a aria-hidden="true" tabindex="-1" href="#送别者交换机" class="anchor"><span class="icon icon-link"></span></a>送别者—交换机</h3>
         <ul>
           <li>
-            <p>交换机收到电信号后，将其转换为数字信号，并将得到的网络包中，将其MAC地址和使用的端口号写到其路由表当中，在后续收到其他端口发来的网络包时，发现目的MAC地址就在路由表中，直接进行转换。</p>
+            <p>交换机收到电信号后，将其转换为数字信号，并将得到的网络包中，将其MAC地址和使用的端口号写到其路由表当中，在后续收到其他端口发来的网络包时，发现目的MAC地址就在路由表中，直接进行转发。</p>
           </li>
           <li>
             <p>交换机<strong>没有MAC地址</strong>，会接受所有的发送过来的包到缓冲区，去路由表查询接收方的MAC地址。</p>
@@ -185,11 +189,13 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p>网络包经过交换机之后，现在到达了<strong>路由器</strong>，通过查表转发到下一个路由器或目标设备。</p>
         <p>路由器每个端口都有IP地址和MAC地址，因此根据端口MAC地址接受发送给自己的以太网包，再查询路由表转发目标，再由响应端口发送以太网包出去。</p>
         <blockquote>
-          <p>与交换机的区别</p>
           <p>查询不到对应的MAC地址，进行ARP，并且路由器具有ARP缓存。</p>
           <p>完成后转换为电信号，通过端口发送出去，类似计算机。</p>
           <p>通过交换机达到下一个路由器，交换机根据接收方MAC地址（下一个路由器的）</p>
         </blockquote>
+        <ul>
+          <li>路由器可以起到划分子网的作用</li>
+        </ul>
         <h2 id="响应http请求"><a aria-hidden="true" tabindex="-1" href="#响应http请求" class="anchor"><span class="icon icon-link"></span></a>响应HTTP请求</h2>
         <p>服务器收到请求报文后，处理返回响应报文给浏览器。</p>
         <p>比如<code>HTTP/1.1 200 OK</code>，200是状态码，OK是消息短语。</p>

@@ -48,15 +48,13 @@ priority_queue< Node,vector< Node >,cmp > Q;
 
 [225. 用队列实现栈](https://leetcode.cn/problems/implement-stack-using-queues/)
 
->来换交换得到最底部的元素值，
-
 [20. 有效的括号](https://leetcode.cn/problems/valid-parentheses/)
 
 [1047. 删除字符串中的所有相邻重复项](https://leetcode.cn/problems/remove-all-adjacent-duplicates-in-string/)
 
 [150. 逆波兰表达式求值](https://leetcode.cn/problems/evaluate-reverse-polish-notation/)
 
-**[239. 滑动窗口最大值](https://leetcode.cn/problems/sliding-window-maximum/)**
+[239. 滑动窗口最大值](https://leetcode.cn/problems/sliding-window-maximum/)
 
 > 用双端队列模拟进出，维护一个单调队列，队首的元素一定是当前窗口中最大的值。
 
