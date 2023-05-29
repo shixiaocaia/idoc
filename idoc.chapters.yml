@@ -2,10 +2,11 @@
 - 00Go: Hello World
 - 00Go/ch00.md: 基础语法
 - 00Go/ch01.md: 并发编程
-- 00Go: Todolist
 - 00Go: Web编程
-- 00Go: 原理深入
-- 00Go: 微服务框架
+- 00Go/ch02.md: gorm框架
+- 00Go/ch03.md: gin框架
+#- 00Go: 原理深入
+#- 00Go: 微服务框架
 
 
 - 01DataStructure/README.md: ↩️README
@@ -36,15 +37,16 @@
 - 01ComputerNetwork/ch31.md: IP知识全家桶
 - 01ComputerNetwork/ch32.md: ping的工作原理
 - 01ComputerNetwork: 综合篇
-- 01ComputerNetwork/ch41.md: 键入网址到网页显示，期间发生了什么？
+- 01ComputerNetwork/ch41.md: 描述键入url到渲染显示过程
 
 - 01DataBase/README.md: ↩️README
-- 01DataBase: MySQL
-- 01DataBase/ch00.md: 初见
+- 01DataBase:SQL
+- 01DataBase/ch00.md: Hello MySQL
 - 01DataBase/ch01.md: SQL
-- 01DataBase/ch02.md: MySQL是怎么运行的
+- 01DataBase: MySQL原理
+- 01DataBase/ch02.md: 架构
 - 01DataBase: Redis
-- 01DataBase/ch11.md: 初见
+- 01DataBase/ch11.md: Hello Redis
 
 - 01OperatingSystem/README.md: ↩️README
 - 01OperatingSystem/ch00.md: 问题收集
