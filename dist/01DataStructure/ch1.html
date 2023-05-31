@@ -164,6 +164,20 @@ public:
           <p>双指针的经典应用，如果要删除倒数第n个节点，让fast移动n步，然后让fast和slow同时移动，直到fast指向链表末尾。删掉slow所指向的节点就可以了。</p>
           <p>多个指针，指向不同的下标，满足条件时移动对应的一个指针，指针用于划分数组部分。</p>
         </blockquote>
+        <h3 id="同向双指针"><a aria-hidden="true" tabindex="-1" href="#同向双指针" class="anchor"><span class="icon icon-link"></span></a>同向双指针</h3>
+        <p><a href="https://leetcode.cn/problems/minimum-size-subarray-sum/submissions/">209.长度最小的子数组</a></p>
+        <p><strong><a href="https://leetcode.cn/problems/subarray-product-less-than-k/description/">713. 乘积小于 K 的子数组</a></strong></p>
+        <blockquote>
+          <p>209是不满足条件变化，713不满足条件时变，有一定的相关性。</p>
+          <p>713自己第一遍没写出来，没有想到以r为右边界时，符合区间个数，停留在209区间长度的思路上。</p>
+          <p>当[l, r]满足时，[l + 1,r]...[r, r]都是满足，即这一段的长度。</p>
+        </blockquote>
+        <ol start="1004">
+          <li>最大连续 1 的个数 III <a href="https://leetcode.cn/problems/max-consecutive-ones-iii/">https://leetcode.cn/problems/max-consecutive-ones-iii/</a></li>
+          <li>替换子串得到平衡字符串 <a href="https://leetcode.cn/problems/replace-the-substring-for-balanced-string/">https://leetcode.cn/problems/replace-the-substring-for-balanced-string/</a></li>
+          <li>将 x 减到 0 的最小操作数 <a href="https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/">https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/</a></li>
+        </ol>
+        <h3 id="相向双指针"><a aria-hidden="true" tabindex="-1" href="#相向双指针" class="anchor"><span class="icon icon-link"></span></a>相向双指针</h3>
         <h3 id="例题-1"><a aria-hidden="true" tabindex="-1" href="#例题-1" class="anchor"><span class="icon icon-link"></span></a>例题</h3>
         <p><a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/">LC26. 删除有序数组中的重复项</a></p>
         <p><a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-list/description/">LC83. 删除排序链表中的重复元素</a></p>
@@ -402,6 +416,8 @@ num[i + 1] = num[i] + diff[i + 1]; //diff[i] + k,导致num[i] + k,后面都加�
             </li>
             <li><a href="#双指针" class="tocs-link">双指针</a>
               <ol class="tocs-list is-collapsed">
+                <li><a href="#同向双指针" class="tocs-link">同向双指针</a></li>
+                <li><a href="#相向双指针" class="tocs-link">相向双指针</a></li>
                 <li><a href="#例题-1" class="tocs-link">例题</a></li>
               </ol>
             </li>

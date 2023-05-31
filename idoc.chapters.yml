@@ -37,12 +37,14 @@
 - 01ComputerNetwork/ch31.md: IP知识全家桶
 - 01ComputerNetwork/ch32.md: ping的工作原理
 - 01ComputerNetwork: 综合篇
-- 01ComputerNetwork/ch41.md: 描述键入url到渲染显示过程
+- 01ComputerNetwork/ch01.md: 网络发展   
+- 01ComputerNetwork/ch41.md: 键入url到渲染显示
 
 - 01DataBase/README.md: ↩️README
 - 01DataBase:SQL
 - 01DataBase/ch00.md: Hello MySQL
 - 01DataBase/ch01.md: SQL
+- 01DataBase/ch04.md: 写点SQL
 - 01DataBase: MySQL原理
 - 01DataBase/ch02.md: 架构
 - 01DataBase: Redis

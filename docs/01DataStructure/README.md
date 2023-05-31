@@ -19,8 +19,4 @@ LeetCode
 
 ✅[有没有人一起刷LC](https://leetcode.cn/circle/article/48kq9d/)
 
----
-
-- 常见的思路：图论、DP、查找、排序、
-- 注意思路总结分析，时间、空间复杂度。
-
+✅[灵茶山艾府](https://space.bilibili.com/206214/channel/series)

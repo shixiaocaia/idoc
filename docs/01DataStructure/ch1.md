@@ -77,6 +77,26 @@ public:
 >
 > 多个指针，指向不同的下标，满足条件时移动对应的一个指针，指针用于划分数组部分。
 
+### 同向双指针
+
+[209.长度最小的子数组](https://leetcode.cn/problems/minimum-size-subarray-sum/submissions/)                                                                 
+
+**[713. 乘积小于 K 的子数组](https://leetcode.cn/problems/subarray-product-less-than-k/description/)**
+
+> 209是不满足条件变化，713不满足条件时变，有一定的相关性。
+>
+> 713自己第一遍没写出来，没有想到以r为右边界时，符合区间个数，停留在209区间长度的思路上。
+>
+> 当[l, r]满足时，[l + 1,r]...[r, r]都是满足，即这一段的长度。    
+
+1004. 最大连续 1 的个数 III https://leetcode.cn/problems/max-consecutive-ones-iii/ 
+1234. 替换子串得到平衡字符串 https://leetcode.cn/problems/replace-the-substring-for-balanced-string/ 
+1658. 将 x 减到 0 的最小操作数 https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/
+
+### 相向双指针
+
+
+
 ### 例题
 
 [LC26. 删除有序数组中的重复项](https://leetcode.cn/problems/remove-duplicates-from-sorted-array/)
@@ -112,7 +132,7 @@ public:
 
 > 刷油漆战略。
 >
-> 由于num <= 2，我们线全部刷成2，如果小于等于1，刷一个1（有一个错误的2刷成了1），如果小于0，刷一个0（纠正了一个错误1），分别用两个指针指向0，1的起始位置。                                                                                 
+> 由于num <= 2，我们线全部刷成2，如果小于等于1，刷一个1（有一个错误的2刷成了1），如果小于0，刷一个0（纠正了一个错误1），分别用两个指针指向0，1的起始位置。                     
 
 **其他章节双指针思路题**
 
