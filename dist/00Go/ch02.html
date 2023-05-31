@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gorm框架 iDoc</title>
-    <meta name="description" content="IO 密集型服务的瓶颈不在 CPU 处理速度，而在于尽可能快速的完成高并发、多连接下的数据读写。">
+    <meta name="description" content="GORM让你的数据库里面的表结构变成你代码定义的数据结构（golang里面的结构体的结构）从而做到，代码结构即为数据库结构，代码行为即为数据库行为。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
@@ -59,7 +59,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </div>
       </article>
     </header>
-    <div class="warpper-content warpper sidebar notocs">
+    <div class="warpper-content warpper sidebar">
       <div class="sidebar-border">
         <aside class="sidebar" role="navigation">
           <div>
@@ -75,7 +75,131 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       </div>
       <markdown-style>
         <h1 id="gorm框架"><a aria-hidden="true" tabindex="-1" href="#gorm框架" class="anchor"><span class="icon icon-link"></span></a>Gorm框架</h1>
+        <p><strong><a href="https://gorm.io/zh_CN/docs/index.html">读文档</a></strong></p>
+        <h2 id="什么是gorm"><a aria-hidden="true" tabindex="-1" href="#什么是gorm" class="anchor"><span class="icon icon-link"></span></a>什么是gorm</h2>
+        <p>GORM让你的数据库里面的表结构变成你代码定义的数据结构（golang里面的结构体的结构）从而做到，代码结构即为数据库结构，代码行为即为数据库行为。</p>
+        <ul>
+          <li>数据库的连接(以/YSQL为例)以及建表和自动迁移</li>
+          <li>模型建立</li>
+          <li>单表的增删改查</li>
+          <li>一对一关系一对多多对多关系的增删改查</li>
+          <li>特殊的增删改查(select原生sq等)</li>
+          <li>事务的操作(普通事务，嵌套事务)</li>
+          <li>自定义数据类型json[1,2,3]</li>
+          <li>钩子(生命周期HOOK函数)</li>
+          <li>DBResolver读写分离（多数据库）</li>
+        </ul>
+        <h3 id="安装gorm"><a aria-hidden="true" tabindex="-1" href="#安装gorm" class="anchor"><span class="icon icon-link"></span></a>安装GORM</h3>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">go</span> get <span class="token operator">-</span>u gorm<span class="token punctuation">.</span>io<span class="token operator">/</span>gorm
+</span><span class="code-line line-number" line="2"><span class="token keyword">go</span> get <span class="token operator">-</span>u gorm<span class="token punctuation">.</span>io<span class="token operator">/</span>driver<span class="token operator">/</span>sqlite
+</span></code><input type="hidden" value="go get -u gorm.io/gorm
+go get -u gorm.io/driver/sqlite
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="链接mysql"><a aria-hidden="true" tabindex="-1" href="#链接mysql" class="anchor"><span class="icon icon-link"></span></a>链接MySQL</h3>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1">db<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> gorm<span class="token punctuation">.</span><span class="token function">Open</span><span class="token punctuation">(</span>mysql<span class="token punctuation">.</span><span class="token function">New</span><span class="token punctuation">(</span>mysql<span class="token punctuation">.</span>Config<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">    DSN<span class="token punctuation">:</span> <span class="token string">"root:1127@tcp(127.0.0.1:3306)/gorm_class?charset=utf8mb4&#x26;parseTime=True&#x26;loc=Local"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="3">    DefaultStringSize<span class="token punctuation">:</span> <span class="token number">256</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="4"><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token operator">&#x26;</span>gorm<span class="token punctuation">.</span>Config<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="5">    SkipDefaultTransaction<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="6">    NamingStrategy<span class="token punctuation">:</span> schema<span class="token punctuation">.</span>NamingStrategy<span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="7">        TablePrefix<span class="token punctuation">:</span>   <span class="token string">"gva_"</span><span class="token punctuation">,</span> 
+</span><span class="code-line line-number" line="8">        SingularTable<span class="token punctuation">:</span> <span class="token boolean">false</span><span class="token punctuation">,</span>  		<span class="token comment">// skip the snake_casing of names</span>
+</span><span class="code-line line-number" line="9">    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="10">    DisableForeignKeyConstraintWhenMigrating<span class="token punctuation">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> <span class="token comment">// 主张逻辑外键</span>
+</span><span class="code-line line-number" line="11"><span class="token punctuation">}</span><span class="token punctuation">)</span>
+</span></code><input type="hidden" value="db, _ := gorm.Open(mysql.New(mysql.Config{
+    DSN: &#x22;root:1127@tcp(127.0.0.1:3306)/gorm_class?charset=utf8mb4&#x26;parseTime=True&#x26;loc=Local&#x22;,
+    DefaultStringSize: 256,
+}), &#x26;gorm.Config{
+    SkipDefaultTransaction: true,
+    NamingStrategy: schema.NamingStrategy{
+        TablePrefix:   &#x22;gva_&#x22;, 
+        SingularTable: false,  		// skip the snake_casing of names
+    },
+    DisableForeignKeyConstraintWhenMigrating: true, // 主张逻辑外键
+})
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>学习gorm.Config设置，有一些设置需要提前设置好
+            <ul>
+              <li>DefaultStringSize</li>
+              <li>跳过默认事务：SkipDefaultTransaction</li>
+              <li>命名规则：NamingStrategy</li>
+              <li>主张逻辑外键：DisableForeignKeyConstraintWhenMigrating</li>
+            </ul>
+          </li>
+        </ul>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1">sqlDB<span class="token punctuation">,</span> <span class="token boolean">_</span> <span class="token operator">:=</span> db<span class="token punctuation">.</span><span class="token function">DB</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="2">sqlDB<span class="token punctuation">.</span><span class="token function">SetConnMaxIdleTime</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="3">sqlDB<span class="token punctuation">.</span><span class="token function">SetMaxOpenConns</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="4">sqlDB<span class="token punctuation">.</span><span class="token function">SetConnMaxLifetime</span><span class="token punctuation">(</span>time<span class="token punctuation">.</span>Hour<span class="token punctuation">)</span>
+</span></code><input type="hidden" value="sqlDB, _ := db.DB()
+sqlDB.SetConnMaxIdleTime(10)
+sqlDB.SetMaxOpenConns(100)
+sqlDB.SetConnMaxLifetime(time.Hour)
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>配置连接池</li>
+        </ul>
+        <h3 id="建表以及关键api"><a aria-hidden="true" tabindex="-1" href="#建表以及关键api" class="anchor"><span class="icon icon-link"></span></a>建表以及关键api</h3>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">type</span> User <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">    Name <span class="token builtin">string</span>
+</span><span class="code-line line-number" line="3"><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5"><span class="token keyword">type</span> UserTwo <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="6">    Name <span class="token builtin">string</span>
+</span><span class="code-line line-number" line="7"><span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="8">
+</span><span class="code-line line-number" line="9">M <span class="token operator">:=</span> db<span class="token punctuation">.</span><span class="token function">Migrator</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="10"><span class="token comment">//M.CreateTable(&#x26;User{})</span>
+</span><span class="code-line line-number" line="11"><span class="token keyword">if</span> M<span class="token punctuation">.</span><span class="token function">HasTable</span><span class="token punctuation">(</span><span class="token operator">&#x26;</span>User<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="12">    <span class="token comment">//M.DropTable(&#x26;User{})</span>
+</span><span class="code-line line-number" line="13">    M<span class="token punctuation">.</span><span class="token function">RenameTable</span><span class="token punctuation">(</span><span class="token operator">&#x26;</span>User<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">&#x26;</span>UserTwo<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="14"><span class="token punctuation">}</span> <span class="token keyword">else</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="15">    M<span class="token punctuation">.</span><span class="token function">RenameTable</span><span class="token punctuation">(</span><span class="token operator">&#x26;</span>UserTwo<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token operator">&#x26;</span>User<span class="token punctuation">{</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="16"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="type User struct {
+    Name string
+}
+
+type UserTwo struct {
+    Name string
+}
+
+M := db.Migrator()
+//M.CreateTable(&#x26;User{})
+if M.HasTable(&#x26;User{}) {
+    //M.DropTable(&#x26;User{})
+    M.RenameTable(&#x26;User{}, &#x26;UserTwo{})
+} else {
+    M.RenameTable(&#x26;UserTwo{}, &#x26;User{})
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>db.AutoMigrate(User)自动迁移（自动建表）</li>
+          <li>Migrator接口一个统一的api接口
+            <ul>
+              <li>CreateTable(&#x26;结构体)创建表</li>
+              <li>HasTable是否存在表</li>
+              <li>DropTable删除表</li>
+              <li>RenameTable重命名表</li>
+            </ul>
+          </li>
+        </ul>
       </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#什么是gorm" class="tocs-link">什么是gorm</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#安装gorm" class="tocs-link">安装GORM</a></li>
+                <li><a href="#链接mysql" class="tocs-link">链接MySQL</a></li>
+                <li><a href="#建表以及关键api" class="tocs-link">建表以及关键api</a></li>
+              </ol>
+            </li>
+          </ol>
+        </aside>
+      </nav>
     </div>
     <script src="../js/demo-preview.js?v=1.25.0"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>

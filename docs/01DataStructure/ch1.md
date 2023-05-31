@@ -45,10 +45,6 @@ public:
 >
 > 三刷，合并左右遍历问题
 
- [167. 两数之和 II - 输入有序数组](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/)
-
-> 二分、双指针，相向而行。
-
 [33. 搜索旋转排序数组](https://leetcode.cn/problems/search-in-rotated-sorted-array/description/)
 
 >找到原数组的left值，对`[left, nums.size() - 1 + left]`进行二分，再通过取余对应旋转后数组的下标数值。
@@ -89,13 +85,20 @@ public:
 >
 > 当[l, r]满足时，[l + 1,r]...[r, r]都是满足，即这一段的长度。    
 
-1004. 最大连续 1 的个数 III https://leetcode.cn/problems/max-consecutive-ones-iii/ 
-1234. 替换子串得到平衡字符串 https://leetcode.cn/problems/replace-the-substring-for-balanced-string/ 
-1658. 将 x 减到 0 的最小操作数 https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/
+[1004. 最大连续 1 的个数 III](https://leetcode.cn/problems/max-consecutive-ones-iii/ ) 
+
+[1234. 替换子串得到平衡字符串]( https://leetcode.cn/problems/replace-the-substring-for-balanced-string/ ) 
+
+[1658. 将 x 减到 0 的最小操作数](https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/
+) 
 
 ### 相向双指针
 
+ [167. 两数之和 II - 输入有序数组](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/)
 
+> 二分、双指针，相向而行。
+
+[15.三树之和](https://leetcode.cn/problems/3sum/)
 
 ### 例题
 
@@ -138,7 +141,7 @@ public:
 
 > [LC19.删除链表的倒数第N个节点](https://leetcode.cn/problems/remove-nth-node-from-end-of-list/)
 >
-> [LC15.三树之和](https://leetcode.cn/problems/3sum/)
+> 
 
 ## 滑动窗口
 

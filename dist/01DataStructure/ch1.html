@@ -140,10 +140,6 @@ public:
           <p>本题卡了我很久一个点：<strong>数组越界访问问题</strong>，剪枝判断应该先判断越界问题再判断大小，否则会出现数组的越界访问。</p>
           <p>三刷，合并左右遍历问题</p>
         </blockquote>
-        <p><a href="https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/">167. 两数之和 II - 输入有序数组</a></p>
-        <blockquote>
-          <p>二分、双指针，相向而行。</p>
-        </blockquote>
         <p><a href="https://leetcode.cn/problems/search-in-rotated-sorted-array/description/">33. 搜索旋转排序数组</a></p>
         <blockquote>
           <p>找到原数组的left值，对<code>[left, nums.size() - 1 + left]</code>进行二分，再通过取余对应旋转后数组的下标数值。</p>
@@ -172,12 +168,15 @@ public:
           <p>713自己第一遍没写出来，没有想到以r为右边界时，符合区间个数，停留在209区间长度的思路上。</p>
           <p>当[l, r]满足时，[l + 1,r]...[r, r]都是满足，即这一段的长度。</p>
         </blockquote>
-        <ol start="1004">
-          <li>最大连续 1 的个数 III <a href="https://leetcode.cn/problems/max-consecutive-ones-iii/">https://leetcode.cn/problems/max-consecutive-ones-iii/</a></li>
-          <li>替换子串得到平衡字符串 <a href="https://leetcode.cn/problems/replace-the-substring-for-balanced-string/">https://leetcode.cn/problems/replace-the-substring-for-balanced-string/</a></li>
-          <li>将 x 减到 0 的最小操作数 <a href="https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/">https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/</a></li>
-        </ol>
+        <p><a href="https://leetcode.cn/problems/max-consecutive-ones-iii/">1004. 最大连续 1 的个数 III</a></p>
+        <p><a href="https://leetcode.cn/problems/replace-the-substring-for-balanced-string/">1234. 替换子串得到平衡字符串</a></p>
+        <p><a href="https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/">1658. 将 x 减到 0 的最小操作数</a></p>
         <h3 id="相向双指针"><a aria-hidden="true" tabindex="-1" href="#相向双指针" class="anchor"><span class="icon icon-link"></span></a>相向双指针</h3>
+        <p><a href="https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/">167. 两数之和 II - 输入有序数组</a></p>
+        <blockquote>
+          <p>二分、双指针，相向而行。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/3sum/">15.三树之和</a></p>
         <h3 id="例题-1"><a aria-hidden="true" tabindex="-1" href="#例题-1" class="anchor"><span class="icon icon-link"></span></a>例题</h3>
         <p><a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/">LC26. 删除有序数组中的重复项</a></p>
         <p><a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-list/description/">LC83. 删除排序链表中的重复元素</a></p>
@@ -210,7 +209,6 @@ public:
         <p><strong>其他章节双指针思路题</strong></p>
         <blockquote>
           <p><a href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/">LC19.删除链表的倒数第N个节点</a></p>
-          <p><a href="https://leetcode.cn/problems/3sum/">LC15.三树之和</a></p>
         </blockquote>
         <h2 id="滑动窗口"><a aria-hidden="true" tabindex="-1" href="#滑动窗口" class="anchor"><span class="icon icon-link"></span></a>滑动窗口</h2>
         <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>

@@ -114,37 +114,21 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
               <li><code>GOMODULE</code>模式下所有依赖的包存放在<code>GOPATH/pkg/mod</code>目录下</li>
               <li>所有第三方二进制可执行文件放在<code>GOPATH/bin</code>目录下</li>
               <li>且工程项目可以放在<code>GOPATH</code>路径之外，但要求项目中需要有<code>go.mod</code>文件（该文件通过<code>go mod init</code>命令初始化可以生成）。</li>
+              <li>注意：所使用的包，还是需要手动<code>go get</code></li>
             </ul>
-            <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1">export GO111MODULE<span class="token operator">=</span>on
-</span><span class="code-line line-number" line="2">
-</span><span class="code-line line-number" line="3"><span class="token keyword">go</span> mod init
-</span><span class="code-line line-number" line="4">初始化当前文件夹，创建<span class="token keyword">go</span><span class="token punctuation">.</span>mod文件，事实上，如果你的环境中GO111MODULE<span class="token operator">=</span>on，使用类似goland的工具创建工程会自动生成<span class="token keyword">go</span><span class="token punctuation">.</span>mod
-</span><span class="code-line line-number" line="5"><span class="token keyword">go</span> mod tidy
-</span><span class="code-line line-number" line="6">包整理（多的删去、少的拉取），使用之前自然是<span class="token keyword">import</span>了需要的库了
-</span><span class="code-line line-number" line="7"><span class="token keyword">go</span> mod download
-</span><span class="code-line line-number" line="8">下载依赖到本地（默认为 GOPATH<span class="token operator">/</span>pkg<span class="token operator">/</span>mod 目录）
-</span><span class="code-line line-number" line="9"><span class="token keyword">go</span> mod vendor	
-</span><span class="code-line line-number" line="10">将依赖包复制到工程文件的vendor目录下
-</span><span class="code-line line-number" line="11"><span class="token keyword">go</span> mod verify
-</span><span class="code-line line-number" line="12">验证依赖是否正确
-</span></code><input type="hidden" value="export GO111MODULE=on
-
-go mod init
-初始化当前文件夹，创建go.mod文件，事实上，如果你的环境中GO111MODULE=on，使用类似goland的工具创建工程会自动生成go.mod
-go mod tidy
-包整理（多的删去、少的拉取），使用之前自然是import了需要的库了
-go mod download
-下载依赖到本地（默认为 GOPATH/pkg/mod 目录）
-go mod vendor	
-将依赖包复制到工程文件的vendor目录下
-go mod verify
-验证依赖是否正确
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
           </li>
         </ol>
         <blockquote>
           <ul>
             <li>go mod init testname后，引用该模块下的package时，作为共同的前缀，同时也是模块的标识。</li>
+            <li>在项目的根目录中执行 go get 命令的话，go get 会同步更新 go.mod 和 go.sum 文件，go.mod 中记录的是依赖名及其版本，如：go.sum 文件中则会记录依赖包的哈希值（同时还有依赖包中 go.mod 的哈希值）</li>
+            <li><code>go mod tidy</code>拉取缺少的模块，移除不用的模块</li>
+            <li><code>go mod vendor</code>将 GOPATH/src/pkg/mod 中的缓存包，复制到项目的 vendor 目录中，即使用每个项目使用自身包的模式，类似之前的 govendor 管理方式</li>
+            <li><code>go mod download</code>下载依赖包</li>
+            <li><code>go mod edit</code>编辑 go.mod 文件一般直接用 ide 编辑就行</li>
+            <li><code>go mod graph</code>打印模块依赖图</li>
+            <li><code>go mod verify</code>验证依赖是否正确</li>
+            <li><code>go mod why</code>解释为什么需要依赖</li>
           </ul>
         </blockquote>
         <h3 id="golang环境"><a aria-hidden="true" tabindex="-1" href="#golang环境" class="anchor"><span class="icon icon-link"></span></a>golang环境</h3>
