@@ -411,7 +411,7 @@ public:
         </ul>
         <h2 id="例题"><a aria-hidden="true" tabindex="-1" href="#例题" class="anchor"><span class="icon icon-link"></span></a>例题</h2>
         <h3 id="一般树的遍历"><a aria-hidden="true" tabindex="-1" href="#一般树的遍历" class="anchor"><span class="icon icon-link"></span></a>一般树的遍历</h3>
-        <p><strong><a href="https://leetcode.cn/problems/invert-binary-tree/">226. 翻转二叉树</a></strong></p>
+        <p><a href="https://leetcode.cn/problems/invert-binary-tree/">226. 翻转二叉树</a></p>
         <blockquote>
           <p>模板题。</p>
           <p>对于[遍历]：对每一个非空节点，交换左右节点，然后再分别遍历子节点即可。</p>
@@ -420,7 +420,7 @@ public:
           <p>每次取出结点，交换其左右结点，再放入左右结点。</p>
           <p>：我会写翻转二叉树，但不是去不了谷歌系列题</p>
         </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/symmetric-tree/">101. 对称二叉树</a></strong></p>
+        <p><a href="https://leetcode.cn/problems/symmetric-tree/">101. 对称二叉树</a></p>
         <blockquote>
           <p>二刷错误。没有正确处理空节点情况。</p>
           <p>对于基础语法错误，还是要仔细看清楚。</p>
@@ -446,41 +446,14 @@ public:
           <p>这题一开始我就按照上面的思路写了一遍，但是忽略了本地中的定义，最小深度是从根节点到最小的叶子节点的最短路径上的节点数量。</p>
           <p>所以当某个节点的左节点为空时不代表子树的高度就是1，应该分三类讨论：左节点为空，右节点不为空时为1+ lenr，同理 1 + lenl，如果都不为空时才是 1 + min( lenr, lenl)。</p>
         </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/count-complete-tree-nodes/">222. 完全二叉树的节点个数</a></strong></p>
-        <blockquote>
-          <p>模板题。</p>
-          <p>递归搜索即可。</p>
-        </blockquote>
+        <p><a href="https://leetcode.cn/problems/count-complete-tree-nodes/">222. 完全二叉树的节点个数</a></p>
         <p><strong><a href="https://leetcode.cn/problems/balanced-binary-tree/">110. 平衡二叉树</a></strong></p>
-        <blockquote>
-          <p>遍历每个节点，判断每一棵子树是否是平衡二叉树，单独计算左右子树的高度。</p>
-          <p>要重做。</p>
-        </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/binary-tree-paths/">257. 二叉树的所有路径</a></strong></p>
-        <blockquote>
-          <p>初看的时候想到这是二叉树的前序遍历，遍历叶子节点的路径。</p>
-          <p>我怎么回退不同的路径呢？其实这题也可以说是回溯题，可以增加path存放遍历答案，再加上终止的条件。</p>
-          <p>回溯的几个要素：递归函数的参数，递归的终止条件，单层递归的逻辑。</p>
-        </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/sum-of-left-leaves/">404. 左叶子之和</a></strong></p>
-        <blockquote>
-          <p>简单的遍历题，判断是不是左叶子节点即可。</p>
-        </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/path-sum/">112. 路径总和</a></strong></p>
-        <blockquote>
-          <p>树的回溯题。</p>
-          <p>注意题目的值范围，可能包含负值的，所以在没有到叶子节点前，不能用sum> targetsum 剪枝。</p>
-        </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/merge-two-binary-trees/">🆙617. 合并二叉树</a></strong></p>
-        <blockquote>
-          <p>暴力合并，细分节点的情况。</p>
-        </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/">🆙236. 二叉树的最近公共祖先</a></strong></p>
-        <blockquote>
-          <p>最近遇到的难题。</p>
-          <p>一个为空，一个不为空，找到了p，那么剩下的q不在为空的子树里，肯定是p作为了祖先节点。</p>
-          <p>如果从左子树找，右子树找都找到了，那么当前的节点肯定是最近的公共祖先。</p>
-        </blockquote>
+        <blockquote></blockquote>
+        <p><a href="https://leetcode.cn/problems/binary-tree-paths/">257. 二叉树的所有路径</a></p>
+        <p><a href="https://leetcode.cn/problems/sum-of-left-leaves/">404. 左叶子之和</a></p>
+        <p><a href="https://leetcode.cn/problems/path-sum/">112. 路径总和</a></p>
+        <p><a href="https://leetcode.cn/problems/merge-two-binary-trees/">617. 合并二叉树</a></p>
+        <p><a href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/">236. 二叉树的最近公共祖先</a></p>
         <p><strong><a href="https://leetcode.cn/problems/find-duplicate-subtrees/description/">652. 寻找重复的子树</a></strong></p>
         <blockquote>
           <p>判断重复值，想到了哈希表（map），遍历序列，发现子树是否重复出现。</p>
@@ -526,25 +499,12 @@ public:
           <p>这两题在优化上，注意类似用数组构造二叉树的题目，每次分隔尽量不要定义新的数组，而是通过下标索引直接在原数组上操作，这样可以节约时间和空间上的开销。</p>
         </blockquote>
         <p><strong><a href="https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-inorder-traversal/">105. 从前序与中序遍历序列构造二叉树</a></strong></p>
-        <blockquote>
-          <p>如何通过两个遍历数组，分割数组，从而构造函数。</p>
-        </blockquote>
+        <blockquote></blockquote>
         <p><strong><a href="https://leetcode.cn/problems/construct-binary-tree-from-inorder-and-postorder-traversal/">106. 从中序与后序遍历序列构造二叉树</a></strong></p>
-        <blockquote>
-          <p>中等题。</p>
-          <p>思路我们可以从后序遍历末尾找到根节点，再从中序遍历中找到根节点的左子树序列和右子树序列。</p>
-          <p>后序遍历除去根节点以后，剩余的部分，我们可以根据上面已经划分好的左子树序列长度和右子树序列长度，然后将后序遍历的数组划分为左子树和右子树。然后继续划分左子树部分和右子树部分，当作根节点。</p>
-        </blockquote>
+        <blockquote></blockquote>
         <p><strong><a href="https://leetcode.cn/problems/construct-binary-tree-from-preorder-and-postorder-traversal/">889. 根据前序和后序遍历构造二叉树</a></strong></p>
-        <blockquote>
-          <p>if(startp == endp)跳出。这里还是有一点晕。</p>
-          <p>在只有单个节点时，如果不跳出就溢出到了，后面startp > endp无法跳出。</p>
-          <p>叶子节点要直接跳出。</p>
-          <p>想换个思路做这种题。</p>
-        </blockquote>
-        <h3 id="归并排序"><a aria-hidden="true" tabindex="-1" href="#归并排序" class="anchor"><span class="icon icon-link"></span></a>归并排序</h3>
-        <p>待做。</p>
-        <h3 id="bst"><a aria-hidden="true" tabindex="-1" href="#bst" class="anchor"><span class="icon icon-link"></span></a>BST</h3>
+        <blockquote></blockquote>
+        <h3 id="二叉搜索树"><a aria-hidden="true" tabindex="-1" href="#二叉搜索树" class="anchor"><span class="icon icon-link"></span></a>二叉搜索树</h3>
         <p><strong><a href="https://leetcode.cn/problems/kth-smallest-element-in-a-bst/description/">230. 二叉搜索树中第K小的元素</a></strong></p>
         <blockquote>
           <p>在有size的时候，可以通过比较每个元素的排名，用log时间，类似二分来更快找到第k小的数。</p>
@@ -554,52 +514,22 @@ public:
           <p>能想到用中序遍历转换为有序序列求值，但是没有想到如何处理，实际上反中序遍历，然后添加值即可。</p>
           <p>加一个pre记录前置值。</p>
         </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/validate-binary-search-tree/">98. 验证二叉搜索树</a></strong></p>
-        <blockquote>
-          <p>一刷错在，左子树上每一个点都是小于根节点上的值，右子树上每一个点都是大于根节点上的值。</p>
-          <p>关键一个知识点：二叉搜索树的中序遍历是一个有序序列。</p>
-          <p>二刷没问题。</p>
-          <p>三刷已经忘记了通过中序遍历判断有序性。</p>
-          <p>直接遍历，需要判断pre是否完成初始化，加一个标志位判断是不是第一个节点，是的话不比较当前值和前驱结点的值。</p>
-        </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/search-in-a-binary-search-tree/">700.二叉搜索树中的搜索</a></strong></p>
-        <blockquote>
-          <p>注意题目中二叉搜索树这个条件，说明他已经是一个有序树了。</p>
-        </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/minimum-absolute-difference-in-bst/">530. 二叉搜索树的最小绝对差</a></strong></p>
-        <blockquote>
-          <p>前提又是二叉搜索树，那么模仿上一题我们同样可以知道，最小的插值肯定连续的两个数，中序一遍序列然后遍历即可。</p>
-          <p>result初始值可以设置为<code> INT_MAX</code>。</p>
-        </blockquote>
+        <p><a href="https://leetcode.cn/problems/validate-binary-search-tree/">98. 验证二叉搜索树</a></p>
+        <p><a href="https://leetcode.cn/problems/minimum-absolute-difference-in-bst/">530. 二叉搜索树的最小绝对差</a></p>
+        <blockquote></blockquote>
         <p><strong><a href="https://leetcode.cn/problems/find-mode-in-binary-search-tree/">501. 二叉搜索树中的众数</a></strong></p>
-        <blockquote>
-          <p>暴力遍历。</p>
-          <p>考虑中序遍历的有序性，相同的数连续出现，那我们可以用一个pre记录前驱节点，来判断相同count++，否则判断和前面的大小关系，比前面的大前面的答案都失效了，相同的众数可以放进去。</p>
-          <p>与前置变量相关的，考虑使用一个中间变量。</p>
-          <p>直接遍历出数组，依次判断。</p>
-        </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/">🆙235. 二叉搜索树的最近公共祖先</a></strong></p>
-        <blockquote>
-          <p>二叉搜索树是上面的一种，同样可以直接遍历到底。</p>
-          <p>如何利用二叉搜索树的特性：在答案肯定存在的前提下，且节点有序，那么可以从上向下查找。</p>
-          <p>如果当前的值大于二者，那么肯定在左节点，如果小于二者肯定都在右节点。否则就是找到了节点了，因为root->val 在[ p , q ]之间的话，p，q肯定在这之下。</p>
-        </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/insert-into-a-binary-search-tree/">701. 二叉搜索树中的插入操作</a></strong></p>
+        <blockquote></blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-search-tree/">235. 二叉搜索树的最近公共祖先</a></strong></p>
+        <blockquote></blockquote>
+        <p><a href="https://leetcode.cn/problems/insert-into-a-binary-search-tree/">701. 二叉搜索树中的插入操作</a></p>
         <blockquote>
           <p>找到空节点插入即可。</p>
         </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/trim-a-binary-search-tree/">🆙669. 修剪二叉搜索树</a></strong></p>
-        <blockquote>
-          <p>重做。</p>
-          <p>二刷：还是没做出来。</p>
-          <p>递归三要素，一遇到空节点我们返回值，二单层的递归逻辑是当前的值小于low，那只能去右节点找一个合适的节点放入当前的位置（二叉搜索树，右子树更小），如果大于high，那么去左子树找一个合适的节点放入。</p>
-          <p>接下来要将下一层处理完左子树的结果赋给root->left，处理完右子树的结果赋给root->right。</p>
-          <p>最后返回root节点。</p>
-        </blockquote>
-        <p><strong><a href="https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/">🆙108. 将有序数组转换为二叉搜索树</a></strong></p>
+        <p><strong><a href="https://leetcode.cn/problems/trim-a-binary-search-tree/">669. 修剪二叉搜索树</a></strong></p>
+        <blockquote></blockquote>
+        <p><a href="https://leetcode.cn/problems/convert-sorted-array-to-binary-search-tree/">108. 将有序数组转换为二叉搜索树</a></p>
         <blockquote>
           <p>Link到106如何构造一棵二叉树。</p>
-          <p>题目给的nums实际上是数组的中序遍历结果，那么就可以从中间划分，取中间点作为根节点，左边剩余数组构造左子树，右边剩余数组构造右子树。</p>
         </blockquote>
         <p><a href="https://leetcode.cn/problems/er-cha-shu-zhong-he-wei-mou-yi-zhi-de-lu-jing-lcof/?envType=study-plan&#x26;id=lcof&#x26;plan=lcof&#x26;plan_progress=fi7d972">剑指 Offer 34. 二叉树中和为某一值的路径</a></p>
         <blockquote>
@@ -628,8 +558,7 @@ public:
               <ol class="tocs-list is-collapsed">
                 <li><a href="#一般树的遍历" class="tocs-link">一般树的遍历</a></li>
                 <li><a href="#构造二叉树" class="tocs-link">构造二叉树</a></li>
-                <li><a href="#归并排序" class="tocs-link">归并排序</a></li>
-                <li><a href="#bst" class="tocs-link">BST</a></li>
+                <li><a href="#二叉搜索树" class="tocs-link">二叉搜索树</a></li>
               </ol>
             </li>
           </ol>

@@ -125,7 +125,6 @@ public:
           <li>这里防止溢出是指，当left和right同为int较大型数据时候，(left+right)容易溢出，而left + (right - left) / 2，相等价也避免了溢出的问题。</li>
           <li>二分的时间复杂度：O(log n)</li>
         </ul>
-        <h3 id="例题"><a aria-hidden="true" tabindex="-1" href="#例题" class="anchor"><span class="icon icon-link"></span></a>例题</h3>
         <p><a href="https://leetcode.cn/problems/search-insert-position/">LC35.搜索插入位置</a></p>
         <blockquote>
           <ol>
@@ -169,18 +168,30 @@ public:
           <p>当[l, r]满足时，[l + 1,r]...[r, r]都是满足，即这一段的长度。</p>
         </blockquote>
         <p><a href="https://leetcode.cn/problems/max-consecutive-ones-iii/">1004. 最大连续 1 的个数 III</a></p>
-        <p><a href="https://leetcode.cn/problems/replace-the-substring-for-balanced-string/">1234. 替换子串得到平衡字符串</a></p>
-        <p><a href="https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/">1658. 将 x 减到 0 的最小操作数</a></p>
-        <h3 id="相向双指针"><a aria-hidden="true" tabindex="-1" href="#相向双指针" class="anchor"><span class="icon icon-link"></span></a>相向双指针</h3>
-        <p><a href="https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/">167. 两数之和 II - 输入有序数组</a></p>
+        <p><strong><a href="https://leetcode.cn/problems/replace-the-substring-for-balanced-string/">1234. 替换子串得到平衡字符串</a></strong></p>
         <blockquote>
-          <p>二分、双指针，相向而行。</p>
+          <p>简单理解一下，如果QWER相当于四个容量为n/4的桶，最终四个桶一定能装满，所以只需要包括[left, right]区间以外的桶没溢出，那么一定能用[left, right]的水去装满剩下的桶。</p>
+          <p>先尽可能满足条件能用区间内水装满以外的桶，再这个前提下缩小区间。</p>
         </blockquote>
-        <p><a href="https://leetcode.cn/problems/3sum/">15.三树之和</a></p>
-        <h3 id="例题-1"><a aria-hidden="true" tabindex="-1" href="#例题-1" class="anchor"><span class="icon icon-link"></span></a>例题</h3>
+        <p><a href="https://leetcode.cn/problems/minimum-operations-to-reduce-x-to-zero/">1658. 将 x 减到 0 的最小操作数</a></p>
+        <blockquote>
+          <p>题目要求是在双端操作，那么可以变向转为取中间一个子区间，剩下的值为x。</p>
+          <p>当剩余值不足x时移动</p>
+        </blockquote>
         <p><a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-array/">LC26. 删除有序数组中的重复项</a></p>
         <p><a href="https://leetcode.cn/problems/remove-duplicates-from-sorted-list/description/">LC83. 删除排序链表中的重复元素</a></p>
         <p><a href="https://leetcode.cn/problems/move-zeroes/">LC283.移动零</a></p>
+        <p><a href="https://leetcode.cn/problems/sort-colors">75. 颜色分类</a></p>
+        <blockquote>
+          <p>刷油漆战略。</p>
+          <p>由于num &#x3C;= 2，我们线全部刷成2，如果小于等于1，刷一个1（有一个错误的2刷成了1），如果小于0，刷一个0（纠正了一个错误1），分别用两个指针指向0，1的起始位置。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/merge-intervals">56. 合并区间</a></p>
+        <blockquote>
+          <p>以左边界排序，排序后的数组左边界肯定在右侧。</p>
+          <p>维护一个区间l，r，当下一个区间的左边界超过当前区间的右侧，那么就要存入档案，以及更新区间。否则的话只需要更新右区间。</p>
+          <p>最后不能忘记最后一组区间需要手动存入。</p>
+        </blockquote>
         <p><a href="https://leetcode.cn/problems/backspace-string-compare/">LC844.比较含退格的字符串</a></p>
         <blockquote>
           <p>
@@ -190,26 +201,64 @@ public:
           <p>当序列都在边界范围时进行比较，else的时候分为三种情况，最后合并为一种，这里比较复杂一点。</p>
           <p>🆙二刷：思考的顺序，从前还是从后处理的顺序。</p>
         </blockquote>
+        <h3 id="相向双指针"><a aria-hidden="true" tabindex="-1" href="#相向双指针" class="anchor"><span class="icon icon-link"></span></a>相向双指针</h3>
+        <p><a href="https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/">167. 两数之和 II - 输入有序数组</a></p>
+        <blockquote>
+          <p>二分、双指针，相向而行。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/3sum/">15.三树之和</a></p>
+        <p><strong><a href="https://leetcode.cn/problems/3sum-closest/">16. 最接近的三数之和</a></strong></p>
+        <blockquote>
+          <ul>
+            <li>对整体sort一遍</li>
+            <li>通过比较三数之和和目标值的差值的绝对值来比较远近</li>
+            <li>如果sum == target，直接返回</li>
+            <li>如果sum - target &#x3C; ans - target，说明当前三个数更加接近</li>
+            <li>更新双指针坐标，当sum > target, right++，反之同理</li>
+          </ul>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/4sum/">17. 四数之和</a></p>
+        <p><strong><a href="https://leetcode.com/problems/valid-triangle-number/">19. 611. 有效三角形的个数</a></strong></p>
+        <blockquote>
+          <p>
+            组成三角形的条件：任意两边之和大于第三边，任意两边之差小于第三边。
+            可以简化为一个条件 三条边长从小到大为 a、b、c，当且仅当 a + b > c 这三条边能组成三角形
+          </p>
+          <ul>
+            <li>
+              <p>sort后</p>
+            </li>
+            <li>
+              <p>固定最大C，找寻满足条件的区间</p>
+            </li>
+            <li>
+              <p>当a + b &#x3C;= c，左端不够大</p>
+            </li>
+            <li>
+              <p>当a + b > c，是满足条件的区间，比如<code>2 3 3 4 | 5</code>，<code>2 + 4</code> / <code>3 + 4</code> / <code>3 + 4</code>都是满足的，数量为<code>r - l</code></p>
+            </li>
+          </ul>
+        </blockquote>
         <p><a href="https://leetcode.cn/problems/squares-of-a-sorted-array/">LC977.有序数组的平方</a></p>
         <blockquote>
           <p>使用双向指针，由于原数组按照非递减排序，那么平方后的数，应该在两头，通过双向指针指向头和尾，进行比较大小移动。</p>
           <p>每次比较左边和右边哪个数更大，更新左右边界，用一个k记录ans数组的位置。</p>
         </blockquote>
-        <p><a href="https://leetcode.cn/problems/merge-intervals">56. 合并区间</a></p>
+        <p><a href="https://leetcode.cn/problems/container-with-most-water/description/">11.盛最多水的容器</a></p>
         <blockquote>
-          <p>以左边界排序，排序后的数组左边界肯定在右侧。</p>
-          <p>维护一个区间l，r，当下一个区间的左边界超过当前区间的右侧，那么就要存入档案，以及更新区间。否则的话只需要更新右区间。</p>
-          <p>最后不能忘记最后一组区间需要手动存入。</p>
+          <ol>
+            <li>可以想到栈去做</li>
+            <li>同向双指针：如何移动指针
+              <ul>
+                <li>如何出现更大的值</li>
+                <li>每次移动较短的边才可能，下一条边在宽度减小的情况下高度更高，造成整体面积更大</li>
+                <li>如果移动较高的一边，那么下一条高度变低、宽度变短都造成面积更小，如果下一条更高，整体高度还是取的较小一边，宽度变短的情况，整体面积还是变短。</li>
+              </ul>
+            </li>
+          </ol>
         </blockquote>
-        <p><a href="https://leetcode.cn/problems/sort-colors">75. 颜色分类</a></p>
-        <blockquote>
-          <p>刷油漆战略。</p>
-          <p>由于num &#x3C;= 2，我们线全部刷成2，如果小于等于1，刷一个1（有一个错误的2刷成了1），如果小于0，刷一个0（纠正了一个错误1），分别用两个指针指向0，1的起始位置。</p>
-        </blockquote>
-        <p><strong>其他章节双指针思路题</strong></p>
-        <blockquote>
-          <p><a href="https://leetcode.cn/problems/remove-nth-node-from-end-of-list/">LC19.删除链表的倒数第N个节点</a></p>
-        </blockquote>
+        <p><a href="https://leetcode.cn/problems/trapping-rain-water/solutions/1974340/zuo-liao-nbian-huan-bu-hui-yi-ge-shi-pin-ukwm/">42. 接雨水</a></p>
+        <blockquote></blockquote>
         <h2 id="滑动窗口"><a aria-hidden="true" tabindex="-1" href="#滑动窗口" class="anchor"><span class="icon icon-link"></span></a>滑动窗口</h2>
         <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">class</span> <span class="token class-name">Solution</span> <span class="token punctuation">{</span>
 </span><span class="code-line line-number" line="2"><span class="token keyword">public</span><span class="token operator">:</span>
@@ -281,7 +330,6 @@ while j < len(nums):
     不断更新结果（注意在while外更新！）
     j += 1
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <h3 id="例题-2"><a aria-hidden="true" tabindex="-1" href="#例题-2" class="anchor"><span class="icon icon-link"></span></a>例题</h3>
         <p><a href="https://leetcode.cn/problems/minimum-size-subarray-sum/">LC209.最小子串长度</a></p>
         <blockquote>
           <p>本题可以用前缀和+二分做，通过s[j]-s[i] >= target,可以变化为 s[j] >= s[i]+target。在s数组中寻找第一个大于 s[i]+target位置，进行更新大小，使用了C++ lower_bound()函数</p>
@@ -359,9 +407,6 @@ while j < len(nums):
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <p><a href="https://leetcode.cn/problems/subarray-sum-equals-k">560. 和为K的子数组</a></p>
         <p>直接的前缀和TL，O(n^2)。</p>
-        <p>
-          <img src="http://pic.shixiaocaia.fun/202302131920381.png" alt=" ">
-        </p>
         <h2 id="差分"><a aria-hidden="true" tabindex="-1" href="#差分" class="anchor"><span class="icon icon-link"></span></a>差分</h2>
         <p>差分数组的主要适用场景是频繁对原始数组的某个区间的元素进行增减。</p>
         <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1">diff<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> num<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">-</span> num<span class="token punctuation">[</span>i <span class="token operator">-</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
@@ -407,23 +452,14 @@ num[i + 1] = num[i] + diff[i + 1]; //diff[i] + k,导致num[i] + k,后面都加�
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#二分查找" class="tocs-link">二分查找</a>
-              <ol class="tocs-list is-collapsed">
-                <li><a href="#例题" class="tocs-link">例题</a></li>
-              </ol>
-            </li>
+            <li><a href="#二分查找" class="tocs-link">二分查找</a></li>
             <li><a href="#双指针" class="tocs-link">双指针</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#同向双指针" class="tocs-link">同向双指针</a></li>
                 <li><a href="#相向双指针" class="tocs-link">相向双指针</a></li>
-                <li><a href="#例题-1" class="tocs-link">例题</a></li>
               </ol>
             </li>
-            <li><a href="#滑动窗口" class="tocs-link">滑动窗口</a>
-              <ol class="tocs-list is-collapsed">
-                <li><a href="#例题-2" class="tocs-link">例题</a></li>
-              </ol>
-            </li>
+            <li><a href="#滑动窗口" class="tocs-link">滑动窗口</a></li>
             <li><a href="#前缀和" class="tocs-link">前缀和</a></li>
             <li><a href="#差分" class="tocs-link">差分</a></li>
             <li><a href="#模拟" class="tocs-link">模拟</a></li>
