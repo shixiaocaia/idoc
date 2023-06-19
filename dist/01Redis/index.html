@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据库 iDoc</title>
+    <meta name="description" content="⬜MySql必知必会">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00Go/index.html" target="" class="">Go</a></li>
+            <li><a href="../01MySQL/index.html" target="" class="">MySQL</a></li>
+            <li><a href="index.html" target="" class="active">Redis</a></li>
+            <li><a href="../01LeetCode/index.html" target="" class="">LeetCode</a></li>
+            <li><a href="../02HelloWorld/index.html" target="" class="">Hello World</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <a href="ch12.html" class="">数据结构</a>
+            <a href="ch13.html" class="">Redis是怎么运行的</a>
+            <a href="ch14.html" class="">持久化</a>
+            <a href="ch15.html" class="">缓存过期与内存淘汰</a>
+            <a href="ch16.html" class="">集群模式</a>
+            <a href="ch17.html" class="">缓存</a>
+            <a href="ch18.html" class="">分布式锁</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="数据库"><a aria-hidden="true" tabindex="-1" href="#数据库" class="anchor"><span class="icon icon-link"></span></a>数据库</h1>
+        <h2 id="mysql"><a aria-hidden="true" tabindex="-1" href="#mysql" class="anchor"><span class="icon icon-link"></span></a>MySQL</h2>
+        <h3 id="读点书"><a aria-hidden="true" tabindex="-1" href="#读点书" class="anchor"><span class="icon icon-link"></span></a>读点书</h3>
+        <p>⬜MySql必知必会</p>
+        <p>⬜MySQL 是怎么运行的</p>
+        <p>⬜<a href="https://funnylog.gitee.io/mysql45/">MySql45讲</a></p>
+        <h3 id="累了就看看视频"><a aria-hidden="true" tabindex="-1" href="#累了就看看视频" class="anchor"><span class="icon icon-link"></span></a>累了就看看视频</h3>
+        <p>✅<a href="https://www.bilibili.com/video/BV1UE41147KC/?vd_source=894a223b85ae44e61e16dcd1a7356db0">SQL视频教程</a></p>
+        <p>✅<a href="https://space.bilibili.com/668097429/dynamic">编程技术宇宙—Redis</a></p>
+        <h2 id="redis"><a aria-hidden="true" tabindex="-1" href="#redis" class="anchor"><span class="icon icon-link"></span></a>Redis</h2>
+        <ul>
+          <li>这玩意儿是什么？——是什么，解决什么问题</li>
+          <li>怎么用—— 基本操作、数据结构</li>
+          <li>原理是啥——一个技术热点原理不会超过10个</li>
+          <li>实际场景——我已经熟练使用并看了原理了，具体能做什么呢？</li>
+          <li>面试题——看看面试官会面什么，反过来也检验下学习成果、查漏补缺</li>
+        </ul>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#mysql" class="tocs-link">MySQL</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#读点书" class="tocs-link">读点书</a></li>
+                <li><a href="#累了就看看视频" class="tocs-link">累了就看看视频</a></li>
+              </ol>
+            </li>
+            <li><a href="#redis" class="tocs-link">Redis</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>

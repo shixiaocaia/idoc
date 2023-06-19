@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>索引 iDoc</title>
+    <meta name="description" content="InnoDB存储引擎支持B+树索引、全文索引、R树索引。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00Go/index.html" target="" class="">Go</a></li>
+            <li><a href="index.html" target="" class="active">MySQL</a></li>
+            <li><a href="../01Redis/index.html" target="" class="">Redis</a></li>
+            <li><a href="../01LeetCode/index.html" target="" class="">LeetCode</a></li>
+            <li><a href="../02HelloWorld/index.html" target="" class="">Hello World</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <a href="ch00.html" class="">Hello MySQL</a>
+            <a href="ch01.html" class="">SQL</a>
+            <a href="ch02.html" class="">写点SQL</a>
+            <label>MySQL原理</label>
+            <a href="ch03.html" class="">InnoDB存储引擎</a>
+            <a href="ch04.html" class="">索引</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="索引"><a aria-hidden="true" tabindex="-1" href="#索引" class="anchor"><span class="icon icon-link"></span></a>索引</h1>
+        <p><strong>索引是提升查询速度的一种数据结构。</strong></p>
+        <blockquote>
+          <p>索引之所以能提升查询速度，在于它在插入时对数据进行了排序，比如聚簇索引根据主键排序。</p>
+          <p>同时也会影响插入或者更新的性能，需要考虑顺序。</p>
+        </blockquote>
+        <p>InnoDB存储引擎支持B+树索引、全文索引、R树索引。</p>
+        <ul>
+          <li>主键索引是默认创建的，其他索引称为二级索引。</li>
+        </ul>
+        <h2 id="数据结构"><a aria-hidden="true" tabindex="-1" href="#数据结构" class="anchor"><span class="icon icon-link"></span></a>数据结构</h2>
+        <h3 id="什么样数据结构是好的"><a aria-hidden="true" tabindex="-1" href="#什么样数据结构是好的" class="anchor"><span class="icon icon-link"></span></a>什么样数据结构是好的</h3>
+        <p>MySQL 的数据是持久化的，意味着数据（索引+记录）是保存到磁盘上的，因为这样即使设备断电了，数据也不会丢失。</p>
+        <p>但是通过索引查询某行数据时，先读取索引到内存，再根据索引从磁盘中找到某行数据读到内存当中，这样会发生多次磁盘IO操作，效率和损耗时间都是巨大的。</p>
+        <ul>
+          <li><strong>好的数据结构应该能在尽可能少的磁盘的 I/O 操作中完成查询工作；</strong></li>
+        </ul>
+        <p>MySQL 是支持范围查找的，所以索引的数据结构不仅要能高效地查询某一个记录，而且也要能高效地执行范围查找。</p>
+        <ul>
+          <li><strong>要能高效地查询某一个记录，也要能高效地执行范围查找；</strong></li>
+        </ul>
+        <h3 id="二分搜索树"><a aria-hidden="true" tabindex="-1" href="#二分搜索树" class="anchor"><span class="icon icon-link"></span></a>二分搜索树</h3>
+        <p>由于索引数据一般是按顺序排列的，可以使用二分查找法定位数据。时间复杂度 O(logn)。</p>
+        <p>由此有了非线性且天然适合二分查找的数据结构，二叉查找树。</p>
+        <p>二叉查找树不仅解决了查找问题，在插入新元素时能够保持二分结构，并且开销较小。</p>
+        <p>但是二叉查找树存在一个极端情况，当每次插入的元素都是最大的元素，会形成一个链表结构，查找数据的时间复杂度变成了O(n)。</p>
+        <p>由于树是存储在磁盘中，访问每个节点，都对应一次磁盘 I/O 操作（<em>假设一个节点的大小「小于」操作系统的最小读写单位块的大小</em>），也就是说<strong>树的高度就等于每次查询数据时磁盘 IO 操作的次数</strong>，所以树的高度越高，就会影响查询性能。</p>
+        <h3 id="平衡二叉搜索树"><a aria-hidden="true" tabindex="-1" href="#平衡二叉搜索树" class="anchor"><span class="icon icon-link"></span></a>平衡二叉搜索树</h3>
+        <p>为了解决上述极端情况，提出了平衡二叉搜索树，<strong>每个节点的左子树和右子树的高度差不能超过 1</strong>。</p>
+        <p>但是随着插入的数据增多，会导致树的高度增加，从而增加磁盘IO的次数。</p>
+        <p>根本原因是，二叉树每个节点只能保存2个节点。</p>
+        <p>由此想到把二叉树改成M叉树，当树的节点越多的时候，并且树的分叉数 M 越大的时候，M 叉树的高度会远小于二叉树的高度。</p>
+        <h3 id="b树"><a aria-hidden="true" tabindex="-1" href="#b树" class="anchor"><span class="icon icon-link"></span></a>B树</h3>
+        <p>为了解决上述树高度问题，提出了B树，它不再限制一个节点就只能有 2 个子节点，而是允许 M 个子节点 (M>2)，从而降低树的高度。</p>
+        <p>B 树的每一个节点最多可以包括 M 个子节点，M 称为 B 树的阶，所以 B 树就是一个多叉树。</p>
+        <p>假设 M = 3，那么就是一棵 3 阶的 B 树，特点就是每个节点最多有 2 个（M-1个）数据和最多有 3 个（M个）子节点，超过这些要求的话，就会分裂节点。</p>
+        <p>但是B树每个节点存放了索引和记录，用户的记录数据的大小很有可能远远超过了索引数据，这就需要花费更多的磁盘 I/O 操作次数来读到「有用的索引数据」。</p>
+        <p>在查询底层节点数据时，加载过多中间无用数据，会浪费资源。</p>
+        <h3 id="b树-1"><a aria-hidden="true" tabindex="-1" href="#b树-1" class="anchor"><span class="icon icon-link"></span></a>B+树</h3>
+        <p>由此又提出了B+树，叶子节点存放真实数据，非叶子节点存放索引信息。叶子节点之间又构成有序链表。</p>
+        <h3 id="b与b树对比"><a aria-hidden="true" tabindex="-1" href="#b与b树对比" class="anchor"><span class="icon icon-link"></span></a>B+与B树对比</h3>
+        <ul>
+          <li>单点查询上
+            <ul>
+              <li>B树节点包含了记录，最快可以O1查询，但是有时候需要访问叶子节点才能找到，波动较大。</li>
+              <li>B+树较矮，能用较少的次数查询到数据，但是需要查询到对应叶子节点。</li>
+            </ul>
+          </li>
+          <li>插入和删除
+            <ul>
+              <li>B+ 树有大量的冗余节点，这样使得删除一个节点的时候，可以直接从叶子节点中删除，甚至可以不动非叶子节点，效率高</li>
+              <li>B树删除需要复杂的树变化</li>
+            </ul>
+          </li>
+          <li>范围查询
+            <ul>
+              <li>B+树底层是有序链表，就可以进行范围查询，省去重复查询。</li>
+              <li>B树需要多次IO查询。</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="innodb中b树索引"><a aria-hidden="true" tabindex="-1" href="#innodb中b树索引" class="anchor"><span class="icon icon-link"></span></a>InnoDB中B+树索引</h2>
+        <p>是目前为止排序<strong>最有效率</strong>的数据结构。像二叉树，哈希索引、红黑树、SkipList，在海量数据基于磁盘存储效率方面远不如 B+ 树索引高效。</p>
+        <p>上面几种一般用于内存对象，基于磁盘的数据排序与存储，最有效的还是B+树索引。</p>
+        <p><strong>B+树索引的特点是：</strong> 基于磁盘的平衡树，但树非常矮，通常为 3~4 层，能存放千万到上亿的排序数据。<strong>树矮意味着访问效率高，从千万或上亿数据里查询一条数据，只用 3、4 次 I/O</strong>。</p>
+        <blockquote>
+          <p>实际中只有叶子节点存放的是数据页，其他是目录页，3~4层已经能存放大量的数据。</p>
+        </blockquote>
+        <blockquote>
+          <p>所有 B+ 树都是从高度为 1 的树开始，然后根据数据的插入，慢慢增加树的高度。</p>
+        </blockquote>
+        <h3 id="b树查询性能"><a aria-hidden="true" tabindex="-1" href="#b树查询性能" class="anchor"><span class="icon icon-link"></span></a>B+树查询性能</h3>
+        <hr>
+        <p><strong>见书中第五六章</strong></p>
+        <hr>
+        <h3 id="优化b树索引的插入性能"><a aria-hidden="true" tabindex="-1" href="#优化b树索引的插入性能" class="anchor"><span class="icon icon-link"></span></a>优化B+树索引的插入性能</h3>
+        <p>B+ 树在插入时就对要对数据进行排序，但排序的开销其实并没有你想象得那么大，因为排序是 CPU 操作（当前一个时钟周期 CPU 能处理上亿指令）。</p>
+        <p><strong>真正的开销在于 B+ 树索引的维护，保证数据排序，这里存在两种不同数据类型的插入情况</strong>。</p>
+        <ul>
+          <li><strong>数据顺序（或逆序）插入：</strong> B+ 树索引的维护代价非常小，叶子节点都是从左往右进行插入，比较典型的是自增 ID 的插入、时间的插入（若在自增 ID 上创建索引，时间列上创建索引，则 B+ 树插入通常是比较快的）。</li>
+          <li><strong>数据无序插入：</strong> B+ 树为了维护排序，需要对页进行分裂、旋转等开销较大的操作，另外，即便对于固态硬盘，随机写的性能也不如顺序写，所以磁盘性能也会收到较大影响。比较典型的是用户昵称，每个用户注册时，昵称是随意取的，若在昵称上创建索引，插入是无序的，索引维护需要的开销会比较大。</li>
+        </ul>
+        <p>对于 B+ 树索引，在 MySQL 数据库设计中，仅要求主键的索引设计为顺序，比如使用自增。</p>
+        <p>在表结构设计时，主键的设计一定要尽可能地<strong>使用顺序值</strong>，这样才能保证在海量并发业务场景下的性能。</p>
+        <p>实际中对于索引的数量没有限定，但是对于创建的N多索引，在实际中可能没有使用过，优化器并不会选择这些低效的索引，这些<strong>无效索引占用了空间，又影响了插入的性能</strong>。</p>
+        <p>实际可以查看哪些索引未被使用过，DBA考虑删除这些没有用过的索引。</p>
+        <p>MySQL 8.0 版本推出了索引不可见（Invisible）功能。在删除废弃索引前，用户可以将索引设置为对优化器不可见，然后观察业务是否有影响。若无，DBA 可以更安心地删除这些索引。</p>
+        <h2 id="索引组织表"><a aria-hidden="true" tabindex="-1" href="#索引组织表" class="anchor"><span class="icon icon-link"></span></a>索引组织表</h2>
+        <h3 id="是什么"><a aria-hidden="true" tabindex="-1" href="#是什么" class="anchor"><span class="icon icon-link"></span></a>是什么</h3>
+        <p>数据存储有堆表和索引组织表两种方式。</p>
+        <p>堆表中数据是<strong>无序</strong>存放，数据的排序完全依赖于索引。数据和索引也是分开存储的，索引是排序后的数据，而堆表中的数据是无序的。</p>
+        <p>索引的叶子节点存放了数据在堆表中的地址，当堆表的数据发生改变，且位置发生了变更，所有索引中的地址都要更新，十分影响性能。</p>
+        <p><strong>索引组织表，数据根据主键排序存放在索引中</strong>，主键索引也叫聚集索引（Clustered Index）。在索引组织表中，数据即索引，索引即数据。</p>
+        <p>之前的User表中主键是id，表中的数据根据id排序存储，叶子节点存放了完整的记录。表就是索引，索引就是表。</p>
+        <h3 id="二级索引"><a aria-hidden="true" tabindex="-1" href="#二级索引" class="anchor"><span class="icon icon-link"></span></a>二级索引</h3>
+        <p>除了主键索引以外，其他的索引都是二级索引或者非聚集索引。</p>
+        <p>与主键索引不同，叶子节点存放的是索引键值、主键值，只有聚集索引（主键索引）才会存放完整的数据。</p>
+        <p>索引组织表的二级索引方式，若记录改变，只需要维护主键索引中的完整记录，除非记录的主键发生变化的。</p>
+        <blockquote>
+          <p>在二级索引中主要有两步骤，先去二级索引中找到对应的主键，再回主键索引中查找完整的。</p>
+        </blockquote>
+        <h3 id="函数索引"><a aria-hidden="true" tabindex="-1" href="#函数索引" class="anchor"><span class="icon icon-link"></span></a>函数索引</h3>
+        <p>函数索引的含义是，索引键是一个函数表达式。主要用来：</p>
+        <ul>
+          <li>优化业务SQL性能</li>
+        </ul>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">ALTER</span> <span class="token keyword">TABLE</span> <span class="token keyword">User</span> 
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3"><span class="token keyword">ADD</span> <span class="token keyword">INDEX</span> <span class="token comment">#向现有表中添加索引</span>
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5">idx_func_register_date<span class="token punctuation">(</span><span class="token punctuation">(</span>DATE_FORMAT<span class="token punctuation">(</span>register_date<span class="token punctuation">,</span><span class="token string">'%Y-%m'</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment"># 在格式化后的数据创建索引</span>
+</span></code><input type="hidden" value="ALTER TABLE User 
+
+ADD INDEX #向现有表中添加索引
+
+idx_func_register_date((DATE_FORMAT(register_date,&#x27;%Y-%m&#x27;))); # 在格式化后的数据创建索引
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">EXPLAIN</span> <span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token keyword">User</span> 
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3"><span class="token keyword">WHERE</span> DATE_FORMAT<span class="token punctuation">(</span>register_date<span class="token punctuation">,</span><span class="token string">'%Y-%m'</span><span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token string">'2021-01'</span>
+</span></code><input type="hidden" value="EXPLAIN SELECT * FROM User 
+
+WHERE DATE_FORMAT(register_date,&#x27;%Y-%m&#x27;) = &#x27;2021-01&#x27;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>只有主动创建了格式化索引，在查询时才能用到。</p>
+        <ul>
+          <li>配合虚拟列</li>
+        </ul>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">CREATE</span> <span class="token keyword">TABLE</span> UserLogin <span class="token punctuation">(</span>
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3">    userId <span class="token keyword">BIGINT</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5">    loginInfo JSON<span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="6">
+</span><span class="code-line line-number" line="7">    cellphone <span class="token keyword">VARCHAR</span><span class="token punctuation">(</span><span class="token number">255</span><span class="token punctuation">)</span> <span class="token keyword">AS</span> <span class="token punctuation">(</span>loginInfo<span class="token operator">-</span><span class="token operator">>></span><span class="token string">"$.cellphone"</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="8">
+</span><span class="code-line line-number" line="9">    <span class="token keyword">PRIMARY</span> <span class="token keyword">KEY</span><span class="token punctuation">(</span>userId<span class="token punctuation">)</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="10">
+</span><span class="code-line line-number" line="11">    <span class="token keyword">UNIQUE</span> <span class="token keyword">KEY</span> idx_cellphone<span class="token punctuation">(</span>cellphone<span class="token punctuation">)</span>
+</span><span class="code-line line-number" line="12">
+</span><span class="code-line line-number" line="13"><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="CREATE TABLE UserLogin (
+
+    userId BIGINT,
+
+    loginInfo JSON,
+
+    cellphone VARCHAR(255) AS (loginInfo->>&#x22;$.cellphone&#x22;),
+
+    PRIMARY KEY(userId),
+
+    UNIQUE KEY idx_cellphone(cellphone)
+
+);
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>cellphone 就是一个虚拟列，它是由后面的函数表达式计算而成，本身这个列不占用任何的存储空间，而索引 idx_cellphone 实质是一个函数索引。</p>
+        <h2 id="组合索引"><a aria-hidden="true" tabindex="-1" href="#组合索引" class="anchor"><span class="icon icon-link"></span></a>组合索引</h2>
+        <p>组合索引（Compound Index）是指由多个列所组合而成的 B+树索引，对多个列进行排序。</p>
+        <p>对组合索引（a，b）来说，因为其对列 a、b 做了排序，WHERE 后查询列 a 和 b 的顺序无关，即使先写 b = ? AND a = ？依然可以使用组合索引（a，b）。</p>
+        <p>但是单独对b不能使用（a, b）索引。</p>
+        <p>根据顺序（a，b），所以对下列SQL使用组合索引，</p>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token keyword">table</span> <span class="token keyword">WHERE</span> a <span class="token operator">=</span> ？ <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> b <span class="token keyword">DESC</span>
+</span></code><input type="hidden" value="SELECT * FROM table WHERE a = ？ ORDER BY b DESC
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>索引（a，b）排序不能得出（b，a）排序，因此下面的 SQL 无法使用组合索引（a，b），注意<strong>索引失效</strong>问题</p>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token keyword">table</span> <span class="token keyword">WHERE</span> b <span class="token operator">=</span> ？ <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> a <span class="token keyword">DESC</span>
+</span></code><input type="hidden" value="SELECT * FROM table WHERE b = ？ ORDER BY a DESC
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>当所查询的字段就在二级索引的叶子节点当中，则可直接返回结果，<strong>避免</strong>回表。</p>
+        <p>在二级索引中使用组合索引，查询字段在其中时，无需回表，称为索引覆盖。</p>
+        <h2 id="索引失效"><a aria-hidden="true" tabindex="-1" href="#索引失效" class="anchor"><span class="icon icon-link"></span></a>索引失效</h2>
+        <p>InnoDB 和 MyISAM 都支持 B+ 树索引，但是它们数据的存储结构实现方式不同。不同之处在于：</p>
+        <ul>
+          <li>InnoDB 存储引擎：B+ 树索引的叶子节点保存数据本身；</li>
+          <li>MyISAM 存储引擎：B+ 树索引的叶子节点保存数据的物理地址；</li>
+        </ul>
+        <p>所谓索引失效指的是，查询条件用上了索引列，实际中可能会发生全表扫描，而没有使用索引。</p>
+        <h3 id="对索引使用左或者左右模糊匹配"><a aria-hidden="true" tabindex="-1" href="#对索引使用左或者左右模糊匹配" class="anchor"><span class="icon icon-link"></span></a>对索引使用左或者左右模糊匹配</h3>
+        <p>当我们使用左或者左右模糊匹配的时候，也就是 <code>like %xx</code> 或者 <code>like %xx%</code> 这两种方式都会造成索引失效。</p>
+        <p>使用右模糊匹配，依然会走索引匹配。</p>
+        <p>为什么 like 关键字左或者左右模糊匹配无法走索引呢？</p>
+        <blockquote>
+          <p>因为索引 B+ 树是按照「索引值」有序排列存储的，只能根据前缀进行比较。</p>
+        </blockquote>
+        <h3 id="对索引使用函数"><a aria-hidden="true" tabindex="-1" href="#对索引使用函数" class="anchor"><span class="icon icon-link"></span></a>对索引使用函数</h3>
+        <p>查询条件中对索引字段使用函数，就会导致索引失效。比如<code>select * from t_user where length(name)=6;</code></p>
+        <p>为什么对索引使用函数，就无法走索引了呢？</p>
+        <blockquote>
+          <p>因为索引保存的是索引字段的原始值，而不是经过函数计算后的值，自然就没办法走索引了。</p>
+        </blockquote>
+        <blockquote>
+          <p>MySQL8.0开始支持对经过函数计算过的值，建立一个索引。</p>
+        </blockquote>
+        <h3 id="对索引进行表达式计算"><a aria-hidden="true" tabindex="-1" href="#对索引进行表达式计算" class="anchor"><span class="icon icon-link"></span></a>对索引进行表达式计算</h3>
+        <p>在查询条件中对索引进行表达式计算，也是无法走索引的。比如<code>explain select * from t_user where id + 1 = 10;</code></p>
+        <p>为什么？</p>
+        <blockquote>
+          <p>类似对索引使用函数，索引保存的是索引字段的原始值，而不是id + 1计算后的值。</p>
+          <p>但是对 where id = 10 -1这种是可以的。</p>
+        </blockquote>
+        <h3 id="对索引隐式类型转换"><a aria-hidden="true" tabindex="-1" href="#对索引隐式类型转换" class="anchor"><span class="icon icon-link"></span></a>对索引隐式类型转换</h3>
+        <p>索引字段是字符串类型，但是在条件查询中，输入的参数是整型的话，你会在执行计划的结果发现这条语句会走全表扫描。</p>
+        <p>但是如果索引字段是整型类型，查询条件中的输入参数即使是字符串，是不会导致索引失效，还是可以走索引扫描。</p>
+        <blockquote>
+          <p>用字符串类型查整型类型√，用整型查字符串类型×</p>
+          <p>简单理解用整型查字符串类型时，转换为字符串进行比较时可能出错。</p>
+          <p>“10” ---> 10 > 9 √</p>
+          <p>10 ---> "10" &#x3C; "9"，因为第一位是"1"</p>
+          <p>由于隐式类型转换是通过 CAST 函数实现的，等同于对索引列使用了函数，所以就会导致索引失效。</p>
+        </blockquote>
+        <h3 id="联合索引非最左匹配"><a aria-hidden="true" tabindex="-1" href="#联合索引非最左匹配" class="anchor"><span class="icon icon-link"></span></a>联合索引非最左匹配</h3>
+        <p>联合索引要能正确使用需要遵循最左匹配原则，也就是按照最左优先的方式进行索引的匹配。在联合索引的情况下，数据是按照索引第一列排序，<strong>第一列数据相同时才会按照第二列排序</strong>。</p>
+        <p>比如，如果创建了一个 (a, b, c) 联合索引，如果查询条件是以下这几种，因为不符合最左匹配原则，所以就无法匹配上联合索引，联合索引就会失效:</p>
+        <ul>
+          <li>where b=2；</li>
+          <li>where c=3；</li>
+          <li>where b=2 and c=3；</li>
+        </ul>
+        <p>有一个比较特殊的查询条件：where a = 1 and c = 3 ，符合最左匹配吗？</p>
+        <p>这种其实严格意义上来说是属于索引截断，不同版本处理方式也不一样。</p>
+        <p>MySQL 5.5 的话，前面 a 会走索引，在联合索引找到主键值后，开始回表，到主键索引读取数据行，Server 层从存储引擎层获取到数据行后，然后在 Server 层再比对 c 字段的值。</p>
+        <p>从 MySQL 5.6 之后，有一个<strong>索引下推功能</strong>，可以在存储引擎层进行索引遍历过程中，对索引中包含的字段先做判断，直接过滤掉不满足条件的记录，再返还给 Server 层，从而减少回表次数。</p>
+        <blockquote>
+          <p>索引下推的大概原理是：截断的字段不会在 Server 层进行条件判断，而是会被下推到「存储引擎层」进行条件判断（因为 c 字段的值是在 <code>(a, b, c)</code> 联合索引里的），然后过滤出符合条件的数据后再返回给 Server 层。由于在引擎层就过滤掉大量的数据，无需再回表读取数据来进行判断，减少回表次数，从而提升了性能。</p>
+        </blockquote>
+        <h3 id="where-子句中的-or"><a aria-hidden="true" tabindex="-1" href="#where-子句中的-or" class="anchor"><span class="icon icon-link"></span></a>WHERE 子句中的 OR</h3>
+        <p>在 WHERE 子句中，如果在 OR 前的条件列是索引列，而在 OR 后的条件列不是索引列，那么索引会失效。</p>
+        <p>只有一个是索引列，是没有意义的。</p>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#数据结构" class="tocs-link">数据结构</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#什么样数据结构是好的" class="tocs-link">什么样数据结构是好的</a></li>
+                <li><a href="#二分搜索树" class="tocs-link">二分搜索树</a></li>
+                <li><a href="#平衡二叉搜索树" class="tocs-link">平衡二叉搜索树</a></li>
+                <li><a href="#b树" class="tocs-link">B树</a></li>
+                <li><a href="#b树-1" class="tocs-link">B+树</a></li>
+                <li><a href="#b与b树对比" class="tocs-link">B+与B树对比</a></li>
+              </ol>
+            </li>
+            <li><a href="#innodb中b树索引" class="tocs-link">InnoDB中B+树索引</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#b树查询性能" class="tocs-link">B+树查询性能</a></li>
+                <li><a href="#优化b树索引的插入性能" class="tocs-link">优化B+树索引的插入性能</a></li>
+              </ol>
+            </li>
+            <li><a href="#索引组织表" class="tocs-link">索引组织表</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#是什么" class="tocs-link">是什么</a></li>
+                <li><a href="#二级索引" class="tocs-link">二级索引</a></li>
+                <li><a href="#函数索引" class="tocs-link">函数索引</a></li>
+              </ol>
+            </li>
+            <li><a href="#组合索引" class="tocs-link">组合索引</a></li>
+            <li><a href="#索引失效" class="tocs-link">索引失效</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#对索引使用左或者左右模糊匹配" class="tocs-link">对索引使用左或者左右模糊匹配</a></li>
+                <li><a href="#对索引使用函数" class="tocs-link">对索引使用函数</a></li>
+                <li><a href="#对索引进行表达式计算" class="tocs-link">对索引进行表达式计算</a></li>
+                <li><a href="#对索引隐式类型转换" class="tocs-link">对索引隐式类型转换</a></li>
+                <li><a href="#联合索引非最左匹配" class="tocs-link">联合索引非最左匹配</a></li>
+                <li><a href="#where-子句中的-or" class="tocs-link">WHERE 子句中的 OR</a></li>
+              </ol>
+            </li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>

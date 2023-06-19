@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>环境配置 iDoc</title>
+    <meta name="description" content="我们常使用的系统都具有图形用户界面(GUI)，进行点击操作，但并不是每个平台都具有GUI，但几乎所有平台都支持，文字接口(Shell)。其中*bash(Bourne Again Shell)*就是其中一种shell。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../../logo.png" type="image/x-icon">
+    <script src="../../js/copy.js?v=1.25.0"></script>
+    <script src="../../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../../index.html"><img alt="iDoc logo" src="../../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../../index.html" target="" class="">Home</a></li>
+            <li><a href="../../00Go/index.html" target="" class="">Go</a></li>
+            <li><a href="../../01MySQL/index.html" target="" class="">MySQL</a></li>
+            <li><a href="../../01Redis/index.html" target="" class="">Redis</a></li>
+            <li><a href="../../01LeetCode/index.html" target="" class="">LeetCode</a></li>
+            <li><a href="../index.html" target="" class="active">Hello World</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="../index.html" class="">↩️README</a>
+            <label>计算机网络</label>
+            <a href="../01ComputerNetwork/ch00.html" class="">问题收集</a>
+            <a href="../01ComputerNetwork/ch11.html" class="">常见问题</a>
+            <a href="../01ComputerNetwork/ch21.html" class="">三次握手/四次挥手</a>
+            <a href="../01ComputerNetwork/ch22.html" class="">socket</a>
+            <a href="../01ComputerNetwork/ch23.html" class="">可靠的TCP</a>
+            <a href="../01ComputerNetwork/ch31.html" class="">IP知识全家桶</a>
+            <a href="../01ComputerNetwork/ch32.html" class="">ping的工作原理</a>
+            <a href="../01ComputerNetwork/ch01.html" class="">网络发展</a>
+            <a href="../01ComputerNetwork/ch41.html" class="">键入url到渲染显示</a>
+            <label>操作系统</label>
+            <a href="../01OperatingSystem/ch51.html" class="">优化程序性能</a>
+            <a href="../01OperatingSystem/ch61.html" class="">存储器</a>
+            <a href="../01OperatingSystem/ch71.html" class="">链接</a>
+            <a href="../01OperatingSystem/ch81.html" class="">进程、线程、调度</a>
+            <a href="../01OperatingSystem/ch82.html" class="">问题</a>
+            <a href="../01OperatingSystem/ch91.html" class="">虚拟内存</a>
+            <label>工具</label>
+            <a href="environment.html" class="">配个环境</a>
+            <a href="vim.html" class="">Vim</a>
+            <a href="git.html" class="">Git</a>
+            <a href="shell.html" class="">Shell</a>
+            <a href="docker.html" class="">Docker</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="环境配置"><a aria-hidden="true" tabindex="-1" href="#环境配置" class="anchor"><span class="icon icon-link"></span></a>环境配置</h1>
+        <h2 id="idoc环境"><a aria-hidden="true" tabindex="-1" href="#idoc环境" class="anchor"><span class="icon icon-link"></span></a>iDoc环境</h2>
+        <ul>
+          <li><a href="http://nodejs.org/">Node.js</a> (版本需不低于 14，建议使用 Node.js <code>14+</code> 及以上版本)</li>
+          <li>使用 npm 安装 idoc：<code>npm install -g idoc</code></li>
+        </ul>
+        <h2 id="go"><a aria-hidden="true" tabindex="-1" href="#go" class="anchor"><span class="icon icon-link"></span></a>Go</h2>
+        <ol>
+          <li>
+            <p>下载安装包</p>
+          </li>
+          <li>
+            <p>环境变量配置，使得所有代码布置到指定的GOPATH目录下</p>
+            <p>这些路径下又必须分别包含三个规定的目录：<code>src</code>、<code>pkg</code> 和 <code>bin</code>，这三个目录分别用于存放源码文件、包文件和可执行文件。</p>
+          </li>
+          <li>
+            <p>设置代理</p>
+          </li>
+          <li>
+            <p>Vscode下安装Go插件，并ctrl + shift + p安装<code>go install</code></p>
+          </li>
+          <li>
+            <p>dlv错误时，<code>go env -w GOARCH=amd64</code>，dlv调试工具不支持386。</p>
+          </li>
+        </ol>
+        <ul>
+          <li><a href="https://mp.weixin.qq.com/s/J01LY7s6xMB8Lk10sxTFhg">参考文章</a></li>
+        </ul>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1">go version
+</span><span class="code-line line-number" line="2">go <span class="token function">env</span>
+</span><span class="code-line line-number" line="3"><span class="token comment"># 查看配置环境</span>
+</span><span class="code-line line-number" line="4">
+</span><span class="code-line line-number" line="5">go <span class="token function">env</span> <span class="token parameter variable">-w</span> <span class="token assign-left variable">GOPROXY</span><span class="token operator">=</span>https://goproxy.cn,https://goproxy.io,direct
+</span><span class="code-line line-number" line="6"><span class="token comment"># 配置代理</span>
+</span></code><input type="hidden" value="go version
+go env
+# 查看配置环境
+
+go env -w GOPROXY=https://goproxy.cn,https://goproxy.io,direct
+# 配置代理
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="redis"><a aria-hidden="true" tabindex="-1" href="#redis" class="anchor"><span class="icon icon-link"></span></a>Redis</h2>
+        <ul>
+          <li>
+            <p>下载地址：<a href="https://github.com/tporadowski/redis/releases%E3%80%82">https://github.com/tporadowski/redis/releases。</a></p>
+          </li>
+          <li>
+            <p>添加路径到环境变量</p>
+          </li>
+          <li>
+            <p>打开一个 <strong>cmd</strong> 窗口 使用 cd 命令切换目录到 <strong>C:\redis</strong> 运行：</p>
+          </li>
+        </ul>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1">redis<span class="token operator">-</span>server<span class="token punctuation">.</span>exe redis<span class="token punctuation">.</span>windows<span class="token punctuation">.</span>conf
+</span><span class="code-line line-number" line="2">redis<span class="token operator">-</span>server<span class="token punctuation">.</span>exe <span class="token comment">// 添加环境变量后可以省略</span>
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4">redis<span class="token operator">-</span>cli<span class="token punctuation">.</span>exe <span class="token operator">-</span>h <span class="token number">127.0</span><span class="token number">.0</span><span class="token number">.1</span> <span class="token operator">-</span>p <span class="token number">6379</span>
+</span><span class="code-line line-number" line="5">set myKey abc
+</span><span class="code-line line-number" line="6">
+</span><span class="code-line line-number" line="7">get myKey
+</span></code><input type="hidden" value="redis-server.exe redis.windows.conf
+redis-server.exe // 添加环境变量后可以省略
+
+redis-cli.exe -h 127.0.0.1 -p 6379
+set myKey abc
+
+get myKey
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#idoc环境" class="tocs-link">iDoc环境</a></li>
+            <li><a href="#go" class="tocs-link">Go</a></li>
+            <li><a href="#redis" class="tocs-link">Redis</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>

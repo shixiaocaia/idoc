@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>进程 iDoc</title>
+    <meta name="description" content="在操作系统中，是用进程控制块（process control block，PCB）数据结构来描述进程的。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../../logo.png" type="image/x-icon">
+    <script src="../../js/copy.js?v=1.25.0"></script>
+    <script src="../../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../../index.html"><img alt="iDoc logo" src="../../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../../index.html" target="" class="">Home</a></li>
+            <li><a href="../../00Go/index.html" target="" class="">Go</a></li>
+            <li><a href="../../01MySQL/index.html" target="" class="">MySQL</a></li>
+            <li><a href="../../01Redis/index.html" target="" class="">Redis</a></li>
+            <li><a href="../../01LeetCode/index.html" target="" class="">LeetCode</a></li>
+            <li><a href="../index.html" target="" class="active">Hello World</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="../index.html" class="">↩️README</a>
+            <label>计算机网络</label>
+            <a href="../01ComputerNetwork/ch00.html" class="">问题收集</a>
+            <a href="../01ComputerNetwork/ch11.html" class="">常见问题</a>
+            <a href="../01ComputerNetwork/ch21.html" class="">三次握手/四次挥手</a>
+            <a href="../01ComputerNetwork/ch22.html" class="">socket</a>
+            <a href="../01ComputerNetwork/ch23.html" class="">可靠的TCP</a>
+            <a href="../01ComputerNetwork/ch31.html" class="">IP知识全家桶</a>
+            <a href="../01ComputerNetwork/ch32.html" class="">ping的工作原理</a>
+            <a href="../01ComputerNetwork/ch01.html" class="">网络发展</a>
+            <a href="../01ComputerNetwork/ch41.html" class="">键入url到渲染显示</a>
+            <label>操作系统</label>
+            <a href="ch51.html" class="">优化程序性能</a>
+            <a href="ch61.html" class="">存储器</a>
+            <a href="ch71.html" class="">链接</a>
+            <a href="ch81.html" class="">进程、线程、调度</a>
+            <a href="ch82.html" class="">问题</a>
+            <a href="ch91.html" class="">虚拟内存</a>
+            <label>工具</label>
+            <a href="../03Other/environment.html" class="">配个环境</a>
+            <a href="../03Other/vim.html" class="">Vim</a>
+            <a href="../03Other/git.html" class="">Git</a>
+            <a href="../03Other/shell.html" class="">Shell</a>
+            <a href="../03Other/docker.html" class="">Docker</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="进程"><a aria-hidden="true" tabindex="-1" href="#进程" class="anchor"><span class="icon icon-link"></span></a>进程</h1>
+        <blockquote>
+          <p>CPU并行和并发的区别：</p>
+          <p>并行：两个CPU同时处理两个不同的任务。</p>
+          <p>并发：同一个CPU交替执行不同的任务。</p>
+        </blockquote>
+        <h3 id="进程的状态"><a aria-hidden="true" tabindex="-1" href="#进程的状态" class="anchor"><span class="icon icon-link"></span></a>进程的状态</h3>
+        <p>
+          <img src="../../img/202301272002909.png" alt="进程五种状态的变迁">
+        </p>
+        <ul>
+          <li>
+            <p>运行状态（<em>Running</em>）：该时刻进程占用 CPU；</p>
+          </li>
+          <li>
+            <p>就绪状态（<em>Ready</em>）：可运行，由于其他进程处于运行状态而暂时停止运行；</p>
+          </li>
+          <li>
+            <p>阻塞状态（<em>Blocked</em>）：该进程正在等待某一事件发生（如等待输入/输出操作的完成）而暂时停止运行，这时，即使给它CPU控制权，它也无法运行；</p>
+          </li>
+          <li>
+            <p>创建状态（<em>new</em>）：进程正在被创建时的状态；</p>
+          </li>
+          <li>
+            <p>结束状态（<em>Exit</em>）：进程正在从系统中消失时的状态；</p>
+          </li>
+        </ul>
+        <blockquote>
+          <p>在虚拟内存管理的操作系统中，通常会把阻塞状态的进程的物理内存空间换出到硬盘，等需要再次运行的时候，再从硬盘换入到物理内存，避免进程占用大量物理内存空间。</p>
+          <p>进程挂起状态又分为阻塞挂起状态、就绪挂起状态。</p>
+          <p>导致进程挂起还有设置sleep函数一类的定时器，一起用户希望挂起一个程序如通过ctrl + Z。</p>
+        </blockquote>
+        <hr>
+        <h3 id="进程的控制结构"><a aria-hidden="true" tabindex="-1" href="#进程的控制结构" class="anchor"><span class="icon icon-link"></span></a>进程的控制结构</h3>
+        <p>在操作系统中，是用<strong>进程控制块</strong>（<em>process control block，PCB</em>）数据结构来描述进程的。</p>
+        <blockquote>
+          <p>PCB包含了：</p>
+          <p><strong>进程描述信息：</strong></p>
+          <ul>
+            <li>进程标识符：标识各个进程，每个进程都有一个并且唯一的标识符；</li>
+            <li>用户标识符：进程归属的用户，用户标识符主要为共享和保护服务；</li>
+          </ul>
+          <p><strong>进程控制和管理信息：</strong></p>
+          <ul>
+            <li>进程当前状态，如 new、ready、running、waiting 或 blocked 等；</li>
+            <li>进程优先级：进程抢占 CPU 时的优先级；</li>
+          </ul>
+          <p><strong>资源分配清单：</strong></p>
+          <ul>
+            <li>有关内存地址空间或虚拟地址空间的信息，所打开文件的列表和所使用的 I/O 设备信息。</li>
+          </ul>
+          <p><strong>CPU 相关信息：</strong></p>
+          <ul>
+            <li>CPU 中各个寄存器的值，当进程被切换时，CPU 的状态信息都会被保存在相应的 PCB 中，以便进程重新执行时，能从断点处继续执行。</li>
+          </ul>
+        </blockquote>
+        <p>每个PCB通过链表组织在一起，把相同状态的进程链在一起，构成如就绪队列，阻塞队列。</p>
+        <blockquote>
+          <p>选择链表，有利于进程的创建和销毁等变化。</p>
+        </blockquote>
+        <hr>
+        <h3 id="进程的上下文切换"><a aria-hidden="true" tabindex="-1" href="#进程的上下文切换" class="anchor"><span class="icon icon-link"></span></a>进程的上下文切换</h3>
+        <p>各个进程之间是共享 CPU 资源的，在不同的时候进程之间需要切换，让不同的进程可以在 CPU 执行，那么这个<strong>一个进程切换到另一个进程运行，称为进程的上下文切换</strong>。</p>
+        <blockquote>
+          <p>CPU 寄存器和程序计数是 CPU 在运行任何任务前，所必须依赖的环境，这些环境就叫做 <strong>CPU 上下文</strong>。</p>
+        </blockquote>
+        <p>当发生「任务」，主要包含进程、线程和中断时，系统内核会把前一个任务的 CPU 上下文（CPU 寄存器和程序计数器）保存起来，然后加载新任务的上下文到这些寄存器和程序计数器，最后再跳转到程序计数器所指的新位置，运行新任务。</p>
+        <p><strong>进程的上下文切换不仅包含了虚拟内存、栈、全局变量等用户空间的资源，还包括了内核堆栈、寄存器等内核空间的资源。</strong></p>
+        <p>通常，会把交换的信息保存在进程的 PCB，当要运行另外一个进程的时候，我们需要从这个进程的 PCB 取出上下文，然后恢复到 CPU 中，这使得这个进程可以继续执行，如下图所示：</p>
+        <p>
+          <img src="../../img/202301272013190.jpeg" alt="进程上下文切换">
+        </p>
+        <blockquote>
+          <p>发生进程上下文切换的场景：</p>
+          <ul>
+            <li>为了保证所有进程可以得到公平调度，CPU 时间被划分为一段段的时间片，这些时间片再被轮流分配给各个进程。这样，当某个进程的时间片耗尽了，进程就从运行状态变为就绪状态，系统从就绪队列选择另外一个进程运行；</li>
+            <li>进程在系统资源不足（比如内存不足）时，要等到资源满足后才可以运行，这个时候进程也会被挂起，并由系统调度其他进程运行；</li>
+            <li>当进程通过睡眠函数 sleep 这样的方法将自己主动挂起时，自然也会重新调度；</li>
+            <li>当有优先级更高的进程运行时，为了保证高优先级进程的运行，当前进程会被挂起，由高优先级进程来运行；</li>
+            <li>发生硬件中断时，CPU 上的进程会被中断挂起，转而执行内核中的中断服务程序；</li>
+          </ul>
+        </blockquote>
+        <hr>
+        <h2 id="线程"><a aria-hidden="true" tabindex="-1" href="#线程" class="anchor"><span class="icon icon-link"></span></a>线程</h2>
+        <blockquote>
+          <p><strong>线程是进程当中的一条执行流程。</strong></p>
+          <p>同一个进程内多个线程之间可以共享代码段、数据段、打开的文件等资源，但每个线程各自都有一套独立的寄存器和栈，这样可以确保线程的控制流是相对独立的。</p>
+        </blockquote>
+        <h3 id="线程的优缺点"><a aria-hidden="true" tabindex="-1" href="#线程的优缺点" class="anchor"><span class="icon icon-link"></span></a>线程的优缺点</h3>
+        <p>线程的优点：</p>
+        <ul>
+          <li>一个进程中可以同时存在多个线程；</li>
+          <li>各个线程之间可以并发执行；</li>
+          <li>各个线程之间可以共享地址空间和文件等资源；</li>
+        </ul>
+        <p>线程的缺点：</p>
+        <ul>
+          <li>当进程中的一个线程崩溃时，会导致其所属进程的所有线程崩溃（这里是针对 C/C++ 语言，Java语言中的线程奔溃不会造成进程崩溃，具体分析原因可以看这篇：<a href="https://xiaolincoding.com/os/4_process/thread_crash.html">线程崩溃了，进程也会崩溃吗？ </a>。</li>
+        </ul>
+        <p>举个例子，对于游戏的用户设计，则不应该使用多线程的方式，否则一个用户挂了，会影响其他同个进程的线程。</p>
+        <hr>
+        <h3 id="线程与进程的比较"><a aria-hidden="true" tabindex="-1" href="#线程与进程的比较" class="anchor"><span class="icon icon-link"></span></a>线程与进程的比较</h3>
+        <p>线程与进程的比较如下：</p>
+        <blockquote>
+          <ul>
+            <li><strong>进程是资源（包括内存、打开的文件等）分配的单位，线程是 CPU 调度的单位；</strong></li>
+            <li>进程拥有一个完整的资源平台，而线程只独享必不可少的资源，如寄存器和栈；</li>
+            <li>线程同样具有就绪、阻塞、执行三种基本状态，同样具有状态之间的转换关系；</li>
+            <li>线程能减少并发执行的时间和空间开销；</li>
+          </ul>
+        </blockquote>
+        <blockquote>
+          <p>[!NOTE]</p>
+          <p><a href="https://xiaolincoding.com/os/4_process/process_base.html#%E4%BB%80%E4%B9%88%E6%98%AF%E7%BA%BF%E7%A8%8B">对于，线程相比进程能减少开销，体现在在哪些方面</a></p>
+        </blockquote>
+        <hr>
+        <h3 id="线程的上下文切换"><a aria-hidden="true" tabindex="-1" href="#线程的上下文切换" class="anchor"><span class="icon icon-link"></span></a>线程的上下文切换</h3>
+        <p>所谓操作系统的任务调度，实际上的调度对象是线程，而进程只是给线程提供了虚拟内存、全局变量等资源。</p>
+        <p>对于线程和进程，我们可以这么理解：</p>
+        <ul>
+          <li>当进程只有一个线程时，可以认为进程就等于线程；</li>
+          <li>当进程拥有多个线程时，这些线程会共享相同的虚拟内存和全局变量等资源，这些资源在上下文切换时是不需要修改的；</li>
+        </ul>
+        <p>另外，线程也有自己的私有数据，比如栈和寄存器等，这些在上下文切换时也是需要保存的。</p>
+        <blockquote>
+          <p>线程的上下文切换</p>
+          <blockquote>
+            <p>线程上下文切换的是什么？</p>
+          </blockquote>
+          <p>这还得看线程是不是属于同一个进程：</p>
+          <ul>
+            <li>当两个线程不是属于同一个进程，则切换的过程就跟进程上下文切换一样；</li>
+            <li><strong>当两个线程是属于同一个进程，因为虚拟内存是共享的，所以在切换时，虚拟内存这些资源就保持不动，只需要切换线程的私有数据、寄存器等不共享的数据</strong>；</li>
+          </ul>
+          <p>所以，线程的上下文切换相比进程，开销要小很多。</p>
+        </blockquote>
+        <h3 id="线程的实现"><a aria-hidden="true" tabindex="-1" href="#线程的实现" class="anchor"><span class="icon icon-link"></span></a>线程的实现</h3>
+        <p>主要有三种线程的实现方式：</p>
+        <ul>
+          <li>用户线程（User Thread）：在用户空间实现的线程，不是由内核管理的线程，是由用户态的线程库来完成线程的管理；</li>
+          <li>内核线程（Kernel Thread）：在内核中实现的线程，是由内核管理的线程；</li>
+          <li>轻量级进程（LightWeight Process）：在内核中来支持用户线程；</li>
+        </ul>
+        <blockquote>
+          <p>用户线程和内核线程的对应关系包含了：</p>
+          <ul>
+            <li>多对一</li>
+            <li>一对一</li>
+            <li>多对多</li>
+          </ul>
+        </blockquote>
+        <hr>
+        <p><strong>用户线程</strong>是基于用户态的线程管理库来实现的，那么<em>线程控制块（Thread Control Block, TCB）</em> 也是在库里面来实现的，对于操作系统而言是看不到这个 TCB 的，它只能看到整个进程的 PCB。</p>
+        <p>所以，用户线程的整个线程管理和调度，操作系统是不直接参与的，而是由用户级线程库函数来完成线程的管理，包括线程的创建、终止、同步和调度等。</p>
+        <p>用户级线程的模型，也就类似前面提到的多对一的关系，即多个用户线程对应同一个内核线程，如下图所示：</p>
+        <p>
+          <img src="../../img/202301280910479.png" alt="用户级线程模型">
+        </p>
+        <blockquote>
+          <p>[!NOTE]</p>
+          <p><a href="https://xiaolincoding.com/os/4_process/process_base.html#%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0">用户线程的优缺点</a></p>
+        </blockquote>
+        <hr>
+        <p><strong>内核线程</strong>是由操作系统管理的，线程对应的 TCB 自然是放在操作系统里的，这样线程的创建、终止和管理都是由操作系统负责。</p>
+        <p>内核线程的模型，也就类似前面提到的一对一的关系，即一个用户线程对应一个内核线程，如下图所示：</p>
+        <p>
+          <img src="../../img/202301280912258.png" alt="内核线程模型">
+        </p>
+        <blockquote>
+          <p>[!NOTE]</p>
+          <p><a href="https://xiaolincoding.com/os/4_process/process_base.html#%E7%BA%BF%E7%A8%8B%E7%9A%84%E5%AE%9E%E7%8E%B0">内核线程的优缺点</a></p>
+        </blockquote>
+        <hr>
+        <p><strong>轻量级进程</strong>（Light-weight process，LWP）是内核支持的用户线程，一个进程可有一个或多个 LWP，每个 LWP 是跟内核线程一对一映射的，也就是 LWP 都是由一个内核线程支持，而且 LWP 是由内核管理并像普通进程一样被调度。</p>
+        <p>在大多数系统中，LWP与普通进程的区别也在于它只有一个最小的执行上下文和调度程序所需的统计信息。一般来说，一个进程代表程序的一个实例，而 LWP 代表程序的执行线程，因为一个执行线程不像进程那样需要那么多状态信息，所以 LWP 也不带有这样的信息。</p>
+        <h2 id="调度"><a aria-hidden="true" tabindex="-1" href="#调度" class="anchor"><span class="icon icon-link"></span></a>调度</h2>
+        <p>选择一个进程运行这一功能是在操作系统中完成的，通常称为<strong>调度程序</strong>（<em>scheduler</em>）。</p>
+        <h3 id="调度时机"><a aria-hidden="true" tabindex="-1" href="#调度时机" class="anchor"><span class="icon icon-link"></span></a>调度时机</h3>
+        <p>在进程的生命周期中，当进程从一个运行状态到另外一状态变化的时候，其实会触发一次调度。</p>
+        <p>比如：从就绪态到运行态，从运行态到阻塞态。</p>
+        <p>另外，如果硬件时钟提供某个频率的周期性中断，那么可以根据如何处理时钟中断 ，把调度算法分为两类：</p>
+        <ul>
+          <li><strong>非抢占式调度算法</strong>挑选一个进程，然后让该进程运行直到被阻塞，或者直到该进程退出，才会调用另外一个进程，也就是说不会理时钟中断这个事情。</li>
+          <li><strong>抢占式调度算法</strong>挑选一个进程，然后让该进程只运行某段时间，如果在该时段结束时，该进程仍然在运行时，则会把它挂起，接着调度程序从就绪队列挑选另外一个进程。这种抢占式调度处理，需要在时间间隔的末端发生<strong>时钟中断</strong>，以便把 CPU 控制返回给调度程序进行调度，也就是常说的<strong>时间片机制</strong>。</li>
+        </ul>
+        <hr>
+        <h3 id="调度原则"><a aria-hidden="true" tabindex="-1" href="#调度原则" class="anchor"><span class="icon icon-link"></span></a>调度原则</h3>
+        <p>针对五种调度原则，总结成如下：</p>
+        <ul>
+          <li><strong>CPU 利用率</strong>：调度程序应确保 CPU 是始终匆忙的状态，这可提高 CPU 的利用率；</li>
+          <li><strong>系统吞吐量</strong>：吞吐量表示的是单位时间内 CPU 完成进程的数量，长作业的进程会占用较长的 CPU 资源，因此会降低吞吐量，相反，短作业的进程会提升系统吞吐量；</li>
+          <li><strong>周转时间</strong>：周转时间是进程运行+阻塞时间+等待时间的总和，一个进程的周转时间越小越好；</li>
+          <li><strong>等待时间</strong>：这个等待时间不是阻塞状态的时间，而是进程处于就绪队列的时间，等待的时间越长，用户越不满意；</li>
+          <li><strong>响应时间</strong>：用户提交请求到系统第一次产生响应所花费的时间，在交互式系统中，响应时间是衡量调度算法好坏的主要标准。</li>
+        </ul>
+        <p>调度原则目的就是要使得进程要「快」。</p>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#进程的状态" class="tocs-link">进程的状态</a></li>
+            <li><a href="#进程的控制结构" class="tocs-link">进程的控制结构</a></li>
+            <li><a href="#进程的上下文切换" class="tocs-link">进程的上下文切换</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>

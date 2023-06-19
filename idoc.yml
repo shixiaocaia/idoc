@@ -52,11 +52,10 @@ openSource: https://github.com/shixiaocaia
 # -----------------------
 scope: 
   - 00Go
-  - 01DataStructure
-  - 01ComputerNetwork
-  - 01DataBase
-  - 01OperatingSystem
-  - 03Other
+  - 01MySQL
+  - 01Redis
+  - 01LeetCode
+  - 02HelloWorld
 
 ## Navigation Menu.
 # -----------------------
@@ -64,11 +63,10 @@ menus:
   Home: index.html
   # Label: <URL> [scope]
   Go: 00Go/index.html
-  DataStructure: 01DataStructure/index.html
-  ComputerNetwrok: 01ComputerNetwork/index.html
-  DataBase: 01DataBase/index.html
-  OperatingSystem: 01OperatingSystem/index.html
-  Other: 03Other/index.html
+  MySQL: 01MySQL/index.html
+  Redis: 01Redis/index.html
+  LeetCode: 01LeetCode/index.html
+  Hello World: 02HelloWorld/index.html
 
 ## Copy Assets
 # -----------------------

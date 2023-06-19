@@ -5,82 +5,80 @@
 - 00Go/ch01.md: 基础语法
 - 00Go/ch02.md: 并发编程
 - 00Go: Web编程
-- 00Go/ch03.md: gorm框架
-- 00Go/ch05.md: gin框架
-#- 00Go: 原理深入
-#- 00Go: 微服务框架
-
-
-- 01DataStructure/README.md: ↩️README
-- 01DataStructure: Leetcode
-- 01DataStructure/ch1.md: 数组
-- 01DataStructure/ch2.md: 链表
-- 01DataStructure/ch3.md: 哈希表
-- 01DataStructure/ch4.md: 字符串
-- 01DataStructure/ch5.md: 栈与队列
-- 01DataStructure/ch6.md: 二叉树
-- 01DataStructure/ch7.md: 回溯
-- 01DataStructure/ch8.md: 贪心
-- 01DataStructure/ch9.md: 动态规划
-- 01DataStructure/ch11.md: 排序
-- 01DataStructure/ch12.md: 图论
-- 01DataStructure/ch13.md: 其他
-
-
-- 01ComputerNetwork/README.md: ↩️README
-- 01ComputerNetwork/ch00.md: 问题收集
-- 01ComputerNetwork: HTTP篇 
-- 01ComputerNetwork/ch11.md: 常见问题
-- 01ComputerNetwork: TCP篇
-- 01ComputerNetwork/ch21.md: 三次握手/四次挥手
-- 01ComputerNetwork/ch22.md: socket
-- 01ComputerNetwork/ch23.md: 可靠的TCP
-- 01ComputerNetwork: IP篇
-- 01ComputerNetwork/ch31.md: IP知识全家桶
-- 01ComputerNetwork/ch32.md: ping的工作原理
-- 01ComputerNetwork: 综合篇
-- 01ComputerNetwork/ch01.md: 网络发展   
-- 01ComputerNetwork/ch41.md: 键入url到渲染显示
-
-- 01DataBase/README.md: ↩️README
-- 01DataBase:SQL
-- 01DataBase/ch00.md: Hello MySQL
-- 01DataBase/ch01.md: SQL
-- 01DataBase/ch04.md: 写点SQL
-- 01DataBase: MySQL原理
-- 01DataBase/ch02.md: 架构
-- 01DataBase/ch03.md: InnoDB存储引擎
-- 01DataBase: Redis
-- 01DataBase/ch11.md: Hello Redis
-- 01DataBase/ch12.md: 数据结构
-
-- 01OperatingSystem/README.md: ↩️README
-- 01OperatingSystem/ch00.md: 问题收集
-- 01OperatingSystem: 计组
-- 01OperatingSystem/ch51.md: 优化程序性能
-- 01OperatingSystem/ch61.md: 存储器
-- 01OperatingSystem/ch71.md: 链接
-- 01OperatingSystem: 进程
-- 01OperatingSystem/ch81.md: 进程、线程、调度
-- 01OperatingSystem/ch82.md: 问题
-- 01OperatingSystem: 虚拟内存
-- 01OperatingSystem/ch91.md: 虚拟内存
-- 01OperatingSystem/ch92.md: 问题
+- 00Go/ch03.md: gorm
+- 00Go/ch05.md: gin
+#- 00Go/ch09.md: seelog
+#- 00Go/ch10.md: redigo
+- 00Go: 原理深入
+- 00Go/ch06.md: 原理分析
+#- 00Go/ch07.md: 垃圾回收
+#- 00Go/ch08.md: CMP
+# - 00Go: 微服务框架
 
 
 
-
-- 03Other/README.md: ↩️README
-- 03Other/environment.md: 配个环境
-- 03Other/vim.md: Vim
-- 03Other/git.md: Git
-- 03Other/shell.md: Shell
-- 03Other/docker.md: Docker
-
-
-
+- 01MySQL/README.md: ↩️README
+- 01MySQL:SQL
+- 01MySQL/ch00.md: Hello MySQL
+- 01MySQL/ch01.md: SQL
+- 01MySQL/ch02.md: 写点SQL
+- 01MySQL: MySQL原理
+- 01MySQL/ch03.md: InnoDB存储引擎
+- 01MySQL/ch04.md: 索引
 
 
+- 01Redis/README.md: ↩️README
+#- 01Redis: Redis
+- 01Redis/ch12.md: 数据结构
+- 01Redis/ch13.md: Redis是怎么运行的
+- 01Redis/ch14.md: 持久化
+- 01Redis/ch15.md: 缓存过期与内存淘汰
+- 01Redis/ch16.md: 集群模式
+- 01Redis/ch17.md: 缓存
+- 01Redis/ch18.md: 分布式锁
+
+- 01LeetCode/README.md: ↩️README
+- 01LeetCode: Leetcode
+- 01LeetCode/ch1.md: 数组
+- 01LeetCode/ch2.md: 链表
+- 01LeetCode/ch3.md: 哈希表
+- 01LeetCode/ch4.md: 字符串
+- 01LeetCode/ch5.md: 栈与队列
+- 01LeetCode/ch6.md: 二叉树
+- 01LeetCode/ch7.md: 回溯
+- 01LeetCode/ch8.md: 贪心
+- 01LeetCode/ch9.md: 动态规划
+- 01LeetCode/ch11.md: 排序
+- 01LeetCode/ch12.md: 图论
+- 01LeetCode/ch13.md: 其他
+
+
+- 02HelloWorld/README.md: ↩️README
+- 02HelloWorld: 计算机网络
+- 02HelloWorld/01ComputerNetwork/ch00.md: 问题收集
+- 02HelloWorld/01ComputerNetwork/ch11.md: 常见问题
+- 02HelloWorld/01ComputerNetwork/ch21.md: 三次握手/四次挥手
+- 02HelloWorld/01ComputerNetwork/ch22.md: socket
+- 02HelloWorld/01ComputerNetwork/ch23.md: 可靠的TCP
+- 02HelloWorld/01ComputerNetwork/ch31.md: IP知识全家桶
+- 02HelloWorld/01ComputerNetwork/ch32.md: ping的工作原理
+- 02HelloWorld/01ComputerNetwork/ch01.md: 网络发展   
+- 02HelloWorld/01ComputerNetwork/ch41.md: 键入url到渲染显示
+
+- 02HelloWorld: 操作系统
+- 02HelloWorld/01OperatingSystem/ch51.md: 优化程序性能
+- 02HelloWorld/01OperatingSystem/ch61.md: 存储器
+- 02HelloWorld/01OperatingSystem/ch71.md: 链接
+- 02HelloWorld/01OperatingSystem/ch81.md: 进程、线程、调度
+- 02HelloWorld/01OperatingSystem/ch82.md: 问题
+- 02HelloWorld/01OperatingSystem/ch91.md: 虚拟内存
+
+- 02HelloWorld: 工具
+- 02HelloWorld/03Other/environment.md: 配个环境
+- 02HelloWorld/03Other/vim.md: Vim
+- 02HelloWorld/03Other/git.md: Git
+- 02HelloWorld/03Other/shell.md: Shell
+- 02HelloWorld/03Other/docker.md: Docker
 
 
 
@@ -88,35 +86,3 @@
 
 
 
-- 00CPP/README.md: ↩️README
-- 00CPP: C++ primer
-- 00CPP/ch00.md: 语法问题
-- 00CPP/ch01.md: 指针&引用
-- 00CPP/ch02.md: 函数
-- 00CPP/ch03.md: 类
-- 00CPP/ch10.md: 模板
-- 00CPP/ch15.md: 异常处理
-- 00CPP/ch16.md: 内存管理
-- 00CPP: STL
-- 00CPP/ch20.md: 标准库
-- 00CPP/ch21.md: 容器
-- 00CPP: Effective C++
-- 00CPP/ch25.md: 条款1-25
-- 00CPP: 读万里书
-- 00CPP/ch31.md: Effective C++
-
-
-- 02MyWeb/README.md: ↩️README
-- 02MyWeb: 新手村
-- 02MyWeb/ch00.md: 环境配置
-- 02MyWeb/ch01.md: 线程同步机制封装类
-- 02MyWeb/ch02.md: 半同步/半反应堆线程池
-- 02MyWeb/ch03.md: 监听事件
-- 02MyWeb/ch04.md: HTTP连接请求处理类
-- 02MyWeb/ch05.md: 请求/响应报文
-- 02MyWeb: 进阶
-- 02MyWeb/ch06.md: 定时器
-- 02MyWeb/ch07.md: 日志系统
-- 02MyWeb: 总结
-- 02MyWeb/ch10.md: 问题总结
-- 02MyWeb/ch11.md: 压力测试

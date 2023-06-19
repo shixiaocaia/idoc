@@ -1,0 +1,744 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数据结构 iDoc</title>
+    <meta name="description" content="常见的有五种：String（字符串），Hash（哈希），List（列表），Set（集合）、Zset（有序集合）。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00Go/index.html" target="" class="">Go</a></li>
+            <li><a href="../01MySQL/index.html" target="" class="">MySQL</a></li>
+            <li><a href="index.html" target="" class="active">Redis</a></li>
+            <li><a href="../01LeetCode/index.html" target="" class="">LeetCode</a></li>
+            <li><a href="../02HelloWorld/index.html" target="" class="">Hello World</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <a href="ch12.html" class="">数据结构</a>
+            <a href="ch13.html" class="">Redis是怎么运行的</a>
+            <a href="ch14.html" class="">持久化</a>
+            <a href="ch15.html" class="">缓存过期与内存淘汰</a>
+            <a href="ch16.html" class="">集群模式</a>
+            <a href="ch17.html" class="">缓存</a>
+            <a href="ch18.html" class="">分布式锁</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="数据结构"><a aria-hidden="true" tabindex="-1" href="#数据结构" class="anchor"><span class="icon icon-link"></span></a>数据结构</h1>
+        <h2 id="关键点"><a aria-hidden="true" tabindex="-1" href="#关键点" class="anchor"><span class="icon icon-link"></span></a>关键点</h2>
+        <p>常见的有五种：String（字符串），Hash（哈希），List（列表），Set（集合）、Zset（有序集合）。</p>
+        <p>支持了四种数据类型： BitMap（2.2 版新增）、HyperLogLog（2.8 版新增）、GEO（3.2 版新增）、Stream（5.0 版新增）。</p>
+        <ul>
+          <li>每种数据对象都各自的应用场景，说出它们各自的应用场景</li>
+          <li>针对具体的应用场景，使用哪种Redis数据类型来实现</li>
+          <li>掌握特性、实现、时间复杂度、各种操作</li>
+          <li>超热点：跳表、字典</li>
+        </ul>
+        <hr>
+        <ul>
+          <li>采用多种底层实现编码的角度
+            <ul>
+              <li>数据量小的情况，节省内存</li>
+              <li>数据量大的情况，提高查找性能</li>
+              <li>不同编码方式，查找的效率，对应到应用场景问题</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="对象"><a aria-hidden="true" tabindex="-1" href="#对象" class="anchor"><span class="icon icon-link"></span></a>对象</h2>
+        <p>Redis是<strong>key-value存储</strong>，key和value在Redis中都被抽象为对象，key<strong>只能是String对象</strong>，而Value支持丰富的对象种类。</p>
+        <p>Object在内存当中包括：</p>
+        <ul>
+          <li>type：是哪种Redis对象</li>
+          <li>encoding：表示用哪种底层编码，用OBJECT ENCODING[key]可以看到对应的编码方式</li>
+          <li>lru：记录对象访问信息，用于内存淘汰</li>
+          <li>refcount：引用计数，用来描述有多少个指针，指向该对象</li>
+          <li>ptr：内容指针，指向实际内容</li>
+        </ul>
+        <h2 id="string"><a aria-hidden="true" tabindex="-1" href="#string" class="anchor"><span class="icon icon-link"></span></a>String</h2>
+        <h3 id="是什么"><a aria-hidden="true" tabindex="-1" href="#是什么" class="anchor"><span class="icon icon-link"></span></a>是什么</h3>
+        <p>String 是最基本的 key-value 结构，key 是唯一标识，value 是具体的值，value其实不仅是字符串， 也可以是数字（整数或浮点数），value 最多可以容纳的数据长度是 <code>512M</code>。</p>
+        <p>适用场景：一般用来存字节数据、文本数据、序列化后的对象数据等。</p>
+        <h3 id="使用"><a aria-hidden="true" tabindex="-1" href="#使用" class="anchor"><span class="icon icon-link"></span></a>使用</h3>
+        <ul>
+          <li>常用操作聚焦于创建、查询、更新和删除</li>
+          <li>创建：<code>SET name lin</code>，<code>MSET key1 value1 key2 value2 </code>，<code>SETNX key value</code></li>
+          <li>查询：<code>GET name</code>，<code>MGET key1 key2 </code>，<code>STRELEN name</code>，<code>TTL name</code></li>
+          <li>更新：<code>INCR number</code>，<code>EXPIRE name 60</code></li>
+          <li>删除：<code>DEL name</code></li>
+        </ul>
+        <h3 id="内部实现"><a aria-hidden="true" tabindex="-1" href="#内部实现" class="anchor"><span class="icon icon-link"></span></a>内部实现</h3>
+        <p>采用不同编码方式来应对不同的场景，以达到高性能。</p>
+        <p>包含了三种编码方式：</p>
+        <ul>
+          <li>INT：存放可以用long表示的整数</li>
+          <li>EMBSTR：字符串小于等于阈值字节，32 字节（redis 2.+版本）</li>
+          <li>RAW：字符串大于阈值字节</li>
+        </ul>
+        <p>其中EMBSTR和RAW由<strong>redisObject</strong>和**SDS（Simple Dynamic String）**构成，EMBSTR下的redisObject和SDS是连续的内存，而RAW是离散的。</p>
+        <ul>
+          <li>
+            <p>EMBSTR可以<strong>一次性分配空间</strong>，连续分布的。</p>
+            <ul>
+              <li>创建字符串对象所需的内存分配次数就只需要一次，而raw需要两次</li>
+              <li>释放 <code>embstr</code>编码的字符串对象同样只需要调用一次内存释放函数，连续分布的</li>
+              <li>所有数据保存在一块连续的内存里面可以更好的利用CPU缓存提升性能</li>
+              <li>缺点是在修改后需要<strong>整体重新分配空间</strong>，会先将其转换为raw格式，再执行修改命令</li>
+            </ul>
+          </li>
+          <li>
+            <p>因此EMBSTR在发生写操作后，会变成RAW，默认当作发生过修改的字符串通常是易变的。</p>
+          </li>
+          <li>
+            <p>编码可能会发生转换</p>
+            <ul>
+              <li>INT->RAW：当存的内容不再是整数，或者大小超过了long的时候。</li>
+              <li>EMBSTR->RAW：任何写操作之后EMBSTR都会变成RAW,原因前面有解释。</li>
+            </ul>
+          </li>
+        </ul>
+        <h3 id="为什么使用sds"><a aria-hidden="true" tabindex="-1" href="#为什么使用sds" class="anchor"><span class="icon icon-link"></span></a>为什么使用SDS</h3>
+        <ul>
+          <li>
+            <p>SDS 不仅可以保存文本数据，还可以保存二进制数据。</p>
+            <ul>
+              <li>使用 <code>len</code> 属性的值而不是空字符来判断字符串是否结束</li>
+              <li>SDS 的所有 API 都会以处理二进制的方式来处理 SDS 存放在 <code>buf[]</code> 数组里的数据</li>
+              <li>SDS 能存放文本数据，而且能保存图片、音频、视频、压缩文件这样的二进制数据</li>
+            </ul>
+          </li>
+          <li>
+            <p>SDS 获取字符串长度的时间复杂度是 O(1)：增加了len长度字段，原生C是O(n)</p>
+          </li>
+          <li>
+            <p>Redis 的 SDS API 是安全的，拼接字符串不会造成缓冲区溢出：增加了空余空间（alloc - len)，有了预留空间，节约性能。SDS 在拼接字符串之前会检查 SDS 空间是否满足要求，如果空间不够会自动扩容，所以不会导致缓冲区溢出的问题。</p>
+          </li>
+        </ul>
+        <h3 id="应用场景"><a aria-hidden="true" tabindex="-1" href="#应用场景" class="anchor"><span class="icon icon-link"></span></a>应用场景</h3>
+        <ul>
+          <li>
+            <p>缓存对象</p>
+          </li>
+          <li>
+            <p>常规计数</p>
+          </li>
+          <li>
+            <p>分布式锁</p>
+          </li>
+        </ul>
+        <h2 id="list"><a aria-hidden="true" tabindex="-1" href="#list" class="anchor"><span class="icon icon-link"></span></a>List</h2>
+        <h3 id="是什么-1"><a aria-hidden="true" tabindex="-1" href="#是什么-1" class="anchor"><span class="icon icon-link"></span></a>是什么</h3>
+        <ul>
+          <li>Redis List是一组连接起来的<strong>字符串集合</strong>，按照插入顺序排序，可以从<strong>头部和尾部</strong>向List列表添加元素。</li>
+          <li>List的最大元素个数是2^64 - 1。</li>
+          <li>作为一个列表存储，属于比较底层的数据结构，可以用于存储一批任务数据、存储一批消息等。</li>
+        </ul>
+        <h3 id="使用-1"><a aria-hidden="true" tabindex="-1" href="#使用-1" class="anchor"><span class="icon icon-link"></span></a>使用</h3>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 将一个或多个值value插入到key列表的表头(最左边)，最后的值在最前面</span>
+</span><span class="code-line line-number" line="2">LPUSH <span class="token keyword">key</span> <span class="token keyword">value</span> <span class="token punctuation">[</span><span class="token keyword">value</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span> 
+</span><span class="code-line line-number" line="3"><span class="token comment"># 将一个或多个值value插入到key列表的表尾(最右边)</span>
+</span><span class="code-line line-number" line="4">RPUSH <span class="token keyword">key</span> <span class="token keyword">value</span> <span class="token punctuation">[</span><span class="token keyword">value</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="5"><span class="token comment"># 移除并返回key列表的头元素</span>
+</span><span class="code-line line-number" line="6">LPOP <span class="token keyword">key</span>     
+</span><span class="code-line line-number" line="7"><span class="token comment"># 移除并返回key列表的尾元素</span>
+</span><span class="code-line line-number" line="8">RPOP <span class="token keyword">key</span> 
+</span><span class="code-line line-number" line="9">
+</span><span class="code-line line-number" line="10"><span class="token comment"># 返回列表key中指定区间内的元素，区间以偏移量start和stop指定，从0开始</span>
+</span><span class="code-line line-number" line="11">LRANGE <span class="token keyword">key</span> <span class="token keyword">start</span> stop
+</span><span class="code-line line-number" line="12">
+</span><span class="code-line line-number" line="13"><span class="token comment"># 从key列表表头弹出一个元素，没有就阻塞timeout秒，如果timeout=0则一直阻塞</span>
+</span><span class="code-line line-number" line="14">BLPOP <span class="token keyword">key</span> <span class="token punctuation">[</span><span class="token keyword">key</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span> timeout
+</span><span class="code-line line-number" line="15"><span class="token comment"># 从key列表表尾弹出一个元素，没有就阻塞timeout秒，如果timeout=0则一直阻塞</span>
+</span><span class="code-line line-number" line="16">BRPOP <span class="token keyword">key</span> <span class="token punctuation">[</span><span class="token keyword">key</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span> timeout
+</span></code><input type="hidden" value="# 将一个或多个值value插入到key列表的表头(最左边)，最后的值在最前面
+LPUSH key value [value ...] 
+# 将一个或多个值value插入到key列表的表尾(最右边)
+RPUSH key value [value ...]
+# 移除并返回key列表的头元素
+LPOP key     
+# 移除并返回key列表的尾元素
+RPOP key 
+
+# 返回列表key中指定区间内的元素，区间以偏移量start和stop指定，从0开始
+LRANGE key start stop
+
+# 从key列表表头弹出一个元素，没有就阻塞timeout秒，如果timeout=0则一直阻塞
+BLPOP key [key ...] timeout
+# 从key列表表尾弹出一个元素，没有就阻塞timeout秒，如果timeout=0则一直阻塞
+BRPOP key [key ...] timeout
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="内部实现-1"><a aria-hidden="true" tabindex="-1" href="#内部实现-1" class="anchor"><span class="icon icon-link"></span></a>内部实现</h3>
+        <p>主要包括两种编码方式，ZIPLIST和LINKEDLIST。</p>
+        <p>当满足如下条件时，用ZIPLIST（<strong>压缩列表</strong>）编码</p>
+        <ul>
+          <li>列表对象保存的所有字符串对象长度都小于64字节（默认值，可由 <code>list-max-ziplist-value</code> 配置）</li>
+          <li>列表对象元素个数少于512个，注意，这是LIST的限制，而不是ZIPLIST的限制</li>
+        </ul>
+        <p>ZIPLIST底层用压缩列表实现，相邻元素紧凑压缩在一起，可以有效节约内存空间。</p>
+        <p>当不满足ZIPLIST编码条件，则使用LINKEDLIST（<strong>双向链表</strong>）编码，是几个STRING对象的链接结构。</p>
+        <ul>
+          <li>通过链表形式，便于删除和插入</li>
+          <li>列表个数或者节点数据长度比较大的时候，使用LINKEDLIST编码可以加快处理（增长，删除）</li>
+        </ul>
+        <p><strong>ZIPLIST是为了在数据较少情况时节约内存，LINKEDLIST是为了数据多时提高更新效率。</strong></p>
+        <p>为了优化解决上述问题，引入了<strong>QUICKLIST</strong>，二者的结合体，在 Redis 3.2 版本之后，List 数据类型底层数据结构就只由 quicklist 实现了，替代了双向链表和压缩列表。</p>
+        <ul>
+          <li>
+            <p>LINKEDLIST原来是单个节点，只能存一个数据，现在单个节点存的是一个ZIPLIST，存放了多个数据。</p>
+          </li>
+          <li>
+            <p>当数据较少，QUICKLIST节点只有一个时，此时相当于就是一个ZIPLIST。</p>
+          </li>
+        </ul>
+        <p><strong>ZIPLIST优化</strong>：</p>
+        <p>Redis7.0使用LISTPACK（<strong>紧凑列表</strong>）的编码模式取代了ZIPLIST，本质上都是一种压缩列表。同时在LINKEDLIST中也用LISTPACK替代了ZIPLIST。</p>
+        <blockquote>
+          <p>LISTPACK是为了解决ZIPLIST连锁更新问题</p>
+          <ul>
+            <li>ZIPLIST连锁更新是什么，如何造成的
+              <ul>
+                <li>当前一个节点大小超过254，会导致后面一个节点中prev值变化膨胀，接连后续变化，发生连锁更新</li>
+              </ul>
+            </li>
+            <li>LISTPACK是如何解决的
+              <ul>
+                <li>引入一个不记录prevlen的变量，element-tot-len存储整个节点除它自身以外的长度，从这个节点的末尾再遍历element-tot-len长度，就能找到这个节点的开始位置。</li>
+              </ul>
+            </li>
+          </ul>
+        </blockquote>
+        <h3 id="消息队列"><a aria-hidden="true" tabindex="-1" href="#消息队列" class="anchor"><span class="icon icon-link"></span></a>消息队列</h3>
+        <p>消息队列在存储消息时，必须要满足三个需求，分别是<strong>消息保序、处理重复的消息和保证消息可靠性</strong>。</p>
+        <ul>
+          <li>
+            <p>消息保序：使用 LPUSH + RPOP</p>
+            <ul>
+              <li>生产者和消费者分别在两端操作。</li>
+            </ul>
+          </li>
+          <li>
+            <p>阻塞读取：使用 BRPOP</p>
+            <ul>
+              <li>由于生产者不会主动告知新消息，消费者为了及时处理消息，需要不停调用RPOP，即使没有新消息，也会不停调用RPOP，造成了性能损失。</li>
+              <li>因此使用阻塞式读，客户端在没有读到队列数据时，自动阻塞，直到有新的数据写入队列，再开始读取新数据。</li>
+            </ul>
+          </li>
+          <li>
+            <p>重复消息处理</p>
+            <ul>
+              <li>生产者自行实现全局唯一 ID，list不会提供</li>
+              <li>消费者对比收到消息的ID和记录的已处理过的消息ID，来判断有没有处理过</li>
+            </ul>
+          </li>
+          <li>
+            <p>消息的可靠性</p>
+            <ul>
+              <li>使用 BRPOPLPUSH，让消费者程序从一个 List 中读取消息，同时，Redis 会把这个消息再插入到另一个 List（可以叫作备份 List）留存。</li>
+            </ul>
+          </li>
+          <li>
+            <p>List作为消息队列有什么缺陷</p>
+            <ul>
+              <li>List 不支持多个消费者消费同一条消息，因为一旦消费者拉取一条消息后，这条消息就从 List 中删除了，无法被其它消费者再次消费。</li>
+              <li>要实现一条消息可以被多个消费者消费，那么就要将多个消费者组成一个消费组，使得多个消费者可以消费同一条消息，但是 List 类型并不支持消费组的实现。</li>
+              <li>这就要说起 Redis 从 5.0 版本开始提供的 Stream 数据类型了，Stream 同样能够满足消息队列的三大需求，而且它还支持「消费组」形式的消息读取。</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="hash"><a aria-hidden="true" tabindex="-1" href="#hash" class="anchor"><span class="icon icon-link"></span></a>Hash</h2>
+        <h3 id="是什么-2"><a aria-hidden="true" tabindex="-1" href="#是什么-2" class="anchor"><span class="icon icon-link"></span></a>是什么</h3>
+        <p>Hash 是一个键值对（key - value）集合，其中 value 的形式如： <code>value=[{field1，value1}，...{fieldN，valueN}]</code>。Hash 特别适合用于存储对象。</p>
+        <h3 id="使用-2"><a aria-hidden="true" tabindex="-1" href="#使用-2" class="anchor"><span class="icon icon-link"></span></a>使用</h3>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 存储一个哈希表key的键值</span>
+</span><span class="code-line line-number" line="2">HSET <span class="token keyword">key</span> field <span class="token keyword">value</span>   
+</span><span class="code-line line-number" line="3"><span class="token comment"># 获取哈希表key对应的field键值</span>
+</span><span class="code-line line-number" line="4">HGET <span class="token keyword">key</span> field
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6"><span class="token comment"># 在一个哈希表key中存储多个键值对</span>
+</span><span class="code-line line-number" line="7">HMSET <span class="token keyword">key</span> field <span class="token keyword">value</span> <span class="token punctuation">[</span>field <span class="token keyword">value</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span> 
+</span><span class="code-line line-number" line="8"><span class="token comment"># 批量获取哈希表key中多个field键值</span>
+</span><span class="code-line line-number" line="9">HMGET <span class="token keyword">key</span> field <span class="token punctuation">[</span>field <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>       
+</span><span class="code-line line-number" line="10"><span class="token comment"># 删除哈希表key中的field键值</span>
+</span><span class="code-line line-number" line="11">HDEL <span class="token keyword">key</span> field <span class="token punctuation">[</span>field <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>    
+</span><span class="code-line line-number" line="12">
+</span><span class="code-line line-number" line="13"><span class="token comment"># 返回哈希表key中field的数量</span>
+</span><span class="code-line line-number" line="14">HLEN <span class="token keyword">key</span>       
+</span><span class="code-line line-number" line="15"><span class="token comment"># 返回哈希表key中所有的键值</span>
+</span><span class="code-line line-number" line="16">HGETALL <span class="token keyword">key</span> 
+</span><span class="code-line line-number" line="17">
+</span><span class="code-line line-number" line="18"><span class="token comment"># 为哈希表key中field键的值加上增量n</span>
+</span><span class="code-line line-number" line="19">HINCRBY <span class="token keyword">key</span> field n    
+</span></code><input type="hidden" value="# 存储一个哈希表key的键值
+HSET key field value   
+# 获取哈希表key对应的field键值
+HGET key field
+
+# 在一个哈希表key中存储多个键值对
+HMSET key field value [field value...] 
+# 批量获取哈希表key中多个field键值
+HMGET key field [field ...]       
+# 删除哈希表key中的field键值
+HDEL key field [field ...]    
+
+# 返回哈希表key中field的数量
+HLEN key       
+# 返回哈希表key中所有的键值
+HGETALL key 
+
+# 为哈希表key中field键的值加上增量n
+HINCRBY key field n    
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="内部实现-2"><a aria-hidden="true" tabindex="-1" href="#内部实现-2" class="anchor"><span class="icon icon-link"></span></a>内部实现</h3>
+        <p>Hash 类型的底层数据结构是由<strong>压缩列表或哈希表</strong>实现的：</p>
+        <ul>
+          <li>如果哈希类型元素个数小于 <code>512</code> 个（默认值，可由 <code>hash-max-ziplist-entries</code> 配置），所有值小于 <code>64</code> 字节（默认值，可由 <code>hash-max-ziplist-value</code> 配置）的话，Redis 会使用<strong>压缩列表</strong>作为 Hash 类型的底层数据结构；</li>
+          <li>如果哈希类型元素不满足上面条件，Redis 会使用<strong>哈希表</strong>作为 Hash 类型的 底层数据结构。</li>
+        </ul>
+        <p><strong>在 Redis 7.0 中，压缩列表数据结构已经废弃了，交由 listpack 数据结构来实现了</strong>。</p>
+        <h3 id="应用场景-1"><a aria-hidden="true" tabindex="-1" href="#应用场景-1" class="anchor"><span class="icon icon-link"></span></a>应用场景</h3>
+        <ul>
+          <li>缓存对象
+            <ul>
+              <li>相比String + Json类型，Hash更适合频繁变化的属性</li>
+            </ul>
+          </li>
+          <li>购物车
+            <ul>
+              <li>用户 id 为 key，商品 id 为 field，商品数量为 value</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="set"><a aria-hidden="true" tabindex="-1" href="#set" class="anchor"><span class="icon icon-link"></span></a>Set</h2>
+        <h3 id="是什么-3"><a aria-hidden="true" tabindex="-1" href="#是什么-3" class="anchor"><span class="icon icon-link"></span></a>是什么</h3>
+        <p>Redis的Set是一个不重复、无序的字符串集合。</p>
+        <p>一个集合最多可以存储 <code>2^32-1</code> 个元素。</p>
+        <p>适用于无序集合场景，比如某个用户关注了哪些公众号，这些信息可以放进一个集合当中。Set也提供了查交集、并集的功能，可以很方便地实现共同关注的能力。</p>
+        <h3 id="使用-3"><a aria-hidden="true" tabindex="-1" href="#使用-3" class="anchor"><span class="icon icon-link"></span></a>使用</h3>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 往集合key中存入元素，元素存在则忽略，若key不存在则新建</span>
+</span><span class="code-line line-number" line="2">SADD <span class="token keyword">key</span> member <span class="token punctuation">[</span>member <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="3"><span class="token comment"># 从集合key中删除元素</span>
+</span><span class="code-line line-number" line="4">SREM <span class="token keyword">key</span> member <span class="token punctuation">[</span>member <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span> 
+</span><span class="code-line line-number" line="5"><span class="token comment"># 获取集合key中所有元素</span>
+</span><span class="code-line line-number" line="6">SMEMBERS <span class="token keyword">key</span>
+</span><span class="code-line line-number" line="7"><span class="token comment"># 获取集合key中的元素个数</span>
+</span><span class="code-line line-number" line="8">SCARD <span class="token keyword">key</span>
+</span><span class="code-line line-number" line="9">
+</span><span class="code-line line-number" line="10"><span class="token comment"># 判断member元素是否存在于集合key中</span>
+</span><span class="code-line line-number" line="11">SISMEMBER <span class="token keyword">key</span> member
+</span><span class="code-line line-number" line="12">
+</span><span class="code-line line-number" line="13"><span class="token comment"># 从集合key中随机选出count个元素，元素不从key中删除</span>
+</span><span class="code-line line-number" line="14">SRANDMEMBER <span class="token keyword">key</span> <span class="token punctuation">[</span>count<span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="15"><span class="token comment"># 从集合key中随机选出count个元素，元素从key中删除</span>
+</span><span class="code-line line-number" line="16">SPOP <span class="token keyword">key</span> <span class="token punctuation">[</span>count<span class="token punctuation">]</span>
+</span></code><input type="hidden" value="# 往集合key中存入元素，元素存在则忽略，若key不存在则新建
+SADD key member [member ...]
+# 从集合key中删除元素
+SREM key member [member ...] 
+# 获取集合key中所有元素
+SMEMBERS key
+# 获取集合key中的元素个数
+SCARD key
+
+# 判断member元素是否存在于集合key中
+SISMEMBER key member
+
+# 从集合key中随机选出count个元素，元素不从key中删除
+SRANDMEMBER key [count]
+# 从集合key中随机选出count个元素，元素从key中删除
+SPOP key [count]
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="内部实现-3"><a aria-hidden="true" tabindex="-1" href="#内部实现-3" class="anchor"><span class="icon icon-link"></span></a>内部实现</h3>
+        <p>如果集群元素都是整数，且元素数量不超过512个，就可以用INTSET编码（<strong>整数集合</strong>），因为INTSET编码比较紧凑，内存占用少，但是查询时使用<strong>二分查找</strong>（有序集合）。</p>
+        <blockquote>
+          <p>Set是无序的，IntSet编码是有序的。</p>
+        </blockquote>
+        <p>如果不满足INTSET的条件，就需要用HASHTABLE（<strong>字典</strong>），能O(1)时间就能找到一个元素是否存在。</p>
+        <blockquote>
+          <p>数据指针部分，用的字典存储，能够O(1)查询，适合快速定位的场景。</p>
+        </blockquote>
+        <p><strong>Set是有序的吗</strong></p>
+        <blockquote>
+          <p>Set的底层实现是整数集合或字典，前者是有序的，后者是无序的。整体来看，建议不依赖SET的顺序。</p>
+        </blockquote>
+        <h3 id="应用场景-2"><a aria-hidden="true" tabindex="-1" href="#应用场景-2" class="anchor"><span class="icon icon-link"></span></a>应用场景</h3>
+        <ul>
+          <li>存储的数据是无序并且需要去重的情况下，比较适合使用集合类型进行存储
+            <ul>
+              <li>Set差集、并集和交集的计算复杂度较高，在数据量较大的情况下，如果直接执行这些计算，会导致 Redis 实例阻塞。</li>
+              <li>在主从集群中，为了避免主库因为 Set 做聚合计算（交集、差集、并集）时导致主库被阻塞，我们可以选择一个从库完成聚合统计，或者把数据返回给客户端，由客户端来完成聚合统计。</li>
+            </ul>
+          </li>
+          <li>点赞：Set 类型可以保证一个用户只能点一个赞，这里举例子一个场景，key 是文章id，value 是用户id。</li>
+          <li>共同关注：Set 类型支持交集运算，所以可以用来计算共同关注的好友、公众号等。</li>
+        </ul>
+        <h2 id="hset"><a aria-hidden="true" tabindex="-1" href="#hset" class="anchor"><span class="icon icon-link"></span></a>HSet</h2>
+        <h3 id="是什么-4"><a aria-hidden="true" tabindex="-1" href="#是什么-4" class="anchor"><span class="icon icon-link"></span></a>是什么</h3>
+        <p>Redis Hash是一个field、value都为string的hash表，存储在Redis的内存当中。</p>
+        <p>适用于O(1)时间字典查找某个field对应数据的场景，比如任务信息的配置，就可以将任务类型设置为filed，任务配置参数为value。</p>
+        <h3 id="使用-4"><a aria-hidden="true" tabindex="-1" href="#使用-4" class="anchor"><span class="icon icon-link"></span></a>使用</h3>
+        <ul>
+          <li>我们还是从创建、查询、更新、删除这几个基本操作来了解HSet</li>
+          <li>创建即产生一个HSet对象，可以使用HSET、HSETNX创建</li>
+          <li>查询支持HGET查询单个元素；HGETALL查询所有数据；HLEN查询数据总数；HSCAN进行游标迭代查询</li>
+          <li>更新的话，HSET可以用于增加新元素，HDEL删除元素</li>
+          <li>至于删除，和其它对象一样，DEL可以删除一个HSet对象</li>
+        </ul>
+        <h3 id="内部实现-4"><a aria-hidden="true" tabindex="-1" href="#内部实现-4" class="anchor"><span class="icon icon-link"></span></a>内部实现</h3>
+        <p>如果满足以下条件使用ZIPLIST（压缩列表)：</p>
+        <ul>
+          <li>HSet对象保存的所有值和键的长度都小于64字节</li>
+          <li>HSet对象元素少于512个</li>
+        </ul>
+        <p>否则使用HASHTABLE。</p>
+        <h2 id="zset"><a aria-hidden="true" tabindex="-1" href="#zset" class="anchor"><span class="icon icon-link"></span></a>ZSet</h2>
+        <h3 id="是什么-5"><a aria-hidden="true" tabindex="-1" href="#是什么-5" class="anchor"><span class="icon icon-link"></span></a>是什么</h3>
+        <p>ZSet就是有序、不可重复集合，也叫Sorted Set，是一组按关联积分有序的字符串集合。</p>
+        <p>这里的分数是个抽象概念，任何指标都可以抽象为分数，以满足不同场景。积分相同的情况下，按字典序排序。</p>
+        <h3 id="使用-5"><a aria-hidden="true" tabindex="-1" href="#使用-5" class="anchor"><span class="icon icon-link"></span></a>使用</h3>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 往有序集合key中加入带分值元素</span>
+</span><span class="code-line line-number" line="2">ZADD <span class="token keyword">key</span> score member <span class="token punctuation">[</span><span class="token punctuation">[</span>score member<span class="token punctuation">]</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>   
+</span><span class="code-line line-number" line="3"><span class="token comment"># 往有序集合key中删除元素</span>
+</span><span class="code-line line-number" line="4">ZREM <span class="token keyword">key</span> member <span class="token punctuation">[</span>member<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>                 
+</span><span class="code-line line-number" line="5"><span class="token comment"># 返回有序集合key中元素member的分值</span>
+</span><span class="code-line line-number" line="6">ZSCORE <span class="token keyword">key</span> member
+</span><span class="code-line line-number" line="7"><span class="token comment"># 返回有序集合key中元素个数</span>
+</span><span class="code-line line-number" line="8">ZCARD <span class="token keyword">key</span> 
+</span><span class="code-line line-number" line="9">
+</span><span class="code-line line-number" line="10"><span class="token comment"># 为有序集合key中元素member的分值加上increment</span>
+</span><span class="code-line line-number" line="11">ZINCRBY <span class="token keyword">key</span> increment member 
+</span><span class="code-line line-number" line="12">
+</span><span class="code-line line-number" line="13"><span class="token comment"># 正序获取有序集合key从start下标到stop下标的元素</span>
+</span><span class="code-line line-number" line="14">ZRANGE <span class="token keyword">key</span> <span class="token keyword">start</span> stop <span class="token punctuation">[</span>WITHSCORES<span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="15"><span class="token comment"># 倒序获取有序集合key从start下标到stop下标的元素</span>
+</span><span class="code-line line-number" line="16">ZREVRANGE <span class="token keyword">key</span> <span class="token keyword">start</span> stop <span class="token punctuation">[</span>WITHSCORES<span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="17">
+</span><span class="code-line line-number" line="18"><span class="token comment"># 返回有序集合中指定分数区间内的成员，分数由低到高排序。</span>
+</span><span class="code-line line-number" line="19">ZRANGEBYSCORE <span class="token keyword">key</span> min max <span class="token punctuation">[</span>WITHSCORES<span class="token punctuation">]</span> <span class="token punctuation">[</span><span class="token keyword">LIMIT</span> <span class="token keyword">offset</span> count<span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="20">
+</span><span class="code-line line-number" line="21"><span class="token comment"># 返回指定成员区间内的成员，按字典正序排列, 分数必须相同。</span>
+</span><span class="code-line line-number" line="22">ZRANGEBYLEX <span class="token keyword">key</span> min max <span class="token punctuation">[</span><span class="token keyword">LIMIT</span> <span class="token keyword">offset</span> count<span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="23"><span class="token comment"># 返回指定成员区间内的成员，按字典倒序排列, 分数必须相同</span>
+</span><span class="code-line line-number" line="24">ZREVRANGEBYLEX <span class="token keyword">key</span> max min <span class="token punctuation">[</span><span class="token keyword">LIMIT</span> <span class="token keyword">offset</span> count<span class="token punctuation">]</span>
+</span></code><input type="hidden" value="# 往有序集合key中加入带分值元素
+ZADD key score member [[score member]...]   
+# 往有序集合key中删除元素
+ZREM key member [member...]                 
+# 返回有序集合key中元素member的分值
+ZSCORE key member
+# 返回有序集合key中元素个数
+ZCARD key 
+
+# 为有序集合key中元素member的分值加上increment
+ZINCRBY key increment member 
+
+# 正序获取有序集合key从start下标到stop下标的元素
+ZRANGE key start stop [WITHSCORES]
+# 倒序获取有序集合key从start下标到stop下标的元素
+ZREVRANGE key start stop [WITHSCORES]
+
+# 返回有序集合中指定分数区间内的成员，分数由低到高排序。
+ZRANGEBYSCORE key min max [WITHSCORES] [LIMIT offset count]
+
+# 返回指定成员区间内的成员，按字典正序排列, 分数必须相同。
+ZRANGEBYLEX key min max [LIMIT offset count]
+# 返回指定成员区间内的成员，按字典倒序排列, 分数必须相同
+ZREVRANGEBYLEX key max min [LIMIT offset count]
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="内部实现-5"><a aria-hidden="true" tabindex="-1" href="#内部实现-5" class="anchor"><span class="icon icon-link"></span></a>内部实现</h3>
+        <p>底层编码包括两种，ZIPLIST和SKIPLIST（<strong>跳表</strong>）+ HT。</p>
+        <p>同样在数据量比较小的时候，使用ZIPLIST</p>
+        <ul>
+          <li>列表对象保存的所有字符串对象长度都小于64字节；</li>
+          <li>列表对象元素个数少于128个。</li>
+        </ul>
+        <p>两个条件任何一条不满足，编码机构就用SKIPLIST + HT。</p>
+        <blockquote>
+          <p>SKIPLIST是一种可以快速查找的多级链表结构，可以当作是一个具有高级索引的链表</p>
+        </blockquote>
+        <h3 id="应用场景-3"><a aria-hidden="true" tabindex="-1" href="#应用场景-3" class="anchor"><span class="icon icon-link"></span></a>应用场景</h3>
+        <ul>
+          <li>排行榜
+            <ul>
+              <li>有序集合比较典型的使用场景就是排行榜。例如学生成绩的排名榜、游戏积分排行榜、视频播放排名、电商系统中商品的销量排名等。</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="bitmap"><a aria-hidden="true" tabindex="-1" href="#bitmap" class="anchor"><span class="icon icon-link"></span></a>BitMap</h2>
+        <h3 id="是什么-6"><a aria-hidden="true" tabindex="-1" href="#是什么-6" class="anchor"><span class="icon icon-link"></span></a>是什么</h3>
+        <p>Bitmap，即位图，是一串连续的二进制数组（0和1），可以通过偏移量（offset）定位元素。BitMap通过最小的单位bit来进行<code>0|1</code>的设置，表示某个元素的值或者状态，时间复杂度为O(1)。</p>
+        <h3 id="使用-6"><a aria-hidden="true" tabindex="-1" href="#使用-6" class="anchor"><span class="icon icon-link"></span></a>使用</h3>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"># 设置值，其中value只能是 <span class="token number">0</span> 和 <span class="token number">1</span>
+</span><span class="code-line line-number" line="2">SETBIT key offset value
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4"># 获取值
+</span><span class="code-line line-number" line="5">GETBIT key offset
+</span><span class="code-line line-number" line="6">
+</span><span class="code-line line-number" line="7"># 获取指定范围内值为 <span class="token number">1</span> 的个数
+</span><span class="code-line line-number" line="8"># start 和 end 以字节为单位
+</span><span class="code-line line-number" line="9">BITCOUNT key start end
+</span></code><input type="hidden" value="# 设置值，其中value只能是 0 和 1
+SETBIT key offset value
+
+# 获取值
+GETBIT key offset
+
+# 获取指定范围内值为 1 的个数
+# start 和 end 以字节为单位
+BITCOUNT key start end
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="内部实现-6"><a aria-hidden="true" tabindex="-1" href="#内部实现-6" class="anchor"><span class="icon icon-link"></span></a>内部实现</h3>
+        <p>Bitmap 本身是用 String 类型作为底层数据结构实现的一种统计二值状态的数据类型。</p>
+        <p>String 类型是会保存为二进制的字节数组，所以，Redis 就把字节数组的每个 bit 位利用起来，用来表示一个元素的二值状态，你可以把 Bitmap 看作是一个 bit 数组。</p>
+        <h3 id="应用场景-4"><a aria-hidden="true" tabindex="-1" href="#应用场景-4" class="anchor"><span class="icon icon-link"></span></a>应用场景</h3>
+        <ul>
+          <li>签到统计，用记录签到（1）或未签到（0），所以它就是非常典型的二值状态。</li>
+          <li>连续签到用户总数：day1这个BitMap，使用offset作为用户ID，连续其他七个BitMap，最后将七个BitMap相与得到一个新的，统计新的BitMap就会得到连续打卡七天的用户。</li>
+        </ul>
+        <h2 id="hyperloglog"><a aria-hidden="true" tabindex="-1" href="#hyperloglog" class="anchor"><span class="icon icon-link"></span></a>HyperLogLog</h2>
+        <h3 id="是什么-7"><a aria-hidden="true" tabindex="-1" href="#是什么-7" class="anchor"><span class="icon icon-link"></span></a>是什么</h3>
+        <ul>
+          <li>
+            <p>Redis 2.8.9 版本新增的数据类型。</p>
+          </li>
+          <li>
+            <p>一种用于「统计基数」的数据集合类型，基数统计就是指统计一个集合中不重复的元素个数。</p>
+          </li>
+          <li>
+            <p>基于概率完成的，不是非常准确，标准误算率是 0.81%。</p>
+          </li>
+          <li>
+            <p>提供不精确的去重计数，在输入元素的数量或者体积非常非常大时，计算基数所需的内存空间总是固定的、并且是很小的。</p>
+          </li>
+        </ul>
+        <h3 id="使用-7"><a aria-hidden="true" tabindex="-1" href="#使用-7" class="anchor"><span class="icon icon-link"></span></a>使用</h3>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 添加指定元素到 HyperLogLog 中</span>
+</span><span class="code-line line-number" line="2">PFADD <span class="token keyword">key</span> element <span class="token punctuation">[</span>element <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4"><span class="token comment"># 返回给定 HyperLogLog 的基数估算值。</span>
+</span><span class="code-line line-number" line="5">PFCOUNT <span class="token keyword">key</span> <span class="token punctuation">[</span><span class="token keyword">key</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="6">
+</span><span class="code-line line-number" line="7"><span class="token comment"># 将多个 HyperLogLog 合并为一个 HyperLogLog</span>
+</span><span class="code-line line-number" line="8">PFMERGE destkey sourcekey <span class="token punctuation">[</span>sourcekey <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+</span></code><input type="hidden" value="# 添加指定元素到 HyperLogLog 中
+PFADD key element [element ...]
+
+# 返回给定 HyperLogLog 的基数估算值。
+PFCOUNT key [key ...]
+
+# 将多个 HyperLogLog 合并为一个 HyperLogLog
+PFMERGE destkey sourcekey [sourcekey ...]
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h3 id="内部实现-7"><a aria-hidden="true" tabindex="-1" href="#内部实现-7" class="anchor"><span class="icon icon-link"></span></a>内部实现</h3>
+        <p>难。</p>
+        <h3 id="应用场景-5"><a aria-hidden="true" tabindex="-1" href="#应用场景-5" class="anchor"><span class="icon icon-link"></span></a>应用场景</h3>
+        <ul>
+          <li>百万级网页 UV 计数</li>
+        </ul>
+        <h2 id="geo"><a aria-hidden="true" tabindex="-1" href="#geo" class="anchor"><span class="icon icon-link"></span></a>GEO</h2>
+        <p>存储地理位置信息，并对存储的信息进行操作。</p>
+        <p>内部实现使用了Sorted Set集合。</p>
+        <h2 id="stream"><a aria-hidden="true" tabindex="-1" href="#stream" class="anchor"><span class="icon icon-link"></span></a>Stream</h2>
+        <h3 id="是什么-8"><a aria-hidden="true" tabindex="-1" href="#是什么-8" class="anchor"><span class="icon icon-link"></span></a>是什么</h3>
+        <p>Redis Stream 是 Redis 5.0 版本新增加的数据类型，Redis 专门为消息队列设计的数据类型。</p>
+        <p>在 Redis 5.0 Stream 没出来之前，消息队列的实现方式都有着各自的缺陷，例如：</p>
+        <ul>
+          <li>发布订阅模式，不能持久化也就无法可靠的保存消息，并且对于离线重连的客户端不能读取历史消息的缺陷；</li>
+          <li>List 实现消息队列的方式不能重复消费，一个消息消费完就会被删除，而且生产者需要自行实现全局唯一 ID。</li>
+        </ul>
+        <p>基于以上问题，Redis 5.0 便推出了 Stream 类型也是此版本最重要的功能，用于完美地实现消息队列，它支持消息的持久化、支持自动生成全局唯一 ID、支持 ack 确认消息的模式、支持消费组模式等，让消息队列更加的稳定和可靠。</p>
+        <h3 id="使用-8"><a aria-hidden="true" tabindex="-1" href="#使用-8" class="anchor"><span class="icon icon-link"></span></a>使用</h3>
+        <p>Stream 消息队列操作命令：</p>
+        <ul>
+          <li>XADD：插入消息，保证有序，可以自动生成全局唯一 ID；</li>
+          <li>XLEN ：查询消息长度；</li>
+          <li>XREAD：用于读取消息，可以按 ID 读取数据；</li>
+          <li>XDEL ： 根据消息 ID 删除消息；</li>
+          <li>DEL ：删除整个 Stream；</li>
+          <li>XRANGE ：读取区间消息</li>
+          <li>XREADGROUP：按消费组形式读取消息；</li>
+          <li>XPENDING 和 XACK：
+            <ul>
+              <li>XPENDING 命令可以用来查询每个消费组内所有消费者「已读取、但尚未确认」的消息；</li>
+              <li>XACK 命令用于向消息队列确认消息处理已完成；</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="过期时间"><a aria-hidden="true" tabindex="-1" href="#过期时间" class="anchor"><span class="icon icon-link"></span></a>过期时间</h2>
+        <h3 id="是什么-9"><a aria-hidden="true" tabindex="-1" href="#是什么-9" class="anchor"><span class="icon icon-link"></span></a>是什么</h3>
+        <p>给定一个时间点key，到达时间，数据被认为是过期的，由Redis进行回收。</p>
+        <p>如果不是常驻的数据，设置过期时间，可以有效节约内存。</p>
+        <p>缓存设置过期时间，保证数据有效性。</p>
+        <h3 id="使用-9"><a aria-hidden="true" tabindex="-1" href="#使用-9" class="anchor"><span class="icon icon-link"></span></a>使用</h3>
+        <ul>
+          <li>SET key value EX seconds：设置多少秒后过期</li>
+          <li>SET key value PX seconds：设置多少毫秒后过期</li>
+          <li>TTL key：查询还有多久过期</li>
+          <li>EXPIRE key seconds：对所有对象设置一个key的过期时间，单位秒</li>
+          <li>PEXPIRE key milliseconds：设置一个key的过期时间，单位毫秒</li>
+        </ul>
+        <p>设置过期时间之后会有个字典，专门记录这些Ky和过期时间的关系。</p>
+        <h3 id="过期删除策略"><a aria-hidden="true" tabindex="-1" href="#过期删除策略" class="anchor"><span class="icon icon-link"></span></a>过期删除策略</h3>
+        <p>过期后删除策略包括</p>
+        <ul>
+          <li>定时删除：设置一个定时器，到期后全部删除，可能会短期删除过多</li>
+          <li>定期删除：定期检查，每次删除部分过期</li>
+          <li>惰性删除：待到再次访问使用时，判断过期后删除</li>
+        </ul>
+        <p>实际中通过惰性删除 + 定期删除二者结合方式进行删除。</p>
+        <p>定期删除需要注意：</p>
+        <ul>
+          <li>定期删除的频率：取决于Redis周期任务的执行频率</li>
+          <li>每次删除的数量：固定</li>
+        </ul>
+        <h2 id="对象引用计数"><a aria-hidden="true" tabindex="-1" href="#对象引用计数" class="anchor"><span class="icon icon-link"></span></a>对象引用计数</h2>
+        <p>有点类似C++里面智能指针了，在redisObject结构有一个refcount字段，减少到0时，就会触发对象的释放。</p>
+        <p>注意这里目前是只有encoding为整数，并且在0-9999时才会有用，因为</p>
+        <ul>
+          <li>0 - 9999这样的对象池，被使用的概率大，复用有场景</li>
+          <li>整数存储空间比较小，而分配这样的redisObject内部结构至少16字节，比本身还大，频繁分配占用过多的空间。</li>
+          <li>要复用对象，包含数值比较过程，整数对象进行比较，成本最低。</li>
+        </ul>
+        <p>最大的作用，在内部场景中用refcount进行引用计数，传递参数参数时，避免拷贝。</p>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#关键点" class="tocs-link">关键点</a></li>
+            <li><a href="#对象" class="tocs-link">对象</a></li>
+            <li><a href="#string" class="tocs-link">String</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#是什么" class="tocs-link">是什么</a></li>
+                <li><a href="#使用" class="tocs-link">使用</a></li>
+                <li><a href="#内部实现" class="tocs-link">内部实现</a></li>
+                <li><a href="#为什么使用sds" class="tocs-link">为什么使用SDS</a></li>
+                <li><a href="#应用场景" class="tocs-link">应用场景</a></li>
+              </ol>
+            </li>
+            <li><a href="#list" class="tocs-link">List</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#是什么-1" class="tocs-link">是什么</a></li>
+                <li><a href="#使用-1" class="tocs-link">使用</a></li>
+                <li><a href="#内部实现-1" class="tocs-link">内部实现</a></li>
+                <li><a href="#消息队列" class="tocs-link">消息队列</a></li>
+              </ol>
+            </li>
+            <li><a href="#hash" class="tocs-link">Hash</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#是什么-2" class="tocs-link">是什么</a></li>
+                <li><a href="#使用-2" class="tocs-link">使用</a></li>
+                <li><a href="#内部实现-2" class="tocs-link">内部实现</a></li>
+                <li><a href="#应用场景-1" class="tocs-link">应用场景</a></li>
+              </ol>
+            </li>
+            <li><a href="#set" class="tocs-link">Set</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#是什么-3" class="tocs-link">是什么</a></li>
+                <li><a href="#使用-3" class="tocs-link">使用</a></li>
+                <li><a href="#内部实现-3" class="tocs-link">内部实现</a></li>
+                <li><a href="#应用场景-2" class="tocs-link">应用场景</a></li>
+              </ol>
+            </li>
+            <li><a href="#hset" class="tocs-link">HSet</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#是什么-4" class="tocs-link">是什么</a></li>
+                <li><a href="#使用-4" class="tocs-link">使用</a></li>
+                <li><a href="#内部实现-4" class="tocs-link">内部实现</a></li>
+              </ol>
+            </li>
+            <li><a href="#zset" class="tocs-link">ZSet</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#是什么-5" class="tocs-link">是什么</a></li>
+                <li><a href="#使用-5" class="tocs-link">使用</a></li>
+                <li><a href="#内部实现-5" class="tocs-link">内部实现</a></li>
+                <li><a href="#应用场景-3" class="tocs-link">应用场景</a></li>
+              </ol>
+            </li>
+            <li><a href="#bitmap" class="tocs-link">BitMap</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#是什么-6" class="tocs-link">是什么</a></li>
+                <li><a href="#使用-6" class="tocs-link">使用</a></li>
+                <li><a href="#内部实现-6" class="tocs-link">内部实现</a></li>
+                <li><a href="#应用场景-4" class="tocs-link">应用场景</a></li>
+              </ol>
+            </li>
+            <li><a href="#hyperloglog" class="tocs-link">HyperLogLog</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#是什么-7" class="tocs-link">是什么</a></li>
+                <li><a href="#使用-7" class="tocs-link">使用</a></li>
+                <li><a href="#内部实现-7" class="tocs-link">内部实现</a></li>
+                <li><a href="#应用场景-5" class="tocs-link">应用场景</a></li>
+              </ol>
+            </li>
+            <li><a href="#geo" class="tocs-link">GEO</a></li>
+            <li><a href="#stream" class="tocs-link">Stream</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#是什么-8" class="tocs-link">是什么</a></li>
+                <li><a href="#使用-8" class="tocs-link">使用</a></li>
+              </ol>
+            </li>
+            <li><a href="#过期时间" class="tocs-link">过期时间</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#是什么-9" class="tocs-link">是什么</a></li>
+                <li><a href="#使用-9" class="tocs-link">使用</a></li>
+                <li><a href="#过期删除策略" class="tocs-link">过期删除策略</a></li>
+              </ol>
+            </li>
+            <li><a href="#对象引用计数" class="tocs-link">对象引用计数</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>

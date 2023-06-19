@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网络体系结构 iDoc</title>
+    <meta name="description" content="为了使得多种设备能通过网络相互通信，和为了解决各种不同设备在网络互联中的兼容性问题">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../../logo.png" type="image/x-icon">
+    <script src="../../js/copy.js?v=1.25.0"></script>
+    <script src="../../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../../index.html"><img alt="iDoc logo" src="../../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../../index.html" target="" class="">Home</a></li>
+            <li><a href="../../00Go/index.html" target="" class="">Go</a></li>
+            <li><a href="../../01MySQL/index.html" target="" class="">MySQL</a></li>
+            <li><a href="../../01Redis/index.html" target="" class="">Redis</a></li>
+            <li><a href="../../01LeetCode/index.html" target="" class="">LeetCode</a></li>
+            <li><a href="../index.html" target="" class="active">Hello World</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="../index.html" class="">↩️README</a>
+            <label>计算机网络</label>
+            <a href="ch00.html" class="">问题收集</a>
+            <a href="ch11.html" class="">常见问题</a>
+            <a href="ch21.html" class="">三次握手/四次挥手</a>
+            <a href="ch22.html" class="">socket</a>
+            <a href="ch23.html" class="">可靠的TCP</a>
+            <a href="ch31.html" class="">IP知识全家桶</a>
+            <a href="ch32.html" class="">ping的工作原理</a>
+            <a href="ch01.html" class="">网络发展</a>
+            <a href="ch41.html" class="">键入url到渲染显示</a>
+            <label>操作系统</label>
+            <a href="../01OperatingSystem/ch51.html" class="">优化程序性能</a>
+            <a href="../01OperatingSystem/ch61.html" class="">存储器</a>
+            <a href="../01OperatingSystem/ch71.html" class="">链接</a>
+            <a href="../01OperatingSystem/ch81.html" class="">进程、线程、调度</a>
+            <a href="../01OperatingSystem/ch82.html" class="">问题</a>
+            <a href="../01OperatingSystem/ch91.html" class="">虚拟内存</a>
+            <label>工具</label>
+            <a href="../03Other/environment.html" class="">配个环境</a>
+            <a href="../03Other/vim.html" class="">Vim</a>
+            <a href="../03Other/git.html" class="">Git</a>
+            <a href="../03Other/shell.html" class="">Shell</a>
+            <a href="../03Other/docker.html" class="">Docker</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="网络体系结构"><a aria-hidden="true" tabindex="-1" href="#网络体系结构" class="anchor"><span class="icon icon-link"></span></a>网络体系结构</h1>
+        <ul>
+          <li>为什么要设计分层网络模型
+            <ul>
+              <li>易于单独实现每个层的协议</li>
+              <li>界定各个分层的具体责任和义务</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="osi参考模型"><a aria-hidden="true" tabindex="-1" href="#osi参考模型" class="anchor"><span class="icon icon-link"></span></a>OSI参考模型</h2>
+        <p>为了使得多种设备能通过网络相互通信，和为了解决各种不同设备在网络互联中的兼容性问题</p>
+        <ul>
+          <li>
+            <p>OSI模型是一种理论模型，虽然现代互联网并没有严格采用OSI模型，但OSI模型能够帮助分析问题和找到问题根源。</p>
+          </li>
+          <li>
+            <p>
+              <img src="../../img/611.jpg" alt="img">
+            </p>
+          </li>
+          <li>
+            <ul>
+              <li>应用层：负责给应用程序提供统一的接口；</li>
+              <li>表示层：负责把数据转换成兼容另一个系统能识别的格式；</li>
+              <li>会话层：<strong>何时</strong>建立连接、<strong>何时</strong>发送数据等问题进行管理；</li>
+              <li>传输层：负责端到端的数据传输；</li>
+              <li>网络层：负责数据的路由、转发、分片；</li>
+              <li>数据链路层：负责数据的封帧和差错检测，以及 MAC 寻址；</li>
+              <li>物理层：负责在物理网络中传输数据帧；</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="tcp--ip-四层"><a aria-hidden="true" tabindex="-1" href="#tcp--ip-四层" class="anchor"><span class="icon icon-link"></span></a>TCP / IP 四层</h2>
+        <p>TCP/IP已被广泛使用，成为网络互联事实上的标准。</p>
+        <p>
+          <img src="../../img/6112.jpg" alt="img">
+        </p>
+        <ul>
+          <li>应用层，负责向用户提供一组应用程序，比如 HTTP、DNS、FTP 等；工作在操作系统的用户态；</li>
+          <li>传输层，负责端到端的通信，比如 TCP、UDP 等；</li>
+          <li>网络层，负责网络包的封装、分片、路由、转发，比如 IP、ICMP 等；</li>
+          <li>网络接口层，负责网络包在物理网络中的传输，比如网络包的封帧、 MAC 寻址、差错检测，以及通过网卡传输网络帧等；</li>
+        </ul>
+        <h2 id="osi七层和tcpip的区别"><a aria-hidden="true" tabindex="-1" href="#osi七层和tcpip的区别" class="anchor"><span class="icon icon-link"></span></a>OSI七层和TCP/IP的区别</h2>
+        <ul>
+          <li>TCP/IP他是一个协议簇；而OSI（开放系统互联）则是一个模型，且TCP/IP的开发时间在OSI之前。</li>
+          <li>TCP/IP是由一些交互性的模块做成的分层次的协议，其中每个模块提供特定的功能；OSI则指定了哪个功能是属于哪一层的。</li>
+          <li>TCP/IP是四层结构，而OSI是七层结构。OSI的最高三层在TCP中用应用层表示。</li>
+        </ul>
+        <p>
+          <img src="../../img/6113.jpg" alt="img">
+        </p>
+        <h2 id="linux系统如何收发网络包"><a aria-hidden="true" tabindex="-1" href="#linux系统如何收发网络包" class="anchor"><span class="icon icon-link"></span></a>Linux系统如何收发网络包</h2>
+        <p>
+          <img src="../../img/6114.jpg" alt="img">
+        </p>
+        <ul>
+          <li>当网卡接收到一个网络包后，会通过 <strong>DMA</strong> <strong>技术</strong>，将网络包写入到指定的内存地址，也就是写入到 Ring Buffer，这个是一个环形缓冲区，接着就会告诉操作系统这个网络包已经到达。</li>
+        </ul>
+        <blockquote>
+          <p>DMA（Direct Memory Access，直接内存访问）是一种计算机技术，用于在不直接经过CPU的干预下，将数据在主存和外设之间进行直接传输。</p>
+        </blockquote>
+        <ul>
+          <li>如果单纯通过中断方式告知用户，频繁中断会影响其他任务进行。因此引入了NAPI机制，采用[ 中断和轮询 ]的方式来接受网络包。
+            <ul>
+              <li>
+                <p>当网络包到达后，网卡向CPU发起硬件中断，当 CPU 收到硬件中断请求后，根据中断表，调用已经注册的中断处理函数。</p>
+              </li>
+              <li>
+                <p>硬件中断处理函数会做如下的事情：</p>
+              </li>
+              <li>
+                <p>需要先「暂时屏蔽中断」，表示已经知道内存中有数据了，告诉网卡下次再收到数据包直接写内存就可以了，不要再通知 CPU 了，这样可以提高效率，避免 CPU 不停的被中断。</p>
+              </li>
+              <li>
+                <p>接着，发起「软中断」，然后恢复刚才屏蔽的中断。</p>
+              </li>
+              <li>
+                <p>内核中的 ksoftirqd 线程专门负责软中断的处理，当 ksoftirqd 内核线程收到软中断后，就会来轮询处理数据。</p>
+              </li>
+              <li>
+                <p>ksoftirqd 线程会从 Ring Buffer 中获取一个数据帧，用 sk_buff 表示，从而可以作为一个网络包交给网络协议栈进行逐层处理。</p>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <blockquote>
+          <p>软中断（Soft Interrupt）是一种在操作系统内核中使用的机制，用于处理异步事件或特定的软件请求。它是一种软件中断处理机制，与硬件中断不同，不是由硬件设备触发，而是由软件或内核主动触发。</p>
+        </blockquote>
+        <ul>
+          <li>一层拆解，首先在网络接口层检查报文合法性，再去找到上层协议类型IPv4或者v6，去除帧头和帧尾后交给网络层</li>
+          <li>网络层取出IP包，判断是本机接受还是转发。本机接受再去查下一层协议TCP还是UDP，去掉IP头，交给传输层</li>
+          <li>传输层取出 TCP 头或 UDP 头，根据四元组「源 IP、源端口、目的 IP、目的端口」 作为标识，找出对应的 Socket，并把数据放到 Socket 的接收缓冲区。</li>
+          <li>最后，应用层程序调用 Socket 接口，将内核的 Socket 接收缓冲区的数据「拷贝」到应用层的缓冲区，然后唤醒用户进程。</li>
+        </ul>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#osi参考模型" class="tocs-link">OSI参考模型</a></li>
+            <li><a href="#tcp--ip-四层" class="tocs-link">TCP / IP 四层</a></li>
+            <li><a href="#osi七层和tcpip的区别" class="tocs-link">OSI七层和TCP/IP的区别</a></li>
+            <li><a href="#linux系统如何收发网络包" class="tocs-link">Linux系统如何收发网络包</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>

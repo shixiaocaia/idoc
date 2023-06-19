@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪心 iDoc</title>
+    <meta name="description" content="贪心算法一般分为如下四步：">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00Go/index.html" target="" class="">Go</a></li>
+            <li><a href="../01MySQL/index.html" target="" class="">MySQL</a></li>
+            <li><a href="../01Redis/index.html" target="" class="">Redis</a></li>
+            <li><a href="index.html" target="" class="active">LeetCode</a></li>
+            <li><a href="../02HelloWorld/index.html" target="" class="">Hello World</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <label>Leetcode</label>
+            <a href="ch1.html" class="">数组</a>
+            <a href="ch2.html" class="">链表</a>
+            <a href="ch3.html" class="">哈希表</a>
+            <a href="ch4.html" class="">字符串</a>
+            <a href="ch5.html" class="">栈与队列</a>
+            <a href="ch6.html" class="">二叉树</a>
+            <a href="ch7.html" class="">回溯</a>
+            <a href="ch8.html" class="">贪心</a>
+            <a href="ch9.html" class="">动态规划</a>
+            <a href="ch11.html" class="">排序</a>
+            <a href="ch12.html" class="">图论</a>
+            <a href="ch13.html" class="">其他</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="贪心"><a aria-hidden="true" tabindex="-1" href="#贪心" class="anchor"><span class="icon icon-link"></span></a>贪心</h1>
+        <p>贪心算法一般分为如下四步：</p>
+        <ul>
+          <li>将问题分解为若干个子问题</li>
+          <li>找出适合的贪心策略</li>
+          <li>求解每一个子问题的最优解</li>
+          <li>将局部最优解堆叠成全局最优解</li>
+        </ul>
+        <p>其实这个分的有点细了，真正做题的时候很难分出这么详细的解题步骤，可能就是因为贪心的题目往往还和其他方面的知识混在一起。</p>
+        <h2 id="例题"><a aria-hidden="true" tabindex="-1" href="#例题" class="anchor"><span class="icon icon-link"></span></a>例题</h2>
+        <p><a href="https://leetcode.cn/problems/assign-cookies/">455. 分发饼干</a></p>
+        <blockquote>
+          <p>采用一个思路，小饼干喂饱小饼干的人，把大的留给胃口更大的，这样的全局思路，喂饱更多的人。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/wiggle-subsequence/">376. 摆动序列</a></p>
+        <p><a href="https://leetcode.cn/problems/maximum-subarray/">53. 最大子数组和</a></p>
+        <p><strong><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-ii/">122. 买卖股票的最佳时机 II</a></strong></p>
+        <blockquote>
+          <p>赚的是差价。</p>
+          <p>计算相邻两天的差价，如果值为正说明前一次买今天赚，计算差值序列，统计所有正值情况即可。</p>
+          <p>如果持续为正收入差价即为正值差价和，如果否则就是前面正值。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/jump-game/">55. 跳跃游戏</a></p>
+        <p><a href="https://leetcode.cn/problems/merge-intervals/">56.合并区间</a></p>
+        <p><strong><a href="https://leetcode.cn/problems/jump-game-ii/">45. 跳跃游戏 II</a></strong></p>
+        <blockquote>
+          <ul>
+            <li>贪心：保证每一步尽可能走的远，并且这个题目保证可以到达最远的。
+              <ul>
+                <li>每次记录能到达的最远距离</li>
+                <li>每次选择最长的那一步，到达最长的，再走下一次最长的那一步</li>
+                <li>当这一步能到头，就跳出。</li>
+                <li>next始终记录了能到达的最远距离，无论如何都包含了了终点</li>
+              </ul>
+            </li>
+            <li>DP：到达i的最少次数，等于0~i - 1的步数 + 1
+              <ul>
+                <li>dp[i]表示到底i位置的最小步数</li>
+                <li>转移条件：dp[i] = min(dp[i], dp[0~i-1]) + 1</li>
+                <li>初始化：dp[0] = 0</li>
+                <li>遍历顺序，从前到后</li>
+              </ul>
+            </li>
+          </ul>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/maximize-sum-of-array-after-k-negations/">1005. K 次取反后最大化的数组和</a></strong></p>
+        <blockquote>
+          <p>很容易想到对负值取反，剩余的取反次数给绝对值最小的数进行操作。</p>
+          <p>这里没有想到的一个点是对nums数组的取绝对值之和，从大到小排序，这样我们能够优先对负数最小值取负变正。如果还剩余次数，对绝对值最小的取负也是影响最小的。</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/gas-station">134. 加油站</a></strong></p>
+        <blockquote>
+          <ul>
+            <li>如果到达当前节点时，sum &#x3C; 0，那么前面的节点也不可以。因为前面节点满足的条件是sum >=0，说明经过站点的油量至少是大于等于0的，所以肯定都不行了</li>
+            <li>更新答案从下一起点开始，sum重0开始。</li>
+            <li>没有答案：如果整体gas - cost 和小于0，从哪一个起点都不行</li>
+          </ul>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/candy/">135. 分发糖果</a></strong></p>
+        <blockquote>
+          <p>分两次遍历找寻答案，第一遍前序，第二遍后续。</p>
+          <p>第一遍保证右边大于左边，第二遍后续遍历才能保证可以使用之前的顺序性。</p>
+          <p>反向遍历时，保证candy[i] > candy[ i + 1], 取 candy [i] = max(candy[i], candy [ i + 1] + 1), 这样也能保证前序的大小关系。</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/queue-reconstruction-by-height/">406. 根据身高重建队列</a></strong></p>
+        <ul>
+          <li>有个两个指标考虑，优先固定好其中一个进行排序考虑。</li>
+          <li>先固定从大到小排序h，同样h，优先k小在前
+            <ul>
+              <li>h大的必然h相对较小</li>
+            </ul>
+          </li>
+          <li>遍历每个人h,k，将其插入到k位置</li>
+        </ul>
+        <pre class="language-go"><code class="language-Go code-highlight"><span class="code-line line-number" line="1">插入<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span>：<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="2">插入<span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span>：<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="3">插入<span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span>：<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="4">插入<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span>：<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="5">插入<span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span>：<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+</span><span class="code-line line-number" line="6">插入<span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span>：<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">5</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token punctuation">[</span><span class="token number">7</span><span class="token punctuation">,</span><span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">]</span>
+</span></code><input type="hidden" value="插入[7,0]：[[7,0]]
+插入[7,1]：[[7,0],[7,1]]
+插入[6,1]：[[7,0],[6,1],[7,1]]
+插入[5,0]：[[5,0],[7,0],[6,1],[7,1]]
+插入[5,2]：[[5,0],[7,0],[5,2],[6,1],[7,1]]
+插入[4,4]：[[5,0],[7,0],[5,2],[6,1],[4,4],[7,1]]
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>插入[6,1]，后移[7,1]，将[6,1]插入到1这个位置，由于按照身高插入的，那么在[7,1]前面插入一个，不会影响他的k（数量还是前面有1个比他高的）</li>
+          <li>同样插入[5,0]，到0这个位置，不影响[7,0],[6,1],[7,1]</li>
+        </ul>
+        <p><a href="https://leetcode.cn/problems/minimum-number-of-arrows-to-burst-balloons/">452. 用最少数量的箭引爆气球</a></p>
+        <blockquote>
+          <p>维护一个最小的边界，每次更新这个边界，超过这个边界就 + 1</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/non-overlapping-intervals/description/">435. 无重叠区间</a></strong></p>
+        <blockquote>
+          <p>计算去除交叉区间 == 总区间 - 计算不交叉区间</p>
+          <p>计算不交叉区间，考虑排序判断边界，这里考虑右边界排序，然后从左向右遍历，选择左边界尽可能小的，腾出空间给后面的。</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/partition-labels/description/">763. 划分字母区间</a></strong></p>
+        <blockquote>
+          <ol>
+            <li>记录每个字母的最远位置，作为一个分割点</li>
+            <li>遍历每个位置，当前字母的最远位置与当前位置重合，划分为一个区间。</li>
+          </ol>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/monotone-increasing-digits/">738.单调递增的数字</a></strong></p>
+        <blockquote>
+          <p>能想到一位位判断每个位置的数，但是剩下的就一头雾水了。</p>
+          <p>题解是从后向前判断数字的递增性，如果strNum[i - 1] > strNum[i]的话，就strNum[i - 1] - 1,而 strNum[i] 一维置 9。先把递增行维护好，最后一次性置9.</p>
+          <p>这里有两个重要的函数，stoi和to_string。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/non-decreasing-array/description/">665.非递减数列</a></p>
+        <blockquote>
+          <p>每次看贪心题目都觉得自己是笨比。</p>
+        </blockquote>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#例题" class="tocs-link">例题</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>

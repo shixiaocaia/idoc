@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>缓存过期删除和缓存淘汰 iDoc</title>
+    <meta name="description" content="Redis 是可以对 key 设置过期时间的，因此需要有相应的机制将已过期的键值对删除，而做这个工作的就是过期键值删除策略。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00Go/index.html" target="" class="">Go</a></li>
+            <li><a href="../01MySQL/index.html" target="" class="">MySQL</a></li>
+            <li><a href="index.html" target="" class="active">Redis</a></li>
+            <li><a href="../01LeetCode/index.html" target="" class="">LeetCode</a></li>
+            <li><a href="../02HelloWorld/index.html" target="" class="">Hello World</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <a href="ch12.html" class="">数据结构</a>
+            <a href="ch13.html" class="">Redis是怎么运行的</a>
+            <a href="ch14.html" class="">持久化</a>
+            <a href="ch15.html" class="">缓存过期与内存淘汰</a>
+            <a href="ch16.html" class="">集群模式</a>
+            <a href="ch17.html" class="">缓存</a>
+            <a href="ch18.html" class="">分布式锁</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="缓存过期删除和缓存淘汰"><a aria-hidden="true" tabindex="-1" href="#缓存过期删除和缓存淘汰" class="anchor"><span class="icon icon-link"></span></a>缓存过期删除和缓存淘汰</h1>
+        <h2 id="过期删除策略"><a aria-hidden="true" tabindex="-1" href="#过期删除策略" class="anchor"><span class="icon icon-link"></span></a>过期删除策略</h2>
+        <p>Redis 是可以对 key 设置过期时间的，因此需要有相应的机制将已过期的键值对删除，而做这个工作的就是过期键值删除策略。</p>
+        <h3 id="如何设置过期时间"><a aria-hidden="true" tabindex="-1" href="#如何设置过期时间" class="anchor"><span class="icon icon-link"></span></a>如何设置过期时间</h3>
+        <ul>
+          <li>常用的四种命令，设置秒、毫秒以及设置在时间戳时间过期。</li>
+          <li>也可以在设置字符串时，同时对 key 设置过期时间。</li>
+          <li>查询key剩余存活时间。</li>
+          <li>取消过期时间</li>
+        </ul>
+        <h3 id="判定key已经过期"><a aria-hidden="true" tabindex="-1" href="#判定key已经过期" class="anchor"><span class="icon icon-link"></span></a>判定key已经过期</h3>
+        <p>每当我们对一个 key 设置了过期时间时，Redis 会把该 key 带上过期时间存储到一个<strong>过期字典</strong>（expires dict）中，也就是说「过期字典」保存了数据库中所有 key 的过期时间。</p>
+        <p>过期字典的key是指向某个键对象的指针，value是保存key的过期时间。</p>
+        <p>字典实际上是一个哈希表，能够在O1下查找。当我们查询一个 key 时，Redis 首先检查该 key 是否存在于过期字典中：</p>
+        <ul>
+          <li>如果不在，则正常读取键值；</li>
+          <li>如果存在，则会获取该 key 的过期时间，然后与当前系统时间进行比对，如果比系统时间大，那就没有过期，否则判定该 key 已过期。</li>
+        </ul>
+        <h3 id="过期删除策略-1"><a aria-hidden="true" tabindex="-1" href="#过期删除策略-1" class="anchor"><span class="icon icon-link"></span></a>过期删除策略</h3>
+        <p>常见的三种过期删除策略：</p>
+        <ul>
+          <li>定时删除；</li>
+          <li>惰性删除；</li>
+          <li>定期删除；</li>
+        </ul>
+        <h4 id="定时删除"><a aria-hidden="true" tabindex="-1" href="#定时删除" class="anchor"><span class="icon icon-link"></span></a>定时删除</h4>
+        <p>定时删除策略的做法是，在设置 key 的过期时间时，同时创建一个定时事件，当时间到达时，由事件处理器自动执行 key 的删除操作。</p>
+        <p>定时删除策略的<strong>优点</strong>：</p>
+        <ul>
+          <li>可以保证过期 key 会被尽快删除，也就是内存可以被尽快地释放。因此，定时删除对内存是最友好的。</li>
+        </ul>
+        <p>定时删除策略的<strong>缺点</strong>：</p>
+        <ul>
+          <li>在过期 key 比较多的情况下，删除过期 key 可能会占用相当一部分 CPU 时间，在内存不紧张但 CPU 时间紧张的情况下，将 CPU 时间用于删除和当前任务无关的过期键上，无疑会对服务器的响应时间和吞吐量造成影响。所以，定时删除策略对 CPU 不友好。</li>
+        </ul>
+        <h4 id="惰性删除"><a aria-hidden="true" tabindex="-1" href="#惰性删除" class="anchor"><span class="icon icon-link"></span></a>惰性删除</h4>
+        <p>惰性删除策略的做法是，不主动删除过期键，每次从数据库访问 key 时，都检测 key 是否过期，如果过期则删除该 key。</p>
+        <p>惰性删除策略的<strong>优点</strong>：</p>
+        <ul>
+          <li>因为每次访问时，才会检查 key 是否过期，所以此策略只会使用很少的系统资源，因此，惰性删除策略对 CPU 时间最友好。</li>
+        </ul>
+        <p>惰性删除策略的<strong>缺点</strong>：</p>
+        <ul>
+          <li>如果一个 key 已经过期，而这个 key 又仍然保留在数据库中，那么只要这个过期 key 一直没有被访问，它所占用的内存就不会释放，造成了一定的内存空间浪费。所以，惰性删除策略对内存不友好。</li>
+        </ul>
+        <h4 id="定期删除"><a aria-hidden="true" tabindex="-1" href="#定期删除" class="anchor"><span class="icon icon-link"></span></a>定期删除</h4>
+        <p>每隔一段时间「随机」从数据库中取出一定数量的 key 进行检查，并删除其中的过期key。</p>
+        <p>定期删除策略的<strong>优点</strong>：</p>
+        <ul>
+          <li>通过限制删除操作执行的时长和频率，来减少删除操作对 CPU 的影响，同时也能删除一部分过期的数据减少了过期键对空间的无效占用。</li>
+        </ul>
+        <p>定期删除策略的<strong>缺点</strong>：</p>
+        <ul>
+          <li>内存清理方面没有定时删除效果好，同时没有惰性删除使用的系统资源少。</li>
+          <li>难以确定删除操作执行的时长和频率。如果执行的太频繁，定期删除策略变得和定时删除策略一样，对CPU不友好；如果执行的太少，那又和惰性删除一样了，过期 key 占用的内存不会及时得到释放。</li>
+        </ul>
+        <h3 id="redis过期删除策略"><a aria-hidden="true" tabindex="-1" href="#redis过期删除策略" class="anchor"><span class="icon icon-link"></span></a>Redis过期删除策略</h3>
+        <p>Redis 选择「惰性删除+定期删除」这两种策略配和使用，以求在合理使用 CPU 时间和避免内存浪费之间取得平衡。</p>
+        <h4 id="惰性删除-1"><a aria-hidden="true" tabindex="-1" href="#惰性删除-1" class="anchor"><span class="icon icon-link"></span></a>惰性删除</h4>
+        <p>Redis 在访问或者修改 key 之前，都会调用 expireIfNeeded 函数对其进行检查，检查 key 是否过期：</p>
+        <ul>
+          <li>如果过期，则删除该 key，至于选择异步删除，还是选择同步删除，根据 <code>lazyfree_lazy_expire</code> 参数配置决定（Redis 4.0版本开始提供参数），然后返回 null 客户端；</li>
+          <li>如果没有过期，不做任何处理，然后返回正常的键值对给客户端；</li>
+        </ul>
+        <h4 id="定期删除-1"><a aria-hidden="true" tabindex="-1" href="#定期删除-1" class="anchor"><span class="icon icon-link"></span></a>定期删除</h4>
+        <p>默认每秒进行 10 次过期检查一次数据库，每次抽查20个（写死）。</p>
+        <ol>
+          <li>从过期字典中随机抽取 20 个 key；</li>
+          <li>检查这 20 个 key 是否过期，并删除已过期的 key；</li>
+          <li>如果本轮检查的已过期 key 的数量，超过 5 个（20/4），也就是「已过期 key 的数量」占比「随机抽取 key 的数量」大于 25%，则继续重复步骤 1；如果已过期的 key 比例小于 25%，则停止继续删除过期 key，然后等待下一轮再检查。</li>
+        </ol>
+        <p>Redis 为了保证定期删除不会出现循环过度，导致线程卡死现象，为此增加了定期删除循环流程的<strong>时间上限</strong>，默认不会超过 25ms。</p>
+        <h2 id="内存淘汰策略"><a aria-hidden="true" tabindex="-1" href="#内存淘汰策略" class="anchor"><span class="icon icon-link"></span></a>内存淘汰策略</h2>
+        <p>Redis 的运行内存已经超过 Redis 设置的最大内存之后，则会使用内存淘汰策略删除符合条件的 key，以此来保障 Redis 高效的运行。</p>
+        <p>Redis是基于内存存储的，在64位机器默认不会限制内存的使用，在 32 位操作系统中，maxmemory 的默认值是 3G。</p>
+        <p>实际中通过<code>maxmemory</code>来设置，超过这个配置值，会触发Redis内存淘汰。</p>
+        <p>当内存不足时，会腾出部分内存给新数据，因此Redis支持多种淘汰策略：</p>
+        <ul>
+          <li>
+            <p>不进行数据淘汰的策略，<strong>默认</strong>是noeviction，如果内存达到了maxmemory，写入操作会失败，但是不会淘汰已有的数据。</p>
+          </li>
+          <li>
+            <p>针对「进行数据淘汰」这一类策略，又可以细分为「在设置了过期时间的数据中进行淘汰」和「在所有数据范围内进行淘汰」这两类策略。</p>
+            <p>在设置了过期时间的数据中进行淘汰：</p>
+            <ul>
+              <li><strong>volatile-random</strong>：随机淘汰设置了过期时间的任意键值；</li>
+              <li><strong>volatile-ttl</strong>：优先淘汰更早过期的键值。</li>
+              <li><strong>volatile-lru</strong>（Redis3.0 之前，默认的内存淘汰策略）：淘汰所有设置了过期时间的键值中，最久未使用的键值；</li>
+              <li><strong>volatile-lfu</strong>（Redis 4.0 后新增的内存淘汰策略）：淘汰所有设置了过期时间的键值中，最少使用的键值；</li>
+            </ul>
+            <p>在所有数据范围内进行淘汰：</p>
+            <ul>
+              <li><strong>allkeys-random</strong>：随机淘汰任意键值;</li>
+              <li><strong>allkeys-lru</strong>：淘汰整个键值中最久未使用的键值；</li>
+              <li><strong>allkeys-lfu</strong>（Redis 4.0 后新增的内存淘汰策略）：淘汰整个键值中最少使用的键值。</li>
+            </ul>
+          </li>
+        </ul>
+        <p>实际当中根据业务选择淘汰算法：</p>
+        <ul>
+          <li>当数据比较重要，不能丢失，那么就选择不淘汰。但是这种情况会导致写入失败，需要完善的告警机制配合人工介入。</li>
+          <li>如果是缓存场景，业务一般使用LRU/LFU灵活的粗略。</li>
+        </ul>
+        <p>淘汰时机：</p>
+        <p>每次运行读写命令时，都会调用processCommand函数，其又会调用freeMemoryIfNeed，这时候会尝试去释放一定的内存，根据上述的策略。</p>
+        <h3 id="lru算法"><a aria-hidden="true" tabindex="-1" href="#lru算法" class="anchor"><span class="icon icon-link"></span></a>LRU算法</h3>
+        <p>LRU尝试回收最长时间未使用的数据。因此会记录每个Key的最近访问时间，维护一个访问时间的数据。</p>
+        <h4 id="问题"><a aria-hidden="true" tabindex="-1" href="#问题" class="anchor"><span class="icon icon-link"></span></a>问题</h4>
+        <ul>
+          <li>需要用链表管理所有的缓存数据，这会带来额外的空间开销；</li>
+          <li>当有数据被访问时，需要在链表上把该数据移动到头端，如果有大量数据被访问，就会带来很多链表移动操作，会很耗时，进而会降低 Redis 缓存性能。</li>
+        </ul>
+        <h4 id="近似lru算法"><a aria-hidden="true" tabindex="-1" href="#近似lru算法" class="anchor"><span class="icon icon-link"></span></a>近似LRU算法</h4>
+        <p>redisObject对象中lru字段存储的是key被访问时Redis的时钟server.lruclock，当key被访问时，更新<strong>lru字段</strong>。</p>
+        <p>在redis当中缓存了Unix操作系统时钟，避免了每次调用函数获取。</p>
+        <p>近似LRU算法，采用随机采样的方法来淘汰元素，但内存不足时，执行一次近似LRU算法。</p>
+        <p>具体步骤是随机采样n个key，这个采样个数默认为5，然后根据时间戳淘汰掉最旧的那个key，如果淘汰后内存还是不足，就继续随机采样来淘汰。</p>
+        <p>采样范围：</p>
+        <ul>
+          <li>allkeys-lru，所有key中</li>
+          <li>volatitle-lru，所有有过期时间的key</li>
+        </ul>
+        <p>淘汰池优化：</p>
+        <p>近似LRU算法不能保证每次随机采样得到的结果，是全局真正最久未访问的，尤其在数据量大的情况下。</p>
+        <p>准备一个大小为16的候选池，池中根据访问时间进行排序。</p>
+        <ul>
+          <li>第一次随机选择的key都会放入池中，然后淘汰最久未被访问的。比如第一次选了5个，淘汰了1个，剩下4个，继续留在池子里。</li>
+          <li>
+            随后每次随机选取的key只有活性比池子里活性最小的key还小时才会放入池中，当池子装满
+            了，如果有新的key需要放入，则将池中活性最大的key移除。
+          </li>
+        </ul>
+        <p>这样能保证在不断加活性低的加入池中，活性高的移除。</p>
+        <blockquote>
+          <ul>
+            <li>如果池子没满，不管活性大小，都会继续填充，没有位置了就挤走一个</li>
+            <li>池子当中始终保持有序的</li>
+            <li>最后淘汰的时候，固定从池子里淘汰一个活性最小的</li>
+            <li>内存占用还超，继续重复操作。</li>
+          </ul>
+          <p>6.2版本之后加了渐进式驱逐，超过一定时间会返回。</p>
+        </blockquote>
+        <h3 id="lfu算法"><a aria-hidden="true" tabindex="-1" href="#lfu算法" class="anchor"><span class="icon icon-link"></span></a>LFU算法</h3>
+        <p>优先淘汰使用频率最低的数据。</p>
+        <p>使用LFU时，实际当中是复用了redisObject当中的lru字段。将其24位拆解为高16bit存储上一次访问的时间戳，低8bit存储访问次数。</p>
+        <p>这里访问时间精度是1分钟。如果上一次访问时间很久，访问次数就会衰减。</p>
+        <p>默认情况下新写的key的后8位计数器的值位5，防止因为访问频率过低被直接删除。</p>
+        <h4 id="数据更新"><a aria-hidden="true" tabindex="-1" href="#数据更新" class="anchor"><span class="icon icon-link"></span></a>数据更新</h4>
+        <ul>
+          <li>根据上次访问的时间间隔，减少访问次数。</li>
+          <li>根据当前访问更新访问次数
+            <ul>
+              <li>当前访问次数等于最大值 255（用了后八位记录访问次数）的情况。此时，LFULogIncr 函数不再增加访问次数。</li>
+              <li>当前访问次数小于 255 的情况。此时，LFULogIncr 函数会计算一个阈值 p，以及一个取值为 0 到 1 之间的随机概率值 r。如果概率 r 小于阈值 p，那么 LFULogIncr 函数才会将访问次数加 1。否则的话，LFULogIncr 函数会返回当前的访问次数，不做更新。</li>
+            </ul>
+          </li>
+        </ul>
+        <blockquote>
+          <p>这里r值是随机的，p值得设定决定了访问得次数增加的难度。</p>
+          <p>p的大小取决于当前访问次数和宏定义 LFU_INIT_VAL 的差值 baseval，另一个是 redis.conf 文件中定义的配置项 lfu-log-factor。</p>
+        </blockquote>
+        <p><strong>为什么使用一定概率增加：</strong></p>
+        <blockquote>
+          <ol>
+            <li>避免热点数据占据过多的缓存空间，而其他非热门的数据很快淘汰出缓存。通过使用一定概率增加访问次数，可以让其他不那么热门但仍然有访问可能性的数据项有机会留在缓存中，提高整体缓存的命中率。</li>
+            <li>平衡不同数据项的访问次数，为不同的数据项提供更公平的缓存替换机会。</li>
+            <li>避免过度关注最近访问的数据项，可以更好地综合考虑历史访问情况和最近访问的权衡，更准确地反映数据项的访问频率。</li>
+          </ol>
+        </blockquote>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#过期删除策略" class="tocs-link">过期删除策略</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#如何设置过期时间" class="tocs-link">如何设置过期时间</a></li>
+                <li><a href="#判定key已经过期" class="tocs-link">判定key已经过期</a></li>
+                <li><a href="#过期删除策略-1" class="tocs-link">过期删除策略</a>
+                  <ol class="tocs-list is-collapsed">
+                    <li><a href="#定时删除" class="tocs-link">定时删除</a></li>
+                    <li><a href="#惰性删除" class="tocs-link">惰性删除</a></li>
+                    <li><a href="#定期删除" class="tocs-link">定期删除</a></li>
+                  </ol>
+                </li>
+                <li><a href="#redis过期删除策略" class="tocs-link">Redis过期删除策略</a>
+                  <ol class="tocs-list is-collapsed">
+                    <li><a href="#惰性删除-1" class="tocs-link">惰性删除</a></li>
+                    <li><a href="#定期删除-1" class="tocs-link">定期删除</a></li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+            <li><a href="#内存淘汰策略" class="tocs-link">内存淘汰策略</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#lru算法" class="tocs-link">LRU算法</a>
+                  <ol class="tocs-list is-collapsed">
+                    <li><a href="#问题" class="tocs-link">问题</a></li>
+                    <li><a href="#近似lru算法" class="tocs-link">近似LRU算法</a></li>
+                  </ol>
+                </li>
+                <li><a href="#lfu算法" class="tocs-link">LFU算法</a>
+                  <ol class="tocs-list is-collapsed">
+                    <li><a href="#数据更新" class="tocs-link">数据更新</a></li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>

@@ -13,3 +13,4 @@ Go
 
 ✅[幼麟实验室](https://space.bilibili.com/567195437/channel/seriesdetail?sid=426378&ctype=0)：形象化讲解Go中底层的内容。
 
+✅[Go](https://space.bilibili.com/373073810/)：深入理解Go语言

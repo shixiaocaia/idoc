@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>字符串 iDoc</title>
+    <meta name="description" content="用一个前缀表next，当发现字符不匹配时，跳转至前面已经匹配的最长前后缀位置，而不用重新开始匹配，最坏情况是重头开始匹配字符串。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00Go/index.html" target="" class="">Go</a></li>
+            <li><a href="../01MySQL/index.html" target="" class="">MySQL</a></li>
+            <li><a href="../01Redis/index.html" target="" class="">Redis</a></li>
+            <li><a href="index.html" target="" class="active">LeetCode</a></li>
+            <li><a href="../02HelloWorld/index.html" target="" class="">Hello World</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <label>Leetcode</label>
+            <a href="ch1.html" class="">数组</a>
+            <a href="ch2.html" class="">链表</a>
+            <a href="ch3.html" class="">哈希表</a>
+            <a href="ch4.html" class="">字符串</a>
+            <a href="ch5.html" class="">栈与队列</a>
+            <a href="ch6.html" class="">二叉树</a>
+            <a href="ch7.html" class="">回溯</a>
+            <a href="ch8.html" class="">贪心</a>
+            <a href="ch9.html" class="">动态规划</a>
+            <a href="ch11.html" class="">排序</a>
+            <a href="ch12.html" class="">图论</a>
+            <a href="ch13.html" class="">其他</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="字符串"><a aria-hidden="true" tabindex="-1" href="#字符串" class="anchor"><span class="icon icon-link"></span></a>字符串</h1>
+        <h2 id="kmp"><a aria-hidden="true" tabindex="-1" href="#kmp" class="anchor"><span class="icon icon-link"></span></a>KMP</h2>
+        <p>用一个前缀表<code>next</code>，当发现字符不匹配时，跳转至前面已经匹配的<strong>最长前后缀</strong>位置，而不用重新开始匹配，最坏情况是重头开始匹配字符串。</p>
+        <p>其中n为文本串长度，m为模式串长度，因为在匹配的过程中，根据前缀表不断调整匹配的位置，可以看出匹配的过程是O(n)，之前还要单独生成next数组，时间复杂度是O(m)。所以整个KMP算法的时间复杂度是O(n+m)的。</p>
+        <h3 id="如何求next数组"><a aria-hidden="true" tabindex="-1" href="#如何求next数组" class="anchor"><span class="icon icon-link"></span></a>如何求next数组</h3>
+        <pre class="language-cpp"><code class="language-cpp code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">void</span> <span class="token function">getnext</span><span class="token punctuation">(</span>vector<span class="token operator">&#x3C;</span><span class="token keyword">int</span><span class="token operator">></span><span class="token operator">&#x26;</span> next<span class="token punctuation">,</span> string<span class="token operator">&#x26;</span> needle<span class="token punctuation">)</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">    <span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token operator">-</span><span class="token number">1</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="3">    next<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span> <span class="token operator">=</span> j<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="4">    <span class="token keyword">for</span><span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span> i <span class="token operator">&#x3C;</span> needle<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="5">        <span class="token keyword">while</span><span class="token punctuation">(</span>j <span class="token operator">>=</span> <span class="token number">0</span> <span class="token operator">&#x26;&#x26;</span> needle<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">!=</span> needle<span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token comment">//字符不匹配</span>
+</span><span class="code-line line-number" line="6">            j <span class="token operator">=</span> next<span class="token punctuation">[</span>j<span class="token punctuation">]</span><span class="token punctuation">;</span><span class="token comment">//向前回退，回退到开头j = -1了不能重新开始，j就是前一个，比较的是j + 1</span>
+</span><span class="code-line line-number" line="7">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="8">
+</span><span class="code-line line-number" line="9">        <span class="token keyword">if</span><span class="token punctuation">(</span>needle<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">==</span> needle<span class="token punctuation">[</span>j <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">{</span> <span class="token comment">//字符匹配时</span>
+</span><span class="code-line line-number" line="10">            j<span class="token operator">++</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="11">        <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="12">        next<span class="token punctuation">[</span>i<span class="token punctuation">]</span> <span class="token operator">=</span> j<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="13">    <span class="token punctuation">}</span>
+</span><span class="code-line line-number" line="14"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="void getnext(vector<int>&#x26; next, string&#x26; needle){
+    int j = -1;
+    next[0] = j;
+    for(int i = 1; i < needle.size(); i++){
+        while(j >= 0 &#x26;&#x26; needle[i] != needle[j + 1]){ //字符不匹配
+            j = next[j];//向前回退，回退到开头j = -1了不能重新开始，j就是前一个，比较的是j + 1
+        }
+
+        if(needle[i] == needle[j + 1]){ //字符匹配时
+            j++;
+        }
+        next[i] = j;
+    }
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <blockquote>
+          <p>从-1下标开始只是标记的手段，我理解也是告诉我们0位置不可继续回退匹配。</p>
+        </blockquote>
+        <h2 id="例题"><a aria-hidden="true" tabindex="-1" href="#例题" class="anchor"><span class="icon icon-link"></span></a>例题</h2>
+        <p><a href="https://leetcode.cn/problems/reverse-string/">344. 反转字符串</a></p>
+        <p><a href="https://leetcode.cn/problems/reverse-string-ii/">541. 反转字符串 II</a></p>
+        <blockquote>
+          <p>用一个变量维护一个区间，当这个区间内字符大于等于k的字符时，将前k个字符翻转。</p>
+          <p>如果小于的话，则将当前剩余的字符全部反转。</p>
+          <p>所以处理是判断[i, i + k]是否在区间内，区间移动是加2k长度。</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/ti-huan-kong-ge-lcof/">剑指 Offer 05. 替换空格</a></p>
+        <p><a href="https://leetcode.cn/problems/reverse-words-in-a-string/">151. 反转字符串中的单词</a></p>
+        <blockquote>
+          <p>整体思路：删除空格，反转字符串，反转单词还原</p>
+          <p>删除空格，用双指针删除中间空间，在特判开头和末尾。</p>
+          <p>还原单词时，用一个start表示单词开始，再循环找到每个单词的结尾（空格，或者最后一个单词是末尾）</p>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/repeated-substring-pattern/">459. 重复的子字符串</a></p>
+        <blockquote>
+          <p>暴力遍历：</p>
+          <ol>
+            <li>
+              <p>截取字串，由于必须有2个以上的子串构成，因此字串长度一定小于等于size/2。</p>
+            </li>
+            <li>
+              <p>判断子串是否和前部分字串相等，满足一种情况时即可，遍历完所有情况找不到时，即错误。</p>
+            </li>
+          </ol>
+        </blockquote>
+        <p><a href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/">28. 找出字符串中第一个匹配项的下标</a></p>
+        <blockquote>
+          <p>用KMP匹配。</p>
+          <p>当模式串到末尾时，返回<code>i - size + 1</code>即为起始坐标。</p>
+        </blockquote>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#kmp" class="tocs-link">KMP</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#如何求next数组" class="tocs-link">如何求next数组</a></li>
+              </ol>
+            </li>
+            <li><a href="#例题" class="tocs-link">例题</a></li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>

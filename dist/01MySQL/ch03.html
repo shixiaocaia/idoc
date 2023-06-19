@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InnoDB存储引擎 iDoc</title>
+    <meta name="description" content="长...">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
+<span class="title">iDoc</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00Go/index.html" target="" class="">Go</a></li>
+            <li><a href="index.html" target="" class="active">MySQL</a></li>
+            <li><a href="../01Redis/index.html" target="" class="">Redis</a></li>
+            <li><a href="../01LeetCode/index.html" target="" class="">LeetCode</a></li>
+            <li><a href="../02HelloWorld/index.html" target="" class="">Hello World</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <a href="ch00.html" class="">Hello MySQL</a>
+            <a href="ch01.html" class="">SQL</a>
+            <a href="ch02.html" class="">写点SQL</a>
+            <label>MySQL原理</label>
+            <a href="ch03.html" class="">InnoDB存储引擎</a>
+            <a href="ch04.html" class="">索引</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="innodb存储引擎"><a aria-hidden="true" tabindex="-1" href="#innodb存储引擎" class="anchor"><span class="icon icon-link"></span></a>InnoDB存储引擎</h1>
+        <h2 id="一行记录的存储"><a aria-hidden="true" tabindex="-1" href="#一行记录的存储" class="anchor"><span class="icon icon-link"></span></a>一行记录的存储</h2>
+        <p>长...</p>
+        <h2 id="char和varchar区别"><a aria-hidden="true" tabindex="-1" href="#char和varchar区别" class="anchor"><span class="icon icon-link"></span></a>char和varchar区别</h2>
+        <h3 id="mysql层区别"><a aria-hidden="true" tabindex="-1" href="#mysql层区别" class="anchor"><span class="icon icon-link"></span></a>MySQL层区别</h3>
+        <ul>
+          <li>
+            <p>最大长度：char是255，varchar是65535，单位是<strong>字符</strong>（而不是字节）。</p>
+          </li>
+          <li>
+            <p>尾随空格：char会将尾随空格去掉，而varchar不会。</p>
+            <blockquote>
+              <p>如果char字段有唯一索引，<code>a</code>和<code>a_</code>会提示唯一索引冲突。</p>
+            </blockquote>
+          </li>
+          <li>
+            <p>存储空间占用：varchar会占用额外的1~2字节来存储字符串长度。如果最大长度超过255，就需要2字节，否则1字节。(变长字段长度列表)</p>
+            <ul>
+              <li>对于<code>CHAR(N)</code>字段，如果实际存储数据小于<code>N</code>字节，会填充空格到<code>N</code>个字节。</li>
+            </ul>
+          </li>
+        </ul>
+        <h3 id="存储引擎层区别"><a aria-hidden="true" tabindex="-1" href="#存储引擎层区别" class="anchor"><span class="icon icon-link"></span></a>存储引擎层区别</h3>
+        <p>在InnoDB存储引擎下、DYNAMIC行格式下。</p>
+        <ul>
+          <li>varchar类型对于短字符串、长字符串、多字节编码，都是存储了实际的字符+字符长度</li>
+          <li>char类型存储字符 + 字符长度，对于<code>CHAR(N)</code>字段，如果实际存储数据小于<code>N</code>字节，会填充空格到<code>N</code>个字节。</li>
+        </ul>
+        <h3 id="性能对比"><a aria-hidden="true" tabindex="-1" href="#性能对比" class="anchor"><span class="icon icon-link"></span></a>性能对比</h3>
+        <ul>
+          <li><strong>char填充空格可能导致浪费存储空间，进而导致性能下降</strong>。</li>
+          <li>因为char多存储一些空格，意味着需要从磁盘读写更多的数据、耗费更多内存、查找数据时删除空格可能也会耗费一些CPU性能。</li>
+          <li>使用char类型的好处，插入记录分配100个字节，后序修改不会造成页分裂、空分析等问题。</li>
+          <li>而varchar(100)没有提前分配存储空间，后序Update可能造成页分裂，导致性能下降。
+            <ul>
+              <li>MyISAM会拆成不同的片段存储</li>
+            </ul>
+          </li>
+        </ul>
+        <h3 id="其他字符串"><a aria-hidden="true" tabindex="-1" href="#其他字符串" class="anchor"><span class="icon icon-link"></span></a>其他字符串</h3>
+        <ul>
+          <li>
+            <p>BINARY / VARBINARY ： 存放二进制字符串</p>
+          </li>
+          <li>
+            <p>BLOB / TEXT : 存放较大的数据，分别采用二进制和字符方式存储</p>
+          </li>
+          <li>
+            <p>ENUM：枚举</p>
+          </li>
+        </ul>
+        <h2 id="buffer-pool"><a aria-hidden="true" tabindex="-1" href="#buffer-pool" class="anchor"><span class="icon icon-link"></span></a>Buffer Pool</h2>
+        <p>为了提升查询性能，数据从磁盘读取出来后，缓存到内存当中，后续查询缓存命中，提高了数据库的读写性能。</p>
+        <p>为此，Innodb存储引擎设计了缓冲池。默认缓冲池大小为128MB。可以通过调整 <code>innodb_buffer_pool_size</code> 参数来设置 Buffer Pool 的大小，一般建议设置成可用物理内存的 60%~80%。</p>
+        <p>有了缓冲池之后：</p>
+        <ul>
+          <li>当读取数据存在Buffer Pool当中，客户端直接读取缓冲池中的数据，否则去磁盘中读取</li>
+          <li>当修改数据时，首先是修改 Buffer Pool 中数据所在的页，然后将其页设置为脏页，最后由后台线程将脏页写入到磁盘。</li>
+        </ul>
+        <h3 id="缓存什么"><a aria-hidden="true" tabindex="-1" href="#缓存什么" class="anchor"><span class="icon icon-link"></span></a>缓存什么</h3>
+        <p>Buffer Pool同样按照页来划分，在 MySQL 启动的时候，InnoDB 会为 Buffer Pool 申请一片连续的内存空间，然后按照默认的16KB的大小划分出一个个的页， Buffer Pool 中的页就叫做缓存页。</p>
+        <ul>
+          <li>MySQL刚启动时，虚拟内存很大，使用到的物理内存很少，只有这些虚拟内存被访问后，操作系统才会触发缺页中断，接着将虚拟地址和物理地址建立映射关系。</li>
+          <li>Buffer Pool 除了缓存「索引页」和「数据页」，还包括了 undo 页，插入缓存、自适应哈希索引、锁信息等等。</li>
+          <li>为了更好管理缓存页，为每一个页创建了一个控制块
+            <ul>
+              <li>控制块信息包括「缓存页的表空间、页号、缓存页地址、链表节点」等等。</li>
+              <li>控制块也是占据内存空间的，放在Buffer Pool的最前面。</li>
+            </ul>
+          </li>
+          <li>当控制块和缓存页设置不刚刚好时，可能产生碎片空间</li>
+          <li>查询到一条记录后，实际当中是将整个页加载到Buffer Pool当中，然后通过页目录定位到具体的记录。</li>
+        </ul>
+        <h3 id="如何管理空闲页面"><a aria-hidden="true" tabindex="-1" href="#如何管理空闲页面" class="anchor"><span class="icon icon-link"></span></a>如何管理空闲页面</h3>
+        <p>缓存池是连续的内存空间，当MySQL运行一段时间后，这篇空间既有使用的也有空闲的，为了更快遍历到空闲的缓存页，构建了一个<strong>Free链表</strong>。</p>
+        <p>Free链表中的包括了一个头节点，来包含链表信息，空闲缓存页的控制块作为链表的节点，每个控制块又包含对应缓存页的地址。所以相当于Free链表节点对应一个个空闲的缓存页。</p>
+        <h3 id="如何管理脏页"><a aria-hidden="true" tabindex="-1" href="#如何管理脏页" class="anchor"><span class="icon icon-link"></span></a>如何管理脏页</h3>
+        <p>每次修改数据，修改Buffer Pool 中数据所在的页，然后将其页设置为脏页，最后由后台线程将脏页写入到磁盘。</p>
+        <p>为了快速知道哪些是脏页，而有了<strong>Flush链表</strong>，记录哪些是脏页，同上面的Free链表结构相似。</p>
+        <h3 id="如何提高缓存命中率"><a aria-hidden="true" tabindex="-1" href="#如何提高缓存命中率" class="anchor"><span class="icon icon-link"></span></a>如何提高缓存命中率</h3>
+        <p>由于缓冲池的大小有限，希望尽可能留下频繁访问的数据，去除很少访问的数据，从而提高命中率。</p>
+        <p>最简单的实现：<strong>LRU（Least recently used）算法。</strong></p>
+        <p>该算法的思路是，链表头部的节点是最近使用的，而链表末尾的节点是最久没被使用的。那么，当空间不够了，就淘汰最久没被使用的节点，从而腾出空间。</p>
+        <p>简单的 LRU 算法的实现思路是这样的：</p>
+        <ul>
+          <li>当访问的页在 Buffer Pool 里，就直接把该页对应的 LRU 链表节点移动到链表的头部。</li>
+          <li>当访问的页不在 Buffer Pool 里，除了要把页放入到 LRU 链表的头部，还要淘汰 LRU 链表末尾的节点。</li>
+        </ul>
+        <hr>
+        <p>最简单的LRU没有被采用，考虑到以下两个问题：</p>
+        <ul>
+          <li>预读失效；</li>
+        </ul>
+        <blockquote>
+          <p>靠近被访问的数据的数据，在未来大概率会被访问，所以MySQL在加载数据时会提前把它相邻的数据一起加入过来，减少磁盘IO。</p>
+          <p>当时这些预加载的数据可能未被访问，从而造成预读失效。</p>
+          <p>当使用LRU算法时，就可能会造成加预读页放在前排位置，缓冲池空间不够时淘汰了末尾的页，而这些预读页如果一直不被访问，会占用前排位置，并且淘汰了可能访问的页。</p>
+        </blockquote>
+        <blockquote>
+          <p>MySQL将LRU算法划分前半部分的young区域，后半部分的old区域，一般按照63：37划分。</p>
+          <p><strong>划分这两个区域后，预读的页就只需要加入到 old 区域的头部，当页被真正访问的时候，才将页插入 young 区域的头部</strong>。如果预读的页一直没有被访问，就会从 old 区域移除，这样就不会影响 young 区域中的热点数据。</p>
+          <p>优先去除old区域的页。</p>
+        </blockquote>
+        <ul>
+          <li>Buffer Pool 污染；</li>
+        </ul>
+        <blockquote>
+          <p>某一个 SQL 语句<strong>扫描了大量的数据</strong>时，在 Buffer Pool 空间比较有限的情况下，可能会将 <strong>Buffer Pool 里的所有页都替换出去，导致大量热数据被淘汰了</strong>，等这些热数据又被再次访问的时候，由于缓存未命中，就会产生大量的磁盘 IO，MySQL 性能就会急剧下降，这个过程被称为 <strong>Buffer Pool 污染</strong>。</p>
+        </blockquote>
+        <blockquote>
+          <p>发生全表扫描时，很容易出现这样的问题，热点数据被替换掉。因此想到提高数据进入young区域的门槛，通过判断是不是频繁访问，而不是短暂访问一次。</p>
+          <p>MySQL 是这样做的，进入到 young 区域条件增加了一个<strong>停留在 old 区域的时间判断</strong>。</p>
+          <ul>
+            <li>如果后续的访问时间与第一次访问的时间<strong>在某个时间间隔内</strong>，那么<strong>该缓存页就不会被从 old 区域移动到 young 区域的头部</strong>；</li>
+            <li>如果后续的访问时间与第一次访问的时间<strong>不在某个时间间隔内</strong>，那么<strong>该缓存页移动到 young 区域的头部</strong>；</li>
+          </ul>
+          <p>同时满足被访问，并且在old区域停留在超过1s两个条件，才会被插入到young区域。</p>
+        </blockquote>
+        <blockquote>
+          <p>另外，MySQL 针对 young 区域其实做了一个优化，为了防止 young 区域节点频繁移动到头部。young 区域前面 1/4 被访问不会移动到链表头部，只有后面的 3/4被访问了才会。</p>
+        </blockquote>
+        <h3 id="脏页什么时候刷新到磁盘"><a aria-hidden="true" tabindex="-1" href="#脏页什么时候刷新到磁盘" class="anchor"><span class="icon icon-link"></span></a>脏页什么时候刷新到磁盘</h3>
+        <p>为了提高性能，会在一定时机统一批量刷入磁盘。并且InnoDB具有Write Ahead Log策略，先写日志再写入磁盘，通过日志可以进行崩溃恢复，防止MySQL宕机未来得及写入磁盘。</p>
+        <p>当满足以下情况会触发脏页的刷新：</p>
+        <ul>
+          <li>当 redo log 日志满了的情况下，会主动触发脏页刷新到磁盘；</li>
+          <li>Buffer Pool 空间不足时，需要将一部分数据页淘汰掉，如果淘汰的是脏页，需要先将脏页同步到磁盘；</li>
+          <li>MySQL 认为空闲时，后台线程会定期将适量的脏页刷入到磁盘；</li>
+          <li>MySQL 正常关闭之前，会把所有的脏页刷入到磁盘；</li>
+        </ul>
+        <h2 id="普通索引和唯一索引如何选择"><a aria-hidden="true" tabindex="-1" href="#普通索引和唯一索引如何选择" class="anchor"><span class="icon icon-link"></span></a>普通索引和唯一索引如何选择</h2>
+        <h3 id="查询过程"><a aria-hidden="true" tabindex="-1" href="#查询过程" class="anchor"><span class="icon icon-link"></span></a>查询过程</h3>
+        <ul>
+          <li>对于普通索引来说，查找到满足条件的第一个记录 (5,500) 后，需要查找下一个记录，直到碰到第一个不满足 k=5 条件的记录。</li>
+          <li>对于唯一索引来说，由于索引定义了唯一性，查找到第一个满足条件的记录后，就会停止继续检索。</li>
+        </ul>
+        <blockquote>
+          <p>对比下，普通索引重复查找确认，性能差距不大。毕竟是按页读写的，查到k=5，所在的数据也就在内存当中了，重复查找就在这个内存页中指针寻找和计算。</p>
+          <p>查询时，不在缓冲池，磁盘IO读入。</p>
+        </blockquote>
+        <h3 id="更新过程"><a aria-hidden="true" tabindex="-1" href="#更新过程" class="anchor"><span class="icon icon-link"></span></a>更新过程</h3>
+        <p>当需要更新一个数据页时，如果数据页在内存中就直接更新（标记为脏页），而如果这个数据页还没有在内存中的话，在不影响数据一致性的前提下，InnoDB 会将这些更新操作缓存在 change buffer 中，这样就不需要从磁盘中读入这个数据页了。</p>
+        <p>在下次查询需要访问这个数据页的时候，将数据页读入内存，然后执行 change buffer 中与这个页有关的操作。</p>
+        <ul>
+          <li>将change buffer中操作应用到原数据页，得到最新的结果过程称为merge。</li>
+          <li>后台也会定期merge，正常关闭数据库也会发生merge。</li>
+        </ul>
+        <blockquote>
+          <p>change buffer在内存中和磁盘中都有拷贝，是持久化数据。</p>
+          <p>通过先修改change buffer，减少磁盘IO提高了岁都，同时避免数据写入内存，提高内存利用率。</p>
+          <p>change buffer使用的是buffer pool内存，因此不能无限量增加。</p>
+        </blockquote>
+        <p>对于唯一索引来说，需要先判断现在表中是否存在k=4（保证唯一性），必须将数据页读入内存才能判断 ，读入后不如直接读内存中更新了。因此change buffer<strong>应用在普通索引上</strong>，因为普通索引不用考虑唯一性，直接记录。</p>
+        <blockquote>
+          <p>当更新记录的目标页不在内存中，唯一索引需要先加载到内存当中，这个磁盘IO消耗是巨大的。而普通索引直接使用change buffer，大大降低了成本。</p>
+        </blockquote>
+        <h3 id="change-buffer的使用场景"><a aria-hidden="true" tabindex="-1" href="#change-buffer的使用场景" class="anchor"><span class="icon icon-link"></span></a>change buffer的使用场景</h3>
+        <p>在merge更新之前，change buffer记录越多，说明节省的成本越大，收益大。</p>
+        <p>因此change buffer适合写多读少的场景，比如账单类、日志类的系统。</p>
+        <p>如果一个业务更新模式写入之后马上查询，那么就去看内存中有没有缓存，没有的话需要加载到内存中，立即触发merge操作，这样操作反而增加了merge的成本。</p>
+        <hr>
+        <p>综上考虑，查询过程性能差距不大，在更新时由于change buffer存在，应该尽可能选择普通索引。</p>
+        <p>如果所有的更新后面，都马上伴随着对这个记录的查询，那么你应该关闭 change buffer。而在其他情况下，change buffer 都能提升更新性能。</p>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#一行记录的存储" class="tocs-link">一行记录的存储</a></li>
+            <li><a href="#char和varchar区别" class="tocs-link">char和varchar区别</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#mysql层区别" class="tocs-link">MySQL层区别</a></li>
+                <li><a href="#存储引擎层区别" class="tocs-link">存储引擎层区别</a></li>
+                <li><a href="#性能对比" class="tocs-link">性能对比</a></li>
+                <li><a href="#其他字符串" class="tocs-link">其他字符串</a></li>
+              </ol>
+            </li>
+            <li><a href="#buffer-pool" class="tocs-link">Buffer Pool</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#缓存什么" class="tocs-link">缓存什么</a></li>
+                <li><a href="#如何管理空闲页面" class="tocs-link">如何管理空闲页面</a></li>
+                <li><a href="#如何管理脏页" class="tocs-link">如何管理脏页</a></li>
+                <li><a href="#如何提高缓存命中率" class="tocs-link">如何提高缓存命中率</a></li>
+                <li><a href="#脏页什么时候刷新到磁盘" class="tocs-link">脏页什么时候刷新到磁盘</a></li>
+              </ol>
+            </li>
+            <li><a href="#普通索引和唯一索引如何选择" class="tocs-link">普通索引和唯一索引如何选择</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#查询过程" class="tocs-link">查询过程</a></li>
+                <li><a href="#更新过程" class="tocs-link">更新过程</a></li>
+                <li><a href="#change-buffer的使用场景" class="tocs-link">change buffer的使用场景</a></li>
+              </ol>
+            </li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>
