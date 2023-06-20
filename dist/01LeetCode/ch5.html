@@ -229,14 +229,29 @@ for (遍历这个数组)
         </blockquote>
         <p><strong><a href="https://leetcode.cn/problems/trapping-rain-water/description/">42. 接雨水</a></strong></p>
         <blockquote>
-          <p>方法一：双指针法。</p>
-          <p>按照列方向统计每一列的储水量。</p>
-          <p>左右指针分别指向该列的左右边的最大值，其中的最小值 - 当前列的高度就得到了这一列的雨水，这是一个O(n^2)，超时。</p>
-          <p>方法二：DP</p>
-          <p>对上面的方法优化，待做。</p>
-          <p>方法三：单调栈</p>
-          <p>关键是底部，左侧、右侧高度。</p>
-          <p>这里在例题中，3高度时，会把前面的11都弹出，因为底和最高相等。</p>
+          <ol>
+            <li>前后缀分解
+              <ol>
+                <li>分别计算前缀和后缀的长度</li>
+                <li>每个水柱的高度等于左右边界的较小值，减去当前的高度值</li>
+              </ol>
+            </li>
+            <li>双指针</li>
+            <li>单调栈
+              <ol>
+                <li>通过栈维护一个高度差。</li>
+                <li>当前高度小于前面高度说明凹陷的部分，入栈</li>
+                <li>当前高度等于前者高度说明平整的，重复了，出栈，入栈新的</li>
+                <li>当前高度大于前者说明形成了一个水柱
+                  <ol>
+                    <li>水柱面积等于 高×宽</li>
+                    <li>高度取决于水柱左侧和右侧的最小值以及底部值，比如102，高度应该min(1, 2) - 0 = 1</li>
+                    <li>宽度就是当前的位置和水柱左边界的坐标值</li>
+                  </ol>
+                </li>
+              </ol>
+            </li>
+          </ol>
         </blockquote>
         <p><strong><a href="https://leetcode.cn/problems/largest-rectangle-in-histogram/description/">🆙84. 柱状图中最大的矩形</a></strong></p>
         <blockquote>

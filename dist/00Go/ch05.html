@@ -88,6 +88,26 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li>由于使用了radix树，路由的性能很高。</li>
           <li>数据绑定，让用户可以非常方便地从请求中获取想要的结构体。</li>
         </ul>
+        <h3 id="运行模式"><a aria-hidden="true" tabindex="-1" href="#运行模式" class="anchor"><span class="icon icon-link"></span></a>运行模式</h3>
+        <p>Gin框架提供了两种运行模式：<code>debug</code>（调试模式）和<code>release</code>（发布模式），用于控制框架的行为和日志输出级别。</p>
+        <ol>
+          <li><strong>调试模式（debug）</strong>：
+            <ul>
+              <li>在调试模式下，Gin框架将提供更详细的日志输出，方便开发人员进行调试和开发。</li>
+              <li>在请求发生错误时，Gin框架将返回详细的错误信息和堆栈跟踪。</li>
+              <li>Gin框架会自动重新编译和加载模板文件，以便在修改模板时无需重启应用程序。</li>
+              <li>调试模式下，Gin框架会输出更多的调试信息，如请求和响应的详细信息、路由匹配信息等。</li>
+            </ul>
+          </li>
+          <li><strong>发布模式（release）</strong>：
+            <ul>
+              <li>在发布模式下，Gin框架将提供更高的性能和更少的日志输出，适用于生产环境。</li>
+              <li>发布模式下，Gin框架会限制详细的错误信息和堆栈跟踪的输出，以防止敏感信息泄露。</li>
+              <li>Gin框架不会自动重新加载模板文件，以提高性能和减少IO操作。</li>
+              <li>发布模式下，Gin框架会输出更简洁的日志信息，如请求和响应的基本信息，以减少日志输出量。</li>
+            </ul>
+          </li>
+        </ol>
         <h2 id="run"><a aria-hidden="true" tabindex="-1" href="#run" class="anchor"><span class="icon icon-link"></span></a>Run</h2>
         <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">go</span> get <span class="token operator">-</span>u github<span class="token punctuation">.</span>com<span class="token operator">/</span>gin<span class="token operator">-</span>gonic<span class="token operator">/</span>gin
 </span></code><input type="hidden" value="go get -u github.com/gin-gonic/gin
@@ -474,7 +494,11 @@ func main() {
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#是什么" class="tocs-link">是什么</a></li>
+            <li><a href="#是什么" class="tocs-link">是什么</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#运行模式" class="tocs-link">运行模式</a></li>
+              </ol>
+            </li>
             <li><a href="#run" class="tocs-link">Run</a></li>
             <li><a href="#get-post-put-delete" class="tocs-link">GET POST PUT DELETE</a>
               <ol class="tocs-list is-collapsed">

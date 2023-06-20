@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>seelog iDoc</title>
+    <title>logrus iDoc</title>
     <meta name="description" content="Go 的 http 有两个核心功能：Conn、ServeMux。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
@@ -77,38 +77,33 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </aside>
       </div>
       <markdown-style>
-        <h1 id="seelog"><a aria-hidden="true" tabindex="-1" href="#seelog" class="anchor"><span class="icon icon-link"></span></a>seelog</h1>
-        <h2 id="下载seelog库"><a aria-hidden="true" tabindex="-1" href="#下载seelog库" class="anchor"><span class="icon icon-link"></span></a>下载seelog库</h2>
-        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">go</span> get github<span class="token punctuation">.</span>com<span class="token operator">/</span>cihub<span class="token operator">/</span>seelog
-</span></code><input type="hidden" value="go get github.com/cihub/seelog
+        <h1 id="logrus"><a aria-hidden="true" tabindex="-1" href="#logrus" class="anchor"><span class="icon icon-link"></span></a>logrus</h1>
+        <h2 id="快速使用"><a aria-hidden="true" tabindex="-1" href="#快速使用" class="anchor"><span class="icon icon-link"></span></a>快速使用</h2>
+        <ul>
+          <li>设置日志格式</li>
+          <li>设置日志输出位置</li>
+          <li>设置日志级别</li>
+        </ul>
+        <hr>
+        <ul>
+          <li></li>
+        </ul>
+        <h2 id="数据格式化"><a aria-hidden="true" tabindex="-1" href="#数据格式化" class="anchor"><span class="icon icon-link"></span></a>数据格式化</h2>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">type</span> logFormatter <span class="token keyword">struct</span> <span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">	log<span class="token punctuation">.</span>TextFormatter
+</span><span class="code-line line-number" line="3"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="type logFormatter struct {
+	log.TextFormatter
+}
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
-        <h3 id="简单的日志输出"><a aria-hidden="true" tabindex="-1" href="#简单的日志输出" class="anchor"><span class="icon icon-link"></span></a>简单的日志输出</h3>
-        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">package</span> main  
-</span><span class="code-line line-number" line="2">
-</span><span class="code-line line-number" line="3"><span class="token keyword">import</span> log <span class="token string">"github.com/cihub/seelog"</span>  
-</span><span class="code-line line-number" line="4">
-</span><span class="code-line line-number" line="5"><span class="token keyword">func</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>  
-</span><span class="code-line line-number" line="6">    <span class="token keyword">defer</span> log<span class="token punctuation">.</span><span class="token function">Flush</span><span class="token punctuation">(</span><span class="token punctuation">)</span>  
-</span><span class="code-line line-number" line="7">    log<span class="token punctuation">.</span><span class="token function">Info</span><span class="token punctuation">(</span><span class="token string">"Hello world from Seelog!"</span><span class="token punctuation">)</span>  
-</span><span class="code-line line-number" line="8"><span class="token punctuation">}</span>  
-</span></code><input type="hidden" value="package main  
-
-import log &#x22;github.com/cihub/seelog&#x22;  
-
-func main() {  
-    defer log.Flush()  
-    log.Info(&#x22;Hello world from Seelog!&#x22;)  
-}  
-"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="自定义日志输出格式"><a aria-hidden="true" tabindex="-1" href="#自定义日志输出格式" class="anchor"><span class="icon icon-link"></span></a>自定义日志输出格式</h2>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#下载seelog库" class="tocs-link">下载seelog库</a>
-              <ol class="tocs-list is-collapsed">
-                <li><a href="#简单的日志输出" class="tocs-link">简单的日志输出</a></li>
-              </ol>
-            </li>
+            <li><a href="#快速使用" class="tocs-link">快速使用</a></li>
+            <li><a href="#数据格式化" class="tocs-link">数据格式化</a></li>
+            <li><a href="#自定义日志输出格式" class="tocs-link">自定义日志输出格式</a></li>
           </ol>
         </aside>
       </nav>

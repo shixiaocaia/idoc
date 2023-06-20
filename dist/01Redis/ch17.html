@@ -95,8 +95,10 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <ol start="3">
           <li>后台更新缓存：业务线程不再负责更新缓存，缓存也不设置有效期，而是<strong>让缓存“永久有效”，并将更新缓存的工作交由后台线程定时更新</strong>。</li>
         </ol>
-        <p>​ 实际上不设置有效期，内存中数据也会因为系统内存紧张时，有些缓存数据被淘汰，在这些缓存被下一次后天定时更新的期间，业务读取缓存会返回空值，被当作数据丢失。</p>
-        <p>​ 解决上述问题方式：1. 后台线程定时更新缓存同时，也负责<strong>频繁地检测缓存是否有效</strong>，检测到失效可能是因为上述的内存紧张导致的，马上从数据库读取数据更新到缓存当中。2. 在业务线程发现缓存数据失效后（缓存数据被淘汰），<strong>通过消息队列发送一条消息通知后台线程更新缓存</strong>，后台线程收到消息后，在更新缓存前可以判断缓存是否存在，存在就不执行更新缓存操作；不存在就读取数据库数据，并将数据加载到缓存。这种方式相比第一种方式缓存的更新会更及时，用户体验也比较好。</p>
+        <blockquote>
+          <p>实际上不设置有效期，内存中数据也会因为系统内存紧张时，有些缓存数据被淘汰，在这些缓存被下一次后天定时更新的期间，业务读取缓存会返回空值，被当作数据丢失。</p>
+          <p>​ 解决上述问题方式：1. 后台线程定时更新缓存同时，也负责<strong>频繁地检测缓存是否有效</strong>，检测到失效可能是因为上述的内存紧张导致的，马上从数据库读取数据更新到缓存当中。2. 在业务线程发现缓存数据失效后（缓存数据被淘汰），<strong>通过消息队列发送一条消息通知后台线程更新缓存</strong>，后台线程收到消息后，在更新缓存前可以判断缓存是否存在，存在就不执行更新缓存操作；不存在就读取数据库数据，并将数据加载到缓存。这种方式相比第一种方式缓存的更新会更及时，用户体验也比较好。</p>
+        </blockquote>
         <p>在业务刚上线的时候，我们最好提前把数据缓起来，而不是等待用户访问才来触发缓存构建，这就是所谓的<strong>缓存预热</strong>，后台更新缓存的机制刚好也适合干这个事情。</p>
         <h3 id="redis故障宕机"><a aria-hidden="true" tabindex="-1" href="#redis故障宕机" class="anchor"><span class="icon icon-link"></span></a>Redis故障宕机</h3>
         <ol>
@@ -110,6 +112,34 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </ol>
         <p>服务熔断或请求限流机制是缓存雪崩发生后的应对方案，我们最好通过<strong>主从节点的方式构建 Redis 缓存高可靠集群</strong>。</p>
         <p>如果 Redis 缓存的主节点故障宕机，从节点可以切换成为主节点，继续提供缓存服务，避免了由于 Redis 故障宕机而导致的缓存雪崩问题。</p>
+        <h2 id="缓存击穿"><a aria-hidden="true" tabindex="-1" href="#缓存击穿" class="anchor"><span class="icon icon-link"></span></a>缓存击穿</h2>
+        <p>我们的业务通常会有几个数据会被频繁地访问，比如秒杀活动，这类被频地访问的数据被称为<strong>热点数据</strong>。</p>
+        <p>如果缓存中的<strong>某个热点数据过期</strong>了，此时大量的请求访问了该热点数据，就无法从缓存中读取，直接访问数据库，数据库很容易就被高并发的请求冲垮，这就是<strong>缓存击穿</strong>的问题。</p>
+        <blockquote>
+          <p>缓存击穿和缓存雪崩类似，是其一个子集。</p>
+        </blockquote>
+        <p>应对缓存击穿可以采取前面说到两种方案：</p>
+        <ul>
+          <li>互斥锁方案，保证同一时间只有一个业务线程更新缓存，未能获取互斥锁的请求，要么等待锁释放后重新读取缓存，要么就返回空值或者默认值。</li>
+          <li>不给热点数据设置过期时间，由后台异步更新缓存，或者在热点数据准备要过期前，提前通知后台线程更新缓存以及重新设置过期时间；</li>
+        </ul>
+        <h2 id="缓存穿透"><a aria-hidden="true" tabindex="-1" href="#缓存穿透" class="anchor"><span class="icon icon-link"></span></a>缓存穿透</h2>
+        <p>当用户访问的数据，<strong>既不在缓存中，也不在数据库中</strong>，导致请求在访问缓存时，发现缓存缺失，再去访问数据库时，发现数据库中也没有要访问的数据，没办法构建缓存数据，来服务后续的请求。那么当有大量这样的请求到来时，数据库的压力骤增，这就是<strong>缓存穿透</strong>的问题。</p>
+        <p>缓存穿透的发生一般有这两种情况：</p>
+        <ul>
+          <li>业务误操作，缓存中的数据和数据库中的数据都被误删除了，所以导致缓存和数据库中都没有数据；</li>
+          <li>黑客恶意攻击，故意大量访问某些读取不存在数据的业务；</li>
+        </ul>
+        <h3 id="非法请求的限制"><a aria-hidden="true" tabindex="-1" href="#非法请求的限制" class="anchor"><span class="icon icon-link"></span></a>非法请求的限制</h3>
+        <p>当有大量恶意请求访问不存在的数据的时候，也会发生缓存穿透，因此在 API 入口处我们要判断求请求参数是否合理，请求参数是否含有非法值、请求字段是否存在，如果判断出是恶意请求就直接返回错误，避免进一步访问缓存和数据库。</p>
+        <h3 id="缓存空值或者默认值"><a aria-hidden="true" tabindex="-1" href="#缓存空值或者默认值" class="anchor"><span class="icon icon-link"></span></a>缓存空值或者默认值</h3>
+        <p>当我们线上业务发现缓存穿透的现象时，可以针对查询的数据，在缓存中设置一个空值或者默认值，这样后续请求就可以从缓存中读取到空值或者默认值，返回给应用，而不会继续查询数据库。</p>
+        <h3 id="布隆过滤器"><a aria-hidden="true" tabindex="-1" href="#布隆过滤器" class="anchor"><span class="icon icon-link"></span></a>布隆过滤器</h3>
+        <p>我们可以在写入数据库数据时，使用<strong>布隆过滤器</strong>做个标记，然后在用户请求到来时，业务线程确认缓存失效后，可以通过查询布隆过滤器快速判断数据是否存在，如果不存在，就不用通过查询数据库来判断数据是否存在。</p>
+        <p>即使发生了缓存穿透，大量请求只会查询 Redis 和布隆过滤器，而不会查询数据库，保证了数据库能正常运行，Redis 自身也是支持布隆过滤器的。</p>
+        <p>布隆过滤器主要通过3个操作完成标记：1. 使用N个哈希函数计算哈希值，2. 将哈希值对位图数组长度取模，得到的哈希值在位图数组的对应位置，3. 对应位置置1。</p>
+        <p>当对应位置全为1，才可能在数据库中，有一个0肯定不在。</p>
+        <p>当查询一个数据是否存在时，布隆过滤器<strong>数据存在，并不一定证明数据库中存在这个数据，但是查询到数据不存在，数据库中一定就不存在这个数据</strong>。</p>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -118,6 +148,14 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
               <ol class="tocs-list is-collapsed">
                 <li><a href="#大量数据同时过期" class="tocs-link">大量数据同时过期</a></li>
                 <li><a href="#redis故障宕机" class="tocs-link">Redis故障宕机</a></li>
+              </ol>
+            </li>
+            <li><a href="#缓存击穿" class="tocs-link">缓存击穿</a></li>
+            <li><a href="#缓存穿透" class="tocs-link">缓存穿透</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#非法请求的限制" class="tocs-link">非法请求的限制</a></li>
+                <li><a href="#缓存空值或者默认值" class="tocs-link">缓存空值或者默认值</a></li>
+                <li><a href="#布隆过滤器" class="tocs-link">布隆过滤器</a></li>
               </ol>
             </li>
           </ol>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Go Module iDoc</title>
+    <title>Go代码规范 iDoc</title>
     <meta name="description" content="Go 模块准备好后，只需简单几步，即可将其发布出去：">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
@@ -77,14 +77,19 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </aside>
       </div>
       <markdown-style>
-        <h1 id="go-module"><a aria-hidden="true" tabindex="-1" href="#go-module" class="anchor"><span class="icon icon-link"></span></a>Go Module</h1>
-        <h2 id="如何使用"><a aria-hidden="true" tabindex="-1" href="#如何使用" class="anchor"><span class="icon icon-link"></span></a>如何使用</h2>
+        <h1 id="go代码规范"><a aria-hidden="true" tabindex="-1" href="#go代码规范" class="anchor"><span class="icon icon-link"></span></a>Go代码规范</h1>
+        <h2 id="package"><a aria-hidden="true" tabindex="-1" href="#package" class="anchor"><span class="icon icon-link"></span></a>Package</h2>
+        <ul>
+          <li>同一个文件夹内package归属统一</li>
+        </ul>
+        <h2 id="go-moudle"><a aria-hidden="true" tabindex="-1" href="#go-moudle" class="anchor"><span class="icon icon-link"></span></a>Go Moudle</h2>
+        <h3 id="如何使用"><a aria-hidden="true" tabindex="-1" href="#如何使用" class="anchor"><span class="icon icon-link"></span></a>如何使用</h3>
         <ul>
           <li>go mod tidy会检测import中缺少的包，进行下载</li>
           <li>go get roc.io/quote@v1.9.1 指定版本号</li>
           <li>再执行一次go mod tidy 可以去除不必要的包</li>
         </ul>
-        <h2 id="发布步骤"><a aria-hidden="true" tabindex="-1" href="#发布步骤" class="anchor"><span class="icon icon-link"></span></a>发布步骤</h2>
+        <h3 id="发布步骤"><a aria-hidden="true" tabindex="-1" href="#发布步骤" class="anchor"><span class="icon icon-link"></span></a>发布步骤</h3>
         <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1">module github<span class="token punctuation">.</span>com<span class="token operator">/</span>shixiaocaia<span class="token operator">/</span>Learn_go
 </span><span class="code-line line-number" line="2">
 </span><span class="code-line line-number" line="3"><span class="token keyword">go</span> <span class="token number">1.20</span>
@@ -155,8 +160,13 @@ git tag v1.0.0
       <nav class="tocs">
         <aside class="inner toc">
           <ol class="tocs-list">
-            <li><a href="#如何使用" class="tocs-link">如何使用</a></li>
-            <li><a href="#发布步骤" class="tocs-link">发布步骤</a></li>
+            <li><a href="#package" class="tocs-link">Package</a></li>
+            <li><a href="#go-moudle" class="tocs-link">Go Moudle</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#如何使用" class="tocs-link">如何使用</a></li>
+                <li><a href="#发布步骤" class="tocs-link">发布步骤</a></li>
+              </ol>
+            </li>
           </ol>
         </aside>
       </nav>
