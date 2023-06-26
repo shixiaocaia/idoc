@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>数组 iDoc</title>
+    <title>数组 今天是个好天气</title>
     <meta name="description" content="在一个有序数组中查找某一个数或者位置可以考虑二分">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
@@ -41,8 +41,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 </script>
     <header class="header">
-      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
-<span class="title">iDoc</span></a>
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="今天是个好天气 logo" src="../logo.png">
+<span class="title">今天是个好天气</span></a>
         <div class="content">
           <ul class="menu">
             <li><a href="../index.html" target="" class="">Home</a></li>
@@ -135,8 +135,7 @@ public:
         </blockquote>
         <p><a href="https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/">LC34.在排序数组中查找元素的第一个和最后一个位置</a></p>
         <blockquote>
-          <p>本题卡了我很久一个点：<strong>数组越界访问问题</strong>，剪枝判断应该先判断越界问题再判断大小，否则会出现数组的越界访问。</p>
-          <p>三刷，合并左右遍历问题</p>
+          <p>找到答案后，继续向左或者向右遍历。</p>
         </blockquote>
         <p><a href="https://leetcode.cn/problems/search-in-rotated-sorted-array/description/">33. 搜索旋转排序数组</a></p>
         <blockquote>
@@ -149,6 +148,13 @@ public:
           <p>时间复杂度：<em>O</em>(<em>N</em>log<em>N</em>)，在二分里面嵌套了一个for循环。</p>
           <p>空间复杂度：O(1)，使用了一个 cnt 变量，因此空间复杂度为 O(1)。</p>
           <p>双指针做法。</p>
+        </blockquote>
+        <p><strong><a href="https://leetcode.cn/problems/find-peak-element/description/">162.寻找峰值</a></strong></p>
+        <blockquote>
+          <ol>
+            <li>根据条件，这里可以最后一个数默认作为小于峰值的点或者就是峰值点，初始化，从[0, n -2]遍历，通过nums[i]与nums[i + 1]大小关系，来染色，如果大于说明右侧可以全部染成蓝色，峰值点在左侧，如果小于那么峰值点在右侧，左侧全部是蓝色的。</li>
+            <li>这里用开区间写法，就要变成[-1, n - 1]，最后答案返回right，当left + 1 >= right，开区间内不包含整数。</li>
+          </ol>
         </blockquote>
         <h2 id="双指针"><a aria-hidden="true" tabindex="-1" href="#双指针" class="anchor"><span class="icon icon-link"></span></a>双指针</h2>
         <blockquote>

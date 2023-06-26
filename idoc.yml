@@ -13,12 +13,12 @@ output: dist
 
 ## site name
 # -----------------------
-site: iDoc
+site: 今天是个好天气
 
 
 cacheFileStat: true
 
-homepage: https://wangchujiang.com/idoc/
+homepage: https://shixiaocaia.fun
 
 ## Customize theme settings.
 ## defalut: `default`

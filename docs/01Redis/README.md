@@ -12,3 +12,5 @@ Redis
 ## 学习资料
 
 ✅[编程技术宇宙—Redis](https://space.bilibili.com/668097429/dynamic)
+
+✅[Brand—Redis原理分析](https://www.cnblogs.com/wzh2010/)

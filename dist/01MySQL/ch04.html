@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>索引 iDoc</title>
-    <meta name="description" content="InnoDB存储引擎支持B+树索引、全文索引、R树索引。">
+    <title>索引 今天是个好天气</title>
+    <meta name="description" content="使用索引带来以下的好处">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
@@ -41,8 +41,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 </script>
     <header class="header">
-      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
-<span class="title">iDoc</span></a>
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="今天是个好天气 logo" src="../logo.png">
+<span class="title">今天是个好天气</span></a>
         <div class="content">
           <ul class="menu">
             <li><a href="../index.html" target="" class="">Home</a></li>
@@ -63,12 +63,17 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <aside class="sidebar" role="navigation">
           <div>
             <a href="index.html" class="">↩️README</a>
+            <label>SQL</label>
             <a href="ch00.html" class="">Hello MySQL</a>
             <a href="ch01.html" class="">SQL</a>
             <a href="ch02.html" class="">写点SQL</a>
             <label>MySQL原理</label>
             <a href="ch03.html" class="">InnoDB存储引擎</a>
             <a href="ch04.html" class="">索引</a>
+            <a href="ch05.html" class="">事务</a>
+            <label>锁</label>
+            <a href="ch06.html" class="">有哪些锁</a>
+            <a href="ch07.html" class="">MySQL如何加锁</a>
           </div>
         </aside>
       </div>
@@ -79,9 +84,21 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <p>索引之所以能提升查询速度，在于它在插入时对数据进行了排序，比如聚簇索引根据主键排序。</p>
           <p>同时也会影响插入或者更新的性能，需要考虑顺序。</p>
         </blockquote>
-        <p>InnoDB存储引擎支持B+树索引、全文索引、R树索引。</p>
+        <p>使用索引带来以下的好处</p>
         <ul>
-          <li>主键索引是默认创建的，其他索引称为二级索引。</li>
+          <li>主键索引是默认创建的，其他索引称为二级索引</li>
+          <li>整个数据库中，数据表的查询速度直线提升，数据量越大时效果越明显。</li>
+          <li>通过创建唯一索引，可以确保数据表中的数据唯一性，无需额外建立唯一约束。</li>
+          <li>在使用分组和排序时，同样可以显著减少<code>SQL</code>查询的分组和排序的时间。</li>
+          <li>连表查询时，基于主外键字段上建立索引，可以带来十分明显的性能提升。</li>
+          <li>索引默认是<code>B+Tree</code>有序结构，基于索引字段做范围查询时，效率会明显提高。</li>
+          <li>从<code>MySQL</code>整体架构而言，减少了查询<code>SQL</code>的执行时间，提高了数据库整体吞吐量。</li>
+        </ul>
+        <p>同时也会带来一系列弊端：</p>
+        <ul>
+          <li>建立索引会生成本地磁盘文件，需要额外的空间存储索引数据，磁盘占用率会变高。</li>
+          <li>写入数据时，需要额外维护索引结构，增、删、改数据时，都需要额外操作索引。</li>
+          <li>写入数据时维护索引需要额外的时间开销，执行写<code>SQL</code>时效率会降低，性能会下降。</li>
         </ul>
         <h2 id="数据结构"><a aria-hidden="true" tabindex="-1" href="#数据结构" class="anchor"><span class="icon icon-link"></span></a>数据结构</h2>
         <h3 id="什么样数据结构是好的"><a aria-hidden="true" tabindex="-1" href="#什么样数据结构是好的" class="anchor"><span class="icon icon-link"></span></a>什么样数据结构是好的</h3>
@@ -231,8 +248,8 @@ WHERE DATE_FORMAT(register_date,&#x27;%Y-%m&#x27;) = &#x27;2021-01&#x27;
         <p>cellphone 就是一个虚拟列，它是由后面的函数表达式计算而成，本身这个列不占用任何的存储空间，而索引 idx_cellphone 实质是一个函数索引。</p>
         <h2 id="组合索引"><a aria-hidden="true" tabindex="-1" href="#组合索引" class="anchor"><span class="icon icon-link"></span></a>组合索引</h2>
         <p>组合索引（Compound Index）是指由多个列所组合而成的 B+树索引，对多个列进行排序。</p>
-        <p>对组合索引（a，b）来说，因为其对列 a、b 做了排序，WHERE 后查询列 a 和 b 的顺序无关，即使先写 b = ? AND a = ？依然可以使用组合索引（a，b）。</p>
-        <p>但是单独对b不能使用（a, b）索引。</p>
+        <p>对组合索引（a，b）来说，实际上是分别基于a，b建立了一个联合索引，越靠左优先级越高。</p>
+        <p>因为其对列 a、b 做了排序，WHERE 后查询列 a 和 b 的顺序无关，即使先写 b = ? AND a = ？依然可以使用组合索引（a，b）。 但是单独对b不能使用（a, b）索引，必须包含了最左的字段，才能使用联合索引。</p>
         <p>根据顺序（a，b），所以对下列SQL使用组合索引，</p>
         <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">SELECT</span> <span class="token operator">*</span> <span class="token keyword">FROM</span> <span class="token keyword">table</span> <span class="token keyword">WHERE</span> a <span class="token operator">=</span> ？ <span class="token keyword">ORDER</span> <span class="token keyword">BY</span> b <span class="token keyword">DESC</span>
 </span></code><input type="hidden" value="SELECT * FROM table WHERE a = ？ ORDER BY b DESC
@@ -242,7 +259,6 @@ WHERE DATE_FORMAT(register_date,&#x27;%Y-%m&#x27;) = &#x27;2021-01&#x27;
 </span></code><input type="hidden" value="SELECT * FROM table WHERE b = ？ ORDER BY a DESC
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <p>当所查询的字段就在二级索引的叶子节点当中，则可直接返回结果，<strong>避免</strong>回表。</p>
-        <p>在二级索引中使用组合索引，查询字段在其中时，无需回表，称为索引覆盖。</p>
         <h2 id="索引失效"><a aria-hidden="true" tabindex="-1" href="#索引失效" class="anchor"><span class="icon icon-link"></span></a>索引失效</h2>
         <p>InnoDB 和 MyISAM 都支持 B+ 树索引，但是它们数据的存储结构实现方式不同。不同之处在于：</p>
         <ul>
@@ -291,6 +307,8 @@ WHERE DATE_FORMAT(register_date,&#x27;%Y-%m&#x27;) = &#x27;2021-01&#x27;
           <li>where c=3；</li>
           <li>where b=2 and c=3；</li>
         </ul>
+        <p><code>MySQL</code>的最左前缀原则，在匹配到范围查询时会停止匹配，比如<code>>、&#x3C;、between、like</code>这类范围条件，并不会继续使用联合索引</p>
+        <hr>
         <p>有一个比较特殊的查询条件：where a = 1 and c = 3 ，符合最左匹配吗？</p>
         <p>这种其实严格意义上来说是属于索引截断，不同版本处理方式也不一样。</p>
         <p>MySQL 5.5 的话，前面 a 会走索引，在联合索引找到主键值后，开始回表，到主键索引读取数据行，Server 层从存储引擎层获取到数据行后，然后在 Server 层再比对 c 字段的值。</p>
@@ -301,6 +319,93 @@ WHERE DATE_FORMAT(register_date,&#x27;%Y-%m&#x27;) = &#x27;2021-01&#x27;
         <h3 id="where-子句中的-or"><a aria-hidden="true" tabindex="-1" href="#where-子句中的-or" class="anchor"><span class="icon icon-link"></span></a>WHERE 子句中的 OR</h3>
         <p>在 WHERE 子句中，如果在 OR 前的条件列是索引列，而在 OR 后的条件列不是索引列，那么索引会失效。</p>
         <p>只有一个是索引列，是没有意义的。</p>
+        <h2 id="索引出错"><a aria-hidden="true" tabindex="-1" href="#索引出错" class="anchor"><span class="icon icon-link"></span></a>索引出错</h2>
+        <h3 id="mysql如何选择索引的"><a aria-hidden="true" tabindex="-1" href="#mysql如何选择索引的" class="anchor"><span class="icon icon-link"></span></a>MySQL如何选择索引的</h3>
+        <p>索引的选择取决于数据库的优化器。优化器的选择是基于成本（cost），哪个索引的成本越低，优先使用哪个索引。</p>
+        <p>如图所示，MySQL 数据库由 Server 层和 Engine 层组成：</p>
+        <p>
+          <img src="..\img\Cgp9HWCvUQGAR_xXAACOy0gME7Q765.png" alt="image">
+        </p>
+        <ul>
+          <li>Server 层有 SQL 分析器、SQL优化器、SQL 执行器，用于负责 SQL 语句的具体执行过程；</li>
+          <li>Engine 层负责存储具体的数据，如最常使用的 InnoDB 存储引擎，还有用于在内存中存储临时结果集的 TempTable 引擎。</li>
+        </ul>
+        <p>SQL 优化器会分析所有可能的执行计划，选择成本最低的执行，这种优化器称之为：CBO（Cost-based Optimizer，基于成本的优化器）。</p>
+        <p>在 MySQL中，一条 SQL 的计算成本计算如下所示：<code>Cost = Server Cost + Engine Cost = CPU Cost + IO Cost</code></p>
+        <ul>
+          <li>其中，CPU Cost 表示计算的开销，比如索引键值的比较、记录值的比较、结果集的排序……这些操作都在 Server 层完成；</li>
+          <li>IO Cost 表示引擎层 IO 的开销，MySQL 8.0 可以通过区分一张表的数据是否在内存中，分别计算读取内存 IO 开销以及读取磁盘 IO 的开销。</li>
+        </ul>
+        <h3 id="未能使用创建的索引"><a aria-hidden="true" tabindex="-1" href="#未能使用创建的索引" class="anchor"><span class="icon icon-link"></span></a>未能使用创建的索引</h3>
+        <p>同一条SQL语句，查询的范围不同，优化器的选择范围就可能不同。</p>
+        <p><strong>为什么全表扫描比二级索引查询快呢？</strong></p>
+        <blockquote>
+          <p>因为二级索引需要回表，当回表的记录数非常大时，成本就会比直接扫描要慢，因此这取决于回表的记录数。</p>
+          <p>所以有时候在有二级索引的情况下，仍然可能使用全表扫描，优化器根据成本计算得到最优的执行计划。</p>
+        </blockquote>
+        <h3 id="索引创建在有限状态上"><a aria-hidden="true" tabindex="-1" href="#索引创建在有限状态上" class="anchor"><span class="icon icon-link"></span></a>索引创建在有限状态上</h3>
+        <p>B+ 树索引通常要建立在高选择性的字段或字段组合上，如性别、订单 ID、日期等，因为这样每个字段值大多并不相同。像性别这样的低选择性的字段，一般无须创建索引。</p>
+        <p>但是在有些低选择性列上，仍然有必要创建索引。比如在电商业务中订单o_orderstatus 的状态是有限的，一般仅为已完成、支付中、超时已关闭这几种。</p>
+        <p>通常订单状态绝大部分都是已完成，只有绝少部分因为系统故障原因，会在 15 分钟后还没有完成订单，<strong>因此订单状态是存在数据倾斜的。</strong></p>
+        <p>这时，虽然订单状态是低选择性的，但是由于其有数据倾斜，且我们只是从索引查询少量数据，因此可以对订单状态创建索引。</p>
+        <p>此时可以通过MySQL8.0的直方图功能，让优化器知道数据的分布，从而更好地选择执行计划。</p>
+        <p>在创建完直方图后，MySQL会收集到字段 o_orderstatus 的数值分布，优化器知道所查询的字段占的比例小时，在查询小比例部分时，不会误以为回表成本大而不使用二级索引。</p>
+        <h2 id="建立索引"><a aria-hidden="true" tabindex="-1" href="#建立索引" class="anchor"><span class="icon icon-link"></span></a>建立索引</h2>
+        <h3 id="优劣分析"><a aria-hidden="true" tabindex="-1" href="#优劣分析" class="anchor"><span class="icon icon-link"></span></a>优劣分析</h3>
+        <h4 id="主键索引"><a aria-hidden="true" tabindex="-1" href="#主键索引" class="anchor"><span class="icon icon-link"></span></a>主键索引</h4>
+        <p>一张表中大多数情况下，会将主键索引以聚簇的形式存在磁盘中。聚簇索引在存储数据时，表数据和索引数据是一起存放的。同时，<code>MySQL</code>默认的索引结构是<code>B+Tree</code>，也就代表着索引节点的数据是<strong>有序的</strong>。</p>
+        <blockquote>
+          <p>如果使用UUID自增，不会重复，但是无序会导致插入新数据时，破坏原本的树的结构，调整树的结构来存放新的数据。</p>
+          <p>使用自增ID，确保插入的数据都放到最后。</p>
+        </blockquote>
+        <h4 id="前缀索引"><a aria-hidden="true" tabindex="-1" href="#前缀索引" class="anchor"><span class="icon icon-link"></span></a>前缀索引</h4>
+        <p>利用一个字段的前<code>N</code>个字符创建索引，以这种形式创建的索引也被称之为前缀索引，相较于使用一个完整字段创建索引，前缀索引能够更加节省存储空间，当数据越多时，带来的优势越明显。</p>
+        <p>未存储一个字段的完整值，所以<code>MySQL</code>也无法通过前缀索引来完成<code>ORDER BY、GROUP BY</code>等分组排序工作，同时也无法完成覆盖扫描等操作。</p>
+        <h4 id="全文索引"><a aria-hidden="true" tabindex="-1" href="#全文索引" class="anchor"><span class="icon icon-link"></span></a>全文索引</h4>
+        <p>全文索引替代模糊查询（like），性能更好。</p>
+        <p>但是也有以下的缺点：</p>
+        <ul>
+          <li>由于全文索引是基于分词实现的，所以对一个字段建立全文索引后，<code>MySQL</code>会对该字段做分词处理，这些分词结果也会被存储在全文索引中，因此<strong>全文索引的文件会额外的大</strong>！</li>
+          <li>由于全文索引对每个字段值都会做分词，因此当修改字段值后，<strong>分词是需要时间的</strong>，所以修改字段数据后不会立马自动更新全文索引，此时需要咱们写存储过程，并调用它手动更新全文索引中的数据。</li>
+          <li>全文索引最大的硬伤在于<strong>对中文支持不够友好</strong>，类似于英文可以直接通过符号、空格来分词，但中文呢？一个词语来形容就是博大精深，无法精准的对一段文字做分词，因此全文索引在检索中文时，存在些许精准度问题。</li>
+        </ul>
+        <h4 id="唯一索引"><a aria-hidden="true" tabindex="-1" href="#唯一索引" class="anchor"><span class="icon icon-link"></span></a>唯一索引</h4>
+        <p>使用普通索引，查询某个数据时，可能会因为重复字段值而走完整个二叉树。</p>
+        <p>如果字段上建立的是唯一索引，当找到一条数据后就会立马停下检索，因此本身建立唯一索引的字段值就具备唯一性。</p>
+        <h4 id="哈希索引"><a aria-hidden="true" tabindex="-1" href="#哈希索引" class="anchor"><span class="icon icon-link"></span></a>哈希索引</h4>
+        <p>大部分结构默认是B+树结构，Hash结构形式存储索引字段值，可以经过哈希计算更快获取数据，但是<strong>无序</strong>的特性导致基于哈希索引的字段无法做排序、分组工作。</p>
+        <h3 id="正确建立索引"><a aria-hidden="true" tabindex="-1" href="#正确建立索引" class="anchor"><span class="icon icon-link"></span></a>正确建立索引</h3>
+        <p><strong>表中哪个字段建立一个索引能带来最大的性能收益呢</strong></p>
+        <blockquote>
+          <p>经常被当作查询条件，并且高选择性。</p>
+        </blockquote>
+        <h4 id="回表问题"><a aria-hidden="true" tabindex="-1" href="#回表问题" class="anchor"><span class="icon icon-link"></span></a>回表问题</h4>
+        <p>如果表中存在主键索引或聚簇索引，对其他字段建立的索引，都是次级索引，也被称为辅助索引，其节点上的值，存储的并非一条完整的行数据，而是指向聚簇索引的索引字段值。</p>
+        <p>回表指的是一条SQL在MySQL内部，需要经过两次查询才能获取到数据。先通过索引字段查询到指向聚簇索引的主键ID值，再去聚簇索引中找到一行数据返回。</p>
+        <blockquote>
+          <p>实际情况中建立联合索引，利用索引覆盖特性，从而避免使用辅助索引，这样也能够消除回表动作。</p>
+        </blockquote>
+        <h4 id="遵守原则"><a aria-hidden="true" tabindex="-1" href="#遵守原则" class="anchor"><span class="icon icon-link"></span></a>遵守原则</h4>
+        <ul>
+          <li>经常频繁用作查询条件的字段应酌情考虑为其创建索引。</li>
+          <li>表的主外键或连表字段，必须建立索引，因为能很大程度提升连表查询的性能。</li>
+          <li>建立索引的字段，一般值的<strong>区分性要足够高</strong>，这样才能提高索引的检索效率。</li>
+          <li>建立索引的字段，值不应该过长，如果较长的字段要建立索引，可以选择前缀索引。</li>
+          <li>建立联合索引，应当遵循最左前缀原则，将多个字段之间按优先级顺序组合。</li>
+          <li>经常根据范围取值、排序、分组的字段应建立索引，因为索引有序，能加快排序时间。</li>
+          <li>对于唯一索引，如果确认不会利用该字段排序，那可以将结构改为<code>Hash</code>结构。</li>
+          <li>尽量使用联合索引代替单值索引，联合索引比多个单值索引查询效率要高。</li>
+        </ul>
+        <p>同时，除开上述一些建立索引的原则外，在建立索引时还需有些注意点：</p>
+        <ul>
+          <li>值经常会增删改的字段，不合适建立索引，因为每次改变后需维护索引结构。</li>
+          <li>一个字段存在大量的重复值时，不适合建立索引，比如之前举例的性别字段。</li>
+          <li>索引不能参与计算，因此经常带函数查询的字段，并不适合建立索引。</li>
+          <li>一张表中的索引数量并不是越多越好，一般控制在<code>3</code>，最多不能超过<code>5</code>。</li>
+          <li>建立联合索引时，一定要考虑优先级，查询频率最高的字段应当放首位。</li>
+          <li>当表的数据较少，不应当建立索引，因为数据量不大时，维护索引反而开销更大。</li>
+          <li>索引的字段值无序时，不推荐建立索引，因为会造成页分裂，尤其是主键索引。</li>
+        </ul>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -337,6 +442,32 @@ WHERE DATE_FORMAT(register_date,&#x27;%Y-%m&#x27;) = &#x27;2021-01&#x27;
                 <li><a href="#对索引隐式类型转换" class="tocs-link">对索引隐式类型转换</a></li>
                 <li><a href="#联合索引非最左匹配" class="tocs-link">联合索引非最左匹配</a></li>
                 <li><a href="#where-子句中的-or" class="tocs-link">WHERE 子句中的 OR</a></li>
+              </ol>
+            </li>
+            <li><a href="#索引出错" class="tocs-link">索引出错</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#mysql如何选择索引的" class="tocs-link">MySQL如何选择索引的</a></li>
+                <li><a href="#未能使用创建的索引" class="tocs-link">未能使用创建的索引</a></li>
+                <li><a href="#索引创建在有限状态上" class="tocs-link">索引创建在有限状态上</a></li>
+              </ol>
+            </li>
+            <li><a href="#建立索引" class="tocs-link">建立索引</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#优劣分析" class="tocs-link">优劣分析</a>
+                  <ol class="tocs-list is-collapsed">
+                    <li><a href="#主键索引" class="tocs-link">主键索引</a></li>
+                    <li><a href="#前缀索引" class="tocs-link">前缀索引</a></li>
+                    <li><a href="#全文索引" class="tocs-link">全文索引</a></li>
+                    <li><a href="#唯一索引" class="tocs-link">唯一索引</a></li>
+                    <li><a href="#哈希索引" class="tocs-link">哈希索引</a></li>
+                  </ol>
+                </li>
+                <li><a href="#正确建立索引" class="tocs-link">正确建立索引</a>
+                  <ol class="tocs-list is-collapsed">
+                    <li><a href="#回表问题" class="tocs-link">回表问题</a></li>
+                    <li><a href="#遵守原则" class="tocs-link">遵守原则</a></li>
+                  </ol>
+                </li>
               </ol>
             </li>
           </ol>

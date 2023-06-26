@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>动态规划 iDoc</title>
-    <meta name="description" content="动态规划，英文：Dynamic Programming，简称DP，如果某一问题有很多重叠子问题，使用动态规划是最有效的。">
+    <title>动态规划 今天是个好天气</title>
+    <meta name="description" content="dp[i][j]表示从0-i个物品中任意取重量为j得物品后，最大价值。">
     <meta name="keywords" content="notebook">
     <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
     <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
@@ -41,8 +41,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
 }
 </script>
     <header class="header">
-      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="iDoc logo" src="../logo.png">
-<span class="title">iDoc</span></a>
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="今天是个好天气 logo" src="../logo.png">
+<span class="title">今天是个好天气</span></a>
         <div class="content">
           <ul class="menu">
             <li><a href="../index.html" target="" class="">Home</a></li>
@@ -81,8 +81,6 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
       </div>
       <markdown-style>
         <h1 id="动态规划"><a aria-hidden="true" tabindex="-1" href="#动态规划" class="anchor"><span class="icon icon-link"></span></a>动态规划</h1>
-        <p>动态规划，英文：Dynamic Programming，简称DP，如果某一问题有很多重叠子问题，使用动态规划是最有效的。</p>
-        <p>所以动态规划中每一个状态一定是由上一个状态推导出来的，<strong>这一点就区分于贪心</strong>，贪心没有状态推导，而是从局部直接选最优的，同时这也是全局最优的。</p>
         <h3 id="步骤"><a aria-hidden="true" tabindex="-1" href="#步骤" class="anchor"><span class="icon icon-link"></span></a>步骤</h3>
         <ol>
           <li>确定dp数组（dp table）以及下标的含义</li>
@@ -91,10 +89,6 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li>确定遍历顺序</li>
           <li>举例推导dp数组</li>
         </ol>
-        <p><strong>找问题的最好方式就是把dp数组打印出来，看看究竟是不是按照自己思路推导的！</strong></p>
-        <blockquote>
-          <p>DP的题有哪些状态，比如买或者不买，状态怎么转变的。</p>
-        </blockquote>
         <h3 id="例子"><a aria-hidden="true" tabindex="-1" href="#例子" class="anchor"><span class="icon icon-link"></span></a>例子</h3>
         <ol>
           <li>确定dp数组（dp table）以及下标的含义</li>
@@ -361,7 +355,7 @@ int main() {
               <p>dp[i]表示分拆数字i，可以得到的最大乘积为 dp[i]。</p>
             </li>
             <li>
-              <p>dp[i] 一种为 j * (i - j)，一种为j * dp[i - j] 是对 i - j 的再拆分至少两个数的最大值 <code>dp[i] = max(dp[i], max((i - j) * j, dp[i - j] * j));</code></p>
+              <p>dp[i] 一种为 j * (i - j)，一种为j * dp[i - j] 是对 i - j 的<strong>再拆分</strong>至少两个数的最大值 <code>dp[i] = max(dp[i], max((i - j) * j, dp[i - j] * j));</code></p>
             </li>
             <li>
               <p>dp[0] dp[1] 就不应该初始化，也就是没有意义的数值。只初始化dp[2] = 1.</p>
@@ -371,9 +365,6 @@ int main() {
               <p>枚举 j 的时候，是从1开始的。i 是从3开始，这样dp[i - j]就是dp[2]正好可以通过我们初始化的数值求出来。</p>
             </li>
           </ol>
-        </blockquote>
-        <blockquote>
-          <p>用容器实现初始化，<code>int dp[n + 1] = {0}</code>报错。</p>
         </blockquote>
         <p><strong><a href="https://leetcode.cn/problems/unique-binary-search-trees/">96. 不同的二叉搜索树</a></strong></p>
         <blockquote>

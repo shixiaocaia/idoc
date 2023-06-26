@@ -39,9 +39,7 @@ public:
 
 [LC34.在排序数组中查找元素的第一个和最后一个位置](https://leetcode.cn/problems/find-first-and-last-position-of-element-in-sorted-array/)
 
-> 本题卡了我很久一个点：**数组越界访问问题**，剪枝判断应该先判断越界问题再判断大小，否则会出现数组的越界访问。
->
-> 三刷，合并左右遍历问题
+> 找到答案后，继续向左或者向右遍历。 
 
 [33. 搜索旋转排序数组](https://leetcode.cn/problems/search-in-rotated-sorted-array/description/)
 
@@ -58,6 +56,11 @@ public:
 > 空间复杂度：O(1)，使用了一个 cnt 变量，因此空间复杂度为 O(1)。
 >
 > 双指针做法。
+
+**[162.寻找峰值](https://leetcode.cn/problems/find-peak-element/description/)**
+
+> 1. 根据条件，这里可以最后一个数默认作为小于峰值的点或者就是峰值点，初始化，从[0, n -2]遍历，通过nums[i]与nums[i + 1]大小关系，来染色，如果大于说明右侧可以全部染成蓝色，峰值点在左侧，如果小于那么峰值点在右侧，左侧全部是蓝色的。
+> 2. 这里用开区间写法，就要变成[-1, n - 1]，最后答案返回right，当left + 1 >= right，开区间内不包含整数。
 
 ## 双指针
 
