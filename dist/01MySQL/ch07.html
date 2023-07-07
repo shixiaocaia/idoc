@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MySQL如何加锁 今天是个好天气</title>
+    <meta name="description" content="InnoDB 引擎是支持行级锁的，而 MyISAM 引擎并不支持行级锁。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.26.6">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.26.6"></script>
+    <script src="../js/dark-mode.js?v=1.26.6"></script>
+    <script src="../js/markdown-style.js?v=1.26.6"></script>
+    <script src="../js/jquery.min.js?v=1.26.6"></script>
+    <script src="../js/fancybox.umd.js?v=1.26.6"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="今天是个好天气 logo" src="../logo.png">
+<span class="title">今天是个好天气</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00Go/index.html" target="" class="">Go</a></li>
+            <li><a href="index.html" target="" class="active">MySQL</a></li>
+            <li><a href="../01Redis/index.html" target="" class="">Redis</a></li>
+            <li><a href="../01LeetCode/index.html" target="" class="">LeetCode</a></li>
+            <li><a href="../02HelloWorld/index.html" target="" class="">Hello World</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <label>SQL</label>
+            <a href="ch00.html" class="">Hello MySQL</a>
+            <a href="ch01.html" class="">SQL</a>
+            <a href="ch02.html" class="">写点SQL</a>
+            <label>MySQL原理</label>
+            <a href="ch03.html" class="">InnoDB存储引擎</a>
+            <a href="ch04.html" class="">索引</a>
+            <a href="ch05.html" class="">事务</a>
+            <label>锁</label>
+            <a href="ch06.html" class="">有哪些锁</a>
+            <a href="ch07.html" class="">MySQL如何加锁</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="mysql如何加锁"><a aria-hidden="true" tabindex="-1" href="#mysql如何加锁" class="anchor"><span class="icon icon-link"></span></a>MySQL如何加锁</h1>
+        <p>InnoDB 引擎是支持行级锁的，而 MyISAM 引擎并不支持行级锁。</p>
+        <h2 id="什么sql语句会加行级锁"><a aria-hidden="true" tabindex="-1" href="#什么sql语句会加行级锁" class="anchor"><span class="icon icon-link"></span></a>什么SQL语句会加行级锁</h2>
+        <p>普通的 select 语句是不会对记录加锁的（除了串行化隔离级别），因为它属于快照读，是通过 MVCC（多版本并发控制）实现的。</p>
+        <p>可以手动添加：</p>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token comment">//对读取的记录加共享锁(S型锁)</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">select</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token keyword">lock</span> <span class="token operator">in</span> <span class="token keyword">share</span> <span class="token keyword">mode</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4"><span class="token comment">//对读取的记录加独占锁(X型锁)</span>
+</span><span class="code-line line-number" line="5"><span class="token keyword">select</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token keyword">for</span> <span class="token keyword">update</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="//对读取的记录加共享锁(S型锁)
+select ... lock in share mode;
+
+//对读取的记录加独占锁(X型锁)
+select ... for update;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>当事务提交时，锁会被释放，所以在使用这两条语句时，需要加上begin或者start transaction。</p>
+        <p>update 和 delete 操作都会加行级锁，且锁的类型都是独占锁(X型锁)。</p>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token comment">//对操作的记录加独占锁(X型锁)</span>
+</span><span class="code-line line-number" line="2"><span class="token keyword">update</span> <span class="token keyword">table</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token keyword">where</span> id <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="3">
+</span><span class="code-line line-number" line="4"><span class="token comment">//对操作的记录加独占锁(X型锁)</span>
+</span><span class="code-line line-number" line="5"><span class="token keyword">delete</span> <span class="token keyword">from</span> <span class="token keyword">table</span> <span class="token keyword">where</span> id <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="//对操作的记录加独占锁(X型锁)
+update table .... where id = 1;
+
+//对操作的记录加独占锁(X型锁)
+delete from table where id = 1;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="mysql是怎么加行级锁的"><a aria-hidden="true" tabindex="-1" href="#mysql是怎么加行级锁的" class="anchor"><span class="icon icon-link"></span></a>MySQL是怎么加行级锁的</h2>
+        <p>加锁的对象是索引，加锁的基本单位是 next-key lock。</p>
+        <p>next-key lock 在一些场景下会退化成记录锁或间隙锁：<strong>在能使用记录锁或者间隙锁就能避免幻读现象的场景下， next-key lock 就会退化成记录锁或间隙锁</strong>。</p>
+        <h3 id="唯一索引等值查询"><a aria-hidden="true" tabindex="-1" href="#唯一索引等值查询" class="anchor"><span class="icon icon-link"></span></a>唯一索引等值查询</h3>
+        <p>用唯一索引进行等值查询的时候，查询的记录存不存在，加锁的规则也会不同：</p>
+        <ul>
+          <li>当查询的记录是「存在」的，在索引树上定位到这一条记录后，将该记录的索引中的 next-key lock 会<strong>退化成「记录锁」</strong>。</li>
+          <li>当查询的记录是「不存在」的，在索引树找到第一条大于该查询记录的记录后，将该记录的索引中的 next-key lock 会<strong>退化成「间隙锁」</strong>。</li>
+        </ul>
+        <hr>
+        <p><strong>为什么唯一索引等值查询并且查询记录存在的场景下，该记录的索引中的 next-key lock 会退化成记录锁？</strong></p>
+        <blockquote>
+          <p>在唯一索引等值查询并且查询记录存在的场景下，仅靠记录锁也能避免幻读的问题。</p>
+          <p>幻读是一个事务前后两次查询到的结果集不同。避免幻读就是避免结果集一条记录被其他事务删除或者插入一条新的记录。</p>
+          <ul>
+            <li>由于主键唯一性，其他事务插入查询id记录，比如id = 1的记录时，会因为主键冲突，导致无法查询id = 1的新记录。</li>
+            <li>加了记录锁（X锁）后，其他事务无法对记录进行增删改。</li>
+          </ul>
+        </blockquote>
+        <hr>
+        <p><strong>为什么唯一索引等值查询并且查询记录「不存在」的场景下，在索引树找到第一条大于该查询记录的记录后，要将该记录的索引中的 next-key lock 会退化成「间隙锁」？</strong></p>
+        <blockquote>
+          <p>在唯一索引等值查询并且查询记录不存在的场景下，仅靠间隙锁就能避免幻读的问题。</p>
+          <ul>
+            <li>next-key锁会影响其他记录的删除，其他记录的删除不会影响当前查询（不存在）的结果，只需要Gap锁来避免插入影响结果集的新纪录即可。</li>
+            <li>锁是加在索引上的，当查询记录不存在时，无法锁住不存在的记录。</li>
+          </ul>
+        </blockquote>
+        <h3 id="唯一索引查询范围"><a aria-hidden="true" tabindex="-1" href="#唯一索引查询范围" class="anchor"><span class="icon icon-link"></span></a>唯一索引查询范围</h3>
+        <p>当唯一索引进行范围查询时，**会对每一个扫描到的索引加 next-key 锁，**然后如果遇到下面这些情况，会退化成记录锁或者间隙锁：</p>
+        <ul>
+          <li>情况一：针对「大于等于」的范围查询，因为存在等值查询的条件，那么如果等值查询的记录是存在于表中，那么该记录的索引中的 next-key 锁会<strong>退化成记录锁</strong>。</li>
+        </ul>
+        <blockquote>
+          <p>对于等值部分同上面说明的，主键唯一性避免了插入，记录锁又避免了插入新记录，避免了幻读。</p>
+          <p>对于其他部分，增加next-key锁避免删除更改、新增记录。</p>
+        </blockquote>
+        <hr>
+        <ul>
+          <li>
+            <p>情况二：针对「小于或者小于等于」的范围查询，要看条件值的记录是否存在于表中：</p>
+            <ul>
+              <li>
+                <p>当条件值的记录不在表中，那么不管是「小于」还是「小于等于」条件的范围查询，<strong>扫描到终止范围查询的记录时，该记录的索引的 next-key 锁会退化成间隙锁</strong>，其他扫描到的记录，都是在这些记录的索引上加 next-key 锁。</p>
+              </li>
+            </ul>
+            <blockquote>
+              <p>因为这里的终止范围不是符合条件的记录，没必要加记录锁。</p>
+            </blockquote>
+            <ul>
+              <li>当条件值的记录「在」表中时：
+                <ul>
+                  <li>如果是「小于」条件的范围查询，扫描到终止范围查询的记录时，该记录的主键索引中的 next-key 锁会<strong>退化成间隙锁</strong>，其他扫描到的记录，都是在这些记录的主键索引上，加 next-key 锁。</li>
+                  <li>如果是「小于等于」条件的范围查询，扫描到终止范围查询的记录时，该记录的主键索引中加的都是 next-key 锁</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <h3 id="非唯一索引等值查询"><a aria-hidden="true" tabindex="-1" href="#非唯一索引等值查询" class="anchor"><span class="icon icon-link"></span></a>非唯一索引等值查询</h3>
+        <p>当我们用非唯一索引进行等值查询的时候，因为存在两个索引，一个是主键索引，一个是非唯一索引（二级索引），所以在加锁时，<strong>同时会对这两个索引都加锁</strong>，但是对主键索引加锁的时候，只有满足查询条件的记录才会对它们的主键索引加锁。</p>
+        <ul>
+          <li>
+            <p>当查询的记录「存在」时，由于不是唯一索引，所以肯定存在索引值相同的记录，于是非唯一索引等值查询的过程是一个扫描的过程，直到扫描到第一个不符合条件的二级索引记录就停止扫描</p>
+            <ul>
+              <li>
+                <p>然后在扫描的过程中，对扫描到的二级索引记录加的是 next-key 锁</p>
+              </li>
+              <li>
+                <p>对于第一个不符合条件的二级索引记录，该二级索引的 next-key 锁会退化成间隙锁</p>
+              </li>
+            </ul>
+            <blockquote>
+              <p>这里避免了同age而主键id靠后，逃过Next-key锁后的插入，避免幻读现象，</p>
+            </blockquote>
+            <ul>
+              <li>同时，在符合查询条件的记录的主键索引上加记录锁</li>
+            </ul>
+          </li>
+        </ul>
+        <hr>
+        <ul>
+          <li>当查询的记录「不存在」时，<strong>扫描到第一条不符合条件的二级索引记录，该二级索引的 next-key 锁会退化成间隙锁。因为不存在满足查询条件的记录，所以不会对主键索引加锁</strong>。</li>
+        </ul>
+        <blockquote>
+          <p>由于间隙锁是左开右开的，对于边界上的位置能否插入新纪录，根据**「二级索引值（age列）+主键值（id列）」**同时判断插入位置后面是否具有Gap锁。</p>
+          <p>所以也可以看到<code>LOCK_DATA：39，20</code>，增加一个字段来判断哪些范围的id值可以插入。</p>
+        </blockquote>
+        <h3 id="非唯一索引范围查询"><a aria-hidden="true" tabindex="-1" href="#非唯一索引范围查询" class="anchor"><span class="icon icon-link"></span></a>非唯一索引范围查询</h3>
+        <p>非唯一索引进行范围查询时，对二级索引记录加锁都是加 next-key 锁。</p>
+        <p>因为在二级索引中字段不是唯一的，如果只加记录锁，无法防止插入或者修改，出现幻读。</p>
+        <h3 id="没有加索引的查询"><a aria-hidden="true" tabindex="-1" href="#没有加索引的查询" class="anchor"><span class="icon icon-link"></span></a>没有加索引的查询</h3>
+        <p>如果锁定读查询语句，没有使用索引列作为查询条件，或者查询语句没有走索引查询，导致扫描是<strong>全表扫描</strong>。那么，每一条记录的索引上都会加 next-key 锁，这样就相当于锁住的全表，这时如果其他事务对该表进行增、删、改操作的时候，都会被阻塞。</p>
+        <p>在线上在执行 update、delete、select ... for update 等具有加锁性质的语句，一定要检查语句是否走了索引，如果是全表扫描的话，会对每一个索引加 next-key 锁，相当于把整个表锁住了，这是挺严重的问题。</p>
+        <h2 id="锁结构"><a aria-hidden="true" tabindex="-1" href="#锁结构" class="anchor"><span class="icon icon-link"></span></a>锁结构</h2>
+        <h2 id="在线修改表结构"><a aria-hidden="true" tabindex="-1" href="#在线修改表结构" class="anchor"><span class="icon icon-link"></span></a>在线修改表结构</h2>
+        <ul>
+          <li>在业务系统<strong>运行</strong>过程中随意删改字段，会<strong>造成重大事故</strong>。
+            <ul>
+              <li>常规的做法是：<strong>业务停机</strong>，再 <strong>维护表结构</strong>，比如：12306 凌晨 0 点到早上 7 点是停机维护。</li>
+            </ul>
+          </li>
+          <li>如果是不影响正常业务的表结构是允许在线修改的。
+            <ul>
+              <li>比如：int 类型不够用了，要缓存 bigint、有唯一性约束，要去掉。这不会影响线上的正在执行的数据</li>
+            </ul>
+          </li>
+        </ul>
+        <h3 id="alter-table弊端"><a aria-hidden="true" tabindex="-1" href="#alter-table弊端" class="anchor"><span class="icon icon-link"></span></a>alter table弊端</h3>
+        <ul>
+          <li>
+            <p>表级锁</p>
+            <p>修改表结构会锁表，因此在修改表结构时，影响表的写入操作；</p>
+            <p>数据越多，锁表时间越长。</p>
+          </li>
+          <li>
+            <p>修改失败，还原表结构，耗时长</p>
+            <p>如果修改表结果失败，必须还原表结构，所以耗时更长；</p>
+            <p>比如：添加一个唯一性约束，结果发现很多数据有控制，无法添加进来了，这个时候就只能还原表结构</p>
+          </li>
+          <li>
+            <p>大数据表记录多，修改表结构锁表时间很久、</p>
+          </li>
+        </ul>
+        <h3 id="使用perconatookit"><a aria-hidden="true" tabindex="-1" href="#使用perconatookit" class="anchor"><span class="icon icon-link"></span></a>使用PerconaTookit</h3>
+        <p>由于 alter table 线上修改表结构有诸多弊端，但是 PerconaTookit 提供了一个开源的线上修改表结构的工具。</p>
+        <p>其中一个名为 pt-online-schema-change 的工具可以完成在线修改表结构。</p>
+        <h3 id="perconatookit原理"><a aria-hidden="true" tabindex="-1" href="#perconatookit原理" class="anchor"><span class="icon icon-link"></span></a>PerconaTookit原理</h3>
+        <ol>
+          <li>复制一份 order 表结构</li>
+          <li>在这个新表的修改表结构</li>
+          <li>同步执行数据拷贝
+            <ul>
+              <li>修改完成之后，会在原来表上增加触发器，新的操作数据增删改查都会同步到新的表中，</li>
+              <li>同时会把原来表的数据拷贝到新表中。</li>
+              <li>当数据拷贝完之后，且<strong>原表没有新的数据写入</strong>时，把原表删除，把新表名称修改为原表名称</li>
+            </ul>
+          </li>
+        </ol>
+        <h2 id="死锁"><a aria-hidden="true" tabindex="-1" href="#死锁" class="anchor"><span class="icon icon-link"></span></a>死锁</h2>
+        <h3 id="死锁的发生"><a aria-hidden="true" tabindex="-1" href="#死锁的发生" class="anchor"><span class="icon icon-link"></span></a>死锁的发生</h3>
+        <p>普通的 select 语句是不会对记录加锁的，因为它是通过 MVCC 的机制实现的快照读，如果要在查询时对记录加行锁，可以显式使用：</p>
+        <pre class="language-go"><code class="language-go code-highlight"><span class="code-line line-number" line="1">begin<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="2"><span class="token comment">//对读取的记录加共享锁</span>
+</span><span class="code-line line-number" line="3"><span class="token keyword">select</span> <span class="token operator">...</span> lock in share mode<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="4">commit<span class="token punctuation">;</span> <span class="token comment">//锁释放</span>
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6">begin<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="7"><span class="token comment">//对读取的记录加排他锁</span>
+</span><span class="code-line line-number" line="8"><span class="token keyword">select</span> <span class="token operator">...</span> <span class="token keyword">for</span> update<span class="token punctuation">;</span>
+</span><span class="code-line line-number" line="9">commit<span class="token punctuation">;</span> <span class="token comment">//锁释放</span>
+</span></code><input type="hidden" value="begin;
+//对读取的记录加共享锁
+select ... lock in share mode;
+commit; //锁释放
+
+begin;
+//对读取的记录加排他锁
+select ... for update;
+commit; //锁释放
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>行锁的释放时机是在事务提交（commit）后，锁就会被释放，并不是一条语句执行完就释放行锁。</p>
+        <p>如果 update 语句的 where 条件没有用到索引列，那么就会全表扫描，在一行行扫描的过程中，不仅给行记录加上了行锁，还给行记录两边的空隙也加上了间隙锁，相当于锁住整个表，然后直到事务结束才会释放锁。</p>
+        <blockquote>
+          <p>在线上千万不要执行没有带索引条件的 update 语句，不然会造成业务停滞。</p>
+        </blockquote>
+        <h3 id="如何避免死锁"><a aria-hidden="true" tabindex="-1" href="#如何避免死锁" class="anchor"><span class="icon icon-link"></span></a>如何避免死锁</h3>
+        <p>死锁的四个必要条件：<strong>互斥、占有且等待、不可强占用、循环等待</strong>。只要系统发生死锁，这些条件必然成立，但是只要破坏任意一个条件就死锁就不会成立。</p>
+        <p>在数据库层面，有两种策略通过「打破循环等待条件」来解除死锁状态：</p>
+        <ul>
+          <li>设置事务等待锁的超时时间。</li>
+          <li>开启主动死锁检测。</li>
+        </ul>
+        <p>当一个事务的等待时间超过该值或者主动死锁检测到死锁后，主动回滚到链条中某一个十五，让其他事务正常运行，</p>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#什么sql语句会加行级锁" class="tocs-link">什么SQL语句会加行级锁</a></li>
+            <li><a href="#mysql是怎么加行级锁的" class="tocs-link">MySQL是怎么加行级锁的</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#唯一索引等值查询" class="tocs-link">唯一索引等值查询</a></li>
+                <li><a href="#唯一索引查询范围" class="tocs-link">唯一索引查询范围</a></li>
+                <li><a href="#非唯一索引等值查询" class="tocs-link">非唯一索引等值查询</a></li>
+                <li><a href="#非唯一索引范围查询" class="tocs-link">非唯一索引范围查询</a></li>
+                <li><a href="#没有加索引的查询" class="tocs-link">没有加索引的查询</a></li>
+              </ol>
+            </li>
+            <li><a href="#锁结构" class="tocs-link">锁结构</a></li>
+            <li><a href="#在线修改表结构" class="tocs-link">在线修改表结构</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#alter-table弊端" class="tocs-link">alter table弊端</a></li>
+                <li><a href="#使用perconatookit" class="tocs-link">使用PerconaTookit</a></li>
+                <li><a href="#perconatookit原理" class="tocs-link">PerconaTookit原理</a></li>
+              </ol>
+            </li>
+            <li><a href="#死锁" class="tocs-link">死锁</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#死锁的发生" class="tocs-link">死锁的发生</a></li>
+                <li><a href="#如何避免死锁" class="tocs-link">如何避免死锁</a></li>
+              </ol>
+            </li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.26.6"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.26.6"></script>
+  </body>
+</html>

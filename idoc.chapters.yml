@@ -1,18 +1,16 @@
 - 00Go/README.md: ↩️README
 - 00Go: Hello World
 - 00Go/ch00.md: 配个环境
-- 00Go/ch04.md: Go Moudle
 - 00Go/ch01.md: 基础语法
 - 00Go/ch02.md: 并发编程
 - 00Go: Web编程
-- 00Go/ch09.md: go web
 - 00Go/ch03.md: gorm
-- 00Go/ch05.md: gin
+- 00Go/ch04.md: gin
 #- 00Go/ch09.md: seelog
 #- 00Go/ch10.md: redigo
 - 00Go: 原理深入
-- 00Go/ch06.md: 原理分析
-#- 00Go/ch07.md: 垃圾回收
+- 00Go/ch05.md: 逃逸分析
+- 00Go/ch06.md: 数据结构
 #- 00Go/ch08.md: CMP
 # - 00Go: 微服务框架
 

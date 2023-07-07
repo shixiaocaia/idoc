@@ -1,195 +1,22 @@
 动态规划
 ===
 
-### 步骤
-
 1. 确定dp数组（dp table）以及下标的含义
 2. 确定递推公式
 3. dp数组如何初始化
 4. 确定遍历顺序
 5. 举例推导dp数组
 
-### 例子
+---
 
-1. 确定dp数组（dp table）以及下标的含义
+递归-> 记忆化搜索-> 动态规划
 
-> dp[i] 表示第i个数的斐波那契数列数值
 
-2. 确定递推公式
-
-> 题目已给：dp[i] = dp[i-1] + dp[i-2]
-
-3. dp数组如何初始化
-
-> dp[0] = 0, dp[1] = 1;
-
-4. 确定遍历顺序
-
-> 从前向后遍历，因为后一项依赖前两项。
-
-5. 举例推导dp数组
-
-> 按照这个递推公式dp[i] = dp[i - 1] + dp[i - 2]，我们来推导一下，当N为10的时候，dp数组应该是如下的数列：
->
-> 0 1 1 2 3 5 8 13 21 34 55
->
-> 根据这个，可以打印输出判断是否正确。
-
-```cpp
-class Solution {
-public:
-    int fib(int n) {
-        int dp[35];
-        dp[0] = 0;
-        dp[1] = 1;
-        for(int i = 2; i <= n; i++){
-            dp[i] = dp[i-1] + dp[i-2];
-        }
-        return dp[n];
-    }
-};
-```
-
-**优化空间写法**
-
-```cpp
-class Solution {
-public:
-    int climbStairs(int n) {
-        if (n <= 1) return n;
-        int dp[3];
-        dp[1] = 1;
-        dp[2] = 2;
-        for (int i = 3; i <= n; i++) {
-            int sum = dp[1] + dp[2];
-            dp[1] = dp[2];
-            dp[2] = sum;
-        }
-        return dp[2];
-    }
-};
-```
 
 
 ## 01背包
 
-**二维数组dp**
 
-1. dp数组及其含义
-
-`dp[i][j]`表示从0-i个物品中任意取重量为j得物品后，最大价值。
-
-2. 确定递推表达式
-
-也就是状态和选择，对于01背包来说，状态就是「背包的容量」和「可选择的物品」。
-
-选择就是「装进背包」或者「不装进背包」。
-
-```cpp
-for 状态1 in 状态1的所有取值：
-    for 状态2 in 状态2的所有取值：
-        for ...
-            dp[状态1][状态2][...] = 择优(选择1，选择2...)
-```
-
-注：下标是从1开始遍历，上一个物品的价值
-
-**不放物品：**不放物品就是当前容量放不下，那么`dp[i][j] = dp[i-1][j]`，相当于和前面的最大值相同。
-
-**放物品**：放物品是由当前不放，和放的最大值决定的。如果当前放了，那么就剩下的空间的最大存放价值为`dp[i-1][j - weight[i]]`，加上当前物品的价值，取最大值。即`dp[i][j] = max(dp[i-1][j], dp[i-1][j - weight[i]] + value[i])`。
-
-3. 初始化dp数组
-
-首先从`dp[i][j]`的定义出发，如果背包容量j为0的话，即`dp[i][0]`，无论是选取哪些物品，背包价值总和一定为0。
-
-由递推表达式可以看出，是由前一个递推出来的，所以最开始的`dp[i-1][j]`，所以最开始的0要`dp[0][...]`需要初始化。
-
-```cpp
-dp[...][0] = 0;
-dp[0][...] = 0;
-
-//大小够存放第一个物品时价值，也是此时的最大值，注意dp数组的含义
-for (int j = weight[0]; j <= bagweight; j++) {
-    dp[0][j] = value[0];
-}
-```
-
-4. 确定遍历顺序
-
-先遍历物品，再遍历背包大小。
-
-```cpp
-// weight数组的大小 就是物品个数
-for(int i = 1; i < weight.size(); i++) { // 遍历物品
-    for(int j = 0; j <= bagweight; j++) { // 遍历背包容量
-        if (j < weight[i]) dp[i][j] = dp[i - 1][j]; 
-        else dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - weight[i]] + value[i]);
-
-    }
-}
-```
-
-5. 举例推导
-
-> 01背包为什么一定是外层for循环遍历物品，内层for循环遍历背包容量且从后向前遍历！
-
----
-
-**一维dp 01 背包**
-
-1. 确定dp数组（dp table）以及下标的含义
-
-在一维dp数组中，dp[j]表示：容量为j的背包，所背的物品价值可以最大为dp[j]。
-
-2. 确定递推公式
-
-```cpp
-dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);
-```
-
-3. dp数组如何初始化
-
-dp[j]表示：容量为j的背包，所背的物品价值可以最大为dp[j]，那么dp[0]就应该是0，因为背包容量为0所背的物品的最大价值就是0。
-
-**这样才能让dp数组在递归公式的过程中取的最大的价值，而不是被初始值覆盖了**。
-
-那么我假设物品价值都是大于0的，所以dp数组初始化的时候，都初始为0就可以了。
-
-4. 确定遍历顺序
-
-```cpp
-for(int i = 0; i < weight.size(); i++) { // 遍历物品
-    for(int j = bagWeight; j >= weight[i]; j--) { // 遍历背包容量
-        dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);
-	//倒序遍历，才能保证前一个值都后面一个值最优化无影响
-    }
-}
-```
-
-```cpp
-void test_1_wei_bag_problem() {
-    vector<int> weight = {1, 3, 4};
-    vector<int> value = {15, 20, 30};
-    int bagWeight = 4;
-
-    // 初始化
-    vector<int> dp(bagWeight + 1, 0);
-    for(int i = 0; i < weight.size(); i++) { // 遍历物品
-		cout << "weight:" << weight[i] << endl;
-		for(int j = bagWeight; j >= weight[i]; j--) { // 遍历背包容量
-            dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);
-			printf("dp[%d]: = %d\n", j, dp[j]);
-		}
-		cout << endl;
-	}
-    cout << dp[bagWeight] << endl;
-}
-
-int main() {
-    test_1_wei_bag_problem();
-	system("pause");
-}
-```
 
 ### 刷题
 
@@ -267,19 +94,31 @@ vector<vector<int>> dp(m, vector<int>(n, 0)); // 初始化一个二维数组
 >
 > 问题转化为：把一堆石头分成两堆,求两堆石头重量差最小值。
 >
-> 进一步分析：要让差值小,两堆石头的重量都要接近sum/2;我们假设两堆分别为A,B,A<sum/2,B>sum/2,若A更接近sum/2,B也相应更接近sum/2。
+> 进一步分析：要让差值小，两堆石头的重量都要接近sum/2；我们假设两堆分别为A，B，A < sum/2，B > sum/2，若A更接近sum/2，B也相应更接近sum/2。
 >
-> 进一步转化：将一堆stone放进最大容量为sum/2的背包,求放进去的石头的最大重量MaxWeight,最终答案即为sum-2*MaxWeight。
+> 进一步转化：将一堆stone放进最大容量为sum/2的背包，求放进去的石头的最大重量MaxWeight，最终答案即为sum/2 - MaxWeight + sum/2 - MaxWeight。
 >
-> 所以本题关联416
+> 本题关联416
 
 **[474. 一和零](https://leetcode.cn/problems/ones-and-zeroes/)**
 
-> 这题本质上还是01背包的问题，可以用`dp[i][j]`表示 i 个 0 和 j 个1 的最大字串个数。
->
-> 背包的遍历都是从后向前更新的。
+> 
 
 [494. 目标和](https://leetcode.cn/problems/target-sum)
+
+> // sum = S, sum+ = P, sum- = S - P
+>
+> // sum+ - sum- = P - (S - P) = 2P - S = target
+>
+> // P = (target + S) / 2
+>
+> //sum+是添加正好部分数的和，sum-是添加负数部分的和，sum是所有数的和
+>
+> //S和target是常数，因此问题转换为找一些数凑成P
+>
+> // 因为nums都是整数，所以(target + S) 必须大于0，并且要除以2，所以(target + S) 应该是一个偶数
+>
+> // 转换为01背包，容量为P，物品为nums
 
 ## 完全背包
 
@@ -311,10 +150,6 @@ for(int i = 0; i < weight.size(); i++) { // 遍历物品
 
 **[518. 零钱兑换 II](https://leetcode.cn/problems/coin-change-ii/)**
 
-> dp递推式写错了。
->
-> 能看出来这是一个完全背包的问题。
->
 > dp[j]含义是能组合成j金额的方案数，那么dp[j]应该由dp[ j - coins[i]]推出来的。
 >
 > 初始化dp[0] = 1,这样才会对后续产生影响。
@@ -369,7 +204,7 @@ for(int i = 0; i < weight.size(); i++) { // 遍历物品
 >
 > 4. 确定遍历顺序
 >
-> 题目中说是拆分为一个或多个在字典中出现的单词，所以这是完全背包。这里应该考虑前后组合的顺序，因此应该先遍历背包再遍历物品，所以a a b和 b a a是不同的，应该当作排列背包容量在外层遍历。
+> 题目中说是拆分为一个或多个在字典中出现的单词，所以这是完全背包。这里应该考虑前后组合的顺序，因此应该先遍历背包再遍历物品，所以a a b和 b a a是不同的，应该当作排列背包容量在外层遍历，排列问题。
 
 ## 多重背包
 

@@ -3,17 +3,14 @@ Docker
 
 ## README
 
-- [CSDN参考文档1](https://blog.csdn.net/qq_39611230/article/details/108641842)
+- [WSL安装](https://deepinout.com/wsl-tutorials/wsl-install-and-quick-start.html)
+- 除了上述文档的配置，注意进入BIOS打开主板的虚拟化
+- `wsl --update`
+- `wsl --shutdown`关闭WSL
 
-## 是什么
+---
 
-
-
-## 环境安装
-
-**docker必须部署在linux内核的系统上**，所以如果windows想安装,需要先安装一个linux虚拟机,然后再在虚拟机中运行，而wsl中安装Ubuntu就相当于安装了虚拟机，wsl没有linux环境就不能正确使用docker。
-
-**网络问题**：`netsh winsock reset`
+- [Docker从入门到实践](https://yeasy.gitbook.io/docker_practice/)
 
 ## 基本命令
 
@@ -34,6 +31,19 @@ docker container kill 容器名或容器id
 # 或可简写为
 docker kill 容器名或容器id
 ```
+
+## 常用容器
+
+### MySQL
+
+1. 拉去镜像：`docker pull mysql`，默认最新。
+2. 运行容器：`docker run -itd --name mysql-test -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 mysql`
+
+
+
+### Redis
+
+
 
 ## 问题
 

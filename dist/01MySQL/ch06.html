@@ -7,18 +7,18 @@
     <title>锁 今天是个好天气</title>
     <meta name="description" content="使用MVCC（多版本并发控制）属于一致性读，性能相比加锁更好，但是在一些情况下不得不加锁。">
     <meta name="keywords" content="notebook">
-    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
-    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
-    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
-    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
-    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
-    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.26.6">
     <link rel="icon" href="../logo.png" type="image/x-icon">
-    <script src="../js/copy.js?v=1.25.0"></script>
-    <script src="../js/dark-mode.js?v=1.25.0"></script>
-    <script src="../js/markdown-style.js?v=1.25.0"></script>
-    <script src="../js/jquery.min.js?v=1.25.0"></script>
-    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
+    <script src="../js/copy.js?v=1.26.6"></script>
+    <script src="../js/dark-mode.js?v=1.26.6"></script>
+    <script src="../js/markdown-style.js?v=1.26.6"></script>
+    <script src="../js/jquery.min.js?v=1.26.6"></script>
+    <script src="../js/fancybox.umd.js?v=1.26.6"></script>
   </head>
   <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <script>
@@ -147,7 +147,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </blockquote>
         <p>所以为了能安全的对表结构进行变更，在对表结构变更前，先要看看数据库中的长事务，是否有事务已经对表加上了 MDL 读锁，如果可以考虑 kill 掉这个长事务，然后再做表结构的变更。</p>
         <hr>
-        <p>在InnoDB存储引擎当中，在对表SELECT、INSERT、DELETE、UPDATE时，不会为这个表添加表级别的S锁和X锁，在server层使用了MDL。其表级别的S锁和X锁比较鸡肋，不会提供额外保护，只会降低并发能力。</p>
+        <p>在InnoDB存储引擎当中，在对表SELECT、INSERT、DELETE、UPDATE时，不会为这个表添加表级别的S锁和X锁，在server层使用了MDL来防止表结构的变化。</p>
         <h3 id="意向锁"><a aria-hidden="true" tabindex="-1" href="#意向锁" class="anchor"><span class="icon icon-link"></span></a>意向锁</h3>
         <p>由于S锁和X锁和是互斥的，对于整个表加上S锁和X锁前，需要检查整个表是否有记录存在锁，由此有了意向锁：在事务准备在某条记录上加上S锁或者X锁时，在表级别上增加意向锁。</p>
         <ul>
@@ -176,6 +176,13 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li>Gap Lock，间隙锁，锁定一个范围，但是不包含记录本身；</li>
           <li>Next-Key Lock：Record Lock + Gap Lock 的组合，锁定一个范围，并且锁定记录本身。</li>
         </ul>
+        <hr>
+        <ul>
+          <li>如果 LOCK_MODE 为 <code>X</code>，说明是 X 型的 next-key 锁；</li>
+          <li>如果 LOCK_MODE 为 <code>X, REC_NOT_GAP</code>，说明是 X 型的记录锁；</li>
+          <li>如果 LOCK_MODE 为 <code>X, GAP</code>，说明是 X 型的间隙锁；</li>
+          <li>同理这里的X可以换成S。</li>
+        </ul>
         <h3 id="record-lock"><a aria-hidden="true" tabindex="-1" href="#record-lock" class="anchor"><span class="icon icon-link"></span></a>Record Lock</h3>
         <p>Record Lock 称为记录锁，锁住的是一条记录。而且记录锁是有 S 锁和 X 锁之分的：</p>
         <ul>
@@ -183,18 +190,25 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li>当一个事务对一条记录加了 X 型记录锁后，其他事务既不可以对该记录加 S 型记录锁（S 型与 X 锁不兼容），也不可以对该记录加 X 型记录锁（X 型与 X 锁不兼容）。</li>
         </ul>
         <h3 id="gap-lock"><a aria-hidden="true" tabindex="-1" href="#gap-lock" class="anchor"><span class="icon icon-link"></span></a>Gap Lock</h3>
-        <p>Gap Lock 称为间隙锁，只存在于可重复读隔离级别，目的是为了解决可重复读隔离级别下幻读的现象。</p>
+        <p>Gap Lock 称为间隙锁，<strong>只存在于可重复读隔离级别</strong>，目的是为了解决可重复读隔离级别下幻读的现象。</p>
         <p>给记录加上Gap锁，避免当前记录和前一条记录之间插入新的记录造成幻读现象，只有Gap锁释放了才会释放阻塞。</p>
         <blockquote>
           <p>针对末尾，对Supermum记录（记录页面最大记录的，在最后）加上gap锁。</p>
         </blockquote>
+        <p>间隙锁之间是<strong>兼容的</strong>，即两个事务可以同时持有包含共同间隙范围的间隙锁，并不存在互斥关系。</p>
         <h3 id="next-key-lock"><a aria-hidden="true" tabindex="-1" href="#next-key-lock" class="anchor"><span class="icon icon-link"></span></a>Next-Key Lock</h3>
         <p>Next-Key Lock 称为临键锁，是 Record Lock + Gap Lock的组合，锁住某条记录，同时组织前面的间隙插入新记录。</p>
         <p>next-key lock 即能保护该记录，又能阻止其他事务将新纪录插入到被保护记录前面的间隙中。</p>
+        <p>如果一个事务获取了 X 型的 next-key lock，那么另外一个事务在获取相同范围的 X 型的 next-key lock 时，是会被<strong>阻塞的</strong>。</p>
+        <blockquote>
+          <p>因为Next-Key Lock是Record Lock和Gap Lock的组合，Record Lock区分S锁和X锁，是不兼容的。</p>
+          <p>对于这种范围为 (1006, +∞] 的 next-key lock，两个事务是可以同时持有的，不会冲突。因为 +∞ 并不是一个真实的记录，自然就不需要考虑 X 型与 S 型关系。</p>
+        </blockquote>
         <h3 id="插入意向锁"><a aria-hidden="true" tabindex="-1" href="#插入意向锁" class="anchor"><span class="icon icon-link"></span></a>插入意向锁</h3>
         <p>一个事务在插入一条记录的时候，需要判断插入位置是否已被其他事务加了Gap锁（next-key lock 也包含Gap锁）。</p>
         <p>如果有的话，插入操作就会发生<strong>阻塞</strong>，直到拥有间隙锁的那个事务提交为止（释放Gap锁的时刻），在此期间会生成一个<strong>插入意向锁</strong>，表明有事务想在某个区间插入新记录，但是现在处于等待状态。</p>
         <p>插入意向锁之间是可以兼容的，实际上是不会阻碍其他事务获取该记录上的任何锁。</p>
+        <p>插入意向锁与间隙锁的另一个非常重要的差别是：尽管「插入意向锁」也属于间隙锁，但两个事务却不能在同一时间内，一个拥有间隙锁，另一个拥有该间隙区间内的插入意向锁（当然，插入意向锁如果不在间隙锁区间内则是可以的）。<strong>所以，插入意向锁和间隙锁之间是冲突的。</strong></p>
         <h2 id="隐式锁"><a aria-hidden="true" tabindex="-1" href="#隐式锁" class="anchor"><span class="icon icon-link"></span></a>隐式锁</h2>
         <p>在内存当中生成锁结构并不是零成本的事，所以提出了隐式锁的概念，比如一般情况下INSERT不需要生成锁结构。</p>
         <p><strong>在插入记录的同时，此时进行读写，可能会出现脏写、脏读情况</strong></p>
@@ -204,7 +218,13 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <blockquote>
           <p>对于二级索引，查看Page Header当中的，PAGE_MAX_TRX_ID，对该页面做改动的最大的事务ID，如果小于当前活跃的最小事务id，说明对该页面的修改已经提交，否则就需要定位到二级索引记录位置，通过回表到聚簇索引，重复上述的操作。</p>
         </blockquote>
-        <p>可以看到<strong>通过事务ID，隐式锁延缓了生成锁结构</strong>，</p>
+        <p>可以看到<strong>通过事务ID，隐式锁延缓了生成锁结构</strong>，只有在可能发生冲突时才会枷锁，从而减少锁的数量，提高系统整体性能。</p>
+        <p>隐式锁就是在 Insert 过程中不加锁，只有在特殊情况下，才会将隐式锁转换为显示锁，这里我们列举两个场景。</p>
+        <ul>
+          <li>如果记录之间加有间隙锁，为了避免幻读，此时是不能插入记录的；</li>
+          <li>如果 Insert 的记录和已有记录存在唯一键冲突，此时也不能插入记录；</li>
+        </ul>
+        <hr>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -236,8 +256,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </aside>
       </nav>
     </div>
-    <script src="../js/demo-preview.js?v=1.25.0"></script>
+    <script src="../js/demo-preview.js?v=1.26.6"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
-    <script src="../js/tocbot.js?v=1.25.0"></script>
+    <script src="../js/tocbot.js?v=1.26.6"></script>
   </body>
 </html>

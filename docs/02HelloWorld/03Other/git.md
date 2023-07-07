@@ -30,9 +30,12 @@ Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
 Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.
 Hi shixiaocaia! You've successfully authenticated, but GitHub does not provide shell access.
 
-# 登录信息
-Username for 'https://github.com'  # 完整的邮箱
-password # access key
+
+# GitHub中添加SSH id_rsa.pub内容
+# 再次验证
+ssh -T git@github.com 
+
+# Hi shixiaocaia! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
 ## 主体思路
