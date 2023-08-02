@@ -120,6 +120,8 @@ vector<vector<int>> dp(m, vector<int>(n, 0)); // 初始化一个二维数组
 >
 > // 转换为01背包，容量为P，物品为nums
 
+[931. 下降路径最小和](https://leetcode.cn/problems/minimum-falling-path-sum)
+
 ## 完全背包
 
 > 有N件物品和一个最多能背重量为W的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。**每件物品都有无限个（也就是可以放入背包多次）**，求解将哪些物品装入背包里物品价值总和最大。
@@ -288,6 +290,8 @@ int main() {
 > 这里可以多次买入卖出。
 >
 > `dp[i][0]`持有股票是昨天乃至之前保留的`dp[i-1][0]`，或者是今天新买的`dp[i-1][1]-price[i]`。`dp[i][1]`前一天不持有股票有的钱， 我今天卖掉股票赚的钱`dp[i-1][0] + prices[i]`。都是取最大值。
+
+[1911.最大子序列交替和](https://leetcode.cn/problems/maximum-alternating-subsequence-sum/description/)
 
 **[123. 买卖股票的最佳时机 III](https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/)**
 

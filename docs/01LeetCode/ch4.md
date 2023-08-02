@@ -44,19 +44,19 @@ void getnext(vector<int>& next, string& needle){
 
 [151. 反转字符串中的单词](https://leetcode.cn/problems/reverse-words-in-a-string/)
 
-> 整体思路：删除空格，反转字符串，反转单词还原
->
-> 删除空格，用双指针删除中间空间，在特判开头和末尾。
->
-> 还原单词时，用一个start表示单词开始，再循环找到每个单词的结尾（空格，或者最后一个单词是末尾）
-
-[459. 重复的子字符串](https://leetcode.cn/problems/repeated-substring-pattern/)
+**[459. 重复的子字符串](https://leetcode.cn/problems/repeated-substring-pattern/)**
 
 > 暴力遍历：
 >
 > 1. 截取字串，由于必须有2个以上的子串构成，因此字串长度一定小于等于size/2。
 >
 > 2. 判断子串是否和前部分字串相等，满足一种情况时即可，遍历完所有情况找不到时，即错误。
+>
+> abcabc--->abcabc abcabc
+>
+> - 只要两个s拼接在一起，里面还出现一个s的话，就说明是由重复子串组成。
+> - 在判断 s + s 拼接的字符串里是否出现一个s的的时候，要刨除 s + s 的首字符和尾字符，这样避免在s+s中搜索出原来的s
+> - 我们要搜索的是中间拼接出来的s。
 
 [28. 找出字符串中第一个匹配项的下标](https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/)
 

@@ -24,23 +24,38 @@ go env  -w GOPROXY=https://goproxy.cn,https://goproxy.io,direct
 
 # Go Moudle
 go env -w GO111MODULE=on
-
 ```
 
-## Redis
 
-- 下载地址：https://github.com/tporadowski/redis/releases。
 
-- 添加路径到环境变量
-- 打开一个 **cmd** 窗口 使用 cd 命令切换目录到 **C:\redis** 运行：
+## 服务器上
 
-```go
-redis-server.exe redis.windows.conf
-redis-server.exe // 添加环境变量后可以省略
+- sudo切换：`sudo passwd root`，`su`
+- yum安装：`yum -y install yum-utils`
+- vim安装：`yum -y install vim-enhanced`
+- git安装：https://www.runoob.com/git/git-install-setup.html
 
-redis-cli.exe -h 127.0.0.1 -p 6379
-set myKey abc
+---
 
-get myKey
+### goland环境配置
+
+```shell
+yum install golang
+
+wget  https://dl.google.com/go/go1.17.2.linux-amd64.tar.gz
+tar -zxf go1.17.2.linux-amd64.tar.gz -C /usr/local
+
+vim /etc/profile
+
+export GO111MODULE=on
+export GOROOT=/usr/local/go
+export GOPATH=/home/gopath
+export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+source /etc/profile
+
+go env -w GOPROXY=https://goproxy.cn,direct
+
+go version
 ```
 

@@ -134,9 +134,28 @@ public:
 
  [167. 两数之和 II - 输入有序数组](https://leetcode.cn/problems/two-sum-ii-input-array-is-sorted/description/)
 
-> 二分、双指针，相向而行。
+```go
+func twoSum(numbers []int, target int) []int {
+    // 非递减顺序排列，有序-----> 二分
+    // 同向双指针
+    left, right := 0, len(numbers) - 1;
+    for numbers[left] + numbers[right] != target{
+        sum := numbers[left] + numbers[right]
+        if sum > target{
+            right--
+        }else if sum < target{
+            left++
+        }
+    }
+    return []int{left + 1, right + 1}
+}
+```
 
-[15.三树之和](https://leetcode.cn/problems/3sum/)
+[15.三数之和](https://leetcode.cn/problems/3sum/)
+
+- 相比二数之和，可以先固定一个数，剩下两个数转换为双数之和问题
+- 第一个数去重：与前一个数相等，那么答案必然重复，为子集
+- 后两个数去重，在相向双指针，更新答案时判断相等去重即可。
 
 **[16. 最接近的三数之和](https://leetcode.cn/problems/3sum-closest/ )**
 
@@ -173,7 +192,7 @@ public:
 >    - 每次移动较短的边才可能，下一条边在宽度减小的情况下高度更高，造成整体面积更大
 >    - 如果移动较高的一边，那么下一条高度变低、宽度变短都造成面积更小，如果下一条更高，整体高度还是取的较小一边，宽度变短的情况，整体面积还是变短。
 
-[42. 接雨水](https://leetcode.cn/problems/trapping-rain-water/solutions/1974340/zuo-liao-nbian-huan-bu-hui-yi-ge-shi-pin-ukwm/)
+**[42. 接雨水](https://leetcode.cn/problems/trapping-rain-water/solutions/1974340/zuo-liao-nbian-huan-bu-hui-yi-ge-shi-pin-ukwm/)**
 
 > 
 

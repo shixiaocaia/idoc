@@ -7,18 +7,18 @@
     <title>哈希表 今天是个好天气</title>
     <meta name="description" content="简单来说，数组就可以看成一个哈希表，哈希表中的关键码是在数组中索引下标，通过下标访问对应的元素。">
     <meta name="keywords" content="notebook">
-    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
     <link rel="icon" href="../logo.png" type="image/x-icon">
-    <script src="../js/copy.js?v=1.26.6"></script>
-    <script src="../js/dark-mode.js?v=1.26.6"></script>
-    <script src="../js/markdown-style.js?v=1.26.6"></script>
-    <script src="../js/jquery.min.js?v=1.26.6"></script>
-    <script src="../js/fancybox.umd.js?v=1.26.6"></script>
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
   </head>
   <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <script>
@@ -200,23 +200,12 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <p>用<code>unorder_set&#x3C;int></code>去重。</p>
         </blockquote>
         <p><a href="https://leetcode.cn/problems/two-sum/">LC1.两数之和</a></p>
-        <p><strong><a href="https://leetcode.cn/problems/3sum/">LC15.三树之和</a></strong></p>
+        <p><a href="https://leetcode.cn/problems/4sum-ii">454. 四数相加 II</a></p>
         <blockquote>
-          <p>题解版：用双指针维护 + 去重</p>
-          <p>a, b, c 三个数的去重，是难点。</p>
+          <p>将四数之和转换为两数之和。</p>
         </blockquote>
+        <p><a href="https://leetcode.cn/problems/3sum/">LC15.三树之和</a></p>
         <p><strong><a href="https://leetcode.cn/problems/4sum/">LC18. 四数之和</a></strong></p>
-        <blockquote>
-          <p>对比三数之和，增加了一层外循环。</p>
-          <ul>
-            <li>总体思路：用两层for维护最小的两个数，然后双指针维护后面的部分。</li>
-            <li>第一层for ：当前数大于目标值时，并且当前数大于等于0，break。外加 if(i > 0 &#x26;&#x26; nums[i] == nums[i-1]) continue;进行剪枝。在这个数和前一个数大于0的情况下，后续有满足的组合，在前一种必然出现过。</li>
-            <li>第二层for : 即再上一层基础上初始值时nums[i] + nums[j]进行比较。</li>
-            <li>双指针同上一题一样进行维护。</li>
-          </ul>
-          <p>注意数据的溢出。</p>
-          <p>LC15 和18 的剪枝是难点。</p>
-        </blockquote>
         <p><a href="https://leetcode.cn/problems/group-anagrams/">LC49. 字母异位词分组</a></p>
         <blockquote>
           <p>结合例题的<a href="https://leetcode.cn/problems/valid-anagram/">LC242.有效的字母异位词</a>。将一个单词的所有字母进行重新排列得到新的单词，那我们可以将每个单词按照一定顺序排列后的值，作为关键码，相同的放到一起，就想到了用哈希表实现。</p>
@@ -243,8 +232,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </aside>
       </nav>
     </div>
-    <script src="../js/demo-preview.js?v=1.26.6"></script>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
-    <script src="../js/tocbot.js?v=1.26.6"></script>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
   </body>
 </html>

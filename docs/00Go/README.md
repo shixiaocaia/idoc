@@ -15,6 +15,7 @@ Go
 - [ ] [Go by Example](https://gobyexample-cn.github.io/hello-world)：敲一敲
 - [ ] [Learn Go with tests](https://studygolang.gitbook.io/learn-go-with-tests/)：敲一敲
 - [ ] [Go 标准库文档](https://studygolang.com/static/pkgdoc/main.html)：读一读
+- [ ] [跟煎鱼学Go](https://eddycjy.gitbook.io/golang/di-1-ke-za-tan)
 
 ## 记录问题
 

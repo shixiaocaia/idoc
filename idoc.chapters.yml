@@ -4,15 +4,11 @@
 - 00Go/ch01.md: 基础语法
 - 00Go/ch02.md: 并发编程
 - 00Go: Web编程
-- 00Go/ch03.md: gorm
-- 00Go/ch04.md: gin
-#- 00Go/ch09.md: seelog
-#- 00Go/ch10.md: redigo
+- 00Go/ch05.md: 脚手架使用
+- 00Go/ch06.md: RPC
 - 00Go: 原理深入
-- 00Go/ch05.md: 逃逸分析
-- 00Go/ch06.md: 数据结构
-#- 00Go/ch08.md: CMP
-# - 00Go: 微服务框架
+- 00Go/ch03.md: 数据结构
+- 00Go/ch04.md: 逃逸分析
 
 
 
@@ -25,9 +21,12 @@
 - 01MySQL/ch03.md: InnoDB存储引擎
 - 01MySQL/ch04.md: 索引
 - 01MySQL/ch05.md: 事务
+- 01MySQL/ch08.md: 日志
 - 01MySQL: 锁
 - 01MySQL/ch06.md: 有哪些锁
 - 01MySQL/ch07.md: MySQL如何加锁
+- 01MySQL/ch09.md: MySQL性能如何优化
+
 
 - 01Redis/README.md: ↩️README
 #- 01Redis: Redis
@@ -59,15 +58,17 @@
 
 - 02HelloWorld/README.md: ↩️README
 - 02HelloWorld: 计算机网络
-- 02HelloWorld/01ComputerNetwork/ch00.md: 问题收集
-- 02HelloWorld/01ComputerNetwork/ch11.md: 常见问题
+- 02HelloWorld/01ComputerNetwork/ch01.md: 网络发展过程 
+- 02HelloWorld/01ComputerNetwork/ch41.md: 键入url到渲染显示
+- 02HelloWorld/01ComputerNetwork/ch11.md: HTTP报文
+- 02HelloWorld/01ComputerNetwork/ch12.md: HTTPS / HTTP1、2、3
 - 02HelloWorld/01ComputerNetwork/ch21.md: 三次握手/四次挥手
 - 02HelloWorld/01ComputerNetwork/ch22.md: socket
 - 02HelloWorld/01ComputerNetwork/ch23.md: 可靠的TCP
 - 02HelloWorld/01ComputerNetwork/ch31.md: IP知识全家桶
 - 02HelloWorld/01ComputerNetwork/ch32.md: ping的工作原理
-- 02HelloWorld/01ComputerNetwork/ch01.md: 网络发展   
-- 02HelloWorld/01ComputerNetwork/ch41.md: 键入url到渲染显示
+  
+
 
 - 02HelloWorld: 操作系统
 - 02HelloWorld/01OperatingSystem/ch51.md: 优化程序性能
@@ -79,11 +80,10 @@
 
 - 02HelloWorld: 工具
 - 02HelloWorld/03Other/environment.md: 配个环境
-- 02HelloWorld/03Other/vim.md: Vim
 - 02HelloWorld/03Other/git.md: Git
 - 02HelloWorld/03Other/shell.md: Shell
 - 02HelloWorld/03Other/docker.md: Docker
-
+- 02HelloWorld/03Other/python.md: python
 
 
 

@@ -7,18 +7,18 @@
     <title>TCP 三次握手与四次挥手 今天是个好天气</title>
     <meta name="description" content="TCP 是面向连接的、可靠的、基于字节流的传输层通信协议。">
     <meta name="keywords" content="notebook">
-    <link rel="stylesheet" type="text/css" href="../../css/main.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/tocbot.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/media.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/sidebar.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/copy.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/fancybox.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/fancybox.css?v=1.25.0">
     <link rel="icon" href="../../logo.png" type="image/x-icon">
-    <script src="../../js/copy.js?v=1.26.6"></script>
-    <script src="../../js/dark-mode.js?v=1.26.6"></script>
-    <script src="../../js/markdown-style.js?v=1.26.6"></script>
-    <script src="../../js/jquery.min.js?v=1.26.6"></script>
-    <script src="../../js/fancybox.umd.js?v=1.26.6"></script>
+    <script src="../../js/copy.js?v=1.25.0"></script>
+    <script src="../../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../../js/fancybox.umd.js?v=1.25.0"></script>
   </head>
   <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <script>
@@ -64,15 +64,15 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <div>
             <a href="../index.html" class="">↩️README</a>
             <label>计算机网络</label>
-            <a href="ch00.html" class="">问题收集</a>
-            <a href="ch11.html" class="">常见问题</a>
+            <a href="ch01.html" class="">网络发展过程</a>
+            <a href="ch41.html" class="">键入url到渲染显示</a>
+            <a href="ch11.html" class="">HTTP报文</a>
+            <a href="ch12.html" class="">HTTPS / HTTP1、2、3</a>
             <a href="ch21.html" class="">三次握手/四次挥手</a>
             <a href="ch22.html" class="">socket</a>
             <a href="ch23.html" class="">可靠的TCP</a>
             <a href="ch31.html" class="">IP知识全家桶</a>
             <a href="ch32.html" class="">ping的工作原理</a>
-            <a href="ch01.html" class="">网络发展</a>
-            <a href="ch41.html" class="">键入url到渲染显示</a>
             <label>操作系统</label>
             <a href="../01OperatingSystem/ch51.html" class="">优化程序性能</a>
             <a href="../01OperatingSystem/ch61.html" class="">存储器</a>
@@ -82,10 +82,10 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <a href="../01OperatingSystem/ch91.html" class="">虚拟内存</a>
             <label>工具</label>
             <a href="../03Other/environment.html" class="">配个环境</a>
-            <a href="../03Other/vim.html" class="">Vim</a>
             <a href="../03Other/git.html" class="">Git</a>
             <a href="../03Other/shell.html" class="">Shell</a>
             <a href="../03Other/docker.html" class="">Docker</a>
+            <a href="../03Other/python.html" class="">python</a>
           </div>
         </aside>
       </div>
@@ -112,7 +112,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </ul>
         <h2 id="tcp头格式有哪些"><a aria-hidden="true" tabindex="-1" href="#tcp头格式有哪些" class="anchor"><span class="icon icon-link"></span></a>TCP头格式有哪些</h2>
         <p>
-          <img src="../../img/202303201628435.png" alt="TCP 头格式">
+          <img src="..\..\img\202303201628435.png" alt="TCP 头格式">
         </p>
         <ul>
           <li>
@@ -146,7 +146,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <h2 id="tcp连接建立"><a aria-hidden="true" tabindex="-1" href="#tcp连接建立" class="anchor"><span class="icon icon-link"></span></a>TCP连接建立</h2>
         <h3 id="三次握手的过程"><a aria-hidden="true" tabindex="-1" href="#三次握手的过程" class="anchor"><span class="icon icon-link"></span></a>三次握手的过程</h3>
         <p>
-          <img src="../../img/202303251613524.png" alt="TCP 三次握手">
+          <img src="..\..\img\202303251613524.png" alt="TCP 三次握手">
         </p>
         <ol>
           <li>一开始，客户端和服务端都处于 <code>CLOSE</code> 状态。先是服务端主动监听某个端口，处于 <code>LISTEN</code> 状态</li>
@@ -228,7 +228,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </ul>
         <h2 id="tcp连接断开"><a aria-hidden="true" tabindex="-1" href="#tcp连接断开" class="anchor"><span class="icon icon-link"></span></a>TCP连接断开</h2>
         <p>
-          <img src="../../img/202303261444817.png" alt="客户端主动关闭连接 —— TCP 四次挥手">
+          <img src="..\..\img\202303261444817.png" alt="客户端主动关闭连接 —— TCP 四次挥手">
         </p>
         <h3 id="四次挥手的过程"><a aria-hidden="true" tabindex="-1" href="#四次挥手的过程" class="anchor"><span class="icon icon-link"></span></a>四次挥手的过程</h3>
         <ol>
@@ -401,8 +401,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </aside>
       </nav>
     </div>
-    <script src="../../js/demo-preview.js?v=1.26.6"></script>
+    <script src="../../js/demo-preview.js?v=1.25.0"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
-    <script src="../../js/tocbot.js?v=1.26.6"></script>
+    <script src="../../js/tocbot.js?v=1.25.0"></script>
   </body>
 </html>

@@ -7,18 +7,18 @@
     <title>IP知识全家桶 今天是个好天气</title>
     <meta name="description" content="IP 在 TCP/IP 参考模型中处于第三层，也就是网络层。">
     <meta name="keywords" content="notebook">
-    <link rel="stylesheet" type="text/css" href="../../css/main.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/tocbot.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/media.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/sidebar.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/copy.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/fancybox.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/fancybox.css?v=1.25.0">
     <link rel="icon" href="../../logo.png" type="image/x-icon">
-    <script src="../../js/copy.js?v=1.26.6"></script>
-    <script src="../../js/dark-mode.js?v=1.26.6"></script>
-    <script src="../../js/markdown-style.js?v=1.26.6"></script>
-    <script src="../../js/jquery.min.js?v=1.26.6"></script>
-    <script src="../../js/fancybox.umd.js?v=1.26.6"></script>
+    <script src="../../js/copy.js?v=1.25.0"></script>
+    <script src="../../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../../js/fancybox.umd.js?v=1.25.0"></script>
   </head>
   <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <script>
@@ -64,15 +64,15 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <div>
             <a href="../index.html" class="">↩️README</a>
             <label>计算机网络</label>
-            <a href="ch00.html" class="">问题收集</a>
-            <a href="ch11.html" class="">常见问题</a>
+            <a href="ch01.html" class="">网络发展过程</a>
+            <a href="ch41.html" class="">键入url到渲染显示</a>
+            <a href="ch11.html" class="">HTTP报文</a>
+            <a href="ch12.html" class="">HTTPS / HTTP1、2、3</a>
             <a href="ch21.html" class="">三次握手/四次挥手</a>
             <a href="ch22.html" class="">socket</a>
             <a href="ch23.html" class="">可靠的TCP</a>
             <a href="ch31.html" class="">IP知识全家桶</a>
             <a href="ch32.html" class="">ping的工作原理</a>
-            <a href="ch01.html" class="">网络发展</a>
-            <a href="ch41.html" class="">键入url到渲染显示</a>
             <label>操作系统</label>
             <a href="../01OperatingSystem/ch51.html" class="">优化程序性能</a>
             <a href="../01OperatingSystem/ch61.html" class="">存储器</a>
@@ -82,10 +82,10 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <a href="../01OperatingSystem/ch91.html" class="">虚拟内存</a>
             <label>工具</label>
             <a href="../03Other/environment.html" class="">配个环境</a>
-            <a href="../03Other/vim.html" class="">Vim</a>
             <a href="../03Other/git.html" class="">Git</a>
             <a href="../03Other/shell.html" class="">Shell</a>
             <a href="../03Other/docker.html" class="">Docker</a>
+            <a href="../03Other/python.html" class="">python</a>
           </div>
         </aside>
       </div>
@@ -120,7 +120,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <p>主机号：负责标识同一「子网」下的不同主机，用来区分设备。</p>
         </blockquote>
         <p>
-          <img src="../../img/202301301043432.png" alt="">
+          <img src="..\..\img\202301301043432.png" alt="">
         </p>
         <p>每一类地址的最大主机数是根据主机号位数再减去(主机号)全0和全1的网络地址和广播地址。</p>
         <blockquote>
@@ -168,7 +168,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <p>在进行路由选择时看的是纯网络地址的一部分。</p>
         </blockquote>
         <p>
-          <img src="../../img/202302141538221.png" alt="IP 地址与路由控制">
+          <img src="..\..\img\202302141538221.png" alt="IP 地址与路由控制">
         </p>
         <ol>
           <li>主机 A 要发送一个 IP 包，其源地址是 <code>10.1.1.30</code> 和目标地址是 <code>10.1.2.10</code>，由于没有在主机 A 的路由表找到与目标地址 <code>10.1.2.10</code> 相同的网络地址，于是包被转发到默认路由（路由器 <code>1</code> ）</li>
@@ -187,7 +187,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <p>假设发送方发送一个 4000 字节的大数据报，若要传输在以太网链路，则需要把数据报分片成 3 个小数据报进行传输，再交由接收方重组成大数据报。</p>
         </blockquote>
         <p>
-          <img src="../../img/202302141543486.jpeg" alt="分片与重组">
+          <img src="..\..\img\202302141543486.jpeg" alt="分片与重组">
         </p>
         <p>在分片传输中，一旦某个分片丢失，则会造成整个 IP 数据报作废，所以 TCP 引入了 <code>MSS</code> 也就是在 TCP 层进行分片不由 IP 层分片，那么对于 UDP 我们尽量不要发送一个大于 <code>MTU</code> 的数据报文。</p>
         <h3 id="ipv6基本认识"><a aria-hidden="true" tabindex="-1" href="#ipv6基本认识" class="anchor"><span class="icon icon-link"></span></a>IPv6基本认识</h3>
@@ -218,7 +218,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </ul>
         <h4 id="ipv4-首部与-ipv6-首部"><a aria-hidden="true" tabindex="-1" href="#ipv4-首部与-ipv6-首部" class="anchor"><span class="icon icon-link"></span></a>IPv4 首部与 IPv6 首部</h4>
         <p>
-          <img src="../../img/202302141551386.png" alt="IPv4 首部与 IPv6 首部的差异">
+          <img src="..\..\img\202302141551386.png" alt="IPv4 首部与 IPv6 首部的差异">
         </p>
         <p>IPv6 相比 IPv4 的首部改进：</p>
         <ul>
@@ -237,7 +237,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p>由于域名非常非常多，如果都存放在一台域名服务器中，那么不仅查询速度慢，服务器压力大，而且难以保证服务的可靠性。因此，<strong>DNS 采用了分布式的设计方案，大量的域名服务器之间通过<code>层次</code>方式组织，分布在全世界范围内。</strong></p>
         <p><strong>域名解析流程</strong></p>
         <p>
-          <img src="../../img/202302122034697.gif" alt="img">
+          <img src="..\..\img\202302122034697.gif" alt="img">
         </p>
         <ol>
           <li>请求主机向本地域名服务器发送 DNS 查询报文，询问 <em><a href="http://www.baidu.com">www.baidu.com</a></em> 的 IP 地址是什么；</li>
@@ -288,7 +288,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <p>IPv6中不需要经过DHCP分配。</p>
         </blockquote>
         <p>
-          <img src="../../img/202302141605879.png" alt="DHCP 工作流程">
+          <img src="..\..\img\202302141605879.png" alt="DHCP 工作流程">
         </p>
         <ul>
           <li>客户端首先发起 <strong>DHCP 发现报文（DHCP DISCOVER）</strong> 的 IP 数据报，由于客户端没有 IP 地址，也不知道 DHCP 服务器的地址，所以使用的是 UDP <strong>广播</strong>通信，其使用的广播目的地址是 255.255.255.255（端口 67） 并且使用 0.0.0.0（端口 68） 作为源 IP 地址。DHCP 客户端将该 IP 数据报传递给链路层，链路层然后将帧广播到所有的网络中设备。</li>
@@ -306,7 +306,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p>DHCP 交互中，<strong>全程都是使用 UDP 广播通信</strong>。如果 DHCP 服务器和客户端不是在同一个局域网内，路由器又不会转发广播包，那不是每个网络都要配一个 DHCP 服务器？</p>
         <p>所以，为了解决这一问题，就出现了 <strong>DHCP 中继代理</strong>。有了 DHCP 中继代理以后，<strong>对不同网段的 IP 地址分配也可以由一个 DHCP 服务器统一进行管理。</strong></p>
         <p>
-          <img src="../../img/202302141608732.jpeg" alt=" DHCP 中继代理">
+          <img src="..\..\img\202302141608732.jpeg" alt=" DHCP 中继代理">
         </p>
         <ul>
           <li>DHCP 客户端会向 DHCP 中继代理发送 DHCP 请求包，而 DHCP 中继代理在收到这个广播包以后，再以<strong>单播</strong>的形式发给 DHCP 服务器。</li>
@@ -317,7 +317,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p>网络地址转换，缓解IPv4地址不够用的问题。</p>
         <p>简单的来说 NAT 就是同个公司、家庭、教室内的主机对外部通信时，把私有 IP 地址转换成公有 IP 地址。</p>
         <p>
-          <img src="../../img/202302152033466.png" alt="">
+          <img src="..\..\img\202302152033466.png" alt="">
         </p>
         <p>但是这样的私有IP地址对应一个公有IP地址，是没有意义的。</p>
         <p>由于绝大多数的网络应用都是使用传输层协议 TCP 或 UDP 来传输数据的。</p>
@@ -364,14 +364,14 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </blockquote>
         <h4 id="常规查询与响应工作机制"><a aria-hidden="true" tabindex="-1" href="#常规查询与响应工作机制" class="anchor"><span class="icon icon-link"></span></a>常规查询与响应工作机制</h4>
         <p>
-          <img src="../../img/202302152101755.png" alt=" IGMP 常规查询与响应工作机制">
+          <img src="..\..\img\202302152101755.png" alt=" IGMP 常规查询与响应工作机制">
         </p>
         <blockquote>
           <p>描述这个过程？</p>
         </blockquote>
         <h4 id="离开组播组工作机制"><a aria-hidden="true" tabindex="-1" href="#离开组播组工作机制" class="anchor"><span class="icon icon-link"></span></a>离开组播组工作机制</h4>
         <p>
-          <img src="../../img/202302152101430.png" alt=" IGMPv2 离开组播组工作机制 情况1">
+          <img src="..\..\img\202302152101430.png" alt=" IGMPv2 离开组播组工作机制 情况1">
         </p>
         <blockquote>
           <p>描述这个过程？</p>
@@ -428,8 +428,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </aside>
       </nav>
     </div>
-    <script src="../../js/demo-preview.js?v=1.26.6"></script>
+    <script src="../../js/demo-preview.js?v=1.25.0"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
-    <script src="../../js/tocbot.js?v=1.26.6"></script>
+    <script src="../../js/tocbot.js?v=1.25.0"></script>
   </body>
 </html>

@@ -7,18 +7,18 @@
     <title>动态规划 今天是个好天气</title>
     <meta name="description" content="递归-> 记忆化搜索-> 动态规划">
     <meta name="keywords" content="notebook">
-    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
     <link rel="icon" href="../logo.png" type="image/x-icon">
-    <script src="../js/copy.js?v=1.26.6"></script>
-    <script src="../js/dark-mode.js?v=1.26.6"></script>
-    <script src="../js/markdown-style.js?v=1.26.6"></script>
-    <script src="../js/jquery.min.js?v=1.26.6"></script>
-    <script src="../js/fancybox.umd.js?v=1.26.6"></script>
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
   </head>
   <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <script>
@@ -169,6 +169,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <p>// 因为nums都是整数，所以(target + S) 必须大于0，并且要除以2，所以(target + S) 应该是一个偶数</p>
           <p>// 转换为01背包，容量为P，物品为nums</p>
         </blockquote>
+        <p><a href="https://leetcode.cn/problems/minimum-falling-path-sum">931. 下降路径最小和</a></p>
         <h2 id="完全背包"><a aria-hidden="true" tabindex="-1" href="#完全背包" class="anchor"><span class="icon icon-link"></span></a>完全背包</h2>
         <blockquote>
           <p>有N件物品和一个最多能背重量为W的背包。第i件物品的重量是weight[i]，得到的价值是value[i] 。<strong>每件物品都有无限个（也就是可以放入背包多次）</strong>，求解将哪些物品装入背包里物品价值总和最大。</p>
@@ -347,6 +348,7 @@ int main() {
           <p>这里可以多次买入卖出。</p>
           <p><code>dp[i][0]</code>持有股票是昨天乃至之前保留的<code>dp[i-1][0]</code>，或者是今天新买的<code>dp[i-1][1]-price[i]</code>。<code>dp[i][1]</code>前一天不持有股票有的钱， 我今天卖掉股票赚的钱<code>dp[i-1][0] + prices[i]</code>。都是取最大值。</p>
         </blockquote>
+        <p><a href="https://leetcode.cn/problems/maximum-alternating-subsequence-sum/description/">1911.最大子序列交替和</a></p>
         <p><strong><a href="https://leetcode.cn/problems/best-time-to-buy-and-sell-stock-iii/">123. 买卖股票的最佳时机 III</a></strong></p>
         <blockquote>
           <ol>
@@ -618,8 +620,8 @@ dp[i][j] = dp[i-1][j-1] + 1;//替换一个字符，此时不用增加元素，�
         </aside>
       </nav>
     </div>
-    <script src="../js/demo-preview.js?v=1.26.6"></script>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
-    <script src="../js/tocbot.js?v=1.26.6"></script>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
   </body>
 </html>

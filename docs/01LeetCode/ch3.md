@@ -73,24 +73,13 @@
 
 [LC1.两数之和](https://leetcode.cn/problems/two-sum/)
 
-**[LC15.三树之和](https://leetcode.cn/problems/3sum/)**
+[454. 四数相加 II](https://leetcode.cn/problems/4sum-ii)
 
-> 题解版：用双指针维护 + 去重
->
-> a, b, c 三个数的去重，是难点。
+> 将四数之和转换为两数之和。
+
+[LC15.三树之和](https://leetcode.cn/problems/3sum/)
 
 **[LC18. 四数之和](https://leetcode.cn/problems/4sum/)**
-
-> 对比三数之和，增加了一层外循环。
->
-> - 总体思路：用两层for维护最小的两个数，然后双指针维护后面的部分。
-> - 第一层for ：当前数大于目标值时，并且当前数大于等于0，break。外加 if(i > 0 && nums[i] == nums[i-1]) continue;进行剪枝。在这个数和前一个数大于0的情况下，后续有满足的组合，在前一种必然出现过。
-> - 第二层for : 即再上一层基础上初始值时nums[i] + nums[j]进行比较。
-> - 双指针同上一题一样进行维护。
->
-> 注意数据的溢出。
->
-> LC15 和18 的剪枝是难点。
 
 [LC49. 字母异位词分组](https://leetcode.cn/problems/group-anagrams/)
 

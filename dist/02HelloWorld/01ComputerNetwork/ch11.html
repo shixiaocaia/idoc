@@ -7,18 +7,18 @@
     <title>HTTP常见的问题 今天是个好天气</title>
     <meta name="description" content="HTTP 是超文本传输协议，也就是HyperText Transfer Protocol。">
     <meta name="keywords" content="notebook">
-    <link rel="stylesheet" type="text/css" href="../../css/main.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/tocbot.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/media.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/sidebar.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/copy.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/fancybox.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/fancybox.css?v=1.25.0">
     <link rel="icon" href="../../logo.png" type="image/x-icon">
-    <script src="../../js/copy.js?v=1.26.6"></script>
-    <script src="../../js/dark-mode.js?v=1.26.6"></script>
-    <script src="../../js/markdown-style.js?v=1.26.6"></script>
-    <script src="../../js/jquery.min.js?v=1.26.6"></script>
-    <script src="../../js/fancybox.umd.js?v=1.26.6"></script>
+    <script src="../../js/copy.js?v=1.25.0"></script>
+    <script src="../../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../../js/fancybox.umd.js?v=1.25.0"></script>
   </head>
   <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <script>
@@ -64,15 +64,15 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <div>
             <a href="../index.html" class="">↩️README</a>
             <label>计算机网络</label>
-            <a href="ch00.html" class="">问题收集</a>
-            <a href="ch11.html" class="">常见问题</a>
+            <a href="ch01.html" class="">网络发展过程</a>
+            <a href="ch41.html" class="">键入url到渲染显示</a>
+            <a href="ch11.html" class="">HTTP报文</a>
+            <a href="ch12.html" class="">HTTPS / HTTP1、2、3</a>
             <a href="ch21.html" class="">三次握手/四次挥手</a>
             <a href="ch22.html" class="">socket</a>
             <a href="ch23.html" class="">可靠的TCP</a>
             <a href="ch31.html" class="">IP知识全家桶</a>
             <a href="ch32.html" class="">ping的工作原理</a>
-            <a href="ch01.html" class="">网络发展</a>
-            <a href="ch41.html" class="">键入url到渲染显示</a>
             <label>操作系统</label>
             <a href="../01OperatingSystem/ch51.html" class="">优化程序性能</a>
             <a href="../01OperatingSystem/ch61.html" class="">存储器</a>
@@ -82,10 +82,10 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <a href="../01OperatingSystem/ch91.html" class="">虚拟内存</a>
             <label>工具</label>
             <a href="../03Other/environment.html" class="">配个环境</a>
-            <a href="../03Other/vim.html" class="">Vim</a>
             <a href="../03Other/git.html" class="">Git</a>
             <a href="../03Other/shell.html" class="">Shell</a>
             <a href="../03Other/docker.html" class="">Docker</a>
+            <a href="../03Other/python.html" class="">python</a>
           </div>
         </aside>
       </div>
@@ -102,15 +102,21 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p><strong>HTTP 是一个在计算机世界里专门在「两点」之间「传输」文字、图片、音频、视频等「超文本」数据的「约定和规范」。</strong></p>
         <h3 id="常见的状态码"><a aria-hidden="true" tabindex="-1" href="#常见的状态码" class="anchor"><span class="icon icon-link"></span></a>常见的状态码</h3>
         <p>
-          <img src="../../img/202303301107244.png" alt=" 五大类 HTTP 状态码 ">
+          <img src="..\..\img\202303301107244.png" alt=" 五大类 HTTP 状态码 ">
         </p>
+        <ul>
+          <li>200 OK，204 No Content，206 Partial Content，206 Content-Range</li>
+          <li>301 Moved Permanently，302 Found，304 Not Modified‘</li>
+          <li>400 Bad Request，403 Forbidden，404 Not Found</li>
+          <li>500 Internal Server Error，501 Not Implemented，502 Bad Gateway，503 Service Unavailable</li>
+        </ul>
         <h3 id="常见字段"><a aria-hidden="true" tabindex="-1" href="#常见字段" class="anchor"><span class="icon icon-link"></span></a>常见字段</h3>
         <ul>
           <li>connection中的<code>keep-live</code>和TCP中的<code>keepalive</code>的区别</li>
         </ul>
         <h2 id="http报文是什么样"><a aria-hidden="true" tabindex="-1" href="#http报文是什么样" class="anchor"><span class="icon icon-link"></span></a>HTTP报文是什么样</h2>
         <p>
-          <img src="../../img/62e061618977565c22c2cf09930e1d3c.png" alt="img">
+          <img src="..\..\img\62e061618977565c22c2cf09930e1d3c.png" alt="img">
         </p>
         <p>HTTP 协议的请求报文和响应报文的结构基本相同，由三大部分组成：</p>
         <ol>
@@ -226,11 +232,11 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         <p>URI是统一资源标识符，本质上是一个字符串，唯一地标记资源的位置或者名字。</p>
         <p>URI 最常用的形式，由 scheme、host:port、path 和 query 四个部分组成，但有的部分可以视情况省略。</p>
         <p>
-          <img src="../../img/46581d7e1058558d8e12c1bf37d30d2a.png" alt="img">
+          <img src="..\..\img\46581d7e1058558d8e12c1bf37d30d2a.png" alt="img">
         </p>
         <ul>
           <li><code>scheme</code>表示协议名，表示资源使用哪个协议来访问。常见的http，https。</li>
-          <li><code>://</code>将scheme和后面部分分离。</li>
+          <li><code>://</code>将<code>scheme</code>和后面部分分离。</li>
           <li><code>host:port</code>表示资源所在的主机名和端口号
             <ul>
               <li>主机名可以是 IP 地址或者域名的形式，必须要有，否则浏览器就会找不到服务器。</li>
@@ -239,17 +245,282 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           </li>
           <li><code>path</code>表示资源所在位置。比如<code>/11-1</code>、<code>/rfc2023</code></li>
           <li><code>?query</code>表示查询资源，是多个“key=value”的字符串，这些 KV 值用字符“&#x26;”连接，浏览器和客户端都可以按照这个格式把长串的查询参数解析成可理解的字典或关联数组形式。是对资源附加的额外要求。</li>
+          <li><code>#fragment</code>是 URI 所定位的资源内部的一个“锚点”或者说是“标签”，浏览器可以在获取资源后直接跳转到它指示的位置。仅能由浏览器这样的客户端使用。</li>
         </ul>
         <hr>
         <ul>
           <li>URI只能使用ASCII码，对于其他的字符转换为16进制字节值。</li>
         </ul>
+        <h2 id="http-的实体数据"><a aria-hidden="true" tabindex="-1" href="#http-的实体数据" class="anchor"><span class="icon icon-link"></span></a>HTTP 的实体数据</h2>
+        <h3 id="数据类型"><a aria-hidden="true" tabindex="-1" href="#数据类型" class="anchor"><span class="icon icon-link"></span></a>数据类型</h3>
+        <ol>
+          <li>text：即文本格式的可读数据，我们最熟悉的应该就是 text/html 了，表示超文本文档，此外还有纯文本 text/plain、样式表 text/css 等。</li>
+          <li>image：即图像文件，有 image/gif、image/jpeg、image/png 等。</li>
+          <li>audio/video：音频和视频数据，例如 audio/mpeg、video/mp4 等。</li>
+          <li>application：数据格式不固定，可能是文本也可能是二进制，必须由上层应用程序来解释。常见的有 application/json，application/javascript、application/pdf 等，另外，如果实在是不知道数据是什么类型，像刚才说的“黑盒”，就会是 application/octet-stream，即不透明的二进制数据。</li>
+        </ol>
+        <hr>
+        <p>Encoding type：数据是用的什么编码格式，这样对方才能正确解压缩，还原出原始的数据。</p>
+        <ol>
+          <li>gzip：GNU zip 压缩格式，也是互联网上最流行的压缩格式；</li>
+          <li>deflate：zlib（deflate）压缩格式，流行程度仅次于 gzip；</li>
+          <li>br：一种专门为 HTTP 优化的新压缩算法（Brotli）。</li>
+        </ol>
+        <hr>
+        <p>实际中用Accept标记希望接收到的数据类型以及编码格式，Content字段用来告知客户端实际的报文中数据类型的压缩格式。</p>
+        <ul>
+          <li>如果请求报文中Accept-Encoding 字段，就表示客户端不支持压缩数据；</li>
+          <li>如果响应报文里没有 Content-Encoding 字段，就表示响应数据没有被压缩。</li>
+        </ul>
+        <h3 id="语言类型与编码"><a aria-hidden="true" tabindex="-1" href="#语言类型与编码" class="anchor"><span class="icon icon-link"></span></a>语言类型与编码</h3>
+        <ul>
+          <li>为了让浏览器显示出每个人都可理解可阅读的语言文字，引入了语言类型和字符集</li>
+          <li>语言类型中，地区性方言，用type-subtype表示，比如en-US表示美式英语，en-GB表示英式英语</li>
+          <li>字符集当中有英语ASCII，汉语的GBK，后来出现了UTF-8成为了互联网上的标准字符集</li>
+        </ul>
+        <h3 id="内容协商结果"><a aria-hidden="true" tabindex="-1" href="#内容协商结果" class="anchor"><span class="icon icon-link"></span></a>内容协商结果</h3>
+        <p>用Vary字段记录服务器在协商参考的请求字段，如：</p>
+        <pre class="language-html"><code class="language-html code-highlight"><span class="code-line line-number" line="1">Vary: Accept-Encoding,User-Agent,Accept
+</span></code><input type="hidden" value="Vary: Accept-Encoding,User-Agent,Accept
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <h2 id="数据压缩"><a aria-hidden="true" tabindex="-1" href="#数据压缩" class="anchor"><span class="icon icon-link"></span></a>数据压缩</h2>
+        <p>通常浏览器在发送请求时都会带着“<strong>Accept-Encoding</strong>”头字段，里面是浏览器支持的压缩格式列表，例如 gzip、deflate、br 等，这样服务器就可以从中选择一种压缩算法，放进“<strong>Content-Encoding</strong>”响应头里，再把原数据压缩后发给浏览器。</p>
+        <p>一般情况对文字压缩效率比较高，而图片、音视频本身已经是高度压缩的，因此使用gzip也不会再变小，甚至可能增大。所以各大网站的服务器都会使用这个手段作为“保底”。例如，在 Nginx 里就会使用“gzip on”指令，启用对“text/html”的压缩。</p>
+        <h3 id="分块传输"><a aria-hidden="true" tabindex="-1" href="#分块传输" class="anchor"><span class="icon icon-link"></span></a>分块传输</h3>
+        <p>将文件分块传输，在 HTTP 协议里就是“<strong>chunked</strong>”分块传输编码，在响应报文里用头字段“<strong>Transfer-Encoding: chunked</strong>”来表示，意思是报文里的 body 部分不是一次性发过来的，而是分成了许多的块（chunk）逐个发送。</p>
+        <p>此外，分块传输也可以用于流式数据，例如由数据库动态生成的表单页面，这种情况下 body 数据的长度是未知的，无法在头字段“<strong>Content-Length</strong>”里给出确切的长度，所以也只能用 chunked 方式分块发送。</p>
+        <p>“Transfer-Encoding: chunked”和“Content-Length”这两个字段是<strong>互斥的</strong>，也就是说响应报文里这两个字段不能同时出现。</p>
+        <h3 id="范围请求"><a aria-hidden="true" tabindex="-1" href="#范围请求" class="anchor"><span class="icon icon-link"></span></a>范围请求</h3>
+        <p>允许客户端在请求头里使用专用字段来表示只获取文件的一部分，比如在线播放视频时跳转到某个部分。</p>
+        <p>范围请求不是 Web 服务器必备的功能，可以实现也可以不实现，所以服务器必须在响应头里使用字段“<strong>Accept-Ranges: bytes</strong>”明确告知客户端：“我是支持范围请求的”。</p>
+        <p>常用的下载工具里的多段下载、断点续传也是基于它实现的，要点是：</p>
+        <ul>
+          <li>先发个 HEAD，看服务器是否支持范围请求，同时获取文件的大小；</li>
+          <li>开 N 个线程，每个线程使用 Range 字段划分出各自负责下载的片段，发请求传输数据；</li>
+          <li>下载意外中断也不怕，不必重头再来一遍，只要根据上次的下载记录，用 Range 请求剩下的那一部分就可以了。</li>
+        </ul>
+        <h3 id="多端数据"><a aria-hidden="true" tabindex="-1" href="#多端数据" class="anchor"><span class="icon icon-link"></span></a>多端数据</h3>
+        <p>为了一次性获取多个片段的值，需要使用一种特殊的 MIME 类型：“<strong>multipart/byteranges</strong>”，表示报文的 body 是由多段字节序列组成的，并且还要用一个参数“<strong>boundary=xxx</strong>”给出段之间的分隔标记。</p>
+        <h2 id="重定向和跳转"><a aria-hidden="true" tabindex="-1" href="#重定向和跳转" class="anchor"><span class="icon icon-link"></span></a>重定向和跳转</h2>
+        <p>当我们点击一个链接，浏览器解析URI，用这个URI发起一个新的HTTP请求，获取响应报文后切换显示的内容，渲染出新URI指向的页面。这样的方式称为“主动跳转”。</p>
+        <p>重定向的过程，当收到301或者302报文时，检查响应头里有没有Location，如果有就从字段值提取出URI，发起新的HTTP请求，整个过程是无感的。</p>
+        <p>此外重定向如果针对是站内，可以放心使用相对URI，否则要使用绝对URI，包括前面的请求协议等。</p>
+        <p>应用场景：</p>
+        <ul>
+          <li>一个最常见的原因就是“<strong>资源不可用</strong>”，需要用另一个新的 URI 来代替。</li>
+          <li>“<strong>避免重复</strong>”，让多个网址都跳转到一个 URI，增加访问入口的同时还不会增加额外的工作量。</li>
+        </ul>
+        <h2 id="连接管理"><a aria-hidden="true" tabindex="-1" href="#连接管理" class="anchor"><span class="icon icon-link"></span></a>连接管理</h2>
+        <h3 id="短连接"><a aria-hidden="true" tabindex="-1" href="#短连接" class="anchor"><span class="icon icon-link"></span></a>短连接</h3>
+        <p>最早短连接底层的数据传输基于 TCP/IP，每次发送请求前需要先与服务器建立连接，收到响应报文后会立即关闭连接。不会与服务器保持长时间的连接状态，所以被称为短连接。</p>
+        <p>在TCP协议里，连接和关闭连接都是昂贵的操作。TCP 建立连接要有“三次握手”，发送 3 个数据包，需要 1 个 RTT；关闭连接是“四次挥手”，4 个数据包需要 2 个 RTT。</p>
+        <p>短连接的缺点严重制约了服务器的服务能力，导致它无法处理更多的请求。</p>
+        <h3 id="长连接"><a aria-hidden="true" tabindex="-1" href="#长连接" class="anchor"><span class="icon icon-link"></span></a>长连接</h3>
+        <p>因为只在第一次时建立连接，在最后一次时关闭连接。</p>
+        <p>由于长连接对性能的改善效果非常显著，所以在 HTTP/1.1 中的连接都会默认启用长连接。</p>
+        <p>在请求头里明确地要求使用长连接机制，使用的字段是<strong>Connection</strong>，值是“<strong>keep-alive</strong>”。</p>
+        <p>在客户端，可以在请求头里加上“<strong>Connection: close</strong>”字段，告诉服务器：“这次通信后就关闭连接”来主动关闭长连接，避免资源浪费。</p>
+        <p>通常服务器不会主动关闭连接，一般设置一些策略比如超时时间，长连接上可发送的最大请求次数。</p>
+        <h3 id="队头阻塞"><a aria-hidden="true" tabindex="-1" href="#队头阻塞" class="anchor"><span class="icon icon-link"></span></a>队头阻塞</h3>
+        <p>HTTP 规定报文必须是“一发一收”，这就形成了一个先进先出的“串行”队列。</p>
+        <p>如果队首的请求因为处理的太慢耽误了时间，那么队列里后面的所有请求也不得不跟着一起等待，结果就是其他的请求承担了不应有的时间成本。</p>
+        <h3 id="性能优化"><a aria-hidden="true" tabindex="-1" href="#性能优化" class="anchor"><span class="icon icon-link"></span></a>性能优化</h3>
+        <p>因为“请求 - 应答”模型不能变，所以“队头阻塞”问题在 HTTP/1.1 里无法解决，只能缓解。</p>
+        <p><strong>并发连接</strong>，同时对一个域名发起多个长连接，用数量来解决质量的问题。但是过多的连接会对服务器造成过大的压力。</p>
+        <p>“<strong>域名分片</strong>”（domain sharding）技术，还是用数量来解决质量的思路。多个域名指向同一台服务器，实际长连接的数量就上去了。</p>
+        <h2 id="cookie机制"><a aria-hidden="true" tabindex="-1" href="#cookie机制" class="anchor"><span class="icon icon-link"></span></a>Cookie机制</h2>
+        <p>HTTP是无状态的，无法支持需要记录状态的操作。随后引入了Cookie机制。</p>
+        <ul>
+          <li>第一次发送请求时，请求报文里带有Cookie字段，响应报文当中回应Set-Cookie字段，之后的报文中将这个值保存到Cookie当中，发送给服务器。
+            <ul>
+              <li>服务器可能会设置多个set-cookie</li>
+              <li>浏览器发送时，只要在一个cookie字段中包含这些cookie就行</li>
+              <li>Cookie以key-value形式</li>
+            </ul>
+          </li>
+          <li>第二次请求，Cookie字段携带之前得到的数据进行发送。</li>
+          <li>cookie存储在浏览器当中，而不是操作系统当中，当然也有硬盘类型的Cookie（持久化）。</li>
+          <li>一般来说，系统会把状态信息保存在服务端，在 Cookie 里只传输的是一个无字面意义的、不重复的字符串，习惯上以<code>sessionid</code>或者<code>jsessionid</code>为名，服务器拿这个字符串为 Key，在内存中开辟一块空间，以 Key/Entity 的结构存储每一个在线用户的上下文状态，再辅以一些超时自动清理之类的管理措施。</li>
+        </ul>
+        <h3 id="属性字段"><a aria-hidden="true" tabindex="-1" href="#属性字段" class="anchor"><span class="icon icon-link"></span></a>属性字段</h3>
+        <pre class="language-html"><code class="language-html code-highlight"><span class="code-line line-number" line="1">Set-Cookie: <span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>cookie名</span><span class="token punctuation">></span></span>=<span class="token tag"><span class="token tag"><span class="token punctuation">&#x3C;</span>cookie值</span><span class="token punctuation">></span></span>
+</span><span class="code-line line-number" line="2">
+</span><span class="code-line line-number" line="3">HTTP/1.0 200 OK
+</span><span class="code-line line-number" line="4">Content-type: text/html
+</span><span class="code-line line-number" line="5">Set-Cookie: yummy_cookie=choco
+</span><span class="code-line line-number" line="6">Set-Cookie: tasty_cookie=strawberry
+</span></code><input type="hidden" value="Set-Cookie: <cookie名>=<cookie值>
+
+HTTP/1.0 200 OK
+Content-type: text/html
+Set-Cookie: yummy_cookie=choco
+Set-Cookie: tasty_cookie=strawberry
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>Expires：过期时间</li>
+          <li>Max-Age：用的是相对时间</li>
+          <li>Domain和Path：指定了 Cookie 所属的域名和路径，浏览器在发送 Cookie 前会从 URI 中提取出 host 和 path 部分，对比 Cookie 的属性。如果不满足条件，就不会在请求头里发送 Cookie。也可以根据不同的域名和路径设置各自的Cookie。</li>
+          <li>HttpOnly：会告诉浏览器，此 Cookie 只能通过浏览器 HTTP 协议传输，禁止其他方式访问，浏览器的 JS 引擎就会禁用 document.cookie 等一切相关的 API，脚本攻击也就无从谈起了。</li>
+          <li>SameSite：可以防范“跨站请求伪造”（XSRF）攻击，设置成“SameSite=Strict”可以严格限定 Cookie 不能随着跳转链接跨站发送，而“SameSite=Lax”则略宽松一点，允许 GET/HEAD 等安全方法，但禁止 POST 跨站发送。</li>
+          <li>“Secure”，表示这个 Cookie 仅能用 HTTPS 协议加密传输，明文的 HTTP 协议会禁止发送。Cookie 本身不是加密的，浏览器里还是以明文的形式存在。</li>
+        </ul>
+        <h3 id="身份识别"><a aria-hidden="true" tabindex="-1" href="#身份识别" class="anchor"><span class="icon icon-link"></span></a>身份识别</h3>
+        <p>第一次登陆时，通过用户的登录信息，返回一个Cookie，作为一个身份标签，后续的请求通过Cookie发送给服务器，避免了重复登录，实现了状态保持。</p>
+        <h3 id="广告跟踪"><a aria-hidden="true" tabindex="-1" href="#广告跟踪" class="anchor"><span class="icon icon-link"></span></a>广告跟踪</h3>
+        <p>例如 Google，它会上网时“偷偷地”给你贴上 Cookie 小纸条，这样你上其他的网站，别的广告就能用 Cookie 读出你的身份，然后做行为分析，再推给你广告。</p>
+        <p>这种 Cookie 不是由访问的主站存储的，所以又叫“第三方 Cookie”（third-party cookie）。</p>
+        <h3 id="存在问题"><a aria-hidden="true" tabindex="-1" href="#存在问题" class="anchor"><span class="icon icon-link"></span></a>存在问题</h3>
+        <p>Cookie 常用来标记用户或授权会话，被浏览器发出之后可能被劫持，被用于非法行为，可能导致授权用户的会话受到攻击，因此存在安全问题。</p>
+        <p>还有一种情况就是跨站请求伪造CSRF，简单来说 比如你在登录银行网站的同时，登录了一个钓鱼网站，在钓鱼网站进行某些操作时可能会获取银行网站相关的Cookie信息，向银行网站发起转账等非法行为。</p>
+        <p>明文，有数量和容量限制，每次都要发送额外的流量消耗，复杂的Cookie行为无法满足。</p>
+        <h2 id="session机制"><a aria-hidden="true" tabindex="-1" href="#session机制" class="anchor"><span class="icon icon-link"></span></a>Session机制</h2>
+        <p>Cookie机制在最初和服务端完成交互后，保持状态所需的信息都将<strong>存储在客户端</strong>，后续直接读取发送给服务端进行交互。</p>
+        <p>Session代表服务器与浏览器的一次<strong>会话过程</strong>，并且完全有服务端掌控，实现分配唯一ID、会话信息存储、会话检索等功能。</p>
+        <p>Session机制将用户的所有活动信息、上下文信息、登录信息等都<strong>存储在服务端</strong>数据库，只是生成一个唯一标识ID发送给客户端，后续的交互将没有重复的用户信息传输，取而代之的是唯一标识ID，暂且称之为Session-ID吧。</p>
+        <h3 id="交互流程"><a aria-hidden="true" tabindex="-1" href="#交互流程" class="anchor"><span class="icon icon-link"></span></a>交互流程</h3>
+        <ul>
+          <li>当客户端第一次请求session对象时候，服务器会为客户端创建一个session，并将通过特殊算法算出一个session的ID，用来标识该session对象。</li>
+          <li>当浏览器下次请求别的资源的时候，浏览器会将sessionID放置到请求头中，服务器接收到请求后解析得到sessionID，服务器找到该id的session来确定请求方的身份和一些上下文信息。</li>
+          <li>Cookie过期后，浏览器一般会自动删除这个Cookie。</li>
+        </ul>
+        <h3 id="实现方式"><a aria-hidden="true" tabindex="-1" href="#实现方式" class="anchor"><span class="icon icon-link"></span></a>实现方式</h3>
+        <p>主要包括两种方式cookie与url重写，而cookie是首选方式，因为各种现代浏览器都默认开通cookie功能，但是每种浏览器也都有允许cookie失效的设置，因此对于Session机制来说还需要一个备胎。</p>
+        <p>将会话标识号以参数形式附加在超链接的URL地址后面的技术称为URL重写，比如<code>http://taobao.com/getitem?sessionid=1wui87htentg&#x26;?name=baymax&#x26;action=buy</code>。</p>
+        <h3 id="存在问题-1"><a aria-hidden="true" tabindex="-1" href="#存在问题-1" class="anchor"><span class="icon icon-link"></span></a>存在问题</h3>
+        <ul>
+          <li>由于Session信息是存储在服务端的，因此如果用户量很大的场景，Session信息占用的空间过大。</li>
+          <li>对于大型网站必然是集群化&#x26;分布式的服务器配置，如果Session信息是存储在本地的，那么由于负载均衡的作用，原来请求机器A并且存储了Session信息，下一次请求可能到了机器B，此时机器B上并没有Session信息。
+            <ul>
+              <li>在B机器重复创建，造成浪费</li>
+              <li>引入高可用的Session集群方案，引入Session代理实现信息共享，要么实现定制化哈希到集群A，这样做其实就有些复杂了。</li>
+            </ul>
+          </li>
+        </ul>
+        <h2 id="token方案"><a aria-hidden="true" tabindex="-1" href="#token方案" class="anchor"><span class="icon icon-link"></span></a>Token方案</h2>
+        <p>Token是令牌的意思，由服务端生成并发放给客户端，具有时效性的一种验证身份的手段。</p>
+        <p>如果采用上面的Session-cookie形式，在大流量场景下，需要分流到其他服务器，其他服务器进行验证时，需要通用的Seesion ID。</p>
+        <p>如果用数据库存储ID，数据库崩溃，会导致整体失败。</p>
+        <h3 id="交互流程-1"><a aria-hidden="true" tabindex="-1" href="#交互流程-1" class="anchor"><span class="icon icon-link"></span></a>交互流程</h3>
+        <p>
+          <img src="..\..\img\233.webp" alt="img">
+        </p>
+        <ul>
+          <li>客户端将用户的账号和密码提交给服务器</li>
+          <li>服务器对其进行校验，通过则生成一个token值，服务端只保存<strong>JWT签名密文</strong>，同时返回给客户端JWT，作为后续的请求交互身份令牌</li>
+          <li>客户端拿到服务端返回的token值后，可将其<strong>保存在本地</strong>，以后每次请求服务器时都携带该token，提交给服务器进行身份校验</li>
+          <li>服务器接收到请求后，解析出其中的Token，再根据相同的加密算法和参数生成Token与客户端的Token进行对比，一致则通过，否则拒绝服务</li>
+          <li>Token验证通过，服务端就可以根据该Token中的uid获取对应的用户信息，进行业务请求的响应</li>
+        </ul>
+        <h3 id="方案优点"><a aria-hidden="true" tabindex="-1" href="#方案优点" class="anchor"><span class="icon icon-link"></span></a>方案优点</h3>
+        <ul>
+          <li>Token可以跨站共享，实现单点登录</li>
+          <li>Token机制无需太多存储空间，Token包含了用户的信息，只需在客户端存储状态信息即可，对于服务端的扩展性很好</li>
+          <li>Token机制的安全性依赖于服务端加密算法和密钥的安全性</li>
+        </ul>
+        <h2 id="jwt"><a aria-hidden="true" tabindex="-1" href="#jwt" class="anchor"><span class="icon icon-link"></span></a>JWT</h2>
+        <h3 id="跨域认证"><a aria-hidden="true" tabindex="-1" href="#跨域认证" class="anchor"><span class="icon icon-link"></span></a>跨域认证</h3>
+        <p>举例来说，A 网站和 B 网站是同一家公司的关联服务。现在要求，用户只要在其中一个网站登录，再访问另一个网站就会自动登录，请问怎么实现？</p>
+        <blockquote>
+          <p>一种解决方案是 session 数据持久化，写入数据库或别的持久层。各种服务收到请求后，都向持久层请求数据。这种方案的优点是架构清晰，缺点是工程量比较大。另外，持久层万一挂了，就会单点失败。</p>
+          <p>另一种方案是服务器索性不保存 session 数据了，所有数据都保存在客户端，每次请求都发回服务器。JWT 就是这种方案的一个代表。</p>
+        </blockquote>
+        <h3 id="原理"><a aria-hidden="true" tabindex="-1" href="#原理" class="anchor"><span class="icon icon-link"></span></a>原理</h3>
+        <p>JWT 的原理是，服务器认证以后，生成一个 JSON 对象，发回给用户，就像下面这样。</p>
+        <pre class="language-html"><code class="language-html code-highlight"><span class="code-line line-number" line="1">{
+</span><span class="code-line line-number" line="2">  "姓名": "张三",
+</span><span class="code-line line-number" line="3">  "角色": "管理员",
+</span><span class="code-line line-number" line="4">  "到期时间": "2018年7月1日0点0分"
+</span><span class="code-line line-number" line="5">}
+</span></code><input type="hidden" value="{
+  &#x22;姓名&#x22;: &#x22;张三&#x22;,
+  &#x22;角色&#x22;: &#x22;管理员&#x22;,
+  &#x22;到期时间&#x22;: &#x22;2018年7月1日0点0分&#x22;
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>以后，用户与服务端通信的时候，都要发回这个 JSON 对象。服务器完全只靠这个对象认定用户身份。为了防止用户篡改数据，服务器在生成这个对象的时候，会加上签名（详见后文）。</p>
+        <h3 id="组成"><a aria-hidden="true" tabindex="-1" href="#组成" class="anchor"><span class="icon icon-link"></span></a>组成</h3>
+        <p>JWT 包含三个部分，<code>Header.Payload.Signature</code>。</p>
+        <h4 id="header"><a aria-hidden="true" tabindex="-1" href="#header" class="anchor"><span class="icon icon-link"></span></a>Header</h4>
+        <p>Header 部分是一个 JSON 对象，描述 JWT 的元数据，通常是下面的样子。</p>
+        <blockquote>
+          <pre class="language-javascript"><code class="language-javascript code-highlight"><span class="code-line line-number" line="1"><span class="token punctuation">{</span>
+</span><span class="code-line line-number" line="2">  <span class="token string-property property">"alg"</span><span class="token operator">:</span> <span class="token string">"HS256"</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="3">  <span class="token string-property property">"typ"</span><span class="token operator">:</span> <span class="token string">"JWT"</span>
+</span><span class="code-line line-number" line="4"><span class="token punctuation">}</span>
+</span></code><input type="hidden" value="{
+  &#x22;alg&#x22;: &#x22;HS256&#x22;,
+  &#x22;typ&#x22;: &#x22;JWT&#x22;
+}
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        </blockquote>
+        <p>上面代码中，<code>alg</code>属性表示签名的算法（algorithm），默认是 HMAC SHA256（写成 HS256）；<code>typ</code>属性表示这个令牌（token）的类型（type），JWT 令牌统一写为<code>JWT</code>。</p>
+        <p>最后，将上面的 JSON 对象使用 Base64URL 算法（详见后文）转成字符串。</p>
+        <h4 id="payload"><a aria-hidden="true" tabindex="-1" href="#payload" class="anchor"><span class="icon icon-link"></span></a>Payload</h4>
+        <p>Payload 部分也是一个 JSON 对象，用来存放实际需要传递的数据。JWT 规定了7个官方字段，供选用。</p>
+        <blockquote>
+          <ul>
+            <li>
+              <p>iss (issuer)：签发人</p>
+            </li>
+            <li>
+              <p>exp (expiration time)：过期时间</p>
+            </li>
+            <li>
+              <p>sub (subject)：主题</p>
+            </li>
+            <li>
+              <p>aud (audience)：受众</p>
+            </li>
+            <li>
+              <p>nbf (Not Before)：生效时间</p>
+            </li>
+            <li>
+              <p>iat (Issued At)：签发时间</p>
+            </li>
+            <li>
+              <p>jti (JWT ID)：编号</p>
+            </li>
+            <li>
+              <p>自定义私有字段</p>
+            </li>
+          </ul>
+        </blockquote>
+        <p>这个 JSON 对象也要使用 Base64URL 算法转成字符串。</p>
+        <h4 id="signature"><a aria-hidden="true" tabindex="-1" href="#signature" class="anchor"><span class="icon icon-link"></span></a>Signature</h4>
+        <p>Signature 部分是对前两部分的签名，防止数据篡改。</p>
+        <p>首先，需要指定一个密钥（secret）。这个密钥只有服务器才知道，不能泄露给用户。然后，使用 Header 里面指定的签名算法（默认是 HMAC SHA256），按照下面的公式产生签名。</p>
+        <blockquote>
+          <pre class="language-javascript"><code class="language-javascript code-highlight"><span class="code-line line-number" line="1"><span class="token constant">HMACSHA256</span><span class="token punctuation">(</span>
+</span><span class="code-line line-number" line="2">  <span class="token function">base64UrlEncode</span><span class="token punctuation">(</span>header<span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"."</span> <span class="token operator">+</span>
+</span><span class="code-line line-number" line="3">  <span class="token function">base64UrlEncode</span><span class="token punctuation">(</span>payload<span class="token punctuation">)</span><span class="token punctuation">,</span>
+</span><span class="code-line line-number" line="4">  secret<span class="token punctuation">)</span>
+</span></code><input type="hidden" value="HMACSHA256(
+  base64UrlEncode(header) + &#x22;.&#x22; +
+  base64UrlEncode(payload),
+  secret)
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        </blockquote>
+        <p>算出签名以后，把 Header、Payload、Signature 三个部分拼成一个字符串，每个部分之间用"点"（<code>.</code>）分隔，就可以返回给用户。</p>
+        <h3 id="使用方式"><a aria-hidden="true" tabindex="-1" href="#使用方式" class="anchor"><span class="icon icon-link"></span></a>使用方式</h3>
+        <p>客户端收到服务器返回的 JWT，可以储存在 Cookie 里面，也可以储存在 localStorage。</p>
+        <p>此后，客户端每次与服务器通信，都要带上这个 JWT。你可以把它放在 Cookie 里面自动发送，但是这样不能跨域，所以更好的做法是放在 HTTP 请求的头信息<code>Authorization</code>字段里面。</p>
+        <pre class="language-javascript"><code class="language-javascript code-highlight"><span class="code-line line-number" line="1"><span class="token literal-property property">Authorization</span><span class="token operator">:</span> <span class="token maybe-class-name">Bearer</span> <span class="token operator">&#x3C;</span>token<span class="token operator">></span>
+</span></code><input type="hidden" value="Authorization: Bearer <token>
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>另一种做法是，跨域的时候，JWT 就放在 POST 请求的数据体里面。</p>
+        <h3 id="jwt特点"><a aria-hidden="true" tabindex="-1" href="#jwt特点" class="anchor"><span class="icon icon-link"></span></a>JWT特点</h3>
+        <p>（1）JWT 默认是不加密，但也是可以加密的。生成原始 Token 以后，可以用密钥再加密一次。</p>
+        <p>（2）JWT 不加密的情况下，不能将秘密数据写入 JWT，明文传递。</p>
+        <p>（3）JWT 不仅可以用于认证，也可以用于交换信息。有效使用 JWT，可以降低服务器查询数据库的次数。</p>
+        <p>（4）JWT 的最大缺点是，由于服务器不保存 session 状态，因此无法在使用过程中废止某个 token，或者更改 token 的权限。也就是说，一旦 JWT 签发了，在到期之前就会始终有效，除非服务器部署额外的逻辑。</p>
+        <p>（5）JWT 本身包含了认证信息，一旦泄露，任何人都可以获得该令牌的所有权限。为了减少盗用，JWT 的有效期应该设置得比较短。对于一些比较重要的权限，使用时应该再次对用户进行认证。</p>
+        <p>（6）为了减少盗用，JWT 不应该使用 HTTP 协议明码传输，要使用 HTTPS 协议传输。</p>
         <h2 id="缓存原理"><a aria-hidden="true" tabindex="-1" href="#缓存原理" class="anchor"><span class="icon icon-link"></span></a>缓存原理</h2>
         <p>对重复性的HTTP请求，每次得到数据都一样时，把[请求 + 缓存]放在本地，下次直接读取本地数据。</p>
         <p>HTTP 协议的头部有不少是针对缓存的字段，实现缓存技术都要用到<code>Cache-control</code>和<code>expires</code>来判断缓存的过期情况。</p>
         <p>在第一次发送请求报文后，服务器在响应报文当中标注了<code>cache-control</code>，当报文过期后，向服务器发送请求时，会更新<code>cache-control</code>。</p>
         <p>
-          <img src="../../img/http%E7%BC%93%E5%AD%98.png" alt="img">
+          <img src="..\..\img\http缓存.png" alt="img">
         </p>
         <h3 id="强制缓存"><a aria-hidden="true" tabindex="-1" href="#强制缓存" class="anchor"><span class="icon icon-link"></span></a>强制缓存</h3>
         <p>浏览器判断缓存有没有过期，没有过期会直接使用本地缓存，决定权在浏览器。</p>
@@ -291,159 +562,6 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <p>如果浏览器收到 304 的请求响应状态码，则会从本地缓存中加载资源，否则更新资源。</p>
           </li>
         </ul>
-        <h2 id="http特性"><a aria-hidden="true" tabindex="-1" href="#http特性" class="anchor"><span class="icon icon-link"></span></a>HTTP特性</h2>
-        <h3 id="http-11优缺点"><a aria-hidden="true" tabindex="-1" href="#http-11优缺点" class="anchor"><span class="icon icon-link"></span></a>HTTP 1.1优缺点</h3>
-        <ul>
-          <li>简单：HTTP 基本的报文格式就是 <code>header + body</code>，易于理解，降低了学习和使用的门槛</li>
-          <li>灵活和易于扩展：请求字段和结构没有固定死，可以灵活设置</li>
-          <li>应用广泛和跨平台</li>
-          <li>无状态：服务器不会记忆HTTP的状态，进行关联性操作时要反复判断，但也节省了存储信息的负担，解决办法：Cooki技术</li>
-          <li>明文传输：方便阅读，便于抓包调试，但是信息容易被窃取</li>
-          <li>不安全：明文传输，不验证通信方的身份，无法证明报文的完整新，主要通过HTTPS解决</li>
-        </ul>
-        <h2 id="http与https"><a aria-hidden="true" tabindex="-1" href="#http与https" class="anchor"><span class="icon icon-link"></span></a>HTTP与HTTPS</h2>
-        <h3 id="区别"><a aria-hidden="true" tabindex="-1" href="#区别" class="anchor"><span class="icon icon-link"></span></a>区别</h3>
-        <table>
-          <thead>
-            <tr>
-              <th align="center">HTTP</th>
-              <th align="center">HTTPS</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td align="center">超文本传输协议</td>
-              <td align="center">超文本传输协议</td>
-            </tr>
-            <tr>
-              <td align="center">明文传输</td>
-              <td align="center">加密传输（TCP和HTTP之间加入了SSL/TLS安全协议）</td>
-            </tr>
-            <tr>
-              <td align="center">三次握手后开始传输</td>
-              <td align="center">增加SSL/TLS的握手过程</td>
-            </tr>
-            <tr>
-              <td align="center">默认端口号：80</td>
-              <td align="center">默认端口号：443</td>
-            </tr>
-            <tr>
-              <td align="center">不需要证书</td>
-              <td align="center">需要CA（证书权威机构）申请数字证书</td>
-            </tr>
-          </tbody>
-        </table>
-        <h3 id="https如何解决了http问题"><a aria-hidden="true" tabindex="-1" href="#https如何解决了http问题" class="anchor"><span class="icon icon-link"></span></a>HTTPS如何解决了HTTP问题</h3>
-        <p>在TCP/HTTP之间增加了SSL/TLS协议，解决了明文传输过程中的窃听风险、篡改风险、冒充风险问题。</p>
-        <h4 id="混合加密"><a aria-hidden="true" tabindex="-1" href="#混合加密" class="anchor"><span class="icon icon-link"></span></a>混合加密</h4>
-        <p>为了解决信息被窃听的问题，HTTPS 采用的是对称加密和非对称加密结合的「混合加密」方式，使得未经的解密的其他用户只能看到密文。</p>
-        <p>一般将加密算法分为：</p>
-        <ul>
-          <li><strong>对称加密</strong>加密和解密使用同一个密钥，运算速度快，密钥必须保密，无法做到安全的密钥交换。</li>
-          <li><strong>非对称加密</strong>使用两个不同的密钥：公钥和私钥，公钥可以任意分发而私钥保密，解决了密钥交换问题但速度慢。</li>
-        </ul>
-        <blockquote>
-          <p>使用对称加密前提是通信双方商量出一个密钥，在这个过程中是传输明文，容易被窃取。</p>
-          <p>所以有了非对称加密，公钥被窃取时，通过公钥加密的报文，只能被私钥解密。</p>
-        </blockquote>
-        <p>综合考虑到可靠性和速度，HTTPS采用混合加密方式。</p>
-        <p>也就是说，<strong>用非对称加密算法传输密钥，用对称加密算法传输实际数据。</strong> 此密钥一般称为<code>『会话密钥』</code>。</p>
-        <blockquote>
-          <p>黑客窃取到会话密钥，但是没有私钥解密，以至于在后续无法解密对称加密的数据。</p>
-        </blockquote>
-        <h4 id="摘要算法"><a aria-hidden="true" tabindex="-1" href="#摘要算法" class="anchor"><span class="icon icon-link"></span></a>摘要算法</h4>
-        <p>为了保证传输的内容不被更改，计算出要发送内容的一个摘要，接受报文后再计算一遍，对比前后的值是否发生改变来判断内容是否被篡改。</p>
-        <p>在计算机里会用摘要算法（<strong>哈希函数</strong>）来计算出内容的哈希值，也就是内容的「指纹」，这个哈希值是唯一的，且无法通过哈希值推导出内容。</p>
-        <blockquote>
-          <p>计算机网络中常用的摘要算法有：MD5、SHA-1、SHA-256 等。</p>
-        </blockquote>
-        <p>但是在这个过程中不能保证整个内容和哈希值都被篡改，需要确保内容 + 哈希值都是原始发送的内容。</p>
-        <p>增加了一个<strong>鉴别密钥</strong>，获取方式等同于会话密钥，摘要算法的输入变为数据+鉴别密钥，在经过篡改后的数据，另一端收到后会发现解密后鉴别密钥变更，被篡改了。</p>
-        <blockquote>
-          <p>为了进一步提升安全性，实际上客户端和服务器将使用不同的<code>会话密钥</code>和<code>鉴别密钥</code>，也就是一共需要四个密钥：</p>
-          <ol>
-            <li>用于从客户端发送到服务器的数据的<code>会话密钥</code>；</li>
-            <li>用于从服务器发送到客户端的数据的<code>会话密钥</code>；</li>
-            <li>用于从客户端发送到服务器的数据的<code>鉴别密钥</code>；</li>
-            <li>用于从服务器发送到客户端的数据的<code>鉴别密钥</code>。</li>
-          </ol>
-        </blockquote>
-        <h4 id="数字证书"><a aria-hidden="true" tabindex="-1" href="#数字证书" class="anchor"><span class="icon icon-link"></span></a>数字证书</h4>
-        <p>万一服务器的公钥是被黑客伪造的呢？比如经典的『中间人攻击』问题，这里有点复杂具体可以看<a href="https://www.cnblogs.com/yifeng-coding/p/17031677.html">原文</a>。</p>
-        <p>为了避免客户端收到了非正规的网站（中间人），需要一个数字证书。</p>
-        <p>通过数字证书解决中间人攻击的具体过程为：</p>
-        <ul>
-          <li>服务器（正规网站）首先生成一对公钥和私钥，然后将域名、申请者、公钥（注意不是私钥，私钥是无论如何也不能泄露的）等信息整合在一起，生成 .csr 文件，并将此文件发给认证中心 CA。</li>
-          <li>CA 收到申请后，会通过各种手段验证申请者的信息，如无异常，则使用摘要算法得到 .csr 中明文信息的一个摘要，再用 CA 自己的<code>私钥</code>对这个摘要进行加密，生成一串密文，密文也称为数字签名。数字证书即包含此数字签名和 .csr 中明文信息。CA 把这个证书返回给申请人。</li>
-          <li>为了防止中间人攻击，客户端要求服务器发送其证书，并进行验证。</li>
-          <li>客户端在验证证书时，把证书里的签名与及明文信息分别取出来，然后会用自身携带的 CA 机构的<code>公钥</code>去解密签名，得到摘要 1，再利用摘要算法得到明文信息的摘要 2，对比摘要 1 和摘要 2，如果一样，说明证书是合法的，也就是证书里的公钥是正确的，否则说明证书不合法。</li>
-        </ul>
-        <blockquote>
-          <p>这里明文信息的摘要2，是可能被篡改的部分，而通过CA公钥解密得到的信息摘要是明确的。</p>
-          <p>此外认证中心的公钥，一般在操作系统中会内置这些，避免公钥被伪造。</p>
-          <p>Chrome 浏览器一旦发现一个网站数字证书无效，就会生成如下界面进行提示，如果用户强制访问，则存在一定的风险。（那我经常点开...</p>
-        </blockquote>
-        <h2 id="https连接建立"><a aria-hidden="true" tabindex="-1" href="#https连接建立" class="anchor"><span class="icon icon-link"></span></a>HTTPS连接建立</h2>
-        <p>根据前面所述，进行一下小结：</p>
-        <ul>
-          <li>HTTPS 通过混合加密算法解决 HTTP 传输数据容易被窃听的问题，此过程需要协商<code>会话密钥</code>。</li>
-          <li>HTTPS 通过摘要算法解决 HTTP 传输数据容易被篡改的问题，此过程需要协商<code>鉴别密钥</code>。</li>
-          <li>HTTPS 通过数字证书解决 HTTP 协议中身份容易被伪造的问题，此过程需要客户端验证服务器的<code>证书</code>。</li>
-        </ul>
-        <p>通信双方在SSL / TLS协议握手的时候，来协商会话密钥和鉴别密钥，以及验证证书的合法性。</p>
-        <p>
-          <img src="../../img/23-HTTPS%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B.png" alt="HTTPS 连接建立过程">
-        </p>
-        <ul>
-          <li>
-            <p>为什么第三、第四次握手要发送所有握手报文的摘要呢？</p>
-            <blockquote>
-              <p>主要原因是<strong>防止握手信息被篡改</strong>。比如客户端支持的密码套件列表中，有些加密算法较弱，有些加密算法较强，而此密码套件是明文传输的，万一黑客将此密码套件列表进行了修改，只留下一些安全性较低的加密算法，那么服务器就只能从这些安全性较低的加密算法中选择，安全性大大降低。因此需要通过发送摘要的形式防止握手信息被篡改。</p>
-            </blockquote>
-          </li>
-          <li>
-            <p>为什么不直接发送一个主密钥，而是用两个随机数加一个前主密钥重新生成一个主密钥呢？</p>
-            <blockquote>
-              <p>主要原因是<strong>防止连接重放</strong>。如果没有前面两个随机数，仅仅由客户端生成一个主密钥，并通过服务器<code>公钥</code>加密发送给服务器。那么黑客在嗅探了服务器与客户端之间的所有报文后，可以再次冒充客户端向服务器发送相同的报文（虽然黑客不知道内容是什么），因为报文信息都是之前客户端和服务器验证过的，因此服务器会认为是客户端与其通信，导致又一次连接。</p>
-            </blockquote>
-          </li>
-        </ul>
-        <p>整个 TLS 的握手阶段全部结束。接下来，客户端与服务器进入加密通信，就完全是使用普通的 HTTP 协议，只不过用「会话秘钥」加密内容。</p>
-        <h3 id="客户端校验数字证书的流程是怎样的"><a aria-hidden="true" tabindex="-1" href="#客户端校验数字证书的流程是怎样的" class="anchor"><span class="icon icon-link"></span></a>客户端校验数字证书的流程是怎样的？</h3>
-        <blockquote>
-          <p>小林coding</p>
-        </blockquote>
-        <h2 id="https-的应用数据是如何保证完整性的"><a aria-hidden="true" tabindex="-1" href="#https-的应用数据是如何保证完整性的" class="anchor"><span class="icon icon-link"></span></a>HTTPS 的应用数据是如何保证完整性的？</h2>
-        <h2 id="https-一定安全可靠吗"><a aria-hidden="true" tabindex="-1" href="#https-一定安全可靠吗" class="anchor"><span class="icon icon-link"></span></a>HTTPS 一定安全可靠吗？</h2>
-        <h2 id="http11http2http3-演变"><a aria-hidden="true" tabindex="-1" href="#http11http2http3-演变" class="anchor"><span class="icon icon-link"></span></a>HTTP/1.1、HTTP/2、HTTP/3 演变</h2>
-        <h3 id="http11"><a aria-hidden="true" tabindex="-1" href="#http11" class="anchor"><span class="icon icon-link"></span></a>HTTP/1.1</h3>
-        <ul>
-          <li>对比1.0 增加了长连接方式，改善了性能开销</li>
-          <li>支持管道传输（但是一般浏览器并不支持</li>
-        </ul>
-        <h3 id="http2"><a aria-hidden="true" tabindex="-1" href="#http2" class="anchor"><span class="icon icon-link"></span></a>HTTP/2</h3>
-        <ul>
-          <li>头部压缩（1.1只能压缩body）：如果你同时发出多个请求，他们的头是一样的或是相似的，那么，协议会帮你<strong>消除重复的部分</strong>。</li>
-          <li>二进制格式：头信息和数据体都是二进制，并且统称为帧（frame），计算机可以解析和传输报文信息，并不需要转码操作。</li>
-          <li>并发传输：在1.1中基于请求-响应报文，完成一个请求与响应，才能处理响应下一个，但是如果中途有一个阻塞，那么会造成后续的断发。在2.0当中引入Stream概念，多个Stream复用在一条TCP连接当中。</li>
-          <li>服务器主动推送资源：客户端和服务器<strong>双方都可以建立 Stream</strong>，传输消息。比如在1.1当中html和css分别作请求和响应，在2.0服务端可以主动推送需要的css进行渲染。</li>
-        </ul>
-        <blockquote>
-          <p>但是2.0虽然通过Stream的并发解决了1.0的队头阻塞问题，但是基于TCP实现的面向字节流，当一个报文的前1个字节延迟到达时，其他字节存放在缓冲区，全部到达后应用层才能从内核当中拿到数据。</p>
-        </blockquote>
-        <h3 id="http3"><a aria-hidden="true" tabindex="-1" href="#http3" class="anchor"><span class="icon icon-link"></span></a>HTTP/3</h3>
-        <ul>
-          <li>1.1通过stream解决了请求的队头阻塞，但是没有解决响应的队头阻塞。</li>
-          <li>2通过多个请求复用一个 TCP 连接解决了 HTTP 的队头阻塞 ，但是一旦发生丢包，就会阻塞住所有的 HTTP 请求，这属于 TCP 层队头阻塞。</li>
-        </ul>
-        <p>HTTP/3把下层的TCP协议改成了UDP。</p>
-        <p>UDP 发送是不管顺序，也不管丢包的，所以不会出现像 HTTP/2 队头阻塞的问题。大家都知道 UDP 是不可靠传输的，但基于 UDP 的 <strong>QUIC 协议</strong> 可以实现类似 TCP 的可靠性传输。</p>
-        <p>QUIC 有以下 3 个特点。</p>
-        <ul>
-          <li>无队头阻塞：某个流发生丢包时，只会阻塞这个流，不会影响其他的。</li>
-          <li>更快的连接建立：需要 QUIC 协议握手，但是这个握手过程只需要 1 RTT，握手的目的是为确认双方的「连接 ID」，连接迁移就是基于连接 ID 实现的。</li>
-          <li>连接迁移</li>
-        </ul>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -472,6 +590,65 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
               </ol>
             </li>
             <li><a href="#写出正确的网址" class="tocs-link">写出正确的网址</a></li>
+            <li><a href="#http-的实体数据" class="tocs-link">HTTP 的实体数据</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#数据类型" class="tocs-link">数据类型</a></li>
+                <li><a href="#语言类型与编码" class="tocs-link">语言类型与编码</a></li>
+                <li><a href="#内容协商结果" class="tocs-link">内容协商结果</a></li>
+              </ol>
+            </li>
+            <li><a href="#数据压缩" class="tocs-link">数据压缩</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#分块传输" class="tocs-link">分块传输</a></li>
+                <li><a href="#范围请求" class="tocs-link">范围请求</a></li>
+                <li><a href="#多端数据" class="tocs-link">多端数据</a></li>
+              </ol>
+            </li>
+            <li><a href="#重定向和跳转" class="tocs-link">重定向和跳转</a></li>
+            <li><a href="#连接管理" class="tocs-link">连接管理</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#短连接" class="tocs-link">短连接</a></li>
+                <li><a href="#长连接" class="tocs-link">长连接</a></li>
+                <li><a href="#队头阻塞" class="tocs-link">队头阻塞</a></li>
+                <li><a href="#性能优化" class="tocs-link">性能优化</a></li>
+              </ol>
+            </li>
+            <li><a href="#cookie机制" class="tocs-link">Cookie机制</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#属性字段" class="tocs-link">属性字段</a></li>
+                <li><a href="#身份识别" class="tocs-link">身份识别</a></li>
+                <li><a href="#广告跟踪" class="tocs-link">广告跟踪</a></li>
+                <li><a href="#存在问题" class="tocs-link">存在问题</a></li>
+              </ol>
+            </li>
+            <li><a href="#session机制" class="tocs-link">Session机制</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#交互流程" class="tocs-link">交互流程</a></li>
+                <li><a href="#实现方式" class="tocs-link">实现方式</a></li>
+                <li><a href="#存在问题-1" class="tocs-link">存在问题</a></li>
+              </ol>
+            </li>
+            <li><a href="#token方案" class="tocs-link">Token方案</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#交互流程-1" class="tocs-link">交互流程</a></li>
+                <li><a href="#方案优点" class="tocs-link">方案优点</a></li>
+              </ol>
+            </li>
+            <li><a href="#jwt" class="tocs-link">JWT</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#跨域认证" class="tocs-link">跨域认证</a></li>
+                <li><a href="#原理" class="tocs-link">原理</a></li>
+                <li><a href="#组成" class="tocs-link">组成</a>
+                  <ol class="tocs-list is-collapsed">
+                    <li><a href="#header" class="tocs-link">Header</a></li>
+                    <li><a href="#payload" class="tocs-link">Payload</a></li>
+                    <li><a href="#signature" class="tocs-link">Signature</a></li>
+                  </ol>
+                </li>
+                <li><a href="#使用方式" class="tocs-link">使用方式</a></li>
+                <li><a href="#jwt特点" class="tocs-link">JWT特点</a></li>
+              </ol>
+            </li>
             <li><a href="#缓存原理" class="tocs-link">缓存原理</a>
               <ol class="tocs-list is-collapsed">
                 <li><a href="#强制缓存" class="tocs-link">强制缓存</a></li>
@@ -480,43 +657,12 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
                 <li><a href="#整体流程" class="tocs-link">整体流程</a></li>
               </ol>
             </li>
-            <li><a href="#http特性" class="tocs-link">HTTP特性</a>
-              <ol class="tocs-list is-collapsed">
-                <li><a href="#http-11优缺点" class="tocs-link">HTTP 1.1优缺点</a></li>
-              </ol>
-            </li>
-            <li><a href="#http与https" class="tocs-link">HTTP与HTTPS</a>
-              <ol class="tocs-list is-collapsed">
-                <li><a href="#区别" class="tocs-link">区别</a></li>
-                <li><a href="#https如何解决了http问题" class="tocs-link">HTTPS如何解决了HTTP问题</a>
-                  <ol class="tocs-list is-collapsed">
-                    <li><a href="#混合加密" class="tocs-link">混合加密</a></li>
-                    <li><a href="#摘要算法" class="tocs-link">摘要算法</a></li>
-                    <li><a href="#数字证书" class="tocs-link">数字证书</a></li>
-                  </ol>
-                </li>
-              </ol>
-            </li>
-            <li><a href="#https连接建立" class="tocs-link">HTTPS连接建立</a>
-              <ol class="tocs-list is-collapsed">
-                <li><a href="#客户端校验数字证书的流程是怎样的" class="tocs-link">客户端校验数字证书的流程是怎样的？</a></li>
-              </ol>
-            </li>
-            <li><a href="#https-的应用数据是如何保证完整性的" class="tocs-link">HTTPS 的应用数据是如何保证完整性的？</a></li>
-            <li><a href="#https-一定安全可靠吗" class="tocs-link">HTTPS 一定安全可靠吗？</a></li>
-            <li><a href="#http11http2http3-演变" class="tocs-link">HTTP/1.1、HTTP/2、HTTP/3 演变</a>
-              <ol class="tocs-list is-collapsed">
-                <li><a href="#http11" class="tocs-link">HTTP/1.1</a></li>
-                <li><a href="#http2" class="tocs-link">HTTP/2</a></li>
-                <li><a href="#http3" class="tocs-link">HTTP/3</a></li>
-              </ol>
-            </li>
           </ol>
         </aside>
       </nav>
     </div>
-    <script src="../../js/demo-preview.js?v=1.26.6"></script>
+    <script src="../../js/demo-preview.js?v=1.25.0"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
-    <script src="../../js/tocbot.js?v=1.26.6"></script>
+    <script src="../../js/tocbot.js?v=1.25.0"></script>
   </body>
 </html>

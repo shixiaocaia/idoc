@@ -7,18 +7,18 @@
     <title>Docker 今天是个好天气</title>
     <meta name="description" content="1.按下Windows + R键，输入%UserProfile%并运行进入用户文件夹">
     <meta name="keywords" content="notebook">
-    <link rel="stylesheet" type="text/css" href="../../css/main.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/tocbot.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/media.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/sidebar.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/copy.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/fancybox.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/fancybox.css?v=1.25.0">
     <link rel="icon" href="../../logo.png" type="image/x-icon">
-    <script src="../../js/copy.js?v=1.26.6"></script>
-    <script src="../../js/dark-mode.js?v=1.26.6"></script>
-    <script src="../../js/markdown-style.js?v=1.26.6"></script>
-    <script src="../../js/jquery.min.js?v=1.26.6"></script>
-    <script src="../../js/fancybox.umd.js?v=1.26.6"></script>
+    <script src="../../js/copy.js?v=1.25.0"></script>
+    <script src="../../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../../js/fancybox.umd.js?v=1.25.0"></script>
   </head>
   <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <script>
@@ -64,15 +64,15 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <div>
             <a href="../index.html" class="">↩️README</a>
             <label>计算机网络</label>
-            <a href="../01ComputerNetwork/ch00.html" class="">问题收集</a>
-            <a href="../01ComputerNetwork/ch11.html" class="">常见问题</a>
+            <a href="../01ComputerNetwork/ch01.html" class="">网络发展过程</a>
+            <a href="../01ComputerNetwork/ch41.html" class="">键入url到渲染显示</a>
+            <a href="../01ComputerNetwork/ch11.html" class="">HTTP报文</a>
+            <a href="../01ComputerNetwork/ch12.html" class="">HTTPS / HTTP1、2、3</a>
             <a href="../01ComputerNetwork/ch21.html" class="">三次握手/四次挥手</a>
             <a href="../01ComputerNetwork/ch22.html" class="">socket</a>
             <a href="../01ComputerNetwork/ch23.html" class="">可靠的TCP</a>
             <a href="../01ComputerNetwork/ch31.html" class="">IP知识全家桶</a>
             <a href="../01ComputerNetwork/ch32.html" class="">ping的工作原理</a>
-            <a href="../01ComputerNetwork/ch01.html" class="">网络发展</a>
-            <a href="../01ComputerNetwork/ch41.html" class="">键入url到渲染显示</a>
             <label>操作系统</label>
             <a href="../01OperatingSystem/ch51.html" class="">优化程序性能</a>
             <a href="../01OperatingSystem/ch61.html" class="">存储器</a>
@@ -82,10 +82,10 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <a href="../01OperatingSystem/ch91.html" class="">虚拟内存</a>
             <label>工具</label>
             <a href="environment.html" class="">配个环境</a>
-            <a href="vim.html" class="">Vim</a>
             <a href="git.html" class="">Git</a>
             <a href="shell.html" class="">Shell</a>
             <a href="docker.html" class="">Docker</a>
+            <a href="python.html" class="">python</a>
           </div>
         </aside>
       </div>
@@ -103,31 +103,37 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li><a href="https://yeasy.gitbook.io/docker_practice/">Docker从入门到实践</a></li>
         </ul>
         <h2 id="基本命令"><a aria-hidden="true" tabindex="-1" href="#基本命令" class="anchor"><span class="icon icon-link"></span></a>基本命令</h2>
-        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 查看当前的容器</span>
-</span><span class="code-line line-number" line="2"><span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">-as</span>
+        <pre class="language-bash"><code class="language-bash code-highlight"><span class="code-line line-number" line="1"><span class="token comment"># 启动docker</span>
+</span><span class="code-line line-number" line="2">systemctl start <span class="token function">docker</span>
 </span><span class="code-line line-number" line="3">
-</span><span class="code-line line-number" line="4"><span class="token comment"># 启动容器</span>
-</span><span class="code-line line-number" line="5"><span class="token function">docker</span> container start 容器名或者容器id
-</span><span class="code-line line-number" line="6">
-</span><span class="code-line line-number" line="7"><span class="token comment"># 停止容器</span>
-</span><span class="code-line line-number" line="8"><span class="token function">docker</span> container stop 容器名或容器id
-</span><span class="code-line line-number" line="9"><span class="token comment"># 或可简写为</span>
-</span><span class="code-line line-number" line="10"><span class="token function">docker</span> stop 容器名或容器id
-</span><span class="code-line line-number" line="11">
-</span><span class="code-line line-number" line="12"><span class="token comment"># 强制关闭容器</span>
-</span><span class="code-line line-number" line="13"><span class="token function">docker</span> container <span class="token function">kill</span> 容器名或容器id
-</span><span class="code-line line-number" line="14"><span class="token comment"># 或可简写为</span>
-</span><span class="code-line line-number" line="15"><span class="token function">docker</span> <span class="token function">kill</span> 容器名或容器id
-</span></code><input type="hidden" value="# 查看当前的容器
-docker ps -as
+</span><span class="code-line line-number" line="4"><span class="token comment"># 查看当前的容器</span>
+</span><span class="code-line line-number" line="5">
+</span><span class="code-line line-number" line="6"><span class="token function">docker</span> <span class="token function">ps</span> <span class="token parameter variable">-a</span>
+</span><span class="code-line line-number" line="7">
+</span><span class="code-line line-number" line="8"><span class="token comment"># 启动容器</span>
+</span><span class="code-line line-number" line="9"><span class="token function">docker</span>  start 容器名或者容器id
+</span><span class="code-line line-number" line="10">
+</span><span class="code-line line-number" line="11"><span class="token comment"># 停止容器</span>
+</span><span class="code-line line-number" line="12"><span class="token function">docker</span>  stop 容器名或容器id
+</span><span class="code-line line-number" line="13">
+</span><span class="code-line line-number" line="14">
+</span><span class="code-line line-number" line="15"><span class="token comment"># 强制关闭容器</span>
+</span><span class="code-line line-number" line="16"><span class="token function">docker</span> container <span class="token function">kill</span> 容器名或容器id
+</span><span class="code-line line-number" line="17"><span class="token comment"># 或可简写为</span>
+</span><span class="code-line line-number" line="18"><span class="token function">docker</span> <span class="token function">kill</span> 容器名或容器id
+</span></code><input type="hidden" value="# 启动docker
+systemctl start docker
+
+# 查看当前的容器
+
+docker ps -a
 
 # 启动容器
-docker container start 容器名或者容器id
+docker  start 容器名或者容器id
 
 # 停止容器
-docker container stop 容器名或容器id
-# 或可简写为
-docker stop 容器名或容器id
+docker  stop 容器名或容器id
+
 
 # 强制关闭容器
 docker container kill 容器名或容器id
@@ -142,7 +148,9 @@ docker kill 容器名或容器id
         </ol>
         <h3 id="redis"><a aria-hidden="true" tabindex="-1" href="#redis" class="anchor"><span class="icon icon-link"></span></a>Redis</h3>
         <h2 id="问题"><a aria-hidden="true" tabindex="-1" href="#问题" class="anchor"><span class="icon icon-link"></span></a>问题</h2>
-        <h3 id="wsl2-vmmem内存"><a aria-hidden="true" tabindex="-1" href="#wsl2-vmmem内存" class="anchor"><span class="icon icon-link"></span></a>WSL2 Vmmem内存</h3>
+        <ul>
+          <li><strong>WSL2 Vmmem内存</strong></li>
+        </ul>
         <p>1.按下<code>Windows + R</code>键，输入<code>%UserProfile%</code>并运行进入用户文件夹</p>
         <p>2.新建文件<code>.wslconfig</code>，然后记事本编辑</p>
         <p>3.填入以下内容并保存, memory为系统内存上限，这里我限制最大2GB，可根据自身电脑配置设置</p>
@@ -156,6 +164,23 @@ swap=8GB
 localhostForwarding=true
 "><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
         <p>4.然后启动cmd命令提示符，输入<code>wsl --shutdown</code>来关闭当前的子系统</p>
+        <ul>
+          <li><strong>Wsl/Service/CreateInstance/MountVhd/ERROR_FILE_NOT_FOUND</strong></li>
+        </ul>
+        <pre class="language-plain"><code class="language-plain code-highlight"><span class="code-line line-number" line="1">wsl -l #查看名字
+</span><span class="code-line line-number" line="2">wsl --unregister Ubuntu22.04 # 注销
+</span><span class="code-line line-number" line="3">重新打开
+</span></code><input type="hidden" value="wsl -l #查看名字
+wsl --unregister Ubuntu22.04 # 注销
+重新打开
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <ul>
+          <li>无法复制文件到目录当中
+            <ul>
+              <li>切换到默认rootyong'hu</li>
+            </ul>
+          </li>
+        </ul>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -168,17 +193,13 @@ localhostForwarding=true
                 <li><a href="#redis" class="tocs-link">Redis</a></li>
               </ol>
             </li>
-            <li><a href="#问题" class="tocs-link">问题</a>
-              <ol class="tocs-list is-collapsed">
-                <li><a href="#wsl2-vmmem内存" class="tocs-link">WSL2 Vmmem内存</a></li>
-              </ol>
-            </li>
+            <li><a href="#问题" class="tocs-link">问题</a></li>
           </ol>
         </aside>
       </nav>
     </div>
-    <script src="../../js/demo-preview.js?v=1.26.6"></script>
+    <script src="../../js/demo-preview.js?v=1.25.0"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
-    <script src="../../js/tocbot.js?v=1.26.6"></script>
+    <script src="../../js/tocbot.js?v=1.25.0"></script>
   </body>
 </html>

@@ -15,8 +15,8 @@ Hello World
 
 ### Coding之外
 
-## 未来愿景
-
 - [ ] 听一场演唱会
-- [ ] 出国旅行—新西兰
+- [ ] 出国旅行—新西兰/日本
 - [ ] 攒到自己的第一个10w
+- [ ] 学习[英语](https://babyyoung.gitbook.io/english-level-up-tips/)
+

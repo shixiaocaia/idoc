@@ -4,21 +4,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CP 重传、滑动窗口、流量控制、拥塞控制 今天是个好天气</title>
+    <title>TCP 重传、滑动窗口、流量控制、拥塞控制 今天是个好天气</title>
     <meta name="description" content="常见的重传机制有：超时重传、快速重传、SACK、D-SACK。">
     <meta name="keywords" content="notebook">
-    <link rel="stylesheet" type="text/css" href="../../css/main.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/tocbot.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/media.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/sidebar.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/copy.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../../css/fancybox.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../../css/fancybox.css?v=1.25.0">
     <link rel="icon" href="../../logo.png" type="image/x-icon">
-    <script src="../../js/copy.js?v=1.26.6"></script>
-    <script src="../../js/dark-mode.js?v=1.26.6"></script>
-    <script src="../../js/markdown-style.js?v=1.26.6"></script>
-    <script src="../../js/jquery.min.js?v=1.26.6"></script>
-    <script src="../../js/fancybox.umd.js?v=1.26.6"></script>
+    <script src="../../js/copy.js?v=1.25.0"></script>
+    <script src="../../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../../js/fancybox.umd.js?v=1.25.0"></script>
   </head>
   <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <script>
@@ -64,15 +64,15 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <div>
             <a href="../index.html" class="">↩️README</a>
             <label>计算机网络</label>
-            <a href="ch00.html" class="">问题收集</a>
-            <a href="ch11.html" class="">常见问题</a>
+            <a href="ch01.html" class="">网络发展过程</a>
+            <a href="ch41.html" class="">键入url到渲染显示</a>
+            <a href="ch11.html" class="">HTTP报文</a>
+            <a href="ch12.html" class="">HTTPS / HTTP1、2、3</a>
             <a href="ch21.html" class="">三次握手/四次挥手</a>
             <a href="ch22.html" class="">socket</a>
             <a href="ch23.html" class="">可靠的TCP</a>
             <a href="ch31.html" class="">IP知识全家桶</a>
             <a href="ch32.html" class="">ping的工作原理</a>
-            <a href="ch01.html" class="">网络发展</a>
-            <a href="ch41.html" class="">键入url到渲染显示</a>
             <label>操作系统</label>
             <a href="../01OperatingSystem/ch51.html" class="">优化程序性能</a>
             <a href="../01OperatingSystem/ch61.html" class="">存储器</a>
@@ -82,15 +82,15 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <a href="../01OperatingSystem/ch91.html" class="">虚拟内存</a>
             <label>工具</label>
             <a href="../03Other/environment.html" class="">配个环境</a>
-            <a href="../03Other/vim.html" class="">Vim</a>
             <a href="../03Other/git.html" class="">Git</a>
             <a href="../03Other/shell.html" class="">Shell</a>
             <a href="../03Other/docker.html" class="">Docker</a>
+            <a href="../03Other/python.html" class="">python</a>
           </div>
         </aside>
       </div>
       <markdown-style>
-        <h1 id="cp-重传滑动窗口流量控制拥塞控制"><a aria-hidden="true" tabindex="-1" href="#cp-重传滑动窗口流量控制拥塞控制" class="anchor"><span class="icon icon-link"></span></a>CP 重传、滑动窗口、流量控制、拥塞控制</h1>
+        <h1 id="tcp-重传滑动窗口流量控制拥塞控制"><a aria-hidden="true" tabindex="-1" href="#tcp-重传滑动窗口流量控制拥塞控制" class="anchor"><span class="icon icon-link"></span></a>TCP 重传、滑动窗口、流量控制、拥塞控制</h1>
         <h2 id="重传机制"><a aria-hidden="true" tabindex="-1" href="#重传机制" class="anchor"><span class="icon icon-link"></span></a>重传机制</h2>
         <p>常见的重传机制有：超时重传、快速重传、SACK、D-SACK。</p>
         <h3 id="超时重传"><a aria-hidden="true" tabindex="-1" href="#超时重传" class="anchor"><span class="icon icon-link"></span></a>超时重传</h3>
@@ -153,7 +153,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </blockquote>
         <h3 id="发送方窗口"><a aria-hidden="true" tabindex="-1" href="#发送方窗口" class="anchor"><span class="icon icon-link"></span></a>发送方窗口</h3>
         <p>
-          <img src="../../img/19.jpg" alt="SND.WND、SND.UN、SND.NXT">
+          <img src="..\..\img\19.jpg" alt="SND.WND、SND.UN、SND.NXT">
         </p>
         <p>TCP 头里有一个字段叫 <code>Window</code>，也就是窗口大小。这个字段是接收端告诉发送端自己还有多少<strong>缓冲区可以接收数据</strong>。于是发送端就可以根据这个接收端的处理能力来发送数据，而不会导致接收端处理不过来。</p>
         <p>所以，通常窗口的大小是由<strong>接收方的缓冲区（窗口）大小</strong>来决定的。</p>
@@ -189,7 +189,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </ul>
         <h3 id="接收方窗口"><a aria-hidden="true" tabindex="-1" href="#接收方窗口" class="anchor"><span class="icon icon-link"></span></a>接收方窗口</h3>
         <p>
-          <img src="../../img/20.jpg" alt="接收窗口">
+          <img src="..\..\img\20.jpg" alt="接收窗口">
         </p>
         <p>根据处理的情况划分成三个部分：</p>
         <ul>
@@ -302,7 +302,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
           <li>如果收到新数据的 ACK 后，把 cwnd 设置为第一步中的 ssthresh 的值，原因是该 ACK 确认了新的数据，说明从 duplicated ACK 时的数据都已收到，该恢复过程已经结束，可以回到恢复之前的状态了，也即再次进入拥塞避免状态；</li>
         </ul>
         <p>
-          <img src="../../img/202304140936531.png" alt="快速重传和快速恢复">
+          <img src="..\..\img\202304140936531.png" alt="快速重传和快速恢复">
         </p>
         <blockquote>
           <p>拥塞窗口cwnd = ssthreash + 3是因为收到了3个重复的ACK报文，增加窗口大小。</p>
@@ -347,8 +347,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </aside>
       </nav>
     </div>
-    <script src="../../js/demo-preview.js?v=1.26.6"></script>
+    <script src="../../js/demo-preview.js?v=1.25.0"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
-    <script src="../../js/tocbot.js?v=1.26.6"></script>
+    <script src="../../js/tocbot.js?v=1.25.0"></script>
   </body>
 </html>

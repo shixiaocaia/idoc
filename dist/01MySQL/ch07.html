@@ -7,18 +7,18 @@
     <title>MySQL如何加锁 今天是个好天气</title>
     <meta name="description" content="InnoDB 引擎是支持行级锁的，而 MyISAM 引擎并不支持行级锁。">
     <meta name="keywords" content="notebook">
-    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
     <link rel="icon" href="../logo.png" type="image/x-icon">
-    <script src="../js/copy.js?v=1.26.6"></script>
-    <script src="../js/dark-mode.js?v=1.26.6"></script>
-    <script src="../js/markdown-style.js?v=1.26.6"></script>
-    <script src="../js/jquery.min.js?v=1.26.6"></script>
-    <script src="../js/fancybox.umd.js?v=1.26.6"></script>
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
   </head>
   <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <script>
@@ -71,9 +71,11 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
             <a href="ch03.html" class="">InnoDB存储引擎</a>
             <a href="ch04.html" class="">索引</a>
             <a href="ch05.html" class="">事务</a>
+            <a href="ch08.html" class="">日志</a>
             <label>锁</label>
             <a href="ch06.html" class="">有哪些锁</a>
             <a href="ch07.html" class="">MySQL如何加锁</a>
+            <a href="ch09.html" class="">MySQL性能如何优化</a>
           </div>
         </aside>
       </div>
@@ -277,10 +279,66 @@ commit; //锁释放
         <p>死锁的四个必要条件：<strong>互斥、占有且等待、不可强占用、循环等待</strong>。只要系统发生死锁，这些条件必然成立，但是只要破坏任意一个条件就死锁就不会成立。</p>
         <p>在数据库层面，有两种策略通过「打破循环等待条件」来解除死锁状态：</p>
         <ul>
-          <li>设置事务等待锁的超时时间。</li>
-          <li>开启主动死锁检测。</li>
+          <li>
+            <p>设置事务等待锁的超时时间。</p>
+            <ul>
+              <li>设置锁等待超时参数：<code>innodb_lock_wait_timeout</code>，这个参数并不是只用来解决死锁问题，在并发访问比较高的情况下，如果大量事务因无法立即获得所需的锁而挂起，会占用大量计算机资源，造成严重性能问题，甚至拖跨数据库。我们通过设置合适的锁等待超时阈值，可以避免这种情况发生。</li>
+            </ul>
+          </li>
+          <li>
+            <p>开启主动死锁检测。</p>
+          </li>
         </ul>
         <p>当一个事务的等待时间超过该值或者主动死锁检测到死锁后，主动回滚到链条中某一个十五，让其他事务正常运行，</p>
+        <hr>
+        <ul>
+          <li>对索引加锁顺序的不一致很可能会导致死锁，所以如果可以，尽量以相同的顺序来访问索引记录和表。在程序以批量方式处理数据的时候，如果事先对数据排序，保证每个线程按固定的顺序来处理记录，也可以大大降低出现死锁的可能；</li>
+          <li>Gap 锁往往是程序中导致死锁的真凶，由于默认情况下 MySQL 的隔离级别是 RR，所以如果能确定幻读和不可重复读对应用的影响不大，可以考虑将隔离级别改成 RC，可以避免 Gap 锁导致的死锁；</li>
+          <li>为表添加合理的索引，如果不走索引将会为表的每一行记录加锁，死锁的概率就会大大增大；</li>
+          <li>我们知道 MyISAM 只支持表锁，它采用一次封锁技术来保证事务之间不会发生死锁，所以，我们也可以使用同样的思想，在事务中一次锁定所需要的所有资源，减少死锁概率；</li>
+          <li>避免大事务，尽量将大事务拆成多个小事务来处理；因为大事务占用资源多，耗时长，与其他事务冲突的概率也会变高；</li>
+          <li>避免在同一时间点运行多个对同一表进行读写的脚本，特别注意加锁且操作数据量比较大的语句；我们经常会有一些定时脚本，避免它们在同一时间点运行；</li>
+        </ul>
+        <h3 id="如何排查死锁"><a aria-hidden="true" tabindex="-1" href="#如何排查死锁" class="anchor"><span class="icon icon-link"></span></a>如何排查死锁</h3>
+        <p>一般情况是由于批量更新时加锁顺序不一致而导致的死锁。</p>
+        <ol>
+          <li>阅读死锁日志。</li>
+        </ol>
+        <h2 id="悲观锁与乐观锁"><a aria-hidden="true" tabindex="-1" href="#悲观锁与乐观锁" class="anchor"><span class="icon icon-link"></span></a>悲观锁与乐观锁</h2>
+        <h3 id="是什么"><a aria-hidden="true" tabindex="-1" href="#是什么" class="anchor"><span class="icon icon-link"></span></a>是什么</h3>
+        <p><strong>悲观锁（Pessimistic Lock）：</strong> 就是很悲观，每次去拿数据的时候都认为别人会修改。所以每次在拿数据的时候都会上锁。这样别人想拿数据就被挡住，直到悲观锁被释放，<strong>悲观锁中的共享资源每次只给一个线程使用，其它线程阻塞，用完后再把资源转让给其它线程</strong>。</p>
+        <blockquote>
+          <p>在效率方面，处理加锁的机制会产生额外的开销，还有增加产生死锁的机会。另外还会降低并行性，如果已经锁定了一个线程 A，其他线程就必须等待该线程 A 处理完才可以处理。</p>
+        </blockquote>
+        <p>数据库中的行锁，表锁，读锁（共享锁），写锁（排他锁），以及 <strong>syncronized</strong> 实现的锁均为悲观锁。</p>
+        <hr>
+        <p><strong>乐观锁（Optimistic Lock）：</strong> 就是很乐观，每次去拿数据的时候都认为别人不会修改。所以不会上锁，但是如果想要更新数据，则会在更新前检查在读取至更新这段时间别人有没有修改过这个数据。如果修改过，则重新读取，再次尝试更新，循环上述步骤直到更新成功（当然也允许更新失败的线程放弃操作）,乐观锁适用于多读的应用类型，这样可以提高吞吐量。</p>
+        <p>相对于悲观锁，在对数据库进行处理的时候，乐观锁并不会使用数据库提供的锁机制。一般的实现乐观锁的方式就是<strong>记录数据版本（version）或者是时间戳</strong>来实现，不过使用版本记录是最常用的。</p>
+        <h3 id="如何添加"><a aria-hidden="true" tabindex="-1" href="#如何添加" class="anchor"><span class="icon icon-link"></span></a>如何添加</h3>
+        <p>首先要关闭MySQL的关于每一条SQL的自动提交，MySQL 默认使用 autocommit 模式。</p>
+        <p>悲观锁加锁的SQL语句：<code>select num from t_goods where id = 2 for update</code>。</p>
+        <ul>
+          <li>加锁失败，说明数据正在被其他事务修改，当前查询返回等待或者抛出异常。</li>
+          <li>加锁成功，可以对事务修改，事务完成后就会解锁。在事务提交前，阻塞其他事务的查询。</li>
+        </ul>
+        <p>乐观锁使用version来实现，当不同事务提交修改时，查看version是否变更，有变更会在提交时修改失败。</p>
+        <h3 id="compare-and-swapcas"><a aria-hidden="true" tabindex="-1" href="#compare-and-swapcas" class="anchor"><span class="icon icon-link"></span></a>Compare-and-Swap（CAS）</h3>
+        <p>比较并置换，有时候也叫Compare and Set，比较并设置。</p>
+        <p>1、比较：读取到了一个值 A，在将其更新为 B 之前，检查原值是否仍为 A（未被其他线程改动）。</p>
+        <p>2、设置：如果是，将 A 更新为 B，结束。[1]如果不是，则什么都不做。</p>
+        <p>上面的两步操作是原子性的，可以简单地理解为瞬间完成，在 CPU 看来就是一步操作。有了 CAS，就可以实现一个乐观锁，允许多个线程同时读取（因为根本没有加锁操作），但是只有一个线程可以成功更新数据，并导致其他要更新数据的线程回滚重试。 CAS 利用 CPU 指令，从硬件层面保证了操作的原子性，以达到类似于锁的效果。</p>
+        <h3 id="aba"><a aria-hidden="true" tabindex="-1" href="#aba" class="anchor"><span class="icon icon-link"></span></a>ABA</h3>
+        <p>如果一个变量 V 初次读取的时候是 A 值，并且在准备赋值的时候检查到它仍然是 A 值，那我们就能说明它的值没有被其他线程修改过了吗？很明显是不能的，因为在这段时间它的值可能被改为其他值，然后又改回 A，那 CAS 操作就会误认为它从来没有被修改过。这个问题被称为 CAS 操作的 "ABA"问题。</p>
+        <blockquote>
+          <p>解决办法：</p>
+          <p>我们需要加上一个版本号（Version）,在每次提交的时候将版本号+1 操作，那么下个线程去提交修改的时候，会带上版本号去判断，如果版本修改了，那么线程重试或者提示错误信息。</p>
+        </blockquote>
+        <h3 id="对比"><a aria-hidden="true" tabindex="-1" href="#对比" class="anchor"><span class="icon icon-link"></span></a>对比</h3>
+        <ul>
+          <li>悲观锁阻塞事务，乐观锁回滚重试。</li>
+          <li>乐观锁适用于写比较少的情况，冲突很少发生，节省锁的开销，加大系统的整个吞吐量。</li>
+          <li>如果经常产生冲突，上层应用会不断进行重试，反而降低了性能，所以这种情况下用悲观锁比较合适。</li>
+        </ul>
       </markdown-style>
       <nav class="tocs">
         <aside class="inner toc">
@@ -307,14 +365,24 @@ commit; //锁释放
               <ol class="tocs-list is-collapsed">
                 <li><a href="#死锁的发生" class="tocs-link">死锁的发生</a></li>
                 <li><a href="#如何避免死锁" class="tocs-link">如何避免死锁</a></li>
+                <li><a href="#如何排查死锁" class="tocs-link">如何排查死锁</a></li>
+              </ol>
+            </li>
+            <li><a href="#悲观锁与乐观锁" class="tocs-link">悲观锁与乐观锁</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#是什么" class="tocs-link">是什么</a></li>
+                <li><a href="#如何添加" class="tocs-link">如何添加</a></li>
+                <li><a href="#compare-and-swapcas" class="tocs-link">Compare-and-Swap（CAS）</a></li>
+                <li><a href="#aba" class="tocs-link">ABA</a></li>
+                <li><a href="#对比" class="tocs-link">对比</a></li>
               </ol>
             </li>
           </ol>
         </aside>
       </nav>
     </div>
-    <script src="../js/demo-preview.js?v=1.26.6"></script>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
-    <script src="../js/tocbot.js?v=1.26.6"></script>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
   </body>
 </html>

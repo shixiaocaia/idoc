@@ -1,0 +1,462 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>性能调优 今天是个好天气</title>
+    <meta name="description" content="可以观察系统在不同压力下的行为，评估系统的容量，掌握哪些是重要的变化，或者观察系统如何处理不同的数据。">
+    <meta name="keywords" content="notebook">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
+    <link rel="icon" href="../logo.png" type="image/x-icon">
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
+  </head>
+  <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+    <script>
+// Get the button:
+let mybutton = document.getElementById("myBtn");
+// When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+// 顶部隐藏，底部隐藏
+function scrollFunction() {
+if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+mybutton.style.display = "block";
+} else {
+mybutton.style.display = "none";
+}
+}
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+document.body.scrollTop = 0; // For Safari
+document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+</script>
+    <header class="header">
+      <article class="inner warpper"><a class="logo" href="../index.html"><img alt="今天是个好天气 logo" src="../logo.png">
+<span class="title">今天是个好天气</span></a>
+        <div class="content">
+          <ul class="menu">
+            <li><a href="../index.html" target="" class="">Home</a></li>
+            <li><a href="../00Go/index.html" target="" class="">Go</a></li>
+            <li><a href="index.html" target="" class="active">MySQL</a></li>
+            <li><a href="../01Redis/index.html" target="" class="">Redis</a></li>
+            <li><a href="../01LeetCode/index.html" target="" class="">LeetCode</a></li>
+            <li><a href="../02HelloWorld/index.html" target="" class="">Hello World</a></li>
+          </ul><a href="https://github.com/shixiaocaia" target="_blank" rel="noopener noreferrer" title="Github" name="Github" class="github"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg></a>
+          <dark-mode permanent=""></dark-mode>
+        </div>
+      </article>
+    </header>
+    <div class="warpper-content warpper sidebar">
+      <div class="sidebar-border">
+        <aside class="sidebar" role="navigation">
+          <div>
+            <a href="index.html" class="">↩️README</a>
+            <label>SQL</label>
+            <a href="ch00.html" class="">Hello MySQL</a>
+            <a href="ch01.html" class="">SQL</a>
+            <a href="ch02.html" class="">写点SQL</a>
+            <label>MySQL原理</label>
+            <a href="ch03.html" class="">InnoDB存储引擎</a>
+            <a href="ch04.html" class="">索引</a>
+            <a href="ch05.html" class="">事务</a>
+            <a href="ch08.html" class="">日志</a>
+            <label>锁</label>
+            <a href="ch06.html" class="">有哪些锁</a>
+            <a href="ch07.html" class="">MySQL如何加锁</a>
+            <a href="ch09.html" class="">MySQL性能如何优化</a>
+          </div>
+        </aside>
+      </div>
+      <markdown-style>
+        <h1 id="性能调优"><a aria-hidden="true" tabindex="-1" href="#性能调优" class="anchor"><span class="icon icon-link"></span></a>性能调优</h1>
+        <h2 id="面试问题"><a aria-hidden="true" tabindex="-1" href="#面试问题" class="anchor"><span class="icon icon-link"></span></a>面试问题</h2>
+        <ul>
+          <li>时间复杂度</li>
+          <li></li>
+        </ul>
+        <h2 id="基准测试"><a aria-hidden="true" tabindex="-1" href="#基准测试" class="anchor"><span class="icon icon-link"></span></a>基准测试</h2>
+        <p>可以观察系统在不同压力下的行为，评估系统的容量，掌握哪些是重要的变化，或者观察系统如何处理不同的数据。</p>
+        <h3 id="分类"><a aria-hidden="true" tabindex="-1" href="#分类" class="anchor"><span class="icon icon-link"></span></a>分类</h3>
+        <p>主要分为对整个系统测试以及单独测试MySQL。</p>
+        <ul>
+          <li>整体测试关注整体的性能；证明MySQL不是应用的瓶颈；发现各个部分之间的缓存影响；更好揭示应用的真实表现。</li>
+          <li>单独测试，比较不同的schema或者查询的性能；针对具体问题测试；避免漫长的基准测试，短期简单测试</li>
+        </ul>
+        <h3 id="测试指标"><a aria-hidden="true" tabindex="-1" href="#测试指标" class="anchor"><span class="icon icon-link"></span></a>测试指标</h3>
+        <ul>
+          <li>吞吐量：单位时间内的事务处理数，每秒事务数TPS，每分钟事务数TPM。</li>
+          <li>响应时间或者延迟：测试任务所需的整体时间。</li>
+          <li>并发性：任意时间有多少同时发生的并发请求。
+            <ul>
+              <li>一个好的应用，同时可以打开成百上千个Web数据库服务器连接，但可能同时只有少数连接在查询。</li>
+            </ul>
+          </li>
+          <li>可扩展性：给系统增加一倍工作，在理想情况下能获得两倍的结果。大多数系统无法做到理想的线性扩展。</li>
+        </ul>
+        <h2 id="explain"><a aria-hidden="true" tabindex="-1" href="#explain" class="anchor"><span class="icon icon-link"></span></a>Explain</h2>
+        <h3 id="如何使用"><a aria-hidden="true" tabindex="-1" href="#如何使用" class="anchor"><span class="icon icon-link"></span></a>如何使用</h3>
+        <pre class="language-sql"><code class="language-sql code-highlight"><span class="code-line line-number" line="1"><span class="token keyword">EXPLAIN</span> <span class="token keyword">SELECT</span> <span class="token number">1</span><span class="token punctuation">;</span>
+</span></code><input type="hidden" value="EXPLAIN SELECT 1;
+"><div onclick="copied(this)" class="copied"><svg class="octicon-copy" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path><path fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path></svg><svg class="octicon-check" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor" height="12" width="12"><path fill-rule="evenodd" d="M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z"></path></svg></div></pre>
+        <p>使用<code>EXPLAIN</code>可以查看某个语句具体执行计划是什么。</p>
+        <h3 id="输出各个列参数"><a aria-hidden="true" tabindex="-1" href="#输出各个列参数" class="anchor"><span class="icon icon-link"></span></a>输出各个列参数</h3>
+        <ul>
+          <li>
+            <p>table</p>
+          </li>
+          <li>
+            <p>id</p>
+            <ul>
+              <li>每出现一个select关键字，都会分配为一个唯一的id值。</li>
+              <li>查询优化器可能对涉及子查询的查询语句进行重写，从而转换为连接查询（只有一个id值）</li>
+              <li>出现多个ID值，这个值越大，表示执行的优先级越高</li>
+            </ul>
+          </li>
+          <li>
+            <p>select_type</p>
+            <ul>
+              <li>用来简单概述语句的作用。</li>
+              <li>查询语句中不包含 UNION 或者子查询的查询都算作是 SIMPLE 类型。</li>
+              <li>对于包含 UNION 、 UNION ALL 或者子查询的大查询来说，它是由几个小查询组成的，其中最左边的那个查询的 select_type 值就是 PRIMARY。
+                <ul>
+                  <li>其余的小查询的 select_type 值就是 UNION</li>
+                </ul>
+              </li>
+              <li>如果包含子查询的查询语句不能够转为对应的 semi-join 的形式，并且该子查询是不相关子查询，并且查询优化器决定采用将该子查询物化的方案来执行该子查询时，该子查询的第一个 SELECT 关键字代表的那个查询的 select_type 就是 SUBQUERY</li>
+              <li>如果包含子查询的查询语句不能够转为对应的 semi-join 的形式，并且该子查询是相关子查询，则该子查询的第一个 SELECT 关键字代表的那个查询的 select_type 就是 DEPENDENT SUBQUERY</li>
+              <li>在包含 UNION 或者 UNION ALL 的大查询中，如果各个小查询都依赖于外层查询的话，那除了最左边的那个小查询之外，其余的小查询的 select_type 的值就是 DEPENDENT UNION</li>
+              <li>对于采用物化的方式执行的包含派生表的查询，该派生表对应的子查询的 select_type 就是 DERIVED</li>
+              <li>当查询优化器在执行包含子查询的语句时，选择将子查询物化之后与外层查询进行连接查询时，该子查询对应的 select_type 属性就是 MATERIALIZED</li>
+            </ul>
+          </li>
+          <li>
+            <p>type</p>
+            <ul>
+              <li>对某个表执行查询时的访问方法</li>
+              <li>全表扫描：All</li>
+              <li>当表中只有一条记录并且该表使用的存储引擎的统计数据是精确的，比如MyISAM、Memory，那么对该表的访问方法就是 system 。</li>
+              <li>当我们根据主键或者唯一二级索引列与常数进行等值匹配时，对单表的访问方法就是 const</li>
+              <li>在连接查询时，如果被驱动表是通过主键或者唯一二级索引列等值匹配的方式进行访问的（如果该主键或者唯一二级索引是联合索引的话，所有的索引列都必须进行等值比较），则对该被驱动表的访问方法就是eq_ref</li>
+              <li>当通过普通的二级索引列与常量进行等值匹配时来查询某个表，那么对该表的访问方法就可能是 ref</li>
+              <li>当对普通二级索引进行等值匹配查询，该索引列的值也可以是 NULL 值时，那么对该表的访问方法就可能是ref_or_null</li>
+              <li>三种索引合并的方式来执行查询index_merge</li>
+              <li>如果使用索引获取某些 范围区间 的记录，那么就可能使用到 range 访问方法</li>
+              <li>当我们可以使用索引覆盖，但需要扫描全部的索引记录时，该表的访问方法就是 index</li>
+            </ul>
+          </li>
+          <li>
+            <p>possible_keys和key</p>
+            <ul>
+              <li>possible_keys列中的值并不是越多越好，可能使用的索引越多，查询优化器计算查询成本时就得花费更长时间，所以如果可以的话，尽量删除那些用不到的索引。</li>
+            </ul>
+          </li>
+          <li>
+            <p>key_len</p>
+            <ul>
+              <li>当优化器决定使用某个索引执行查询时，该索引记录的最大长度</li>
+            </ul>
+          </li>
+          <li>
+            <p>ref</p>
+            <ul>
+              <li>当使用索引列等值匹配的条件去执行查询时，与索引列作等值匹配的是什么</li>
+              <li>const匹配对象是一个常数</li>
+            </ul>
+          </li>
+          <li>
+            <p>rows</p>
+            <ul>
+              <li>预计需要扫描的行数</li>
+            </ul>
+          </li>
+          <li>
+            <p>filtered</p>
+            <ul>
+              <li>如果使用的是单表扫描，计算满足使用对应索引的搜索条件外的其他搜索条件的记录有多少条</li>
+              <li>该值越小则表示执行时会扫描的数据量越大，取值范围是<code>0.00~100.00</code>。</li>
+            </ul>
+          </li>
+          <li>
+            <p>extra</p>
+            <ul>
+              <li>Using index condition 索引条件下推</li>
+            </ul>
+          </li>
+        </ul>
+        <blockquote>
+          <p>子查询物化：将子查询的结果存储在临时表中，然后在主查询中使用该临时表的结果来执行查询。避免重复计算。</p>
+          <p>常见的性能排序：<code>system → const → eq_ref → ref → fulltext → range → index → all</code></p>
+        </blockquote>
+        <h2 id="索引优化"><a aria-hidden="true" tabindex="-1" href="#索引优化" class="anchor"><span class="icon icon-link"></span></a>索引优化</h2>
+        <ol>
+          <li>独立的列：索引列不能是表达式的一部分，也不能是索引的参数。比如不要有计算表达式，MySQL无法自动解析。</li>
+          <li>前缀索引和索引选择性：使用前缀索引可以避免长字符串索引带来的性能问题，但是会降低索引选择性。因此在实际中选择合适的前缀长度，来保障一定的选择性。</li>
+          <li>多列索引：在5.0往后，可以使用多个单列索引，将结果合并。实际上当出现较多的索引合并的结果，应该建立正确的多列索引，而不是使用合并，合并过程涉及了缓存、排序和合并操作，浪费CPU和内存资源。</li>
+          <li>选择合适的索引列顺序：将选择性较高的列排在前列。</li>
+          <li>聚簇索引：数据页放在叶子节点。</li>
+          <li>覆盖索引：使用索引直接获取列的值，而不是先查主键再回表查询。</li>
+          <li>使用索引扫描来做排序：</li>
+          <li>压缩（前缀压缩）索引：</li>
+          <li>冗余和重复索引：(A，ID）也是一种重复，因为主键ID已经包含在二级索引当中了。所以应该尽量扩展已有的索引而不是创建新索引。</li>
+          <li>未使用的索引：根据运行一段时间后，检查索引的使用频率来删除永远用不到的索引。</li>
+          <li>索引和锁：索引能够让查询锁定更少的行，减少锁的开销，</li>
+        </ol>
+        <h2 id="mysql连接池"><a aria-hidden="true" tabindex="-1" href="#mysql连接池" class="anchor"><span class="icon icon-link"></span></a>MySQL连接池</h2>
+        <p>连接池是实现连接复用的手段，和mysql交互时，每次需要建立一个连接，用完就会关掉，这就是短连接。如果在高并发场景，反复建立连接的成本是很高的，所以我们可以使用长连接，即连接用完后先不关闭，放到一个池子里等待复用，这个池子就叫连接池。</p>
+        <p>通过以下参数来控制连接池中数量：</p>
+        <ul>
+          <li><strong>最大连接数</strong>：可以稍大一些，能够打开连接的最大数量，超过阈值，会报错too many connections。</li>
+          <li><strong>最大空闲连接数</strong>：表示连接池中最多有多少个空闲连接 ，某个连接做完事务之后暂时空闲，如果连接池中空闲连接数没有达到上限，即可放入连接池。否则就释放避免浪费。</li>
+          <li><strong>最大空闲时间</strong>：连接池中连接使用完毕后会等到新的请求到来，表明了连接池中的连接在空闲时能在池子里摸鱼多久，如果长时间没有请求到来，说明请求量非常小，此时就需要释放掉连接来节省资源。</li>
+          <li>最小连接数：连接池中最小空闲连接数，当连接数少于此值时，连接池会创建新的连接来进行补充，作用主要是保持连接池始终处于就绪状态。</li>
+          <li>初始化连接数：初始化连接数目，实际意义不大，由最小连接数补齐即可。</li>
+        </ul>
+        <hr>
+        <p>初始连接池为空，创建一定数量的连接，完成后根据上述参数，放入连接池中，进行复用，超过最大空闲连接数就释放一部分避免浪费，不够用再建立新的连接，但是也不能太多。</p>
+        <hr>
+        <h3 id="为什么数据库连接数不是越大越好"><a aria-hidden="true" tabindex="-1" href="#为什么数据库连接数不是越大越好" class="anchor"><span class="icon icon-link"></span></a>为什么数据库连接数不是越大越好</h3>
+        <ul>
+          <li>数据库连接数越大，也就意味着内部创建出的工作线程会越多，线程越多代表需要的<code>CPU</code>配置得更高。超过CPU核心数后，不同核心在不同的线程间反复切换执行，上下文切换成本较高。</li>
+          <li>通过限制客户端连接池数量，达到限制服务到连接池的效果。</li>
+          <li><code>PostgreSQL</code>提供的计算公式：最大连接数 = (CPU核心数 * 2) + 有效磁盘数
+            <ul>
+              <li>这里如果使用的是SSD，那么有效磁盘数+1</li>
+            </ul>
+          </li>
+          <li>对于偶发高峰类业务的连接数配置，可以设置最大连接数，连接存活时间调整，来确保资源的合理分配。</li>
+          <li><strong>对于最佳连接数的计算，首先要把<code>CPU</code>核数放首位考虑，紧接着是磁盘，最后是网络带宽，因为带宽会影响<code>SQL</code>执行时间，综合考虑后才能计算出最合适的连接数大小。</strong></li>
+        </ul>
+        <h2 id="mysql结构优化"><a aria-hidden="true" tabindex="-1" href="#mysql结构优化" class="anchor"><span class="icon icon-link"></span></a>MySQL结构优化</h2>
+        <h3 id="表结构优化"><a aria-hidden="true" tabindex="-1" href="#表结构优化" class="anchor"><span class="icon icon-link"></span></a>表结构优化</h3>
+        <ol>
+          <li>表结构设计时，字段数量不能太多，<code>InnoDB</code>引擎基本上都会将数据操作放到<strong>内存中完成</strong>，而当一张表的字段数量越多，那么能载入内存的数据页会越少，当操作时数据不在内存，又不得不去磁盘中读取数据，这显然会很大程度上影响<code>MySQL</code>性能。
+            <ul>
+              <li>应当尽可能将表结构拆分，精细化，确保内存中缓存的数据足够多，也便于维护。</li>
+              <li>一张表最多最多只能允许设计<code>30</code>个字段左右，否则会导致查询时的性能明显下降。</li>
+            </ul>
+          </li>
+          <li>主键选择顺序递增的数值类型，最好为int类型</li>
+          <li>对于实时性要求不高的数据建立中间表（单独针对某个指标的表），通过联表查询，然后每日定期更新中间表的数据，从而达到减小<strong>重复连表查询</strong>的开销，同时也能进一步提升查询速度。</li>
+          <li>根据业务特性为每张不同的表选择合适的存储引擎</li>
+        </ol>
+        <h3 id="字段结构的优化"><a aria-hidden="true" tabindex="-1" href="#字段结构的优化" class="anchor"><span class="icon icon-link"></span></a>字段结构的优化</h3>
+        <p>要指选择合适的数据类型，大多数开发在设计表字段结构时，如果要使用数值类型一般会选择<code>int</code>，使用字符串类型一般会选择<code>varchar</code>，但这些字段类型可以适当的做些调整。</p>
+        <p>在选择字段的数据类型时有三个原则：</p>
+        <ul>
+          <li>①在保证足够使用的范围内，选择最小数据类型，因为它们会占用更少的磁盘、内存和<code>CPU</code>缓存，同时在处理速度也会更快。</li>
+          <li>②尽量避免索引字段值为<code>NULL</code>，定义字段时应尽可能使用<code>NOT NULL</code>关键字，因为字段空值过多会影响索引性能。</li>
+          <li>③在条件允许的情况下，尽量使用最简单的类型代替复杂的类型，如<code>IP</code>的存储可以使用<code>int</code>而并非<code>varchar</code>，因为简单的数据类型，操作时通常需要的<code>CPU</code>资源更少。</li>
+        </ul>
+        <h3 id="索引结构的优化"><a aria-hidden="true" tabindex="-1" href="#索引结构的优化" class="anchor"><span class="icon icon-link"></span></a>索引结构的优化</h3>
+        <ol>
+          <li>索引字段的组成尽量选择多个，如果一个表中需要建立多个索引，应适当根据业务去将多个单列索引组合成一个联合索引，这样做一方面可以节省磁盘空间，第二方面还可以充分使用索引覆盖的方式查询数据，能够在一定程度上提升数据库的整体性能。</li>
+          <li>避免索引过长，可以选择合适长度建立索引，而不是使用完整的字段值。</li>
+          <li>索引类型的选择一定要合理，对于经常做模糊查询的字段，可以建立全文索引来代替普通索引，因为基于普通索引做<code>like</code>查询会导致索引失效，而采用全文索引的方式做模糊查询效率会更高更快，并且全文索引的功能更为强大。</li>
+          <li>索引结构的选择可以根据业务进行调整，在某些不会做范围查询的字段上建立索引时，可以选用<code>hash</code>结构代替<code>B+Tree</code>结构，因为<code>Hash</code>结构的索引是所有数据结构中最快的，散列度足够的情况下，复杂度仅为<code>O(1)</code>。</li>
+        </ol>
+        <h2 id="mysql参数优化"><a aria-hidden="true" tabindex="-1" href="#mysql参数优化" class="anchor"><span class="icon icon-link"></span></a>MySQL参数优化</h2>
+        <h3 id="innodb缓冲区"><a aria-hidden="true" tabindex="-1" href="#innodb缓冲区" class="anchor"><span class="icon icon-link"></span></a>InnoDB缓冲区</h3>
+        <p><code>InnoDB</code>将是<code>MySQL</code>启动后使用最多的引擎，所以为其分配一个足够大的缓冲区，能够在最大程度上提升<code>MySQL</code>的性能。</p>
+        <p>当<code>InnoDB</code>缓冲区空间大于<code>1GB</code>时，<code>InnoDB</code>会自动将缓冲区划分为多个实例空间，这样做的好处在于：<strong>多线程并发执行时，可以减少并发冲突</strong>。</p>
+        <h3 id="调整工作线程的缓冲区"><a aria-hidden="true" tabindex="-1" href="#调整工作线程的缓冲区" class="anchor"><span class="icon icon-link"></span></a>调整工作线程的缓冲区</h3>
+        <p>调大<code>sort_buffer、read_buffer、join_buffer</code>几个区域，这几个部分属于每个线程私有区域。</p>
+        <h3 id="调整临时表空间"><a aria-hidden="true" tabindex="-1" href="#调整临时表空间" class="anchor"><span class="icon icon-link"></span></a>调整临时表空间</h3>
+        <p>避免创建的临时表被写入到磁盘中，违背了创建临时表加速查询的初衷。</p>
+        <h3 id="调整空闲线程的存活时间"><a aria-hidden="true" tabindex="-1" href="#调整空闲线程的存活时间" class="anchor"><span class="icon icon-link"></span></a>调整空闲线程的存活时间</h3>
+        <p>手动调整成<code>30min~1h</code>左右，可以让无用的连接能及时释放，减少资源的占用。其他的通过客户端连接进行调整。</p>
+        <h2 id="架构优化"><a aria-hidden="true" tabindex="-1" href="#架构优化" class="anchor"><span class="icon icon-link"></span></a>架构优化</h2>
+        <h3 id="引入缓存中间件读压力"><a aria-hidden="true" tabindex="-1" href="#引入缓存中间件读压力" class="anchor"><span class="icon icon-link"></span></a>引入缓存中间件——读压力</h3>
+        <p>正常的项目业务中，往往读请求的数量远超写请求，如果将所有的读请求都落入数据库处理，这自然会对<code>MySQL</code>造成巨大的访问压力，严重的情况下甚至会由于流量过大，直接将数据库打到宕机。</p>
+        <p>因此有了Redis，架设在应用程序和数据库中间。</p>
+        <p>在缓存<code>Key</code>设计合理的情况下，至少能够为<code>MySQL</code>分担<code>70%</code>以上的读压力。查询<code>MySQL</code>之前先查询一次<code>Redis</code>，<code>Redis</code>中有缓存数据则直接返回，没有数据时再将请求交给<code>MySQL</code>处理，从<code>MySQL</code>查询到数据后，再次将数据写入<code>Redis</code>，后续有相同请求再来读取数据时，直接从<code>Redis</code>返回数据即可。</p>
+        <h3 id="引入消息中间件写压力"><a aria-hidden="true" tabindex="-1" href="#引入消息中间件写压力" class="anchor"><span class="icon icon-link"></span></a>引入消息中间件——写压力</h3>
+        <p>
+          <img src="..\img\2382.webp" alt="App-MQ-MySQL">
+        </p>
+        <h3 id="mysql主从读写分离"><a aria-hidden="true" tabindex="-1" href="#mysql主从读写分离" class="anchor"><span class="icon icon-link"></span></a>MySQL主从读写分离</h3>
+        <ul>
+          <li>
+            <p>主从复制：一台为主机，另一台为从机，从节点会一直不断的从主节点上同步增量数据，当主节点发生故障时，从节点可以替换原本的主节点，以此来为客户端提供正常服务。</p>
+            <ul>
+              <li>在主从复制上，实现读写分离，由于主机写和从机上同步有延迟，可能造成在从机上读的数据不一致情况。</li>
+              <li>一般适合读大于写的情况。</li>
+            </ul>
+            <p>
+              <img src="..\img\23822.webp" alt="主从读写分离">
+            </p>
+          </li>
+          <li>
+            <p>双主双写热备：两台主机可以同时读写操作，请求可以在任意一台主机上完成。两台主机之间要进行同步数据。</p>
+            <ul>
+              <li>为了兼容两者之间的数据，对于每张表的主键要处理好，保证主键的一致性。</li>
+            </ul>
+          </li>
+          <li>
+            <p>分库分表：解决了多主主机造成的存储容量的木桶问题，每个业务读写不同的数据库，不会同步。</p>
+            <p>
+              <img src="..\img\823.webp" alt="MySQL-垂直分库">
+            </p>
+          </li>
+        </ul>
+        <h2 id="sql优化"><a aria-hidden="true" tabindex="-1" href="#sql优化" class="anchor"><span class="icon icon-link"></span></a>SQL优化</h2>
+        <h3 id="编写sql注意点"><a aria-hidden="true" tabindex="-1" href="#编写sql注意点" class="anchor"><span class="icon icon-link"></span></a>编写SQL注意点</h3>
+        <ul>
+          <li>
+            <p>查询时尽量不要使用*</p>
+            <ul>
+              <li>分析成本高：使用<code>*</code>时，解析器需要先去解析出当前要查询的表上<code>*</code>表示哪些字段，因此会额外增加<strong>解析成本</strong>。</li>
+              <li>网络开销大：当使用<code>*</code>时，查询时每条数据会返回所有字段值，然后这些查询出的数据会先被放到结果集中，最终查询完成后会统一返回给客户端，分机器部署，网络数据包体积增加。</li>
+              <li>内存占用变高：查询全部数据，结果集更大，占用的内存更大，缓存的数据减少，还会降低命中，触发更多的磁盘IO，降低整体性能。</li>
+              <li>难以维护，史记中的表字段和对象的映射关系，表结构改变业务也要做出改变。</li>
+            </ul>
+          </li>
+          <li>
+            <p>连表查询时尽量不要关联太多表</p>
+            <ul>
+              <li>一旦关联太多的表，就会导致执行效率变慢，执行时间变长</li>
+              <li>数据量会随表数量呈直线性增长，数据量越大检索效率越低。</li>
+              <li>当关联的表数量过多时，无法控制好索引的匹配，涉及的表越多，索引不可控风险越大。</li>
+            </ul>
+          </li>
+          <li>
+            <p>多表查询时一定要以小驱大</p>
+            <ul>
+              <li>先查小表，用小表的结果去大表中查询数据。</li>
+              <li>结果集小的先执行。</li>
+            </ul>
+          </li>
+          <li>
+            <p>索引失效的情况：</p>
+            <ul>
+              <li>不要使用like左模糊和全模糊查询</li>
+              <li>查询时尽量不要对字段做空值判断：做空值判断的情况时，会导致索引失效，因为判断<code>null</code>的情况不会走索引</li>
+              <li>不要在条件查询=前对字段做任何运算</li>
+              <li>!=、!&#x3C;>、not in、not like、or...要慎用</li>
+            </ul>
+          </li>
+          <li>
+            <p>必要情况下可以强制指定索引，在存在多个索引时，优化器不一定智能。</p>
+          </li>
+          <li>
+            <p>尽量将大事务拆分为小事务执行</p>
+            <ul>
+              <li>当一个事务比较大时，会导致一部分数据的锁定周期较长，在高并发情况下会引起大量事务出现阻塞，从而最终拖垮整个<code>MySQL</code>系统。</li>
+              <li>大事务也会导致日志写入时出现阻塞，这种情况下会强制触发刷盘机制，大事务的日志需要阻塞到有足够的空间时，才能继续写入日志到缓冲区，这也可能会引起线上出现阻塞。</li>
+            </ul>
+          </li>
+          <li>
+            <p>从业务设计层面减少大量数据返回的情况</p>
+            <ul>
+              <li>面对这种需求，应该分批返回给客户端，避免一次性数据量过大造成的网络阻塞，内存占用过高等问题。</li>
+              <li>面对分页场景的：增量查询。</li>
+            </ul>
+          </li>
+          <li>
+            <p>尽量避免深分页的情况出现</p>
+            <ul>
+              <li>select xx,xx,xx from yyy limit 100000,10;</li>
+              <li>select xx,xx,xx from yyy where 有序字段 >= nnn limit 10;</li>
+              <li>面对分页无序的情况，只能在业务上限制深度分页情况出现，比如搜索为例，只能看到前30页，如果还未找到他需要的内容，基本上就会换个更精准的关键词重新搜索。</li>
+            </ul>
+          </li>
+          <li>
+            <p>SQL务必要写完整，不要使用缩写法</p>
+            <ul>
+              <li>在<code>MySQL</code>底层都需要做一次转换，将其转换为完整的写法。</li>
+            </ul>
+          </li>
+          <li>
+            <p>基于联合索引查询时请务必确保字段的顺序性</p>
+          </li>
+          <li>
+            <p>客户端的一些操作可以批量化完成</p>
+            <ul>
+              <li>多个操作回合成一句，节省网络资源的开销</li>
+            </ul>
+          </li>
+          <li>
+            <p>明确仅返回一条数据的语句可以使用limit 1</p>
+            <ul>
+              <li>当程序匹配到一条数据时就会停止扫描，如果不加的情况下会将所有数据都扫描一次。</li>
+            </ul>
+          </li>
+        </ul>
+        <h3 id="sql优化的行业标准"><a aria-hidden="true" tabindex="-1" href="#sql优化的行业标准" class="anchor"><span class="icon icon-link"></span></a>SQL优化的行业标准</h3>
+        <ul>
+          <li>客户端访问时，能够在<code>1s</code>内得到响应，用户会觉得系统响应很快，体验非常好。</li>
+          <li><strong>客户端访问时，<code>1~3</code>秒内得到响应，处于可以接受的阶段，其体验感还算不错。</strong></li>
+          <li><strong>客户端访问时，需要等待<code>3~5</code>秒时才可响应，这是用户就感觉比较慢了，体验有点糟糕。</strong></li>
+          <li>客户端访问时，一旦响应超过<code>5</code>秒，用户体验感特别糟糕，通常会选择离开或刷新重试。</li>
+        </ul>
+      </markdown-style>
+      <nav class="tocs">
+        <aside class="inner toc">
+          <ol class="tocs-list">
+            <li><a href="#面试问题" class="tocs-link">面试问题</a></li>
+            <li><a href="#基准测试" class="tocs-link">基准测试</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#分类" class="tocs-link">分类</a></li>
+                <li><a href="#测试指标" class="tocs-link">测试指标</a></li>
+              </ol>
+            </li>
+            <li><a href="#explain" class="tocs-link">Explain</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#如何使用" class="tocs-link">如何使用</a></li>
+                <li><a href="#输出各个列参数" class="tocs-link">输出各个列参数</a></li>
+              </ol>
+            </li>
+            <li><a href="#索引优化" class="tocs-link">索引优化</a></li>
+            <li><a href="#mysql连接池" class="tocs-link">MySQL连接池</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#为什么数据库连接数不是越大越好" class="tocs-link">为什么数据库连接数不是越大越好</a></li>
+              </ol>
+            </li>
+            <li><a href="#mysql结构优化" class="tocs-link">MySQL结构优化</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#表结构优化" class="tocs-link">表结构优化</a></li>
+                <li><a href="#字段结构的优化" class="tocs-link">字段结构的优化</a></li>
+                <li><a href="#索引结构的优化" class="tocs-link">索引结构的优化</a></li>
+              </ol>
+            </li>
+            <li><a href="#mysql参数优化" class="tocs-link">MySQL参数优化</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#innodb缓冲区" class="tocs-link">InnoDB缓冲区</a></li>
+                <li><a href="#调整工作线程的缓冲区" class="tocs-link">调整工作线程的缓冲区</a></li>
+                <li><a href="#调整临时表空间" class="tocs-link">调整临时表空间</a></li>
+                <li><a href="#调整空闲线程的存活时间" class="tocs-link">调整空闲线程的存活时间</a></li>
+              </ol>
+            </li>
+            <li><a href="#架构优化" class="tocs-link">架构优化</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#引入缓存中间件读压力" class="tocs-link">引入缓存中间件——读压力</a></li>
+                <li><a href="#引入消息中间件写压力" class="tocs-link">引入消息中间件——写压力</a></li>
+                <li><a href="#mysql主从读写分离" class="tocs-link">MySQL主从读写分离</a></li>
+              </ol>
+            </li>
+            <li><a href="#sql优化" class="tocs-link">SQL优化</a>
+              <ol class="tocs-list is-collapsed">
+                <li><a href="#编写sql注意点" class="tocs-link">编写SQL注意点</a></li>
+                <li><a href="#sql优化的行业标准" class="tocs-link">SQL优化的行业标准</a></li>
+              </ol>
+            </li>
+          </ol>
+        </aside>
+      </nav>
+    </div>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
+    <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
+  </body>
+</html>

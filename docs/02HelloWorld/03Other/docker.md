@@ -15,16 +15,19 @@ Docker
 ## 基本命令
 
 ```bash
+# 启动docker
+systemctl start docker
+
 # 查看当前的容器
-docker ps -as
+
+docker ps -a
 
 # 启动容器
-docker container start 容器名或者容器id
+docker  start 容器名或者容器id
 
 # 停止容器
-docker container stop 容器名或容器id
-# 或可简写为
-docker stop 容器名或容器id
+docker  stop 容器名或容器id
+
 
 # 强制关闭容器
 docker container kill 容器名或容器id
@@ -47,7 +50,7 @@ docker kill 容器名或容器id
 
 ## 问题
 
-### WSL2 Vmmem内存
+-  **WSL2 Vmmem内存**
 
 1.按下`Windows + R`键，输入`%UserProfile%`并运行进入用户文件夹
 
@@ -63,3 +66,14 @@ localhostForwarding=true
 ```
 
 4.然后启动cmd命令提示符，输入`wsl --shutdown`来关闭当前的子系统
+
+- **Wsl/Service/CreateInstance/MountVhd/ERROR_FILE_NOT_FOUND**
+
+```plain
+wsl -l #查看名字
+wsl --unregister Ubuntu22.04 # 注销
+重新打开
+```
+
+- 无法复制文件到目录当中
+  - 切换到默认rootyong'hu

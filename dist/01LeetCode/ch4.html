@@ -7,18 +7,18 @@
     <title>字符串 今天是个好天气</title>
     <meta name="description" content="用一个前缀表next，当发现字符不匹配时，跳转至前面已经匹配的最长前后缀位置，而不用重新开始匹配，最坏情况是重头开始匹配字符串。">
     <meta name="keywords" content="notebook">
-    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.26.6">
-    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.26.6">
+    <link rel="stylesheet" type="text/css" href="../css/main.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/tocbot.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/media.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/sidebar.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/copy.css?v=1.25.0">
+    <link rel="stylesheet" type="text/css" href="../css/fancybox.css?v=1.25.0">
     <link rel="icon" href="../logo.png" type="image/x-icon">
-    <script src="../js/copy.js?v=1.26.6"></script>
-    <script src="../js/dark-mode.js?v=1.26.6"></script>
-    <script src="../js/markdown-style.js?v=1.26.6"></script>
-    <script src="../js/jquery.min.js?v=1.26.6"></script>
-    <script src="../js/fancybox.umd.js?v=1.26.6"></script>
+    <script src="../js/copy.js?v=1.25.0"></script>
+    <script src="../js/dark-mode.js?v=1.25.0"></script>
+    <script src="../js/markdown-style.js?v=1.25.0"></script>
+    <script src="../js/jquery.min.js?v=1.25.0"></script>
+    <script src="../js/fancybox.umd.js?v=1.25.0"></script>
   </head>
   <body><button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
     <script>
@@ -127,12 +127,7 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </blockquote>
         <p><a href="https://leetcode.cn/problems/ti-huan-kong-ge-lcof/">剑指 Offer 05. 替换空格</a></p>
         <p><a href="https://leetcode.cn/problems/reverse-words-in-a-string/">151. 反转字符串中的单词</a></p>
-        <blockquote>
-          <p>整体思路：删除空格，反转字符串，反转单词还原</p>
-          <p>删除空格，用双指针删除中间空间，在特判开头和末尾。</p>
-          <p>还原单词时，用一个start表示单词开始，再循环找到每个单词的结尾（空格，或者最后一个单词是末尾）</p>
-        </blockquote>
-        <p><a href="https://leetcode.cn/problems/repeated-substring-pattern/">459. 重复的子字符串</a></p>
+        <p><strong><a href="https://leetcode.cn/problems/repeated-substring-pattern/">459. 重复的子字符串</a></strong></p>
         <blockquote>
           <p>暴力遍历：</p>
           <ol>
@@ -143,6 +138,12 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
               <p>判断子串是否和前部分字串相等，满足一种情况时即可，遍历完所有情况找不到时，即错误。</p>
             </li>
           </ol>
+          <p>abcabc--->abcabc abcabc</p>
+          <ul>
+            <li>只要两个s拼接在一起，里面还出现一个s的话，就说明是由重复子串组成。</li>
+            <li>在判断 s + s 拼接的字符串里是否出现一个s的的时候，要刨除 s + s 的首字符和尾字符，这样避免在s+s中搜索出原来的s</li>
+            <li>我们要搜索的是中间拼接出来的s。</li>
+          </ul>
         </blockquote>
         <p><a href="https://leetcode.cn/problems/find-the-index-of-the-first-occurrence-in-a-string/">28. 找出字符串中第一个匹配项的下标</a></p>
         <blockquote>
@@ -163,8 +164,8 @@ document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
         </aside>
       </nav>
     </div>
-    <script src="../js/demo-preview.js?v=1.26.6"></script>
+    <script src="../js/demo-preview.js?v=1.25.0"></script>
     <div class="footer warpper">Created by <a href="https://github.com/shixiaocaia" target="_blank">shixiaocaia</a> | Powered by <a href="https://github.com/jaywcjlove/idoc" target="_blank">idoc</a><br>Think less and do more.</div>
-    <script src="../js/tocbot.js?v=1.26.6"></script>
+    <script src="../js/tocbot.js?v=1.25.0"></script>
   </body>
 </html>

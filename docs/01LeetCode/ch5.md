@@ -148,16 +148,20 @@ for (遍历这个数组)
 
 ```
 
+3. 如何按照顺序记录答案
+
+如果栈中存放的是下表，根据数组下标更新答案
+
 ### 例题
 
-**[739. 每日温度](https://leetcode.cn/problems/daily-temperatures/description/)**
+[739. 每日温度](https://leetcode.cn/problems/daily-temperatures/description/)
 
 > 维护一个单调递减的栈，当出现温度大于栈顶元素值时，记录答案。
-
-**[496. 下一个更大元素 I](https://leetcode.cn/problems/next-greater-element-i/description/)**
-
-> 基本可以同上处理。
 >
+> 通过数组下标更新答案。
+
+[496. 下一个更大元素 I](https://leetcode.cn/problems/next-greater-element-i/description/)
+
 > 不过加了一个映射。对nums2单调栈，result[i] 表示 i 这个数字在nums2中第一个比他大的数的下标。
 >
 > 再遍历nums1, result[nums1[i]] == -1说明没有比他大的数，否则就是找到了下标，再把下标对在nums2的值放入，否则就是放入-1。
